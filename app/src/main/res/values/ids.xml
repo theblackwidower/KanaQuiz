@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="chkSet1Selection" />
+    <item type="id" name="chkSet2Selection" />
+    <item type="id" name="chkSet3Selection" />
+    <item type="id" name="chkSet4Selection" />
+    <item type="id" name="chkSet5Selection" />
+    <item type="id" name="chkSet6Selection" />
+    <item type="id" name="chkSet7Selection" />
+    <item type="id" name="chkSet8Selection" />
+    <item type="id" name="chkSet9Selection" />
+</resources>

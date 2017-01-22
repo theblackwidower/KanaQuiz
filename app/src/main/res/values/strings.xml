@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Kana Quiz</string>
+
+    <string name="score_label">Score</string>
+    <string name="button_send">Answer</string>
+    <string name="answer_hint">Answer Here</string>
+    <string name="no_questions">No Questions available</string>
+    <string name="correct_answer">Correct</string>
+    <string name="incorrect_answer">Incorrect</string>
+    <string name="request_answer">Enter the Romanji equivalent</string>
+    <string name="title_activity_quiz_options">Options</string>
+
+    <!-- Quiz Options -->
+    <string name="set_1_title">Base set</string>
+    <string name="set_1_contents">あ い う え お</string>
+    <string name="set_2_title">K/G set</string>
+    <string name="set_2_contents">か き く け こ が ぎ ぐ げ ご</string>
+    <string name="set_3_title">S/Z set: </string>
+    <string name="set_3_contents">さ し す せ そ ざ じ ず ぜ ぞ</string>
+    <string name="set_4_title">T/D set</string>
+    <string name="set_4_contents">た ち つ て と だ ぢ づ で ど</string>
+    <string name="set_5_title">N set</string>
+    <string name="set_5_contents">な に ぬ ね の</string>
+    <string name="set_6_title">H/B/P set</string>
+    <string name="set_6_contents">は ひ ふ へ ほ ば び ぶ べ ぼ ぱ ぴ ぷ ぺ ぽ</string>
+    <string name="set_7_title">M set</string>
+    <string name="set_7_contents">ま み む め も</string>
+    <string name="set_8_title">R set</string>
+    <string name="set_8_contents">ら り る れ ろ</string>
+    <string name="set_9_title">Y/W/N set</string>
+    <string name="set_9_contents">や ゆ よ わ を ん</string>
+</resources>
