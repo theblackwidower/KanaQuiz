@@ -1,0 +1,2 @@
+# KanaQuiz
+A simple app to quiz the user on identifying Japanese characters.
