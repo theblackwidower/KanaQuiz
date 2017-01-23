@@ -242,7 +242,7 @@ public class MainQuiz extends AppCompatActivity {
 
     private void checkAnswer()
     {
-        if (expectedAnswer.trim().equals(txtAnswer.getText().toString().toLowerCase()))
+        if (expectedAnswer.equals(txtAnswer.getText().toString().trim().toLowerCase()))
         {
             totalCorrect++;
             lblResponse.setText(R.string.correct_answer);
@@ -266,16 +266,17 @@ public class MainQuiz extends AppCompatActivity {
     }
     public void submitAnswer(View view)
     {
-        checkAnswer();
-
-        delayHandler.postDelayed(new Runnable()
+        if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
         {
-            public void run()
-            {
-                displayScore();
-                setQuestion();
-            }
-        }, 1000);
+            checkAnswer();
+
+            delayHandler.postDelayed(new Runnable() {
+                public void run() {
+                    displayScore();
+                    setQuestion();
+                }
+            }, 1000);
+        }
     }
 
     public void openOptions(View view)
