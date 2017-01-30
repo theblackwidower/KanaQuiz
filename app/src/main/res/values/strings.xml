@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kana Quiz</string>
+    <string name="app_name">The Kana Quiz</string>
 
     <string name="score_label">Score</string>
     <string name="button_send">Answer</string>
@@ -8,7 +8,8 @@
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
     <string name="request_answer">Enter the Romanji equivalent</string>
-    <string name="title_activity_quiz_options">Options</string>
+    <string name="options_title">Options</string>
+    <string name="about_title">About</string>
 
     <!-- Quiz Options -->
     <string name="set_1_title">Base set</string>
@@ -29,4 +30,7 @@
     <string name="set_8_contents">ら り る れ ろ</string>
     <string name="set_9_title">Y/W set + N</string>
     <string name="set_9_contents">や ゆ よ わ を ん</string>
+
+
+    <string name="licence_boilerplate">Copyright 2017 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
 </resources>

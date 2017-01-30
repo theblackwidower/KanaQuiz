@@ -286,6 +286,12 @@ public class MainQuiz extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    public void openAbout(View view)
+    {
+        Intent intent = new Intent(MainQuiz.this, AboutScreen.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
