@@ -1,8 +1,6 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,18 +16,6 @@ public class AboutScreen extends AppCompatActivity {
 
         TextView lblVersionDisplay = (TextView) findViewById(R.id.lblVersionDisplay);
         lblVersionDisplay.setText(BuildConfig.VERSION_NAME);
-        /*
-        try
-        {
-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            lblVersionDisplay.setText(pInfo.versionName);
-        }
-        catch (PackageManager.NameNotFoundException ex)
-        {
-            lblVersionDisplay.setText("(Version unknown)");
-        }*/
-
-
     }
 
     public void toGithub(View view)
