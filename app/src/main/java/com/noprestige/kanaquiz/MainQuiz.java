@@ -15,67 +15,113 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class MainQuiz extends AppCompatActivity {
 
     private int totalQuestions = 0;
     private int totalCorrect = 0;
-    private String expectedAnswer;
-    private int currentQuestionNumber;
 
-    private Object[] availableQuestions;
-    private Object[] acceptableAnswers;
-    private int questionCount;
-    private Random rng = new Random();
+    private KanaQuestionBank questionBank;
 
     private TextView lblResponse;
     private EditText txtAnswer;
     private TextView lblDisplayKana;
     private Button btnSubmit;
+
     private int oldTextColour;
     private DecimalFormat percentFormatter = new DecimalFormat("#0.0");
     private SharedPreferences sharedPref;
 
     private Handler delayHandler = new Handler();
 
-    private static final String[] KANA_SET_1_QUESTIONS = {"あ", "い", "う", "え", "お"};
-    private static final String[] KANA_SET_1_ANSWERS = {"a", "i", "u", "e", "o"};
-    private static final int KANA_SET_1_COUNT = 5;
+    private static final KanaQuestion[] KANA_SET_1 = {
+            new KanaQuestion('あ', "a"),
+            new KanaQuestion('い', "i"),
+            new KanaQuestion('う', "u"),
+            new KanaQuestion('え', "e"),
+            new KanaQuestion('お', "o")};
 
-    private static final String[] KANA_SET_2_QUESTIONS = {"か", "き", "く", "け", "こ", "が", "ぎ", "ぐ", "げ", "ご"};
-    private static final String[] KANA_SET_2_ANSWERS = {"ka", "ki", "ku", "ke", "ko", "ga", "gi", "gu", "ge", "go"};
-    private static final int KANA_SET_2_COUNT = 10;
+    private static final KanaQuestion[] KANA_SET_2 = {
+            new KanaQuestion('か', "ka"),
+            new KanaQuestion('き', "ki"),
+            new KanaQuestion('く', "ku"),
+            new KanaQuestion('け', "ke"),
+            new KanaQuestion('こ', "ko"),
+            new KanaQuestion('が', "ga"),
+            new KanaQuestion('ぎ', "gi"),
+            new KanaQuestion('ぐ', "gu"),
+            new KanaQuestion('げ', "ge"),
+            new KanaQuestion('ご', "go")};
 
-    private static final String[] KANA_SET_3_QUESTIONS = {"さ", "し", "す", "せ", "そ", "ざ", "じ", "ず", "ぜ", "ぞ"};
-    private static final String[] KANA_SET_3_ANSWERS = {"sa", "shi", "su", "se", "so", "za", "ji", "zu", "ze", "zo"};
-    private static final int KANA_SET_3_COUNT = 10;
+    private static final KanaQuestion[] KANA_SET_3 = {
+            new KanaQuestion('さ', "sa"),
+            new KanaQuestion('し', "shi"),
+            new KanaQuestion('す', "su"),
+            new KanaQuestion('せ', "se"),
+            new KanaQuestion('そ', "so"),
+            new KanaQuestion('ざ', "za"),
+            new KanaQuestion('じ', "ji"),
+            new KanaQuestion('ず', "zu"),
+            new KanaQuestion('ぜ', "ze"),
+            new KanaQuestion('ぞ', "zo")};
 
-    private static final String[] KANA_SET_4_QUESTIONS = {"た", "ち", "つ", "て", "と", "だ", "ぢ", "づ", "で", "ど"};
-    private static final String[] KANA_SET_4_ANSWERS = {"ta", "chi", "tsu", "te", "to", "da", "ji", "zu", "de", "do"};
-    private static final int KANA_SET_4_COUNT = 10;
+    private static final KanaQuestion[] KANA_SET_4 = {
+            new KanaQuestion('た', "ta"),
+            new KanaQuestion('ち', "chi"),
+            new KanaQuestion('つ', "tsu"),
+            new KanaQuestion('て', "te"),
+            new KanaQuestion('と', "to"),
+            new KanaQuestion('だ', "da"),
+            new KanaQuestion('ぢ', "ji"),
+            new KanaQuestion('づ', "zu"),
+            new KanaQuestion('で', "de"),
+            new KanaQuestion('ど', "do")};
 
-    private static final String[] KANA_SET_5_QUESTIONS = {"な", "に", "ぬ", "ね", "の"};
-    private static final String[] KANA_SET_5_ANSWERS = {"na", "ni", "nu", "ne", "no"};
-    private static final int KANA_SET_5_COUNT = 5;
+    private static final KanaQuestion[] KANA_SET_5 = {
+            new KanaQuestion('な', "na"),
+            new KanaQuestion('に', "ni"),
+            new KanaQuestion('ぬ', "nu"),
+            new KanaQuestion('ね', "ne"),
+            new KanaQuestion('の', "no")};
 
-    private static final String[] KANA_SET_6_QUESTIONS = {"は", "ひ", "ふ", "へ", "ほ", "ば", "び", "ぶ", "べ", "ぼ", "ぱ", "ぴ", "ぷ", "ぺ", "ぽ"};
-    private static final String[] KANA_SET_6_ANSWERS = {"ha", "hi", "fu", "he", "ho", "ba", "bi", "bu", "be", "bo", "pa", "pi", "pu", "pe", "po"};
-    private static final int KANA_SET_6_COUNT = 15;
+    private static final KanaQuestion[] KANA_SET_6 = {
+            new KanaQuestion('は', "ha"),
+            new KanaQuestion('ひ', "hi"),
+            new KanaQuestion('ふ', "fu"),
+            new KanaQuestion('へ', "he"),
+            new KanaQuestion('ほ', "ho"),
+            new KanaQuestion('ば', "ba"),
+            new KanaQuestion('び', "bi"),
+            new KanaQuestion('ぶ', "bu"),
+            new KanaQuestion('べ', "be"),
+            new KanaQuestion('ぼ', "bo"),
+            new KanaQuestion('ぱ', "pa"),
+            new KanaQuestion('ぴ', "pi"),
+            new KanaQuestion('ぷ', "pu"),
+            new KanaQuestion('ぺ', "pe"),
+            new KanaQuestion('ぽ', "po")};
 
-    private static final String[] KANA_SET_7_QUESTIONS = {"ま", "み", "む", "め", "も"};
-    private static final String[] KANA_SET_7_ANSWERS = {"ma", "mi", "mu", "me", "mo"};
-    private static final int KANA_SET_7_COUNT = 5;
+    private static final KanaQuestion[] KANA_SET_7 = {
+            new KanaQuestion('ま', "ma"),
+            new KanaQuestion('み', "mi"),
+            new KanaQuestion('む', "mu"),
+            new KanaQuestion('め', "me"),
+            new KanaQuestion('も', "mo")};
 
-    private static final String[] KANA_SET_8_QUESTIONS = {"ら", "り", "る", "れ", "ろ"};
-    private static final String[] KANA_SET_8_ANSWERS = {"ra", "ri", "ru", "re", "ro"};
-    private static final int KANA_SET_8_COUNT = 5;
+    private static final KanaQuestion[] KANA_SET_8 = {
+            new KanaQuestion('ら', "ra"),
+            new KanaQuestion('り', "ri"),
+            new KanaQuestion('る', "ru"),
+            new KanaQuestion('れ', "re"),
+            new KanaQuestion('ろ', "ro")};
 
-    private static final String[] KANA_SET_9_QUESTIONS = {"や", "ゆ", "よ", "わ", "を", "ん"};
-    private static final String[] KANA_SET_9_ANSWERS = {"ya", "yu", "yo", "wa", "wo", "n"};
-    private static final int KANA_SET_9_COUNT = 6;
+    private static final KanaQuestion[] KANA_SET_9 = {
+            new KanaQuestion('や', "ya"),
+            new KanaQuestion('ゆ', "yu"),
+            new KanaQuestion('よ', "yo"),
+            new KanaQuestion('わ', "wa"),
+            new KanaQuestion('を', "wo"),
+            new KanaQuestion('ん', "n")};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,104 +159,46 @@ public class MainQuiz extends AppCompatActivity {
         totalCorrect = 0;
 
         lblDisplayKana.setText("");
-        expectedAnswer = "";
         lblResponse.setText("");
     }
 
     public void buildQuestionBank()
     {
-        questionCount = 0;
-        ArrayList<String> questionBuffer = new ArrayList<>();
-        ArrayList<String> answerBuffer = new ArrayList<>();
+        questionBank = new KanaQuestionBank();
         if (sharedPref.getBoolean("kana_set_1", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_1_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_1_ANSWERS));
-            questionCount += KANA_SET_1_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_1);
         if (sharedPref.getBoolean("kana_set_2", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_2_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_2_ANSWERS));
-            questionCount += KANA_SET_2_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_2);
         if (sharedPref.getBoolean("kana_set_3", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_3_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_3_ANSWERS));
-            questionCount += KANA_SET_3_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_3);
         if (sharedPref.getBoolean("kana_set_4", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_4_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_4_ANSWERS));
-            questionCount += KANA_SET_4_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_4);
         if (sharedPref.getBoolean("kana_set_5", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_5_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_5_ANSWERS));
-            questionCount += KANA_SET_5_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_5);
         if (sharedPref.getBoolean("kana_set_6", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_6_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_6_ANSWERS));
-            questionCount += KANA_SET_6_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_6);
         if (sharedPref.getBoolean("kana_set_7", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_7_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_7_ANSWERS));
-            questionCount += KANA_SET_7_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_7);
         if (sharedPref.getBoolean("kana_set_8", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_8_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_8_ANSWERS));
-            questionCount += KANA_SET_8_COUNT;
-        }
+            questionBank.addQuestions(KANA_SET_8);
         if (sharedPref.getBoolean("kana_set_9", false))
-        {
-            questionBuffer.addAll(Arrays.asList(KANA_SET_9_QUESTIONS));
-            answerBuffer.addAll(Arrays.asList(KANA_SET_9_ANSWERS));
-            questionCount += KANA_SET_9_COUNT;
-        }
-
-        if (questionBuffer.isEmpty() || answerBuffer.isEmpty())
-        {
-            availableQuestions = new String[]{};
-            acceptableAnswers = new String[]{};
-        }
-        else
-        {
-            availableQuestions = questionBuffer.toArray();
-            acceptableAnswers = answerBuffer.toArray();
-        }
+            questionBank.addQuestions(KANA_SET_9);
     }
 
     private void setQuestion()
     {
-        if (questionCount > 0)
+        try
         {
-            int newQuestionNumber;
-            do
-            {
-                newQuestionNumber = rng.nextInt(questionCount);
-            } while (currentQuestionNumber == newQuestionNumber);
-            currentQuestionNumber = newQuestionNumber;
-
-            lblDisplayKana.setText(availableQuestions[currentQuestionNumber].toString());
-            expectedAnswer = acceptableAnswers[currentQuestionNumber].toString();
+            questionBank.newQuestion();
+            lblDisplayKana.setText(Character.toString(questionBank.getCurrentKana()));
             lblResponse.setText(R.string.request_answer);
             txtAnswer.setEnabled(true);
             btnSubmit.setEnabled(true);
             txtAnswer.requestFocus();
         }
-        else
+        catch (NoQuestionsException ex)
         {
             lblDisplayKana.setText("");
-            expectedAnswer = "";
             lblResponse.setText(R.string.no_questions);
             txtAnswer.setEnabled(false);
             btnSubmit.setEnabled(false);
@@ -242,7 +230,7 @@ public class MainQuiz extends AppCompatActivity {
 
     private void checkAnswer()
     {
-        if (expectedAnswer.equals(txtAnswer.getText().toString().trim().toLowerCase()))
+        if (questionBank.checkCurrentAnswer(txtAnswer.getText().toString()))
         {
             totalCorrect++;
             lblResponse.setText(R.string.correct_answer);
@@ -251,8 +239,6 @@ public class MainQuiz extends AppCompatActivity {
         else
         {
             lblResponse.setText(R.string.incorrect_answer);
-            lblResponse.append(" the correct answer is: ");
-            lblResponse.append(expectedAnswer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
         }
         totalQuestions++;
@@ -282,7 +268,6 @@ public class MainQuiz extends AppCompatActivity {
     public void openOptions(View view)
     {
         Intent intent = new Intent(MainQuiz.this, SetSelection.class);
-        //intent.putExtra("isChanged", false);
         startActivityForResult(intent, 1);
     }
 
