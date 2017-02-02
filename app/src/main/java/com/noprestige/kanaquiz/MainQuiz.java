@@ -165,23 +165,23 @@ public class MainQuiz extends AppCompatActivity {
     public void buildQuestionBank()
     {
         questionBank = new KanaQuestionBank();
-        if (sharedPref.getBoolean("kana_set_1", false))
+        if (sharedPref.getBoolean("hiragana_set_1", false))
             questionBank.addQuestions(KANA_SET_1);
-        if (sharedPref.getBoolean("kana_set_2", false))
+        if (sharedPref.getBoolean("hiragana_set_2", false))
             questionBank.addQuestions(KANA_SET_2);
-        if (sharedPref.getBoolean("kana_set_3", false))
+        if (sharedPref.getBoolean("hiragana_set_3", false))
             questionBank.addQuestions(KANA_SET_3);
-        if (sharedPref.getBoolean("kana_set_4", false))
+        if (sharedPref.getBoolean("hiragana_set_4", false))
             questionBank.addQuestions(KANA_SET_4);
-        if (sharedPref.getBoolean("kana_set_5", false))
+        if (sharedPref.getBoolean("hiragana_set_5", false))
             questionBank.addQuestions(KANA_SET_5);
-        if (sharedPref.getBoolean("kana_set_6", false))
+        if (sharedPref.getBoolean("hiragana_set_6", false))
             questionBank.addQuestions(KANA_SET_6);
-        if (sharedPref.getBoolean("kana_set_7", false))
+        if (sharedPref.getBoolean("hiragana_set_7", false))
             questionBank.addQuestions(KANA_SET_7);
-        if (sharedPref.getBoolean("kana_set_8", false))
+        if (sharedPref.getBoolean("hiragana_set_8", false))
             questionBank.addQuestions(KANA_SET_8);
-        if (sharedPref.getBoolean("kana_set_9", false))
+        if (sharedPref.getBoolean("hiragana_set_9", false))
             questionBank.addQuestions(KANA_SET_9);
     }
 

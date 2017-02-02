@@ -25,18 +25,18 @@ public class SetSelection extends AppCompatActivity {
 
         layout = (ViewGroup) findViewById(R.id.activity_set_selection);
 
-        createItem(R.string.set_1_title, R.string.set_1_contents, R.id.chkSet1Selection, 1);
-        createItem(R.string.set_2_title, R.string.set_2_contents, R.id.chkSet2Selection, 2);
-        createItem(R.string.set_3_title, R.string.set_3_contents, R.id.chkSet3Selection, 3);
-        createItem(R.string.set_4_title, R.string.set_4_contents, R.id.chkSet4Selection, 4);
-        createItem(R.string.set_5_title, R.string.set_5_contents, R.id.chkSet5Selection, 5);
-        createItem(R.string.set_6_title, R.string.set_6_contents, R.id.chkSet6Selection, 6);
-        createItem(R.string.set_7_title, R.string.set_7_contents, R.id.chkSet7Selection, 7);
-        createItem(R.string.set_8_title, R.string.set_8_contents, R.id.chkSet8Selection, 8);
-        createItem(R.string.set_9_title, R.string.set_9_contents, R.id.chkSet9Selection, 9);
+        createItem(R.string.set_1_title, R.string.set_1_hiragana, R.id.chkHiraSet1Selection, "hiragana_set_1");
+        createItem(R.string.set_2_title, R.string.set_2_hiragana, R.id.chkHiraSet2Selection, "hiragana_set_2");
+        createItem(R.string.set_3_title, R.string.set_3_hiragana, R.id.chkHiraSet3Selection, "hiragana_set_3");
+        createItem(R.string.set_4_title, R.string.set_4_hiragana, R.id.chkHiraSet4Selection, "hiragana_set_4");
+        createItem(R.string.set_5_title, R.string.set_5_hiragana, R.id.chkHiraSet5Selection, "hiragana_set_5");
+        createItem(R.string.set_6_title, R.string.set_6_hiragana, R.id.chkHiraSet6Selection, "hiragana_set_6");
+        createItem(R.string.set_7_title, R.string.set_7_hiragana, R.id.chkHiraSet7Selection, "hiragana_set_7");
+        createItem(R.string.set_8_title, R.string.set_8_hiragana, R.id.chkHiraSet8Selection, "hiragana_set_8");
+        createItem(R.string.set_9_title, R.string.set_9_hiragana, R.id.chkHiraSet9Selection, "hiragana_set_9");
     }
 
-    private void createItem(int title, int contents, int boxId, int idNumber)
+    private void createItem(int title, int contents, int boxId, String prefId)
     {
         LinearLayout container = new LinearLayout(this);
         LinearLayout textContainer = new LinearLayout(this);
@@ -58,7 +58,7 @@ public class SetSelection extends AppCompatActivity {
         lblContents.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         chkCheckBox.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        chkCheckBox.setChecked(sharedPref.getBoolean("kana_set_" + idNumber, false));
+        chkCheckBox.setChecked(sharedPref.getBoolean(prefId, false));
         chkCheckBox.setId(boxId);
         chkCheckBox.setGravity(Gravity.CENTER_VERTICAL);
 
@@ -75,15 +75,15 @@ public class SetSelection extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putBoolean("kana_set_1", ((CheckBox) findViewById(R.id.chkSet1Selection)).isChecked());
-        editor.putBoolean("kana_set_2", ((CheckBox) findViewById(R.id.chkSet2Selection)).isChecked());
-        editor.putBoolean("kana_set_3", ((CheckBox) findViewById(R.id.chkSet3Selection)).isChecked());
-        editor.putBoolean("kana_set_4", ((CheckBox) findViewById(R.id.chkSet4Selection)).isChecked());
-        editor.putBoolean("kana_set_5", ((CheckBox) findViewById(R.id.chkSet5Selection)).isChecked());
-        editor.putBoolean("kana_set_6", ((CheckBox) findViewById(R.id.chkSet6Selection)).isChecked());
-        editor.putBoolean("kana_set_7", ((CheckBox) findViewById(R.id.chkSet7Selection)).isChecked());
-        editor.putBoolean("kana_set_8", ((CheckBox) findViewById(R.id.chkSet8Selection)).isChecked());
-        editor.putBoolean("kana_set_9", ((CheckBox) findViewById(R.id.chkSet9Selection)).isChecked());
+        editor.putBoolean("hiragana_set_1", ((CheckBox) findViewById(R.id.chkHiraSet1Selection)).isChecked());
+        editor.putBoolean("hiragana_set_2", ((CheckBox) findViewById(R.id.chkHiraSet2Selection)).isChecked());
+        editor.putBoolean("hiragana_set_3", ((CheckBox) findViewById(R.id.chkHiraSet3Selection)).isChecked());
+        editor.putBoolean("hiragana_set_4", ((CheckBox) findViewById(R.id.chkHiraSet4Selection)).isChecked());
+        editor.putBoolean("hiragana_set_5", ((CheckBox) findViewById(R.id.chkHiraSet5Selection)).isChecked());
+        editor.putBoolean("hiragana_set_6", ((CheckBox) findViewById(R.id.chkHiraSet6Selection)).isChecked());
+        editor.putBoolean("hiragana_set_7", ((CheckBox) findViewById(R.id.chkHiraSet7Selection)).isChecked());
+        editor.putBoolean("hiragana_set_8", ((CheckBox) findViewById(R.id.chkHiraSet8Selection)).isChecked());
+        editor.putBoolean("hiragana_set_9", ((CheckBox) findViewById(R.id.chkHiraSet9Selection)).isChecked());
         editor.apply();
         finish();
     }

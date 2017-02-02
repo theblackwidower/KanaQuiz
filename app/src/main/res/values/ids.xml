@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="chkSet1Selection" />
-    <item type="id" name="chkSet2Selection" />
-    <item type="id" name="chkSet3Selection" />
-    <item type="id" name="chkSet4Selection" />
-    <item type="id" name="chkSet5Selection" />
-    <item type="id" name="chkSet6Selection" />
-    <item type="id" name="chkSet7Selection" />
-    <item type="id" name="chkSet8Selection" />
-    <item type="id" name="chkSet9Selection" />
+    <item type="id" name="chkHiraSet1Selection" />
+    <item type="id" name="chkHiraSet2Selection" />
+    <item type="id" name="chkHiraSet3Selection" />
+    <item type="id" name="chkHiraSet4Selection" />
+    <item type="id" name="chkHiraSet5Selection" />
+    <item type="id" name="chkHiraSet6Selection" />
+    <item type="id" name="chkHiraSet7Selection" />
+    <item type="id" name="chkHiraSet8Selection" />
+    <item type="id" name="chkHiraSet9Selection" />
+    <item type="id" name="chkKataSet1Selection" />
+    <item type="id" name="chkKataSet2Selection" />
+    <item type="id" name="chkKataSet3Selection" />
+    <item type="id" name="chkKataSet4Selection" />
+    <item type="id" name="chkKataSet5Selection" />
+    <item type="id" name="chkKataSet6Selection" />
+    <item type="id" name="chkKataSet7Selection" />
+    <item type="id" name="chkKataSet8Selection" />
+    <item type="id" name="chkKataSet9Selection" />
 </resources>
