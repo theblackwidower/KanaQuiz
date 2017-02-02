@@ -12,33 +12,35 @@
     <string name="about_title">About</string>
 
     <!-- Quiz Options -->
+    <string name="hiragana">Hiragana</string>
+    <string name="katakana">Katakana</string>
     <string name="set_1_title">Base set</string>
     <string name="set_1_hiragana">あ い う え お</string>
-    <string name="set_1_katakana"></string>
+    <string name="set_1_katakana">ア イ ウ エ オ</string>
     <string name="set_2_title">K/G set</string>
     <string name="set_2_hiragana">か き く け こ が ぎ ぐ げ ご</string>
-    <string name="set_2_katakana"></string>
+    <string name="set_2_katakana">カ キ ク ケ コ ガ ギ グ ゲ ゴ</string>
     <string name="set_3_title">S/Z set</string>
     <string name="set_3_hiragana">さ し す せ そ ざ じ ず ぜ ぞ</string>
-    <string name="set_3_katakana"></string>
+    <string name="set_3_katakana">サ シ ス セ ソ ザ ジ ズ ゼ ゾ</string>
     <string name="set_4_title">T/D set</string>
     <string name="set_4_hiragana">た ち つ て と だ ぢ づ で ど</string>
-    <string name="set_4_katakana"></string>
+    <string name="set_4_katakana">タ チ ツ テ ト ダ ヂ ヅ デ ド</string>
     <string name="set_5_title">N set</string>
     <string name="set_5_hiragana">な に ぬ ね の</string>
-    <string name="set_5_katakana"></string>
+    <string name="set_5_katakana">ナ ニ ヌ ネ ノ</string>
     <string name="set_6_title">H/B/P set</string>
     <string name="set_6_hiragana">は ひ ふ へ ほ ば び ぶ べ ぼ ぱ ぴ ぷ ぺ ぽ</string>
-    <string name="set_6_katakana"></string>
+    <string name="set_6_katakana">ハ ヒ フ ヘ ホ バ ビ ブ ベ ボ パ ピ プ ペ ポ</string>
     <string name="set_7_title">M set</string>
     <string name="set_7_hiragana">ま み む め も</string>
-    <string name="set_7_katakana"></string>
+    <string name="set_7_katakana">マ ミ ム メ モ</string>
     <string name="set_8_title">R set</string>
     <string name="set_8_hiragana">ら り る れ ろ</string>
-    <string name="set_8_katakana"></string>
+    <string name="set_8_katakana">ラ リ ル レ ロ</string>
     <string name="set_9_title">Y/W set + N</string>
     <string name="set_9_hiragana">や ゆ よ わ を ん</string>
-    <string name="set_9_katakana"></string>
+    <string name="set_9_katakana">ヤ ユ ヨ ワ ヲ ン</string>
 
 
     <string name="licence_boilerplate">Copyright 2017 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
