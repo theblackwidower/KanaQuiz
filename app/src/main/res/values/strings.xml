@@ -10,6 +10,7 @@
     <string name="request_answer">Enter the Romanji equivalent</string>
     <string name="options_title">Options</string>
     <string name="about_title">About</string>
+    <string name="github_logo">Github Logo</string>
 
     <!-- Quiz Options -->
     <string name="hiragana">Hiragana</string>
