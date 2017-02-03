@@ -93,9 +93,10 @@ abstract class KatakanaQuestions
             new KanaQuestion('ヲ', "wo"),
             new KanaQuestion('ン', "n")};
 
-    public static KanaQuestionBank getQuestionBank(SharedPreferences sharedPref)
+    static KanaQuestionBank getQuestionBank(SharedPreferences sharedPref)
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
+
         if (sharedPref.getBoolean("katakana_set_1", false))
             questionBank.addQuestions(KANA_SET_1);
         if (sharedPref.getBoolean("katakana_set_2", false))
@@ -117,5 +118,4 @@ abstract class KatakanaQuestions
 
         return questionBank;
     }
-
 }

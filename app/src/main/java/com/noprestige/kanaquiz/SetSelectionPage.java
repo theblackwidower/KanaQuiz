@@ -6,18 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SetSelectionPage extends Fragment {
-
+public class SetSelectionPage extends Fragment
+{
     private static final String ARG_PAGE_NUMBER = "position";
 
     public SetSelectionPage() {}
 
-    public static SetSelectionPage newInstance(int id) {
+    public static SetSelectionPage newInstance(int id)
+    {
         SetSelectionPage screen = new SetSelectionPage();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE_NUMBER, id);
         screen.setArguments(args);
-
         return screen;
     }
 

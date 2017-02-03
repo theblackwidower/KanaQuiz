@@ -47,12 +47,4 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     {
         return super.addAll(questions);
     }
-
-    static KanaQuestionBank merge(KanaQuestionBank questions1, KanaQuestionBank questions2)
-    {
-        KanaQuestionBank newBank = new KanaQuestionBank();
-        newBank.addAll(questions1);
-        newBank.addAll(questions2);
-        return newBank;
-    }
 }

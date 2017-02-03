@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class SetSelectionPager extends FragmentPagerAdapter
+class SetSelectionPager extends FragmentPagerAdapter
 {
-    Context context;
+    private Context context;
 
-    public SetSelectionPager(FragmentManager fm, Context context)
+    SetSelectionPager(FragmentManager fm, Context context)
     {
         super(fm);
         this.context = context;
@@ -28,8 +28,8 @@ public class SetSelectionPager extends FragmentPagerAdapter
     }
 
     @Override
-    public CharSequence getPageTitle(int position) {
-
+    public CharSequence getPageTitle(int position)
+    {
         switch (position)
         {
             case 0:

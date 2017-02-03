@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-public class MainQuiz extends AppCompatActivity {
-
+public class MainQuiz extends AppCompatActivity
+{
     private int totalQuestions = 0;
     private int totalCorrect = 0;
 
@@ -29,14 +29,14 @@ public class MainQuiz extends AppCompatActivity {
     private Button btnSubmit;
 
     private int oldTextColour;
-    private DecimalFormat percentFormatter = new DecimalFormat("#0.0");
+    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0");
     private SharedPreferences sharedPref;
 
     private Handler delayHandler = new Handler();
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_quiz);
         lblResponse = (TextView) findViewById(R.id.lblResponse);
@@ -48,17 +48,21 @@ public class MainQuiz extends AppCompatActivity {
 
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        txtAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_GO && btnSubmit.isEnabled()) {
-                    submitAnswer();
-                    handled = true;
+        txtAnswer.setOnEditorActionListener(
+            new TextView.OnEditorActionListener()
+            {
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+                {
+                    if ((actionId == EditorInfo.IME_ACTION_GO) && btnSubmit.isEnabled())
+                    {
+                        submitAnswer();
+                        return true;
+                    }
+                    else
+                        return false;
                 }
-                return handled;
             }
-        });
+        );
 
         buildQuestionBank();
         setQuestion();
@@ -112,7 +116,7 @@ public class MainQuiz extends AppCompatActivity {
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(percentFormatter.format(((float)totalCorrect / (float)totalQuestions) * 100));
+            lblScore.append(PERCENT_FORMATTER.format(((float)totalCorrect / (float)totalQuestions) * 100));
 
             lblScore.append("%\n");
             lblScore.append(Integer.toString(totalCorrect));
@@ -151,12 +155,16 @@ public class MainQuiz extends AppCompatActivity {
         {
             checkAnswer();
 
-            delayHandler.postDelayed(new Runnable() {
-                public void run() {
-                    displayScore();
-                    setQuestion();
-                }
-            }, 1000);
+            delayHandler.postDelayed(
+                new Runnable()
+                {
+                    public void run()
+                    {
+                        displayScore();
+                        setQuestion();
+                    }
+                }, 1000
+            );
         }
     }
 
@@ -179,14 +187,17 @@ public class MainQuiz extends AppCompatActivity {
         {
             resetQuiz();
             displayScore();
-            delayHandler.postDelayed(new Runnable()
-            {
-                public void run()
+            delayHandler.postDelayed
+            (
+                new Runnable()
                 {
-                    buildQuestionBank();
-                    setQuestion();
-                }
-            }, 500);
+                    public void run()
+                    {
+                        buildQuestionBank();
+                        setQuestion();
+                    }
+                }, 500
+            );
         }
     }
 }

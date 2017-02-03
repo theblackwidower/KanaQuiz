@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 
 abstract class HiraganaQuestions
 {
-
     private static final KanaQuestion[] KANA_SET_1 = {
             new KanaQuestion('あ', "a"),
             new KanaQuestion('い', "i"),
@@ -94,9 +93,10 @@ abstract class HiraganaQuestions
             new KanaQuestion('を', "wo"),
             new KanaQuestion('ん', "n")};
 
-    public static KanaQuestionBank getQuestionBank(SharedPreferences sharedPref)
+    static KanaQuestionBank getQuestionBank(SharedPreferences sharedPref)
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
+
         if (sharedPref.getBoolean("hiragana_set_1", false))
             questionBank.addQuestions(KANA_SET_1);
         if (sharedPref.getBoolean("hiragana_set_2", false))
@@ -118,5 +118,4 @@ abstract class HiraganaQuestions
 
         return questionBank;
     }
-
 }
