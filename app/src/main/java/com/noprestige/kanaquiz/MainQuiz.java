@@ -77,6 +77,7 @@ public class MainQuiz extends AppCompatActivity {
     public void buildQuestionBank()
     {
         questionBank = HiraganaQuestions.getQuestionBank(sharedPref);
+        questionBank.addQuestions(KatakanaQuestions.getQuestionBank(sharedPref));
     }
 
     private void setQuestion()
