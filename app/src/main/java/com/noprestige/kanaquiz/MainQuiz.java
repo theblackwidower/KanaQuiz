@@ -53,7 +53,7 @@ public class MainQuiz extends AppCompatActivity
             {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
                 {
-                    if ((actionId == EditorInfo.IME_ACTION_GO) && btnSubmit.isEnabled())
+                    if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) && btnSubmit.isEnabled())
                     {
                         submitAnswer();
                         return true;
@@ -141,7 +141,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
         }
         totalQuestions++;
-        txtAnswer.setText("");
+        txtAnswer.setEnabled(false);
         btnSubmit.setEnabled(false);
     }
 
