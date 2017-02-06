@@ -141,7 +141,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
         }
         totalQuestions++;
-        txtAnswer.setEnabled(false);
+        //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
         btnSubmit.setEnabled(false);
     }
 

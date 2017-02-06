@@ -7,8 +7,8 @@ android {
         applicationId "com.noprestige.kanaquiz"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "0.2"
+        versionCode 3
+        versionName "0.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
