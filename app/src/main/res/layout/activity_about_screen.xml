@@ -12,23 +12,6 @@
     tools:context="com.noprestige.kanaquiz.AboutScreen"
     android:orientation="vertical">
 
-    <TextView
-        android:text="@string/about_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/lblTitle"
-        android:textStyle="normal|bold"
-        android:textSize="20sp"
-        android:layout_marginBottom="14dp" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="14dp">
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,14 +21,17 @@
                 android:text="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblNameDisplay" />
+                android:id="@+id/lblNameDisplay"
+                android:textStyle="normal|bold"
+                android:textSize="20sp" />
             <TextView
                 android:text=""
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lblVersionDisplay" />
+                android:id="@+id/lblVersionDisplay"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <TextView
@@ -65,6 +51,5 @@
             android:layout_height="50dp"
             android:onClick="toGithub" />
 
-    </LinearLayout>
-
 </LinearLayout>
+
