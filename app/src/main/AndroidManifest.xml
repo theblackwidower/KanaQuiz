@@ -15,8 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SetSelection" />
-        <activity android:name=".AboutScreen" />
+        <activity
+            android:name=".SetSelection"
+            android:label="@string/options_title"
+            android:parentActivityName=".MainQuiz" />
+        <activity
+            android:name=".AboutScreen"
+            android:label="@string/about_title"
+            android:parentActivityName=".MainQuiz" />
     </application>
 
 </manifest>
