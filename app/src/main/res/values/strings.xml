@@ -10,7 +10,15 @@
     <string name="request_answer">Enter the Romanji equivalent</string>
     <string name="options_title">Options</string>
     <string name="about_title">About</string>
+
+    <!-- About screen credits -->
     <string name="github_logo">Github Logo</string>
+    <string name="twitter_logo">Twitter Logo</string>
+    <string name="source_code_on_github">Full source code available on GitHub.</string>
+    <string name="copyright_claim">\u00A9 2017 T Duke Perry. All rights reserved.</string>
+
+    <string name="special_thanks_start">Special Thanks to:</string>
+    <string name="special_thanks_1">Sleepy Duck, for the Learn Japanese to Survive series</string>
 
     <!-- Quiz Options -->
     <string name="hiragana">Hiragana</string>

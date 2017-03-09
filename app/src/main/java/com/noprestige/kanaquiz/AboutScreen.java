@@ -22,4 +22,9 @@ public class AboutScreen extends AppCompatActivity
     {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/theblackwidower/KanaQuiz")));
     }
+
+    public void toTwitter(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/theblackwidower/")));
+    }
 }

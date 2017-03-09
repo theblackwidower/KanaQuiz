@@ -17,39 +17,91 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:text="@string/app_name"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lblNameDisplay"
-            android:textStyle="normal|bold"
-            android:textSize="20sp" />
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@mipmap/ic_launcher" />
+
         <TextView
-            android:text=""
+            android:id="@+id/lblNameDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
+            android:text="@string/app_name"
+            android:textSize="20sp"
+            android:textStyle="normal|bold" />
+
+        <TextView
+            android:id="@+id/lblVersionDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lblVersionDisplay"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:text=""
             android:textSize="20sp" />
+
     </LinearLayout>
 
     <TextView
-        android:text="@string/licence_boilerplate"
+        android:text="@string/copyright_claim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblLicenceDisplay"
+        android:id="@+id/lblCopyrightDisplay"
         android:layout_marginTop="14dp"
         android:textSize="14sp" />
 
-    <ImageView
-        android:contentDescription="@string/github_logo"
-        android:layout_width="match_parent"
-        app:srcCompat="@drawable/github_logo"
-        android:id="@+id/imageView2"
-        android:layout_marginTop="10dp"
-        android:layout_height="50dp"
-        android:onClick="toGithub" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical">
 
+        <TextView
+            android:text="@string/special_thanks_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp" />
+        <TextView
+            android:text="@string/special_thanks_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/source_code_on_github"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/github_logo"
+            android:onClick="toGithub"
+            app:srcCompat="@drawable/ic_github_logo" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/twitter_logo"
+            android:onClick="toTwitter"
+            app:srcCompat="@drawable/ic_twitter_logo" />
+
+    </LinearLayout>
 </LinearLayout>
 
