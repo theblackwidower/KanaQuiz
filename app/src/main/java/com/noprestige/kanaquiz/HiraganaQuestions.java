@@ -88,7 +88,9 @@ abstract class HiraganaQuestions
     private static final KanaQuestion[] KANA_SET_9 = {
             new KanaQuestion('や', "ya"),
             new KanaQuestion('ゆ', "yu"),
-            new KanaQuestion('よ', "yo"),
+            new KanaQuestion('よ', "yo")};
+
+    private static final KanaQuestion[] KANA_SET_10 = {
             new KanaQuestion('わ', "wa"),
             new KanaQuestion('を', "wo"),
             new KanaQuestion('ん', "n")};
@@ -115,6 +117,8 @@ abstract class HiraganaQuestions
             questionBank.addQuestions(KANA_SET_8);
         if (sharedPref.getBoolean("hiragana_set_9", false))
             questionBank.addQuestions(KANA_SET_9);
+        if (sharedPref.getBoolean("hiragana_set_10", false))
+            questionBank.addQuestions(KANA_SET_10);
 
         return questionBank;
     }

@@ -38,6 +38,7 @@ public class SetSelectionPage extends Fragment
                 display.addView(new SetSelectionItem(getContext(), R.string.set_7_title, R.string.set_7_hiragana, "hiragana_set_7"));
                 display.addView(new SetSelectionItem(getContext(), R.string.set_8_title, R.string.set_8_hiragana, "hiragana_set_8"));
                 display.addView(new SetSelectionItem(getContext(), R.string.set_9_title, R.string.set_9_hiragana, "hiragana_set_9"));
+                display.addView(new SetSelectionItem(getContext(), R.string.set_10_title, R.string.set_10_hiragana, "hiragana_set_10"));
                 break;
             case 1:
                 display.addView(new SetSelectionItem(getContext(), R.string.set_1_title, R.string.set_1_katakana, "katakana_set_1"));
@@ -49,6 +50,7 @@ public class SetSelectionPage extends Fragment
                 display.addView(new SetSelectionItem(getContext(), R.string.set_7_title, R.string.set_7_katakana, "katakana_set_7"));
                 display.addView(new SetSelectionItem(getContext(), R.string.set_8_title, R.string.set_8_katakana, "katakana_set_8"));
                 display.addView(new SetSelectionItem(getContext(), R.string.set_9_title, R.string.set_9_katakana, "katakana_set_9"));
+                display.addView(new SetSelectionItem(getContext(), R.string.set_10_title, R.string.set_10_katakana, "katakana_set_10"));
         }
         return display;
     }

@@ -88,7 +88,9 @@ abstract class KatakanaQuestions
     private static final KanaQuestion[] KANA_SET_9 = {
             new KanaQuestion('ヤ', "ya"),
             new KanaQuestion('ユ', "yu"),
-            new KanaQuestion('ヨ', "yo"),
+            new KanaQuestion('ヨ', "yo")};
+
+    private static final KanaQuestion[] KANA_SET_10 = {
             new KanaQuestion('ワ', "wa"),
             new KanaQuestion('ヲ', "wo"),
             new KanaQuestion('ン', "n")};
@@ -115,6 +117,8 @@ abstract class KatakanaQuestions
             questionBank.addQuestions(KANA_SET_8);
         if (sharedPref.getBoolean("katakana_set_9", false))
             questionBank.addQuestions(KANA_SET_9);
+        if (sharedPref.getBoolean("katakana_set_10", false))
+            questionBank.addQuestions(KANA_SET_10);
 
         return questionBank;
     }

@@ -39,9 +39,12 @@
     <string name="set_8_title">R set</string>
     <string name="set_8_hiragana">ら り る れ ろ</string>
     <string name="set_8_katakana">ラ リ ル レ ロ</string>
-    <string name="set_9_title">Y/W set + N</string>
-    <string name="set_9_hiragana">や ゆ よ わ を ん</string>
-    <string name="set_9_katakana">ヤ ユ ヨ ワ ヲ ン</string>
+    <string name="set_9_title">Y set</string>
+    <string name="set_9_hiragana">や ゆ よ</string>
+    <string name="set_9_katakana">ヤ ユ ヨ</string>
+    <string name="set_10_title">W set + N</string>
+    <string name="set_10_hiragana">わ を ん</string>
+    <string name="set_10_katakana">ワ ヲ ン</string>
 
 
     <string name="licence_boilerplate">Copyright 2017 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
