@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,19 +20,25 @@ class SetSelectionItem extends LinearLayout
     {
         super(context);
 
-        this.setOrientation(LinearLayout.HORIZONTAL);
+        this.setOrientation(LinearLayout.VERTICAL);
         this.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        this.setBackgroundResource(R.drawable.border);
 
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 
         LinearLayout textContainer = new LinearLayout(context);
+        LinearLayout mainContainer = new LinearLayout(context);
+        ImageView imgBorder = new ImageView(context);
         TextView lblTitle = new TextView(context);
         TextView lblContents = new TextView(context);
         CheckBox chkCheckBox = new CheckBox(context);
 
         textContainer.setOrientation(LinearLayout.VERTICAL);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+        mainContainer.setOrientation(LinearLayout.HORIZONTAL);
+        mainContainer.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        imgBorder.setImageResource(R.drawable.border);
 
         lblTitle.setText(title);
         lblTitle.setTypeface(null, Typeface.BOLD);
@@ -58,7 +65,10 @@ class SetSelectionItem extends LinearLayout
         textContainer.addView(lblTitle);
         textContainer.addView(lblContents);
 
-        this.addView(textContainer);
-        this.addView(chkCheckBox);
+        mainContainer.addView(textContainer);
+        mainContainer.addView(chkCheckBox);
+
+        this.addView(mainContainer);
+        this.addView(imgBorder);
     }
 }
