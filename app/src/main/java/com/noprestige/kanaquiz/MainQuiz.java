@@ -180,11 +180,11 @@ public class MainQuiz extends AppCompatActivity
         }
     }
 
-    public void submitAnswer()
-    {
-        submitAnswer(findViewById(R.id.activity_main_quiz));
-    }
     public void submitAnswer(View view)
+    {
+        submitAnswer();
+    }
+    public void submitAnswer()
     {
         if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
             checkAnswer();
