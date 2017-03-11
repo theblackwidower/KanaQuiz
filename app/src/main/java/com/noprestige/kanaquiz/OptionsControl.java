@@ -1,5 +1,9 @@
 package com.noprestige.kanaquiz;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 abstract class OptionsControl
 {
     final static String CODE_HIRAGANA_1 = "hiragana_set_1";
@@ -26,4 +30,24 @@ abstract class OptionsControl
 
     final static String CODE_ON_INCORRECT_CHEAT = "show_answer_on_incorrect";
     final static String CODE_ON_INCORRECT_RETRY = "retry_on_incorrect";
+
+    static private SharedPreferences sharedPreferences;
+    static private SharedPreferences.Editor editor;
+
+    static void initialize(Context context)
+    {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = sharedPreferences.edit();
+    }
+
+    static boolean getBoolean(String prefId)
+    {
+        return sharedPreferences.getBoolean(prefId, false);
+    }
+
+    static void setBoolean(String prefId, boolean setting)
+    {
+        editor.putBoolean(prefId, setting);
+        editor.apply();
+    }
 }

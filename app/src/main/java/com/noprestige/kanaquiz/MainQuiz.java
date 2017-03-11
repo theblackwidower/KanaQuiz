@@ -1,9 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +28,6 @@ public class MainQuiz extends AppCompatActivity
 
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0");
-    private SharedPreferences sharedPref;
 
     private Handler delayHandler = new Handler();
 
@@ -48,7 +45,7 @@ public class MainQuiz extends AppCompatActivity
 
         oldTextColour = lblResponse.getCurrentTextColor(); //kludge for reverting text colour
 
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        OptionsControl.initialize(this);
 
         txtAnswer.setOnEditorActionListener(
             new TextView.OnEditorActionListener()
@@ -80,15 +77,15 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana.setText("");
         lblResponse.setText("");
 
-        if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT, false) ||
-                sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT) ||
+                OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY))
             lblResponse.setMinLines(2);
     }
 
     public void buildQuestionBank()
     {
-        questionBank = HiraganaQuestions.getQuestionBank(sharedPref);
-        questionBank.addQuestions(KatakanaQuestions.getQuestionBank(sharedPref));
+        questionBank = HiraganaQuestions.getQuestionBank();
+        questionBank.addQuestions(KatakanaQuestions.getQuestionBank());
     }
 
     private void setQuestion()
@@ -150,14 +147,14 @@ public class MainQuiz extends AppCompatActivity
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-            if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT, false))
+            if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT))
             {
                 lblResponse.append(System.getProperty("line.separator"));
                 lblResponse.append(getResources().getText(R.string.show_correct_answer));
                 lblResponse.append(": ");
                 lblResponse.append(questionBank.fetchCorrectAnswer());
             }
-            if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY, false))
+            if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY))
             {
                 txtAnswer.setText("");
                 lblResponse.append(System.getProperty("line.separator"));

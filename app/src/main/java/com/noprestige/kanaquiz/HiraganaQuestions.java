@@ -1,7 +1,5 @@
 package com.noprestige.kanaquiz;
 
-import android.content.SharedPreferences;
-
 abstract class HiraganaQuestions
 {
     private static final KanaQuestion[] KANA_SET_1 = {
@@ -95,29 +93,29 @@ abstract class HiraganaQuestions
             new KanaQuestion('を', "wo"),
             new KanaQuestion('ん', "n")};
 
-    static KanaQuestionBank getQuestionBank(SharedPreferences sharedPref)
+    static KanaQuestionBank getQuestionBank()
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_1, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_1))
             questionBank.addQuestions(KANA_SET_1);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_2, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_2))
             questionBank.addQuestions(KANA_SET_2);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_3, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_3))
             questionBank.addQuestions(KANA_SET_3);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_4, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_4))
             questionBank.addQuestions(KANA_SET_4);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_5, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_5))
             questionBank.addQuestions(KANA_SET_5);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_6, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_6))
             questionBank.addQuestions(KANA_SET_6);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_7, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_7))
             questionBank.addQuestions(KANA_SET_7);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_8, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_8))
             questionBank.addQuestions(KANA_SET_8);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_9, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_9))
             questionBank.addQuestions(KANA_SET_9);
-        if (sharedPref.getBoolean(OptionsControl.CODE_HIRAGANA_10, false))
+        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_10))
             questionBank.addQuestions(KANA_SET_10);
 
         return questionBank;
