@@ -212,17 +212,8 @@ public class MainQuiz extends AppCompatActivity
         {
             resetQuiz();
             displayScore();
-            delayHandler.postDelayed
-            (
-                new Runnable()
-                {
-                    public void run()
-                    {
-                        buildQuestionBank();
-                        setQuestion();
-                    }
-                }, 500
-            );
+            buildQuestionBank();
+            setQuestion();
         }
     }
 }
