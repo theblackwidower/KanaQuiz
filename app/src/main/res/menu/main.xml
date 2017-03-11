@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mnuSelection"
+        android:title="@string/selection_title" />
     <item android:id="@+id/mnuOptions"
         android:title="@string/options_title" />
     <item android:id="@+id/mnuAbout"

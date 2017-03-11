@@ -18,8 +18,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SetSelection"
+            android:name=".OptionsScreen"
             android:label="@string/options_title"
+            android:parentActivityName=".MainQuiz" />
+        <activity
+            android:name=".SetSelection"
+            android:label="@string/selection_title"
             android:parentActivityName=".MainQuiz" />
         <activity
             android:name=".AboutScreen"

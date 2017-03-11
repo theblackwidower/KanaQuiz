@@ -28,8 +28,10 @@ abstract class OptionsControl
     final static String CODE_KATAKANA_9 = "katakana_set_9";
     final static String CODE_KATAKANA_10 = "katakana_set_10";
 
-    final static String CODE_ON_INCORRECT_CHEAT = "show_answer_on_incorrect";
-    final static String CODE_ON_INCORRECT_RETRY = "retry_on_incorrect";
+    final static String CODE_ON_INCORRECT_ACTION = "on_incorrect";
+    final static int CODE_ON_INCORRECT_MOVE_ON = 0;
+    final static int CODE_ON_INCORRECT_SHOW_ANSWER = 1;
+    final static int CODE_ON_INCORRECT_RETRY = 2;
 
     static private SharedPreferences sharedPreferences;
     static private SharedPreferences.Editor editor;
@@ -48,6 +50,17 @@ abstract class OptionsControl
     static void setBoolean(String prefId, boolean setting)
     {
         editor.putBoolean(prefId, setting);
+        editor.apply();
+    }
+
+    static int getInt(String prefId)
+    {
+        return sharedPreferences.getInt(prefId, 0);
+    }
+
+    static void setInt(String prefId, int setting)
+    {
+        editor.putInt(prefId, setting);
         editor.apply();
     }
 }

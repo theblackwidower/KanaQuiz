@@ -79,8 +79,7 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana.setText("");
         lblResponse.setText("");
 
-        if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT) ||
-                OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY))
+        if (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION) != OptionsControl.CODE_ON_INCORRECT_MOVE_ON)
             lblResponse.setMinLines(2);
     }
 
@@ -149,15 +148,15 @@ public class MainQuiz extends AppCompatActivity
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-            if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT))
+            switch (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION))
             {
+            case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
                 lblResponse.append(System.getProperty("line.separator"));
                 lblResponse.append(getResources().getText(R.string.show_correct_answer));
                 lblResponse.append(": ");
                 lblResponse.append(questionBank.fetchCorrectAnswer());
-            }
-            if (OptionsControl.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY))
-            {
+                break;
+            case OptionsControl.CODE_ON_INCORRECT_RETRY:
                 txtAnswer.setText("");
                 lblResponse.append(System.getProperty("line.separator"));
                 lblResponse.append(getResources().getText(R.string.try_again));
@@ -203,6 +202,9 @@ public class MainQuiz extends AppCompatActivity
     {
         switch (item.getItemId())
         {
+            case R.id.mnuSelection:
+                openSetSelection();
+                return true;
             case R.id.mnuOptions:
                 openOptions();
                 return true;
@@ -214,9 +216,15 @@ public class MainQuiz extends AppCompatActivity
         }
     }
 
-    public void openOptions()
+    public void openSetSelection()
     {
         Intent intent = new Intent(MainQuiz.this, SetSelection.class);
+        startActivityForResult(intent, 1);
+    }
+
+    public void openOptions()
+    {
+        Intent intent = new Intent(MainQuiz.this, OptionsScreen.class);
         startActivityForResult(intent, 1);
     }
 
