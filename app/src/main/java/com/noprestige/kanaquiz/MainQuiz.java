@@ -18,8 +18,8 @@ import java.text.DecimalFormat;
 
 public class MainQuiz extends AppCompatActivity
 {
-    private int totalQuestions = 0;
-    private int totalCorrect = 0;
+    private int totalQuestions;
+    private int totalCorrect;
 
     private KanaQuestionBank questionBank;
 
