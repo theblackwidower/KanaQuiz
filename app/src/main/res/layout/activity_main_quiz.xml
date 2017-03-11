@@ -23,9 +23,10 @@
         android:textAlignment="center" />
 
     <TextView
+        android:id="@+id/lblResponse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblResponse"
+        android:gravity="center_vertical"
         android:textAlignment="center" />
 
     <EditText

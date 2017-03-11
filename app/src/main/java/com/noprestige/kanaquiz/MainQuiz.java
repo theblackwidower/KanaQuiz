@@ -66,6 +66,7 @@ public class MainQuiz extends AppCompatActivity
             }
         );
 
+        resetQuiz();
         buildQuestionBank();
         setQuestion();
         displayScore();
@@ -78,6 +79,10 @@ public class MainQuiz extends AppCompatActivity
 
         lblDisplayKana.setText("");
         lblResponse.setText("");
+
+        if (sharedPref.getBoolean("show_answer_on_incorrect", false) ||
+                sharedPref.getBoolean("retry_on_incorrect", false))
+            lblResponse.setMinLines(2);
     }
 
     public void buildQuestionBank()
