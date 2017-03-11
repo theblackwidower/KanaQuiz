@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">The Kana Quiz</string>
 
+    <string name="options_title">Options</string>
+    <string name="about_title">About</string>
+
     <string name="score_label">Score</string>
     <string name="button_send">Answer</string>
     <string name="answer_hint">Answer Here</string>
@@ -8,8 +11,7 @@
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
     <string name="request_answer">Enter the Romanji equivalent</string>
-    <string name="options_title">Options</string>
-    <string name="about_title">About</string>
+    <string name="try_again">Try again</string>
 
     <!-- About screen credits -->
     <string name="github_logo">Github Logo</string>

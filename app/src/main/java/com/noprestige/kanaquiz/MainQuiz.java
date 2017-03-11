@@ -34,6 +34,8 @@ public class MainQuiz extends AppCompatActivity
 
     private Handler delayHandler = new Handler();
 
+    private boolean isRetrying = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -94,6 +96,7 @@ public class MainQuiz extends AppCompatActivity
             txtAnswer.setEnabled(true);
             btnSubmit.setEnabled(true);
             txtAnswer.requestFocus();
+            isRetrying = false;
         }
         catch (NoQuestionsException ex)
         {
@@ -129,20 +132,43 @@ public class MainQuiz extends AppCompatActivity
 
     private void checkAnswer()
     {
+        boolean isNewQuestion = true;
+
         if (questionBank.checkCurrentAnswer(txtAnswer.getText().toString()))
         {
-            totalCorrect++;
             lblResponse.setText(R.string.correct_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
+            if (!isRetrying)
+                totalCorrect++;
         }
         else
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+            if (sharedPref.getBoolean("retry_on_incorrect", false))
+            {
+                txtAnswer.setText("");
+                lblResponse.append(System.getProperty("line.separator"));
+                lblResponse.append(getResources().getText(R.string.try_again));
+                isRetrying = true;
+                isNewQuestion = false;
+            }
         }
-        totalQuestions++;
-        //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
-        btnSubmit.setEnabled(false);
+
+        if (isNewQuestion)
+        {
+            totalQuestions++;
+            //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
+            btnSubmit.setEnabled(false);
+            delayHandler.postDelayed(
+                new Runnable() {
+                    public void run() {
+                        displayScore();
+                        setQuestion();
+                    }
+                }, 1000
+            );
+        }
     }
 
     public void submitAnswer()
@@ -152,20 +178,7 @@ public class MainQuiz extends AppCompatActivity
     public void submitAnswer(View view)
     {
         if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
-        {
             checkAnswer();
-
-            delayHandler.postDelayed(
-                new Runnable()
-                {
-                    public void run()
-                    {
-                        displayScore();
-                        setQuestion();
-                    }
-                }, 1000
-            );
-        }
     }
 
     public void openOptions(View view)
