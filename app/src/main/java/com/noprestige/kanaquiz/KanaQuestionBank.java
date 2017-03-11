@@ -44,6 +44,11 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
         return currentQuestion.checkAnswer(response);
     }
 
+    String fetchCorrectAnswer()
+    {
+        return currentQuestion.fetchCorrectAnswer();
+    }
+
     boolean addQuestions(KanaQuestion[] questions)
     {
         previousQuestions = null;

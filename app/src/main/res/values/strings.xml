@@ -12,6 +12,7 @@
     <string name="incorrect_answer">Incorrect</string>
     <string name="request_answer">Enter the Romanji equivalent</string>
     <string name="try_again">Try again</string>
+    <string name="show_correct_answer">The correct answer is</string>
 
     <!-- About screen credits -->
     <string name="github_logo">Github Logo</string>

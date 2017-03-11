@@ -31,4 +31,9 @@ class KanaQuestion
     {
         return (romanji.equals(response.trim().toLowerCase()));
     }
+
+    String fetchCorrectAnswer()
+    {
+        return romanji;
+    }
 }
