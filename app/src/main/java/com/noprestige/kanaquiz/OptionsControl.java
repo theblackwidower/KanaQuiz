@@ -36,7 +36,7 @@ abstract class OptionsControl
 
     static void initialize(Context context)
     {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         editor = sharedPreferences.edit();
     }
 
