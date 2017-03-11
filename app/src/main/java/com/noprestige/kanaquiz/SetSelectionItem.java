@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -30,7 +31,7 @@ class SetSelectionItem extends LinearLayout
         ImageView imgBorder = new ImageView(context);
         TextView lblTitle = new TextView(context);
         TextView lblContents = new TextView(context);
-        CheckBox chkCheckBox = new CheckBox(context);
+        final CheckBox chkCheckBox = new CheckBox(context);
 
         textContainer.setOrientation(LinearLayout.VERTICAL);
         textContainer.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
@@ -58,6 +59,16 @@ class SetSelectionItem extends LinearLayout
                     SharedPreferences.Editor editor = sharedPrefs.edit();
                     editor.putBoolean(prefId, isChecked);
                     editor.apply();
+                }
+            }
+        );
+
+        this.setOnClickListener(
+            new OnClickListener()
+            {
+                public void onClick(View view)
+                {
+                    chkCheckBox.toggle();
                 }
             }
         );
