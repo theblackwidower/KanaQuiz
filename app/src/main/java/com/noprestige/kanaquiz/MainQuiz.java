@@ -80,8 +80,8 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana.setText("");
         lblResponse.setText("");
 
-        if (sharedPref.getBoolean("show_answer_on_incorrect", false) ||
-                sharedPref.getBoolean("retry_on_incorrect", false))
+        if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT, false) ||
+                sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY, false))
             lblResponse.setMinLines(2);
     }
 
@@ -150,14 +150,14 @@ public class MainQuiz extends AppCompatActivity
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-            if (sharedPref.getBoolean("show_answer_on_incorrect", false))
+            if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_CHEAT, false))
             {
                 lblResponse.append(System.getProperty("line.separator"));
                 lblResponse.append(getResources().getText(R.string.show_correct_answer));
                 lblResponse.append(": ");
                 lblResponse.append(questionBank.fetchCorrectAnswer());
             }
-            if (sharedPref.getBoolean("retry_on_incorrect", false))
+            if (sharedPref.getBoolean(OptionsControl.CODE_ON_INCORRECT_RETRY, false))
             {
                 txtAnswer.setText("");
                 lblResponse.append(System.getProperty("line.separator"));
