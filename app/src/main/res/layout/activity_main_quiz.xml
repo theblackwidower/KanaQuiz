@@ -59,19 +59,4 @@
         android:maxLines="2"
         android:minLines="2" />
 
-    <Button
-        android:text="@string/options_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptions"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openOptions" />
-
-    <Button
-        android:text="@string/about_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAbout"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openAbout" />
 </LinearLayout>

@@ -6,6 +6,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -190,13 +192,35 @@ public class MainQuiz extends AppCompatActivity
             checkAnswer();
     }
 
-    public void openOptions(View view)
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.mnuOptions:
+                openOptions();
+                return true;
+            case R.id.mnuAbout:
+                openAbout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void openOptions()
     {
         Intent intent = new Intent(MainQuiz.this, SetSelection.class);
         startActivityForResult(intent, 1);
     }
 
-    public void openAbout(View view)
+    public void openAbout()
     {
         Intent intent = new Intent(MainQuiz.this, AboutScreen.class);
         startActivity(intent);
