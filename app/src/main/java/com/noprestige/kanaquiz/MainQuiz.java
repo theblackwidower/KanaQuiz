@@ -71,7 +71,7 @@ public class MainQuiz extends AppCompatActivity
         displayScore();
     }
 
-    public void resetQuiz()
+    private void resetQuiz()
     {
         totalQuestions = 0;
         totalCorrect = 0;
@@ -83,7 +83,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setMinLines(2);
     }
 
-    public void buildQuestionBank()
+    private void buildQuestionBank()
     {
         questionBank = HiraganaQuestions.getQuestionBank();
         questionBank.addQuestions(KatakanaQuestions.getQuestionBank());
@@ -150,18 +150,18 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
             switch (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION))
             {
-            case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
-                lblResponse.append(System.getProperty("line.separator"));
-                lblResponse.append(getResources().getText(R.string.show_correct_answer));
-                lblResponse.append(": ");
-                lblResponse.append(questionBank.fetchCorrectAnswer());
-                break;
-            case OptionsControl.CODE_ON_INCORRECT_RETRY:
-                txtAnswer.setText("");
-                lblResponse.append(System.getProperty("line.separator"));
-                lblResponse.append(getResources().getText(R.string.try_again));
-                isRetrying = true;
-                isNewQuestion = false;
+                case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
+                    lblResponse.append(System.getProperty("line.separator"));
+                    lblResponse.append(getResources().getText(R.string.show_correct_answer));
+                    lblResponse.append(": ");
+                    lblResponse.append(questionBank.fetchCorrectAnswer());
+                    break;
+                case OptionsControl.CODE_ON_INCORRECT_RETRY:
+                    txtAnswer.setText("");
+                    lblResponse.append(System.getProperty("line.separator"));
+                    lblResponse.append(getResources().getText(R.string.try_again));
+                    isRetrying = true;
+                    isNewQuestion = false;
             }
         }
 
@@ -185,7 +185,7 @@ public class MainQuiz extends AppCompatActivity
     {
         submitAnswer();
     }
-    public void submitAnswer()
+    private void submitAnswer()
     {
         if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
             checkAnswer();
@@ -216,19 +216,19 @@ public class MainQuiz extends AppCompatActivity
         }
     }
 
-    public void openSetSelection()
+    private void openSetSelection()
     {
         Intent intent = new Intent(MainQuiz.this, SetSelection.class);
         startActivityForResult(intent, 1);
     }
 
-    public void openOptions()
+    private void openOptions()
     {
         Intent intent = new Intent(MainQuiz.this, OptionsScreen.class);
         startActivityForResult(intent, 1);
     }
 
-    public void openAbout()
+    private void openAbout()
     {
         Intent intent = new Intent(MainQuiz.this, AboutScreen.class);
         startActivity(intent);
