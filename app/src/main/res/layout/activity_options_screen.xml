@@ -17,7 +17,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="On an incorrect answer..." />
+        android:text="@string/incorrect_option_title" />
 
     <RadioGroup
         android:id="@+id/grpOnIncorrect"
@@ -29,20 +29,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="go to next question" />
+            android:text="@string/incorrect_option_move_on" />
 
         <RadioButton
             android:id="@+id/rdoOnIncorrectShowAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="show the correct answer" />
+            android:text="@string/incorrect_option_show_answer" />
 
         <RadioButton
             android:id="@+id/rdoOnIncorrectAllowRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="retry question till the answer is correct" />
+            android:text="@string/incorrect_option_retry" />
     </RadioGroup>
 </LinearLayout>
