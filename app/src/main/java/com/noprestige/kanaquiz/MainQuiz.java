@@ -29,7 +29,7 @@ public class MainQuiz extends AppCompatActivity
     private Button btnSubmit;
 
     private int oldTextColour;
-    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0");
+    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
 
     private Handler delayHandler = new Handler();
 
@@ -95,11 +95,9 @@ public class MainQuiz extends AppCompatActivity
         {
             questionBank.newQuestion();
             lblDisplayKana.setText(Character.toString(questionBank.getCurrentKana()));
-            lblResponse.setText(R.string.request_answer);
-            txtAnswer.setEnabled(true);
-            btnSubmit.setEnabled(true);
-            txtAnswer.requestFocus();
+//            txtAnswer.setEnabled(true);
             isRetrying = false;
+            ReadyForAnswer();
         }
         catch (NoQuestionsException ex)
         {
@@ -107,10 +105,9 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setText(R.string.no_questions);
             txtAnswer.setEnabled(false);
             btnSubmit.setEnabled(false);
+            lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
+            txtAnswer.setText("");
         }
-        lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
-
-        txtAnswer.setText("");
     }
 
     private void displayScore()
@@ -122,9 +119,9 @@ public class MainQuiz extends AppCompatActivity
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(PERCENT_FORMATTER.format(((float)totalCorrect / (float)totalQuestions) * 100));
+            lblScore.append(PERCENT_FORMATTER.format((float)totalCorrect / (float)totalQuestions));
 
-            lblScore.append("%\n");
+            lblScore.append(System.getProperty("line.separator"));
             lblScore.append(Integer.toString(totalCorrect));
             lblScore.append(" / ");
             lblScore.append(Integer.toString(totalQuestions));
@@ -136,6 +133,7 @@ public class MainQuiz extends AppCompatActivity
     private void checkAnswer()
     {
         boolean isNewQuestion = true;
+        btnSubmit.setEnabled(false);
 
         if (questionBank.checkCurrentAnswer(txtAnswer.getText().toString()))
         {
@@ -162,6 +160,16 @@ public class MainQuiz extends AppCompatActivity
                     lblResponse.append(getResources().getText(R.string.try_again));
                     isRetrying = true;
                     isNewQuestion = false;
+
+                    delayHandler.postDelayed(
+                        new Runnable()
+                        {
+                            public void run()
+                            {
+                                ReadyForAnswer();
+                            }
+                        }, 1000
+                    );
             }
         }
 
@@ -169,16 +177,26 @@ public class MainQuiz extends AppCompatActivity
         {
             totalQuestions++;
             //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
-            btnSubmit.setEnabled(false);
             delayHandler.postDelayed(
-                new Runnable() {
-                    public void run() {
+                new Runnable()
+                {
+                    public void run()
+                    {
                         displayScore();
                         setQuestion();
                     }
                 }, 1000
             );
         }
+    }
+
+    private void ReadyForAnswer()
+    {
+        lblResponse.setText(R.string.request_answer);
+        btnSubmit.setEnabled(true);
+        txtAnswer.requestFocus();
+        lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
+        txtAnswer.setText("");
     }
 
     public void submitAnswer(View view)
