@@ -65,6 +65,31 @@
     <string name="set_10_hiragana">わ を ん</string>
     <string name="set_10_katakana">ワ ヲ ン</string>
 
+    <!-- SavedPreferences ID Codes -->
+    <string name="prefid_hiragana_1">hiragana_set_1</string>
+    <string name="prefid_hiragana_2">hiragana_set_2</string>
+    <string name="prefid_hiragana_3">hiragana_set_3</string>
+    <string name="prefid_hiragana_4">hiragana_set_4</string>
+    <string name="prefid_hiragana_5">hiragana_set_5</string>
+    <string name="prefid_hiragana_6">hiragana_set_6</string>
+    <string name="prefid_hiragana_7">hiragana_set_7</string>
+    <string name="prefid_hiragana_8">hiragana_set_8</string>
+    <string name="prefid_hiragana_9">hiragana_set_9</string>
+    <string name="prefid_hiragana_10">hiragana_set_10</string>
+
+    <string name="prefid_katakana_1">katakana_set_1</string>
+    <string name="prefid_katakana_2">katakana_set_2</string>
+    <string name="prefid_katakana_3">katakana_set_3</string>
+    <string name="prefid_katakana_4">katakana_set_4</string>
+    <string name="prefid_katakana_5">katakana_set_5</string>
+    <string name="prefid_katakana_6">katakana_set_6</string>
+    <string name="prefid_katakana_7">katakana_set_7</string>
+    <string name="prefid_katakana_8">katakana_set_8</string>
+    <string name="prefid_katakana_9">katakana_set_9</string>
+    <string name="prefid_katakana_10">katakana_set_10</string>
+
+    <string name="prefid_action_on_incorrect">on_incorrect</string>
+
 
     <string name="licence_boilerplate">Copyright 2017 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
 </resources>

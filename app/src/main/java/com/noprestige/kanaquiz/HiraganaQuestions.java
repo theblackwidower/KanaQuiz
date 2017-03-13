@@ -97,25 +97,25 @@ abstract class HiraganaQuestions
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_1))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_1))
             questionBank.addQuestions(KANA_SET_1);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_2))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_2))
             questionBank.addQuestions(KANA_SET_2);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_3))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_3))
             questionBank.addQuestions(KANA_SET_3);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_4))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_4))
             questionBank.addQuestions(KANA_SET_4);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_5))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_5))
             questionBank.addQuestions(KANA_SET_5);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_6))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_6))
             questionBank.addQuestions(KANA_SET_6);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_7))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_7))
             questionBank.addQuestions(KANA_SET_7);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_8))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_8))
             questionBank.addQuestions(KANA_SET_8);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_9))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_9))
             questionBank.addQuestions(KANA_SET_9);
-        if (OptionsControl.getBoolean(OptionsControl.CODE_HIRAGANA_10))
+        if (OptionsControl.getBoolean(R.string.prefid_hiragana_10))
             questionBank.addQuestions(KANA_SET_10);
 
         return questionBank;

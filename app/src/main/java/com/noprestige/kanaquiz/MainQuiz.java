@@ -79,7 +79,7 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana.setText("");
         lblResponse.setText("");
 
-        if (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION) != OptionsControl.CODE_ON_INCORRECT_MOVE_ON)
+        if (OptionsControl.getInt(R.string.prefid_action_on_incorrect) != OptionsControl.CODE_ON_INCORRECT_MOVE_ON)
             lblResponse.setMinLines(2);
     }
 
@@ -148,7 +148,7 @@ public class MainQuiz extends AppCompatActivity
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-            switch (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION))
+            switch (OptionsControl.getInt(R.string.prefid_action_on_incorrect))
             {
                 case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
                     lblResponse.append(System.getProperty("line.separator"));

@@ -15,7 +15,7 @@ public class OptionsScreen extends AppCompatActivity
 
         RadioGroup grpOnIncorrect = (RadioGroup)findViewById(R.id.grpOnIncorrect);
 
-        switch (OptionsControl.getInt(OptionsControl.CODE_ON_INCORRECT_ACTION))
+        switch (OptionsControl.getInt(R.string.prefid_action_on_incorrect))
         {
             case OptionsControl.CODE_ON_INCORRECT_MOVE_ON:
                 grpOnIncorrect.check(R.id.rdoOnIncorrectMoveOn);
@@ -46,7 +46,7 @@ public class OptionsScreen extends AppCompatActivity
                         default:
                             optionCode = 0;
                     }
-                    OptionsControl.setInt(OptionsControl.CODE_ON_INCORRECT_ACTION, optionCode);
+                    OptionsControl.setInt(R.string.prefid_action_on_incorrect, optionCode);
                 }
             }
         );
