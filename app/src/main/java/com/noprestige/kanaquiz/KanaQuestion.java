@@ -7,7 +7,6 @@ class KanaQuestion
 
     KanaQuestion(char kana, String romanji)
     {
-        super();
         setKana(kana);
         setRomanji(romanji);
     }
