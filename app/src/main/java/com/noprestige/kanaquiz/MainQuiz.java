@@ -200,19 +200,24 @@ public class MainQuiz extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+        Class destination;
+
         switch (item.getItemId())
         {
             case R.id.mnuSelection:
-                startActivity(new Intent(MainQuiz.this, SetSelection.class));
-                return true;
+                destination = SetSelection.class;
+                break;
             case R.id.mnuOptions:
-                startActivity(new Intent(MainQuiz.this, OptionsScreen.class));
-                return true;
+                destination = OptionsScreen.class;
+                break;
             case R.id.mnuAbout:
-                startActivity(new Intent(MainQuiz.this, AboutScreen.class));
-                return true;
+                destination = AboutScreen.class;
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        startActivity(new Intent(MainQuiz.this, destination));
+        return true;
     }
 }
