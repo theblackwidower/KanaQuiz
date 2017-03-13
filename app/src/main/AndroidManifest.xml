@@ -22,7 +22,7 @@
             android:label="@string/options_title"
             android:parentActivityName=".MainQuiz" />
         <activity
-            android:name=".SetSelection"
+            android:name=".KanaSelection"
             android:label="@string/selection_title"
             android:parentActivityName=".MainQuiz" />
         <activity

@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-class SetSelectionPager extends FragmentPagerAdapter
+class KanaSelectionPager extends FragmentPagerAdapter
 {
     private Context context;
 
-    SetSelectionPager(FragmentManager fm, Context context)
+    KanaSelectionPager(FragmentManager fm, Context context)
     {
         super(fm);
         this.context = context;
@@ -18,7 +18,7 @@ class SetSelectionPager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return SetSelectionPage.newInstance(position);
+        return KanaSelectionPage.newInstance(position);
     }
 
     @Override

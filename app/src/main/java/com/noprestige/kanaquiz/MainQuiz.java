@@ -205,7 +205,7 @@ public class MainQuiz extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.mnuSelection:
-                destination = SetSelection.class;
+                destination = KanaSelection.class;
                 break;
             case R.id.mnuOptions:
                 destination = OptionsScreen.class;

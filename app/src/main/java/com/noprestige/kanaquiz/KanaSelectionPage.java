@@ -6,15 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SetSelectionPage extends Fragment
+public class KanaSelectionPage extends Fragment
 {
     private static final String ARG_PAGE_NUMBER = "position";
 
-    public SetSelectionPage() {}
+    public KanaSelectionPage() {}
 
-    public static SetSelectionPage newInstance(int id)
+    public static KanaSelectionPage newInstance(int id)
     {
-        SetSelectionPage screen = new SetSelectionPage();
+        KanaSelectionPage screen = new KanaSelectionPage();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE_NUMBER, id);
         screen.setArguments(args);
@@ -27,9 +27,9 @@ public class SetSelectionPage extends Fragment
         switch(getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                return inflater.inflate(R.layout.fragment_set_selection_hiragana, container, false);
+                return inflater.inflate(R.layout.fragment_kana_selection_hiragana, container, false);
             case 1:
-                return inflater.inflate(R.layout.fragment_set_selection_katakana, container, false);
+                return inflater.inflate(R.layout.fragment_kana_selection_katakana, container, false);
             default:
                 return null;
         }
