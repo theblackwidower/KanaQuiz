@@ -203,35 +203,17 @@ public class MainQuiz extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.mnuSelection:
-                openSetSelection();
+                startActivityForResult(new Intent(MainQuiz.this, SetSelection.class), 1);
                 return true;
             case R.id.mnuOptions:
-                openOptions();
+                startActivityForResult(new Intent(MainQuiz.this, OptionsScreen.class), 1);
                 return true;
             case R.id.mnuAbout:
-                openAbout();
+                startActivity(new Intent(MainQuiz.this, AboutScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void openSetSelection()
-    {
-        Intent intent = new Intent(MainQuiz.this, SetSelection.class);
-        startActivityForResult(intent, 1);
-    }
-
-    private void openOptions()
-    {
-        Intent intent = new Intent(MainQuiz.this, OptionsScreen.class);
-        startActivityForResult(intent, 1);
-    }
-
-    private void openAbout()
-    {
-        Intent intent = new Intent(MainQuiz.this, AboutScreen.class);
-        startActivity(intent);
     }
 
     @Override
