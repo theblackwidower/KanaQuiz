@@ -235,7 +235,19 @@ public class MainQuiz extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
 
-        startActivity(new Intent(MainQuiz.this, destination));
+        startActivityForResult(new Intent(MainQuiz.this, destination), 1);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == 1)
+        {
+            resetQuiz();
+            displayScore();
+            buildQuestionBank();
+            setQuestion();
+        }
     }
 }
