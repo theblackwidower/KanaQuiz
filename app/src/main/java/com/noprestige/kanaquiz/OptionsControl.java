@@ -16,6 +16,7 @@ abstract class OptionsControl
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         editor = sharedPreferences.edit();
         resources = context.getResources();
+        PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
     }
 
     static boolean getBoolean(int resId)

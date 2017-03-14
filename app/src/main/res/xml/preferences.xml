@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="@string/prefid_on_incorrect"
+        android:title="@string/incorrect_option_title"
+        android:entries="@array/incorrect_option_item_names"
+        android:entryValues="@array/prefids_on_incorrect"
+        android:defaultValue="@string/prefid_on_incorrect_default" />
+</PreferenceScreen>
