@@ -15,38 +15,34 @@ public class OptionsScreen extends AppCompatActivity
 
         RadioGroup grpOnIncorrect = (RadioGroup)findViewById(R.id.grpOnIncorrect);
 
-        switch (OptionsControl.getInt(R.string.prefid_action_on_incorrect))
-        {
-            case OptionsControl.CODE_ON_INCORRECT_MOVE_ON:
+            if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
                 grpOnIncorrect.check(R.id.rdoOnIncorrectMoveOn);
-                break;
-            case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
+            else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 grpOnIncorrect.check(R.id.rdoOnIncorrectShowAnswer);
-                break;
-            case OptionsControl.CODE_ON_INCORRECT_RETRY:
+            else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
                 grpOnIncorrect.check(R.id.rdoOnIncorrectAllowRetry);
-        }
+
         grpOnIncorrect.setOnCheckedChangeListener(
             new RadioGroup.OnCheckedChangeListener()
             {
                 public void onCheckedChanged(RadioGroup group, int checkedId)
                 {
-                    int optionCode;
+                    String optionCode;
                     switch (checkedId)
                     {
                         case (R.id.rdoOnIncorrectMoveOn):
-                            optionCode = OptionsControl.CODE_ON_INCORRECT_MOVE_ON;
+                            optionCode = getResources().getString(R.string.prefid_on_incorrect_default);
                             break;
                         case (R.id.rdoOnIncorrectShowAnswer):
-                            optionCode = OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER;
+                            optionCode = getResources().getString(R.string.prefid_on_incorrect_show_answer);
                             break;
                         case (R.id.rdoOnIncorrectAllowRetry):
-                            optionCode = OptionsControl.CODE_ON_INCORRECT_RETRY;
+                            optionCode = getResources().getString(R.string.prefid_on_incorrect_retry);
                             break;
                         default:
-                            optionCode = 0;
+                            optionCode = "";
                     }
-                    OptionsControl.setInt(R.string.prefid_action_on_incorrect, optionCode);
+                    OptionsControl.setString(R.string.prefid_on_incorrect, optionCode);
                 }
             }
         );

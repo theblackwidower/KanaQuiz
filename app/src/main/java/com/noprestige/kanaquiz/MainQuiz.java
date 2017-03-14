@@ -79,7 +79,7 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana.setText("");
         lblResponse.setText("");
 
-        if (OptionsControl.getInt(R.string.prefid_action_on_incorrect) != OptionsControl.CODE_ON_INCORRECT_MOVE_ON)
+        if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
     }
 
@@ -146,15 +146,16 @@ public class MainQuiz extends AppCompatActivity
         {
             lblResponse.setText(R.string.incorrect_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-            switch (OptionsControl.getInt(R.string.prefid_action_on_incorrect))
-            {
-                case OptionsControl.CODE_ON_INCORRECT_SHOW_ANSWER:
+
+                if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
+                {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.show_correct_answer));
                     lblResponse.append(": ");
                     lblResponse.append(questionBank.fetchCorrectAnswer());
-                    break;
-                case OptionsControl.CODE_ON_INCORRECT_RETRY:
+                }
+                else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
+                {
                     txtAnswer.setText("");
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.try_again));

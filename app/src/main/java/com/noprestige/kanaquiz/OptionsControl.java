@@ -7,10 +7,6 @@ import android.preference.PreferenceManager;
 
 abstract class OptionsControl
 {
-    final static int CODE_ON_INCORRECT_MOVE_ON = 0;
-    final static int CODE_ON_INCORRECT_SHOW_ANSWER = 1;
-    final static int CODE_ON_INCORRECT_RETRY = 2;
-
     static private SharedPreferences sharedPreferences;
     static private SharedPreferences.Editor editor;
     static private Resources resources;
@@ -41,22 +37,31 @@ abstract class OptionsControl
         editor.apply();
     }
 
-    static int getInt(int resId)
+    static String getString(int resId)
     {
-        return getInt(resources.getString(resId));
+        return getString(resources.getString(resId));
     }
-    static int getInt(String prefId)
+    static String getString(String prefId)
     {
-        return sharedPreferences.getInt(prefId, 0);
+        return sharedPreferences.getString(prefId, "");
     }
 
-    static void setInt(int resId, int setting)
+    static void setString(int resId, String setting)
     {
-        setInt(resources.getString(resId), setting);
+        setString(resources.getString(resId), setting);
     }
-    static void setInt(String prefId, int setting)
+    static void setString(String prefId, String setting)
     {
-        editor.putInt(prefId, setting);
+        editor.putString(prefId, setting);
         editor.apply();
+    }
+
+    static boolean compareStrings(int prefId, int comparator)
+    {
+        return compareStrings(resources.getString(prefId), resources.getString(comparator));
+    }
+    static boolean compareStrings(String prefId, String comparator)
+    {
+        return sharedPreferences.getString(prefId, "").equals(comparator);
     }
 }
