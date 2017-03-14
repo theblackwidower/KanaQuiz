@@ -15,12 +15,12 @@ public class OptionsScreen extends AppCompatActivity
 
         RadioGroup grpOnIncorrect = (RadioGroup)findViewById(R.id.grpOnIncorrect);
 
-            if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
-                grpOnIncorrect.check(R.id.rdoOnIncorrectMoveOn);
-            else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
-                grpOnIncorrect.check(R.id.rdoOnIncorrectShowAnswer);
-            else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
-                grpOnIncorrect.check(R.id.rdoOnIncorrectAllowRetry);
+        if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
+            grpOnIncorrect.check(R.id.rdoOnIncorrectMoveOn);
+        else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
+            grpOnIncorrect.check(R.id.rdoOnIncorrectShowAnswer);
+        else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
+            grpOnIncorrect.check(R.id.rdoOnIncorrectAllowRetry);
 
         grpOnIncorrect.setOnCheckedChangeListener(
             new RadioGroup.OnCheckedChangeListener()
