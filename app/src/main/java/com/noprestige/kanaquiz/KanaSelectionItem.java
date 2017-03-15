@@ -117,6 +117,16 @@ public class KanaSelectionItem extends LinearLayout
         );
     }
 
+    public String getTitle() {
+        return title;
+    }
+    public String getContents() {
+        return contents;
+    }
+    public String getPrefId() {
+        return prefId;
+    }
+
     public void setTitle(int resId)
     {
         setTitle(getResources().getString(resId));
