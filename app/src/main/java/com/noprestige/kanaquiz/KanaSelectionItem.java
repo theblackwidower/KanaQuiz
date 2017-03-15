@@ -103,7 +103,9 @@ public class KanaSelectionItem extends LinearLayout
         lblTitle.setText(title);
         lblContents.setText(contents);
 
-        chkCheckBox.setChecked(OptionsControl.getBoolean(prefId));
+        if (!isInEditMode())
+            chkCheckBox.setChecked(OptionsControl.getBoolean(prefId));
+
         chkCheckBox.setOnCheckedChangeListener(
             new android.widget.CompoundButton.OnCheckedChangeListener()
             {
