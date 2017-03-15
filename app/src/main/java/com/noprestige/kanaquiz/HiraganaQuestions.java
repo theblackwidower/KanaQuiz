@@ -9,36 +9,42 @@ abstract class HiraganaQuestions
             new KanaQuestion('え', "e"),
             new KanaQuestion('お', "o")};
 
-    private static final KanaQuestion[] KANA_SET_2 = {
+    private static final KanaQuestion[] KANA_SET_2_BASE = {
             new KanaQuestion('か', "ka"),
             new KanaQuestion('き', "ki"),
             new KanaQuestion('く', "ku"),
             new KanaQuestion('け', "ke"),
-            new KanaQuestion('こ', "ko"),
+            new KanaQuestion('こ', "ko")};
+
+    private static final KanaQuestion[] KANA_SET_2_DAKUTEN = {
             new KanaQuestion('が', "ga"),
             new KanaQuestion('ぎ', "gi"),
             new KanaQuestion('ぐ', "gu"),
             new KanaQuestion('げ', "ge"),
             new KanaQuestion('ご', "go")};
 
-    private static final KanaQuestion[] KANA_SET_3 = {
+    private static final KanaQuestion[] KANA_SET_3_BASE = {
             new KanaQuestion('さ', "sa"),
             new KanaQuestion('し', "shi"),
             new KanaQuestion('す', "su"),
             new KanaQuestion('せ', "se"),
-            new KanaQuestion('そ', "so"),
+            new KanaQuestion('そ', "so")};
+
+    private static final KanaQuestion[] KANA_SET_3_DAKUTEN = {
             new KanaQuestion('ざ', "za"),
             new KanaQuestion('じ', "ji"),
             new KanaQuestion('ず', "zu"),
             new KanaQuestion('ぜ', "ze"),
             new KanaQuestion('ぞ', "zo")};
 
-    private static final KanaQuestion[] KANA_SET_4 = {
+    private static final KanaQuestion[] KANA_SET_4_BASE = {
             new KanaQuestion('た', "ta"),
             new KanaQuestion('ち', "chi"),
             new KanaQuestion('つ', "tsu"),
             new KanaQuestion('て', "te"),
-            new KanaQuestion('と', "to"),
+            new KanaQuestion('と', "to")};
+
+    private static final KanaQuestion[] KANA_SET_4_DAKUTEN = {
             new KanaQuestion('だ', "da"),
             new KanaQuestion('ぢ', "ji"),
             new KanaQuestion('づ', "zu"),
@@ -52,17 +58,21 @@ abstract class HiraganaQuestions
             new KanaQuestion('ね', "ne"),
             new KanaQuestion('の', "no")};
 
-    private static final KanaQuestion[] KANA_SET_6 = {
+    private static final KanaQuestion[] KANA_SET_6_BASE = {
             new KanaQuestion('は', "ha"),
             new KanaQuestion('ひ', "hi"),
             new KanaQuestion('ふ', "fu"),
             new KanaQuestion('へ', "he"),
-            new KanaQuestion('ほ', "ho"),
+            new KanaQuestion('ほ', "ho")};
+
+    private static final KanaQuestion[] KANA_SET_6_DAKUTEN = {
             new KanaQuestion('ば', "ba"),
             new KanaQuestion('び', "bi"),
             new KanaQuestion('ぶ', "bu"),
             new KanaQuestion('べ', "be"),
-            new KanaQuestion('ぼ', "bo"),
+            new KanaQuestion('ぼ', "bo")};
+
+    private static final KanaQuestion[] KANA_SET_6_HANDAKETEN = {
             new KanaQuestion('ぱ', "pa"),
             new KanaQuestion('ぴ', "pi"),
             new KanaQuestion('ぷ', "pu"),
@@ -100,15 +110,15 @@ abstract class HiraganaQuestions
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_1))
             questionBank.addQuestions(KANA_SET_1);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_2))
-            questionBank.addQuestions(KANA_SET_2);
+            questionBank.addQuestions(KANA_SET_2_BASE, KANA_SET_2_DAKUTEN);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_3))
-            questionBank.addQuestions(KANA_SET_3);
+            questionBank.addQuestions(KANA_SET_3_BASE, KANA_SET_3_DAKUTEN);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_4))
-            questionBank.addQuestions(KANA_SET_4);
+            questionBank.addQuestions(KANA_SET_4_BASE, KANA_SET_4_DAKUTEN);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_5))
             questionBank.addQuestions(KANA_SET_5);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_6))
-            questionBank.addQuestions(KANA_SET_6);
+            questionBank.addQuestions(KANA_SET_6_BASE, KANA_SET_6_DAKUTEN, KANA_SET_6_HANDAKETEN);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_7))
             questionBank.addQuestions(KANA_SET_7);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_8))
