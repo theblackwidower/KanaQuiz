@@ -34,7 +34,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
             throw new NoQuestionsException();
     }
 
-    char getCurrentKana()
+    String getCurrentKana()
     {
         return currentQuestion.getKana();
     }

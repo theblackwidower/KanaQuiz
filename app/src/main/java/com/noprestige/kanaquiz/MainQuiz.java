@@ -94,7 +94,7 @@ public class MainQuiz extends AppCompatActivity
         try
         {
             questionBank.newQuestion();
-            lblDisplayKana.setText(Character.toString(questionBank.getCurrentKana()));
+            lblDisplayKana.setText(questionBank.getCurrentKana());
 //            txtAnswer.setEnabled(true);
             isRetrying = false;
             ReadyForAnswer();

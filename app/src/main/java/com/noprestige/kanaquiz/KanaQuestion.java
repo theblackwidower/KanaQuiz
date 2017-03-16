@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz;
 
 class KanaQuestion
 {
-    private char kana;
+    private String kana;
     private String romanji;
 
     KanaQuestion(char kana, String romanji)
@@ -18,10 +18,14 @@ class KanaQuestion
 
     private void setKana(char kana)
     {
-        this.kana = kana;
+        setKana(Character.toString(kana));
+    }
+    private void setKana(String kana)
+    {
+        this.kana = kana.trim();
     }
 
-    char getKana()
+    String getKana()
     {
         return kana;
     }
