@@ -9,9 +9,6 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     private KanaQuestion currentQuestion;
     private Random rng = new Random();
 
-    //this number represents any given sequence of questions in which there are no repeats
-    //can't be anything less than 2
-    private static final int NO_REPEAT_RECORD = 3;
     private QuestionRecord previousQuestions = null;
 
     KanaQuestionBank()
@@ -24,8 +21,10 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
         if (this.size() > 1)
         {
             if (previousQuestions == null)
-                previousQuestions = new QuestionRecord((this.size() < NO_REPEAT_RECORD)?this.size():NO_REPEAT_RECORD);
-
+            {
+                int repetitionLimit = OptionsControl.getInt(R.string.prefid_repetition);
+                previousQuestions = new QuestionRecord((this.size() < repetitionLimit) ? this.size() : repetitionLimit);
+            }
             do {
                 currentQuestion = this.get(rng.nextInt(this.size()));
             } while (!previousQuestions.add(currentQuestion));

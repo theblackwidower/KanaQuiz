@@ -38,6 +38,25 @@ abstract class OptionsControl
         editor.apply();
     }
 
+    static int getInt(int resId)
+    {
+        return getInt(resources.getString(resId));
+    }
+    static int getInt(String prefId)
+    {
+        return sharedPreferences.getInt(prefId, 0);
+    }
+
+    static void setInt(int resId, int setting)
+    {
+        setInt(resources.getString(resId), setting);
+    }
+    static void setInt(String prefId, int setting)
+    {
+        editor.putInt(prefId, setting);
+        editor.apply();
+    }
+
     static String getString(int resId)
     {
         return getString(resources.getString(resId));
