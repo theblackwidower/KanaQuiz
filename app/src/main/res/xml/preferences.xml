@@ -6,4 +6,9 @@
         android:entries="@array/incorrect_option_item_names"
         android:entryValues="@array/prefids_on_incorrect"
         android:defaultValue="@string/prefid_on_incorrect_default" />
+    <com.noprestige.kanaquiz.NumberPreference
+        android:key="@string/prefid_repetition"
+        android:title="@string/repetition_option_title"
+        android:summary="@string/repetition_option_summary"
+        android:defaultValue="3" />
 </PreferenceScreen>

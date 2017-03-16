@@ -47,6 +47,10 @@
         <item>@string/prefid_on_incorrect_retry</item>
     </string-array>
 
+    <string name="repetition_option_title">Repetition control</string>
+    <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
+    <string name="prefid_repetition">repeat_control</string>
+
     <!-- Kana Selection -->
     <string name="hiragana">Hiragana</string>
     <string name="katakana">Katakana</string>
