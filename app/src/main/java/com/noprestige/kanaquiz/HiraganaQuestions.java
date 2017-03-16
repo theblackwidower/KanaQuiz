@@ -49,9 +49,9 @@ abstract class HiraganaQuestions
             new KanaQuestion("しゃ", "sha"),
             new KanaQuestion("しゅ", "shu"),
             new KanaQuestion("しょ", "sho"),
-            new KanaQuestion("じゃ", "jya"),
-            new KanaQuestion("じゅ", "jyu"),
-            new KanaQuestion("じょ", "jyo")};
+            new KanaQuestion("じゃ", new String[] {"ja", "jya"}),
+            new KanaQuestion("じゅ", new String[] {"ju", "jyu"}),
+            new KanaQuestion("じょ", new String[] {"jo", "jyo"})};
 
     private static final KanaQuestion[] KANA_SET_4_BASE = {
             new KanaQuestion('た', "ta"),
@@ -71,9 +71,9 @@ abstract class HiraganaQuestions
             new KanaQuestion("ちゃ", "cha"),
             new KanaQuestion("ちゅ", "chu"),
             new KanaQuestion("ちょ", "cho"),
-            new KanaQuestion("ぢゃ", "dzya"),
-            new KanaQuestion("ぢゅ", "dzyu"),
-            new KanaQuestion("ぢょ", "dzyo")};
+            new KanaQuestion("ぢゃ", new String[] {"ja", "dzya"}),
+            new KanaQuestion("ぢゅ", new String[] {"ju", "dzyu"}),
+            new KanaQuestion("ぢょ", new String[] {"jo", "dzyo"})};
 
     private static final KanaQuestion[] KANA_SET_5 = {
             new KanaQuestion('な', "na"),
