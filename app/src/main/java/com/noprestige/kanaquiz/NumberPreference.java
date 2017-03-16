@@ -5,12 +5,12 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.widget.EditText;
+import android.widget.NumberPicker;
 
 class NumberPreference extends DialogPreference
 {
     private int repetitionLimit;
-    private EditText txtNumber;
+    private NumberPicker numberPicker;
 
     public NumberPreference(Context context, AttributeSet attrs)
     {
@@ -27,8 +27,11 @@ class NumberPreference extends DialogPreference
     protected void showDialog(Bundle state) {
         super.showDialog(state);
 
-        txtNumber = (EditText) getDialog().findViewById(R.id.txtNumber);
-        txtNumber.setText(Integer.toString(repetitionLimit));
+        numberPicker = (NumberPicker) getDialog().findViewById(R.id.numberPicker);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(142); //TODO: implement as property of class
+        numberPicker.setWrapSelectorWheel(false);
+        numberPicker.setValue(repetitionLimit);
     }
 
     @Override
@@ -36,17 +39,10 @@ class NumberPreference extends DialogPreference
     {
         if (positiveResult)
         {
-            try
-            {
-                repetitionLimit = Integer.parseInt(txtNumber.getText().toString());
+                repetitionLimit = numberPicker.getValue();
                 if (repetitionLimit < 1)
                     repetitionLimit = 1;
                 persistInt(repetitionLimit);
-            }
-            catch (NumberFormatException e)
-            {
-                //ignore
-            }
         }
     }
 

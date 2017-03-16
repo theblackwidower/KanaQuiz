@@ -5,11 +5,8 @@
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="2"
-        android:inputType="number"
-        android:textAlignment="center" />
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
