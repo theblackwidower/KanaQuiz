@@ -3,9 +3,14 @@ package com.noprestige.kanaquiz;
 class KanaQuestion
 {
     private String kana;
-    private String romanji;
+    private String[] romanji;
 
     KanaQuestion(char kana, String romanji)
+    {
+        setKana(kana);
+        setRomanji(romanji);
+    }
+    KanaQuestion(char kana, String[] romanji)
     {
         setKana(kana);
         setRomanji(romanji);
@@ -13,7 +18,11 @@ class KanaQuestion
 
     private void setRomanji(String romanji)
     {
-        this.romanji = romanji.trim().toLowerCase();
+        this.romanji = new String[] {romanji};
+    }
+    private void setRomanji(String[] romanji)
+    {
+        this.romanji = romanji;
     }
 
     private void setKana(char kana)
@@ -32,11 +41,17 @@ class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        return (romanji.equals(response.trim().toLowerCase()));
+        boolean isCorrect = false;
+        for (String correctAnswer : romanji)
+        {
+            if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
+                isCorrect = true;
+        }
+        return isCorrect;
     }
 
     String fetchCorrectAnswer()
     {
-        return romanji;
+        return romanji[0];
     }
 }

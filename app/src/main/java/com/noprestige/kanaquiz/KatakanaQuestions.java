@@ -61,7 +61,7 @@ abstract class KatakanaQuestions
     private static final KanaQuestion[] KANA_SET_6_BASE = {
             new KanaQuestion('ハ', "ha"),
             new KanaQuestion('ヒ', "hi"),
-            new KanaQuestion('フ', "fu"),
+            new KanaQuestion('フ', new String[] {"fu", "hu"}),
             new KanaQuestion('ヘ', "he"),
             new KanaQuestion('ホ', "ho")};
 

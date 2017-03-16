@@ -61,7 +61,7 @@ abstract class HiraganaQuestions
     private static final KanaQuestion[] KANA_SET_6_BASE = {
             new KanaQuestion('は', "ha"),
             new KanaQuestion('ひ', "hi"),
-            new KanaQuestion('ふ', "fu"),
+            new KanaQuestion('ふ', new String[] {"fu", "hu"}),
             new KanaQuestion('へ', "he"),
             new KanaQuestion('ほ', "ho")};
 
