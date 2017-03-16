@@ -23,6 +23,14 @@ abstract class HiraganaQuestions
             new KanaQuestion('げ', "ge"),
             new KanaQuestion('ご', "go")};
 
+    private static final KanaQuestion[] KANA_SET_2_DIGRAPHS = {
+            new KanaQuestion("きゃ", "kya"),
+            new KanaQuestion("きゅ", "kyu"),
+            new KanaQuestion("きょ", "kyo"),
+            new KanaQuestion("ぎゃ", "gya"),
+            new KanaQuestion("ぎゅ", "gyu"),
+            new KanaQuestion("ぎょ", "gyo")};
+
     private static final KanaQuestion[] KANA_SET_3_BASE = {
             new KanaQuestion('さ', "sa"),
             new KanaQuestion('し', "shi"),
@@ -36,6 +44,14 @@ abstract class HiraganaQuestions
             new KanaQuestion('ず', "zu"),
             new KanaQuestion('ぜ', "ze"),
             new KanaQuestion('ぞ', "zo")};
+
+    private static final KanaQuestion[] KANA_SET_3_DIGRAPHS = {
+            new KanaQuestion("しゃ", "sha"),
+            new KanaQuestion("しゅ", "shu"),
+            new KanaQuestion("しょ", "sho"),
+            new KanaQuestion("じゃ", "jya"),
+            new KanaQuestion("じゅ", "jyu"),
+            new KanaQuestion("じょ", "jyo")};
 
     private static final KanaQuestion[] KANA_SET_4_BASE = {
             new KanaQuestion('た', "ta"),
@@ -51,12 +67,25 @@ abstract class HiraganaQuestions
             new KanaQuestion('で', "de"),
             new KanaQuestion('ど', "do")};
 
+    private static final KanaQuestion[] KANA_SET_4_DIGRAPHS = {
+            new KanaQuestion("ちゃ", "cha"),
+            new KanaQuestion("ちゅ", "chu"),
+            new KanaQuestion("ちょ", "cho"),
+            new KanaQuestion("ぢゃ", "dzya"),
+            new KanaQuestion("ぢゅ", "dzyu"),
+            new KanaQuestion("ぢょ", "dzyo")};
+
     private static final KanaQuestion[] KANA_SET_5 = {
             new KanaQuestion('な', "na"),
             new KanaQuestion('に', "ni"),
             new KanaQuestion('ぬ', "nu"),
             new KanaQuestion('ね', "ne"),
             new KanaQuestion('の', "no")};
+
+    private static final KanaQuestion[] KANA_SET_5_DIGRAPHS = {
+            new KanaQuestion("にゃ", "nya"),
+            new KanaQuestion("にゅ", "nyu"),
+            new KanaQuestion("にょ", "nyo")};
 
     private static final KanaQuestion[] KANA_SET_6_BASE = {
             new KanaQuestion('は', "ha"),
@@ -79,6 +108,17 @@ abstract class HiraganaQuestions
             new KanaQuestion('ぺ', "pe"),
             new KanaQuestion('ぽ', "po")};
 
+    private static final KanaQuestion[] KANA_SET_6_DIGRAPHS = {
+            new KanaQuestion("ひゃ", "hya"),
+            new KanaQuestion("ひゅ", "hyu"),
+            new KanaQuestion("ひょ", "hyo"),
+            new KanaQuestion("びゃ", "bya"),
+            new KanaQuestion("びゅ", "byu"),
+            new KanaQuestion("びょ", "byo"),
+            new KanaQuestion("ぴゃ", "pya"),
+            new KanaQuestion("ぴゅ", "pyu"),
+            new KanaQuestion("ぴょ", "pyo")};
+
     private static final KanaQuestion[] KANA_SET_7 = {
             new KanaQuestion('ま', "ma"),
             new KanaQuestion('み', "mi"),
@@ -86,12 +126,22 @@ abstract class HiraganaQuestions
             new KanaQuestion('め', "me"),
             new KanaQuestion('も', "mo")};
 
+    private static final KanaQuestion[] KANA_SET_7_DIGRAPHS = {
+            new KanaQuestion("みゃ", "mya"),
+            new KanaQuestion("みゅ", "myu"),
+            new KanaQuestion("みょ", "myo")};
+
     private static final KanaQuestion[] KANA_SET_8 = {
             new KanaQuestion('ら', "ra"),
             new KanaQuestion('り', "ri"),
             new KanaQuestion('る', "ru"),
             new KanaQuestion('れ', "re"),
             new KanaQuestion('ろ', "ro")};
+
+    private static final KanaQuestion[] KANA_SET_8_DIGRAPHS = {
+            new KanaQuestion("りゃ", "rya"),
+            new KanaQuestion("りゅ", "ryu"),
+            new KanaQuestion("りょ", "ryo")};
 
     private static final KanaQuestion[] KANA_SET_9 = {
             new KanaQuestion('や', "ya"),
@@ -107,22 +157,52 @@ abstract class HiraganaQuestions
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
+        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(R.string.prefid_hiragana_9);
+
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_1))
             questionBank.addQuestions(KANA_SET_1);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_2))
+        {
             questionBank.addQuestions(KANA_SET_2_BASE, KANA_SET_2_DAKUTEN);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_2_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_3))
+        {
             questionBank.addQuestions(KANA_SET_3_BASE, KANA_SET_3_DAKUTEN);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_3_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_4))
+        {
             questionBank.addQuestions(KANA_SET_4_BASE, KANA_SET_4_DAKUTEN);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_4_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_5))
+        {
             questionBank.addQuestions(KANA_SET_5);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_5_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_6))
+        {
             questionBank.addQuestions(KANA_SET_6_BASE, KANA_SET_6_DAKUTEN, KANA_SET_6_HANDAKETEN);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_6_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_7))
+        {
             questionBank.addQuestions(KANA_SET_7);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_7_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_8))
+        {
             questionBank.addQuestions(KANA_SET_8);
+            if (isDigraphs)
+                questionBank.addQuestions(KANA_SET_8_DIGRAPHS);
+        }
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_9))
             questionBank.addQuestions(KANA_SET_9);
         if (OptionsControl.getBoolean(R.string.prefid_hiragana_10))

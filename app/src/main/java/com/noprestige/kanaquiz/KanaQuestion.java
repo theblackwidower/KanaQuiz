@@ -10,7 +10,17 @@ class KanaQuestion
         setKana(kana);
         setRomanji(romanji);
     }
+    KanaQuestion(String kana, String romanji)
+    {
+        setKana(kana);
+        setRomanji(romanji);
+    }
     KanaQuestion(char kana, String[] romanji)
+    {
+        setKana(kana);
+        setRomanji(romanji);
+    }
+    KanaQuestion(String kana, String[] romanji)
     {
         setKana(kana);
         setRomanji(romanji);

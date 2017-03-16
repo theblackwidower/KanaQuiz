@@ -11,4 +11,9 @@
         android:title="@string/repetition_option_title"
         android:summary="@string/repetition_option_summary"
         android:defaultValue="3" />
+    <CheckBoxPreference
+        android:key="@string/prefid_digraphs"
+        android:title="@string/digraphs_option_title"
+        android:summary="@string/digraphs_option_summary"
+        android:defaultValue="false" />
 </PreferenceScreen>
