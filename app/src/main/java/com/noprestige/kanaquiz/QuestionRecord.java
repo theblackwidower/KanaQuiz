@@ -6,7 +6,7 @@ class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
 {
     QuestionRecord(int capacity)
     {
-        super(capacity - 1);
+        super(capacity);
     }
 
     public boolean add(KanaQuestion question)
@@ -15,9 +15,10 @@ class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
             return false;
         else
         {
+            super.add(question);
             if (super.remainingCapacity() == 0)
                 super.remove();
-            return super.add(question);
+            return true;
         }
     }
 }
