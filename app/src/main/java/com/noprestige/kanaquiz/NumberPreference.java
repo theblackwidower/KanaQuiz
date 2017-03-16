@@ -39,10 +39,10 @@ class NumberPreference extends DialogPreference
     {
         if (positiveResult)
         {
-                repetitionLimit = numberPicker.getValue();
-                if (repetitionLimit < 1)
-                    repetitionLimit = 1;
-                persistInt(repetitionLimit);
+            repetitionLimit = numberPicker.getValue();
+            if (repetitionLimit < 1)
+                repetitionLimit = 1;
+            persistInt(repetitionLimit);
         }
     }
 
