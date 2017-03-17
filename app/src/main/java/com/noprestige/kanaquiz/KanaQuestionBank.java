@@ -23,7 +23,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
             if (previousQuestions == null)
             {
                 int repetitionLimit = OptionsControl.getInt(R.string.prefid_repetition);
-                previousQuestions = new QuestionRecord((this.size() < repetitionLimit) ? this.size() : repetitionLimit);
+                previousQuestions = new QuestionRecord(Math.min(this.size(), repetitionLimit));
             }
             do {
                 currentQuestion = this.get(rng.nextInt(this.size()));
