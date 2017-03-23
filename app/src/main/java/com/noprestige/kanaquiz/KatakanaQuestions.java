@@ -1,5 +1,8 @@
 package com.noprestige.kanaquiz;
 
+import android.content.Context;
+import android.widget.TableLayout;
+
 abstract class KatakanaQuestions
 {
     private static final KanaQuestion[] KANA_SET_1 = {
@@ -148,9 +151,11 @@ abstract class KatakanaQuestions
             new KanaQuestion('ユ', "yu"),
             new KanaQuestion('ヨ', "yo")};
 
-    private static final KanaQuestion[] KANA_SET_10 = {
+    private static final KanaQuestion[] KANA_SET_10_W_GROUP = {
             new KanaQuestion('ワ', "wa"),
-            new KanaQuestion('ヲ', "wo"),
+            new KanaQuestion('ヲ', "wo")};
+
+    private static final KanaQuestion[] KANA_SET_10_N_CONSONANT = {
             new KanaQuestion('ン', "n")};
 
     static KanaQuestionBank getQuestionBank()
@@ -206,8 +211,51 @@ abstract class KatakanaQuestions
         if (OptionsControl.getBoolean(R.string.prefid_katakana_9))
             questionBank.addQuestions(KANA_SET_9);
         if (OptionsControl.getBoolean(R.string.prefid_katakana_10))
-            questionBank.addQuestions(KANA_SET_10);
+            questionBank.addQuestions(KANA_SET_10_W_GROUP, KANA_SET_10_N_CONSONANT);
 
         return questionBank;
+    }
+
+    static TableLayout getReferenceTable(Context context)
+    {
+        TableLayout layout = new TableLayout(context);
+
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_1))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_1));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_2))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_3))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_4))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_5))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_5));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_6))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_7))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_7));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_8))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_8));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_9))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_9));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_10))
+        {
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_10_W_GROUP));
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_10_N_CONSONANT));
+        }
+
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_2))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_3))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_4))
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
+        if (OptionsControl.getBoolean(R.string.prefid_katakana_6))
+        {
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
+            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
+        }
+
+        return layout;
     }
 }

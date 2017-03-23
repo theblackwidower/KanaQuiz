@@ -29,6 +29,10 @@
             android:name=".AboutScreen"
             android:label="@string/about_title"
             android:parentActivityName=".MainQuiz" />
+        <activity
+            android:name=".ReferenceScreen"
+            android:label="@string/reference_title"
+            android:parentActivityName=".MainQuiz" />
     </application>
 
 </manifest>

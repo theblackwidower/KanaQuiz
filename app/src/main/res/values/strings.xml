@@ -2,6 +2,7 @@
     <string name="app_name">The Kana Quiz</string>
 
     <string name="selection_title">Kana Selection</string>
+    <string name="reference_title">Kana Reference</string>
     <string name="options_title">Options</string>
     <string name="about_title">About</string>
 

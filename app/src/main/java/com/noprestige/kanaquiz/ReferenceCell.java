@@ -7,6 +7,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 public class ReferenceCell extends View
 {
@@ -24,9 +26,7 @@ public class ReferenceCell extends View
     private float romanjiYpoint;
 
     private float kanaWidth;
-    private float kanaHeight;
     private float romanjiWidth;
-    private float romanjiHeight;
 
     private float fullHeight;
 
@@ -61,6 +61,11 @@ public class ReferenceCell extends View
         romanjiSize = a.getDimension(R.styleable.ReferenceCell_romanjiSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics()));
 
+        if (kana == null)
+            kana = "";
+        if (romanji == null)
+            romanji = "";
+
         a.recycle();
 
         updateObject();
@@ -73,8 +78,8 @@ public class ReferenceCell extends View
 
         kanaWidth = kanaPaint.measureText(kana);
         romanjiWidth = romanjiPaint.measureText(romanji);
-        kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
-        romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
+        float kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
+        float romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
         fullHeight = kanaHeight + romanjiHeight;
     }
 
@@ -135,5 +140,53 @@ public class ReferenceCell extends View
 
         canvas.drawText(kana, kanaXpoint, kanaYpoint, kanaPaint);
         canvas.drawText(romanji, romanjiXpoint, romanjiYpoint, romanjiPaint);
+    }
+
+    void setKana(String kana)
+    {
+        this.kana = kana;
+        updateObject();
+    }
+
+    void setRomanji(String romanji)
+    {
+        this.romanji = romanji;
+        updateObject();
+    }
+
+    static TableRow buildRow(Context context, KanaQuestion[] questions)
+    {
+        TableRow row = new TableRow(context);
+
+        if (questions.length == 1)
+        {
+            row.addView(new TextView(context));
+            row.addView(new TextView(context));
+            row.addView(questions[0].generateReference(context));
+        }
+        else if (questions.length == 2)
+        {
+            row.addView(questions[0].generateReference(context));
+            row.addView(new TextView(context));
+            row.addView(new TextView(context));
+            row.addView(new TextView(context));
+            row.addView(questions[1].generateReference(context));
+        }
+        else if (questions.length == 3)
+        {
+            row.addView(questions[0].generateReference(context));
+            row.addView(new TextView(context));
+            row.addView(questions[1].generateReference(context));
+            row.addView(new TextView(context));
+            row.addView(questions[2].generateReference(context));
+        }
+        else
+        {
+            for (KanaQuestion question : questions)
+            {
+                row.addView(question.generateReference(context));
+            }
+        }
+        return row;
     }
 }

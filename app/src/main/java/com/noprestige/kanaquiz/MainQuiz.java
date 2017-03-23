@@ -226,6 +226,9 @@ public class MainQuiz extends AppCompatActivity
             case R.id.mnuSelection:
                 destination = KanaSelection.class;
                 break;
+            case R.id.mnuReference:
+                destination = ReferenceScreen.class;
+                break;
             case R.id.mnuOptions:
                 destination = OptionsScreen.class;
                 break;

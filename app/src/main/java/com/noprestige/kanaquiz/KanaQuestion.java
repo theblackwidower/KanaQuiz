@@ -1,5 +1,7 @@
 package com.noprestige.kanaquiz;
 
+import android.content.Context;
+
 class KanaQuestion
 {
     private String kana;
@@ -63,5 +65,13 @@ class KanaQuestion
     String fetchCorrectAnswer()
     {
         return romanji[0];
+    }
+
+    ReferenceCell generateReference(Context context)
+    {
+        ReferenceCell cell = new ReferenceCell(context);
+        cell.setKana(kana);
+        cell.setRomanji(romanji[0]);
+        return cell;
     }
 }
