@@ -227,6 +227,20 @@ abstract class HiraganaQuestions
         return questionBank;
     }
 
+    static boolean anySelected()
+    {
+        return (OptionsControl.getBoolean(PREFID_1) ||
+                OptionsControl.getBoolean(PREFID_2) ||
+                OptionsControl.getBoolean(PREFID_3) ||
+                OptionsControl.getBoolean(PREFID_4) ||
+                OptionsControl.getBoolean(PREFID_5) ||
+                OptionsControl.getBoolean(PREFID_6) ||
+                OptionsControl.getBoolean(PREFID_7) ||
+                OptionsControl.getBoolean(PREFID_8) ||
+                OptionsControl.getBoolean(PREFID_9) ||
+                OptionsControl.getBoolean(PREFID_10));
+    }
+
     static TableLayout getReferenceTable(Context context)
     {
         TableLayout layout = new TableLayout(context);
