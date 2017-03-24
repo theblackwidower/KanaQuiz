@@ -1,7 +1,13 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableLayout;
+import android.widget.TextView;
+
+import static android.graphics.Color.BLACK;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 abstract class HiraganaQuestions
 {
@@ -269,6 +275,19 @@ abstract class HiraganaQuestions
             layout.addView(ReferenceCell.buildRow(context, KANA_SET_10_N_CONSONANT));
         }
 
+        if (OptionsControl.getBoolean(PREFID_2) ||
+                OptionsControl.getBoolean(PREFID_3) ||
+                OptionsControl.getBoolean(PREFID_4) ||
+                OptionsControl.getBoolean(PREFID_6))
+        {
+            TextView header = new TextView(context);
+            header.setText(R.string.diacritics_title);
+            header.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            header.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            header.setTextSize(COMPLEX_UNIT_SP, 32);
+            header.setTextColor(BLACK);
+            layout.addView(header);
+
         if (OptionsControl.getBoolean(PREFID_2))
             layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
         if (OptionsControl.getBoolean(PREFID_3))
@@ -279,6 +298,7 @@ abstract class HiraganaQuestions
         {
             layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
             layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
+        }
         }
 
         return layout;

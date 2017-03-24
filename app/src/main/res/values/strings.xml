@@ -56,6 +56,9 @@
     <string name="digraphs_option_summary">Two-part kana will appear in the quiz</string>
     <string name="prefid_digraphs">allow_digraphs</string>
 
+    <!-- Other -->
+    <string name="diacritics_title">Diacritics</string>
+
     <!-- Kana Selection -->
     <string name="hiragana">Hiragana</string>
     <string name="katakana">Katakana</string>

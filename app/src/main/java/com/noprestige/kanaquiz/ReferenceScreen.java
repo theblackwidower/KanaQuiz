@@ -1,8 +1,9 @@
 package com.noprestige.kanaquiz;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 public class ReferenceScreen extends AppCompatActivity {
 
@@ -11,7 +12,8 @@ public class ReferenceScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reference_screen);
 
-        ((LinearLayout)this.findViewById(R.id.activity_reference_screen)).addView(HiraganaQuestions.getReferenceTable(this));
-        ((LinearLayout)this.findViewById(R.id.activity_reference_screen)).addView(KatakanaQuestions.getReferenceTable(this));
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerReference);
+        viewPager.setAdapter(new ReferencePager(getSupportFragmentManager(), this));
+        ((TabLayout) findViewById(R.id.tabLayoutReference)).setupWithViewPager(viewPager);
     }
 }
