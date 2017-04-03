@@ -66,9 +66,7 @@ public class MainQuiz extends AppCompatActivity
         );
 
         resetQuiz();
-        buildQuestionBank();
-        setQuestion();
-        displayScore();
+        nextQuestion();
     }
 
     private void resetQuiz()
@@ -81,15 +79,12 @@ public class MainQuiz extends AppCompatActivity
 
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
-    }
 
-    private void buildQuestionBank()
-    {
         questionBank = HiraganaQuestions.getQuestionBank();
         questionBank.addQuestions(KatakanaQuestions.getQuestionBank());
     }
 
-    private void setQuestion()
+    private void nextQuestion()
     {
         try
         {
@@ -108,10 +103,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
             txtAnswer.setText("");
         }
-    }
 
-    private void displayScore()
-    {
         TextView lblScore = (TextView) findViewById(R.id.lblScore);
 
         if (totalQuestions > 0)
@@ -183,8 +175,7 @@ public class MainQuiz extends AppCompatActivity
                 {
                     public void run()
                     {
-                        displayScore();
-                        setQuestion();
+                        nextQuestion();
                     }
                 }, 1000
             );
@@ -249,9 +240,7 @@ public class MainQuiz extends AppCompatActivity
         if (requestCode == 1)
         {
             resetQuiz();
-            displayScore();
-            buildQuestionBank();
-            setQuestion();
+            nextQuestion();
         }
     }
 }
