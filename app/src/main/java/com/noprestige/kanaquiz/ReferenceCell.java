@@ -171,7 +171,7 @@ public class ReferenceCell extends View
         updateObject();
     }
 
-    static TableRow buildRow(Context context, KanaQuestion[] questions)
+    static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
     {
         TableRow row = new TableRow(context);
 
@@ -207,7 +207,7 @@ public class ReferenceCell extends View
         return row;
     }
 
-    static TableRow buildDigraphRow(Context context, KanaQuestion[] questions)
+    static TableRow buildRow(Context context, KanaQuestion[] questions)
     {
         TableRow row = new TableRow(context);
         for (KanaQuestion question : questions)
