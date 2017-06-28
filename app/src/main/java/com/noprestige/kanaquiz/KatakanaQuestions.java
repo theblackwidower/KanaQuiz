@@ -288,17 +288,17 @@ abstract class KatakanaQuestions
             header.setTextColor(BLACK);
             layout.addView(header);
 
-        if (OptionsControl.getBoolean(PREFID_2))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
-        if (OptionsControl.getBoolean(PREFID_3))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
-        if (OptionsControl.getBoolean(PREFID_4))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
-        if (OptionsControl.getBoolean(PREFID_6))
-        {
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
-        }
+            if (OptionsControl.getBoolean(PREFID_2))
+                layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
+            if (OptionsControl.getBoolean(PREFID_3))
+                layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
+            if (OptionsControl.getBoolean(PREFID_4))
+                layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
+            if (OptionsControl.getBoolean(PREFID_6))
+            {
+                layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
+                layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
+            }
         }
 
         return layout;
