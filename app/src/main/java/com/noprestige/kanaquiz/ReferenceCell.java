@@ -16,6 +16,7 @@ public class ReferenceCell extends View
     private String romanji;
     private float kanaSize;
     private float romanjiSize;
+    private int colour;
 
     private TextPaint kanaPaint = new TextPaint();
     private TextPaint romanjiPaint = new TextPaint();
@@ -60,13 +61,18 @@ public class ReferenceCell extends View
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics()));
         romanjiSize = a.getDimension(R.styleable.ReferenceCell_romanjiSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics()));
+        colour = a.getColor(R.styleable.ReferenceCell_colour,
+                new TextView(context).getTextColors().getDefaultColor()); // TODO: Fix this kludge used to fetch default colour
+
+        a.recycle();
 
         if (kana == null)
             kana = "";
         if (romanji == null)
             romanji = "";
 
-        a.recycle();
+        kanaPaint.setAntiAlias(true);
+        romanjiPaint.setAntiAlias(true);
 
         updateObject();
     }
@@ -75,6 +81,9 @@ public class ReferenceCell extends View
     {
         kanaPaint.setTextSize(kanaSize);
         romanjiPaint.setTextSize(romanjiSize);
+
+        kanaPaint.setColor(colour);
+        romanjiPaint.setColor(colour);
 
         kanaWidth = kanaPaint.measureText(kana);
         romanjiWidth = romanjiPaint.measureText(romanji);
