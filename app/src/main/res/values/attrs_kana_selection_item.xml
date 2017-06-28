@@ -1,7 +1,8 @@
 <resources>
     <declare-styleable name="KanaSelectionItem">
         <attr name="title" format="string" />
-        <attr name="contents" format="string" />
+        <attr name="baseContents" format="string" />
+        <attr name="diacritics" format="string" />
         <attr name="prefId" format="string" />
     </declare-styleable>
 </resources>

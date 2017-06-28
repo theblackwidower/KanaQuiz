@@ -16,7 +16,8 @@ import android.widget.TextView;
 public class KanaSelectionItem extends LinearLayout
 {
     private String title;
-    private String contents;
+    private String baseContents;
+    private String diacritics;
     private String prefId;
 
     private TextView lblTitle;
@@ -43,7 +44,8 @@ public class KanaSelectionItem extends LinearLayout
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
         title = a.getString(R.styleable.KanaSelectionItem_title);
-        contents = a.getString(R.styleable.KanaSelectionItem_contents);
+        baseContents = a.getString(R.styleable.KanaSelectionItem_baseContents);
+        diacritics = a.getString(R.styleable.KanaSelectionItem_diacritics);
         prefId = a.getString(R.styleable.KanaSelectionItem_prefId);
 
         a.recycle();
@@ -100,18 +102,18 @@ public class KanaSelectionItem extends LinearLayout
 
     private void updateObject()
     {
-        lblTitle.setText(title);
-        lblContents.setText(contents);
+        lblTitle.setText(getTitle());
+        lblContents.setText(getContents());
 
         if (!isInEditMode())
-            chkCheckBox.setChecked(OptionsControl.getBoolean(prefId));
+            chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
 
         chkCheckBox.setOnCheckedChangeListener(
             new android.widget.CompoundButton.OnCheckedChangeListener()
             {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                 {
-                    OptionsControl.setBoolean(prefId, isChecked);
+                    OptionsControl.setBoolean(getPrefId(), isChecked);
                 }
             }
         );
@@ -120,7 +122,11 @@ public class KanaSelectionItem extends LinearLayout
     public String getTitle() {
         return title;
     }
-    public String getContents() {
+    public String getContents()
+    {
+        String contents = baseContents;
+        if (diacritics != null && OptionsControl.getBoolean(R.string.prefid_diacritics))
+            contents += " " + diacritics;
         return contents;
     }
     public String getPrefId() {
@@ -136,13 +142,22 @@ public class KanaSelectionItem extends LinearLayout
         this.title = title;
         updateObject();
     }
-    public void setContents(int resId)
+    public void setBaseContents(int resId)
     {
-        setContents(getResources().getString(resId));
+        setBaseContents(getResources().getString(resId));
     }
-    public void setContents(String contents)
+    public void setBaseContents(String baseContents)
     {
-        this.contents = contents;
+        this.baseContents = baseContents;
+        updateObject();
+    }
+    public void setDiacritics(int resId)
+    {
+        setDiacritics(getResources().getString(resId));
+    }
+    public void setDiacritics(String diacritics)
+    {
+        this.diacritics = diacritics;
         updateObject();
     }
     public void setPrefId(int resId)

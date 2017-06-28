@@ -10,70 +10,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_1_title"
-        app:contents="@string/set_1_katakana"
+        app:baseContents="@string/set_1_katakana"
         app:prefId="@string/prefid_katakana_1" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_2_title"
-        app:contents="@string/set_2_katakana"
+        app:baseContents="@string/set_2_katakana_base"
+        app:diacritics="@string/set_2_katakana_diacritics"
         app:prefId="@string/prefid_katakana_2" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_3_title"
-        app:contents="@string/set_3_katakana"
+        app:baseContents="@string/set_3_katakana_base"
+        app:diacritics="@string/set_3_katakana_diacritics"
         app:prefId="@string/prefid_katakana_3" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_4_title"
-        app:contents="@string/set_4_katakana"
+        app:baseContents="@string/set_4_katakana_base"
+        app:diacritics="@string/set_4_katakana_diacritics"
         app:prefId="@string/prefid_katakana_4" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_5_title"
-        app:contents="@string/set_5_katakana"
+        app:baseContents="@string/set_5_katakana"
         app:prefId="@string/prefid_katakana_5" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_6_title"
-        app:contents="@string/set_6_katakana"
+        app:baseContents="@string/set_6_katakana_base"
+        app:diacritics="@string/set_6_katakana_diacritics"
         app:prefId="@string/prefid_katakana_6" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_7_title"
-        app:contents="@string/set_7_katakana"
+        app:baseContents="@string/set_7_katakana"
         app:prefId="@string/prefid_katakana_7" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_8_title"
-        app:contents="@string/set_8_katakana"
+        app:baseContents="@string/set_8_katakana"
         app:prefId="@string/prefid_katakana_8" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_9_title"
-        app:contents="@string/set_9_katakana"
+        app:baseContents="@string/set_9_katakana"
         app:prefId="@string/prefid_katakana_9" />
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/set_10_title"
-        app:contents="@string/set_10_katakana"
+        app:baseContents="@string/set_10_katakana"
         app:prefId="@string/prefid_katakana_10" />
 
 </LinearLayout>
