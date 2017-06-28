@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
 
 public class ReferencePage extends Fragment
 {
@@ -28,7 +27,7 @@ public class ReferencePage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        TableLayout table = null;
+        LinearLayout table = null;
         switch(getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:

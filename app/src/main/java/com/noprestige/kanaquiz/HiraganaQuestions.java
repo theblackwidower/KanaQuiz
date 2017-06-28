@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 abstract class HiraganaQuestions
@@ -269,33 +270,37 @@ abstract class HiraganaQuestions
                 OptionsControl.getBoolean(PREFID_10));
     }
 
-    static TableLayout getReferenceTable(Context context)
+    static LinearLayout getReferenceTable(Context context)
     {
-        TableLayout layout = new TableLayout(context);
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        TableLayout tableOne = new TableLayout(context);
 
         if (OptionsControl.getBoolean(PREFID_1))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_1));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_1));
         if (OptionsControl.getBoolean(PREFID_2))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE));
         if (OptionsControl.getBoolean(PREFID_3))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE));
         if (OptionsControl.getBoolean(PREFID_4))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE));
         if (OptionsControl.getBoolean(PREFID_5))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_5));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_5));
         if (OptionsControl.getBoolean(PREFID_6))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE));
         if (OptionsControl.getBoolean(PREFID_7))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_7));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_7));
         if (OptionsControl.getBoolean(PREFID_8))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_8));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_8));
         if (OptionsControl.getBoolean(PREFID_9))
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_9));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_9));
         if (OptionsControl.getBoolean(PREFID_10))
         {
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_10_W_GROUP));
-            layout.addView(ReferenceCell.buildRow(context, KANA_SET_10_N_CONSONANT));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_10_W_GROUP));
+            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_10_N_CONSONANT));
         }
+
+        layout.addView(tableOne);
 
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 (OptionsControl.getBoolean(PREFID_2) ||
@@ -303,19 +308,21 @@ abstract class HiraganaQuestions
                 OptionsControl.getBoolean(PREFID_4) ||
                 OptionsControl.getBoolean(PREFID_6)))
         {
+            TableLayout tableTwo = new TableLayout(context);
             layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
 
             if (OptionsControl.getBoolean(PREFID_2))
-                layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
             if (OptionsControl.getBoolean(PREFID_3))
-                layout.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
             if (OptionsControl.getBoolean(PREFID_4))
-                layout.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
             if (OptionsControl.getBoolean(PREFID_6))
             {
-                layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
-                layout.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
             }
+            layout.addView(tableTwo);
         }
 
         return layout;
