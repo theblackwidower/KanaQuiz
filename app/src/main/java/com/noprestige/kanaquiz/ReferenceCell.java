@@ -7,8 +7,11 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class ReferenceCell extends View
 {
@@ -197,5 +200,19 @@ public class ReferenceCell extends View
             }
         }
         return row;
+    }
+
+    static TextView buildHeader(Context context, int title)
+    {
+        TextView header = new TextView(context);
+        header.setText(title);
+        header.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        header.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        header.setTextSize(COMPLEX_UNIT_SP, 14);
+        header.setPadding(0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())),
+                0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setTypeface(header.getTypeface(), 1);
+        header.setAllCaps(true);
+        return header;
     }
 }

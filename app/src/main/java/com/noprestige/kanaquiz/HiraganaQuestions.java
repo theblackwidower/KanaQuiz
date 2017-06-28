@@ -1,13 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TableLayout;
-import android.widget.TextView;
-
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 abstract class HiraganaQuestions
 {
@@ -309,16 +303,7 @@ abstract class HiraganaQuestions
                 OptionsControl.getBoolean(PREFID_4) ||
                 OptionsControl.getBoolean(PREFID_6)))
         {
-            TextView header = new TextView(context);
-            header.setText(R.string.diacritics_title);
-            header.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            header.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            header.setTextSize(COMPLEX_UNIT_SP, 14);
-            header.setPadding(0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())),
-                    0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
-            header.setTypeface(header.getTypeface(), 1);
-            header.setAllCaps(true);
-            layout.addView(header);
+            layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
 
             if (OptionsControl.getBoolean(PREFID_2))
                 layout.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
