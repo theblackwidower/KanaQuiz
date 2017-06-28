@@ -61,14 +61,6 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
                 super.addAll(Arrays.asList(questions2)));
     }
 
-    boolean addQuestions(KanaQuestion[] questions1, KanaQuestion[] questions2, KanaQuestion[] questions3)
-    {
-        previousQuestions = null;
-        return (super.addAll(Arrays.asList(questions1)) &&
-                super.addAll(Arrays.asList(questions2)) &&
-                super.addAll(Arrays.asList(questions3)));
-    }
-
     boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
