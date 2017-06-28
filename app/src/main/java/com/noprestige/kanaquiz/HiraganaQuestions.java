@@ -1,6 +1,8 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
@@ -274,7 +276,9 @@ abstract class HiraganaQuestions
     {
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setGravity(Gravity.CENTER);
         TableLayout tableOne = new TableLayout(context);
+        tableOne.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         if (OptionsControl.getBoolean(PREFID_1))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_1));
@@ -308,8 +312,10 @@ abstract class HiraganaQuestions
                 OptionsControl.getBoolean(PREFID_4) ||
                 OptionsControl.getBoolean(PREFID_6)))
         {
-            TableLayout tableTwo = new TableLayout(context);
             layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
+
+            TableLayout tableTwo = new TableLayout(context);
+            tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if (OptionsControl.getBoolean(PREFID_2))
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
