@@ -331,6 +331,57 @@ abstract class KatakanaQuestions
             layout.addView(tableTwo);
         }
 
+        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9) &&
+                (OptionsControl.getBoolean(PREFID_2) ||
+                OptionsControl.getBoolean(PREFID_3) ||
+                OptionsControl.getBoolean(PREFID_4) ||
+                OptionsControl.getBoolean(PREFID_5) ||
+                OptionsControl.getBoolean(PREFID_6) ||
+                OptionsControl.getBoolean(PREFID_7) ||
+                OptionsControl.getBoolean(PREFID_8)))
+        {
+            layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
+
+            TableLayout tableThree = new TableLayout(context);
+            tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            if (OptionsControl.getBoolean(PREFID_2))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_2_BASE_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_3))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_3_BASE_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_4))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_4_BASE_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_5))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_5_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_6))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_6_BASE_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_7))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_7_DIGRAPHS));
+            if (OptionsControl.getBoolean(PREFID_8))
+                tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_8_DIGRAPHS));
+
+            if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
+                    (OptionsControl.getBoolean(PREFID_2) ||
+                    OptionsControl.getBoolean(PREFID_3) ||
+                    OptionsControl.getBoolean(PREFID_4) ||
+                    OptionsControl.getBoolean(PREFID_6)))
+            {
+                if (OptionsControl.getBoolean(PREFID_2))
+                    tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_2_DAKUTEN_DIGRAPHS));
+                if (OptionsControl.getBoolean(PREFID_3))
+                    tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_3_DAKUTEN_DIGRAPHS));
+                if (OptionsControl.getBoolean(PREFID_4))
+                    tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_4_DAKUTEN_DIGRAPHS));
+                if (OptionsControl.getBoolean(PREFID_6))
+                {
+                    tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_6_DAKUTEN_DIGRAPHS));
+                    tableThree.addView(ReferenceCell.buildDigraphRow(context, KANA_SET_6_HANDAKETEN_DIGRAPHS));
+                }
+            }
+
+            layout.addView(tableThree);
+        }
+
         return layout;
     }
 }

@@ -159,6 +159,11 @@ public class ReferenceCell extends View
         this.kana = kana;
         updateObject();
     }
+    void setKanaSize(float kanaSize)
+    {
+        this.kanaSize = kanaSize;
+        updateObject();
+    }
 
     void setRomanji(String romanji)
     {
@@ -198,6 +203,16 @@ public class ReferenceCell extends View
             {
                 row.addView(question.generateReference(context));
             }
+        }
+        return row;
+    }
+
+    static TableRow buildDigraphRow(Context context, KanaQuestion[] questions)
+    {
+        TableRow row = new TableRow(context);
+        for (KanaQuestion question : questions)
+        {
+            row.addView(question.generateReference(context));
         }
         return row;
     }

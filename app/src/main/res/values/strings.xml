@@ -62,6 +62,7 @@
 
     <!-- Other -->
     <string name="diacritics_title">Diacritics</string>
+    <string name="digraphs_title">Digraphs</string>
 
     <!-- Kana Selection -->
     <string name="hiragana">Hiragana</string>

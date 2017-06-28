@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
+import android.util.TypedValue;
 
 class KanaQuestion
 {
@@ -72,6 +73,8 @@ class KanaQuestion
         ReferenceCell cell = new ReferenceCell(context);
         cell.setKana(kana);
         cell.setRomanji(fetchCorrectAnswer());
+        if (kana.length() > 1)
+            cell.setKanaSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
         return cell;
     }
 }
