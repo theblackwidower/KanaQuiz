@@ -306,14 +306,8 @@ abstract class KatakanaQuestions
 
         layout.addView(tableOne);
 
-        if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
-                (OptionsControl.getBoolean(PREFID_2) ||
-                OptionsControl.getBoolean(PREFID_3) ||
-                OptionsControl.getBoolean(PREFID_4) ||
-                OptionsControl.getBoolean(PREFID_6)))
+        if (OptionsControl.getBoolean(R.string.prefid_diacritics))
         {
-            layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
-
             TableLayout tableTwo = new TableLayout(context);
             tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -328,20 +322,15 @@ abstract class KatakanaQuestions
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
             }
+
+            if (tableTwo.getChildCount() > 0)
+                layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
+
             layout.addView(tableTwo);
         }
 
-        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9) &&
-                (OptionsControl.getBoolean(PREFID_2) ||
-                OptionsControl.getBoolean(PREFID_3) ||
-                OptionsControl.getBoolean(PREFID_4) ||
-                OptionsControl.getBoolean(PREFID_5) ||
-                OptionsControl.getBoolean(PREFID_6) ||
-                OptionsControl.getBoolean(PREFID_7) ||
-                OptionsControl.getBoolean(PREFID_8)))
+        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9))
         {
-            layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
-
             TableLayout tableThree = new TableLayout(context);
             tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -360,11 +349,7 @@ abstract class KatakanaQuestions
             if (OptionsControl.getBoolean(PREFID_8))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_8_DIGRAPHS));
 
-            if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
-                    (OptionsControl.getBoolean(PREFID_2) ||
-                    OptionsControl.getBoolean(PREFID_3) ||
-                    OptionsControl.getBoolean(PREFID_4) ||
-                    OptionsControl.getBoolean(PREFID_6)))
+            if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             {
                 if (OptionsControl.getBoolean(PREFID_2))
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN_DIGRAPHS));
@@ -378,6 +363,9 @@ abstract class KatakanaQuestions
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN_DIGRAPHS));
                 }
             }
+
+            if (tableThree.getChildCount() > 0)
+                layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
 
             layout.addView(tableThree);
         }
