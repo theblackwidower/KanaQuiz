@@ -32,10 +32,12 @@ abstract class KatakanaQuestions
             new KanaQuestion('ゲ', "ge"),
             new KanaQuestion('ゴ', "go")};
 
-    private static final KanaQuestion[] KANA_SET_2_DIGRAPHS = {
+    private static final KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS = {
             new KanaQuestion("キャ", "kya"),
             new KanaQuestion("キュ", "kyu"),
-            new KanaQuestion("キョ", "kyo"),
+            new KanaQuestion("キョ", "kyo")};
+
+    private static final KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS = {
             new KanaQuestion("ギャ", "gya"),
             new KanaQuestion("ギュ", "gyu"),
             new KanaQuestion("ギョ", "gyo")};
@@ -54,10 +56,12 @@ abstract class KatakanaQuestions
             new KanaQuestion('ゼ', "ze"),
             new KanaQuestion('ゾ', "zo")};
 
-    private static final KanaQuestion[] KANA_SET_3_DIGRAPHS = {
+    private static final KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS = {
             new KanaQuestion("シャ", "sha"),
             new KanaQuestion("シュ", "shu"),
-            new KanaQuestion("ショ", "sho"),
+            new KanaQuestion("ショ", "sho")};
+
+    private static final KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS = {
             new KanaQuestion("ジャ", new String[] {"ja", "jya"}),
             new KanaQuestion("ジュ", new String[] {"ju", "jyu"}),
             new KanaQuestion("ジョ", new String[] {"jo", "jyo"})};
@@ -76,10 +80,12 @@ abstract class KatakanaQuestions
             new KanaQuestion('デ', "de"),
             new KanaQuestion('ド', "do")};
 
-    private static final KanaQuestion[] KANA_SET_4_DIGRAPHS = {
+    private static final KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS = {
             new KanaQuestion("チャ", "cha"),
             new KanaQuestion("チュ", "chu"),
-            new KanaQuestion("チョ", "cho"),
+            new KanaQuestion("チョ", "cho")};
+
+    private static final KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS = {
             new KanaQuestion("ヂャ", new String[] {"ja", "dzya"}),
             new KanaQuestion("ヂュ", new String[] {"ju", "dzyu"}),
             new KanaQuestion("ヂョ", new String[] {"jo", "dzyo"})};
@@ -117,13 +123,17 @@ abstract class KatakanaQuestions
             new KanaQuestion('ペ', "pe"),
             new KanaQuestion('ポ', "po")};
 
-    private static final KanaQuestion[] KANA_SET_6_DIGRAPHS = {
+    private static final KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS = {
             new KanaQuestion("ヒャ", "hya"),
             new KanaQuestion("ヒュ", "hyu"),
-            new KanaQuestion("ヒョ", "hyo"),
+            new KanaQuestion("ヒョ", "hyo")};
+
+    private static final KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS = {
             new KanaQuestion("ビャ", "bya"),
             new KanaQuestion("ビュ", "byu"),
-            new KanaQuestion("ビョ", "byo"),
+            new KanaQuestion("ビョ", "byo")};
+
+    private static final KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS = {
             new KanaQuestion("ピャ", "pya"),
             new KanaQuestion("ピュ", "pyu"),
             new KanaQuestion("ピョ", "pyo")};
@@ -180,26 +190,39 @@ abstract class KatakanaQuestions
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9);
+        boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
         if (OptionsControl.getBoolean(PREFID_1))
             questionBank.addQuestions(KANA_SET_1);
         if (OptionsControl.getBoolean(PREFID_2))
         {
-            questionBank.addQuestions(KANA_SET_2_BASE, KANA_SET_2_DAKUTEN);
+            questionBank.addQuestions(KANA_SET_2_BASE);
+            if (isDiacritics)
+                questionBank.addQuestions(KANA_SET_2_DAKUTEN);
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_2_DIGRAPHS);
+                questionBank.addQuestions(KANA_SET_2_BASE_DIGRAPHS);
+            if (isDigraphs && isDiacritics)
+                questionBank.addQuestions(KANA_SET_2_DAKUTEN_DIGRAPHS);
         }
         if (OptionsControl.getBoolean(PREFID_3))
         {
-            questionBank.addQuestions(KANA_SET_3_BASE, KANA_SET_3_DAKUTEN);
+            questionBank.addQuestions(KANA_SET_3_BASE);
+            if (isDiacritics)
+                questionBank.addQuestions(KANA_SET_3_DAKUTEN);
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_3_DIGRAPHS);
+                questionBank.addQuestions(KANA_SET_3_BASE_DIGRAPHS);
+            if (isDigraphs && isDiacritics)
+                questionBank.addQuestions(KANA_SET_3_DAKUTEN_DIGRAPHS);
         }
         if (OptionsControl.getBoolean(PREFID_4))
         {
-            questionBank.addQuestions(KANA_SET_4_BASE, KANA_SET_4_DAKUTEN);
+            questionBank.addQuestions(KANA_SET_4_BASE);
+            if (isDiacritics)
+                questionBank.addQuestions(KANA_SET_4_DAKUTEN);
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_4_DIGRAPHS);
+                questionBank.addQuestions(KANA_SET_4_BASE_DIGRAPHS);
+            if (isDigraphs && isDiacritics)
+                questionBank.addQuestions(KANA_SET_4_DAKUTEN_DIGRAPHS);
         }
         if (OptionsControl.getBoolean(PREFID_5))
         {
@@ -209,9 +232,14 @@ abstract class KatakanaQuestions
         }
         if (OptionsControl.getBoolean(PREFID_6))
         {
-            questionBank.addQuestions(KANA_SET_6_BASE, KANA_SET_6_DAKUTEN, KANA_SET_6_HANDAKETEN);
+            questionBank.addQuestions(KANA_SET_6_BASE);
+            if (isDiacritics)
+                questionBank.addQuestions(KANA_SET_6_DAKUTEN, KANA_SET_6_HANDAKETEN);
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_6_DIGRAPHS);
+                questionBank.addQuestions(KANA_SET_6_BASE_DIGRAPHS);
+            if (isDigraphs && isDiacritics)
+                questionBank.addQuestions(KANA_SET_6_DAKUTEN_DIGRAPHS, KANA_SET_6_HANDAKETEN_DIGRAPHS);
+
         }
         if (OptionsControl.getBoolean(PREFID_7))
         {

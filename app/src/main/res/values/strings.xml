@@ -56,6 +56,10 @@
     <string name="digraphs_option_summary">Two-part kana will appear in the quiz</string>
     <string name="prefid_digraphs">allow_digraphs</string>
 
+    <string name="diacritics_option_title">Allow Diacritics</string>
+    <string name="diacritics_option_summary">Kana with diacritics will appear in the quiz</string>
+    <string name="prefid_diacritics">allow_diacritics</string>
+
     <!-- Other -->
     <string name="diacritics_title">Diacritics</string>
 

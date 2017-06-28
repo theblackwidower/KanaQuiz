@@ -16,4 +16,9 @@
         android:title="@string/digraphs_option_title"
         android:summary="@string/digraphs_option_summary"
         android:defaultValue="false" />
+    <CheckBoxPreference
+        android:key="@string/prefid_diacritics"
+        android:title="@string/diacritics_option_title"
+        android:summary="@string/diacritics_option_summary"
+        android:defaultValue="true" />
 </PreferenceScreen>
