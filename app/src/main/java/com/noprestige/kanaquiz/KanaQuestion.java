@@ -71,7 +71,7 @@ class KanaQuestion
     {
         ReferenceCell cell = new ReferenceCell(context);
         cell.setKana(kana);
-        cell.setRomanji(romanji[0]);
+        cell.setRomanji(fetchCorrectAnswer());
         return cell;
     }
 }
