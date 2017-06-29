@@ -8,6 +8,8 @@ import android.widget.TableLayout;
 
 abstract class QuestionManagement
 {
+    private static final int CATEGORY_COUNT = 10;
+
     private KanaQuestion[] KANA_SET_1;
     private KanaQuestion[] KANA_SET_2_BASE;
     private KanaQuestion[] KANA_SET_2_DAKUTEN;
@@ -37,16 +39,7 @@ abstract class QuestionManagement
     private KanaQuestion[] KANA_SET_10_W_GROUP;
     private KanaQuestion[] KANA_SET_10_N_CONSONANT;
 
-    private int PREFID_1;
-    private int PREFID_2;
-    private int PREFID_3;
-    private int PREFID_4;
-    private int PREFID_5;
-    private int PREFID_6;
-    private int PREFID_7;
-    private int PREFID_8;
-    private int PREFID_9;
-    private int PREFID_10;
+    private int[] prefIds;
 
     //TODO: Simplify
     QuestionManagement(
@@ -110,28 +103,38 @@ abstract class QuestionManagement
         this.KANA_SET_10_W_GROUP = KANA_SET_10_W_GROUP;
         this.KANA_SET_10_N_CONSONANT = KANA_SET_10_N_CONSONANT;
 
-        this.PREFID_1 = PREFID_1;
-        this.PREFID_2 = PREFID_2;
-        this.PREFID_3 = PREFID_3;
-        this.PREFID_4 = PREFID_4;
-        this.PREFID_5 = PREFID_5;
-        this.PREFID_6 = PREFID_6;
-        this.PREFID_7 = PREFID_7;
-        this.PREFID_8 = PREFID_8;
-        this.PREFID_9 = PREFID_9;
-        this.PREFID_10 = PREFID_10;
+        prefIds = new int[CATEGORY_COUNT];
+        prefIds[0] = PREFID_1;
+        prefIds[1] = PREFID_2;
+        prefIds[2] = PREFID_3;
+        prefIds[3] = PREFID_4;
+        prefIds[4] = PREFID_5;
+        prefIds[5] = PREFID_6;
+        prefIds[6] = PREFID_7;
+        prefIds[7] = PREFID_8;
+        prefIds[8] = PREFID_9;
+        prefIds[9] = PREFID_10;
+    }
+
+    private int getPrefId(int number)
+    {
+        return prefIds[number - 1];
+    }
+    private boolean getPref(int number)
+    {
+        return OptionsControl.getBoolean(getPrefId(number));
     }
 
     KanaQuestionBank getQuestionBank()
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
-        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9);
+        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        if (OptionsControl.getBoolean(PREFID_1))
+        if (getPref(1))
             questionBank.addQuestions(KANA_SET_1);
-        if (OptionsControl.getBoolean(PREFID_2))
+        if (getPref(2))
         {
             questionBank.addQuestions(KANA_SET_2_BASE);
             if (isDiacritics)
@@ -141,7 +144,7 @@ abstract class QuestionManagement
             if (isDigraphs && isDiacritics)
                 questionBank.addQuestions(KANA_SET_2_DAKUTEN_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_3))
+        if (getPref(3))
         {
             questionBank.addQuestions(KANA_SET_3_BASE);
             if (isDiacritics)
@@ -151,7 +154,7 @@ abstract class QuestionManagement
             if (isDigraphs && isDiacritics)
                 questionBank.addQuestions(KANA_SET_3_DAKUTEN_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_4))
+        if (getPref(4))
         {
             questionBank.addQuestions(KANA_SET_4_BASE);
             if (isDiacritics)
@@ -161,13 +164,13 @@ abstract class QuestionManagement
             if (isDigraphs && isDiacritics)
                 questionBank.addQuestions(KANA_SET_4_DAKUTEN_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_5))
+        if (getPref(5))
         {
             questionBank.addQuestions(KANA_SET_5);
             if (isDigraphs)
                 questionBank.addQuestions(KANA_SET_5_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_6))
+        if (getPref(6))
         {
             questionBank.addQuestions(KANA_SET_6_BASE);
             if (isDiacritics)
@@ -178,21 +181,21 @@ abstract class QuestionManagement
                 questionBank.addQuestions(KANA_SET_6_DAKUTEN_DIGRAPHS, KANA_SET_6_HANDAKETEN_DIGRAPHS);
 
         }
-        if (OptionsControl.getBoolean(PREFID_7))
+        if (getPref(7))
         {
             questionBank.addQuestions(KANA_SET_7);
             if (isDigraphs)
                 questionBank.addQuestions(KANA_SET_7_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_8))
+        if (getPref(8))
         {
             questionBank.addQuestions(KANA_SET_8);
             if (isDigraphs)
                 questionBank.addQuestions(KANA_SET_8_DIGRAPHS);
         }
-        if (OptionsControl.getBoolean(PREFID_9))
+        if (getPref(9))
             questionBank.addQuestions(KANA_SET_9);
-        if (OptionsControl.getBoolean(PREFID_10))
+        if (getPref(10))
             questionBank.addQuestions(KANA_SET_10_W_GROUP, KANA_SET_10_N_CONSONANT);
 
         return questionBank;
@@ -200,16 +203,12 @@ abstract class QuestionManagement
 
     boolean anySelected()
     {
-        return (OptionsControl.getBoolean(PREFID_1) ||
-                OptionsControl.getBoolean(PREFID_2) ||
-                OptionsControl.getBoolean(PREFID_3) ||
-                OptionsControl.getBoolean(PREFID_4) ||
-                OptionsControl.getBoolean(PREFID_5) ||
-                OptionsControl.getBoolean(PREFID_6) ||
-                OptionsControl.getBoolean(PREFID_7) ||
-                OptionsControl.getBoolean(PREFID_8) ||
-                OptionsControl.getBoolean(PREFID_9) ||
-                OptionsControl.getBoolean(PREFID_10));
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        {
+            if (getPref(i))
+                return true;
+        }
+        return false;
     }
 
     LinearLayout getReferenceTable(Context context)
@@ -220,25 +219,25 @@ abstract class QuestionManagement
         TableLayout tableOne = new TableLayout(context);
         tableOne.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        if (OptionsControl.getBoolean(PREFID_1))
+        if (getPref(1))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_1));
-        if (OptionsControl.getBoolean(PREFID_2))
+        if (getPref(2))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE));
-        if (OptionsControl.getBoolean(PREFID_3))
+        if (getPref(3))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE));
-        if (OptionsControl.getBoolean(PREFID_4))
+        if (getPref(4))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE));
-        if (OptionsControl.getBoolean(PREFID_5))
+        if (getPref(5))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_5));
-        if (OptionsControl.getBoolean(PREFID_6))
+        if (getPref(6))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE));
-        if (OptionsControl.getBoolean(PREFID_7))
+        if (getPref(7))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_7));
-        if (OptionsControl.getBoolean(PREFID_8))
+        if (getPref(8))
             tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_8));
-        if (OptionsControl.getBoolean(PREFID_9))
+        if (getPref(9))
             tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_9));
-        if (OptionsControl.getBoolean(PREFID_10))
+        if (getPref(10))
         {
             tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_10_W_GROUP));
             tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_10_N_CONSONANT));
@@ -251,13 +250,13 @@ abstract class QuestionManagement
             TableLayout tableTwo = new TableLayout(context);
             tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            if (OptionsControl.getBoolean(PREFID_2))
+            if (getPref(2))
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
-            if (OptionsControl.getBoolean(PREFID_3))
+            if (getPref(3))
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
-            if (OptionsControl.getBoolean(PREFID_4))
+            if (getPref(4))
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
-            if (OptionsControl.getBoolean(PREFID_6))
+            if (getPref(6))
             {
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
                 tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
@@ -269,35 +268,35 @@ abstract class QuestionManagement
             layout.addView(tableTwo);
         }
 
-        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && OptionsControl.getBoolean(PREFID_9))
+        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
         {
             TableLayout tableThree = new TableLayout(context);
             tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            if (OptionsControl.getBoolean(PREFID_2))
+            if (getPref(2))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_3))
+            if (getPref(3))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_4))
+            if (getPref(4))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_5))
+            if (getPref(5))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_5_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_6))
+            if (getPref(6))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_7))
+            if (getPref(7))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_7_DIGRAPHS));
-            if (OptionsControl.getBoolean(PREFID_8))
+            if (getPref(8))
                 tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_8_DIGRAPHS));
 
             if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             {
-                if (OptionsControl.getBoolean(PREFID_2))
+                if (getPref(2))
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN_DIGRAPHS));
-                if (OptionsControl.getBoolean(PREFID_3))
+                if (getPref(3))
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN_DIGRAPHS));
-                if (OptionsControl.getBoolean(PREFID_4))
+                if (getPref(4))
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN_DIGRAPHS));
-                if (OptionsControl.getBoolean(PREFID_6))
+                if (getPref(6))
                 {
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN_DIGRAPHS));
                     tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN_DIGRAPHS));
