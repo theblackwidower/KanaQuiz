@@ -80,8 +80,8 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        questionBank = HiraganaQuestions.getQuestionBank();
-        questionBank.addQuestions(KatakanaQuestions.getQuestionBank());
+        questionBank = Hiragana.QUESTIONS.getQuestionBank();
+        questionBank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
     }
 
     private void nextQuestion()

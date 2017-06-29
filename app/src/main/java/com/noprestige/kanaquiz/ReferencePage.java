@@ -31,13 +31,13 @@ public class ReferencePage extends Fragment
         switch(getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                if (HiraganaQuestions.anySelected())
-                    table = HiraganaQuestions.getReferenceTable(container.getContext());
+                if (Hiragana.QUESTIONS.anySelected())
+                    table = Hiragana.QUESTIONS.getReferenceTable(container.getContext());
                 else
-                    table = KatakanaQuestions.getReferenceTable(container.getContext());
+                    table = Katakana.QUESTIONS.getReferenceTable(container.getContext());
                 break;
             case 1:
-                table = KatakanaQuestions.getReferenceTable(container.getContext());
+                table = Katakana.QUESTIONS.getReferenceTable(container.getContext());
         }
 
         ScrollView scrollBox = new ScrollView(container.getContext());
