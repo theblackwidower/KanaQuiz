@@ -41,11 +41,7 @@ public class ReferencePage extends Fragment
         }
 
         ScrollView scrollBox = new ScrollView(container.getContext());
-        LinearLayout centerBox = new LinearLayout(container.getContext());
-        centerBox.setGravity(Gravity.CENTER_HORIZONTAL);
-
-        centerBox.addView(table);
-        scrollBox.addView(centerBox);
+        scrollBox.addView(table);
 
         return scrollBox;
     }
