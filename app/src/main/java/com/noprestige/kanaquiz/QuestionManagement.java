@@ -8,45 +8,119 @@ import android.widget.TableLayout;
 
 abstract class QuestionManagement
 {
-    protected KanaQuestion[] KANA_SET_1;
-    protected KanaQuestion[] KANA_SET_2_BASE;
-    protected KanaQuestion[] KANA_SET_2_DAKUTEN;
-    protected KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_3_BASE;
-    protected KanaQuestion[] KANA_SET_3_DAKUTEN;
-    protected KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_4_BASE;
-    protected KanaQuestion[] KANA_SET_4_DAKUTEN;
-    protected KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_5;
-    protected KanaQuestion[] KANA_SET_5_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_6_BASE;
-    protected KanaQuestion[] KANA_SET_6_DAKUTEN;
-    protected KanaQuestion[] KANA_SET_6_HANDAKETEN;
-    protected KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_7;
-    protected KanaQuestion[] KANA_SET_7_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_8;
-    protected KanaQuestion[] KANA_SET_8_DIGRAPHS;
-    protected KanaQuestion[] KANA_SET_9;
-    protected KanaQuestion[] KANA_SET_10_W_GROUP;
-    protected KanaQuestion[] KANA_SET_10_N_CONSONANT;
+    private KanaQuestion[] KANA_SET_1;
+    private KanaQuestion[] KANA_SET_2_BASE;
+    private KanaQuestion[] KANA_SET_2_DAKUTEN;
+    private KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_3_BASE;
+    private KanaQuestion[] KANA_SET_3_DAKUTEN;
+    private KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_4_BASE;
+    private KanaQuestion[] KANA_SET_4_DAKUTEN;
+    private KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_5;
+    private KanaQuestion[] KANA_SET_5_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_6_BASE;
+    private KanaQuestion[] KANA_SET_6_DAKUTEN;
+    private KanaQuestion[] KANA_SET_6_HANDAKETEN;
+    private KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_7;
+    private KanaQuestion[] KANA_SET_7_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_8;
+    private KanaQuestion[] KANA_SET_8_DIGRAPHS;
+    private KanaQuestion[] KANA_SET_9;
+    private KanaQuestion[] KANA_SET_10_W_GROUP;
+    private KanaQuestion[] KANA_SET_10_N_CONSONANT;
 
-    protected int PREFID_1;
-    protected int PREFID_2;
-    protected int PREFID_3;
-    protected int PREFID_4;
-    protected int PREFID_5;
-    protected int PREFID_6;
-    protected int PREFID_7;
-    protected int PREFID_8;
-    protected int PREFID_9;
-    protected int PREFID_10;
+    private int PREFID_1;
+    private int PREFID_2;
+    private int PREFID_3;
+    private int PREFID_4;
+    private int PREFID_5;
+    private int PREFID_6;
+    private int PREFID_7;
+    private int PREFID_8;
+    private int PREFID_9;
+    private int PREFID_10;
+
+    //TODO: Simplify
+    QuestionManagement(
+            KanaQuestion[] KANA_SET_1,
+            KanaQuestion[] KANA_SET_2_BASE,
+            KanaQuestion[] KANA_SET_2_DAKUTEN,
+            KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS,
+            KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS,
+            KanaQuestion[] KANA_SET_3_BASE,
+            KanaQuestion[] KANA_SET_3_DAKUTEN,
+            KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS,
+            KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS,
+            KanaQuestion[] KANA_SET_4_BASE,
+            KanaQuestion[] KANA_SET_4_DAKUTEN,
+            KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS,
+            KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS,
+            KanaQuestion[] KANA_SET_5,
+            KanaQuestion[] KANA_SET_5_DIGRAPHS,
+            KanaQuestion[] KANA_SET_6_BASE,
+            KanaQuestion[] KANA_SET_6_DAKUTEN,
+            KanaQuestion[] KANA_SET_6_HANDAKETEN,
+            KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS,
+            KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS,
+            KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS,
+            KanaQuestion[] KANA_SET_7,
+            KanaQuestion[] KANA_SET_7_DIGRAPHS,
+            KanaQuestion[] KANA_SET_8,
+            KanaQuestion[] KANA_SET_8_DIGRAPHS,
+            KanaQuestion[] KANA_SET_9,
+            KanaQuestion[] KANA_SET_10_W_GROUP,
+            KanaQuestion[] KANA_SET_10_N_CONSONANT,
+            int PREFID_1, int PREFID_2, int PREFID_3, int PREFID_4, int PREFID_5,
+            int PREFID_6, int PREFID_7, int PREFID_8, int PREFID_9, int PREFID_10)
+    {
+        this.KANA_SET_1 = KANA_SET_1;
+        this.KANA_SET_2_BASE = KANA_SET_2_BASE;
+        this.KANA_SET_2_DAKUTEN = KANA_SET_2_DAKUTEN;
+        this.KANA_SET_2_BASE_DIGRAPHS = KANA_SET_2_BASE_DIGRAPHS;
+        this.KANA_SET_2_DAKUTEN_DIGRAPHS = KANA_SET_2_DAKUTEN_DIGRAPHS;
+        this.KANA_SET_3_BASE = KANA_SET_3_BASE;
+        this.KANA_SET_3_DAKUTEN = KANA_SET_3_DAKUTEN;
+        this.KANA_SET_3_BASE_DIGRAPHS = KANA_SET_3_BASE_DIGRAPHS;
+        this.KANA_SET_3_DAKUTEN_DIGRAPHS = KANA_SET_3_DAKUTEN_DIGRAPHS;
+        this.KANA_SET_4_BASE = KANA_SET_4_BASE;
+        this.KANA_SET_4_DAKUTEN = KANA_SET_4_DAKUTEN;
+        this.KANA_SET_4_BASE_DIGRAPHS = KANA_SET_4_BASE_DIGRAPHS;
+        this.KANA_SET_4_DAKUTEN_DIGRAPHS = KANA_SET_4_DAKUTEN_DIGRAPHS;
+        this.KANA_SET_5 = KANA_SET_5;
+        this.KANA_SET_5_DIGRAPHS = KANA_SET_5_DIGRAPHS;
+        this.KANA_SET_6_BASE = KANA_SET_6_BASE;
+        this.KANA_SET_6_DAKUTEN = KANA_SET_6_DAKUTEN;
+        this.KANA_SET_6_HANDAKETEN = KANA_SET_6_HANDAKETEN;
+        this.KANA_SET_6_BASE_DIGRAPHS = KANA_SET_6_BASE_DIGRAPHS;
+        this.KANA_SET_6_DAKUTEN_DIGRAPHS = KANA_SET_6_DAKUTEN_DIGRAPHS;
+        this.KANA_SET_6_HANDAKETEN_DIGRAPHS = KANA_SET_6_HANDAKETEN_DIGRAPHS;
+        this.KANA_SET_7 = KANA_SET_7;
+        this.KANA_SET_7_DIGRAPHS = KANA_SET_7_DIGRAPHS;
+        this.KANA_SET_8 = KANA_SET_8;
+        this.KANA_SET_8_DIGRAPHS = KANA_SET_8_DIGRAPHS;
+        this.KANA_SET_9 = KANA_SET_9;
+        this.KANA_SET_10_W_GROUP = KANA_SET_10_W_GROUP;
+        this.KANA_SET_10_N_CONSONANT = KANA_SET_10_N_CONSONANT;
+
+        this.PREFID_1 = PREFID_1;
+        this.PREFID_2 = PREFID_2;
+        this.PREFID_3 = PREFID_3;
+        this.PREFID_4 = PREFID_4;
+        this.PREFID_5 = PREFID_5;
+        this.PREFID_6 = PREFID_6;
+        this.PREFID_7 = PREFID_7;
+        this.PREFID_8 = PREFID_8;
+        this.PREFID_9 = PREFID_9;
+        this.PREFID_10 = PREFID_10;
+    }
 
     KanaQuestionBank getQuestionBank()
     {
