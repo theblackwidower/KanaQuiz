@@ -153,24 +153,7 @@ abstract class QuestionManagement
                     questionBank.addQuestions(getKanaSet(i, DAKUTEN, true));
             }
         }
-        if (getPref(5))
-        {
-            questionBank.addQuestions(getKanaSet(5));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(5, NO_DIACRITIC, true));
-        }
-        if (getPref(6))
-        {
-            questionBank.addQuestions(getKanaSet(6));
-            if (isDiacritics)
-                questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(6, NO_DIACRITIC, true));
-            if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
-
-        }
-        for (int i = 7; i <= 8; i++)
+        for (int i = 5; i <= 8; i++)
         {
             if (getPref(i))
             {
@@ -178,6 +161,12 @@ abstract class QuestionManagement
                 if (isDigraphs)
                     questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
             }
+        }
+        if (isDiacritics && getPref(6))
+        {
+            questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
+            if (isDigraphs)
+                questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
         }
         if (getPref(9))
             questionBank.addQuestions(getKanaSet(9));
@@ -209,11 +198,22 @@ abstract class QuestionManagement
         tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         TableLayout tableThree = new TableLayout(context);
         tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout tableFour = new TableLayout(context);
+        tableFour.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        for (int i = 1; i <= 8; i++)
+        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
+        boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
+
+        if (getPref(1))
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
+        for (int i = 2; i <= 8; i++)
         {
             if (getPref(i))
+            {
                 tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
+                if (isDigraphs)
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
+            }
         }
         if (getPref(9))
             tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
@@ -223,39 +223,25 @@ abstract class QuestionManagement
             tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
         }
 
-        if (OptionsControl.getBoolean(R.string.prefid_diacritics))
+        if (isDiacritics)
         {
             for (int i = 2; i <= 4; i++)
             {
                 if (getPref(i))
+                {
                     tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
+                    if (isDigraphs)
+                        tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
+                }
             }
             if (getPref(6))
             {
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
-            }
-        }
-
-        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-        {
-            for (int i = 2; i <= 8; i++)
-            {
-                if (getPref(i))
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
-            }
-
-            if (OptionsControl.getBoolean(R.string.prefid_diacritics))
-            {
-                for (int i = 2; i <= 4; i++)
+                if (isDigraphs)
                 {
-                    if (getPref(i))
-                        tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
-                }
-                if (getPref(6))
-                {
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
+                    tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
+                    tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
                 }
             }
         }
@@ -266,10 +252,11 @@ abstract class QuestionManagement
             layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
             layout.addView(tableTwo);
         }
-        if (tableThree.getChildCount() > 0)
+        if (tableThree.getChildCount() > 0 || tableFour.getChildCount() > 0)
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
             layout.addView(tableThree);
+            layout.addView(tableFour);
         }
 
         return layout;
