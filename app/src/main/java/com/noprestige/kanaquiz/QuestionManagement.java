@@ -222,8 +222,13 @@ abstract class QuestionManagement
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
+
         TableLayout tableOne = new TableLayout(context);
         tableOne.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout tableTwo = new TableLayout(context);
+        tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout tableThree = new TableLayout(context);
+        tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         if (getPref(1))
             tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
@@ -249,13 +254,8 @@ abstract class QuestionManagement
             tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
         }
 
-        layout.addView(tableOne);
-
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
         {
-            TableLayout tableTwo = new TableLayout(context);
-            tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
             if (getPref(2))
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(2, DAKUTEN)));
             if (getPref(3))
@@ -267,18 +267,10 @@ abstract class QuestionManagement
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
             }
-
-            if (tableTwo.getChildCount() > 0)
-                layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
-
-            layout.addView(tableTwo);
         }
 
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
         {
-            TableLayout tableThree = new TableLayout(context);
-            tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
             if (getPref(2))
                 tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(2, NO_DIACRITIC, true)));
             if (getPref(3))
@@ -308,10 +300,17 @@ abstract class QuestionManagement
                     tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
                 }
             }
+        }
 
-            if (tableThree.getChildCount() > 0)
-                layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
-
+        layout.addView(tableOne);
+        if (tableTwo.getChildCount() > 0)
+        {
+            layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
+            layout.addView(tableTwo);
+        }
+        if (tableThree.getChildCount() > 0)
+        {
+            layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
             layout.addView(tableThree);
         }
 
