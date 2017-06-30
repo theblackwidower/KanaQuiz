@@ -140,35 +140,18 @@ abstract class QuestionManagement
 
         if (getPref(1))
             questionBank.addQuestions(getKanaSet(1));
-        if (getPref(2))
+        for (int i = 2; i <= 4; i++)
         {
-            questionBank.addQuestions(getKanaSet(2));
-            if (isDiacritics)
-                questionBank.addQuestions(getKanaSet(2, DAKUTEN));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(2, NO_DIACRITIC, true));
-            if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(getKanaSet(2, DAKUTEN, true));
-        }
-        if (getPref(3))
-        {
-            questionBank.addQuestions(getKanaSet(3));
-            if (isDiacritics)
-                questionBank.addQuestions(getKanaSet(3, DAKUTEN));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(3, NO_DIACRITIC, true));
-            if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(getKanaSet(3, DAKUTEN, true));
-        }
-        if (getPref(4))
-        {
-            questionBank.addQuestions(getKanaSet(4));
-            if (isDiacritics)
-                questionBank.addQuestions(getKanaSet(4, DAKUTEN));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(4, NO_DIACRITIC, true));
-            if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(getKanaSet(4, DAKUTEN, true));
+            if (getPref(i))
+            {
+                questionBank.addQuestions(getKanaSet(i));
+                if (isDiacritics)
+                    questionBank.addQuestions(getKanaSet(i, DAKUTEN));
+                if (isDigraphs)
+                    questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
+                if (isDigraphs && isDiacritics)
+                    questionBank.addQuestions(getKanaSet(i, DAKUTEN, true));
+            }
         }
         if (getPref(5))
         {
@@ -187,17 +170,14 @@ abstract class QuestionManagement
                 questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
 
         }
-        if (getPref(7))
+        for (int i = 7; i <= 8; i++)
         {
-            questionBank.addQuestions(getKanaSet(7));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(7, NO_DIACRITIC, true));
-        }
-        if (getPref(8))
-        {
-            questionBank.addQuestions(getKanaSet(8));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(8, NO_DIACRITIC, true));
+            if (getPref(i))
+            {
+                questionBank.addQuestions(getKanaSet(i));
+                if (isDigraphs)
+                    questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
+            }
         }
         if (getPref(9))
             questionBank.addQuestions(getKanaSet(9));
@@ -230,22 +210,11 @@ abstract class QuestionManagement
         TableLayout tableThree = new TableLayout(context);
         tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        if (getPref(1))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
-        if (getPref(2))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(2)));
-        if (getPref(3))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(3)));
-        if (getPref(4))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(4)));
-        if (getPref(5))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(5)));
-        if (getPref(6))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(6)));
-        if (getPref(7))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(7)));
-        if (getPref(8))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(8)));
+        for (int i = 1; i <= 8; i++)
+        {
+            if (getPref(i))
+                tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
+        }
         if (getPref(9))
             tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
         if (getPref(10))
@@ -256,12 +225,11 @@ abstract class QuestionManagement
 
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
         {
-            if (getPref(2))
-                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(2, DAKUTEN)));
-            if (getPref(3))
-                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(3, DAKUTEN)));
-            if (getPref(4))
-                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(4, DAKUTEN)));
+            for (int i = 2; i <= 4; i++)
+            {
+                if (getPref(i))
+                    tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
+            }
             if (getPref(6))
             {
                 tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
@@ -271,29 +239,19 @@ abstract class QuestionManagement
 
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
         {
-            if (getPref(2))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(2, NO_DIACRITIC, true)));
-            if (getPref(3))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(3, NO_DIACRITIC, true)));
-            if (getPref(4))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(4, NO_DIACRITIC, true)));
-            if (getPref(5))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(5, NO_DIACRITIC, true)));
-            if (getPref(6))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, NO_DIACRITIC, true)));
-            if (getPref(7))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(7, NO_DIACRITIC, true)));
-            if (getPref(8))
-                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(8, NO_DIACRITIC, true)));
+            for (int i = 2; i <= 8; i++)
+            {
+                if (getPref(i))
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
+            }
 
             if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             {
-                if (getPref(2))
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(2, DAKUTEN, true)));
-                if (getPref(3))
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(3, DAKUTEN, true)));
-                if (getPref(4))
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(4, DAKUTEN, true)));
+                for (int i = 2; i <= 4; i++)
+                {
+                    if (getPref(i))
+                        tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
+                }
                 if (getPref(6))
                 {
                     tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
