@@ -6,39 +6,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
+import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
+import static com.noprestige.kanaquiz.Diacritic.NO_DIACRITIC;
+import static com.noprestige.kanaquiz.Diacritic.DAKUTEN;
+import static com.noprestige.kanaquiz.Diacritic.HANDAKUTEN;
+
 abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    private KanaQuestion[] KANA_SET_1;
-    private KanaQuestion[] KANA_SET_2_BASE;
-    private KanaQuestion[] KANA_SET_2_DAKUTEN;
-    private KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_3_BASE;
-    private KanaQuestion[] KANA_SET_3_DAKUTEN;
-    private KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_4_BASE;
-    private KanaQuestion[] KANA_SET_4_DAKUTEN;
-    private KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_5;
-    private KanaQuestion[] KANA_SET_5_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_6_BASE;
-    private KanaQuestion[] KANA_SET_6_DAKUTEN;
-    private KanaQuestion[] KANA_SET_6_HANDAKETEN;
-    private KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_7;
-    private KanaQuestion[] KANA_SET_7_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_8;
-    private KanaQuestion[] KANA_SET_8_DIGRAPHS;
-    private KanaQuestion[] KANA_SET_9;
-    private KanaQuestion[] KANA_SET_10_W_GROUP;
-    private KanaQuestion[] KANA_SET_10_N_CONSONANT;
-
+    private KanaQuestion[][][][] kanaSets;
     private int[] prefIds;
 
     //TODO: Simplify
@@ -74,34 +51,45 @@ abstract class QuestionManagement
             int PREFID_1, int PREFID_2, int PREFID_3, int PREFID_4, int PREFID_5,
             int PREFID_6, int PREFID_7, int PREFID_8, int PREFID_9, int PREFID_10)
     {
-        this.KANA_SET_1 = KANA_SET_1;
-        this.KANA_SET_2_BASE = KANA_SET_2_BASE;
-        this.KANA_SET_2_DAKUTEN = KANA_SET_2_DAKUTEN;
-        this.KANA_SET_2_BASE_DIGRAPHS = KANA_SET_2_BASE_DIGRAPHS;
-        this.KANA_SET_2_DAKUTEN_DIGRAPHS = KANA_SET_2_DAKUTEN_DIGRAPHS;
-        this.KANA_SET_3_BASE = KANA_SET_3_BASE;
-        this.KANA_SET_3_DAKUTEN = KANA_SET_3_DAKUTEN;
-        this.KANA_SET_3_BASE_DIGRAPHS = KANA_SET_3_BASE_DIGRAPHS;
-        this.KANA_SET_3_DAKUTEN_DIGRAPHS = KANA_SET_3_DAKUTEN_DIGRAPHS;
-        this.KANA_SET_4_BASE = KANA_SET_4_BASE;
-        this.KANA_SET_4_DAKUTEN = KANA_SET_4_DAKUTEN;
-        this.KANA_SET_4_BASE_DIGRAPHS = KANA_SET_4_BASE_DIGRAPHS;
-        this.KANA_SET_4_DAKUTEN_DIGRAPHS = KANA_SET_4_DAKUTEN_DIGRAPHS;
-        this.KANA_SET_5 = KANA_SET_5;
-        this.KANA_SET_5_DIGRAPHS = KANA_SET_5_DIGRAPHS;
-        this.KANA_SET_6_BASE = KANA_SET_6_BASE;
-        this.KANA_SET_6_DAKUTEN = KANA_SET_6_DAKUTEN;
-        this.KANA_SET_6_HANDAKETEN = KANA_SET_6_HANDAKETEN;
-        this.KANA_SET_6_BASE_DIGRAPHS = KANA_SET_6_BASE_DIGRAPHS;
-        this.KANA_SET_6_DAKUTEN_DIGRAPHS = KANA_SET_6_DAKUTEN_DIGRAPHS;
-        this.KANA_SET_6_HANDAKETEN_DIGRAPHS = KANA_SET_6_HANDAKETEN_DIGRAPHS;
-        this.KANA_SET_7 = KANA_SET_7;
-        this.KANA_SET_7_DIGRAPHS = KANA_SET_7_DIGRAPHS;
-        this.KANA_SET_8 = KANA_SET_8;
-        this.KANA_SET_8_DIGRAPHS = KANA_SET_8_DIGRAPHS;
-        this.KANA_SET_9 = KANA_SET_9;
-        this.KANA_SET_10_W_GROUP = KANA_SET_10_W_GROUP;
-        this.KANA_SET_10_N_CONSONANT = KANA_SET_10_N_CONSONANT;
+        kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
+
+        kanaSets[0][NO_DIACRITIC.ordinal()][0] = KANA_SET_1;
+
+        kanaSets[1][NO_DIACRITIC.ordinal()][0] = KANA_SET_2_BASE;
+        kanaSets[1][DAKUTEN.ordinal()][0] = KANA_SET_2_DAKUTEN;
+        kanaSets[1][NO_DIACRITIC.ordinal()][1] = KANA_SET_2_BASE_DIGRAPHS;
+        kanaSets[1][DAKUTEN.ordinal()][1] = KANA_SET_2_DAKUTEN_DIGRAPHS;
+
+        kanaSets[2][NO_DIACRITIC.ordinal()][0] = KANA_SET_3_BASE;
+        kanaSets[2][DAKUTEN.ordinal()][0] = KANA_SET_3_DAKUTEN;
+        kanaSets[2][NO_DIACRITIC.ordinal()][1] = KANA_SET_3_BASE_DIGRAPHS;
+        kanaSets[2][DAKUTEN.ordinal()][1] = KANA_SET_3_DAKUTEN_DIGRAPHS;
+
+        kanaSets[3][NO_DIACRITIC.ordinal()][0] = KANA_SET_4_BASE;
+        kanaSets[3][DAKUTEN.ordinal()][0] = KANA_SET_4_DAKUTEN;
+        kanaSets[3][NO_DIACRITIC.ordinal()][1] = KANA_SET_4_BASE_DIGRAPHS;
+        kanaSets[3][DAKUTEN.ordinal()][1] = KANA_SET_4_DAKUTEN_DIGRAPHS;
+
+        kanaSets[4][NO_DIACRITIC.ordinal()][0] = KANA_SET_5;
+        kanaSets[4][NO_DIACRITIC.ordinal()][1] = KANA_SET_5_DIGRAPHS;
+
+        kanaSets[5][NO_DIACRITIC.ordinal()][0] = KANA_SET_6_BASE;
+        kanaSets[5][DAKUTEN.ordinal()][0] = KANA_SET_6_DAKUTEN;
+        kanaSets[5][HANDAKUTEN.ordinal()][0] = KANA_SET_6_HANDAKETEN;
+        kanaSets[5][NO_DIACRITIC.ordinal()][1] = KANA_SET_6_BASE_DIGRAPHS;
+        kanaSets[5][DAKUTEN.ordinal()][1] = KANA_SET_6_DAKUTEN_DIGRAPHS;
+        kanaSets[5][HANDAKUTEN.ordinal()][1] = KANA_SET_6_HANDAKETEN_DIGRAPHS;
+
+        kanaSets[6][NO_DIACRITIC.ordinal()][0] = KANA_SET_7;
+        kanaSets[6][NO_DIACRITIC.ordinal()][1] = KANA_SET_7_DIGRAPHS;
+
+        kanaSets[7][NO_DIACRITIC.ordinal()][0] = KANA_SET_8;
+        kanaSets[7][NO_DIACRITIC.ordinal()][1] = KANA_SET_8_DIGRAPHS;
+
+        kanaSets[8][NO_DIACRITIC.ordinal()][0] = KANA_SET_9;
+
+        kanaSets[9][NO_DIACRITIC.ordinal()][0] = KANA_SET_10_W_GROUP;
+        kanaSets[9][CONSONANT.ordinal()][0] = KANA_SET_10_N_CONSONANT;
 
         prefIds = new int[CATEGORY_COUNT];
         prefIds[0] = PREFID_1;
@@ -114,6 +102,24 @@ abstract class QuestionManagement
         prefIds[7] = PREFID_8;
         prefIds[8] = PREFID_9;
         prefIds[9] = PREFID_10;
+    }
+
+    private KanaQuestion[] getKanaSet(int number)
+    {
+        return getKanaSet(number, NO_DIACRITIC);
+    }
+    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic)
+    {
+        return getKanaSet(number, diacritic, false);
+    }
+    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
+    {
+        KanaQuestion[] value = kanaSets[number - 1][diacritic.ordinal()][isDigraphs?1:0];
+
+        if (value.length > 0)
+            return value;
+        else
+            throw new NullPointerException();
     }
 
     private int getPrefId(int number)
@@ -133,70 +139,70 @@ abstract class QuestionManagement
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
         if (getPref(1))
-            questionBank.addQuestions(KANA_SET_1);
+            questionBank.addQuestions(getKanaSet(1));
         if (getPref(2))
         {
-            questionBank.addQuestions(KANA_SET_2_BASE);
+            questionBank.addQuestions(getKanaSet(2));
             if (isDiacritics)
-                questionBank.addQuestions(KANA_SET_2_DAKUTEN);
+                questionBank.addQuestions(getKanaSet(2, DAKUTEN));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_2_BASE_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(2, NO_DIACRITIC, true));
             if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(KANA_SET_2_DAKUTEN_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(2, DAKUTEN, true));
         }
         if (getPref(3))
         {
-            questionBank.addQuestions(KANA_SET_3_BASE);
+            questionBank.addQuestions(getKanaSet(3));
             if (isDiacritics)
-                questionBank.addQuestions(KANA_SET_3_DAKUTEN);
+                questionBank.addQuestions(getKanaSet(3, DAKUTEN));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_3_BASE_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(3, NO_DIACRITIC, true));
             if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(KANA_SET_3_DAKUTEN_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(3, DAKUTEN, true));
         }
         if (getPref(4))
         {
-            questionBank.addQuestions(KANA_SET_4_BASE);
+            questionBank.addQuestions(getKanaSet(4));
             if (isDiacritics)
-                questionBank.addQuestions(KANA_SET_4_DAKUTEN);
+                questionBank.addQuestions(getKanaSet(4, DAKUTEN));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_4_BASE_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(4, NO_DIACRITIC, true));
             if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(KANA_SET_4_DAKUTEN_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(4, DAKUTEN, true));
         }
         if (getPref(5))
         {
-            questionBank.addQuestions(KANA_SET_5);
+            questionBank.addQuestions(getKanaSet(5));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_5_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(5, NO_DIACRITIC, true));
         }
         if (getPref(6))
         {
-            questionBank.addQuestions(KANA_SET_6_BASE);
+            questionBank.addQuestions(getKanaSet(6));
             if (isDiacritics)
-                questionBank.addQuestions(KANA_SET_6_DAKUTEN, KANA_SET_6_HANDAKETEN);
+                questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_6_BASE_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(6, NO_DIACRITIC, true));
             if (isDigraphs && isDiacritics)
-                questionBank.addQuestions(KANA_SET_6_DAKUTEN_DIGRAPHS, KANA_SET_6_HANDAKETEN_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
 
         }
         if (getPref(7))
         {
-            questionBank.addQuestions(KANA_SET_7);
+            questionBank.addQuestions(getKanaSet(7));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_7_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(7, NO_DIACRITIC, true));
         }
         if (getPref(8))
         {
-            questionBank.addQuestions(KANA_SET_8);
+            questionBank.addQuestions(getKanaSet(8));
             if (isDigraphs)
-                questionBank.addQuestions(KANA_SET_8_DIGRAPHS);
+                questionBank.addQuestions(getKanaSet(8, NO_DIACRITIC, true));
         }
         if (getPref(9))
-            questionBank.addQuestions(KANA_SET_9);
+            questionBank.addQuestions(getKanaSet(9));
         if (getPref(10))
-            questionBank.addQuestions(KANA_SET_10_W_GROUP, KANA_SET_10_N_CONSONANT);
+            questionBank.addQuestions(getKanaSet(10), getKanaSet(10, CONSONANT));
 
         return questionBank;
     }
@@ -220,27 +226,27 @@ abstract class QuestionManagement
         tableOne.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         if (getPref(1))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_1));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
         if (getPref(2))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(2)));
         if (getPref(3))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(3)));
         if (getPref(4))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(4)));
         if (getPref(5))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_5));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(5)));
         if (getPref(6))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(6)));
         if (getPref(7))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_7));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(7)));
         if (getPref(8))
-            tableOne.addView(ReferenceCell.buildRow(context, KANA_SET_8));
+            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(8)));
         if (getPref(9))
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_9));
+            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
         if (getPref(10))
         {
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_10_W_GROUP));
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, KANA_SET_10_N_CONSONANT));
+            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10)));
+            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
         }
 
         layout.addView(tableOne);
@@ -251,15 +257,15 @@ abstract class QuestionManagement
             tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if (getPref(2))
-                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(2, DAKUTEN)));
             if (getPref(3))
-                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(3, DAKUTEN)));
             if (getPref(4))
-                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(4, DAKUTEN)));
             if (getPref(6))
             {
-                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN));
-                tableTwo.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN));
+                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
+                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
             }
 
             if (tableTwo.getChildCount() > 0)
@@ -274,32 +280,32 @@ abstract class QuestionManagement
             tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
             if (getPref(2))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_2_BASE_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(2, NO_DIACRITIC, true)));
             if (getPref(3))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_3_BASE_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(3, NO_DIACRITIC, true)));
             if (getPref(4))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_4_BASE_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(4, NO_DIACRITIC, true)));
             if (getPref(5))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_5_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(5, NO_DIACRITIC, true)));
             if (getPref(6))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_BASE_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, NO_DIACRITIC, true)));
             if (getPref(7))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_7_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(7, NO_DIACRITIC, true)));
             if (getPref(8))
-                tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_8_DIGRAPHS));
+                tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(8, NO_DIACRITIC, true)));
 
             if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             {
                 if (getPref(2))
-                    tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_2_DAKUTEN_DIGRAPHS));
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(2, DAKUTEN, true)));
                 if (getPref(3))
-                    tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_3_DAKUTEN_DIGRAPHS));
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(3, DAKUTEN, true)));
                 if (getPref(4))
-                    tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_4_DAKUTEN_DIGRAPHS));
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(4, DAKUTEN, true)));
                 if (getPref(6))
                 {
-                    tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_DAKUTEN_DIGRAPHS));
-                    tableThree.addView(ReferenceCell.buildRow(context, KANA_SET_6_HANDAKETEN_DIGRAPHS));
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
+                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
                 }
             }
 
