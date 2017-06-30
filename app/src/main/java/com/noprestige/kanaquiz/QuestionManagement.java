@@ -192,35 +192,35 @@ abstract class QuestionManagement
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
 
-        TableLayout tableOne = new TableLayout(context);
-        tableOne.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        TableLayout tableTwo = new TableLayout(context);
-        tableTwo.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        TableLayout tableThree = new TableLayout(context);
-        tableThree.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        TableLayout tableFour = new TableLayout(context);
-        tableFour.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout baseTable = new TableLayout(context);
+        baseTable.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout diacriticsTable = new TableLayout(context);
+        diacriticsTable.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout digraphsTable = new TableLayout(context);
+        digraphsTable.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TableLayout diacriticDigraphsTable = new TableLayout(context);
+        diacriticDigraphsTable.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
         if (getPref(1))
-            tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
+            baseTable.addView(ReferenceCell.buildRow(context, getKanaSet(1)));
         for (int i = 2; i <= 8; i++)
         {
             if (getPref(i))
             {
-                tableOne.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
+                baseTable.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
                 if (isDigraphs)
-                    tableThree.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
+                    digraphsTable.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
             }
         }
         if (getPref(9))
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
+            baseTable.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
         if (getPref(10))
         {
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10)));
-            tableOne.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
+            baseTable.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10)));
+            baseTable.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
         }
 
         if (isDiacritics)
@@ -229,34 +229,34 @@ abstract class QuestionManagement
             {
                 if (getPref(i))
                 {
-                    tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
+                    diacriticsTable.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
                     if (isDigraphs)
-                        tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
+                        diacriticDigraphsTable.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
                 }
             }
             if (getPref(6))
             {
-                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
-                tableTwo.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
+                diacriticsTable.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
+                diacriticsTable.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
                 if (isDigraphs)
                 {
-                    tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
-                    tableFour.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
+                    diacriticDigraphsTable.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
+                    diacriticDigraphsTable.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
                 }
             }
         }
 
-        layout.addView(tableOne);
-        if (tableTwo.getChildCount() > 0)
+        layout.addView(baseTable);
+        if (diacriticsTable.getChildCount() > 0)
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
-            layout.addView(tableTwo);
+            layout.addView(diacriticsTable);
         }
-        if (tableThree.getChildCount() > 0 || tableFour.getChildCount() > 0)
+        if (digraphsTable.getChildCount() > 0 || diacriticDigraphsTable.getChildCount() > 0)
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
-            layout.addView(tableThree);
-            layout.addView(tableFour);
+            layout.addView(digraphsTable);
+            layout.addView(diacriticDigraphsTable);
         }
 
         return layout;
