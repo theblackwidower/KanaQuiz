@@ -140,33 +140,32 @@ abstract class QuestionManagement
 
         if (getPref(1))
             questionBank.addQuestions(getKanaSet(1));
-        for (int i = 2; i <= 4; i++)
+        for (int i = 2; i <= 8; i++)
         {
             if (getPref(i))
             {
                 questionBank.addQuestions(getKanaSet(i));
-                if (isDiacritics)
+                if (isDigraphs)
+                    questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
+            }
+        }
+        if (isDiacritics)
+        {
+            for (int i = 2; i <= 4; i++)
+            {
+                if (getPref(i))
+                {
                     questionBank.addQuestions(getKanaSet(i, DAKUTEN));
-                if (isDigraphs)
-                    questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
-                if (isDigraphs && isDiacritics)
-                    questionBank.addQuestions(getKanaSet(i, DAKUTEN, true));
+                    if (isDigraphs)
+                        questionBank.addQuestions(getKanaSet(i, DAKUTEN, true));
+                }
             }
-        }
-        for (int i = 5; i <= 8; i++)
-        {
-            if (getPref(i))
+            if (getPref(6))
             {
-                questionBank.addQuestions(getKanaSet(i));
+                questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
                 if (isDigraphs)
-                    questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
+                    questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
             }
-        }
-        if (isDiacritics && getPref(6))
-        {
-            questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
-            if (isDigraphs)
-                questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
         }
         if (getPref(9))
             questionBank.addQuestions(getKanaSet(9));
