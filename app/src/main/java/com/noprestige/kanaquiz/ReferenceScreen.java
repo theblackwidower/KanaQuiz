@@ -10,10 +10,10 @@ public class ReferenceScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reference_screen);
+        setContentView(R.layout.activity_tabbed_screen);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerReference);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new ReferencePager(getSupportFragmentManager(), this));
-        ((TabLayout) findViewById(R.id.tabLayoutReference)).setupWithViewPager(viewPager);
+        ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
     }
 }

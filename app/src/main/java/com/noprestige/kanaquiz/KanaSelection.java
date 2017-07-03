@@ -11,7 +11,7 @@ public class KanaSelection extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kana_selection);
+        setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new KanaSelectionPager(getSupportFragmentManager(), this));
