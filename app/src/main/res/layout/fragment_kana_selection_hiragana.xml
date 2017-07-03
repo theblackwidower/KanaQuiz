@@ -10,75 +10,75 @@
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_1_title"
         app:baseContents="@string/set_1_hiragana"
-        app:prefId="@string/prefid_hiragana_1" />
+        app:prefId="@string/prefid_hiragana_1"
+        app:title="@string/set_1_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_2_title"
         app:baseContents="@string/set_2_hiragana_base"
         app:diacritics="@string/set_2_hiragana_diacritics"
-        app:prefId="@string/prefid_hiragana_2" />
+        app:prefId="@string/prefid_hiragana_2"
+        app:title="@string/set_2_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_3_title"
         app:baseContents="@string/set_3_hiragana_base"
         app:diacritics="@string/set_3_hiragana_diacritics"
-        app:prefId="@string/prefid_hiragana_3" />
+        app:prefId="@string/prefid_hiragana_3"
+        app:title="@string/set_3_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_4_title"
         app:baseContents="@string/set_4_hiragana_base"
         app:diacritics="@string/set_4_hiragana_diacritics"
-        app:prefId="@string/prefid_hiragana_4" />
+        app:prefId="@string/prefid_hiragana_4"
+        app:title="@string/set_4_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_5_title"
         app:baseContents="@string/set_5_hiragana"
-        app:prefId="@string/prefid_hiragana_5" />
+        app:prefId="@string/prefid_hiragana_5"
+        app:title="@string/set_5_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_6_title"
         app:baseContents="@string/set_6_hiragana_base"
         app:diacritics="@string/set_6_hiragana_diacritics"
-        app:prefId="@string/prefid_hiragana_6" />
+        app:prefId="@string/prefid_hiragana_6"
+        app:title="@string/set_6_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_7_title"
         app:baseContents="@string/set_7_hiragana"
-        app:prefId="@string/prefid_hiragana_7" />
+        app:prefId="@string/prefid_hiragana_7"
+        app:title="@string/set_7_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_8_title"
         app:baseContents="@string/set_8_hiragana"
-        app:prefId="@string/prefid_hiragana_8" />
+        app:prefId="@string/prefid_hiragana_8"
+        app:title="@string/set_8_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_9_title"
         app:baseContents="@string/set_9_hiragana"
-        app:prefId="@string/prefid_hiragana_9" />
+        app:prefId="@string/prefid_hiragana_9"
+        app:title="@string/set_9_title"/>
 
     <com.noprestige.kanaquiz.KanaSelectionItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/set_10_title"
         app:baseContents="@string/set_10_hiragana"
-        app:prefId="@string/prefid_hiragana_10" />
+        app:prefId="@string/prefid_hiragana_10"
+        app:title="@string/set_10_title"/>
 
 </LinearLayout>

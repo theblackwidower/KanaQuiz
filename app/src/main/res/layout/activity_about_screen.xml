@@ -6,12 +6,12 @@
     android:id="@+id/activity_about_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.noprestige.kanaquiz.AboutScreen"
-    android:orientation="vertical">
+    tools:context="com.noprestige.kanaquiz.AboutScreen">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/ic_launcher"/>
 
         <TextView
             android:id="@+id/lblNameDisplay"
@@ -32,7 +32,7 @@
             android:layout_marginStart="5dp"
             android:text="@string/app_name"
             android:textSize="20sp"
-            android:textStyle="normal|bold" />
+            android:textStyle="normal|bold"/>
 
         <TextView
             android:id="@+id/lblVersionDisplay"
@@ -41,17 +41,17 @@
             android:layout_gravity="bottom"
             android:layout_marginStart="5dp"
             android:text=""
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
     <TextView
-        android:text="@string/copyright_claim"
+        android:id="@+id/lblCopyrightDisplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblCopyrightDisplay"
         android:layout_marginTop="14dp"
-        android:textSize="14sp" />
+        android:text="@string/copyright_claim"
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -60,26 +60,26 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="@string/special_thanks_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp" />
+            android:text="@string/special_thanks_start"
+            android:textSize="14sp"/>
 
         <TextView
-            android:text="@string/special_thanks_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textSize="14sp" />
+            android:text="@string/special_thanks_1"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 
     <TextView
-        android:text="@string/source_code_on_github"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
-        android:textSize="14sp" />
+        android:text="@string/source_code_on_github"
+        android:textSize="14sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -93,15 +93,14 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/github_logo"
             android:onClick="toGithub"
-            app:srcCompat="@drawable/ic_github_logo" />
+            app:srcCompat="@drawable/ic_github_logo"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/twitter_logo"
             android:onClick="toTwitter"
-            app:srcCompat="@drawable/ic_twitter_logo" />
+            app:srcCompat="@drawable/ic_twitter_logo"/>
 
     </LinearLayout>
 </LinearLayout>
-

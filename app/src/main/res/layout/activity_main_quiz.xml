@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_quiz"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -14,48 +14,48 @@
     tools:menu="@menu/menu">
 
     <TextView
-        android:text=""
+        android:id="@+id/lblDisplayKana"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblDisplayKana"
-        android:textSize="144sp"
-        android:textAlignment="center" />
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="144sp"/>
 
     <TextView
         android:id="@+id/lblResponse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <EditText
+        android:id="@+id/txtAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
         android:ems="10"
-        android:id="@+id/txtAnswer"
-        android:textAlignment="center"
-        android:inputType="textNoSuggestions"
-        android:selectAllOnFocus="true"
-        android:maxLines="1"
         android:hint="@string/answer_hint"
-        android:imeOptions="actionGo" />
+        android:imeOptions="actionGo"
+        android:inputType="textNoSuggestions"
+        android:maxLines="1"
+        android:selectAllOnFocus="true"
+        android:text=""
+        android:textAlignment="center"/>
 
     <Button
-        android:text="@string/button_send"
+        android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSubmit"
         android:layout_gravity="center_horizontal"
-        android:onClick="submitAnswer" />
+        android:onClick="submitAnswer"
+        android:text="@string/button_send"/>
 
     <TextView
-        android:text=""
+        android:id="@+id/lblScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lblScore"
-        android:textAlignment="center"
         android:maxLines="2"
-        android:minLines="2" />
+        android:minLines="2"
+        android:text=""
+        android:textAlignment="center"/>
 
 </LinearLayout>
