@@ -125,7 +125,7 @@ public class KanaSelectionItem extends LinearLayout
     public String getContents()
     {
         String contents = baseContents;
-        if (diacritics != null && OptionsControl.getBoolean(R.string.prefid_diacritics))
+        if (diacritics != null && (isInEditMode() || OptionsControl.getBoolean(R.string.prefid_diacritics)))
             contents += " " + diacritics;
         return contents;
     }
