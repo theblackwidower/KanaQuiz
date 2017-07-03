@@ -24,13 +24,14 @@ class NumberPreference extends DialogPreference
     }
 
     @Override
-    protected void showDialog(Bundle state) {
+    protected void showDialog(Bundle state)
+    {
         super.showDialog(state);
 
         numberPicker = (NumberPicker) getDialog().findViewById(R.id.numberPicker);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(214); //TODO: implement as property of class
-                                        //Currently set to the number of possible questions
+        //Currently set to the number of possible questions
         numberPicker.setWrapSelectorWheel(false);
         numberPicker.setValue(repetitionLimit);
     }

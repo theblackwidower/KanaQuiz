@@ -53,9 +53,9 @@ class Hiragana extends QuestionManagement
             new KanaQuestion("しょ", "sho")};
 
     private static final KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("じゃ", new String[] {"ja", "jya"}),
-            new KanaQuestion("じゅ", new String[] {"ju", "jyu"}),
-            new KanaQuestion("じょ", new String[] {"jo", "jyo"})};
+            new KanaQuestion("じゃ", new String[]{"ja", "jya"}),
+            new KanaQuestion("じゅ", new String[]{"ju", "jyu"}),
+            new KanaQuestion("じょ", new String[]{"jo", "jyo"})};
 
     private static final KanaQuestion[] KANA_SET_4_BASE = {
             new KanaQuestion('た', "ta"),
@@ -77,9 +77,9 @@ class Hiragana extends QuestionManagement
             new KanaQuestion("ちょ", "cho")};
 
     private static final KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("ぢゃ", new String[] {"ja", "dzya"}),
-            new KanaQuestion("ぢゅ", new String[] {"ju", "dzyu"}),
-            new KanaQuestion("ぢょ", new String[] {"jo", "dzyo"})};
+            new KanaQuestion("ぢゃ", new String[]{"ja", "dzya"}),
+            new KanaQuestion("ぢゅ", new String[]{"ju", "dzyu"}),
+            new KanaQuestion("ぢょ", new String[]{"jo", "dzyo"})};
 
     private static final KanaQuestion[] KANA_SET_5 = {
             new KanaQuestion('な', "na"),
@@ -96,7 +96,7 @@ class Hiragana extends QuestionManagement
     private static final KanaQuestion[] KANA_SET_6_BASE = {
             new KanaQuestion('は', "ha"),
             new KanaQuestion('ひ', "hi"),
-            new KanaQuestion('ふ', new String[] {"fu", "hu"}),
+            new KanaQuestion('ふ', new String[]{"fu", "hu"}),
             new KanaQuestion('へ', "he"),
             new KanaQuestion('ほ', "ho")};
 

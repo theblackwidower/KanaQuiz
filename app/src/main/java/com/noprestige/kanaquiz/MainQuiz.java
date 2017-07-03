@@ -1,10 +1,10 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,19 +50,19 @@ public class MainQuiz extends AppCompatActivity
         OptionsControl.initialize(this);
 
         txtAnswer.setOnEditorActionListener(
-            new TextView.OnEditorActionListener()
-            {
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+                new TextView.OnEditorActionListener()
                 {
-                    if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) && btnSubmit.isEnabled())
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
                     {
-                        submitAnswer();
-                        return true;
+                        if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) && btnSubmit.isEnabled())
+                        {
+                            submitAnswer();
+                            return true;
+                        }
+                        else
+                            return false;
                     }
-                    else
-                        return false;
                 }
-            }
         );
 
         resetQuiz();
@@ -111,7 +111,7 @@ public class MainQuiz extends AppCompatActivity
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(PERCENT_FORMATTER.format((float)totalCorrect / (float)totalQuestions));
+            lblScore.append(PERCENT_FORMATTER.format((float) totalCorrect / (float) totalQuestions));
 
             lblScore.append(System.getProperty("line.separator"));
             lblScore.append(Integer.toString(totalCorrect));
@@ -155,13 +155,13 @@ public class MainQuiz extends AppCompatActivity
                 isNewQuestion = false;
 
                 delayHandler.postDelayed(
-                    new Runnable()
-                    {
-                        public void run()
+                        new Runnable()
                         {
-                            ReadyForAnswer();
-                        }
-                    }, 1000
+                            public void run()
+                            {
+                                ReadyForAnswer();
+                            }
+                        }, 1000
                 );
             }
         }
@@ -171,13 +171,13 @@ public class MainQuiz extends AppCompatActivity
             totalQuestions++;
             //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
             delayHandler.postDelayed(
-                new Runnable()
-                {
-                    public void run()
+                    new Runnable()
                     {
-                        nextQuestion();
-                    }
-                }, 1000
+                        public void run()
+                        {
+                            nextQuestion();
+                        }
+                    }, 1000
             );
         }
     }
@@ -195,6 +195,7 @@ public class MainQuiz extends AppCompatActivity
     {
         submitAnswer();
     }
+
     private void submitAnswer()
     {
         if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
@@ -207,6 +208,7 @@ public class MainQuiz extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

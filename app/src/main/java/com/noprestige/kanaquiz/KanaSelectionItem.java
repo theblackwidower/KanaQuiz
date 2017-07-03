@@ -24,22 +24,26 @@ public class KanaSelectionItem extends LinearLayout
     private TextView lblContents;
     private CheckBox chkCheckBox;
 
-    public KanaSelectionItem(Context context) {
+    public KanaSelectionItem(Context context)
+    {
         super(context);
         init(null, 0);
     }
 
-    public KanaSelectionItem(Context context, AttributeSet attrs) {
+    public KanaSelectionItem(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public KanaSelectionItem(Context context, AttributeSet attrs, int defStyle) {
+    public KanaSelectionItem(Context context, AttributeSet attrs, int defStyle)
+    {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init(AttributeSet attrs, int defStyle)
+    {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
@@ -79,13 +83,13 @@ public class KanaSelectionItem extends LinearLayout
         chkCheckBox.setGravity(Gravity.CENTER_VERTICAL);
 
         this.setOnClickListener(
-            new OnClickListener()
-            {
-                public void onClick(View view)
+                new OnClickListener()
                 {
-                    chkCheckBox.toggle();
+                    public void onClick(View view)
+                    {
+                        chkCheckBox.toggle();
+                    }
                 }
-            }
         );
 
         textContainer.addView(lblTitle);
@@ -109,19 +113,21 @@ public class KanaSelectionItem extends LinearLayout
             chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
 
         chkCheckBox.setOnCheckedChangeListener(
-            new android.widget.CompoundButton.OnCheckedChangeListener()
-            {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                new android.widget.CompoundButton.OnCheckedChangeListener()
                 {
-                    OptionsControl.setBoolean(getPrefId(), isChecked);
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+                    {
+                        OptionsControl.setBoolean(getPrefId(), isChecked);
+                    }
                 }
-            }
         );
     }
 
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
+
     public String getContents()
     {
         String contents = baseContents;
@@ -129,7 +135,9 @@ public class KanaSelectionItem extends LinearLayout
             contents += " " + diacritics;
         return contents;
     }
-    public String getPrefId() {
+
+    public String getPrefId()
+    {
         return prefId;
     }
 
@@ -137,33 +145,40 @@ public class KanaSelectionItem extends LinearLayout
     {
         setTitle(getResources().getString(resId));
     }
+
     public void setTitle(String title)
     {
         this.title = title;
         updateObject();
     }
+
     public void setBaseContents(int resId)
     {
         setBaseContents(getResources().getString(resId));
     }
+
     public void setBaseContents(String baseContents)
     {
         this.baseContents = baseContents;
         updateObject();
     }
+
     public void setDiacritics(int resId)
     {
         setDiacritics(getResources().getString(resId));
     }
+
     public void setDiacritics(String diacritics)
     {
         this.diacritics = diacritics;
         updateObject();
     }
+
     public void setPrefId(int resId)
     {
         setPrefId(getResources().getString(resId));
     }
+
     public void setPrefId(String prefId)
     {
         this.prefId = prefId;

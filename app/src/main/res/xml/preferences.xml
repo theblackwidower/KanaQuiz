@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <ListPreference
         android:key="@string/prefid_on_incorrect"
         android:title="@string/incorrect_option_title"
         android:entries="@array/incorrect_option_item_names"
         android:entryValues="@array/prefids_on_incorrect"
-        android:defaultValue="@string/prefid_on_incorrect_default" />
+        android:defaultValue="@string/prefid_on_incorrect_default"/>
     <com.noprestige.kanaquiz.NumberPreference
         android:key="@string/prefid_repetition"
         android:title="@string/repetition_option_title"
         android:summary="@string/repetition_option_summary"
-        android:defaultValue="3" />
+        android:defaultValue="3"/>
     <CheckBoxPreference
         android:key="@string/prefid_digraphs"
         android:title="@string/digraphs_option_title"
         android:summary="@string/digraphs_option_summary"
-        android:defaultValue="false" />
+        android:defaultValue="false"/>
     <CheckBoxPreference
         android:key="@string/prefid_diacritics"
         android:title="@string/diacritics_option_title"
         android:summary="@string/diacritics_option_summary"
-        android:defaultValue="true" />
+        android:defaultValue="true"/>
 </PreferenceScreen>

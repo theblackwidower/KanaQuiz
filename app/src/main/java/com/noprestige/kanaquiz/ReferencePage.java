@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ public class ReferencePage extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         LinearLayout table = null;
-        switch(getArguments().getInt(ARG_PAGE_NUMBER, -1))
+        switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
                 if (Hiragana.QUESTIONS.anySelected())

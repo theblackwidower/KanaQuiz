@@ -17,14 +17,14 @@ public class OptionsFragment extends PreferenceFragment
         setSummary(onIncorrect, OptionsControl.getString(R.string.prefid_on_incorrect));
 
         onIncorrect.setOnPreferenceChangeListener(
-            new Preference.OnPreferenceChangeListener()
-            {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue)
+                new Preference.OnPreferenceChangeListener()
                 {
-                    return setSummary(preference, newValue);
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue)
+                    {
+                        return setSummary(preference, newValue);
+                    }
                 }
-            }
         );
     }
 

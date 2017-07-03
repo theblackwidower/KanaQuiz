@@ -159,6 +159,7 @@ public class ReferenceCell extends View
         this.kana = kana;
         updateObject();
     }
+
     void setKanaSize(float kanaSize)
     {
         this.kanaSize = kanaSize;

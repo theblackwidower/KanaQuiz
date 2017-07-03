@@ -23,11 +23,12 @@ abstract class OptionsControl
     {
         return getBoolean(resources.getString(resId));
     }
+
     static boolean getBoolean(String prefId)
     {
         //Boolean preferences to default to true, all others default to false
         if (prefId.equals(resources.getString(R.string.prefid_hiragana_1)) ||
-            prefId.equals(resources.getString(R.string.prefid_diacritics)))
+                prefId.equals(resources.getString(R.string.prefid_diacritics)))
             return sharedPreferences.getBoolean(prefId, true);
         else
             return sharedPreferences.getBoolean(prefId, false);
@@ -37,6 +38,7 @@ abstract class OptionsControl
     {
         setBoolean(resources.getString(resId), setting);
     }
+
     static void setBoolean(String prefId, boolean setting)
     {
         editor.putBoolean(prefId, setting);
@@ -47,6 +49,7 @@ abstract class OptionsControl
     {
         return getInt(resources.getString(resId));
     }
+
     static int getInt(String prefId)
     {
         return sharedPreferences.getInt(prefId, 0);
@@ -56,6 +59,7 @@ abstract class OptionsControl
     {
         setInt(resources.getString(resId), setting);
     }
+
     static void setInt(String prefId, int setting)
     {
         editor.putInt(prefId, setting);
@@ -66,6 +70,7 @@ abstract class OptionsControl
     {
         return getString(resources.getString(resId));
     }
+
     static String getString(String prefId)
     {
         return sharedPreferences.getString(prefId, "");
@@ -75,6 +80,7 @@ abstract class OptionsControl
     {
         setString(resources.getString(resId), setting);
     }
+
     static void setString(String prefId, String setting)
     {
         editor.putString(prefId, setting);
@@ -85,6 +91,7 @@ abstract class OptionsControl
     {
         return compareStrings(resources.getString(prefId), resources.getString(comparator));
     }
+
     static boolean compareStrings(String prefId, String comparator)
     {
         return sharedPreferences.getString(prefId, "").equals(comparator);

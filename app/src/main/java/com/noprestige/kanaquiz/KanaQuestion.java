@@ -13,16 +13,19 @@ class KanaQuestion
         setKana(kana);
         setRomanji(romanji);
     }
+
     KanaQuestion(String kana, String romanji)
     {
         setKana(kana);
         setRomanji(romanji);
     }
+
     KanaQuestion(char kana, String[] romanji)
     {
         setKana(kana);
         setRomanji(romanji);
     }
+
     KanaQuestion(String kana, String[] romanji)
     {
         setKana(kana);
@@ -31,8 +34,9 @@ class KanaQuestion
 
     private void setRomanji(String romanji)
     {
-        this.romanji = new String[] {romanji};
+        this.romanji = new String[]{romanji};
     }
+
     private void setRomanji(String[] romanji)
     {
         this.romanji = romanji;
@@ -42,6 +46,7 @@ class KanaQuestion
     {
         setKana(Character.toString(kana));
     }
+
     private void setKana(String kana)
     {
         this.kana = kana.trim();

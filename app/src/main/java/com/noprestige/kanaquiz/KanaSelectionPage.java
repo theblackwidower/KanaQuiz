@@ -24,7 +24,7 @@ public class KanaSelectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        switch(getArguments().getInt(ARG_PAGE_NUMBER, -1))
+        switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
                 return inflater.inflate(R.layout.fragment_kana_selection_hiragana, container, false);

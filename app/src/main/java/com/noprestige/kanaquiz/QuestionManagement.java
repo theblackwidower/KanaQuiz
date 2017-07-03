@@ -7,9 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
-import static com.noprestige.kanaquiz.Diacritic.NO_DIACRITIC;
 import static com.noprestige.kanaquiz.Diacritic.DAKUTEN;
 import static com.noprestige.kanaquiz.Diacritic.HANDAKUTEN;
+import static com.noprestige.kanaquiz.Diacritic.NO_DIACRITIC;
 
 abstract class QuestionManagement
 {
@@ -108,13 +108,15 @@ abstract class QuestionManagement
     {
         return getKanaSet(number, NO_DIACRITIC);
     }
+
     private KanaQuestion[] getKanaSet(int number, Diacritic diacritic)
     {
         return getKanaSet(number, diacritic, false);
     }
+
     private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
     {
-        KanaQuestion[] value = kanaSets[number - 1][diacritic.ordinal()][isDigraphs?1:0];
+        KanaQuestion[] value = kanaSets[number - 1][diacritic.ordinal()][isDigraphs ? 1 : 0];
 
         if (value.length > 0)
             return value;
@@ -126,6 +128,7 @@ abstract class QuestionManagement
     {
         return prefIds[number - 1];
     }
+
     private boolean getPref(int number)
     {
         return OptionsControl.getBoolean(getPrefId(number));

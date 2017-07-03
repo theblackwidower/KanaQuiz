@@ -1,9 +1,9 @@
 <resources>
     <declare-styleable name="ReferenceCell">
-        <attr name="kana" format="string" />
-        <attr name="romanji" format="string" />
-        <attr name="kanaSize" format="dimension" />
-        <attr name="romanjiSize" format="dimension" />
-        <attr name="colour" format="color" />
+        <attr name="kana" format="string"/>
+        <attr name="romanji" format="string"/>
+        <attr name="kanaSize" format="dimension"/>
+        <attr name="romanjiSize" format="dimension"/>
+        <attr name="colour" format="color"/>
     </declare-styleable>
 </resources>

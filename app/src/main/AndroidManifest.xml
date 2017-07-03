@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.noprestige.kanaquiz">
 
     <application
@@ -12,27 +13,27 @@
             android:name=".MainQuiz"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".OptionsScreen"
             android:label="@string/options_title"
-            android:parentActivityName=".MainQuiz" />
+            android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".KanaSelection"
             android:label="@string/selection_title"
-            android:parentActivityName=".MainQuiz" />
+            android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".AboutScreen"
             android:label="@string/about_title"
-            android:parentActivityName=".MainQuiz" />
+            android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".ReferenceScreen"
             android:label="@string/reference_title"
-            android:parentActivityName=".MainQuiz" />
+            android:parentActivityName=".MainQuiz"/>
     </application>
 
 </manifest>
