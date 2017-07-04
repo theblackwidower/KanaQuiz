@@ -61,6 +61,7 @@
     <string name="prefid_diacritics">allow_diacritics</string>
 
     <!-- Other -->
+    <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
 
