@@ -60,6 +60,10 @@
     <string name="diacritics_option_summary">Kana with diacritics will appear in the quiz</string>
     <string name="prefid_diacritics">allow_diacritics</string>
 
+    <string name="full_reference_option_title">Display full reference</string>
+    <string name="full_reference_option_summary">Reference screen will display all kana</string>
+    <string name="prefid_full_reference">full_reference</string>
+
     <!-- Other -->
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>

@@ -43,14 +43,14 @@ public class ReferenceSubsectionPage extends Fragment
             case 1:
                 if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
                 {
-                    if (Hiragana.QUESTIONS.diacriticsSelected())
+                    if (Hiragana.QUESTIONS.diacriticsSelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
                         table = Hiragana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
                     else
                         table = Hiragana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
                 }
                 else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
                 {
-                    if (Katakana.QUESTIONS.diacriticsSelected())
+                    if (Katakana.QUESTIONS.diacriticsSelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
                         table = Katakana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
                     else
                         table = Katakana.QUESTIONS.getDigraphsReferenceTable(container.getContext());

@@ -31,7 +31,7 @@ public class ReferencePage extends Fragment
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                if (Hiragana.QUESTIONS.anySelected())
+                if (Hiragana.QUESTIONS.anySelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
                 {
                     kanaType = getResources().getString(R.string.hiragana);
                     break;

@@ -27,7 +27,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     public int getCount()
     {
         int count = 0;
-        if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+            count = 3;
+        else if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
         {
             if (Hiragana.QUESTIONS.anySelected())
                 count++;
@@ -57,7 +59,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 return context.getResources().getString(R.string.base_form_title);
             case 1:
                 if ((kanaType.equals(context.getResources().getString(R.string.hiragana)) && Hiragana.QUESTIONS.diacriticsSelected()) ||
-                        (kanaType.equals(context.getResources().getString(R.string.katakana)) && Katakana.QUESTIONS.diacriticsSelected()))
+                        (kanaType.equals(context.getResources().getString(R.string.katakana)) && Katakana.QUESTIONS.diacriticsSelected()) ||
+                        OptionsControl.getBoolean(R.string.prefid_full_reference))
                     return context.getResources().getString(R.string.diacritics_title);
                 // else continue on
             case 2:

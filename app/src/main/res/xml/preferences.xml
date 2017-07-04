@@ -22,4 +22,9 @@
         android:title="@string/diacritics_option_title"
         android:summary="@string/diacritics_option_summary"
         android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="@string/prefid_full_reference"
+        android:title="@string/full_reference_option_title"
+        android:summary="@string/full_reference_option_summary"
+        android:defaultValue="false"/>
 </PreferenceScreen>

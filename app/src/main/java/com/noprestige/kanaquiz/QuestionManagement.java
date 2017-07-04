@@ -213,13 +213,15 @@ abstract class QuestionManagement
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
 
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
         layout.addView(getMainReferenceTable(context));
-        if (diacriticsSelected())
+        if (isFullReference || diacriticsSelected())
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
             layout.addView(getDiacriticReferenceTable(context));
         }
-        if (digraphsSelected())
+        if (isFullReference || digraphsSelected())
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
             layout.addView(getDigraphsReferenceTable(context));
@@ -233,14 +235,16 @@ abstract class QuestionManagement
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
         for (int i = 1; i <= 8; i++)
         {
-            if (getPref(i))
+            if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
         }
-        if (getPref(9))
+        if (isFullReference || getPref(9))
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
-        if (getPref(10))
+        if (isFullReference || getPref(10))
         {
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10)));
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10, CONSONANT)));
@@ -254,12 +258,14 @@ abstract class QuestionManagement
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
         for (int i = 2; i <= 4; i++)
         {
-            if (getPref(i))
+            if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
         }
-        if (getPref(6))
+        if (isFullReference || getPref(6))
         {
             table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
             table.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN)));
@@ -273,19 +279,21 @@ abstract class QuestionManagement
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
         for (int i = 2; i <= 8; i++)
         {
-            if (getPref(i))
+            if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
         }
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
         {
             for (int i = 2; i <= 4; i++)
             {
-                if (getPref(i))
+                if (isFullReference || getPref(i))
                     table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
             }
-            if (getPref(6))
+            if (isFullReference || getPref(6))
             {
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
