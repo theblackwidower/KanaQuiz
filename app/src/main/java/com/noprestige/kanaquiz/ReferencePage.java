@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
 public class ReferencePage extends Fragment
@@ -45,25 +44,20 @@ public class ReferencePage extends Fragment
                 kanaType = "";
         }
 
-        LinearLayout subScreen = new LinearLayout(getContext());
-        subScreen.setOrientation(LinearLayout.VERTICAL);
-        subScreen.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        LinearLayout subScreen = (LinearLayout) inflater.inflate(R.layout.activity_tabbed_screen, container, false);
+        subScreen.setPadding(0, 0, 0, 0);
 
-        TabLayout tabLayout = new TabLayout(getContext());
-        tabLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        ViewPager viewPager = new ViewPager(getContext());
-        viewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        ViewPager viewPager = (ViewPager) subScreen.findViewById(R.id.viewPager);
 
         if (kanaType.equals(getResources().getString(R.string.hiragana)))
             viewPager.setId(R.id.hiraganaReferenceViewPager);
         else if (kanaType.equals(getResources().getString(R.string.katakana)))
             viewPager.setId(R.id.katakanaReferenceViewPager);
 
-        subScreen.addView(tabLayout);
-        subScreen.addView(viewPager);
-
         viewPager.setAdapter(new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType));
+        TabLayout tabLayout = (TabLayout) subScreen.findViewById(R.id.tabLayout);
+        tabLayout.setPadding(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0,
+                getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0);
         tabLayout.setupWithViewPager(viewPager);
 
         return subScreen;
