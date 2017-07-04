@@ -13,8 +13,7 @@ import android.widget.TableLayout;
 public class ReferenceSubsectionPage extends Fragment
 {
     private static final String ARG_PAGE_NUMBER = "position";
-
-    String kanaType;
+    private static final String ARG_KANA_TYPE = "kanaType";
 
     public ReferenceSubsectionPage() {}
 
@@ -23,7 +22,7 @@ public class ReferenceSubsectionPage extends Fragment
         ReferenceSubsectionPage screen = new ReferenceSubsectionPage();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE_NUMBER, id);
-        screen.kanaType = kanaType;
+        args.putString(ARG_KANA_TYPE, kanaType);
         screen.setArguments(args);
         return screen;
     }
@@ -32,6 +31,7 @@ public class ReferenceSubsectionPage extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         TableLayout table = null;
+        String kanaType = getArguments().getString(ARG_KANA_TYPE, "");
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
