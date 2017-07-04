@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
 public class ReferencePage extends Fragment
@@ -45,13 +46,13 @@ public class ReferencePage extends Fragment
 
         LinearLayout subScreen = new LinearLayout(getContext());
         subScreen.setOrientation(LinearLayout.VERTICAL);
-        subScreen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        subScreen.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         TabLayout tabLayout = new TabLayout(getContext());
-        tabLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        tabLayout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
         ViewPager viewPager = new ViewPager(getContext());
-        viewPager.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        viewPager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         if (kanaType.equals(getResources().getString(R.string.hiragana)))
             viewPager.setId(R.id.hiraganaReferenceViewPager);
@@ -61,8 +62,7 @@ public class ReferencePage extends Fragment
         subScreen.addView(tabLayout);
         subScreen.addView(viewPager);
 
-        ReferenceSubsectionPager adapter = new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType);
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType));
         tabLayout.setupWithViewPager(viewPager);
 
         return subScreen;

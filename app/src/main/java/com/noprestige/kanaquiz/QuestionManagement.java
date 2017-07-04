@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz;
 
 import android.content.Context;
 import android.view.Gravity;
-import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
@@ -231,7 +231,7 @@ abstract class QuestionManagement
     TableLayout getMainReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
         for (int i = 1; i <= 8; i++)
         {
@@ -252,7 +252,7 @@ abstract class QuestionManagement
     TableLayout getDiacriticReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
         for (int i = 2; i <= 4; i++)
         {
@@ -271,7 +271,7 @@ abstract class QuestionManagement
     TableLayout getDigraphsReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 
         for (int i = 2; i <= 8; i++)
         {
