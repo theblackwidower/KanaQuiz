@@ -55,12 +55,8 @@ public class MainQuiz extends AppCompatActivity
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
                     {
                         if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) && btnSubmit.isEnabled())
-                        {
                             submitAnswer();
-                            return true;
-                        }
-                        else
-                            return false;
+                        return true;
                     }
                 }
         );
@@ -122,12 +118,12 @@ public class MainQuiz extends AppCompatActivity
             lblScore.setText("");
     }
 
-    private void checkAnswer()
+    private void checkAnswer(String answer)
     {
         boolean isNewQuestion = true;
         btnSubmit.setEnabled(false);
 
-        if (questionBank.checkCurrentAnswer(txtAnswer.getText().toString()))
+        if (questionBank.checkCurrentAnswer(answer))
         {
             lblResponse.setText(R.string.correct_answer);
             lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
@@ -198,8 +194,9 @@ public class MainQuiz extends AppCompatActivity
 
     private void submitAnswer()
     {
-        if (!txtAnswer.getText().toString().trim().isEmpty()) //ignore if blank
-            checkAnswer();
+        String answer = txtAnswer.getText().toString().trim();
+        if (!answer.isEmpty()) //ignore if blank
+            checkAnswer(answer);
     }
 
     @Override
