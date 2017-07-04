@@ -26,12 +26,12 @@ class ReferencePager extends FragmentPagerAdapter
     {
         boolean isHiragana = Hiragana.QUESTIONS.anySelected();
         boolean isKatakana = Katakana.QUESTIONS.anySelected();
-        if (!(isHiragana || isKatakana))
-            return 0;
+        if (isHiragana && isKatakana)
+            return 2;
         else if (isHiragana ^ isKatakana)
             return 1;
         else
-            return 2;
+            return 0;
     }
 
     @Override
@@ -40,10 +40,9 @@ class ReferencePager extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                if (!Hiragana.QUESTIONS.anySelected())
-                    return context.getResources().getString(R.string.katakana);
-                else
+                if (Hiragana.QUESTIONS.anySelected())
                     return context.getResources().getString(R.string.hiragana);
+                // else continue on
             case 1:
                 return context.getResources().getString(R.string.katakana);
             default:

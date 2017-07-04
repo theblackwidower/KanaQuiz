@@ -59,8 +59,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 if ((kanaType.equals(context.getResources().getString(R.string.hiragana)) && Hiragana.QUESTIONS.diacriticsSelected()) ||
                         (kanaType.equals(context.getResources().getString(R.string.katakana)) && Katakana.QUESTIONS.diacriticsSelected()))
                     return context.getResources().getString(R.string.diacritics_title);
-                else
-                    return context.getResources().getString(R.string.digraphs_title);
+                // else continue on
             case 2:
                 return context.getResources().getString(R.string.digraphs_title);
             default:

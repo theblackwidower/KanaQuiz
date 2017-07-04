@@ -33,10 +33,11 @@ public class ReferencePage extends Fragment
         {
             case 0:
                 if (Hiragana.QUESTIONS.anySelected())
+                {
                     kanaType = getResources().getString(R.string.hiragana);
-                else
-                    kanaType = getResources().getString(R.string.katakana);
-                break;
+                    break;
+                }
+                // else continue on
             case 1:
                 kanaType = getResources().getString(R.string.katakana);
                 break;
