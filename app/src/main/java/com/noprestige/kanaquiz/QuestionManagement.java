@@ -237,13 +237,15 @@ abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 1; i <= 8; i++)
+        for (int i = 1; i <= 7; i++)
         {
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
         }
         if (isFullReference || getPref(9))
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
+        if (isFullReference || getPref(8)) //fits gojūon ordering
+            table.addView(ReferenceCell.buildRow(context, getKanaSet(8)));
         if (isFullReference || getPref(10))
         {
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(10)));
