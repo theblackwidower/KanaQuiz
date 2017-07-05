@@ -41,14 +41,6 @@
         android:text=""
         android:textAlignment="center"/>
 
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="submitAnswer"
-        android:text="@string/button_send"/>
-
     <TextView
         android:id="@+id/lblScore"
         android:layout_width="match_parent"

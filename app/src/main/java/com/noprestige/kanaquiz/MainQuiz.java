@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,13 +18,13 @@ public class MainQuiz extends AppCompatActivity
 {
     private int totalQuestions;
     private int totalCorrect;
+    private boolean canSubmit;
 
     private KanaQuestionBank questionBank;
 
     private TextView lblResponse;
     private EditText txtAnswer;
     private TextView lblDisplayKana;
-    private Button btnSubmit;
 
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
@@ -43,7 +41,6 @@ public class MainQuiz extends AppCompatActivity
         lblResponse = (TextView) findViewById(R.id.lblResponse);
         txtAnswer = (EditText) findViewById(R.id.txtAnswer);
         lblDisplayKana = (TextView) findViewById(R.id.lblDisplayKana);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
         oldTextColour = lblResponse.getCurrentTextColor(); //kludge for reverting text colour
 
@@ -54,8 +51,10 @@ public class MainQuiz extends AppCompatActivity
                 {
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
                     {
-                        if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) && btnSubmit.isEnabled())
-                            submitAnswer();
+                        String answer = v.getText().toString().trim();
+                        if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) &&
+                                canSubmit && !answer.isEmpty())
+                            checkAnswer(answer);
                         return true;
                     }
                 }
@@ -95,7 +94,7 @@ public class MainQuiz extends AppCompatActivity
             lblDisplayKana.setText("");
             lblResponse.setText(R.string.no_questions);
             txtAnswer.setEnabled(false);
-            btnSubmit.setEnabled(false);
+            canSubmit = false;
             lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
             txtAnswer.setText("");
         }
@@ -121,7 +120,7 @@ public class MainQuiz extends AppCompatActivity
     private void checkAnswer(String answer)
     {
         boolean isNewQuestion = true;
-        btnSubmit.setEnabled(false);
+        canSubmit = false;
 
         if (questionBank.checkCurrentAnswer(answer))
         {
@@ -181,22 +180,10 @@ public class MainQuiz extends AppCompatActivity
     private void ReadyForAnswer()
     {
         lblResponse.setText(R.string.request_answer);
-        btnSubmit.setEnabled(true);
+        canSubmit = true;
         txtAnswer.requestFocus();
         lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
         txtAnswer.setText("");
-    }
-
-    public void submitAnswer(View view)
-    {
-        submitAnswer();
-    }
-
-    private void submitAnswer()
-    {
-        String answer = txtAnswer.getText().toString().trim();
-        if (!answer.isEmpty()) //ignore if blank
-            checkAnswer(answer);
     }
 
     @Override
