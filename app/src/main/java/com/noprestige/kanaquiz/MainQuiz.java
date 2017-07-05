@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
+import static android.content.res.Configuration.KEYBOARD_NOKEYS;
+
 public class MainQuiz extends AppCompatActivity
 {
     private int totalQuestions;
@@ -43,6 +45,11 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana = (TextView) findViewById(R.id.lblDisplayKana);
 
         oldTextColour = lblResponse.getCurrentTextColor(); //kludge for reverting text colour
+
+        if (getResources().getConfiguration().keyboard == KEYBOARD_NOKEYS)
+            txtAnswer.setHint(R.string.answer_hint_touch);
+        else
+            txtAnswer.setHint(R.string.answer_hint_hardware);
 
         OptionsControl.initialize(this);
 
