@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -13,8 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-
-import static android.content.res.Configuration.KEYBOARD_NOKEYS;
 
 public class MainQuiz extends AppCompatActivity
 {
@@ -46,10 +45,7 @@ public class MainQuiz extends AppCompatActivity
 
         oldTextColour = lblResponse.getCurrentTextColor(); //kludge for reverting text colour
 
-        if (getResources().getConfiguration().keyboard == KEYBOARD_NOKEYS)
-            txtAnswer.setHint(R.string.answer_hint_touch);
-        else
-            txtAnswer.setHint(R.string.answer_hint_hardware);
+        onConfigurationChanged(getResources().getConfiguration());
 
         OptionsControl.initialize(this);
 
@@ -69,6 +65,17 @@ public class MainQuiz extends AppCompatActivity
 
         resetQuiz();
         nextQuestion();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.keyboard == Configuration.KEYBOARD_NOKEYS &&
+                newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)
+            txtAnswer.setHint(R.string.answer_hint_touch);
+        else
+            txtAnswer.setHint(R.string.answer_hint_hardware);
     }
 
     private void resetQuiz()
