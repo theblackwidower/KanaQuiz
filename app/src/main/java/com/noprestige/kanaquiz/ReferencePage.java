@@ -11,15 +11,15 @@ import android.widget.LinearLayout;
 
 public class ReferencePage extends Fragment
 {
-    private static final String ARG_PAGE_NUMBER = "position";
+    private static final String ARG_KANA_TYPE = "kanaType";
 
     public ReferencePage() {}
 
-    public static ReferencePage newInstance(int id)
+    public static ReferencePage newInstance(String kanaType)
     {
         ReferencePage screen = new ReferencePage();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE_NUMBER, id);
+        args.putString(ARG_KANA_TYPE, kanaType);
         screen.setArguments(args);
         return screen;
     }
@@ -27,22 +27,7 @@ public class ReferencePage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        String kanaType;
-        switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
-        {
-            case 0:
-                if (Hiragana.QUESTIONS.anySelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
-                {
-                    kanaType = getResources().getString(R.string.hiragana);
-                    break;
-                }
-                // else continue on
-            case 1:
-                kanaType = getResources().getString(R.string.katakana);
-                break;
-            default:
-                kanaType = "";
-        }
+        String kanaType = getArguments().getString(ARG_KANA_TYPE, "");
 
         LinearLayout subScreen = (LinearLayout) inflater.inflate(R.layout.activity_tabbed_screen, container, false);
         subScreen.setPadding(0, 0, 0, 0);

@@ -48,7 +48,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return ReferenceSubsectionPage.newInstance(position, kanaType);
+        return ReferenceSubsectionPage.newInstance(kanaType, tabList.get(position));
     }
 
     @Override

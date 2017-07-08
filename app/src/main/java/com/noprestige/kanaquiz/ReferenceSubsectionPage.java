@@ -12,17 +12,17 @@ import android.widget.TableLayout;
 
 public class ReferenceSubsectionPage extends Fragment
 {
-    private static final String ARG_PAGE_NUMBER = "position";
     private static final String ARG_KANA_TYPE = "kanaType";
+    private static final String ARG_REF_CATEGORY = "refCategory";
 
     public ReferenceSubsectionPage() {}
 
-    public static ReferenceSubsectionPage newInstance(int id, String kanaType)
+    public static ReferenceSubsectionPage newInstance(String kanaType, String refCategory)
     {
         ReferenceSubsectionPage screen = new ReferenceSubsectionPage();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE_NUMBER, id);
         args.putString(ARG_KANA_TYPE, kanaType);
+        args.putString(ARG_REF_CATEGORY, refCategory);
         screen.setArguments(args);
         return screen;
     }
@@ -32,36 +32,25 @@ public class ReferenceSubsectionPage extends Fragment
     {
         TableLayout table = null;
         String kanaType = getArguments().getString(ARG_KANA_TYPE, "");
-        switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
+        String refCategory = getArguments().getString(ARG_REF_CATEGORY, "");
+
+        if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
         {
-            case 0:
-                if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-                    table = Hiragana.QUESTIONS.getMainReferenceTable(container.getContext());
-                else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-                    table = Katakana.QUESTIONS.getMainReferenceTable(container.getContext());
-                break;
-            case 1:
-                if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-                {
-                    if (Hiragana.QUESTIONS.diacriticsSelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
-                        table = Hiragana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
-                    else
-                        table = Hiragana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
-                }
-                else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-                {
-                    if (Katakana.QUESTIONS.diacriticsSelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
-                        table = Katakana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
-                    else
-                        table = Katakana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
-                }
-                break;
-            case 2:
-                if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-                    table = Hiragana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
-                else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-                    table = Katakana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
-                break;
+            if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
+                table = Hiragana.QUESTIONS.getMainReferenceTable(container.getContext());
+            else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
+                table = Hiragana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
+            else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
+                table = Hiragana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
+        }
+        else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
+        {
+            if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
+                table = Katakana.QUESTIONS.getMainReferenceTable(container.getContext());
+            else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
+                table = Katakana.QUESTIONS.getDiacriticReferenceTable(container.getContext());
+            else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
+                table = Katakana.QUESTIONS.getDigraphsReferenceTable(container.getContext());
         }
 
         LinearLayout layout = new LinearLayout(getContext());

@@ -34,7 +34,7 @@ class ReferencePager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return ReferencePage.newInstance(position);
+        return ReferencePage.newInstance(tabList.get(position));
     }
 
     @Override
