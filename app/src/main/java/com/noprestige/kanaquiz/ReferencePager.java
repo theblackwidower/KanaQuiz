@@ -5,14 +5,30 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 class ReferencePager extends FragmentPagerAdapter
 {
-    private Context context;
+    private ArrayList<String> tabList;
 
     ReferencePager(FragmentManager fm, Context context)
     {
         super(fm);
-        this.context = context;
+
+        tabList = new ArrayList<>(2);
+
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+        {
+            tabList.add(context.getResources().getString(R.string.hiragana));
+            tabList.add(context.getResources().getString(R.string.katakana));
+        }
+        else
+        {
+            if (Hiragana.QUESTIONS.anySelected())
+                tabList.add(context.getResources().getString(R.string.hiragana));
+            if (Katakana.QUESTIONS.anySelected())
+                tabList.add(context.getResources().getString(R.string.katakana));
+        }
     }
 
     @Override
@@ -24,29 +40,12 @@ class ReferencePager extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        boolean isHiragana = Hiragana.QUESTIONS.anySelected();
-        boolean isKatakana = Katakana.QUESTIONS.anySelected();
-        if (isHiragana && isKatakana || OptionsControl.getBoolean(R.string.prefid_full_reference))
-            return 2;
-        else if (isHiragana ^ isKatakana)
-            return 1;
-        else
-            return 0;
+        return tabList.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        switch (position)
-        {
-            case 0:
-                if (Hiragana.QUESTIONS.anySelected() || OptionsControl.getBoolean(R.string.prefid_full_reference))
-                    return context.getResources().getString(R.string.hiragana);
-                // else continue on
-            case 1:
-                return context.getResources().getString(R.string.katakana);
-            default:
-                return "";
-        }
+        return tabList.get(position);
     }
 }

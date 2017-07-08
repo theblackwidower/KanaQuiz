@@ -5,16 +5,44 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
-    private Context context;
     private String kanaType;
+    private ArrayList<String> tabList;
 
     ReferenceSubsectionPager(FragmentManager fm, Context context, String kanaType)
     {
         super(fm);
         this.kanaType = kanaType;
-        this.context = context;
+
+        tabList = new ArrayList<>(3);
+
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+        {
+            tabList.add(context.getResources().getString(R.string.base_form_title));
+            tabList.add(context.getResources().getString(R.string.diacritics_title));
+            tabList.add(context.getResources().getString(R.string.digraphs_title));
+        }
+        else if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
+        {
+            if (Hiragana.QUESTIONS.anySelected())
+                tabList.add(context.getResources().getString(R.string.base_form_title));
+            if (Hiragana.QUESTIONS.diacriticsSelected())
+                tabList.add(context.getResources().getString(R.string.diacritics_title));
+            if (Hiragana.QUESTIONS.digraphsSelected())
+                tabList.add(context.getResources().getString(R.string.digraphs_title));
+        }
+        else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
+        {
+            if (Katakana.QUESTIONS.anySelected())
+                tabList.add(context.getResources().getString(R.string.base_form_title));
+            if (Katakana.QUESTIONS.diacriticsSelected())
+                tabList.add(context.getResources().getString(R.string.diacritics_title));
+            if (Katakana.QUESTIONS.digraphsSelected())
+                tabList.add(context.getResources().getString(R.string.digraphs_title));
+        }
     }
 
     @Override
@@ -26,47 +54,12 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        int count = 0;
-        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
-            count = 3;
-        else if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
-        {
-            if (Hiragana.QUESTIONS.anySelected())
-                count++;
-            if (Hiragana.QUESTIONS.diacriticsSelected())
-                count++;
-            if (Hiragana.QUESTIONS.digraphsSelected())
-                count++;
-        }
-        else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
-        {
-            if (Katakana.QUESTIONS.anySelected())
-                count++;
-            if (Katakana.QUESTIONS.diacriticsSelected())
-                count++;
-            if (Katakana.QUESTIONS.digraphsSelected())
-                count++;
-        }
-        return count;
+        return tabList.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        switch (position)
-        {
-            case 0:
-                return context.getResources().getString(R.string.base_form_title);
-            case 1:
-                if ((kanaType.equals(context.getResources().getString(R.string.hiragana)) && Hiragana.QUESTIONS.diacriticsSelected()) ||
-                        (kanaType.equals(context.getResources().getString(R.string.katakana)) && Katakana.QUESTIONS.diacriticsSelected()) ||
-                        OptionsControl.getBoolean(R.string.prefid_full_reference))
-                    return context.getResources().getString(R.string.diacritics_title);
-                // else continue on
-            case 2:
-                return context.getResources().getString(R.string.digraphs_title);
-            default:
-                return "";
-        }
+        return tabList.get(position);
     }
 }
