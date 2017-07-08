@@ -2,13 +2,11 @@ package com.noprestige.kanaquiz;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,33 +51,15 @@ public class KanaSelectionItem extends LinearLayout
 
         a.recycle();
 
-        Context context = this.getContext();  //TODO: Fix this
+        if (prefId == null)
+            prefId = "";
 
         // Set up initial objects
-        this.setOrientation(LinearLayout.VERTICAL);
+        LayoutInflater.from(getContext()).inflate(R.layout.kana_selection_item, this);
 
-        LinearLayout textContainer = new LinearLayout(context);
-        LinearLayout mainContainer = new LinearLayout(context);
-        ImageView imgBorder = new ImageView(context);
-        lblTitle = new TextView(context);
-        lblContents = new TextView(context);
-        chkCheckBox = new CheckBox(context);
-
-        textContainer.setOrientation(LinearLayout.VERTICAL);
-        textContainer.setLayoutParams(new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
-
-        mainContainer.setOrientation(LinearLayout.HORIZONTAL);
-        mainContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        imgBorder.setImageResource(R.drawable.border);
-
-        lblTitle.setTypeface(null, Typeface.BOLD);
-        lblTitle.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        lblContents.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-
-        chkCheckBox.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-        chkCheckBox.setGravity(Gravity.CENTER_VERTICAL);
+        lblTitle = (TextView) findViewById(R.id.lblTitle);
+        lblContents = (TextView) findViewById(R.id.lblContents);
+        chkCheckBox = (CheckBox) findViewById(R.id.chkCheckBox);
 
         this.setOnClickListener(
                 new OnClickListener()
@@ -90,15 +70,6 @@ public class KanaSelectionItem extends LinearLayout
                     }
                 }
         );
-
-        textContainer.addView(lblTitle);
-        textContainer.addView(lblContents);
-
-        mainContainer.addView(textContainer);
-        mainContainer.addView(chkCheckBox);
-
-        this.addView(mainContainer);
-        this.addView(imgBorder);
 
         updateObject();
     }
