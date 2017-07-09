@@ -207,6 +207,12 @@ abstract class QuestionManagement
         return false;
     }
 
+    boolean diacriticDigraphsSelected()
+    {
+        return (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9) &&
+                (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
+    }
+
     LinearLayout getReferenceTable(Context context)
     {
         LinearLayout layout = new LinearLayout(context);
@@ -224,7 +230,8 @@ abstract class QuestionManagement
         if (isFullReference || digraphsSelected())
         {
             layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
-            layout.addView(getDigraphsReferenceTable(context));
+            layout.addView(getMainDigraphsReferenceTable(context));
+            layout.addView(getDiacriticDigraphsReferenceTable(context));
         }
 
         return layout;
@@ -276,7 +283,7 @@ abstract class QuestionManagement
         return table;
     }
 
-    TableLayout getDigraphsReferenceTable(Context context)
+    TableLayout getMainDigraphsReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -288,18 +295,26 @@ abstract class QuestionManagement
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
         }
-        if (OptionsControl.getBoolean(R.string.prefid_diacritics))
+
+        return table;
+    }
+
+    TableLayout getDiacriticDigraphsReferenceTable(Context context)
+    {
+        TableLayout table = new TableLayout(context);
+        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
+        for (int i = 2; i <= 4; i++)
         {
-            for (int i = 2; i <= 4; i++)
-            {
-                if (isFullReference || getPref(i))
-                    table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
-            }
-            if (isFullReference || getPref(6))
-            {
-                table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
-                table.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
-            }
+            if (isFullReference || getPref(i))
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
+        }
+        if (isFullReference || getPref(6))
+        {
+            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));
+            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, HANDAKUTEN, true)));
         }
 
         return table;
