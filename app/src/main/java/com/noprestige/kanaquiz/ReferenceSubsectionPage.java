@@ -36,39 +36,26 @@ public class ReferenceSubsectionPage extends Fragment
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
 
-        if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-        {
-            if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
-                layout.addView(Hiragana.QUESTIONS.getMainReferenceTable(container.getContext()));
-            else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
-                layout.addView(Hiragana.QUESTIONS.getDiacriticReferenceTable(container.getContext()));
-            else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
-            {
-                layout.addView(Hiragana.QUESTIONS.getMainDigraphsReferenceTable(container.getContext()));
-                if (OptionsControl.getBoolean(R.string.prefid_full_reference) || Hiragana.QUESTIONS.diacriticDigraphsSelected())
-                {
-                    layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
-                    layout.addView(Hiragana.QUESTIONS.getDiacriticDigraphsReferenceTable(container.getContext()));
-                }
-            }
-        }
-        else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-        {
-            if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
-                layout.addView(Katakana.QUESTIONS.getMainReferenceTable(container.getContext()));
-            else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
-                layout.addView(Katakana.QUESTIONS.getDiacriticReferenceTable(container.getContext()));
-            else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
-            {
-                layout.addView(Katakana.QUESTIONS.getMainDigraphsReferenceTable(container.getContext()));
-                if (OptionsControl.getBoolean(R.string.prefid_full_reference) || Katakana.QUESTIONS.diacriticDigraphsSelected())
-                {
-                    layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
-                    layout.addView(Katakana.QUESTIONS.getDiacriticDigraphsReferenceTable(container.getContext()));
-                }
-            }
-        }
+        QuestionManagement questions = null;
 
+        if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
+            questions = Hiragana.QUESTIONS;
+        else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
+            questions = Katakana.QUESTIONS;
+
+        if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
+            layout.addView(questions.getMainReferenceTable(container.getContext()));
+        else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
+            layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
+        else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
+        {
+            layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
+            if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
+            {
+                layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
+                layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
+            }
+        }
 
         ScrollView scrollBox = new ScrollView(container.getContext());
         scrollBox.addView(layout);

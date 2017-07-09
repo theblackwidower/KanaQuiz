@@ -25,22 +25,19 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             tabList.add(context.getResources().getString(R.string.diacritics_title));
             tabList.add(context.getResources().getString(R.string.digraphs_title));
         }
-        else if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
+        else
         {
-            if (Hiragana.QUESTIONS.anySelected())
+            QuestionManagement questions = null;
+            if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
+                questions = Hiragana.QUESTIONS;
+            else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
+                questions = Katakana.QUESTIONS;
+
+            if (questions.anySelected())
                 tabList.add(context.getResources().getString(R.string.base_form_title));
-            if (Hiragana.QUESTIONS.diacriticsSelected())
+            if (questions.diacriticsSelected())
                 tabList.add(context.getResources().getString(R.string.diacritics_title));
-            if (Hiragana.QUESTIONS.digraphsSelected())
-                tabList.add(context.getResources().getString(R.string.digraphs_title));
-        }
-        else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
-        {
-            if (Katakana.QUESTIONS.anySelected())
-                tabList.add(context.getResources().getString(R.string.base_form_title));
-            if (Katakana.QUESTIONS.diacriticsSelected())
-                tabList.add(context.getResources().getString(R.string.diacritics_title));
-            if (Katakana.QUESTIONS.digraphsSelected())
+            if (questions.digraphsSelected())
                 tabList.add(context.getResources().getString(R.string.digraphs_title));
         }
     }
