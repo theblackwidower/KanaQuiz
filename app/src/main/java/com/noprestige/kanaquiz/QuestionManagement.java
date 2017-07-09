@@ -209,7 +209,8 @@ abstract class QuestionManagement
 
     boolean diacriticDigraphsSelected()
     {
-        return (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9) &&
+        return (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
+                OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9) &&
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
