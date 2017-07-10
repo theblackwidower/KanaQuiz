@@ -36,12 +36,14 @@ public class ReferenceSubsectionPage extends Fragment
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setGravity(Gravity.CENTER);
 
-        QuestionManagement questions = null;
+        QuestionManagement questions;
 
         if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
             questions = Hiragana.QUESTIONS;
         else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
             questions = Katakana.QUESTIONS;
+        else
+            throw new IllegalArgumentException();
 
         if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
             layout.addView(questions.getMainReferenceTable(container.getContext()));

@@ -27,11 +27,14 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         }
         else
         {
-            QuestionManagement questions = null;
+            QuestionManagement questions;
+
             if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
                 questions = Hiragana.QUESTIONS;
             else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
                 questions = Katakana.QUESTIONS;
+            else
+                throw new IllegalArgumentException();
 
             if (questions.anySelected())
                 tabList.add(context.getResources().getString(R.string.base_form_title));
