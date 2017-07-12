@@ -142,25 +142,23 @@ abstract class QuestionManagement
         if (getPref(1))
             questionBank.addQuestions(getKanaSet(1));
         for (int i = 2; i <= 8; i++)
-        {
             if (getPref(i))
             {
                 questionBank.addQuestions(getKanaSet(i));
                 if (isDigraphs)
                     questionBank.addQuestions(getKanaSet(i, NO_DIACRITIC, true));
             }
-        }
+
         if (isDiacritics)
         {
             for (int i = 2; i <= 4; i++)
-            {
                 if (getPref(i))
                 {
                     questionBank.addQuestions(getKanaSet(i, DAKUTEN));
                     if (isDigraphs)
                         questionBank.addQuestions(getKanaSet(i, DAKUTEN, true));
                 }
-            }
+
             if (getPref(6))
             {
                 questionBank.addQuestions(getKanaSet(6, DAKUTEN), getKanaSet(6, HANDAKUTEN));
@@ -179,10 +177,9 @@ abstract class QuestionManagement
     boolean anySelected()
     {
         for (int i = 1; i <= CATEGORY_COUNT; i++)
-        {
             if (getPref(i))
                 return true;
-        }
+
         return false;
     }
 
@@ -195,13 +192,10 @@ abstract class QuestionManagement
     boolean digraphsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-        {
             for (int i = 2; i <= 8; i++)
-            {
                 if (getPref(i))
                     return true;
-            }
-        }
+
         return false;
     }
 
@@ -220,10 +214,9 @@ abstract class QuestionManagement
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
         for (int i = 1; i <= 7; i++)
-        {
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i)));
-        }
+
         if (isFullReference || getPref(9))
             table.addView(ReferenceCell.buildSpecialRow(context, getKanaSet(9)));
         if (isFullReference || getPref(8)) //fits gojūon ordering
@@ -245,10 +238,9 @@ abstract class QuestionManagement
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
         for (int i = 2; i <= 4; i++)
-        {
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN)));
-        }
+
         if (isFullReference || getPref(6))
         {
             table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN)));
@@ -266,10 +258,8 @@ abstract class QuestionManagement
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
         for (int i = 2; i <= 8; i++)
-        {
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, NO_DIACRITIC, true)));
-        }
 
         return table;
     }
@@ -282,10 +272,9 @@ abstract class QuestionManagement
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
         for (int i = 2; i <= 4; i++)
-        {
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, DAKUTEN, true)));
-        }
+
         if (isFullReference || getPref(6))
         {
             table.addView(ReferenceCell.buildRow(context, getKanaSet(6, DAKUTEN, true)));

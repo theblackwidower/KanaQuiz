@@ -200,22 +200,19 @@ public class ReferenceCell extends View
             row.addView(questions[2].generateReference(context));
         }
         else
-        {
             for (KanaQuestion question : questions)
-            {
                 row.addView(question.generateReference(context));
-            }
-        }
+
         return row;
     }
 
     static TableRow buildRow(Context context, KanaQuestion[] questions)
     {
         TableRow row = new TableRow(context);
+
         for (KanaQuestion question : questions)
-        {
             row.addView(question.generateReference(context));
-        }
+
         return row;
     }
 

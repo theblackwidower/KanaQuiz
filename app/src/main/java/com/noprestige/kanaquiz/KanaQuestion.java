@@ -60,10 +60,9 @@ class KanaQuestion
     boolean checkAnswer(String response)
     {
         for (String correctAnswer : romanji)
-        {
             if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
                 return true;
-        }
+
         return false;
     }
 
