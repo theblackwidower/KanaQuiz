@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -83,7 +84,7 @@ public class KanaSelectionItem extends LinearLayout
             chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
 
         chkCheckBox.setOnCheckedChangeListener(
-                new android.widget.CompoundButton.OnCheckedChangeListener()
+                new OnCheckedChangeListener()
                 {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
                     {
