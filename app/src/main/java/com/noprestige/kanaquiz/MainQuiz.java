@@ -240,8 +240,6 @@ public class MainQuiz extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        //Only triggers when user uses device back button
-        //TODO: make work when user uses in-app back button
         if (requestCode == 1)
         {
             resetQuiz();
