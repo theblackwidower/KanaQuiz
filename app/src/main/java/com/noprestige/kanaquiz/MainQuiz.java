@@ -211,17 +211,20 @@ public class MainQuiz extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Class destination;
+        int result = 0;
 
         switch (item.getItemId())
         {
             case R.id.mnuSelection:
                 destination = KanaSelection.class;
+                result = 1;
                 break;
             case R.id.mnuReference:
                 destination = ReferenceScreen.class;
                 break;
             case R.id.mnuOptions:
                 destination = OptionsScreen.class;
+                result = 1;
                 break;
             case R.id.mnuAbout:
                 destination = AboutScreen.class;
@@ -230,13 +233,15 @@ public class MainQuiz extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
 
-        startActivityForResult(new Intent(MainQuiz.this, destination), 1);
+        startActivityForResult(new Intent(MainQuiz.this, destination), result);
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        //Only triggers when user uses device back button
+        //TODO: make work when user uses in-app back button
         if (requestCode == 1)
         {
             resetQuiz();
