@@ -1,9 +1,7 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
@@ -212,30 +210,6 @@ abstract class QuestionManagement
         return (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9) &&
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
-    }
-
-    LinearLayout getReferenceTable(Context context)
-    {
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setGravity(Gravity.CENTER);
-
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
-        layout.addView(getMainReferenceTable(context));
-        if (isFullReference || diacriticsSelected())
-        {
-            layout.addView(ReferenceCell.buildHeader(context, R.string.diacritics_title));
-            layout.addView(getDiacriticReferenceTable(context));
-        }
-        if (isFullReference || digraphsSelected())
-        {
-            layout.addView(ReferenceCell.buildHeader(context, R.string.digraphs_title));
-            layout.addView(getMainDigraphsReferenceTable(context));
-            layout.addView(getDiacriticDigraphsReferenceTable(context));
-        }
-
-        return layout;
     }
 
     TableLayout getMainReferenceTable(Context context)
