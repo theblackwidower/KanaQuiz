@@ -115,6 +115,7 @@ public class ReferenceCell extends View
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         int desiredWidth = Math.round(Math.max(kanaWidth, romanjiWidth));

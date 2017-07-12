@@ -9,6 +9,7 @@ class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
         super(capacity);
     }
 
+    @Override
     public boolean add(KanaQuestion question)
     {
         if (super.contains(question))

@@ -59,13 +59,12 @@ class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        boolean isCorrect = false;
         for (String correctAnswer : romanji)
         {
             if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
-                isCorrect = true;
+                return true;
         }
-        return isCorrect;
+        return false;
     }
 
     String fetchCorrectAnswer()
@@ -76,7 +75,7 @@ class KanaQuestion
     ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);
-        cell.setKana(kana);
+        cell.setKana(getKana());
         cell.setRomanji(fetchCorrectAnswer());
         if (kana.length() > 1)
             cell.setKanaSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
