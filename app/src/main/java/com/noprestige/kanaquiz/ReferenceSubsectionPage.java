@@ -2,12 +2,9 @@ package com.noprestige.kanaquiz;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 public class ReferenceSubsectionPage extends Fragment
 {
@@ -32,9 +29,8 @@ public class ReferenceSubsectionPage extends Fragment
         String kanaType = getArguments().getString(ARG_KANA_TYPE, "");
         String refCategory = getArguments().getString(ARG_REF_CATEGORY, "");
 
-        LinearLayout layout = new LinearLayout(getContext());
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setGravity(Gravity.CENTER);
+        View scrollBox = inflater.inflate(R.layout.fragment_reference_subsection_empty, container, false);
+        ViewGroup layout = (ViewGroup) scrollBox.findViewById(R.id.secReference);
 
         QuestionManagement questions;
 
@@ -58,9 +54,6 @@ public class ReferenceSubsectionPage extends Fragment
                 layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
             }
         }
-
-        ScrollView scrollBox = new ScrollView(container.getContext());
-        scrollBox.addView(layout);
 
         return scrollBox;
     }
