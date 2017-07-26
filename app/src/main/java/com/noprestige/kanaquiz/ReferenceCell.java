@@ -54,9 +54,9 @@ public class ReferenceCell extends View
 
     private void init(AttributeSet attrs, int defStyle)
     {
-        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
-
         Context context = this.getContext();
+
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
         kana = a.getString(R.styleable.ReferenceCell_kana);
         romanji = a.getString(R.styleable.ReferenceCell_romanji);

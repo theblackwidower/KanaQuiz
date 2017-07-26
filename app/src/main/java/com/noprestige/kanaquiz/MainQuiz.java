@@ -43,7 +43,7 @@ public class MainQuiz extends AppCompatActivity
         txtAnswer = (EditText) findViewById(R.id.txtAnswer);
         lblDisplayKana = (TextView) findViewById(R.id.lblDisplayKana);
 
-        oldTextColour = lblResponse.getCurrentTextColor(); //kludge for reverting text colour
+        oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -109,7 +109,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setText(R.string.no_questions);
             txtAnswer.setEnabled(false);
             canSubmit = false;
-            lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
+            lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
             txtAnswer.setText("");
         }
 
@@ -196,7 +196,7 @@ public class MainQuiz extends AppCompatActivity
         lblResponse.setText(R.string.request_answer);
         canSubmit = true;
         txtAnswer.requestFocus();
-        lblResponse.setTextColor(oldTextColour); //kludge for reverting text colours
+        lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
         txtAnswer.setText("");
     }
 
