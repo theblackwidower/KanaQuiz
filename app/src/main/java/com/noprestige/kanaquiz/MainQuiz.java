@@ -52,11 +52,11 @@ public class MainQuiz extends AppCompatActivity
         txtAnswer.setOnEditorActionListener(
                 new TextView.OnEditorActionListener()
                 {
+                    @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
                     {
                         String answer = v.getText().toString().trim();
-                        if (((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL)) &&
-                                canSubmit && !answer.isEmpty())
+                        if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
                             checkAnswer(answer);
                         return true;
                     }
@@ -133,61 +133,64 @@ public class MainQuiz extends AppCompatActivity
 
     private void checkAnswer(String answer)
     {
-        boolean isNewQuestion = true;
-        canSubmit = false;
-
-        if (questionBank.checkCurrentAnswer(answer))
+        if (canSubmit && !answer.isEmpty())
         {
-            lblResponse.setText(R.string.correct_answer);
-            lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
-            if (!isRetrying)
-                totalCorrect++;
-        }
-        else
-        {
-            lblResponse.setText(R.string.incorrect_answer);
-            lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+            boolean isNewQuestion = true;
+            canSubmit = false;
 
-            if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
+            if (questionBank.checkCurrentAnswer(answer))
             {
-                lblResponse.append(System.getProperty("line.separator"));
-                lblResponse.append(getResources().getText(R.string.show_correct_answer));
-                lblResponse.append(": ");
-                lblResponse.append(questionBank.fetchCorrectAnswer());
+                lblResponse.setText(R.string.correct_answer);
+                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
+                if (!isRetrying)
+                    totalCorrect++;
             }
-            else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
+            else
             {
-                txtAnswer.setText("");
-                lblResponse.append(System.getProperty("line.separator"));
-                lblResponse.append(getResources().getText(R.string.try_again));
-                isRetrying = true;
-                isNewQuestion = false;
+                lblResponse.setText(R.string.incorrect_answer);
+                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
+                if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
+                {
+                    lblResponse.append(System.getProperty("line.separator"));
+                    lblResponse.append(getResources().getText(R.string.show_correct_answer));
+                    lblResponse.append(": ");
+                    lblResponse.append(questionBank.fetchCorrectAnswer());
+                }
+                else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
+                {
+                    txtAnswer.setText("");
+                    lblResponse.append(System.getProperty("line.separator"));
+                    lblResponse.append(getResources().getText(R.string.try_again));
+                    isRetrying = true;
+                    isNewQuestion = false;
+
+                    delayHandler.postDelayed(
+                            new Runnable()
+                            {
+                                public void run()
+                                {
+                                    ReadyForAnswer();
+                                }
+                            }, 1000
+                    );
+                }
+            }
+
+            if (isNewQuestion)
+            {
+                totalQuestions++;
+                //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
                 delayHandler.postDelayed(
                         new Runnable()
                         {
                             public void run()
                             {
-                                ReadyForAnswer();
+                                nextQuestion();
                             }
                         }, 1000
                 );
             }
-        }
-
-        if (isNewQuestion)
-        {
-            totalQuestions++;
-            //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
-            delayHandler.postDelayed(
-                    new Runnable()
-                    {
-                        public void run()
-                        {
-                            nextQuestion();
-                        }
-                    }, 1000
-            );
         }
     }
 
