@@ -66,11 +66,14 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers()
     {
-        String[] possibleAnswerStrings = new String[size()];
+        ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
         for (int i = 0; i < size(); i++)
-            possibleAnswerStrings[i] = get(i).fetchCorrectAnswer();
+            if (!possibleAnswerStrings.contains(get(i).fetchCorrectAnswer()))
+                possibleAnswerStrings.add(get(i).fetchCorrectAnswer());
 
-        return possibleAnswerStrings;
+        String[] returnValue = new String[possibleAnswerStrings.size()];
+        possibleAnswerStrings.toArray(returnValue);
+        return returnValue;
     }
 }
