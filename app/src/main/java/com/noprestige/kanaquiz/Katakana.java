@@ -209,6 +209,6 @@ class Katakana extends QuestionManagement
                 KANA_SET_9,
                 KANA_SET_10_W_GROUP,
                 KANA_SET_10_N_CONSONANT,
-                new int[] {PREFID_1, PREFID_2, PREFID_3 ,PREFID_4, PREFID_5, PREFID_6, PREFID_7, PREFID_8, PREFID_9, PREFID_10});
+                new int[]{PREFID_1, PREFID_2, PREFID_3, PREFID_4, PREFID_5, PREFID_6, PREFID_7, PREFID_8, PREFID_9, PREFID_10});
     }
 }
