@@ -195,6 +195,32 @@ abstract class QuestionManagement
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
+    String displayContents(int setNumber)
+    {
+        String returnValue = "";
+
+        boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
+
+        for (KanaQuestion question : getKanaSet(setNumber))
+            returnValue += question.getKana() + " ";
+
+        if (isDiacritics && (setNumber >= 2 && setNumber <= 4 || setNumber == 6))
+        {
+            for (KanaQuestion question : getKanaSet(setNumber, DAKUTEN))
+                returnValue += question.getKana() + " ";
+
+            if (setNumber == 6)
+                for (KanaQuestion question : getKanaSet(setNumber, HANDAKUTEN))
+                    returnValue += question.getKana() + " ";
+        }
+
+        if (setNumber == 10)
+            for (KanaQuestion question : getKanaSet(setNumber, CONSONANT))
+                returnValue += question.getKana() + " ";
+
+        return returnValue;
+    }
+
     TableLayout getMainReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
