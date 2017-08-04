@@ -46,8 +46,7 @@ abstract class QuestionManagement
             KanaQuestion[] KANA_SET_9,
             KanaQuestion[] KANA_SET_10_W_GROUP,
             KanaQuestion[] KANA_SET_10_N_CONSONANT,
-            int PREFID_1, int PREFID_2, int PREFID_3, int PREFID_4, int PREFID_5,
-            int PREFID_6, int PREFID_7, int PREFID_8, int PREFID_9, int PREFID_10)
+            int[] prefIds)
     {
         kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
 
@@ -89,17 +88,7 @@ abstract class QuestionManagement
         kanaSets[9][NO_DIACRITIC.ordinal()][0] = KANA_SET_10_W_GROUP;
         kanaSets[9][CONSONANT.ordinal()][0] = KANA_SET_10_N_CONSONANT;
 
-        prefIds = new int[CATEGORY_COUNT];
-        prefIds[0] = PREFID_1;
-        prefIds[1] = PREFID_2;
-        prefIds[2] = PREFID_3;
-        prefIds[3] = PREFID_4;
-        prefIds[4] = PREFID_5;
-        prefIds[5] = PREFID_6;
-        prefIds[6] = PREFID_7;
-        prefIds[7] = PREFID_8;
-        prefIds[8] = PREFID_9;
-        prefIds[9] = PREFID_10;
+        this.prefIds = prefIds;
     }
 
     private KanaQuestion[] getKanaSet(int number)
