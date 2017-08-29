@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz;
 
 import android.content.Context;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
@@ -15,6 +16,19 @@ abstract class QuestionManagement
 
     private KanaQuestion[][][][] kanaSets;
     private int[] prefIds;
+
+    private static final int SET_1_TITLE = R.string.set_1_title;
+    private static final int SET_2_TITLE = R.string.set_2_title;
+    private static final int SET_3_TITLE = R.string.set_3_title;
+    private static final int SET_4_TITLE = R.string.set_4_title;
+    private static final int SET_5_TITLE = R.string.set_5_title;
+    private static final int SET_6_TITLE = R.string.set_6_title;
+    private static final int SET_7_TITLE = R.string.set_7_title;
+    private static final int SET_8_TITLE = R.string.set_8_title;
+    private static final int SET_9_TITLE = R.string.set_9_title;
+    private static final int SET_10_TITLE = R.string.set_10_title;
+
+    private static final int[] SET_TITLES = {SET_1_TITLE, SET_2_TITLE, SET_3_TITLE, SET_4_TITLE, SET_5_TITLE, SET_6_TITLE, SET_7_TITLE, SET_8_TITLE, SET_9_TITLE, SET_10_TITLE};
 
     //TODO: Simplify
     QuestionManagement(
@@ -114,6 +128,11 @@ abstract class QuestionManagement
     private int getPrefId(int number)
     {
         return prefIds[number - 1];
+    }
+
+    private int getSetTitle(int number)
+    {
+        return SET_TITLES[number - 1];
     }
 
     private boolean getPref(int number)
@@ -297,5 +316,23 @@ abstract class QuestionManagement
         }
 
         return table;
+    }
+
+    LinearLayout getSelectionScreen(Context context)
+    {
+        LinearLayout layout = new LinearLayout(context);
+        layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        {
+            KanaSelectionItem item = new KanaSelectionItem(context);
+            item.setTitle(getSetTitle(i));
+            item.setBaseContents(displayContents(i));
+            item.setPrefId(getPrefId(i));
+            layout.addView(item);
+        }
+
+        return layout;
     }
 }

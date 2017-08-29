@@ -27,9 +27,9 @@ public class KanaSelectionPage extends Fragment
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                return inflater.inflate(R.layout.fragment_kana_selection_hiragana, container, false);
+                return Hiragana.QUESTIONS.getSelectionScreen(getContext());
             case 1:
-                return inflater.inflate(R.layout.fragment_kana_selection_katakana, container, false);
+                return Katakana.QUESTIONS.getSelectionScreen(getContext());
             default:
                 return null;
         }
