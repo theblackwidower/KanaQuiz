@@ -328,7 +328,7 @@ abstract class QuestionManagement
         {
             KanaSelectionItem item = new KanaSelectionItem(context);
             item.setTitle(getSetTitle(i));
-            item.setBaseContents(displayContents(i));
+            item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             layout.addView(item);
         }

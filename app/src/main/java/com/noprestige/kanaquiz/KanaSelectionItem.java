@@ -14,8 +14,7 @@ import android.widget.TextView;
 public class KanaSelectionItem extends LinearLayout
 {
     private String title;
-    private String baseContents;
-    private String diacritics;
+    private String contents;
     private String prefId;
 
     private TextView lblTitle;
@@ -46,8 +45,7 @@ public class KanaSelectionItem extends LinearLayout
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
         title = a.getString(R.styleable.KanaSelectionItem_title);
-        baseContents = a.getString(R.styleable.KanaSelectionItem_baseContents);
-        diacritics = a.getString(R.styleable.KanaSelectionItem_diacritics);
+        contents = a.getString(R.styleable.KanaSelectionItem_contents);
         prefId = a.getString(R.styleable.KanaSelectionItem_prefId);
 
         a.recycle();
@@ -101,9 +99,6 @@ public class KanaSelectionItem extends LinearLayout
 
     public String getContents()
     {
-        String contents = baseContents;
-        if (diacritics != null && (isInEditMode() || OptionsControl.getBoolean(R.string.prefid_diacritics)))
-            contents += " " + diacritics;
         return contents;
     }
 
@@ -123,25 +118,14 @@ public class KanaSelectionItem extends LinearLayout
         updateObject();
     }
 
-    public void setBaseContents(int resId)
+    public void setContents(int resId)
     {
-        setBaseContents(getResources().getString(resId));
+        setContents(getResources().getString(resId));
     }
 
-    public void setBaseContents(String baseContents)
+    public void setContents(String contents)
     {
-        this.baseContents = baseContents;
-        updateObject();
-    }
-
-    public void setDiacritics(int resId)
-    {
-        setDiacritics(getResources().getString(resId));
-    }
-
-    public void setDiacritics(String diacritics)
-    {
-        this.diacritics = diacritics;
+        this.contents = contents;
         updateObject();
     }
 
