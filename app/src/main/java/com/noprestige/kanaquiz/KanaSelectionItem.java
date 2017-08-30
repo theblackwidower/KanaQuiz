@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 public class KanaSelectionItem extends LinearLayout
 {
-    private String title;
-    private String contents;
     private String prefId;
 
     private TextView lblTitle;
@@ -41,18 +39,6 @@ public class KanaSelectionItem extends LinearLayout
 
     private void init(AttributeSet attrs, int defStyle)
     {
-        // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
-
-        title = a.getString(R.styleable.KanaSelectionItem_title);
-        contents = a.getString(R.styleable.KanaSelectionItem_contents);
-        prefId = a.getString(R.styleable.KanaSelectionItem_prefId);
-
-        a.recycle();
-
-        if (prefId == null)
-            prefId = "";
-
         // Set up initial objects
         LayoutInflater.from(getContext()).inflate(R.layout.kana_selection_item, this);
 
@@ -70,17 +56,6 @@ public class KanaSelectionItem extends LinearLayout
                 }
         );
 
-        updateObject();
-    }
-
-    private void updateObject()
-    {
-        lblTitle.setText(getTitle());
-        lblContents.setText(getContents());
-
-        if (!isInEditMode())
-            chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
-
         chkCheckBox.setOnCheckedChangeListener(
                 new OnCheckedChangeListener()
                 {
@@ -90,16 +65,32 @@ public class KanaSelectionItem extends LinearLayout
                     }
                 }
         );
+
+        // Load attributes
+        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
+
+        String title = a.getString(R.styleable.KanaSelectionItem_title);
+        String contents = a.getString(R.styleable.KanaSelectionItem_contents);
+        String prefId = a.getString(R.styleable.KanaSelectionItem_prefId);
+
+        if (title != null)
+            setTitle(title);
+        if (contents != null)
+            setContents(contents);
+        if (prefId != null)
+            setPrefId(prefId);
+
+        a.recycle();
     }
 
     public String getTitle()
     {
-        return title;
+        return (String) lblTitle.getText();
     }
 
     public String getContents()
     {
-        return contents;
+        return (String) lblContents.getText();
     }
 
     public String getPrefId()
@@ -114,8 +105,7 @@ public class KanaSelectionItem extends LinearLayout
 
     public void setTitle(String title)
     {
-        this.title = title;
-        updateObject();
+        lblTitle.setText(title);
     }
 
     public void setContents(int resId)
@@ -125,8 +115,7 @@ public class KanaSelectionItem extends LinearLayout
 
     public void setContents(String contents)
     {
-        this.contents = contents;
-        updateObject();
+        lblContents.setText(contents);
     }
 
     public void setPrefId(int resId)
@@ -137,6 +126,8 @@ public class KanaSelectionItem extends LinearLayout
     public void setPrefId(String prefId)
     {
         this.prefId = prefId;
-        updateObject();
+
+        if (!isInEditMode())
+            chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
     }
 }
