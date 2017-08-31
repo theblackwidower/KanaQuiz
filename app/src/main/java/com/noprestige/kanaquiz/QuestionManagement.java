@@ -64,45 +64,68 @@ abstract class QuestionManagement
     {
         kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
 
-        kanaSets[0][NO_DIACRITIC.ordinal()][0] = KANA_SET_1;
+        addKanaSet(KANA_SET_1, 1);
 
-        kanaSets[1][NO_DIACRITIC.ordinal()][0] = KANA_SET_2_BASE;
-        kanaSets[1][DAKUTEN.ordinal()][0] = KANA_SET_2_DAKUTEN;
-        kanaSets[1][NO_DIACRITIC.ordinal()][1] = KANA_SET_2_BASE_DIGRAPHS;
-        kanaSets[1][DAKUTEN.ordinal()][1] = KANA_SET_2_DAKUTEN_DIGRAPHS;
+        addKanaSet(KANA_SET_2_BASE, 2);
+        addKanaSet(KANA_SET_2_DAKUTEN, 2, DAKUTEN);
+        addKanaSet(KANA_SET_2_BASE_DIGRAPHS, 2, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_2_DAKUTEN_DIGRAPHS, 2, DAKUTEN, true);
 
-        kanaSets[2][NO_DIACRITIC.ordinal()][0] = KANA_SET_3_BASE;
-        kanaSets[2][DAKUTEN.ordinal()][0] = KANA_SET_3_DAKUTEN;
-        kanaSets[2][NO_DIACRITIC.ordinal()][1] = KANA_SET_3_BASE_DIGRAPHS;
-        kanaSets[2][DAKUTEN.ordinal()][1] = KANA_SET_3_DAKUTEN_DIGRAPHS;
+        addKanaSet(KANA_SET_3_BASE, 3);
+        addKanaSet(KANA_SET_3_DAKUTEN, 3, DAKUTEN);
+        addKanaSet(KANA_SET_3_BASE_DIGRAPHS, 3, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_3_DAKUTEN_DIGRAPHS, 3, DAKUTEN, true);
 
-        kanaSets[3][NO_DIACRITIC.ordinal()][0] = KANA_SET_4_BASE;
-        kanaSets[3][DAKUTEN.ordinal()][0] = KANA_SET_4_DAKUTEN;
-        kanaSets[3][NO_DIACRITIC.ordinal()][1] = KANA_SET_4_BASE_DIGRAPHS;
-        kanaSets[3][DAKUTEN.ordinal()][1] = KANA_SET_4_DAKUTEN_DIGRAPHS;
+        addKanaSet(KANA_SET_4_BASE, 4);
+        addKanaSet(KANA_SET_4_DAKUTEN, 4, DAKUTEN);
+        addKanaSet(KANA_SET_4_BASE_DIGRAPHS, 4, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_4_DAKUTEN_DIGRAPHS, 4, DAKUTEN, true);
 
-        kanaSets[4][NO_DIACRITIC.ordinal()][0] = KANA_SET_5;
-        kanaSets[4][NO_DIACRITIC.ordinal()][1] = KANA_SET_5_DIGRAPHS;
+        addKanaSet(KANA_SET_5, 5);
+        addKanaSet(KANA_SET_5_DIGRAPHS, 5, NO_DIACRITIC, true);
 
-        kanaSets[5][NO_DIACRITIC.ordinal()][0] = KANA_SET_6_BASE;
-        kanaSets[5][DAKUTEN.ordinal()][0] = KANA_SET_6_DAKUTEN;
-        kanaSets[5][HANDAKUTEN.ordinal()][0] = KANA_SET_6_HANDAKETEN;
-        kanaSets[5][NO_DIACRITIC.ordinal()][1] = KANA_SET_6_BASE_DIGRAPHS;
-        kanaSets[5][DAKUTEN.ordinal()][1] = KANA_SET_6_DAKUTEN_DIGRAPHS;
-        kanaSets[5][HANDAKUTEN.ordinal()][1] = KANA_SET_6_HANDAKETEN_DIGRAPHS;
+        addKanaSet(KANA_SET_6_BASE, 6);
+        addKanaSet(KANA_SET_6_DAKUTEN, 6, DAKUTEN);
+        addKanaSet(KANA_SET_6_HANDAKETEN, 6, HANDAKUTEN);
+        addKanaSet(KANA_SET_6_BASE_DIGRAPHS, 6, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_6_DAKUTEN_DIGRAPHS, 6, DAKUTEN, true);
+        addKanaSet(KANA_SET_6_HANDAKETEN_DIGRAPHS, 6, HANDAKUTEN, true);
 
-        kanaSets[6][NO_DIACRITIC.ordinal()][0] = KANA_SET_7;
-        kanaSets[6][NO_DIACRITIC.ordinal()][1] = KANA_SET_7_DIGRAPHS;
+        addKanaSet(KANA_SET_7, 7);
+        addKanaSet(KANA_SET_7_DIGRAPHS, 7, NO_DIACRITIC, true);
 
-        kanaSets[7][NO_DIACRITIC.ordinal()][0] = KANA_SET_8;
-        kanaSets[7][NO_DIACRITIC.ordinal()][1] = KANA_SET_8_DIGRAPHS;
+        addKanaSet(KANA_SET_8, 8);
+        addKanaSet(KANA_SET_8_DIGRAPHS, 8, NO_DIACRITIC, true);
 
-        kanaSets[8][NO_DIACRITIC.ordinal()][0] = KANA_SET_9;
+        addKanaSet(KANA_SET_9, 9);
 
-        kanaSets[9][NO_DIACRITIC.ordinal()][0] = KANA_SET_10_W_GROUP;
-        kanaSets[9][CONSONANT.ordinal()][0] = KANA_SET_10_N_CONSONANT;
+        addKanaSet(KANA_SET_10_W_GROUP, 10);
+        addKanaSet(KANA_SET_10_N_CONSONANT, 10, CONSONANT);
 
         this.prefIds = prefIds;
+    }
+
+    private void addKanaSet(KanaQuestion[] kanaSet, int number)
+    {
+        addKanaSet(kanaSet, number, NO_DIACRITIC);
+    }
+
+    private void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
+    {
+        addKanaSet(kanaSet, number, diacritic, false);
+    }
+
+    private void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
+    {
+        int a = number - 1;
+        int b = diacritic.ordinal();
+        int c = isDigraphs ? 1 : 0;
+
+        if (kanaSets[a][b][c] != null)
+            throw new IllegalArgumentException("Kana set " + number + " " + diacritic.name() +
+                    (isDigraphs ? " digraphs" : " monographs") + " already exists");
+        else
+            kanaSets[a][b][c] = kanaSet;
     }
 
     private KanaQuestion[] getKanaSet(int number)
