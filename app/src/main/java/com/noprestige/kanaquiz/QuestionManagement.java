@@ -119,10 +119,11 @@ abstract class QuestionManagement
     {
         KanaQuestion[] value = kanaSets[number - 1][diacritic.ordinal()][isDigraphs ? 1 : 0];
 
-        if (value.length > 0)
+        if (value != null && value.length > 0)
             return value;
         else
-            throw new NullPointerException();
+            throw new NullPointerException("Kana set " + number + " " + diacritic.name() +
+                    (isDigraphs ? " digraphs" : " monographs") + " does not exist");
     }
 
     private int getPrefId(int number)
