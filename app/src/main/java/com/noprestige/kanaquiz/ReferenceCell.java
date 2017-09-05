@@ -76,18 +76,15 @@ public class ReferenceCell extends View
     {
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
+        int contentWidth = width - getPaddingLeft() - getPaddingRight();
+        int contentHeight = height - getPaddingTop() - getPaddingBottom();
 
-        int contentWidth = width - paddingLeft - paddingRight;
-        int contentHeight = height - paddingTop - paddingBottom;
+        float fullHeight = kanaHeight + romanjiHeight;
 
-        kanaXpoint = paddingLeft + (contentWidth - kanaWidth) / 2;
-        kanaYpoint = paddingTop + (contentHeight - (kanaHeight + romanjiHeight)) / 2 - kanaPaint.getFontMetrics().ascent;
-        romanjiXpoint = paddingLeft + (contentWidth - romanjiWidth) / 2;
-        romanjiYpoint = paddingTop + (contentHeight + kanaHeight + romanjiHeight) / 2 - romanjiPaint.getFontMetrics().descent;
+        kanaXpoint = getPaddingLeft() + (contentWidth - kanaWidth) / 2;
+        kanaYpoint = getPaddingTop() + (contentHeight - fullHeight) / 2 - kanaPaint.getFontMetrics().ascent;
+        romanjiXpoint = getPaddingLeft() + (contentWidth - romanjiWidth) / 2;
+        romanjiYpoint = getPaddingTop() + (contentHeight + fullHeight) / 2 - romanjiPaint.getFontMetrics().descent;
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
