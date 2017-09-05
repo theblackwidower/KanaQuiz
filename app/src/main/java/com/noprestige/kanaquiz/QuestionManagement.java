@@ -14,7 +14,7 @@ abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    private KanaQuestion[][][][] kanaSets;
+    private KanaQuestion[][][][] kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
     private int[] prefIds;
 
     private static final int SET_1_TITLE = R.string.set_1_title;
@@ -30,92 +30,17 @@ abstract class QuestionManagement
 
     private static final int[] SET_TITLES = {SET_1_TITLE, SET_2_TITLE, SET_3_TITLE, SET_4_TITLE, SET_5_TITLE, SET_6_TITLE, SET_7_TITLE, SET_8_TITLE, SET_9_TITLE, SET_10_TITLE};
 
-    //TODO: Simplify
-    QuestionManagement(
-            KanaQuestion[] KANA_SET_1,
-            KanaQuestion[] KANA_SET_2_BASE,
-            KanaQuestion[] KANA_SET_2_DAKUTEN,
-            KanaQuestion[] KANA_SET_2_BASE_DIGRAPHS,
-            KanaQuestion[] KANA_SET_2_DAKUTEN_DIGRAPHS,
-            KanaQuestion[] KANA_SET_3_BASE,
-            KanaQuestion[] KANA_SET_3_DAKUTEN,
-            KanaQuestion[] KANA_SET_3_BASE_DIGRAPHS,
-            KanaQuestion[] KANA_SET_3_DAKUTEN_DIGRAPHS,
-            KanaQuestion[] KANA_SET_4_BASE,
-            KanaQuestion[] KANA_SET_4_DAKUTEN,
-            KanaQuestion[] KANA_SET_4_BASE_DIGRAPHS,
-            KanaQuestion[] KANA_SET_4_DAKUTEN_DIGRAPHS,
-            KanaQuestion[] KANA_SET_5,
-            KanaQuestion[] KANA_SET_5_DIGRAPHS,
-            KanaQuestion[] KANA_SET_6_BASE,
-            KanaQuestion[] KANA_SET_6_DAKUTEN,
-            KanaQuestion[] KANA_SET_6_HANDAKETEN,
-            KanaQuestion[] KANA_SET_6_BASE_DIGRAPHS,
-            KanaQuestion[] KANA_SET_6_DAKUTEN_DIGRAPHS,
-            KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS,
-            KanaQuestion[] KANA_SET_7,
-            KanaQuestion[] KANA_SET_7_DIGRAPHS,
-            KanaQuestion[] KANA_SET_8,
-            KanaQuestion[] KANA_SET_8_DIGRAPHS,
-            KanaQuestion[] KANA_SET_9,
-            KanaQuestion[] KANA_SET_10_W_GROUP,
-            KanaQuestion[] KANA_SET_10_N_CONSONANT,
-            int[] prefIds)
-    {
-        kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
-
-        addKanaSet(KANA_SET_1, 1);
-
-        addKanaSet(KANA_SET_2_BASE, 2);
-        addKanaSet(KANA_SET_2_DAKUTEN, 2, DAKUTEN);
-        addKanaSet(KANA_SET_2_BASE_DIGRAPHS, 2, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_2_DAKUTEN_DIGRAPHS, 2, DAKUTEN, true);
-
-        addKanaSet(KANA_SET_3_BASE, 3);
-        addKanaSet(KANA_SET_3_DAKUTEN, 3, DAKUTEN);
-        addKanaSet(KANA_SET_3_BASE_DIGRAPHS, 3, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_3_DAKUTEN_DIGRAPHS, 3, DAKUTEN, true);
-
-        addKanaSet(KANA_SET_4_BASE, 4);
-        addKanaSet(KANA_SET_4_DAKUTEN, 4, DAKUTEN);
-        addKanaSet(KANA_SET_4_BASE_DIGRAPHS, 4, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_4_DAKUTEN_DIGRAPHS, 4, DAKUTEN, true);
-
-        addKanaSet(KANA_SET_5, 5);
-        addKanaSet(KANA_SET_5_DIGRAPHS, 5, NO_DIACRITIC, true);
-
-        addKanaSet(KANA_SET_6_BASE, 6);
-        addKanaSet(KANA_SET_6_DAKUTEN, 6, DAKUTEN);
-        addKanaSet(KANA_SET_6_HANDAKETEN, 6, HANDAKUTEN);
-        addKanaSet(KANA_SET_6_BASE_DIGRAPHS, 6, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_6_DAKUTEN_DIGRAPHS, 6, DAKUTEN, true);
-        addKanaSet(KANA_SET_6_HANDAKETEN_DIGRAPHS, 6, HANDAKUTEN, true);
-
-        addKanaSet(KANA_SET_7, 7);
-        addKanaSet(KANA_SET_7_DIGRAPHS, 7, NO_DIACRITIC, true);
-
-        addKanaSet(KANA_SET_8, 8);
-        addKanaSet(KANA_SET_8_DIGRAPHS, 8, NO_DIACRITIC, true);
-
-        addKanaSet(KANA_SET_9, 9);
-
-        addKanaSet(KANA_SET_10_W_GROUP, 10);
-        addKanaSet(KANA_SET_10_N_CONSONANT, 10, CONSONANT);
-
-        this.prefIds = prefIds;
-    }
-
-    private void addKanaSet(KanaQuestion[] kanaSet, int number)
+    protected void addKanaSet(KanaQuestion[] kanaSet, int number)
     {
         addKanaSet(kanaSet, number, NO_DIACRITIC);
     }
 
-    private void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
+    protected void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
     {
         addKanaSet(kanaSet, number, diacritic, false);
     }
 
-    private void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
+    protected void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
     {
         int a = number - 1;
         int b = diacritic.ordinal();
@@ -126,6 +51,14 @@ abstract class QuestionManagement
                     (isDigraphs ? " digraphs" : " monographs") + " already exists");
         else
             kanaSets[a][b][c] = kanaSet;
+    }
+
+    protected void addPrefIds(int[] prefIds)
+    {
+        if (this.prefIds != null)
+            throw new IllegalArgumentException();
+        else
+            this.prefIds = prefIds;
     }
 
     private KanaQuestion[] getKanaSet(int number)

@@ -1,5 +1,10 @@
 package com.noprestige.kanaquiz;
 
+import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
+import static com.noprestige.kanaquiz.Diacritic.DAKUTEN;
+import static com.noprestige.kanaquiz.Diacritic.HANDAKUTEN;
+import static com.noprestige.kanaquiz.Diacritic.NO_DIACRITIC;
+
 class Hiragana extends QuestionManagement
 {
     private static final KanaQuestion[] KANA_SET_1 = {
@@ -180,35 +185,45 @@ class Hiragana extends QuestionManagement
 
     private Hiragana()
     {
-        super(
-                KANA_SET_1,
-                KANA_SET_2_BASE,
-                KANA_SET_2_DAKUTEN,
-                KANA_SET_2_BASE_DIGRAPHS,
-                KANA_SET_2_DAKUTEN_DIGRAPHS,
-                KANA_SET_3_BASE,
-                KANA_SET_3_DAKUTEN,
-                KANA_SET_3_BASE_DIGRAPHS,
-                KANA_SET_3_DAKUTEN_DIGRAPHS,
-                KANA_SET_4_BASE,
-                KANA_SET_4_DAKUTEN,
-                KANA_SET_4_BASE_DIGRAPHS,
-                KANA_SET_4_DAKUTEN_DIGRAPHS,
-                KANA_SET_5,
-                KANA_SET_5_DIGRAPHS,
-                KANA_SET_6_BASE,
-                KANA_SET_6_DAKUTEN,
-                KANA_SET_6_HANDAKETEN,
-                KANA_SET_6_BASE_DIGRAPHS,
-                KANA_SET_6_DAKUTEN_DIGRAPHS,
-                KANA_SET_6_HANDAKETEN_DIGRAPHS,
-                KANA_SET_7,
-                KANA_SET_7_DIGRAPHS,
-                KANA_SET_8,
-                KANA_SET_8_DIGRAPHS,
-                KANA_SET_9,
-                KANA_SET_10_W_GROUP,
-                KANA_SET_10_N_CONSONANT,
-                new int[]{PREFID_1, PREFID_2, PREFID_3, PREFID_4, PREFID_5, PREFID_6, PREFID_7, PREFID_8, PREFID_9, PREFID_10});
+        addKanaSet(KANA_SET_1, 1);
+
+        addKanaSet(KANA_SET_2_BASE, 2);
+        addKanaSet(KANA_SET_2_DAKUTEN, 2, DAKUTEN);
+        addKanaSet(KANA_SET_2_BASE_DIGRAPHS, 2, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_2_DAKUTEN_DIGRAPHS, 2, DAKUTEN, true);
+
+        addKanaSet(KANA_SET_3_BASE, 3);
+        addKanaSet(KANA_SET_3_DAKUTEN, 3, DAKUTEN);
+        addKanaSet(KANA_SET_3_BASE_DIGRAPHS, 3, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_3_DAKUTEN_DIGRAPHS, 3, DAKUTEN, true);
+
+        addKanaSet(KANA_SET_4_BASE, 4);
+        addKanaSet(KANA_SET_4_DAKUTEN, 4, DAKUTEN);
+        addKanaSet(KANA_SET_4_BASE_DIGRAPHS, 4, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_4_DAKUTEN_DIGRAPHS, 4, DAKUTEN, true);
+
+        addKanaSet(KANA_SET_5, 5);
+        addKanaSet(KANA_SET_5_DIGRAPHS, 5, NO_DIACRITIC, true);
+
+        addKanaSet(KANA_SET_6_BASE, 6);
+        addKanaSet(KANA_SET_6_DAKUTEN, 6, DAKUTEN);
+        addKanaSet(KANA_SET_6_HANDAKETEN, 6, HANDAKUTEN);
+        addKanaSet(KANA_SET_6_BASE_DIGRAPHS, 6, NO_DIACRITIC, true);
+        addKanaSet(KANA_SET_6_DAKUTEN_DIGRAPHS, 6, DAKUTEN, true);
+        addKanaSet(KANA_SET_6_HANDAKETEN_DIGRAPHS, 6, HANDAKUTEN, true);
+
+        addKanaSet(KANA_SET_7, 7);
+        addKanaSet(KANA_SET_7_DIGRAPHS, 7, NO_DIACRITIC, true);
+
+        addKanaSet(KANA_SET_8, 8);
+        addKanaSet(KANA_SET_8_DIGRAPHS, 8, NO_DIACRITIC, true);
+
+        addKanaSet(KANA_SET_9, 9);
+
+        addKanaSet(KANA_SET_10_W_GROUP, 10);
+        addKanaSet(KANA_SET_10_N_CONSONANT, 10, CONSONANT);
+
+        addPrefIds(new int[]{PREFID_1, PREFID_2, PREFID_3, PREFID_4, PREFID_5,
+                PREFID_6, PREFID_7, PREFID_8, PREFID_9, PREFID_10});
     }
 }
