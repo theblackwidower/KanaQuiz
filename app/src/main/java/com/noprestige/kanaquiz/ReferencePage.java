@@ -32,7 +32,7 @@ public class ReferencePage extends Fragment
         LinearLayout subScreen = (LinearLayout) inflater.inflate(R.layout.activity_tabbed_screen, container, false);
         subScreen.setPadding(0, 0, 0, 0);
 
-        ViewPager viewPager = (ViewPager) subScreen.findViewById(R.id.viewPager);
+        ViewPager viewPager = subScreen.findViewById(R.id.viewPager);
 
         if (kanaType.equals(getResources().getString(R.string.hiragana)))
             viewPager.setId(R.id.hiraganaReferenceViewPager);
@@ -40,7 +40,7 @@ public class ReferencePage extends Fragment
             viewPager.setId(R.id.katakanaReferenceViewPager);
 
         viewPager.setAdapter(new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType));
-        TabLayout tabLayout = (TabLayout) subScreen.findViewById(R.id.tabLayout);
+        TabLayout tabLayout = subScreen.findViewById(R.id.tabLayout);
         tabLayout.setPadding(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0,
                 getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0);
         tabLayout.setupWithViewPager(viewPager);

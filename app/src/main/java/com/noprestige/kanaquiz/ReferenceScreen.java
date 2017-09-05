@@ -13,7 +13,7 @@ public class ReferenceScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_screen);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ReferencePager(getSupportFragmentManager(), this));
         ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
     }

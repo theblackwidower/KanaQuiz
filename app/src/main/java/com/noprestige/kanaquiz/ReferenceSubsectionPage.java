@@ -30,7 +30,7 @@ public class ReferenceSubsectionPage extends Fragment
         String refCategory = getArguments().getString(ARG_REF_CATEGORY, "");
 
         View scrollBox = inflater.inflate(R.layout.fragment_reference_subsection_empty, container, false);
-        ViewGroup layout = (ViewGroup) scrollBox.findViewById(R.id.secReference);
+        ViewGroup layout = scrollBox.findViewById(R.id.secReference);
 
         QuestionManagement questions;
 

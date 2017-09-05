@@ -39,9 +39,9 @@ public class MainQuiz extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_quiz);
-        lblResponse = (TextView) findViewById(R.id.lblResponse);
-        txtAnswer = (EditText) findViewById(R.id.txtAnswer);
-        lblDisplayKana = (TextView) findViewById(R.id.lblDisplayKana);
+        lblResponse = findViewById(R.id.lblResponse);
+        txtAnswer = findViewById(R.id.txtAnswer);
+        lblDisplayKana = findViewById(R.id.lblDisplayKana);
 
         oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
@@ -113,7 +113,7 @@ public class MainQuiz extends AppCompatActivity
             txtAnswer.setText("");
         }
 
-        TextView lblScore = (TextView) findViewById(R.id.lblScore);
+        TextView lblScore = findViewById(R.id.lblScore);
 
         if (totalQuestions > 0)
         {

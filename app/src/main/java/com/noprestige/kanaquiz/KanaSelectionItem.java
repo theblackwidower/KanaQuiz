@@ -42,9 +42,9 @@ public class KanaSelectionItem extends LinearLayout
         // Set up initial objects
         LayoutInflater.from(getContext()).inflate(R.layout.kana_selection_item, this);
 
-        lblTitle = (TextView) findViewById(R.id.lblTitle);
-        lblContents = (TextView) findViewById(R.id.lblContents);
-        chkCheckBox = (CheckBox) findViewById(R.id.chkCheckBox);
+        lblTitle = findViewById(R.id.lblTitle);
+        lblContents = findViewById(R.id.lblContents);
+        chkCheckBox = findViewById(R.id.chkCheckBox);
 
         this.setOnClickListener(
                 new OnClickListener()

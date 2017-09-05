@@ -28,7 +28,7 @@ class NumberPreference extends DialogPreference
     {
         super.showDialog(state);
 
-        numberPicker = (NumberPicker) getDialog().findViewById(R.id.numberPicker);
+        numberPicker = getDialog().findViewById(R.id.numberPicker);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(214); //TODO: implement as property of class
         //Currently set to the number of possible questions
