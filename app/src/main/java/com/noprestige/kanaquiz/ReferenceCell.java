@@ -17,9 +17,6 @@ public class ReferenceCell extends View
 {
     private String kana;
     private String romanji;
-    private float kanaSize;
-    private float romanjiSize;
-    private int colour;
 
     private TextPaint kanaPaint = new TextPaint();
     private TextPaint romanjiPaint = new TextPaint();
@@ -32,7 +29,8 @@ public class ReferenceCell extends View
     private float kanaWidth;
     private float romanjiWidth;
 
-    private float fullHeight;
+    private float kanaHeight;
+    private float romanjiHeight;
 
     public ReferenceCell(Context context)
     {
@@ -58,41 +56,19 @@ public class ReferenceCell extends View
 
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
-        kana = a.getString(R.styleable.ReferenceCell_kana);
-        romanji = a.getString(R.styleable.ReferenceCell_romanji);
-        kanaSize = a.getDimension(R.styleable.ReferenceCell_kanaSize,
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics()));
-        romanjiSize = a.getDimension(R.styleable.ReferenceCell_romanjiSize,
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics()));
-        colour = a.getColor(R.styleable.ReferenceCell_colour,
-                new TextView(context).getTextColors().getDefaultColor()); // TODO: Fix this kludge used to fetch default colour
+        setKana(a.getString(R.styleable.ReferenceCell_kana));
+        setRomanji(a.getString(R.styleable.ReferenceCell_romanji));
+        setKanaSize(a.getDimension(R.styleable.ReferenceCell_kanaSize,
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
+        setRomanjiSize(a.getDimension(R.styleable.ReferenceCell_romanjiSize,
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
+        setColour(a.getColor(R.styleable.ReferenceCell_colour,
+                new TextView(context).getTextColors().getDefaultColor())); // TODO: Fix this kludge used to fetch default colour
 
         a.recycle();
 
-        if (kana == null)
-            kana = "";
-        if (romanji == null)
-            romanji = "";
-
         kanaPaint.setAntiAlias(true);
         romanjiPaint.setAntiAlias(true);
-
-        updateObject();
-    }
-
-    private void updateObject()
-    {
-        kanaPaint.setTextSize(kanaSize);
-        romanjiPaint.setTextSize(romanjiSize);
-
-        kanaPaint.setColor(colour);
-        romanjiPaint.setColor(colour);
-
-        kanaWidth = kanaPaint.measureText(kana);
-        romanjiWidth = romanjiPaint.measureText(romanji);
-        float kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
-        float romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
-        fullHeight = kanaHeight + romanjiHeight;
     }
 
     @Override
@@ -109,9 +85,9 @@ public class ReferenceCell extends View
         int contentHeight = height - paddingTop - paddingBottom;
 
         kanaXpoint = paddingLeft + (contentWidth - kanaWidth) / 2;
-        kanaYpoint = paddingTop + (contentHeight - fullHeight) / 2 - kanaPaint.getFontMetrics().ascent;
+        kanaYpoint = paddingTop + (contentHeight - (kanaHeight + romanjiHeight)) / 2 - kanaPaint.getFontMetrics().ascent;
         romanjiXpoint = paddingLeft + (contentWidth - romanjiWidth) / 2;
-        romanjiYpoint = paddingTop + (contentHeight + fullHeight) / 2 - romanjiPaint.getFontMetrics().descent;
+        romanjiYpoint = paddingTop + (contentHeight + kanaHeight + romanjiHeight) / 2 - romanjiPaint.getFontMetrics().descent;
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -119,7 +95,7 @@ public class ReferenceCell extends View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         int desiredWidth = Math.round(Math.max(kanaWidth, romanjiWidth));
-        int desiredHeight = Math.round(fullHeight);
+        int desiredHeight = Math.round(kanaHeight + romanjiHeight);
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -157,20 +133,42 @@ public class ReferenceCell extends View
 
     void setKana(String kana)
     {
-        this.kana = kana;
-        updateObject();
+        if (kana == null)
+            this.kana = "";
+        else
+            this.kana = kana;
+
+        kanaWidth = kanaPaint.measureText(this.kana);
     }
 
     void setKanaSize(float kanaSize)
     {
-        this.kanaSize = kanaSize;
-        updateObject();
+        kanaPaint.setTextSize(kanaSize);
+        kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
+        kanaWidth = kanaPaint.measureText(this.kana);
     }
 
     void setRomanji(String romanji)
     {
-        this.romanji = romanji;
-        updateObject();
+        if (romanji == null)
+            this.romanji = "";
+        else
+            this.romanji = romanji;
+
+        romanjiWidth = romanjiPaint.measureText(this.romanji);
+    }
+
+    void setRomanjiSize(float romanjiSize)
+    {
+        romanjiPaint.setTextSize(romanjiSize);
+        romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
+        romanjiWidth = romanjiPaint.measureText(this.romanji);
+    }
+
+    void setColour(int colour)
+    {
+        kanaPaint.setColor(colour);
+        romanjiPaint.setColor(colour);
     }
 
     static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
