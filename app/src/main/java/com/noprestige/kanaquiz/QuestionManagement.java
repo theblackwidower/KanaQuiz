@@ -171,28 +171,37 @@ abstract class QuestionManagement
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
+    String getKanaSetDisplay(int setNumber)
+    {
+        return getKanaSetDisplay(setNumber, NO_DIACRITIC);
+    }
+
+    private String getKanaSetDisplay(int setNumber, Diacritic diacritic)
+    {
+        String returnValue = "";
+        for (KanaQuestion question : getKanaSet(setNumber, diacritic))
+            returnValue += question.getKana() + " ";
+        return returnValue;
+    }
+
     String displayContents(int setNumber)
     {
         String returnValue = "";
 
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        for (KanaQuestion question : getKanaSet(setNumber))
-            returnValue += question.getKana() + " ";
+        returnValue += getKanaSetDisplay(setNumber);
 
         if (isDiacritics && (setNumber >= 2 && setNumber <= 4 || setNumber == 6))
         {
-            for (KanaQuestion question : getKanaSet(setNumber, DAKUTEN))
-                returnValue += question.getKana() + " ";
+            returnValue += getKanaSetDisplay(setNumber, DAKUTEN);
 
             if (setNumber == 6)
-                for (KanaQuestion question : getKanaSet(setNumber, HANDAKUTEN))
-                    returnValue += question.getKana() + " ";
+                returnValue += getKanaSetDisplay(setNumber, HANDAKUTEN);
         }
 
         if (setNumber == 10)
-            for (KanaQuestion question : getKanaSet(setNumber, CONSONANT))
-                returnValue += question.getKana() + " ";
+            returnValue += getKanaSetDisplay(setNumber, CONSONANT);
 
         return returnValue;
     }
