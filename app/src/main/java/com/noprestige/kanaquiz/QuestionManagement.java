@@ -30,17 +30,17 @@ abstract class QuestionManagement
 
     private static final int[] SET_TITLES = {SET_1_TITLE, SET_2_TITLE, SET_3_TITLE, SET_4_TITLE, SET_5_TITLE, SET_6_TITLE, SET_7_TITLE, SET_8_TITLE, SET_9_TITLE, SET_10_TITLE};
 
-    protected void addKanaSet(KanaQuestion[] kanaSet, int number)
+    void addKanaSet(KanaQuestion[] kanaSet, int number)
     {
         addKanaSet(kanaSet, number, NO_DIACRITIC);
     }
 
-    protected void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
+    void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
     {
         addKanaSet(kanaSet, number, diacritic, false);
     }
 
-    protected void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
+    void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
     {
         int a = number - 1;
         int b = diacritic.ordinal();
@@ -53,7 +53,7 @@ abstract class QuestionManagement
             kanaSets[a][b][c] = kanaSet;
     }
 
-    protected void addPrefIds(int[] prefIds)
+    void addPrefIds(int[] prefIds)
     {
         if (this.prefIds != null)
             throw new IllegalArgumentException();
@@ -171,7 +171,7 @@ abstract class QuestionManagement
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
-    String getKanaSetDisplay(int setNumber)
+    private String getKanaSetDisplay(int setNumber)
     {
         return getKanaSetDisplay(setNumber, NO_DIACRITIC);
     }
@@ -184,7 +184,7 @@ abstract class QuestionManagement
         return returnValue;
     }
 
-    String displayContents(int setNumber)
+    private String displayContents(int setNumber)
     {
         String returnValue = "";
 
