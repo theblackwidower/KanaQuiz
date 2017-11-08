@@ -112,7 +112,7 @@ class Katakana extends QuestionManagement
             new KanaQuestion('ベ', "be"),
             new KanaQuestion('ボ', "bo")};
 
-    private static final KanaQuestion[] KANA_SET_6_HANDAKETEN = {
+    private static final KanaQuestion[] KANA_SET_6_HANDAKUTEN = {
             new KanaQuestion('パ', "pa"),
             new KanaQuestion('ピ', "pi"),
             new KanaQuestion('プ', "pu"),
@@ -129,7 +129,7 @@ class Katakana extends QuestionManagement
             new KanaQuestion("ビュ", "byu"),
             new KanaQuestion("ビョ", "byo")};
 
-    private static final KanaQuestion[] KANA_SET_6_HANDAKETEN_DIGRAPHS = {
+    private static final KanaQuestion[] KANA_SET_6_HANDAKUTEN_DIGRAPHS = {
             new KanaQuestion("ピャ", "pya"),
             new KanaQuestion("ピュ", "pyu"),
             new KanaQuestion("ピョ", "pyo")};
@@ -207,10 +207,10 @@ class Katakana extends QuestionManagement
 
         addKanaSet(KANA_SET_6_BASE, 6);
         addKanaSet(KANA_SET_6_DAKUTEN, 6, DAKUTEN);
-        addKanaSet(KANA_SET_6_HANDAKETEN, 6, HANDAKUTEN);
+        addKanaSet(KANA_SET_6_HANDAKUTEN, 6, HANDAKUTEN);
         addKanaSet(KANA_SET_6_BASE_DIGRAPHS, 6, NO_DIACRITIC, true);
         addKanaSet(KANA_SET_6_DAKUTEN_DIGRAPHS, 6, DAKUTEN, true);
-        addKanaSet(KANA_SET_6_HANDAKETEN_DIGRAPHS, 6, HANDAKUTEN, true);
+        addKanaSet(KANA_SET_6_HANDAKUTEN_DIGRAPHS, 6, HANDAKUTEN, true);
 
         addKanaSet(KANA_SET_7, 7);
         addKanaSet(KANA_SET_7_DIGRAPHS, 7, NO_DIACRITIC, true);
