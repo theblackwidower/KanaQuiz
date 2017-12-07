@@ -30,62 +30,19 @@ abstract class QuestionManagement
 
     private static final int[] SET_TITLES = {SET_1_TITLE, SET_2_TITLE, SET_3_TITLE, SET_4_TITLE, SET_5_TITLE, SET_6_TITLE, SET_7_TITLE, SET_8_TITLE, SET_9_TITLE, SET_10_TITLE};
 
-    void addKanaSet(KanaQuestion[] kanaSet, int number)
-    {
-        addKanaSet(kanaSet, number, NO_DIACRITIC);
-    }
-
-    void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic)
-    {
-        addKanaSet(kanaSet, number, diacritic, false);
-    }
-
-    void addKanaSet(KanaQuestion[] kanaSet, int number, Diacritic diacritic, boolean isDigraphs)
-    {
-        int a = number - 1;
-        int b = diacritic.ordinal();
-        int c = isDigraphs ? 1 : 0;
-
-        if (kanaSets[a][b][c] != null)
-            throw new IllegalArgumentException("Kana set " + number + " " + diacritic.name() +
-                    (isDigraphs ? " digraphs" : " monographs") + " already exists");
-        else
-            kanaSets[a][b][c] = kanaSet;
-    }
-
-    void addPrefIds(int[] prefIds)
-    {
-        if (this.prefIds != null)
-            throw new IllegalArgumentException();
-        else
-            this.prefIds = prefIds;
-    }
-
-    private KanaQuestion[] getKanaSet(int number)
+    KanaQuestion[] getKanaSet(int number)
     {
         return getKanaSet(number, NO_DIACRITIC);
     }
 
-    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic)
+    KanaQuestion[] getKanaSet(int number, Diacritic diacritic)
     {
         return getKanaSet(number, diacritic, false);
     }
 
-    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
-    {
-        KanaQuestion[] value = kanaSets[number - 1][diacritic.ordinal()][isDigraphs ? 1 : 0];
+    abstract KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs);
 
-        if (value != null && value.length > 0)
-            return value;
-        else
-            throw new NullPointerException("Kana set " + number + " " + diacritic.name() +
-                    (isDigraphs ? " digraphs" : " monographs") + " does not exist");
-    }
-
-    private int getPrefId(int number)
-    {
-        return prefIds[number - 1];
-    }
+    abstract int getPrefId(int number);
 
     private int getSetTitle(int number)
     {

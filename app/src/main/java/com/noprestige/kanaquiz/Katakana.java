@@ -1,10 +1,5 @@
 package com.noprestige.kanaquiz;
 
-import static com.noprestige.kanaquiz.Diacritic.CONSONANT;
-import static com.noprestige.kanaquiz.Diacritic.DAKUTEN;
-import static com.noprestige.kanaquiz.Diacritic.HANDAKUTEN;
-import static com.noprestige.kanaquiz.Diacritic.NO_DIACRITIC;
-
 class Katakana extends QuestionManagement
 {
     private static final KanaQuestion[] KANA_SET_1 = {
@@ -181,49 +176,152 @@ class Katakana extends QuestionManagement
     private static final int PREFID_9 = R.string.prefid_katakana_9;
     private static final int PREFID_10 = R.string.prefid_katakana_10;
 
-    static final Katakana QUESTIONS = new Katakana(); //Must remain the last constant generated
+    static final Katakana QUESTIONS = new Katakana();
 
     private Katakana()
     {
-        addKanaSet(KANA_SET_1, 1);
+    }
 
-        addKanaSet(KANA_SET_2_BASE, 2);
-        addKanaSet(KANA_SET_2_DAKUTEN, 2, DAKUTEN);
-        addKanaSet(KANA_SET_2_BASE_DIGRAPHS, 2, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_2_DAKUTEN_DIGRAPHS, 2, DAKUTEN, true);
+    KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
+    {
+        if (isDigraphs)
+        {
+            switch (diacritic)
+            {
+                case NO_DIACRITIC:
+                    switch (number)
+                    {
+                        case 2:
+                            return KANA_SET_2_BASE_DIGRAPHS;
+                        case 3:
+                            return KANA_SET_3_BASE_DIGRAPHS;
+                        case 4:
+                            return KANA_SET_4_BASE_DIGRAPHS;
+                        case 5:
+                            return KANA_SET_5_DIGRAPHS;
+                        case 6:
+                            return KANA_SET_6_BASE_DIGRAPHS;
+                        case 7:
+                            return KANA_SET_7_DIGRAPHS;
+                        case 8:
+                            return KANA_SET_8_DIGRAPHS;
+                    }
+                    break;
 
-        addKanaSet(KANA_SET_3_BASE, 3);
-        addKanaSet(KANA_SET_3_DAKUTEN, 3, DAKUTEN);
-        addKanaSet(KANA_SET_3_BASE_DIGRAPHS, 3, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_3_DAKUTEN_DIGRAPHS, 3, DAKUTEN, true);
+                case DAKUTEN:
+                    switch (number)
+                    {
+                        case 2:
+                            return KANA_SET_2_DAKUTEN_DIGRAPHS;
+                        case 3:
+                            return KANA_SET_3_DAKUTEN_DIGRAPHS;
+                        case 4:
+                            return KANA_SET_4_DAKUTEN_DIGRAPHS;
+                        case 6:
+                            return KANA_SET_6_DAKUTEN_DIGRAPHS;
+                    }
+                    break;
 
-        addKanaSet(KANA_SET_4_BASE, 4);
-        addKanaSet(KANA_SET_4_DAKUTEN, 4, DAKUTEN);
-        addKanaSet(KANA_SET_4_BASE_DIGRAPHS, 4, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_4_DAKUTEN_DIGRAPHS, 4, DAKUTEN, true);
+                case HANDAKUTEN:
+                    switch (number)
+                    {
+                        case 6:
+                            return KANA_SET_6_HANDAKUTEN_DIGRAPHS;
+                    }
+                    break;
+            }
+            throw new NullPointerException("Kana set " + number + " " + diacritic.name() + " digraphs does not exist");
+        }
+        else
+        {
+            switch (diacritic)
+            {
+                case NO_DIACRITIC:
+                    switch (number)
+                    {
+                        case 1:
+                            return KANA_SET_1;
+                        case 2:
+                            return KANA_SET_2_BASE;
+                        case 3:
+                            return KANA_SET_3_BASE;
+                        case 4:
+                            return KANA_SET_4_BASE;
+                        case 5:
+                            return KANA_SET_5;
+                        case 6:
+                            return KANA_SET_6_BASE;
+                        case 7:
+                            return KANA_SET_7;
+                        case 8:
+                            return KANA_SET_8;
+                        case 9:
+                            return KANA_SET_9;
+                        case 10:
+                            return KANA_SET_10_W_GROUP;
+                    }
+                    break;
 
-        addKanaSet(KANA_SET_5, 5);
-        addKanaSet(KANA_SET_5_DIGRAPHS, 5, NO_DIACRITIC, true);
+                case DAKUTEN:
+                    switch (number)
+                    {
+                        case 2:
+                            return KANA_SET_2_DAKUTEN;
+                        case 3:
+                            return KANA_SET_3_DAKUTEN;
+                        case 4:
+                            return KANA_SET_4_DAKUTEN;
+                        case 6:
+                            return KANA_SET_6_DAKUTEN;
+                    }
+                    break;
 
-        addKanaSet(KANA_SET_6_BASE, 6);
-        addKanaSet(KANA_SET_6_DAKUTEN, 6, DAKUTEN);
-        addKanaSet(KANA_SET_6_HANDAKUTEN, 6, HANDAKUTEN);
-        addKanaSet(KANA_SET_6_BASE_DIGRAPHS, 6, NO_DIACRITIC, true);
-        addKanaSet(KANA_SET_6_DAKUTEN_DIGRAPHS, 6, DAKUTEN, true);
-        addKanaSet(KANA_SET_6_HANDAKUTEN_DIGRAPHS, 6, HANDAKUTEN, true);
+                case HANDAKUTEN:
+                    switch (number)
+                    {
+                        case 6:
+                            return KANA_SET_6_HANDAKUTEN;
+                    }
+                    break;
 
-        addKanaSet(KANA_SET_7, 7);
-        addKanaSet(KANA_SET_7_DIGRAPHS, 7, NO_DIACRITIC, true);
+                case CONSONANT:
+                    switch (number)
+                    {
+                        case 10:
+                            return KANA_SET_10_N_CONSONANT;
+                    }
+                    break;
+            }
+            throw new NullPointerException("Kana set " + number + " " + diacritic.name() + " monographs does not exist");
+        }
+    }
 
-        addKanaSet(KANA_SET_8, 8);
-        addKanaSet(KANA_SET_8_DIGRAPHS, 8, NO_DIACRITIC, true);
-
-        addKanaSet(KANA_SET_9, 9);
-
-        addKanaSet(KANA_SET_10_W_GROUP, 10);
-        addKanaSet(KANA_SET_10_N_CONSONANT, 10, CONSONANT);
-
-        addPrefIds(new int[]{PREFID_1, PREFID_2, PREFID_3, PREFID_4, PREFID_5,
-                PREFID_6, PREFID_7, PREFID_8, PREFID_9, PREFID_10});
+    int getPrefId(int number)
+    {
+        switch (number)
+        {
+            case 1:
+                return PREFID_1;
+            case 2:
+                return PREFID_2;
+            case 3:
+                return PREFID_3;
+            case 4:
+                return PREFID_4;
+            case 5:
+                return PREFID_5;
+            case 6:
+                return PREFID_6;
+            case 7:
+                return PREFID_7;
+            case 8:
+                return PREFID_8;
+            case 9:
+                return PREFID_9;
+            case 10:
+                return PREFID_10;
+            default:
+                throw new NullPointerException("PrefId: " + number + " does not exist");
+        }
     }
 }
