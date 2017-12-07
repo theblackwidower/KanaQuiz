@@ -14,9 +14,6 @@ abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    private KanaQuestion[][][][] kanaSets = new KanaQuestion[CATEGORY_COUNT][Diacritic.values().length][2][];
-    private int[] prefIds;
-
     private static final int SET_1_TITLE = R.string.set_1_title;
     private static final int SET_2_TITLE = R.string.set_2_title;
     private static final int SET_3_TITLE = R.string.set_3_title;
