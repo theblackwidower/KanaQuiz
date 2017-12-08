@@ -23,18 +23,22 @@
         <activity
             android:name=".OptionsScreen"
             android:label="@string/options_title"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".KanaSelection"
             android:label="@string/selection_title"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".AboutScreen"
             android:label="@string/about_title"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainQuiz"/>
         <activity
             android:name=".ReferenceScreen"
             android:label="@string/reference_title"
+            android:screenOrientation="portrait"
             android:parentActivityName=".MainQuiz"/>
     </application>
 
