@@ -2,12 +2,15 @@ package com.noprestige.kanaquiz;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 class KanaQuestionBank extends ArrayList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private Random rng = new Random();
+
+    private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 4;
 
     private QuestionRecord previousQuestions = null;
 
@@ -66,12 +69,18 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers()
     {
-        //TODO: Randomize so we select a limited number from a larger selection.
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
-        for (int i = 0; i < size(); i++)
-            if (!possibleAnswerStrings.contains(get(i).fetchCorrectAnswer()))
-                possibleAnswerStrings.add(get(i).fetchCorrectAnswer());
+        possibleAnswerStrings.add(fetchCorrectAnswer());
+
+        while (possibleAnswerStrings.size() < Math.min(this.size(), MAX_MULTIPLE_CHOICE_ANSWERS))
+        {
+            int rand = rng.nextInt(this.size());
+            if (!possibleAnswerStrings.contains(get(rand).fetchCorrectAnswer()))
+                possibleAnswerStrings.add(get(rand).fetchCorrectAnswer());
+        }
+
+        Collections.shuffle(possibleAnswerStrings);
 
         String[] returnValue = new String[possibleAnswerStrings.size()];
         possibleAnswerStrings.toArray(returnValue);
