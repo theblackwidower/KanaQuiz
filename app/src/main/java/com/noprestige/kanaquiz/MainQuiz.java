@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ public class MainQuiz extends AppCompatActivity
     private TextView lblResponse;
     private EditText txtAnswer;
     private TextView lblDisplayKana;
+    private MultipleChoicePad btnMultipleChoice;
 
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
@@ -42,6 +44,7 @@ public class MainQuiz extends AppCompatActivity
         lblResponse = findViewById(R.id.lblResponse);
         txtAnswer = findViewById(R.id.txtAnswer);
         lblDisplayKana = findViewById(R.id.lblDisplayKana);
+        btnMultipleChoice = findViewById(R.id.btnMultipleChoice);
 
         oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
@@ -91,6 +94,18 @@ public class MainQuiz extends AppCompatActivity
 
         questionBank = Hiragana.QUESTIONS.getQuestionBank();
         questionBank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
+
+        //TODO: Fix spacing when txtAnswer is rendered invisible
+        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
+        {
+            txtAnswer.setVisibility(View.INVISIBLE);
+            btnMultipleChoice.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            txtAnswer.setVisibility(View.VISIBLE);
+            btnMultipleChoice.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void nextQuestion()
@@ -102,6 +117,7 @@ public class MainQuiz extends AppCompatActivity
 //            txtAnswer.setEnabled(true);
             isRetrying = false;
             ReadyForAnswer();
+            btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
         }
         catch (NoQuestionsException ex)
         {
@@ -131,7 +147,7 @@ public class MainQuiz extends AppCompatActivity
             lblScore.setText("");
     }
 
-    private void checkAnswer(String answer)
+    public void checkAnswer(String answer)
     {
         if (canSubmit && !answer.isEmpty())
         {
@@ -196,7 +212,10 @@ public class MainQuiz extends AppCompatActivity
 
     private void ReadyForAnswer()
     {
-        lblResponse.setText(R.string.request_answer);
+        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
+            lblResponse.setText(R.string.request_multiple_choice);
+        else
+            lblResponse.setText(R.string.request_text_input);
         canSubmit = true;
         txtAnswer.requestFocus();
         lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours

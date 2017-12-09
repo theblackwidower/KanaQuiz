@@ -14,7 +14,8 @@
     <string name="no_questions">No Questions available</string>
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
-    <string name="request_answer">Enter the Romanji equivalent</string>
+    <string name="request_text_input">Enter the Romanji equivalent</string>
+    <string name="request_multiple_choice">Select the Romanji equivalent</string>
     <string name="try_again">Try again</string>
     <string name="show_correct_answer">The correct answer is</string>
 
@@ -64,6 +65,10 @@
     <string name="full_reference_option_title">Display full reference</string>
     <string name="full_reference_option_summary">Reference screen will display all kana</string>
     <string name="prefid_full_reference">full_reference</string>
+
+    <string name="multiple_choice_option_title">Multiple Choice Questions (beta)</string>
+    <string name="multiple_choice_option_summary">Questions will be in multiple choice</string>
+    <string name="prefid_multiple_choice">multiple_choice</string>
 
     <!-- Other -->
     <string name="base_form_title">Main</string>

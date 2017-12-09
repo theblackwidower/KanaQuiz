@@ -50,4 +50,11 @@
         android:text=""
         android:textAlignment="center"/>
 
+    <com.noprestige.kanaquiz.MultipleChoicePad
+        android:id="@+id/btnMultipleChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="invisible"/>
+
 </LinearLayout>

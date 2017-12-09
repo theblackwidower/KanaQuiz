@@ -27,4 +27,9 @@
         android:title="@string/full_reference_option_title"
         android:summary="@string/full_reference_option_summary"
         android:defaultValue="false"/>
+    <CheckBoxPreference
+        android:key="@string/prefid_multiple_choice"
+        android:title="@string/multiple_choice_option_title"
+        android:summary="@string/multiple_choice_option_summary"
+        android:defaultValue="false"/>
 </PreferenceScreen>

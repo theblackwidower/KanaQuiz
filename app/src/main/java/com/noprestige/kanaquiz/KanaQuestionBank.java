@@ -66,6 +66,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers()
     {
+        //TODO: Randomize so we select a limited number from a larger selection.
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
         for (int i = 0; i < size(); i++)
