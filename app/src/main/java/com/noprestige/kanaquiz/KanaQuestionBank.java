@@ -10,7 +10,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     private KanaQuestion currentQuestion;
     private Random rng = new Random();
 
-    private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 4;
+    private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions = null;
 

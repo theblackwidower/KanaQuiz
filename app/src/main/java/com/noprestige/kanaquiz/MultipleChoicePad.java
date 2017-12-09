@@ -8,10 +8,15 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
+import static android.view.Gravity.CENTER_HORIZONTAL;
+
 public class MultipleChoicePad extends LinearLayout
 {
     private ArrayList<String> choices = new ArrayList<>();
     private ArrayList<Button> btnChoices = new ArrayList<>();
+
+    private LinearLayout lastRow = null;
+    private static final int MAX_COLUMNS = 3;
 
     public MultipleChoicePad(Context context)
     {
@@ -48,8 +53,8 @@ public class MultipleChoicePad extends LinearLayout
     public void deleteChoices()
     {
         choices = new ArrayList<>();
-        for (Button button : btnChoices)
-            this.removeView(button);
+        lastRow = null;
+        this.removeAllViews();
         btnChoices = new ArrayList<>();
     }
 
@@ -67,8 +72,14 @@ public class MultipleChoicePad extends LinearLayout
                 }
         );
         btnNewButton.setText(answer);
-        this.addView(btnNewButton);
-        // TODO: Fix button layout
+        if (lastRow == null || lastRow.getChildCount() >= MAX_COLUMNS)
+        {
+            lastRow = new LinearLayout(getContext());
+            lastRow.setOrientation(HORIZONTAL);
+            lastRow.setGravity(CENTER_HORIZONTAL);
+            this.addView(lastRow);
+        }
+        lastRow.addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
 
