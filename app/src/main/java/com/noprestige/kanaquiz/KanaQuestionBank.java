@@ -69,15 +69,21 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers()
     {
+        ArrayList<String> fullAnswerList = new ArrayList<>();
+
+        for (int i = 0; i < size(); i++)
+            if (!fullAnswerList.contains(get(i).fetchCorrectAnswer()))
+                fullAnswerList.add(get(i).fetchCorrectAnswer());
+
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
         possibleAnswerStrings.add(fetchCorrectAnswer());
 
-        while (possibleAnswerStrings.size() < Math.min(this.size(), MAX_MULTIPLE_CHOICE_ANSWERS))
+        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.size(), MAX_MULTIPLE_CHOICE_ANSWERS))
         {
-            int rand = rng.nextInt(this.size());
-            if (!possibleAnswerStrings.contains(get(rand).fetchCorrectAnswer()))
-                possibleAnswerStrings.add(get(rand).fetchCorrectAnswer());
+            int rand = rng.nextInt(fullAnswerList.size());
+            if (!possibleAnswerStrings.contains(fullAnswerList.get(rand)))
+                possibleAnswerStrings.add(fullAnswerList.get(rand));
         }
 
         Collections.shuffle(possibleAnswerStrings);
