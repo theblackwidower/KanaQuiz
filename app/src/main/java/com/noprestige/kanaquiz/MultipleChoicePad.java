@@ -1,6 +1,8 @@
 package com.noprestige.kanaquiz;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +44,8 @@ public class MultipleChoicePad extends LinearLayout
 
     public void onAnswerSubmit(String userAnswer)
     {
+        for (Button btnChoice : btnChoices)
+            btnChoice.setEnabled(false);
         ((MainQuiz) getContext()).checkAnswer(userAnswer);
     }
 
@@ -67,6 +71,8 @@ public class MultipleChoicePad extends LinearLayout
                     @Override
                     public void onClick(View view)
                     {
+                        //ref: https://stackoverflow.com/questions/1521640/standard-android-button-with-a-different-color
+                        view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                         onAnswerSubmit(answer);
                     }
                 }
