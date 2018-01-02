@@ -114,7 +114,7 @@ public class MainQuiz extends AppCompatActivity
         {
             questionBank.newQuestion();
             lblDisplayKana.setText(questionBank.getCurrentKana());
-//            txtAnswer.setEnabled(true);
+            txtAnswer.setEnabled(true);
             isRetrying = false;
             ReadyForAnswer();
             btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
