@@ -49,6 +49,12 @@ public class MultipleChoicePad extends LinearLayout
         ((MainQuiz) getContext()).checkAnswer(userAnswer);
     }
 
+    public void enableButtons()
+    {
+        for (Button btnChoice : btnChoices)
+            btnChoice.setEnabled(true);
+    }
+
     public String[] getChoices()
     {
         return (String[]) choices.toArray();
@@ -74,6 +80,7 @@ public class MultipleChoicePad extends LinearLayout
                         //ref: https://stackoverflow.com/questions/1521640/standard-android-button-with-a-different-color
                         view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                         onAnswerSubmit(answer);
+                        btnChoices.remove(view); //prevents selected button from being re-enabled
                     }
                 }
         );

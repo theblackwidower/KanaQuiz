@@ -187,6 +187,7 @@ public class MainQuiz extends AppCompatActivity
                                 public void run()
                                 {
                                     ReadyForAnswer();
+                                    btnMultipleChoice.enableButtons();
                                 }
                             }, 1000
                     );
