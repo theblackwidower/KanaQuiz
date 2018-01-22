@@ -14,7 +14,6 @@ import static android.view.Gravity.CENTER_HORIZONTAL;
 
 public class MultipleChoicePad extends LinearLayout
 {
-    private ArrayList<String> choices = new ArrayList<>();
     private ArrayList<Button> btnChoices = new ArrayList<>();
 
     private LinearLayout lastRow = null;
@@ -55,14 +54,8 @@ public class MultipleChoicePad extends LinearLayout
             btnChoice.setEnabled(true);
     }
 
-    public String[] getChoices()
-    {
-        return (String[]) choices.toArray();
-    }
-
     public void deleteChoices()
     {
-        choices = new ArrayList<>();
         lastRow = null;
         this.removeAllViews();
         btnChoices = new ArrayList<>();
