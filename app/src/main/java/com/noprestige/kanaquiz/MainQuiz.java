@@ -95,6 +95,8 @@ public class MainQuiz extends AppCompatActivity
         questionBank = Hiragana.QUESTIONS.getQuestionBank();
         questionBank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
 
+        txtAnswer.setEnabled(true);
+
         //TODO: Fix spacing when txtAnswer is rendered invisible
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
         {
@@ -116,7 +118,6 @@ public class MainQuiz extends AppCompatActivity
         {
             questionBank.newQuestion();
             lblDisplayKana.setText(questionBank.getCurrentKana());
-            txtAnswer.setEnabled(true);
             isRetrying = false;
             if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
                 btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
