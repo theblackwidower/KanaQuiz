@@ -118,19 +118,23 @@ public class MainQuiz extends AppCompatActivity
             lblDisplayKana.setText(questionBank.getCurrentKana());
             txtAnswer.setEnabled(true);
             isRetrying = false;
+            if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
+                btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
             ReadyForAnswer();
-            btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
         }
         catch (NoQuestionsException ex)
         {
             lblDisplayKana.setText("");
             lblResponse.setText(R.string.no_questions);
-            txtAnswer.setEnabled(false);
             canSubmit = false;
             lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
-            txtAnswer.setText("");
             if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
                 btnMultipleChoice.deleteChoices();
+            else
+            {
+                txtAnswer.setEnabled(false);
+                txtAnswer.setText("");
+            }
         }
 
         TextView lblScore = findViewById(R.id.lblScore);
@@ -219,11 +223,13 @@ public class MainQuiz extends AppCompatActivity
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
             lblResponse.setText(R.string.request_multiple_choice);
         else
+        {
             lblResponse.setText(R.string.request_text_input);
+            txtAnswer.requestFocus();
+            txtAnswer.setText("");
+        }
         canSubmit = true;
-        txtAnswer.requestFocus();
         lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
-        txtAnswer.setText("");
     }
 
     @Override
