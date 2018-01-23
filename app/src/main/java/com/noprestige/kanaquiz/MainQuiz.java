@@ -99,11 +99,13 @@ public class MainQuiz extends AppCompatActivity
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
         {
             txtAnswer.setVisibility(View.INVISIBLE);
+            txtAnswer.setHeight(0);
             btnMultipleChoice.setVisibility(View.VISIBLE);
         }
         else
         {
             txtAnswer.setVisibility(View.VISIBLE);
+            txtAnswer.setLines(1);
             btnMultipleChoice.setVisibility(View.INVISIBLE);
         }
     }
