@@ -129,6 +129,8 @@ public class MainQuiz extends AppCompatActivity
             canSubmit = false;
             lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
             txtAnswer.setText("");
+            if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
+                btnMultipleChoice.deleteChoices();
         }
 
         TextView lblScore = findViewById(R.id.lblScore);
