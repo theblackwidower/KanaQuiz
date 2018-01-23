@@ -179,7 +179,6 @@ public class MainQuiz extends AppCompatActivity
                 }
                 else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
                 {
-                    txtAnswer.setText("");
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.try_again));
                     isRetrying = true;
