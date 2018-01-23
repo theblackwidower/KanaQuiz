@@ -69,6 +69,11 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers()
     {
+        return getPossibleAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+    }
+
+    String[] getPossibleAnswers(int maxChoices)
+    {
         ArrayList<String> fullAnswerList = new ArrayList<>();
 
         for (int i = 0; i < size(); i++)
@@ -79,7 +84,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
         possibleAnswerStrings.add(fetchCorrectAnswer());
 
-        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.size(), MAX_MULTIPLE_CHOICE_ANSWERS))
+        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.size(), maxChoices))
         {
             int rand = rng.nextInt(fullAnswerList.size());
             if (!possibleAnswerStrings.contains(fullAnswerList.get(rand)))
