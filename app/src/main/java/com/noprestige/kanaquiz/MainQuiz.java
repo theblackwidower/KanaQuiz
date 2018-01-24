@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -35,6 +36,9 @@ public class MainQuiz extends AppCompatActivity
     private Handler delayHandler = new Handler();
 
     private boolean isRetrying = false;
+
+    LogDao database = Room.databaseBuilder(getApplicationContext(),
+            LogDatabase.class, "user-logs").build().logDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -168,12 +172,17 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setText(R.string.correct_answer);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
                 if (!isRetrying)
+                {
                     totalCorrect++;
+                    database.reportCorrectAnswer(lblDisplayKana.getText().toString());
+                }
             }
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+
+                database.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
 
                 if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 {

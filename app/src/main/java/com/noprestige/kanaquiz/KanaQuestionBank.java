@@ -22,6 +22,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     void newQuestion() throws NoQuestionsException
     {
+        //TODO: Weight question choice by kana records
         if (this.size() > 1)
         {
             if (previousQuestions == null)
@@ -85,6 +86,8 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
                 if (!fullAnswerList.contains(get(i).fetchCorrectAnswer()))
                     fullAnswerList.add(get(i).fetchCorrectAnswer());
         }
+
+        //TODO: Weight displayed choices by incorrect answer records
 
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
