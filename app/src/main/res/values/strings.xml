@@ -66,7 +66,7 @@
     <string name="full_reference_option_summary">Reference screen will display all kana</string>
     <string name="prefid_full_reference">full_reference</string>
 
-    <string name="multiple_choice_option_title">Multiple Choice Questions (beta)</string>
+    <string name="multiple_choice_option_title">Multiple Choice Questions</string>
     <string name="multiple_choice_option_summary">Questions will be in multiple choice</string>
     <string name="prefid_multiple_choice">multiple_choice</string>
 
