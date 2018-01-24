@@ -37,8 +37,7 @@ public class MainQuiz extends AppCompatActivity
 
     private boolean isRetrying = false;
 
-    LogDao database = Room.databaseBuilder(getApplicationContext(),
-            LogDatabase.class, "user-logs").build().logDao();
+    LogDao database = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,6 +54,10 @@ public class MainQuiz extends AppCompatActivity
         onConfigurationChanged(getResources().getConfiguration());
 
         OptionsControl.initialize(this);
+
+        //TODO: Figure out how to run the database on a different thread.
+        database = Room.databaseBuilder(getApplicationContext(),
+                LogDatabase.class, "user-logs").allowMainThreadQueries().build().logDao();
 
         txtAnswer.setOnEditorActionListener(
                 new TextView.OnEditorActionListener()
