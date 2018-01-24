@@ -37,8 +37,6 @@ public class MainQuiz extends AppCompatActivity
 
     private boolean isRetrying = false;
 
-    LogDao database = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,8 +54,9 @@ public class MainQuiz extends AppCompatActivity
         OptionsControl.initialize(this);
 
         //TODO: Figure out how to run the database on a different thread.
-        database = Room.databaseBuilder(getApplicationContext(),
-                LogDatabase.class, "user-logs").allowMainThreadQueries().build().logDao();
+        if (LogDatabase.DAO == null)
+            LogDatabase.DAO = Room.databaseBuilder(getApplicationContext(),
+                    LogDatabase.class, "user-logs").allowMainThreadQueries().build().logDao();
 
         txtAnswer.setOnEditorActionListener(
                 new TextView.OnEditorActionListener()
@@ -177,7 +176,7 @@ public class MainQuiz extends AppCompatActivity
                 if (!isRetrying)
                 {
                     totalCorrect++;
-                    database.reportCorrectAnswer(lblDisplayKana.getText().toString());
+                    LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
             }
             else
@@ -185,7 +184,7 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setText(R.string.incorrect_answer);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
-                database.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
+                LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
 
                 if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 {
