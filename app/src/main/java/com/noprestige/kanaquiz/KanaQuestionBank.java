@@ -8,6 +8,7 @@ import java.util.Random;
 class KanaQuestionBank extends ArrayList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
+    private ArrayList<String> fullAnswerList = null;
     private Random rng = new Random();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
@@ -51,12 +52,14 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     boolean addQuestions(KanaQuestion[] questions)
     {
         previousQuestions = null;
+        fullAnswerList = null;
         return super.addAll(Arrays.asList(questions));
     }
 
     boolean addQuestions(KanaQuestion[] questions1, KanaQuestion[] questions2)
     {
         previousQuestions = null;
+        fullAnswerList = null;
         return (super.addAll(Arrays.asList(questions1)) &&
                 super.addAll(Arrays.asList(questions2)));
     }
@@ -64,6 +67,7 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
+        fullAnswerList = null;
         return super.addAll(questions);
     }
 
@@ -74,11 +78,13 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     String[] getPossibleAnswers(int maxChoices)
     {
-        ArrayList<String> fullAnswerList = new ArrayList<>();
-
-        for (int i = 0; i < size(); i++)
-            if (!fullAnswerList.contains(get(i).fetchCorrectAnswer()))
-                fullAnswerList.add(get(i).fetchCorrectAnswer());
+        if (fullAnswerList == null)
+        {
+            fullAnswerList = new ArrayList<>();
+            for (int i = 0; i < size(); i++)
+                if (!fullAnswerList.contains(get(i).fetchCorrectAnswer()))
+                    fullAnswerList.add(get(i).fetchCorrectAnswer());
+        }
 
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
