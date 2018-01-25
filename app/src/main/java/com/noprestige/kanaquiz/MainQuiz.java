@@ -184,7 +184,10 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setText(R.string.incorrect_answer);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
-                LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
+                if (!isRetrying)
+                    LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
+                else
+                    LogDatabase.DAO.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
                 if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 {

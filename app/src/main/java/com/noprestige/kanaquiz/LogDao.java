@@ -98,6 +98,11 @@ public abstract class LogDao
         addIncorrectAnswerRecord(kana, romanji);
     }
 
+    public void reportIncorrectRetry(String kana, String romanji)
+    {
+        addIncorrectAnswerRecord(kana, romanji);
+    }
+
     @Query("DELETE FROM daily_record WHERE 1 = 1")
     abstract void deleteAllDailyRecords();
 
