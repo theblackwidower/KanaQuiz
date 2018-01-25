@@ -11,6 +11,9 @@
         android:id="@+id/mnuOptions"
         android:title="@string/options_title"/>
     <item
+        android:id="@+id/mnuLogs"
+        android:title="@string/view_logs"/>
+    <item
         android:id="@+id/mnuAbout"
         android:title="@string/about_title"/>
 </menu>

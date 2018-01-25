@@ -20,6 +20,9 @@ public abstract class LogDao
     @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji")
     abstract LogIncorrectAnswer getAnswerRecord(String kana, String romanji);
 
+    @Query("SELECT * FROM daily_record")
+    abstract LogDailyRecord[] getAllDailyRecords();
+
     public float getDailyPercentage(Date date)
     {
         LogDailyRecord record = getDateRecord(date);

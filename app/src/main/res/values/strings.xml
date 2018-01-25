@@ -74,6 +74,7 @@
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
+    <string name="view_logs">View Logs</string>
 
     <!-- Kana Selection -->
     <string name="hiragana">Hiragana</string>

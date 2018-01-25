@@ -270,6 +270,9 @@ public class MainQuiz extends AppCompatActivity
                 destination = OptionsScreen.class;
                 result = 1;
                 break;
+            case R.id.mnuLogs:
+                destination = LogView.class;
+                break;
             case R.id.mnuAbout:
                 destination = AboutScreen.class;
                 break;

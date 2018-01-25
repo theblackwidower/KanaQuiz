@@ -40,6 +40,11 @@
             android:label="@string/reference_title"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainQuiz"/>
+        <activity
+            android:name=".LogView"
+            android:label="@string/view_logs"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainQuiz"/>
     </application>
 
 </manifest>
