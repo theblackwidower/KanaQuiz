@@ -32,13 +32,13 @@ public abstract class LogDao
     public float getDailyPercentage(Date date)
     {
         LogDailyRecord record = getDateRecord(date);
-        return (float) record.correct_answers / (float) record.incorrect_answers;
+        return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
     }
 
     public float getKanaPercentage(String kana)
     {
         LogKanaRecord record = getKanaRecord(kana);
-        return (float) record.correct_answers / (float) record.incorrect_answers;
+        return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
     }
 
     public int getIncorrectAnswerCount(String kana, String romanji)
