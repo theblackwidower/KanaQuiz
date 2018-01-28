@@ -8,7 +8,7 @@ import java.util.TreeMap;
 class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 {
     private KanaQuestion currentQuestion;
-    private ArrayList<String> fullAnswerList = null;
+    private String[] fullAnswerList = null;
     private Random rng = new Random();
     private int maxValue = 0;
 
@@ -88,10 +88,11 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
     {
         if (fullAnswerList == null)
         {
-            fullAnswerList = new ArrayList<>();
+            ArrayList<String> answers = new ArrayList<>();
             for (KanaQuestion question : values())
-                if (!fullAnswerList.contains(question.fetchCorrectAnswer()))
-                    fullAnswerList.add(question.fetchCorrectAnswer());
+                if (!answers.contains(question.fetchCorrectAnswer()))
+                    answers.add(question.fetchCorrectAnswer());
+            fullAnswerList = (String[]) answers.toArray();
         }
 
         //TODO: Weight displayed choices by incorrect answer records
@@ -100,11 +101,11 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 
         possibleAnswerStrings.add(fetchCorrectAnswer());
 
-        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.size(), maxChoices))
+        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.length, maxChoices))
         {
-            int rand = rng.nextInt(fullAnswerList.size());
-            if (!possibleAnswerStrings.contains(fullAnswerList.get(rand)))
-                possibleAnswerStrings.add(fullAnswerList.get(rand));
+            int rand = rng.nextInt(fullAnswerList.length);
+            if (!possibleAnswerStrings.contains(fullAnswerList[rand]))
+                possibleAnswerStrings.add(fullAnswerList[rand]);
         }
 
         Collections.shuffle(possibleAnswerStrings);
