@@ -89,9 +89,9 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         if (fullAnswerList == null)
         {
             fullAnswerList = new ArrayList<>();
-            for (int i = 0; i < size(); i++)
-                if (!fullAnswerList.contains(get(i).fetchCorrectAnswer()))
-                    fullAnswerList.add(get(i).fetchCorrectAnswer());
+            for (KanaQuestion question : values())
+                if (!fullAnswerList.contains(question.fetchCorrectAnswer()))
+                    fullAnswerList.add(question.fetchCorrectAnswer());
         }
 
         //TODO: Weight displayed choices by incorrect answer records
