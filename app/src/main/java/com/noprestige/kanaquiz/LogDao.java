@@ -38,12 +38,19 @@ public abstract class LogDao
     public float getKanaPercentage(String kana)
     {
         LogKanaRecord record = getKanaRecord(kana);
-        return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
+        if (record == null)
+            return 0.9f;
+        else
+            return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
     }
 
     public int getIncorrectAnswerCount(String kana, String romanji)
     {
-        return getAnswerRecord(kana, romanji).occurrences;
+        LogIncorrectAnswer record = getAnswerRecord(kana, romanji);
+        if (record == null)
+            return 0;
+        else
+            return record.occurrences;
     }
 
     void addTodaysRecord(boolean isCorrect)

@@ -1,15 +1,16 @@
 package com.noprestige.kanaquiz;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import java.util.TreeMap;
 
-class KanaQuestionBank extends ArrayList<KanaQuestion>
+class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private ArrayList<String> fullAnswerList = null;
     private Random rng = new Random();
+    private int maxValue = 0;
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -22,13 +23,12 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
 
     void newQuestion() throws NoQuestionsException
     {
-        //TODO: Weight question choice by kana records
         if (this.size() > 1)
         {
             if (previousQuestions == null)
                 previousQuestions = new QuestionRecord(Math.min(this.size(), OptionsControl.getInt(R.string.prefid_repetition)));
             do
-                currentQuestion = this.get(rng.nextInt(this.size()));
+                currentQuestion = get(floorKey(rng.nextInt(maxValue)));
             while (!previousQuestions.add(currentQuestion));
         }
         else
@@ -54,22 +54,29 @@ class KanaQuestionBank extends ArrayList<KanaQuestion>
     {
         previousQuestions = null;
         fullAnswerList = null;
-        return super.addAll(Arrays.asList(questions));
+        for (KanaQuestion question : questions)
+        {
+            this.put(maxValue, question);
+            maxValue += (int) Math.ceil((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f);
+        }
+        return true;
     }
 
     boolean addQuestions(KanaQuestion[] questions1, KanaQuestion[] questions2)
     {
-        previousQuestions = null;
-        fullAnswerList = null;
-        return (super.addAll(Arrays.asList(questions1)) &&
-                super.addAll(Arrays.asList(questions2)));
+        return addQuestions(questions1) && addQuestions(questions2);
     }
 
     boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
         fullAnswerList = null;
-        return super.addAll(questions);
+
+        for (Integer key : questions.keySet())
+            this.put(maxValue + key, questions.get(key));
+        maxValue += questions.maxValue;
+
+        return true;
     }
 
     String[] getPossibleAnswers()
