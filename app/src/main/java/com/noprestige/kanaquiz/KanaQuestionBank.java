@@ -96,7 +96,13 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
             answers.toArray(fullAnswerList);
         }
 
-        //TODO: Weight displayed choices by incorrect answer records
+        TreeMap<Integer, String> weightedAnswerList = new TreeMap<>();
+        int answerListMaxValue = 0;
+        for(String answer : fullAnswerList)
+        {
+            weightedAnswerList.put(answerListMaxValue, answer);
+            answerListMaxValue += LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer) + 1;
+        }
 
         ArrayList<String> possibleAnswerStrings = new ArrayList<>();
 
@@ -104,9 +110,9 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 
         while (possibleAnswerStrings.size() < Math.min(fullAnswerList.length, maxChoices))
         {
-            int rand = rng.nextInt(fullAnswerList.length);
-            if (!possibleAnswerStrings.contains(fullAnswerList[rand]))
-                possibleAnswerStrings.add(fullAnswerList[rand]);
+            String choice = weightedAnswerList.get(weightedAnswerList.floorKey(rng.nextInt(answerListMaxValue)));
+            if (!possibleAnswerStrings.contains(choice))
+                possibleAnswerStrings.add(choice);
         }
 
         Collections.shuffle(possibleAnswerStrings);
