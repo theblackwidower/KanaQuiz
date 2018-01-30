@@ -255,4 +255,59 @@ abstract class QuestionManagement
 
         return layout;
     }
+
+    private static final String[] GOJUON_ORDER = {
+            "a", "i", "u", "e", "o",
+            "ka", "ki", "ku", "ke", "ko",
+            "kya", "kyu", "kyo",
+            "ga", "gi", "gu", "ge", "go",
+            "gya", "gyu", "gyo",
+            "sa", "shi", "su", "se", "so",
+            "sha", "shu", "sho",
+            "za", "ji", "zu", "ze", "zo",
+            "ja", "ju", "jo",
+            "ta", "chi", "tsu", "te", "to",
+            "cha", "chu", "cho",
+            "da", /*"ji", "zu",*/ "de", "do",
+            //"ja", "ju", "jo",
+            "na", "ni", "nu", "ne", "no",
+            "nya", "nyu", "nyo",
+            "ha", "hi", "fu", "he", "ho",
+            "hya", "hyu", "hyo",
+            "ba", "bi", "bu", "be", "bo",
+            "bya", "byu", "byo",
+            "pa", "pi", "pu", "pe", "po",
+            "pya", "pyu", "pyo",
+            "ma", "mi", "mu", "me", "mo",
+            "mya", "myu", "myo",
+            "ya", "yu", "yo",
+            "ra", "ri", "ru", "re", "ro",
+            "rya", "ryu", "ryo",
+            "wa", "wo",
+            "n",};
+
+    static void gojuonSort(String[] romanji)
+    {
+        //String order = "aiueokgszjtcdnhfbpmyrw";
+        for (int i = 1; i < romanji.length; i++)
+        {
+            for (int j = 0; j < romanji.length - i; j++)
+            {
+                if (getSortId(romanji[j]) > getSortId(romanji[j + 1]))
+                {
+                    String temp = romanji[j];
+                    romanji[j] = romanji[j + 1];
+                    romanji[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    private static int getSortId(String romanji)
+    {
+        for (int i = 0; i < GOJUON_ORDER.length; i++)
+            if (GOJUON_ORDER[i].equals(romanji))
+                return i;
+        return GOJUON_ORDER.length;
+    }
 }
