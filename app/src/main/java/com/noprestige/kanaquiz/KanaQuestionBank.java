@@ -115,10 +115,9 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
                 possibleAnswerStrings.add(choice);
         }
 
-        Collections.shuffle(possibleAnswerStrings);
-
         String[] returnValue = new String[possibleAnswerStrings.size()];
         possibleAnswerStrings.toArray(returnValue);
+        QuestionManagement.gojuonSort(returnValue);
         return returnValue;
     }
 }
