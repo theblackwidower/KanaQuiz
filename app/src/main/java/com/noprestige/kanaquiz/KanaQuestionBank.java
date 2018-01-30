@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -96,28 +95,36 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
             answers.toArray(fullAnswerList);
         }
 
-        TreeMap<Integer, String> weightedAnswerList = new TreeMap<>();
-        int answerListMaxValue = 0;
-        for(String answer : fullAnswerList)
+        if (fullAnswerList.length <= maxChoices)
+            return fullAnswerList;
+        else
         {
-            weightedAnswerList.put(answerListMaxValue, answer);
-            answerListMaxValue += LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer) + 1;
+            TreeMap<Integer, String> weightedAnswerList = new TreeMap<>();
+            int answerListMaxValue = 0;
+            for (String answer : fullAnswerList)
+            {
+                if (!answer.equals(fetchCorrectAnswer()))
+                {
+                    weightedAnswerList.put(answerListMaxValue, answer);
+                    answerListMaxValue += LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer) + 1;
+                }
+            }
+
+            ArrayList<String> possibleAnswerStrings = new ArrayList<>();
+
+            possibleAnswerStrings.add(fetchCorrectAnswer());
+
+            while (possibleAnswerStrings.size() < maxChoices)
+            {
+                String choice = weightedAnswerList.get(weightedAnswerList.floorKey(rng.nextInt(answerListMaxValue)));
+                if (!possibleAnswerStrings.contains(choice))
+                    possibleAnswerStrings.add(choice);
+            }
+
+            String[] returnValue = new String[possibleAnswerStrings.size()];
+            possibleAnswerStrings.toArray(returnValue);
+            QuestionManagement.gojuonSort(returnValue);
+            return returnValue;
         }
-
-        ArrayList<String> possibleAnswerStrings = new ArrayList<>();
-
-        possibleAnswerStrings.add(fetchCorrectAnswer());
-
-        while (possibleAnswerStrings.size() < Math.min(fullAnswerList.length, maxChoices))
-        {
-            String choice = weightedAnswerList.get(weightedAnswerList.floorKey(rng.nextInt(answerListMaxValue)));
-            if (!possibleAnswerStrings.contains(choice))
-                possibleAnswerStrings.add(choice);
-        }
-
-        String[] returnValue = new String[possibleAnswerStrings.size()];
-        possibleAnswerStrings.toArray(returnValue);
-        QuestionManagement.gojuonSort(returnValue);
-        return returnValue;
     }
 }
