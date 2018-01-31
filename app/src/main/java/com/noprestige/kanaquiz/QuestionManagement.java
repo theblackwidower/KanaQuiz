@@ -122,10 +122,10 @@ abstract class QuestionManagement
 
     private String getKanaSetDisplay(int setNumber, Diacritic diacritic)
     {
-        String returnValue = "";
+        StringBuilder returnValue = new StringBuilder();
         for (KanaQuestion question : getKanaSet(setNumber, diacritic, false))
-            returnValue += question.getKana() + " ";
-        return returnValue;
+            returnValue.append(question.getKana() + " ");
+        return returnValue.toString();
     }
 
     private String displayContents(int setNumber)
