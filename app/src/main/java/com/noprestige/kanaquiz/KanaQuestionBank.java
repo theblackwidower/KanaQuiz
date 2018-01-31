@@ -61,11 +61,6 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         return true;
     }
 
-    boolean addQuestions(KanaQuestion[] questions1, KanaQuestion[] questions2)
-    {
-        return addQuestions(questions1) && addQuestions(questions2);
-    }
-
     boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;

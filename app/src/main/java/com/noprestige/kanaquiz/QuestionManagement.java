@@ -70,15 +70,22 @@ abstract class QuestionManagement
 
             if (getPref(6))
             {
-                questionBank.addQuestions(getKanaSet(6, DAKUTEN, false), getKanaSet(6, HANDAKUTEN, false));
+                questionBank.addQuestions(getKanaSet(6, DAKUTEN, false));
+                questionBank.addQuestions(getKanaSet(6, HANDAKUTEN, false));
                 if (isDigraphs)
-                    questionBank.addQuestions(getKanaSet(6, DAKUTEN, true), getKanaSet(6, HANDAKUTEN, true));
+                {
+                    questionBank.addQuestions(getKanaSet(6, DAKUTEN, true));
+                    questionBank.addQuestions(getKanaSet(6, HANDAKUTEN, true));
+                }
             }
         }
         if (getPref(9))
             questionBank.addQuestions(getKanaSet(9, NO_DIACRITIC, false));
         if (getPref(10))
-            questionBank.addQuestions(getKanaSet(10, NO_DIACRITIC, false), getKanaSet(10, CONSONANT, false));
+        {
+            questionBank.addQuestions(getKanaSet(10, NO_DIACRITIC, false));
+            questionBank.addQuestions(getKanaSet(10, CONSONANT, false));
+        }
 
         return questionBank;
     }
