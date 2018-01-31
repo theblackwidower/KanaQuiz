@@ -26,3 +26,4 @@ _NB: The following features have no planned release date, or guarantee of releas
 * Logs user's question record
 * App will select questions to preference the kana which the user is having the most trouble with
 * Multiple choice answers to be selected as the ones the user is most likely to confuse the kana with
+* Kanji and vocabulary support
