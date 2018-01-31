@@ -281,7 +281,7 @@ abstract class QuestionManagement
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", "wo",
-            "n",};
+            "n"};
 
     static void gojuonSort(String[] romanji)
     {
