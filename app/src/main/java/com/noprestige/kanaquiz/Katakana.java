@@ -230,7 +230,6 @@ class Katakana extends QuestionManagement
                     }
                     break;
             }
-            throw new NullPointerException("Kana set " + number + " " + diacritic.name() + " digraphs does not exist");
         }
         else
         {
@@ -292,8 +291,8 @@ class Katakana extends QuestionManagement
                     }
                     break;
             }
-            throw new NullPointerException("Kana set " + number + " " + diacritic.name() + " monographs does not exist");
         }
+        return null;
     }
 
     int getPrefId(int number)
@@ -321,7 +320,7 @@ class Katakana extends QuestionManagement
             case 10:
                 return PREFID_10;
             default:
-                throw new NullPointerException("PrefId: " + number + " does not exist");
+                return 0;
         }
     }
 }
