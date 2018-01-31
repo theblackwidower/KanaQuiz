@@ -88,6 +88,7 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
                     answers.add(question.fetchCorrectAnswer());
             fullAnswerList = new String[answers.size()];
             answers.toArray(fullAnswerList);
+            QuestionManagement.gojuonSort(fullAnswerList);
         }
 
         if (fullAnswerList.length <= maxChoices)
