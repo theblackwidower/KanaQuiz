@@ -1,10 +1,13 @@
 package com.noprestige.kanaquiz;
 
+import java.util.Random;
 import java.util.TreeMap;
 
 class WeightedList<E> extends TreeMap<Integer, E>
 {
     private int maxValue = 0;
+
+    private static Random rng = new Random();
 
     boolean add(int weight, E element)
     {
@@ -29,6 +32,11 @@ class WeightedList<E> extends TreeMap<Integer, E>
             throw new NullPointerException();
         else
             return this.get(this.floorKey(value));
+    }
+
+    E getRandom()
+    {
+        return this.get(rng.nextInt(maxValue));
     }
 
     int maxValue()

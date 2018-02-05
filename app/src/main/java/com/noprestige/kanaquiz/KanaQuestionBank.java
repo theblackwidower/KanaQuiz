@@ -1,13 +1,11 @@
 package com.noprestige.kanaquiz;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private String[] fullAnswerList = null;
-    private Random rng = new Random();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -25,7 +23,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
             if (previousQuestions == null)
                 previousQuestions = new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string.prefid_repetition)));
             do
-                currentQuestion = this.get(rng.nextInt(this.maxValue()));
+                currentQuestion = this.getRandom();
             while (!previousQuestions.add(currentQuestion));
         }
         else
@@ -112,7 +110,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
 
             while (possibleAnswerStrings.size() < maxChoices)
             {
-                String choice = weightedAnswerList.get(rng.nextInt(weightedAnswerList.maxValue()));
+                String choice = weightedAnswerList.getRandom();
                 if (!possibleAnswerStrings.contains(choice))
                     possibleAnswerStrings.add(choice);
             }
