@@ -1,6 +1,6 @@
 package com.noprestige.kanaquiz;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
@@ -77,13 +77,11 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
     {
         if (fullAnswerList == null)
         {
-            ArrayList<String> answers = new ArrayList<>();
+            TreeSet<String> answers = new TreeSet<>(new GojuonOrder());
             for (KanaQuestion question : this.values())
-                if (!answers.contains(question.fetchCorrectAnswer()))
-                    answers.add(question.fetchCorrectAnswer());
+                answers.add(question.fetchCorrectAnswer());
             fullAnswerList = new String[answers.size()];
             answers.toArray(fullAnswerList);
-            GojuonOrder.sort(fullAnswerList);
         }
 
         if (fullAnswerList.length <= maxChoices)
@@ -104,20 +102,15 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
                 }
             }
 
-            ArrayList<String> possibleAnswerStrings = new ArrayList<>();
+            TreeSet<String> possibleAnswerStrings = new TreeSet<>(new GojuonOrder());
 
             possibleAnswerStrings.add(fetchCorrectAnswer());
 
             while (possibleAnswerStrings.size() < maxChoices)
-            {
-                String choice = weightedAnswerList.getRandom();
-                if (!possibleAnswerStrings.contains(choice))
-                    possibleAnswerStrings.add(choice);
-            }
+                possibleAnswerStrings.add(weightedAnswerList.getRandom());
 
             String[] returnValue = new String[possibleAnswerStrings.size()];
             possibleAnswerStrings.toArray(returnValue);
-            GojuonOrder.sort(returnValue);
             return returnValue;
         }
     }
