@@ -83,7 +83,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
                     answers.add(question.fetchCorrectAnswer());
             fullAnswerList = new String[answers.size()];
             answers.toArray(fullAnswerList);
-            QuestionManagement.gojuonSort(fullAnswerList);
+            GojuonOrder.sort(fullAnswerList);
         }
 
         if (fullAnswerList.length <= maxChoices)
@@ -117,7 +117,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
 
             String[] returnValue = new String[possibleAnswerStrings.size()];
             possibleAnswerStrings.toArray(returnValue);
-            QuestionManagement.gojuonSort(returnValue);
+            GojuonOrder.sort(returnValue);
             return returnValue;
         }
     }
