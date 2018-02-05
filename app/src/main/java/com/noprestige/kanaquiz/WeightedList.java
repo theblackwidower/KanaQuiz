@@ -21,6 +21,27 @@ class WeightedList<E> extends TreeMap<Integer, E>
         return this.add((int) Math.ceil(weight), element);
     }
 
+    E remove(int key)
+    {
+        key = this.floorKey(key);
+        E returnValue = super.remove(key);
+        if (returnValue == null)
+            return null;
+        else
+        {
+            int gap = this.higherKey(key) - key;
+
+            for (Integer thisKey : this.keySet())
+                if (thisKey >= key)
+                {
+                    E currentElement = super.get(thisKey);
+                    super.remove(thisKey);
+                    super.put(thisKey - gap, currentElement);
+                }
+            return returnValue;
+        }
+    }
+
     int count()
     {
         return super.size();
