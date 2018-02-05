@@ -26,7 +26,7 @@ public abstract class LogDao
     @Query("SELECT * FROM kana_records")
     abstract LogKanaRecord[] getAllKanaRecords();
 
-    @Query("SELECT * FROM incorrect_answers")
+    @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract LogIncorrectAnswer[] getAllAnswerRecords();
 
     public float getDailyPercentage(Date date)
