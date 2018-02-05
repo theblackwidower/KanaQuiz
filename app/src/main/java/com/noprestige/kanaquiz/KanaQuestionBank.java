@@ -2,14 +2,12 @@ package com.noprestige.kanaquiz;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.TreeMap;
 
-class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
+class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private String[] fullAnswerList = null;
     private Random rng = new Random();
-    private int maxValue = 0;
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -22,12 +20,12 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 
     void newQuestion() throws NoQuestionsException
     {
-        if (this.size() > 1)
+        if (this.count() > 1)
         {
             if (previousQuestions == null)
-                previousQuestions = new QuestionRecord(Math.min(this.size(), OptionsControl.getInt(R.string.prefid_repetition)));
+                previousQuestions = new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string.prefid_repetition)));
             do
-                currentQuestion = this.get(this.floorKey(rng.nextInt(maxValue)));
+                currentQuestion = this.get(rng.nextInt(this.maxValue()));
             while (!previousQuestions.add(currentQuestion));
         }
         else
@@ -55,12 +53,11 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         fullAnswerList = null;
         for (KanaQuestion question : questions)
         {
-            this.put(maxValue, question);
             // Fetches the percentage of times the user got a kana right,
             // The 1.05f is to invert the value so we get the number of times they got it wrong,
             // and add 5% so any kana the user got perfect will still appear in the quiz.
             // Times 100f to get the percentage.
-            maxValue += (int) Math.ceil((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f);
+            this.add((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f, question);
         }
         return true;
     }
@@ -70,11 +67,7 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         previousQuestions = null;
         fullAnswerList = null;
 
-        for (Integer key : questions.keySet())
-            this.put(maxValue + key, questions.get(key));
-        maxValue += questions.maxValue;
-
-        return true;
+        return this.merge(questions);
     }
 
     String[] getPossibleAnswers()
@@ -99,17 +92,17 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
             return fullAnswerList;
         else
         {
-            TreeMap<Integer, String> weightedAnswerList = new TreeMap<>();
-            int answerListMaxValue = 0;
+            WeightedList<String> weightedAnswerList = new WeightedList<>();
             for (String answer : fullAnswerList)
             {
                 if (!answer.equals(fetchCorrectAnswer()))
                 {
-                    weightedAnswerList.put(answerListMaxValue, answer);
                     // Max value of 24 to prevent integer overflow,
                     // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
                     // where 102 is the number of unique correct answers in Hiragana and Katakana classes
-                    answerListMaxValue += Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer), 24));
+                    weightedAnswerList.add(
+                            Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer), 24)),
+                            answer);
                 }
             }
 
@@ -119,7 +112,7 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
 
             while (possibleAnswerStrings.size() < maxChoices)
             {
-                String choice = weightedAnswerList.get(weightedAnswerList.floorKey(rng.nextInt(answerListMaxValue)));
+                String choice = weightedAnswerList.get(rng.nextInt(weightedAnswerList.maxValue()));
                 if (!possibleAnswerStrings.contains(choice))
                     possibleAnswerStrings.add(choice);
             }
