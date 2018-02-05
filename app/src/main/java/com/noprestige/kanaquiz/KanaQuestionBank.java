@@ -56,6 +56,10 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         for (KanaQuestion question : questions)
         {
             this.put(maxValue, question);
+            // Fetches the percentage of times the user got a kana right,
+            // The 1.05f is to invert the value so we get the number of times they got it wrong,
+            // and add 5% so any kana the user got perfect will still appear in the quiz.
+            // Times 100f to get the percentage.
             maxValue += (int) Math.ceil((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f);
         }
         return true;
@@ -102,7 +106,10 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
                 if (!answer.equals(fetchCorrectAnswer()))
                 {
                     weightedAnswerList.put(answerListMaxValue, answer);
-                    answerListMaxValue += LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer) + 1;
+                    // Max value of 24 to prevent integer overflow,
+                    // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
+                    // where 102 is the number of unique correct answers in Hiragana and Katakana classes
+                    answerListMaxValue += Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer), 24));
                 }
             }
 
