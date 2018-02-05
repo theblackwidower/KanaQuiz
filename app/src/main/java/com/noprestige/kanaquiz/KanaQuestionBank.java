@@ -27,7 +27,7 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
             if (previousQuestions == null)
                 previousQuestions = new QuestionRecord(Math.min(this.size(), OptionsControl.getInt(R.string.prefid_repetition)));
             do
-                currentQuestion = get(floorKey(rng.nextInt(maxValue)));
+                currentQuestion = this.get(this.floorKey(rng.nextInt(maxValue)));
             while (!previousQuestions.add(currentQuestion));
         }
         else
@@ -87,7 +87,7 @@ class KanaQuestionBank extends TreeMap<Integer, KanaQuestion>
         if (fullAnswerList == null)
         {
             ArrayList<String> answers = new ArrayList<>();
-            for (KanaQuestion question : values())
+            for (KanaQuestion question : this.values())
                 if (!answers.contains(question.fetchCorrectAnswer()))
                     answers.add(question.fetchCorrectAnswer());
             fullAnswerList = new String[answers.size()];
