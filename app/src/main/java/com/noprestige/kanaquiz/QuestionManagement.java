@@ -14,18 +14,12 @@ abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    private static final int SET_1_TITLE = R.string.set_1_title;
-    private static final int SET_2_TITLE = R.string.set_2_title;
-    private static final int SET_3_TITLE = R.string.set_3_title;
-    private static final int SET_4_TITLE = R.string.set_4_title;
-    private static final int SET_5_TITLE = R.string.set_5_title;
-    private static final int SET_6_TITLE = R.string.set_6_title;
-    private static final int SET_7_TITLE = R.string.set_7_title;
-    private static final int SET_8_TITLE = R.string.set_8_title;
-    private static final int SET_9_TITLE = R.string.set_9_title;
-    private static final int SET_10_TITLE = R.string.set_10_title;
-
-    private static final int[] SET_TITLES = {SET_1_TITLE, SET_2_TITLE, SET_3_TITLE, SET_4_TITLE, SET_5_TITLE, SET_6_TITLE, SET_7_TITLE, SET_8_TITLE, SET_9_TITLE, SET_10_TITLE};
+    private static final int[] SET_TITLES = {
+            R.string.set_1_title, R.string.set_2_title,
+            R.string.set_3_title, R.string.set_4_title,
+            R.string.set_5_title, R.string.set_6_title,
+            R.string.set_7_title, R.string.set_8_title,
+            R.string.set_9_title, R.string.set_10_title};
 
     abstract KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs);
 

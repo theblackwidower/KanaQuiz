@@ -165,17 +165,6 @@ class Katakana extends QuestionManagement
     private static final KanaQuestion[] KANA_SET_10_N_CONSONANT = {
             new KanaQuestion('ン', "n")};
 
-    private static final int PREFID_1 = R.string.prefid_katakana_1;
-    private static final int PREFID_2 = R.string.prefid_katakana_2;
-    private static final int PREFID_3 = R.string.prefid_katakana_3;
-    private static final int PREFID_4 = R.string.prefid_katakana_4;
-    private static final int PREFID_5 = R.string.prefid_katakana_5;
-    private static final int PREFID_6 = R.string.prefid_katakana_6;
-    private static final int PREFID_7 = R.string.prefid_katakana_7;
-    private static final int PREFID_8 = R.string.prefid_katakana_8;
-    private static final int PREFID_9 = R.string.prefid_katakana_9;
-    private static final int PREFID_10 = R.string.prefid_katakana_10;
-
     static final Katakana QUESTIONS = new Katakana();
 
     private Katakana()
@@ -300,25 +289,25 @@ class Katakana extends QuestionManagement
         switch (number)
         {
             case 1:
-                return PREFID_1;
+                return R.string.prefid_katakana_1;
             case 2:
-                return PREFID_2;
+                return R.string.prefid_katakana_2;
             case 3:
-                return PREFID_3;
+                return R.string.prefid_katakana_3;
             case 4:
-                return PREFID_4;
+                return R.string.prefid_katakana_4;
             case 5:
-                return PREFID_5;
+                return R.string.prefid_katakana_5;
             case 6:
-                return PREFID_6;
+                return R.string.prefid_katakana_6;
             case 7:
-                return PREFID_7;
+                return R.string.prefid_katakana_7;
             case 8:
-                return PREFID_8;
+                return R.string.prefid_katakana_8;
             case 9:
-                return PREFID_9;
+                return R.string.prefid_katakana_9;
             case 10:
-                return PREFID_10;
+                return R.string.prefid_katakana_10;
             default:
                 return 0;
         }
