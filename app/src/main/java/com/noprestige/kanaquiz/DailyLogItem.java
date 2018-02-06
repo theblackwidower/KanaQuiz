@@ -7,36 +7,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
-import static java.util.Calendar.APRIL;
-import static java.util.Calendar.AUGUST;
 import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.DECEMBER;
-import static java.util.Calendar.FEBRUARY;
-import static java.util.Calendar.FRIDAY;
-import static java.util.Calendar.JANUARY;
-import static java.util.Calendar.JULY;
-import static java.util.Calendar.JUNE;
-import static java.util.Calendar.MARCH;
-import static java.util.Calendar.MAY;
-import static java.util.Calendar.MONDAY;
-import static java.util.Calendar.NOVEMBER;
-import static java.util.Calendar.OCTOBER;
-import static java.util.Calendar.SATURDAY;
-import static java.util.Calendar.SEPTEMBER;
-import static java.util.Calendar.SUNDAY;
-import static java.util.Calendar.THURSDAY;
-import static java.util.Calendar.TUESDAY;
-import static java.util.Calendar.WEDNESDAY;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.LONG;
+import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
 public class DailyLogItem extends LinearLayout
 {
-    private String prefId;
-
     private TextView lblDate;
     private TextView lblRatio;
     private TextView lblPercentage;
@@ -72,7 +54,6 @@ public class DailyLogItem extends LinearLayout
         lblDate = findViewById(R.id.lblDate);
         lblRatio = findViewById(R.id.lblRatio);
         lblPercentage = findViewById(R.id.lblPercentage);
-
     }
 
     public void setFromRecord(LogDailyRecord record)
@@ -87,77 +68,9 @@ public class DailyLogItem extends LinearLayout
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
-        switch (calendar.get(Calendar.DAY_OF_WEEK))
-        {
-            case SUNDAY:
-                lblDate.setText("Sun");
-                break;
-            case MONDAY:
-                lblDate.setText("Mon");
-                break;
-            case TUESDAY:
-                lblDate.setText("Tue");
-                break;
-            case WEDNESDAY:
-                lblDate.setText("Wed");
-                break;
-            case THURSDAY:
-                lblDate.setText("Thu");
-                break;
-            case FRIDAY:
-                lblDate.setText("Fri");
-                break;
-            case SATURDAY:
-                lblDate.setText("Sat");
-                break;
-            default:
-                lblDate.setText("Err");
-        }
-
+        lblDate.setText(calendar.getDisplayName(DAY_OF_WEEK, LONG, Locale.getDefault()));
         lblDate.append(System.getProperty("line.separator"));
-
-        switch (calendar.get(Calendar.MONTH))
-        {
-            case JANUARY:
-                lblDate.append("Jan");
-                break;
-            case FEBRUARY:
-                lblDate.append("Feb");
-                break;
-            case MARCH:
-                lblDate.append("Mar");
-                break;
-            case APRIL:
-                lblDate.append("Apr");
-                break;
-            case MAY:
-                lblDate.append("May");
-                break;
-            case JUNE:
-                lblDate.append("Jun");
-                break;
-            case JULY:
-                lblDate.append("Jul");
-                break;
-            case AUGUST:
-                lblDate.append("Aug");
-                break;
-            case SEPTEMBER:
-                lblDate.append("Sep");
-                break;
-            case OCTOBER:
-                lblDate.append("Oct");
-                break;
-            case NOVEMBER:
-                lblDate.append("Nov");
-                break;
-            case DECEMBER:
-                lblDate.append("Dec");
-                break;
-            default:
-                lblDate.append("Err");
-        }
-
+        lblDate.append(calendar.getDisplayName(MONTH, LONG, Locale.getDefault()));
         lblDate.append(" ");
         lblDate.append(Integer.toString(calendar.get(DAY_OF_MONTH)));
         lblDate.append(System.getProperty("line.separator"));
