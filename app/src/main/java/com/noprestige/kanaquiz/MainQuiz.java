@@ -15,6 +15,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.noprestige.kanaquiz.logs.LogDatabase;
+import com.noprestige.kanaquiz.logs.LogView;
+import com.noprestige.kanaquiz.options.KanaSelection;
+import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.options.OptionsScreen;
+import com.noprestige.kanaquiz.questions.Hiragana;
+import com.noprestige.kanaquiz.questions.KanaQuestionBank;
+import com.noprestige.kanaquiz.questions.Katakana;
+import com.noprestige.kanaquiz.questions.NoQuestionsException;
+import com.noprestige.kanaquiz.reference.ReferenceScreen;
+
 import java.text.DecimalFormat;
 
 public class MainQuiz extends AppCompatActivity
