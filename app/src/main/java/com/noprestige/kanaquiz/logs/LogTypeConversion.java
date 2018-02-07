@@ -12,7 +12,7 @@ import static java.util.Calendar.YEAR;
 public class LogTypeConversion
 {
     @TypeConverter
-    public Date fromTimestamp(Integer value)
+    public static Date fromTimestamp(Integer value)
     {
         return value == null ? null :
                 new GregorianCalendar(value / 10000, value % 10000 / 100 - 1, value % 100).getTime();
