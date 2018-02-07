@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.R;
 
-class Hiragana extends QuestionManagement
+public class Hiragana extends QuestionManagement
 {
     private static final KanaQuestion[] KANA_SET_1 = {
             new KanaQuestion('あ', "a"),
@@ -167,7 +167,7 @@ class Hiragana extends QuestionManagement
     private static final KanaQuestion[] KANA_SET_10_N_CONSONANT = {
             new KanaQuestion('ん', "n")};
 
-    static final Hiragana QUESTIONS = new Hiragana();
+    public static final Hiragana QUESTIONS = new Hiragana();
 
     private Hiragana()
     {

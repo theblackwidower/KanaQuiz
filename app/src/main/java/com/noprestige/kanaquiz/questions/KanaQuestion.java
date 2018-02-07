@@ -5,7 +5,7 @@ import android.util.TypedValue;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
-class KanaQuestion
+public class KanaQuestion
 {
     private String kana;
     private String[] romanji;
@@ -73,7 +73,7 @@ class KanaQuestion
         return romanji[0];
     }
 
-    ReferenceCell generateReference(Context context)
+    public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);
         cell.setKana(getKana());

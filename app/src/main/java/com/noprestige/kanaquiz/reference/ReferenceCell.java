@@ -11,8 +11,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.noprestige.kanaquiz.KanaQuestion;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.KanaQuestion;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -131,7 +131,7 @@ public class ReferenceCell extends View
         canvas.drawText(romanji, romanjiXpoint, romanjiYpoint, romanjiPaint);
     }
 
-    void setKana(String kana)
+    public void setKana(String kana)
     {
         if (kana == null)
             this.kana = "";
@@ -141,14 +141,14 @@ public class ReferenceCell extends View
         kanaWidth = kanaPaint.measureText(this.kana);
     }
 
-    void setKanaSize(float kanaSize)
+    public void setKanaSize(float kanaSize)
     {
         kanaPaint.setTextSize(kanaSize);
         kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
         kanaWidth = kanaPaint.measureText(this.kana);
     }
 
-    void setRomanji(String romanji)
+    public void setRomanji(String romanji)
     {
         if (romanji == null)
             this.romanji = "";
@@ -158,20 +158,20 @@ public class ReferenceCell extends View
         romanjiWidth = romanjiPaint.measureText(this.romanji);
     }
 
-    void setRomanjiSize(float romanjiSize)
+    public void setRomanjiSize(float romanjiSize)
     {
         romanjiPaint.setTextSize(romanjiSize);
         romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
         romanjiWidth = romanjiPaint.measureText(this.romanji);
     }
 
-    void setColour(int colour)
+    public void setColour(int colour)
     {
         kanaPaint.setColor(colour);
         romanjiPaint.setColor(colour);
     }
 
-    static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
+    public static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
     {
         TableRow row = new TableRow(context);
 
@@ -204,7 +204,7 @@ public class ReferenceCell extends View
         return row;
     }
 
-    static TableRow buildRow(Context context, KanaQuestion[] questions)
+    public static TableRow buildRow(Context context, KanaQuestion[] questions)
     {
         TableRow row = new TableRow(context);
 

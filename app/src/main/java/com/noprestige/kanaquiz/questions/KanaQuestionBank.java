@@ -1,12 +1,12 @@
 package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.logs.LogDatabase;
-import com.noprestige.kanaquiz.OptionsControl;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.TreeSet;
 
-class KanaQuestionBank extends WeightedList<KanaQuestion>
+public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private String[] fullAnswerList = null;
@@ -20,7 +20,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
         super();
     }
 
-    void newQuestion() throws NoQuestionsException
+    public void newQuestion() throws NoQuestionsException
     {
         if (this.count() > 1)
         {
@@ -34,22 +34,22 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
             throw new NoQuestionsException();
     }
 
-    String getCurrentKana()
+    public String getCurrentKana()
     {
         return currentQuestion.getKana();
     }
 
-    boolean checkCurrentAnswer(String response)
+    public boolean checkCurrentAnswer(String response)
     {
         return currentQuestion.checkAnswer(response);
     }
 
-    String fetchCorrectAnswer()
+    public String fetchCorrectAnswer()
     {
         return currentQuestion.fetchCorrectAnswer();
     }
 
-    boolean addQuestions(KanaQuestion[] questions)
+    public boolean addQuestions(KanaQuestion[] questions)
     {
         previousQuestions = null;
         fullAnswerList = null;
@@ -64,7 +64,7 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
         return true;
     }
 
-    boolean addQuestions(KanaQuestionBank questions)
+    public boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
         fullAnswerList = null;
@@ -72,12 +72,12 @@ class KanaQuestionBank extends WeightedList<KanaQuestion>
         return this.merge(questions);
     }
 
-    String[] getPossibleAnswers()
+    public String[] getPossibleAnswers()
     {
         return getPossibleAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
     }
 
-    String[] getPossibleAnswers(int maxChoices)
+    public String[] getPossibleAnswers(int maxChoices)
     {
         if (fullAnswerList == null)
         {

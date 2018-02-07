@@ -1,6 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
-class NoQuestionsException extends Exception
+public class NoQuestionsException extends Exception
 {
     NoQuestionsException()
     {

@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.noprestige.kanaquiz.Hiragana;
-import com.noprestige.kanaquiz.Katakana;
-import com.noprestige.kanaquiz.OptionsControl;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.questions.Hiragana;
+import com.noprestige.kanaquiz.questions.Katakana;
 
 import java.util.ArrayList;
 

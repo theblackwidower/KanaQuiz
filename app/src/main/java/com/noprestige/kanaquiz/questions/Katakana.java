@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.R;
 
-class Katakana extends QuestionManagement
+public class Katakana extends QuestionManagement
 {
     private static final KanaQuestion[] KANA_SET_1 = {
             new KanaQuestion('ア', "a"),
@@ -167,7 +167,7 @@ class Katakana extends QuestionManagement
     private static final KanaQuestion[] KANA_SET_10_N_CONSONANT = {
             new KanaQuestion('ン', "n")};
 
-    static final Katakana QUESTIONS = new Katakana();
+    public static final Katakana QUESTIONS = new Katakana();
 
     private Katakana()
     {

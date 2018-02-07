@@ -8,7 +8,6 @@ import android.arch.persistence.room.TypeConverters;
 @TypeConverters({LogTypeConversion.class})
 public abstract class LogDatabase extends RoomDatabase
 {
-    static LogDao DAO = null;
-
+    public static LogDao DAO = null;
     public abstract LogDao logDao();
 }

@@ -6,11 +6,11 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 import com.noprestige.kanaquiz.options.KanaSelectionItem;
-import com.noprestige.kanaquiz.OptionsControl;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
-abstract class QuestionManagement
+public abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
@@ -35,7 +35,7 @@ abstract class QuestionManagement
         return OptionsControl.getBoolean(getPrefId(number));
     }
 
-    KanaQuestionBank getQuestionBank()
+    public KanaQuestionBank getQuestionBank()
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
 
@@ -84,7 +84,7 @@ abstract class QuestionManagement
         return questionBank;
     }
 
-    boolean anySelected()
+    public boolean anySelected()
     {
         for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (getPref(i))
@@ -93,13 +93,13 @@ abstract class QuestionManagement
         return false;
     }
 
-    boolean diacriticsSelected()
+    public boolean diacriticsSelected()
     {
         return (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
-    boolean digraphsSelected()
+    public boolean digraphsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 2; i <= 8; i++)
@@ -109,7 +109,7 @@ abstract class QuestionManagement
         return false;
     }
 
-    boolean diacriticDigraphsSelected()
+    public boolean diacriticDigraphsSelected()
     {
         return (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9) &&
@@ -151,7 +151,7 @@ abstract class QuestionManagement
         return returnValue;
     }
 
-    TableLayout getMainReferenceTable(Context context)
+    public TableLayout getMainReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -175,7 +175,7 @@ abstract class QuestionManagement
         return table;
     }
 
-    TableLayout getDiacriticReferenceTable(Context context)
+    public TableLayout getDiacriticReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -195,7 +195,7 @@ abstract class QuestionManagement
         return table;
     }
 
-    TableLayout getMainDigraphsReferenceTable(Context context)
+    public TableLayout getMainDigraphsReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -209,7 +209,7 @@ abstract class QuestionManagement
         return table;
     }
 
-    TableLayout getDiacriticDigraphsReferenceTable(Context context)
+    public TableLayout getDiacriticDigraphsReferenceTable(Context context)
     {
         TableLayout table = new TableLayout(context);
         table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
@@ -229,7 +229,7 @@ abstract class QuestionManagement
         return table;
     }
 
-    LinearLayout getSelectionScreen(Context context)
+    public LinearLayout getSelectionScreen(Context context)
     {
         LinearLayout layout = new LinearLayout(context);
         layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));

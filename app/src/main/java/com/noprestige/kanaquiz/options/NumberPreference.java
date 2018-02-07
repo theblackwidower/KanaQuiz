@@ -7,6 +7,8 @@ import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.widget.NumberPicker;
 
+import com.noprestige.kanaquiz.R;
+
 class NumberPreference extends DialogPreference
 {
     private int repetitionLimit;
