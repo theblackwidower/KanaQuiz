@@ -15,13 +15,14 @@
 
         <TextView
             android:id="@+id/lblDate"
-            android:layout_width="wrap_content"
+            android:layout_width="90sp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/lblCorrect"
-            android:layout_width="0dp"
+            android:layout_width="80sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -34,14 +35,16 @@
             android:layout_width="65sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="start"
             android:textSize="36sp"/>
 
         <TextView
             android:id="@+id/lblPercentage"
-            android:layout_width="125sp"
+            android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="end"
             android:textSize="36sp"/>
 
