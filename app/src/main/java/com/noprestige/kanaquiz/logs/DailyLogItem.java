@@ -26,8 +26,8 @@ public class DailyLogItem extends LinearLayout
     private TextView lblTotal;
     private TextView lblPercentage;
 
-    private int correctAnswers = 0;
-    private int totalAnswers = 0;
+    private int correctAnswers = -1;
+    private int totalAnswers = -1;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
 
@@ -95,7 +95,7 @@ public class DailyLogItem extends LinearLayout
 
     private void updateAnswers()
     {
-        if (correctAnswers > 0 && totalAnswers > 0)
+        if (correctAnswers >= 0 && totalAnswers >= 0)
         {
             lblCorrect.setText(Integer.toString(correctAnswers) + "/");
             lblTotal.setText(Integer.toString(totalAnswers));
