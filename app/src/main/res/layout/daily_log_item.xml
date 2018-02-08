@@ -31,18 +31,18 @@
         <TextView
             android:id="@+id/lblTotal"
             android:paddingStart="1sp"
-            android:layout_width="0dp"
+            android:layout_width="65sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="start"
             android:textSize="36sp"/>
 
         <TextView
             android:id="@+id/lblPercentage"
-            android:layout_width="wrap_content"
+            android:layout_width="125sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:gravity="end"
             android:textSize="36sp"/>
 
     </LinearLayout>
