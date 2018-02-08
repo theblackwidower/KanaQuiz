@@ -58,7 +58,7 @@ public class DailyLogItem extends LinearLayout
         lblPercentage = findViewById(R.id.lblPercentage);
     }
 
-    public void setFromRecord(LogDailyRecord record)
+    public void setFromRecord(DailyRecord record)
     {
         setDate(record.date);
         setCorrectAnswers(record.correct_answers);

@@ -12,32 +12,32 @@ import java.util.Date;
 public abstract class LogDao
 {
     @Query("SELECT * FROM daily_record WHERE date = :date")
-    abstract LogDailyRecord getDateRecord(Date date);
+    abstract DailyRecord getDateRecord(Date date);
 
     @Query("SELECT * FROM kana_records WHERE kana = :kana")
-    abstract LogKanaRecord getKanaRecord(String kana);
+    abstract KanaRecord getKanaRecord(String kana);
 
     @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji")
-    abstract LogIncorrectAnswer getAnswerRecord(String kana, String romanji);
+    abstract IncorrectAnswerRecord getAnswerRecord(String kana, String romanji);
 
     @Query("SELECT * FROM daily_record")
-    abstract LogDailyRecord[] getAllDailyRecords();
+    abstract DailyRecord[] getAllDailyRecords();
 
     @Query("SELECT * FROM kana_records")
-    abstract LogKanaRecord[] getAllKanaRecords();
+    abstract KanaRecord[] getAllKanaRecords();
 
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
-    abstract LogIncorrectAnswer[] getAllAnswerRecords();
+    abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
     public float getDailyPercentage(Date date)
     {
-        LogDailyRecord record = getDateRecord(date);
+        DailyRecord record = getDateRecord(date);
         return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
     }
 
     public float getKanaPercentage(String kana)
     {
-        LogKanaRecord record = getKanaRecord(kana);
+        KanaRecord record = getKanaRecord(kana);
         if (record == null)
             return 0.9f;
         else
@@ -46,7 +46,7 @@ public abstract class LogDao
 
     public int getIncorrectAnswerCount(String kana, String romanji)
     {
-        LogIncorrectAnswer record = getAnswerRecord(kana, romanji);
+        IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
         if (record == null)
             return 0;
         else
@@ -55,10 +55,10 @@ public abstract class LogDao
 
     void addTodaysRecord(boolean isCorrect)
     {
-        LogDailyRecord record = getDateRecord(new Date());
+        DailyRecord record = getDateRecord(new Date());
         if (record == null)
         {
-            record = new LogDailyRecord();
+            record = new DailyRecord();
             insertDailyRecord(record);
         }
         if (isCorrect)
@@ -70,10 +70,10 @@ public abstract class LogDao
 
     void addKanaRecord(String kana, boolean isCorrect)
     {
-        LogKanaRecord record = getKanaRecord(kana);
+        KanaRecord record = getKanaRecord(kana);
         if (record == null)
         {
-            record = new LogKanaRecord(kana);
+            record = new KanaRecord(kana);
             insertKanaRecord(record);
         }
         if (isCorrect)
@@ -85,10 +85,10 @@ public abstract class LogDao
 
     void addIncorrectAnswerRecord(String kana, String romanji)
     {
-        LogIncorrectAnswer record = getAnswerRecord(kana, romanji);
+        IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
         if (record == null)
         {
-            record = new LogIncorrectAnswer(kana, romanji);
+            record = new IncorrectAnswerRecord(kana, romanji);
             insertIncorrectAnswer(record);
         }
         else
@@ -133,29 +133,29 @@ public abstract class LogDao
     }
 
     @Insert
-    abstract void insertDailyRecord(LogDailyRecord... record);
+    abstract void insertDailyRecord(DailyRecord... record);
 
     @Update
-    abstract void updateDailyRecord(LogDailyRecord... record);
+    abstract void updateDailyRecord(DailyRecord... record);
 
     @Delete
-    abstract void deleteDailyRecord(LogDailyRecord record);
+    abstract void deleteDailyRecord(DailyRecord record);
 
     @Insert
-    abstract void insertKanaRecord(LogKanaRecord... record);
+    abstract void insertKanaRecord(KanaRecord... record);
 
     @Update
-    abstract void updateKanaRecord(LogKanaRecord... record);
+    abstract void updateKanaRecord(KanaRecord... record);
 
     @Delete
-    abstract void deleteKanaRecord(LogKanaRecord record);
+    abstract void deleteKanaRecord(KanaRecord record);
 
     @Insert
-    abstract void insertIncorrectAnswer(LogIncorrectAnswer... record);
+    abstract void insertIncorrectAnswer(IncorrectAnswerRecord... record);
 
     @Update
-    abstract void updateIncorrectAnswer(LogIncorrectAnswer... record);
+    abstract void updateIncorrectAnswer(IncorrectAnswerRecord... record);
 
     @Delete
-    abstract void deleteIncorrectAnswer(LogIncorrectAnswer record);
+    abstract void deleteIncorrectAnswer(IncorrectAnswerRecord record);
 }

@@ -4,7 +4,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 
-@Database(entities = {LogDailyRecord.class, LogKanaRecord.class, LogIncorrectAnswer.class}, version = 1)
+@Database(entities = {DailyRecord.class, KanaRecord.class, IncorrectAnswerRecord.class}, version = 1)
 @TypeConverters({LogTypeConversion.class})
 public abstract class LogDatabase extends RoomDatabase
 {

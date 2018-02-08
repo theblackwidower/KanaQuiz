@@ -5,7 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "incorrect_answers", primaryKeys = {"kana", "incorrect_romanji"})
-public class LogIncorrectAnswer
+public class IncorrectAnswerRecord
 {
     @ColumnInfo(name = "kana")
     @NonNull
@@ -18,7 +18,7 @@ public class LogIncorrectAnswer
     @ColumnInfo(name = "occurrences")
     public int occurrences;
 
-    public LogIncorrectAnswer(String kana, String incorrect_romanji)
+    public IncorrectAnswerRecord(String kana, String incorrect_romanji)
     {
         this.kana = kana;
         this.incorrect_romanji = incorrect_romanji;
