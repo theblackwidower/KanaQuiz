@@ -175,113 +175,120 @@ public class Katakana extends QuestionManagement
 
     KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
     {
-        if (isDigraphs)
+        switch (number)
         {
-            switch (diacritic)
-            {
-                case NO_DIACRITIC:
-                    switch (number)
-                    {
-                        case 2:
-                            return KANA_SET_2_BASE_DIGRAPHS;
-                        case 3:
-                            return KANA_SET_3_BASE_DIGRAPHS;
-                        case 4:
-                            return KANA_SET_4_BASE_DIGRAPHS;
-                        case 5:
-                            return KANA_SET_5_DIGRAPHS;
-                        case 6:
-                            return KANA_SET_6_BASE_DIGRAPHS;
-                        case 7:
-                            return KANA_SET_7_DIGRAPHS;
-                        case 8:
-                            return KANA_SET_8_DIGRAPHS;
-                    }
-                    break;
-
-                case DAKUTEN:
-                    switch (number)
-                    {
-                        case 2:
-                            return KANA_SET_2_DAKUTEN_DIGRAPHS;
-                        case 3:
-                            return KANA_SET_3_DAKUTEN_DIGRAPHS;
-                        case 4:
-                            return KANA_SET_4_DAKUTEN_DIGRAPHS;
-                        case 6:
-                            return KANA_SET_6_DAKUTEN_DIGRAPHS;
-                    }
-                    break;
-
-                case HANDAKUTEN:
-                    switch (number)
-                    {
-                        case 6:
-                            return KANA_SET_6_HANDAKUTEN_DIGRAPHS;
-                    }
-                    break;
-            }
-        }
-        else
-        {
-            switch (diacritic)
-            {
-                case NO_DIACRITIC:
-                    switch (number)
-                    {
-                        case 1:
-                            return KANA_SET_1;
-                        case 2:
-                            return KANA_SET_2_BASE;
-                        case 3:
-                            return KANA_SET_3_BASE;
-                        case 4:
-                            return KANA_SET_4_BASE;
-                        case 5:
-                            return KANA_SET_5;
-                        case 6:
-                            return KANA_SET_6_BASE;
-                        case 7:
-                            return KANA_SET_7;
-                        case 8:
-                            return KANA_SET_8;
-                        case 9:
-                            return KANA_SET_9;
-                        case 10:
-                            return KANA_SET_10_W_GROUP;
-                    }
-                    break;
-
-                case DAKUTEN:
-                    switch (number)
-                    {
-                        case 2:
-                            return KANA_SET_2_DAKUTEN;
-                        case 3:
-                            return KANA_SET_3_DAKUTEN;
-                        case 4:
-                            return KANA_SET_4_DAKUTEN;
-                        case 6:
-                            return KANA_SET_6_DAKUTEN;
-                    }
-                    break;
-
-                case HANDAKUTEN:
-                    switch (number)
-                    {
-                        case 6:
-                            return KANA_SET_6_HANDAKUTEN;
-                    }
-                    break;
-
-                case CONSONANT:
-                    switch (number)
-                    {
-                        case 10:
-                            return KANA_SET_10_N_CONSONANT;
-                    }
-                    break;
-            }
+            case 1:
+                if (diacritic == Diacritic.NO_DIACRITIC && !isDigraphs)
+                    return KANA_SET_1;
+                break;
+            case 2:
+                if (!isDigraphs)
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_2_BASE;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_2_DAKUTEN;
+                }
+                else
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_2_BASE_DIGRAPHS;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_2_DAKUTEN_DIGRAPHS;
+                }
+                break;
+            case 3:
+                if (!isDigraphs)
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_3_BASE;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_3_DAKUTEN;
+                }
+                else
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_3_BASE_DIGRAPHS;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_3_DAKUTEN_DIGRAPHS;
+                }
+                break;
+            case 4:
+                if (!isDigraphs)
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_4_BASE;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_4_DAKUTEN;
+                }
+                else
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_4_BASE_DIGRAPHS;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_4_DAKUTEN_DIGRAPHS;
+                }
+                break;
+            case 5:
+                if (diacritic == Diacritic.NO_DIACRITIC)
+                {
+                    if (!isDigraphs)
+                        return KANA_SET_5;
+                    else
+                        return KANA_SET_5_DIGRAPHS;
+                }
+                break;
+            case 6:
+                if (!isDigraphs)
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_6_BASE;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_6_DAKUTEN;
+                    else if (diacritic == Diacritic.HANDAKUTEN)
+                        return KANA_SET_6_HANDAKUTEN;
+                }
+                else
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_6_BASE_DIGRAPHS;
+                    else if (diacritic == Diacritic.DAKUTEN)
+                        return KANA_SET_6_DAKUTEN_DIGRAPHS;
+                    else if (diacritic == Diacritic.HANDAKUTEN)
+                        return KANA_SET_6_HANDAKUTEN_DIGRAPHS;
+                }
+                break;
+            case 7:
+                if (diacritic == Diacritic.NO_DIACRITIC)
+                {
+                    if (!isDigraphs)
+                        return KANA_SET_7;
+                    else
+                        return KANA_SET_7_DIGRAPHS;
+                }
+                break;
+            case 8:
+                if (diacritic == Diacritic.NO_DIACRITIC)
+                {
+                    if (!isDigraphs)
+                        return KANA_SET_8;
+                    else
+                        return KANA_SET_8_DIGRAPHS;
+                }
+                break;
+            case 9:
+                if (diacritic == Diacritic.NO_DIACRITIC && !isDigraphs)
+                    return KANA_SET_9;
+                break;
+            case 10:
+                if (!isDigraphs)
+                {
+                    if (diacritic == Diacritic.NO_DIACRITIC)
+                        return KANA_SET_10_W_GROUP;
+                    else if (diacritic == Diacritic.CONSONANT)
+                        return KANA_SET_10_N_CONSONANT;
+                }
+                break;
         }
         return null;
     }
