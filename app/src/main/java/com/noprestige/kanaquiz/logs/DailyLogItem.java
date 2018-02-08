@@ -22,7 +22,8 @@ import static java.util.Calendar.YEAR;
 public class DailyLogItem extends LinearLayout
 {
     private TextView lblDate;
-    private TextView lblRatio;
+    private TextView lblCorrect;
+    private TextView lblTotal;
     private TextView lblPercentage;
 
     private int correctAnswers = 0;
@@ -54,7 +55,8 @@ public class DailyLogItem extends LinearLayout
         LayoutInflater.from(getContext()).inflate(R.layout.daily_log_item, this);
 
         lblDate = findViewById(R.id.lblDate);
-        lblRatio = findViewById(R.id.lblRatio);
+        lblCorrect = findViewById(R.id.lblCorrect);
+        lblTotal = findViewById(R.id.lblTotal);
         lblPercentage = findViewById(R.id.lblPercentage);
     }
 
@@ -95,7 +97,8 @@ public class DailyLogItem extends LinearLayout
     {
         if (correctAnswers > 0 && totalAnswers > 0)
         {
-            lblRatio.setText(Integer.toString(correctAnswers) + "/" + Integer.toString(totalAnswers));
+            lblCorrect.setText(Integer.toString(correctAnswers) + "/");
+            lblTotal.setText(Integer.toString(totalAnswers));
             float percentage = (float) correctAnswers / (float) totalAnswers;
             lblPercentage.setText(PERCENT_FORMATTER.format(percentage));
             if (percentage < 0.6)
