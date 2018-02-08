@@ -101,8 +101,10 @@ public class DailyLogItem extends LinearLayout
             lblTotal.setText(Integer.toString(totalAnswers));
             float percentage = (float) correctAnswers / (float) totalAnswers;
             lblPercentage.setText(PERCENT_FORMATTER.format(percentage));
-            if (percentage < 0.6)
-                lblPercentage.setTextColor(getResources().getColor(R.color.below_sixty));
+            if (percentage < 0.5)
+                lblPercentage.setTextColor(getResources().getColor(R.color.below_fifty));
+            else if (percentage < 0.6)
+                lblPercentage.setTextColor(getResources().getColor(R.color.fifty_to_sixty));
             else if (percentage < 0.7)
                 lblPercentage.setTextColor(getResources().getColor(R.color.sixty_to_seventy));
             else if (percentage < 0.8)

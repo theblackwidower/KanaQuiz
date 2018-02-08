@@ -7,7 +7,8 @@
     <color name="correct">#00CC00</color>
     <color name="incorrect">#EE0000</color>
 
-    <color name="below_sixty">#EE0000</color>
+    <color name="below_fifty">#770000</color>
+    <color name="fifty_to_sixty">#EE0000</color>
     <color name="sixty_to_seventy">#EE6600</color>
     <color name="seventy_to_eighty">#EECC00</color>
     <color name="eighty_to_ninty">#77CC00</color>
