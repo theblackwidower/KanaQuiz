@@ -15,10 +15,11 @@
 
         <TextView
             android:id="@+id/lblDate"
-            android:layout_width="88sp"
+            android:layout_width="75sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/lblCorrect"
