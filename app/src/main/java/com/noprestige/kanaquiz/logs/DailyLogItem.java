@@ -29,7 +29,7 @@ public class DailyLogItem extends LinearLayout
     private int correctAnswers = -1;
     private int totalAnswers = -1;
 
-    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
+    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
 
     public DailyLogItem(Context context)
     {
