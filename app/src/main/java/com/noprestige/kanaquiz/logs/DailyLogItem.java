@@ -31,6 +31,7 @@ public class DailyLogItem extends LinearLayout
 
     private int correctAnswers = -1;
     private int totalAnswers = -1;
+    private Date date;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
@@ -82,6 +83,21 @@ public class DailyLogItem extends LinearLayout
         setTotalAnswers(record.correct_answers + record.incorrect_answers);
     }
 
+    public Date getDate()
+    {
+        return this.date;
+    }
+
+    public int getCorrectAnswers()
+    {
+        return this.correctAnswers;
+    }
+
+    public int getTotalAnswers()
+    {
+        return this.totalAnswers;
+    }
+
     public boolean setDate(String date)
     {
         if (date == null)
@@ -100,6 +116,8 @@ public class DailyLogItem extends LinearLayout
 
     public void setDate(Date date)
     {
+        this.date = date;
+
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
