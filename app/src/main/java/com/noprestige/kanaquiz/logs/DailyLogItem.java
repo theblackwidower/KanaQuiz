@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -150,18 +151,24 @@ public class DailyLogItem extends LinearLayout
             lblTotal.setText(Integer.toString(totalAnswers));
             float percentage = (float) correctAnswers / (float) totalAnswers;
             lblPercentage.setText(PERCENT_FORMATTER.format(percentage));
-            if (percentage < 0.5)
-                lblPercentage.setTextColor(getResources().getColor(R.color.below_fifty));
-            else if (percentage < 0.6)
-                lblPercentage.setTextColor(getResources().getColor(R.color.fifty_to_sixty));
-            else if (percentage < 0.7)
-                lblPercentage.setTextColor(getResources().getColor(R.color.sixty_to_seventy));
-            else if (percentage < 0.8)
-                lblPercentage.setTextColor(getResources().getColor(R.color.seventy_to_eighty));
-            else if (percentage < 0.9)
-                lblPercentage.setTextColor(getResources().getColor(R.color.eighty_to_ninty));
-            else
-                lblPercentage.setTextColor(getResources().getColor(R.color.above_ninty));
+            lblPercentage.setTextColor(getPercentageColour(percentage, getResources()));
         }
+    }
+
+    private static int getPercentageColour(float percentage, Resources resources)
+    {
+        int tenth = Math.round(percentage * 100) / 10;
+        if (tenth < 5)
+            return resources.getColor(R.color.below_fifty);
+        else if (tenth < 6)
+            return resources.getColor(R.color.fifty_to_sixty);
+        else if (tenth < 7)
+            return resources.getColor(R.color.sixty_to_seventy);
+        else if (tenth < 8)
+            return resources.getColor(R.color.seventy_to_eighty);
+        else if (tenth < 9)
+            return resources.getColor(R.color.eighty_to_ninty);
+        else
+            return resources.getColor(R.color.above_ninty);
     }
 }
