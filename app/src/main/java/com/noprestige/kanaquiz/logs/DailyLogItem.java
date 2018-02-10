@@ -143,12 +143,24 @@ public class DailyLogItem extends LinearLayout
         updateAnswers();
     }
 
+    private String parseCount(int count)
+    {
+        if (count < 1000)
+            return Integer.toString(count);
+        else if (count < 10000)
+            return Float.toString(
+                    Math.round((float) count / 100f)
+                            / 10f) + "k";
+        else //if (count < 100000)
+            return Integer.toString(
+                    Math.round((float) count / 1000f)) + "k";
+    }
     private void updateAnswers()
     {
         if (correctAnswers >= 0 && totalAnswers >= 0)
         {
-            lblCorrect.setText(Integer.toString(correctAnswers) + "/");
-            lblTotal.setText(Integer.toString(totalAnswers));
+            lblCorrect.setText(parseCount(correctAnswers) + "/");
+            lblTotal.setText(parseCount(totalAnswers));
             float percentage = (float) correctAnswers / (float) totalAnswers;
             lblPercentage.setText(PERCENT_FORMATTER.format(percentage));
             lblPercentage.setTextColor(getPercentageColour(percentage, getResources()));
