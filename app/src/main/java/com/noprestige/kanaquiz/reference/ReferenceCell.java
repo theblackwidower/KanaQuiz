@@ -177,24 +177,24 @@ public class ReferenceCell extends View
 
         if (questions.length == 1)
         {
-            row.addView(new TextView(context));
-            row.addView(new TextView(context));
+            row.addView(new View(context));
+            row.addView(new View(context));
             row.addView(questions[0].generateReference(context));
         }
         else if (questions.length == 2)
         {
             row.addView(questions[0].generateReference(context));
-            row.addView(new TextView(context));
-            row.addView(new TextView(context));
-            row.addView(new TextView(context));
+            row.addView(new View(context));
+            row.addView(new View(context));
+            row.addView(new View(context));
             row.addView(questions[1].generateReference(context));
         }
         else if (questions.length == 3)
         {
             row.addView(questions[0].generateReference(context));
-            row.addView(new TextView(context));
+            row.addView(new View(context));
             row.addView(questions[1].generateReference(context));
-            row.addView(new TextView(context));
+            row.addView(new View(context));
             row.addView(questions[2].generateReference(context));
         }
         else
