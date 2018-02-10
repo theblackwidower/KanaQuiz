@@ -170,17 +170,17 @@ public class DailyLogItem extends LinearLayout
     private static int getPercentageColour(float percentage, Resources resources)
     {
         int tenth = Math.round(percentage * 100) / 10;
-        if (tenth < 5)
+        if (tenth <= 4)
             return resources.getColor(R.color.below_fifty);
-        else if (tenth < 6)
+        else if (tenth == 5)
             return resources.getColor(R.color.fifty_to_sixty);
-        else if (tenth < 7)
+        else if (tenth == 6)
             return resources.getColor(R.color.sixty_to_seventy);
-        else if (tenth < 8)
+        else if (tenth == 7)
             return resources.getColor(R.color.seventy_to_eighty);
-        else if (tenth < 9)
+        else if (tenth == 8)
             return resources.getColor(R.color.eighty_to_ninty);
-        else
+        else //if (tenth >= 9)
             return resources.getColor(R.color.above_ninty);
     }
 }
