@@ -68,14 +68,7 @@ public class DailyLogItem extends LinearLayout
         // Load attributes
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
-        try
-        {
-            setDate(DATE_INPUT_FORMATTER.parse(a.getString(R.styleable.DailyLogItem_date)));
-        }
-        catch (ParseException ex)
-        {
-        }
-
+        setDate(a.getString(R.styleable.DailyLogItem_date));
         setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correct_answers, -1));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_total_answers, -1));
 
@@ -87,6 +80,22 @@ public class DailyLogItem extends LinearLayout
         setDate(record.date);
         setCorrectAnswers(record.correct_answers);
         setTotalAnswers(record.correct_answers + record.incorrect_answers);
+    }
+
+    public boolean setDate(String date)
+    {
+        if (date == null)
+            return false;
+        else
+            try
+            {
+                setDate(DATE_INPUT_FORMATTER.parse(date));
+                return true;
+            }
+            catch (ParseException ex)
+            {
+                return false;
+            }
     }
 
     public void setDate(Date date)
