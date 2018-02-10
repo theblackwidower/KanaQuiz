@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 import com.noprestige.kanaquiz.R;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -30,6 +33,7 @@ public class DailyLogItem extends LinearLayout
     private int totalAnswers = -1;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
+    private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
     public DailyLogItem(Context context)
     {
@@ -51,13 +55,31 @@ public class DailyLogItem extends LinearLayout
 
     private void init(AttributeSet attrs, int defStyle)
     {
+        Context context = this.getContext();
+
         // Set up initial objects
-        LayoutInflater.from(getContext()).inflate(R.layout.daily_log_item, this);
+        LayoutInflater.from(context).inflate(R.layout.daily_log_item, this);
 
         lblDate = findViewById(R.id.lblDate);
         lblCorrect = findViewById(R.id.lblCorrect);
         lblTotal = findViewById(R.id.lblTotal);
         lblPercentage = findViewById(R.id.lblPercentage);
+
+        // Load attributes
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
+
+        try
+        {
+            setDate(DATE_INPUT_FORMATTER.parse(a.getString(R.styleable.DailyLogItem_date)));
+        }
+        catch (ParseException ex)
+        {
+        }
+
+        setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correct_answers, -1));
+        setTotalAnswers(a.getInt(R.styleable.DailyLogItem_total_answers, -1));
+
+        a.recycle();
     }
 
     public void setFromRecord(DailyRecord record)

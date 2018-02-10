@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="DailyLogItem">
+        <attr name="date" format="string"/>
+        <attr name="correct_answers" format="integer"/>
+        <attr name="total_answers" format="integer"/>
+    </declare-styleable>
+</resources>
