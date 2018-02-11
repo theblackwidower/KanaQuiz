@@ -92,7 +92,7 @@
             android:layout_marginStart="10dp"
             android:onClick="toAssetStudioGithub"
             android:text="@string/icon_credit_asset_studio"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primaryColor"
             android:textSize="14sp"/>
 
         <TextView
@@ -101,7 +101,7 @@
             android:layout_marginStart="10dp"
             android:onClick="toNotoCjkGithub"
             android:text="@string/icon_credit_noto_font"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/primaryColor"
             android:textSize="14sp"/>
 
     </LinearLayout>
