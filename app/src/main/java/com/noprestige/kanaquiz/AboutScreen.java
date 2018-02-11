@@ -18,23 +18,33 @@ public class AboutScreen extends AppCompatActivity
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);
     }
 
-    public void toGithub(View view)
+    private void toSite(String url)
     {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/theblackwidower/KanaQuiz")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+    private void toGithub(String githubAddress)
+    {
+        toSite("https://github.com/" + githubAddress);
+    }
+
+    public void toAppGithub(View view)
+    {
+        toGithub("theblackwidower/KanaQuiz");
     }
 
     public void toTwitter(View view)
     {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/theblackwidower/")));
+        toSite("https://twitter.com/theblackwidower/");
     }
 
     public void toAssetStudioGithub(View view)
     {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/romannurik/AndroidAssetStudio")));
+        toGithub("romannurik/AndroidAssetStudio");
     }
 
     public void toNotoCjkGithub(View view)
     {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/googlei18n/noto-cjk")));
+        toGithub("googlei18n/noto-cjk");
     }
 }

@@ -124,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/github_logo"
-            android:onClick="toGithub"
+            android:onClick="toAppGithub"
             app:srcCompat="@drawable/ic_github_logo"/>
 
         <ImageView
