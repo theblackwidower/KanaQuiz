@@ -4,13 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="correct">#00c853</color>
+    <color name="correct">#2e7d32</color>
     <color name="incorrect">#d50000</color>
 
     <color name="below_fifty">#3e2723</color>
     <color name="fifty_to_sixty">#d50000</color>
-    <color name="sixty_to_seventy">#ef6c00</color>
-    <color name="seventy_to_eighty">#ffc400</color>
-    <color name="eighty_to_ninty">#64dd17</color>
-    <color name="above_ninty">#00e676</color>
+    <color name="sixty_to_seventy">#ef6c00</color><!-- got illegible warning-->
+    <color name="seventy_to_eighty">#ffc400</color><!-- got illegible warning-->
+    <color name="eighty_to_ninty">#64dd17</color><!-- got illegible warning-->
+    <color name="above_ninty">#00e676</color><!-- got illegible warning-->
 </resources>
