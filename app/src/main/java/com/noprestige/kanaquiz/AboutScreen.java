@@ -27,4 +27,14 @@ public class AboutScreen extends AppCompatActivity
     {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/theblackwidower/")));
     }
+
+    public void toAssetStudioGithub(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/romannurik/AndroidAssetStudio")));
+    }
+
+    public void toNotoCjkGithub(View view)
+    {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/googlei18n/noto-cjk")));
+    }
 }

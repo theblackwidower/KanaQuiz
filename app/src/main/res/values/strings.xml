@@ -28,6 +28,10 @@
     <string name="special_thanks_start">Special Thanks to:</string>
     <string name="special_thanks_1">Sleepy Duck, for the Learn Japanese to Survive series</string>
 
+    <string name="icon_credit_start">Icon built with assistance from:</string>
+    <string name="icon_credit_asset_studio"><u>The Android Asset Studio by romannurik</u></string>
+    <string name="icon_credit_noto_font"><u>The Google Noto font</u></string>
+
     <!-- Options Screen -->
     <string name="incorrect_option_title">On an incorrect answer&#8230;</string>
     <string name="incorrect_option_move_on">go to next question</string>
