@@ -35,6 +35,8 @@ public class ReferenceCell extends View
     private float kanaHeight;
     private float romanjiHeight;
 
+    private static TypedArray defaultAttributes = null;
+
     public ReferenceCell(Context context)
     {
         super(context);
@@ -57,6 +59,9 @@ public class ReferenceCell extends View
     {
         Context context = this.getContext();
 
+        if (defaultAttributes == null)
+            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
+
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
         setKana(a.getString(R.styleable.ReferenceCell_kana));
@@ -65,8 +70,7 @@ public class ReferenceCell extends View
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
         setRomanjiSize(a.getDimension(R.styleable.ReferenceCell_romanjiSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
-        setColour(a.getColor(R.styleable.ReferenceCell_colour,
-                new TextView(context).getTextColors().getDefaultColor())); // TODO: Fix this kludge used to fetch default colour
+        setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
 
         a.recycle();
 
