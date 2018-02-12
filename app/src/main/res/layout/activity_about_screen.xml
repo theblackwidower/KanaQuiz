@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_about_screen"
     android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            app:srcCompat="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"/>
 
         <TextView
             android:id="@+id/lblNameDisplay"
@@ -125,14 +124,14 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/github_logo"
             android:onClick="toAppGithub"
-            app:srcCompat="@drawable/ic_github_logo"/>
+            android:src="@drawable/ic_github_logo"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/twitter_logo"
             android:onClick="toTwitter"
-            app:srcCompat="@drawable/ic_twitter_logo"/>
+            android:src="@drawable/ic_twitter_logo"/>
 
     </LinearLayout>
 </LinearLayout>
