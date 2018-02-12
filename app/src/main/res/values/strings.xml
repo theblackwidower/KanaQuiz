@@ -38,10 +38,10 @@
     <string name="incorrect_option_show_answer">show the correct answer</string>
     <string name="incorrect_option_retry">retry question till the answer is correct</string>
 
-    <string name="prefid_on_incorrect">action_on_incorrect</string>
-    <string name="prefid_on_incorrect_default">move_on</string>
-    <string name="prefid_on_incorrect_show_answer">show_answer</string>
-    <string name="prefid_on_incorrect_retry">retry</string>
+    <string name="prefid_on_incorrect" translatable="false">action_on_incorrect</string>
+    <string name="prefid_on_incorrect_default" translatable="false">move_on</string>
+    <string name="prefid_on_incorrect_show_answer" translatable="false">show_answer</string>
+    <string name="prefid_on_incorrect_retry" translatable="false">retry</string>
 
     <string-array name="incorrect_option_item_names">
         <item>@string/incorrect_option_move_on</item>
@@ -56,23 +56,23 @@
 
     <string name="repetition_option_title">Repetition control</string>
     <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
-    <string name="prefid_repetition">repeat_control</string>
+    <string name="prefid_repetition" translatable="false">repeat_control</string>
 
     <string name="digraphs_option_title">Allow Digraphs</string>
     <string name="digraphs_option_summary">Two-part kana will appear in the quiz</string>
-    <string name="prefid_digraphs">allow_digraphs</string>
+    <string name="prefid_digraphs" translatable="false">allow_digraphs</string>
 
     <string name="diacritics_option_title">Allow Diacritics</string>
     <string name="diacritics_option_summary">Kana with diacritics will appear in the quiz</string>
-    <string name="prefid_diacritics">allow_diacritics</string>
+    <string name="prefid_diacritics" translatable="false">allow_diacritics</string>
 
     <string name="full_reference_option_title">Display full reference</string>
     <string name="full_reference_option_summary">Reference screen will display all kana</string>
-    <string name="prefid_full_reference">full_reference</string>
+    <string name="prefid_full_reference" translatable="false">full_reference</string>
 
     <string name="multiple_choice_option_title">Multiple Choice Questions</string>
     <string name="multiple_choice_option_summary">Questions will be in multiple choice</string>
-    <string name="prefid_multiple_choice">multiple_choice</string>
+    <string name="prefid_multiple_choice" translatable="false">multiple_choice</string>
 
     <!-- Other -->
     <string name="base_form_title">Main</string>
@@ -82,8 +82,8 @@
     <string name="clear_logs">Clear Logs</string>
 
     <!-- Kana Selection -->
-    <string name="hiragana">Hiragana</string>
-    <string name="katakana">Katakana</string>
+    <string name="hiragana" translatable="false">Hiragana</string>
+    <string name="katakana" translatable="false">Katakana</string>
     <string name="set_1_title">Base set</string>
     <string name="set_2_title">K/G set</string>
     <string name="set_3_title">S/Z set</string>
@@ -96,27 +96,27 @@
     <string name="set_10_title">W set + N</string>
 
     <!-- SavedPreferences ID Codes -->
-    <string name="prefid_hiragana_1">hiragana_set_1</string>
-    <string name="prefid_hiragana_2">hiragana_set_2</string>
-    <string name="prefid_hiragana_3">hiragana_set_3</string>
-    <string name="prefid_hiragana_4">hiragana_set_4</string>
-    <string name="prefid_hiragana_5">hiragana_set_5</string>
-    <string name="prefid_hiragana_6">hiragana_set_6</string>
-    <string name="prefid_hiragana_7">hiragana_set_7</string>
-    <string name="prefid_hiragana_8">hiragana_set_8</string>
-    <string name="prefid_hiragana_9">hiragana_set_9</string>
-    <string name="prefid_hiragana_10">hiragana_set_10</string>
+    <string name="prefid_hiragana_1" translatable="false">hiragana_set_1</string>
+    <string name="prefid_hiragana_2" translatable="false">hiragana_set_2</string>
+    <string name="prefid_hiragana_3" translatable="false">hiragana_set_3</string>
+    <string name="prefid_hiragana_4" translatable="false">hiragana_set_4</string>
+    <string name="prefid_hiragana_5" translatable="false">hiragana_set_5</string>
+    <string name="prefid_hiragana_6" translatable="false">hiragana_set_6</string>
+    <string name="prefid_hiragana_7" translatable="false">hiragana_set_7</string>
+    <string name="prefid_hiragana_8" translatable="false">hiragana_set_8</string>
+    <string name="prefid_hiragana_9" translatable="false">hiragana_set_9</string>
+    <string name="prefid_hiragana_10" translatable="false">hiragana_set_10</string>
 
-    <string name="prefid_katakana_1">katakana_set_1</string>
-    <string name="prefid_katakana_2">katakana_set_2</string>
-    <string name="prefid_katakana_3">katakana_set_3</string>
-    <string name="prefid_katakana_4">katakana_set_4</string>
-    <string name="prefid_katakana_5">katakana_set_5</string>
-    <string name="prefid_katakana_6">katakana_set_6</string>
-    <string name="prefid_katakana_7">katakana_set_7</string>
-    <string name="prefid_katakana_8">katakana_set_8</string>
-    <string name="prefid_katakana_9">katakana_set_9</string>
-    <string name="prefid_katakana_10">katakana_set_10</string>
+    <string name="prefid_katakana_1" translatable="false">katakana_set_1</string>
+    <string name="prefid_katakana_2" translatable="false">katakana_set_2</string>
+    <string name="prefid_katakana_3" translatable="false">katakana_set_3</string>
+    <string name="prefid_katakana_4" translatable="false">katakana_set_4</string>
+    <string name="prefid_katakana_5" translatable="false">katakana_set_5</string>
+    <string name="prefid_katakana_6" translatable="false">katakana_set_6</string>
+    <string name="prefid_katakana_7" translatable="false">katakana_set_7</string>
+    <string name="prefid_katakana_8" translatable="false">katakana_set_8</string>
+    <string name="prefid_katakana_9" translatable="false">katakana_set_9</string>
+    <string name="prefid_katakana_10" translatable="false">katakana_set_10</string>
 
 
     <string name="licence_boilerplate">Copyright 2017 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
