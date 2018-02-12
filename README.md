@@ -27,3 +27,13 @@ _NB: The following features have no planned release date, or guarantee of releas
 * App will select questions to preference the kana which the user is having the most trouble with
 * Multiple choice answers to be selected as the ones the user is most likely to confuse the kana with
 * Kanji and vocabulary support
+
+## Translations
+
+This application is currently only available for English language speakers.
+
+If you are multi-lingual, and wish to assist this project by volunteering translation services, you can submit the changes in a pull request, or send an email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com).
+
+If you wish to submit a translation as a pull request, please use Android Studio's built-in Translations Editor. 
+
+If you don't wish to go through the hassle of installing Android Studio, you can use the strings.xml file (`/app/src/main/res/values/strings.xml`) as a template, and place it in a new directory called `/app/src/main/res/values-xx/` where `xx` is the language's locale code. Remove all strings marked with `translatable="false"` and all string arrays. The remaining strings are those that need to be translated. Be sure to place the name of the language you're translating as well as your own name, in the field marked `translator_credit`. You can also place the URL to your GitHub, Twitter, or other social media profile or personal/professional website in the field marked `translator_credit_url`. If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
