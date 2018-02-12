@@ -134,4 +134,13 @@
             android:src="@drawable/ic_twitter_logo"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblTranslatorCredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/translator_credit"
+        android:textSize="14sp"/>
+
 </LinearLayout>
