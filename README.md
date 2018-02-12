@@ -1,5 +1,7 @@
 # KanaQuiz
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/maintainability)](https://codeclimate.com/github/theblackwidower/KanaQuiz/maintainability)
+
 Are you trying to learn Japanese, but can't seem to remember the pronunciation of the basic Hiragana or Katakana character set?
 
 This application is here to help. It will test your knowledge, and drill the basics into your head. You can select which of the twenty different groups you wish to test yourself on. Allowing you to customize based on your skill level. Because we can't learn all this stuff at once. Also includes a reference screen that can display all kana you're currently working on, just to remind you.
