@@ -32,8 +32,12 @@ _NB: The following features have no planned release date, or guarantee of releas
 
 This application is currently only available for English language speakers.
 
-If you are multi-lingual, and wish to assist this project by volunteering translation services, you can submit the changes in a pull request, or send an email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com).
+If you are multi-lingual, and wish to assist this project by volunteering translation services, you can submit the changes in a pull request, or via email.
 
 If you wish to submit a translation as a pull request, please use Android Studio's built-in Translations Editor. 
 
-If you don't wish to go through the hassle of installing Android Studio, you can use the strings.xml file (`/app/src/main/res/values/strings.xml`) as a template, and place it in a new directory called `/app/src/main/res/values-xx/` where `xx` is the language's locale code. Remove all strings marked with `translatable="false"` and all string arrays. The remaining strings are those that need to be translated. Be sure to place the name of the language you're translating as well as your own name, in the field marked `translator_credit`. You can also place the URL to your GitHub, Twitter, or other social media profile or personal/professional website in the field marked `translator_credit_url`. If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
+If you don't wish to go through the hassle of installing Android Studio, you can use [this strings.xml file](https://gist.github.com/theblackwidower/206876858d2bc5a81f9014267750d8fd) as a template, and place it in a new directory called `/app/src/main/res/values-xx/` where `xx` is the language's locale code. The various string tags contain elements that need to be translated. Be sure to place the name of the language you're translating as well as your own name, in the field marked `translator_credit`. You can also place the URL to your GitHub, Twitter, or other social media profile or personal/professional website in the field marked `translator_credit_url`.
+
+If you don't wish to bother with pull requests, using the template listed above you can also submit your translation through email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com?subject=KanaQuiz%20Translation), with the subject "KanaQuiz Translation".
+
+If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
