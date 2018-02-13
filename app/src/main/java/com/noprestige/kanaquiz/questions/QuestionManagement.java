@@ -169,15 +169,16 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 2; i <= 4; i++)
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, false)));
-
-        if (isFullReference || getPref(6))
-        {
-            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, Diacritic.DAKUTEN, false)));
-            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, Diacritic.HANDAKUTEN, false)));
-        }
+            {
+                KanaQuestion[] kanaSetOne = getKanaSet(i, Diacritic.DAKUTEN, false);
+                KanaQuestion[] kanaSetTwo = getKanaSet(i, Diacritic.HANDAKUTEN, false);
+                if (kanaSetOne != null)
+                    table.addView(ReferenceCell.buildRow(context, kanaSetOne));
+                if (kanaSetTwo != null)
+                    table.addView(ReferenceCell.buildRow(context, kanaSetTwo));
+            }
 
         return table;
     }
@@ -189,9 +190,13 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 2; i <= 8; i++)
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.NO_DIACRITIC, true)));
+            {
+                KanaQuestion[] kanaSet = getKanaSet(i, Diacritic.NO_DIACRITIC, true);
+                if (kanaSet != null)
+                    table.addView(ReferenceCell.buildRow(context, kanaSet));
+            }
 
         return table;
     }
@@ -203,15 +208,16 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 2; i <= 4; i++)
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, true)));
-
-        if (isFullReference || getPref(6))
-        {
-            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, Diacritic.DAKUTEN, true)));
-            table.addView(ReferenceCell.buildRow(context, getKanaSet(6, Diacritic.HANDAKUTEN, true)));
-        }
+            {
+                KanaQuestion[] kanaSetOne = getKanaSet(i, Diacritic.DAKUTEN, true);
+                KanaQuestion[] kanaSetTwo = getKanaSet(i, Diacritic.HANDAKUTEN, true);
+                if (kanaSetOne != null)
+                    table.addView(ReferenceCell.buildRow(context, kanaSetOne));
+                if (kanaSetTwo != null)
+                    table.addView(ReferenceCell.buildRow(context, kanaSetTwo));
+            }
 
         return table;
     }
