@@ -3,12 +3,12 @@ package com.noprestige.kanaquiz.questions;
 import android.content.Context;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.KanaSelectionItem;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
+import com.noprestige.kanaquiz.reference.ReferenceTable;
 
 public abstract class QuestionManagement
 {
@@ -138,10 +138,9 @@ public abstract class QuestionManagement
         return returnValue.toString();
     }
 
-    public TableLayout getMainReferenceTable(Context context)
+    public ReferenceTable getMainReferenceTable(Context context)
     {
-        TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        ReferenceTable table = new ReferenceTable(context);
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
@@ -162,10 +161,9 @@ public abstract class QuestionManagement
         return table;
     }
 
-    public TableLayout getDiacriticReferenceTable(Context context)
+    public ReferenceTable getDiacriticReferenceTable(Context context)
     {
-        TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        ReferenceTable table = new ReferenceTable(context);
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
@@ -183,10 +181,9 @@ public abstract class QuestionManagement
         return table;
     }
 
-    public TableLayout getMainDigraphsReferenceTable(Context context)
+    public ReferenceTable getMainDigraphsReferenceTable(Context context)
     {
-        TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        ReferenceTable table = new ReferenceTable(context);
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
@@ -201,10 +198,9 @@ public abstract class QuestionManagement
         return table;
     }
 
-    public TableLayout getDiacriticDigraphsReferenceTable(Context context)
+    public ReferenceTable getDiacriticDigraphsReferenceTable(Context context)
     {
-        TableLayout table = new TableLayout(context);
-        table.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        ReferenceTable table = new ReferenceTable(context);
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
