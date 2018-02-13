@@ -3,10 +3,12 @@ package com.noprestige.kanaquiz.logs;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.util.TypedValue;
+import android.view.View;
 
 import com.noprestige.kanaquiz.R;
 
@@ -23,19 +25,50 @@ import static java.util.Calendar.LONG;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
-public class DailyLogItem extends LinearLayout
+public class DailyLogItem extends View
 {
-    private TextView lblDate;
-    private TextView lblCorrect;
-    private TextView lblTotal;
-    private TextView lblPercentage;
-
     private int correctAnswers = -1;
     private int totalAnswers = -1;
     private Date date;
 
+    private String dateString_1 = "";
+    private String dateString_3 = "";
+    private String dateString_2 = "";
+    private String correctString = "";
+    private String totalString = "";
+    private String percentageString = "";
+
+    private TextPaint datePaint = new TextPaint();
+    private TextPaint ratioPaint = new TextPaint();
+    private TextPaint percentagePaint = new TextPaint();
+    private Paint linePaint = new Paint();
+
+    private float dateXpoint;
+    private float dateYpoint_1;
+    private float dateYpoint_2;
+    private float dateYpoint_3;
+    private float correctXpoint;
+    private float slashXpoint;
+    private float totalXpoint;
+    private float percentageXpoint;
+    private float dataYpoint;
+
+    private float dateWidth_1;
+    private float dateWidth_2;
+    private float dateWidth_3;
+    private float correctWidth;
+    private float slashWidth;
+    private float totalWidth;
+    private float percentageWidth;
+
+    private float dateHeight;
+    private float dataHeight;
+
+    private static TypedArray defaultAttributes = null;
+
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+    private static final String SLASH = "/";
 
     public DailyLogItem(Context context)
     {
@@ -59,13 +92,8 @@ public class DailyLogItem extends LinearLayout
     {
         Context context = this.getContext();
 
-        // Set up initial objects
-        LayoutInflater.from(context).inflate(R.layout.daily_log_item, this);
-
-        lblDate = findViewById(R.id.lblDate);
-        lblCorrect = findViewById(R.id.lblCorrect);
-        lblTotal = findViewById(R.id.lblTotal);
-        lblPercentage = findViewById(R.id.lblPercentage);
+        if (defaultAttributes == null)
+            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
 
         // Load attributes
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
@@ -74,7 +102,88 @@ public class DailyLogItem extends LinearLayout
         setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correct_answers, -1));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_total_answers, -1));
 
+        setFontSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
+        setTextColour(defaultAttributes.getColor(0, 0));
+
         a.recycle();
+
+        datePaint.setAntiAlias(true);
+        ratioPaint.setAntiAlias(true);
+        percentagePaint.setAntiAlias(true);
+        linePaint.setStrokeWidth(1);
+    }
+
+    @Override
+    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight)
+    {
+        super.onSizeChanged(width, height, oldWidth, oldHeight);
+
+        int contentWidth = width - getPaddingLeft() - getPaddingRight();
+        int contentHeight = height - getPaddingTop() - getPaddingBottom();
+
+        dateXpoint = getPaddingLeft();
+        dateYpoint_1 = getPaddingTop() + dateHeight - datePaint.getFontMetrics().descent + linePaint.getStrokeWidth();
+        dateYpoint_2 = dateYpoint_1 + dateHeight;
+        dateYpoint_3 = dateYpoint_2 + dateHeight;
+
+        slashXpoint = getPaddingLeft() + (contentWidth - slashWidth) / 2;
+
+        correctXpoint = slashXpoint - correctWidth;
+        totalXpoint = slashXpoint + slashWidth;
+        percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
+        dataYpoint = getPaddingTop() + dataHeight - ratioPaint.getFontMetrics().descent + linePaint.getStrokeWidth();
+    }
+
+    //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        int desiredWidth = Math.round(
+                Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
+                        totalWidth + percentageWidth) * 2 + slashWidth) +
+                getPaddingLeft() + getPaddingRight();
+        int desiredHeight = Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) +
+                getPaddingTop() + getPaddingBottom();
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int width = measure(widthMode, widthSize, desiredWidth);
+        int height = measure(heightMode, heightSize, desiredHeight);
+
+        setMeasuredDimension(width, height);
+    }
+
+    static private int measure(int mode, int size, int desired)
+    {
+        if (mode == MeasureSpec.EXACTLY)
+            return size;
+        else if (mode == MeasureSpec.AT_MOST)
+            return Math.min(desired, size);
+        else
+            return desired;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas)
+    {
+        super.onDraw(canvas);
+
+        canvas.drawText(dateString_1, dateXpoint, dateYpoint_1, datePaint);
+        canvas.drawText(dateString_2, dateXpoint, dateYpoint_2, datePaint);
+        canvas.drawText(dateString_3, dateXpoint, dateYpoint_3, datePaint);
+        canvas.drawText(correctString, correctXpoint, dataYpoint, ratioPaint);
+        canvas.drawText(SLASH, slashXpoint, dataYpoint, ratioPaint);
+        canvas.drawText(totalString, totalXpoint, dataYpoint, ratioPaint);
+        canvas.drawText(percentageString, percentageXpoint, dataYpoint, percentagePaint);
+
+        canvas.drawLine(getPaddingLeft(),
+                getHeight() - getPaddingBottom() - linePaint.getStrokeWidth(),
+                getWidth() - getPaddingRight(),
+                getHeight() - getPaddingBottom() - linePaint.getStrokeWidth(),
+                linePaint);
     }
 
     public void setFromRecord(DailyRecord record)
@@ -122,13 +231,17 @@ public class DailyLogItem extends LinearLayout
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
-        lblDate.setText(calendar.getDisplayName(DAY_OF_WEEK, LONG, Locale.getDefault()));
-        lblDate.append(System.getProperty("line.separator"));
-        lblDate.append(calendar.getDisplayName(MONTH, LONG, Locale.getDefault()));
-        lblDate.append(" ");
-        lblDate.append(Integer.toString(calendar.get(DAY_OF_MONTH)));
-        lblDate.append(System.getProperty("line.separator"));
-        lblDate.append(Integer.toString(calendar.get(YEAR)));
+        dateString_1 = calendar.getDisplayName(DAY_OF_WEEK, LONG, Locale.getDefault());
+
+        dateString_2 = calendar.getDisplayName(MONTH, LONG, Locale.getDefault());
+        dateString_2 += " ";
+        dateString_2 += Integer.toString(calendar.get(DAY_OF_MONTH));
+
+        dateString_3 = Integer.toString(calendar.get(YEAR));
+
+        dateWidth_1 = datePaint.measureText(dateString_1);
+        dateWidth_2 = datePaint.measureText(dateString_2);
+        dateWidth_3 = datePaint.measureText(dateString_3);
     }
 
     public void setCorrectAnswers(int correctAnswers)
@@ -143,7 +256,35 @@ public class DailyLogItem extends LinearLayout
         updateAnswers();
     }
 
-    private String parseCount(int count)
+    public void setFontSize(float fontSize)
+    {
+        datePaint.setTextSize(fontSize);
+
+        fontSize *= 3;
+
+        ratioPaint.setTextSize(fontSize);
+        percentagePaint.setTextSize(fontSize);
+
+        dateHeight = datePaint.getFontMetrics().descent - datePaint.getFontMetrics().ascent;
+        dataHeight = ratioPaint.getFontMetrics().descent - ratioPaint.getFontMetrics().ascent;
+
+        dateWidth_1 = datePaint.measureText(dateString_1);
+        dateWidth_2 = datePaint.measureText(dateString_2);
+        dateWidth_3 = datePaint.measureText(dateString_3);
+
+        correctWidth = ratioPaint.measureText(correctString);
+        slashWidth = ratioPaint.measureText(SLASH);
+        totalWidth = ratioPaint.measureText(totalString);
+        percentageWidth = percentagePaint.measureText(percentageString);
+    }
+
+    public void setTextColour(int colour)
+    {
+        datePaint.setColor(colour);
+        ratioPaint.setColor(colour);
+    }
+
+    static private String parseCount(int count)
     {
         if (count < 1000)
             return Integer.toString(count);
@@ -155,15 +296,21 @@ public class DailyLogItem extends LinearLayout
             return Integer.toString(
                     Math.round((float) count / 1000f)) + "k";
     }
+
     private void updateAnswers()
     {
         if (correctAnswers >= 0 && totalAnswers >= 0)
         {
-            lblCorrect.setText(parseCount(correctAnswers) + "/");
-            lblTotal.setText(parseCount(totalAnswers));
+            correctString = parseCount(correctAnswers);
+            totalString = parseCount(totalAnswers);
             float percentage = (float) correctAnswers / (float) totalAnswers;
-            lblPercentage.setText(PERCENT_FORMATTER.format(percentage));
-            lblPercentage.setTextColor(getPercentageColour(percentage, getResources()));
+            percentageString = PERCENT_FORMATTER.format(percentage);
+            percentagePaint.setColor(getPercentageColour(percentage, getResources()));
+
+            correctWidth = ratioPaint.measureText(correctString);
+            slashWidth = ratioPaint.measureText(SLASH);
+            totalWidth = ratioPaint.measureText(totalString);
+            percentageWidth = percentagePaint.measureText(percentageString);
         }
     }
 
