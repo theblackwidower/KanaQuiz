@@ -131,6 +131,32 @@ public class ReferenceCell extends View
         canvas.drawText(romanji, romanjiXpoint, romanjiYpoint, romanjiPaint);
     }
 
+    public String getKana()
+    {
+        return this.kana;
+    }
+
+    public float getKanaSize()
+    {
+        return kanaPaint.getTextSize();
+    }
+
+    public String getRomanji()
+    {
+        return this.romanji;
+    }
+
+    public float getRomanjiSize()
+    {
+        return romanjiPaint.getTextSize();
+    }
+
+    public int getColour()
+    {
+        return kanaPaint.getColor();
+        //return romanjiPaint.getColor();
+    }
+
     public void setKana(String kana)
     {
         this.kana = kana == null ? "" : kana;
