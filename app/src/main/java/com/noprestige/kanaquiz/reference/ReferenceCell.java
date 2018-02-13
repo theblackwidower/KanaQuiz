@@ -106,24 +106,20 @@ public class ReferenceCell extends View
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        int width;
-        int height;
-
-        if (widthMode == MeasureSpec.EXACTLY)
-            width = widthSize;
-        else if (widthMode == MeasureSpec.AT_MOST)
-            width = Math.min(desiredWidth, widthSize);
-        else
-            width = desiredWidth;
-
-        if (heightMode == MeasureSpec.EXACTLY)
-            height = heightSize;
-        else if (heightMode == MeasureSpec.AT_MOST)
-            height = Math.min(desiredHeight, heightSize);
-        else
-            height = desiredHeight;
+        int width = measure(widthMode, widthSize, desiredWidth);
+        int height = measure(heightMode, heightSize, desiredHeight);
 
         setMeasuredDimension(width, height);
+    }
+
+    static private int measure(int mode, int size, int desired)
+    {
+        if (mode == MeasureSpec.EXACTLY)
+            return size;
+        else if (mode == MeasureSpec.AT_MOST)
+            return Math.min(desired, size);
+        else
+            return desired;
     }
 
     @Override
