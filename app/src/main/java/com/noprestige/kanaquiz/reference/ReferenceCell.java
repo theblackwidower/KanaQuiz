@@ -137,11 +137,7 @@ public class ReferenceCell extends View
 
     public void setKana(String kana)
     {
-        if (kana == null)
-            this.kana = "";
-        else
-            this.kana = kana;
-
+        this.kana = kana == null ? "" : kana;
         kanaWidth = kanaPaint.measureText(this.kana);
     }
 
@@ -154,11 +150,7 @@ public class ReferenceCell extends View
 
     public void setRomanji(String romanji)
     {
-        if (romanji == null)
-            this.romanji = "";
-        else
-            this.romanji = romanji;
-
+        this.romanji = romanji == null ? "" : romanji;
         romanjiWidth = romanjiPaint.measureText(this.romanji);
     }
 
