@@ -28,6 +28,9 @@ import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
 import java.text.DecimalFormat;
 
+import static android.graphics.Typeface.BOLD;
+import static android.graphics.Typeface.NORMAL;
+
 public class MainQuiz extends AppCompatActivity
 {
     private int totalQuestions;
@@ -145,6 +148,7 @@ public class MainQuiz extends AppCompatActivity
             lblDisplayKana.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
+            lblResponse.setTypeface(null, NORMAL);
             lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
             if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
                 btnMultipleChoice.deleteChoices();
@@ -183,6 +187,7 @@ public class MainQuiz extends AppCompatActivity
             if (questionBank.checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
+                lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
                 if (!isRetrying)
                 {
@@ -193,6 +198,7 @@ public class MainQuiz extends AppCompatActivity
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
+                lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
                 if (!isRetrying)
@@ -255,6 +261,7 @@ public class MainQuiz extends AppCompatActivity
             txtAnswer.setText("");
         }
         canSubmit = true;
+        lblResponse.setTypeface(null, NORMAL);
         lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
     }
 

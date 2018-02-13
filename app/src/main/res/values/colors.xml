@@ -10,7 +10,7 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
 
-    <color name="correct">#2e7d32</color>
+    <color name="correct">#00c853</color>
     <color name="incorrect">#d50000</color>
 
     <color name="below_fifty">#3e2723</color>
