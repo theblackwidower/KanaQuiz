@@ -98,8 +98,8 @@ public class ReferenceCell extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        int desiredWidth = Math.round(Math.max(kanaWidth, romanjiWidth));
-        int desiredHeight = Math.round(kanaHeight + romanjiHeight);
+        int desiredWidth = Math.round(Math.max(kanaWidth, romanjiWidth)) + getPaddingLeft() + getPaddingRight();
+        int desiredHeight = Math.round(kanaHeight + romanjiHeight) + getPaddingTop() + getPaddingBottom();
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
