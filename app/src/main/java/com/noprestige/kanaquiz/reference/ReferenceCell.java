@@ -179,32 +179,31 @@ public class ReferenceCell extends View
     {
         TableRow row = new TableRow(context);
 
-        if (questions.length == 1)
+        switch (questions.length)
         {
-            row.addView(new View(context));
-            row.addView(new View(context));
-            row.addView(questions[0].generateReference(context));
+            case 1:
+                row.addView(new View(context));
+                row.addView(new View(context));
+                row.addView(questions[0].generateReference(context));
+                break;
+            case 2:
+                row.addView(questions[0].generateReference(context));
+                row.addView(new View(context));
+                row.addView(new View(context));
+                row.addView(new View(context));
+                row.addView(questions[1].generateReference(context));
+                break;
+            case 3:
+                row.addView(questions[0].generateReference(context));
+                row.addView(new View(context));
+                row.addView(questions[1].generateReference(context));
+                row.addView(new View(context));
+                row.addView(questions[2].generateReference(context));
+                break;
+            default:
+                for (KanaQuestion question : questions)
+                    row.addView(question.generateReference(context));
         }
-        else if (questions.length == 2)
-        {
-            row.addView(questions[0].generateReference(context));
-            row.addView(new View(context));
-            row.addView(new View(context));
-            row.addView(new View(context));
-            row.addView(questions[1].generateReference(context));
-        }
-        else if (questions.length == 3)
-        {
-            row.addView(questions[0].generateReference(context));
-            row.addView(new View(context));
-            row.addView(questions[1].generateReference(context));
-            row.addView(new View(context));
-            row.addView(questions[2].generateReference(context));
-        }
-        else
-            for (KanaQuestion question : questions)
-                row.addView(question.generateReference(context));
-
         return row;
     }
 
