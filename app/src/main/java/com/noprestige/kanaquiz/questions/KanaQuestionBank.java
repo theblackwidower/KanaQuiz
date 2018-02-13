@@ -1,7 +1,7 @@
 package com.noprestige.kanaquiz.questions;
 
-import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.TreeSet;
@@ -53,14 +53,15 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     {
         previousQuestions = null;
         fullAnswerList = null;
-        for (KanaQuestion question : questions)
-        {
-            // Fetches the percentage of times the user got a kana right,
-            // The 1.05f is to invert the value so we get the number of times they got it wrong,
-            // and add 5% so any kana the user got perfect will still appear in the quiz.
-            // Times 100f to get the percentage.
-            this.add((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f, question);
-        }
+        if (questions != null)
+            for (KanaQuestion question : questions)
+            {
+                // Fetches the percentage of times the user got a kana right,
+                // The 1.05f is to invert the value so we get the number of times they got it wrong,
+                // and add 5% so any kana the user got perfect will still appear in the quiz.
+                // Times 100f to get the percentage.
+                this.add((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f, question);
+            }
         return true;
     }
 

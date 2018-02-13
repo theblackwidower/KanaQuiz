@@ -5,8 +5,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
-import com.noprestige.kanaquiz.options.KanaSelectionItem;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.KanaSelectionItem;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
@@ -42,44 +42,26 @@ public abstract class QuestionManagement
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        if (getPref(1))
-            questionBank.addQuestions(getKanaSet(1, Diacritic.NO_DIACRITIC, false));
-        for (int i = 2; i <= 8; i++)
+        for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (getPref(i))
             {
                 questionBank.addQuestions(getKanaSet(i, Diacritic.NO_DIACRITIC, false));
-                if (isDigraphs)
-                    questionBank.addQuestions(getKanaSet(i, Diacritic.NO_DIACRITIC, true));
-            }
-
-        if (isDiacritics)
-        {
-            for (int i = 2; i <= 4; i++)
-                if (getPref(i))
+                if (isDiacritics)
                 {
                     questionBank.addQuestions(getKanaSet(i, Diacritic.DAKUTEN, false));
-                    if (isDigraphs)
-                        questionBank.addQuestions(getKanaSet(i, Diacritic.DAKUTEN, true));
+                    questionBank.addQuestions(getKanaSet(i, Diacritic.HANDAKUTEN, false));
                 }
-
-            if (getPref(6))
-            {
-                questionBank.addQuestions(getKanaSet(6, Diacritic.DAKUTEN, false));
-                questionBank.addQuestions(getKanaSet(6, Diacritic.HANDAKUTEN, false));
                 if (isDigraphs)
                 {
-                    questionBank.addQuestions(getKanaSet(6, Diacritic.DAKUTEN, true));
-                    questionBank.addQuestions(getKanaSet(6, Diacritic.HANDAKUTEN, true));
+                    questionBank.addQuestions(getKanaSet(i, Diacritic.NO_DIACRITIC, true));
+                    if (isDiacritics)
+                    {
+                        questionBank.addQuestions(getKanaSet(i, Diacritic.DAKUTEN, true));
+                        questionBank.addQuestions(getKanaSet(i, Diacritic.HANDAKUTEN, true));
+                    }
                 }
+                questionBank.addQuestions(getKanaSet(i, Diacritic.CONSONANT, false));
             }
-        }
-        if (getPref(9))
-            questionBank.addQuestions(getKanaSet(9, Diacritic.NO_DIACRITIC, false));
-        if (getPref(10))
-        {
-            questionBank.addQuestions(getKanaSet(10, Diacritic.NO_DIACRITIC, false));
-            questionBank.addQuestions(getKanaSet(10, Diacritic.CONSONANT, false));
-        }
 
         return questionBank;
     }
