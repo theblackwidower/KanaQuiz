@@ -106,29 +106,26 @@ public abstract class QuestionManagement
     private String getKanaSetDisplay(int setNumber, Diacritic diacritic)
     {
         StringBuilder returnValue = new StringBuilder();
-        for (KanaQuestion question : getKanaSet(setNumber, diacritic, false))
-            returnValue.append(question.getKana() + " ");
+        KanaQuestion[] kanaSet = getKanaSet(setNumber, diacritic, false);
+        if (kanaSet != null)
+            for (KanaQuestion question : kanaSet)
+                returnValue.append(question.getKana() + " ");
         return returnValue.toString();
     }
 
     private String displayContents(int setNumber)
     {
-        String returnValue = "";
-
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        returnValue += getKanaSetDisplay(setNumber);
+        String returnValue = getKanaSetDisplay(setNumber);
 
-        if (isDiacritics && (setNumber >= 2 && setNumber <= 4 || setNumber == 6))
+        if (isDiacritics)
         {
             returnValue += getKanaSetDisplay(setNumber, Diacritic.DAKUTEN);
-
-            if (setNumber == 6)
-                returnValue += getKanaSetDisplay(setNumber, Diacritic.HANDAKUTEN);
+            returnValue += getKanaSetDisplay(setNumber, Diacritic.HANDAKUTEN);
         }
 
-        if (setNumber == 10)
-            returnValue += getKanaSetDisplay(setNumber, Diacritic.CONSONANT);
+        returnValue += getKanaSetDisplay(setNumber, Diacritic.CONSONANT);
 
         return returnValue;
     }
