@@ -79,10 +79,10 @@ public abstract class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             for (int i = 1; i <= CATEGORY_COUNT; i++)
-                if (getPref(i))
-                    if (getKanaSet(i, Diacritic.DAKUTEN, false) != null ||
-                            getKanaSet(i, Diacritic.HANDAKUTEN, false) != null)
-                        return true;
+                if (getPref(i) &&
+                        (getKanaSet(i, Diacritic.DAKUTEN, false) != null ||
+                                getKanaSet(i, Diacritic.HANDAKUTEN, false) != null))
+                    return true;
 
         return false;
     }
@@ -91,9 +91,9 @@ public abstract class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 1; i <= CATEGORY_COUNT; i++)
-                if (getPref(i))
-                    if (getKanaSet(i, Diacritic.NO_DIACRITIC, true) != null)
-                        return true;
+                if (getPref(i) &&
+                        (getKanaSet(i, Diacritic.NO_DIACRITIC, true) != null))
+                    return true;
 
         return false;
     }
@@ -103,10 +103,10 @@ public abstract class QuestionManagement
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 1; i <= CATEGORY_COUNT; i++)
-                if (getPref(i))
-                    if (getKanaSet(i, Diacritic.DAKUTEN, true) != null ||
-                            getKanaSet(i, Diacritic.HANDAKUTEN, true) != null)
-                        return true;
+                if (getPref(i) &&
+                        (getKanaSet(i, Diacritic.DAKUTEN, true) != null ||
+                                getKanaSet(i, Diacritic.HANDAKUTEN, true) != null))
+                    return true;
 
         return false;
     }
