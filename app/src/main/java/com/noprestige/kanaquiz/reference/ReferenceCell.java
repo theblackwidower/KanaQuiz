@@ -197,12 +197,17 @@ public class ReferenceCell extends View
 
     public static TableRow buildRow(Context context, KanaQuestion[] questions)
     {
-        TableRow row = new TableRow(context);
+        if (questions == null)
+            return null;
+        else
+        {
+            TableRow row = new TableRow(context);
 
-        for (KanaQuestion question : questions)
-            row.addView(question.generateReference(context));
+            for (KanaQuestion question : questions)
+                row.addView(question.generateReference(context));
 
-        return row;
+            return row;
+        }
     }
 
     static TextView buildHeader(Context context, int title)

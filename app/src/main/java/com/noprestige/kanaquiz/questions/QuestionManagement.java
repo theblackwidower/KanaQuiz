@@ -170,12 +170,8 @@ public abstract class QuestionManagement
         for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
             {
-                KanaQuestion[] kanaSetOne = getKanaSet(i, Diacritic.DAKUTEN, false);
-                KanaQuestion[] kanaSetTwo = getKanaSet(i, Diacritic.HANDAKUTEN, false);
-                if (kanaSetOne != null)
-                    table.addView(ReferenceCell.buildRow(context, kanaSetOne));
-                if (kanaSetTwo != null)
-                    table.addView(ReferenceCell.buildRow(context, kanaSetTwo));
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, false)));
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.HANDAKUTEN, false)));
             }
 
         return table;
@@ -189,11 +185,7 @@ public abstract class QuestionManagement
 
         for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
-            {
-                KanaQuestion[] kanaSet = getKanaSet(i, Diacritic.NO_DIACRITIC, true);
-                if (kanaSet != null)
-                    table.addView(ReferenceCell.buildRow(context, kanaSet));
-            }
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.NO_DIACRITIC, true)));
 
         return table;
     }
@@ -207,12 +199,8 @@ public abstract class QuestionManagement
         for (int i = 1; i <= CATEGORY_COUNT; i++)
             if (isFullReference || getPref(i))
             {
-                KanaQuestion[] kanaSetOne = getKanaSet(i, Diacritic.DAKUTEN, true);
-                KanaQuestion[] kanaSetTwo = getKanaSet(i, Diacritic.HANDAKUTEN, true);
-                if (kanaSetOne != null)
-                    table.addView(ReferenceCell.buildRow(context, kanaSetOne));
-                if (kanaSetTwo != null)
-                    table.addView(ReferenceCell.buildRow(context, kanaSetTwo));
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, true)));
+                table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.HANDAKUTEN, true)));
             }
 
         return table;
