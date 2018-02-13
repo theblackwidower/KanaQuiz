@@ -98,11 +98,6 @@ public abstract class QuestionManagement
                 (getPref(2) || getPref(3) || getPref(4) || getPref(6)));
     }
 
-    private String getKanaSetDisplay(int setNumber)
-    {
-        return getKanaSetDisplay(setNumber, Diacritic.NO_DIACRITIC);
-    }
-
     private String getKanaSetDisplay(int setNumber, Diacritic diacritic)
     {
         StringBuilder returnValue = new StringBuilder();
@@ -117,7 +112,7 @@ public abstract class QuestionManagement
     {
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        String returnValue = getKanaSetDisplay(setNumber);
+        String returnValue = getKanaSetDisplay(setNumber, Diacritic.NO_DIACRITIC);
 
         if (isDiacritics)
         {
