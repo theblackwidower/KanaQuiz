@@ -112,17 +112,17 @@ public abstract class QuestionManagement
     {
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        String returnValue = getKanaSetDisplay(setNumber, Diacritic.NO_DIACRITIC);
+        StringBuilder returnValue = new StringBuilder(getKanaSetDisplay(setNumber, Diacritic.NO_DIACRITIC));
 
         if (isDiacritics)
         {
-            returnValue += getKanaSetDisplay(setNumber, Diacritic.DAKUTEN);
-            returnValue += getKanaSetDisplay(setNumber, Diacritic.HANDAKUTEN);
+            returnValue.append(getKanaSetDisplay(setNumber, Diacritic.DAKUTEN));
+            returnValue.append(getKanaSetDisplay(setNumber, Diacritic.HANDAKUTEN));
         }
 
-        returnValue += getKanaSetDisplay(setNumber, Diacritic.CONSONANT);
+        returnValue.append(getKanaSetDisplay(setNumber, Diacritic.CONSONANT));
 
-        return returnValue;
+        return returnValue.toString();
     }
 
     public TableLayout getMainReferenceTable(Context context)
