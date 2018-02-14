@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -120,8 +119,8 @@ public class DailyLogItem extends View
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        linePaint.setColor(Color.rgb(0x21, 0x21, 0x21));
-        linePaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics()));
+        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
     }

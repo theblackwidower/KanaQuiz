@@ -3,10 +3,8 @@ package com.noprestige.kanaquiz.options;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -94,8 +92,8 @@ public class KanaSelectionItem extends LinearLayout
 
         a.recycle();
 
-        linePaint.setColor(Color.rgb(0x21, 0x21, 0x21));
-        linePaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getContext().getResources().getDisplayMetrics()));
+        linePaint.setColor(getContext().getResources().getColor(R.color.dividingLine));
+        linePaint.setStrokeWidth(getContext().getResources().getDimension(R.dimen.dividingLine));
     }
 
     @Override
