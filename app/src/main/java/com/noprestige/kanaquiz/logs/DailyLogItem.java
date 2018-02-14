@@ -69,6 +69,8 @@ public class DailyLogItem extends View
     private float dateHeight;
     private float dataHeight;
 
+    private int internalVerticalPadding;
+
     private static TypedArray defaultAttributes = null;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
@@ -118,6 +120,8 @@ public class DailyLogItem extends View
 
         linePaint.setColor(Color.rgb(0x21, 0x21, 0x21));
         linePaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics()));
+
+        internalVerticalPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -126,10 +130,10 @@ public class DailyLogItem extends View
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
-        int contentHeight = height - getPaddingTop() - getPaddingBottom();
+        int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
         dateXpoint = getPaddingLeft();
-        dateYpoint_1 = getPaddingTop() + dateHeight - datePaint.getFontMetrics().descent;
+        dateYpoint_1 = getPaddingTop() + internalVerticalPadding + dateHeight - datePaint.getFontMetrics().descent;
         dateYpoint_2 = dateYpoint_1 + dateHeight;
         dateYpoint_3 = dateYpoint_2 + dateHeight;
 
@@ -138,7 +142,7 @@ public class DailyLogItem extends View
         correctXpoint = slashXpoint - correctWidth;
         totalXpoint = slashXpoint + slashWidth;
         percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYpoint = getPaddingTop() + dataHeight - ratioPaint.getFontMetrics().descent;
+        dataYpoint = getPaddingTop() + internalVerticalPadding + dataHeight - ratioPaint.getFontMetrics().descent;
 
         lineXpoint_1 = getPaddingLeft();
         lineXpoint_2 = width - getPaddingRight();
@@ -154,7 +158,7 @@ public class DailyLogItem extends View
                         totalWidth + percentageWidth) * 2 + slashWidth) +
                 getPaddingLeft() + getPaddingRight();
         int desiredHeight = Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) +
-                getPaddingTop() + getPaddingBottom();
+                getPaddingTop() + getPaddingBottom() + internalVerticalPadding * 2;
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
