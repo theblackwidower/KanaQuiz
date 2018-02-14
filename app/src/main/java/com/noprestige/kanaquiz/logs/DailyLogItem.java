@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -52,6 +53,10 @@ public class DailyLogItem extends View
     private float totalXpoint;
     private float percentageXpoint;
     private float dataYpoint;
+
+    private float lineXpoint_1;
+    private float lineXpoint_2;
+    private float lineYpoint;
 
     private float dateWidth_1;
     private float dateWidth_2;
@@ -110,7 +115,9 @@ public class DailyLogItem extends View
         datePaint.setAntiAlias(true);
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
-        linePaint.setStrokeWidth(1);
+
+        linePaint.setColor(Color.rgb(0x21, 0x21, 0x21));
+        linePaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, context.getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -122,7 +129,7 @@ public class DailyLogItem extends View
         int contentHeight = height - getPaddingTop() - getPaddingBottom();
 
         dateXpoint = getPaddingLeft();
-        dateYpoint_1 = getPaddingTop() + dateHeight - datePaint.getFontMetrics().descent + linePaint.getStrokeWidth();
+        dateYpoint_1 = getPaddingTop() + dateHeight - datePaint.getFontMetrics().descent;
         dateYpoint_2 = dateYpoint_1 + dateHeight;
         dateYpoint_3 = dateYpoint_2 + dateHeight;
 
@@ -131,7 +138,11 @@ public class DailyLogItem extends View
         correctXpoint = slashXpoint - correctWidth;
         totalXpoint = slashXpoint + slashWidth;
         percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYpoint = getPaddingTop() + dataHeight - ratioPaint.getFontMetrics().descent + linePaint.getStrokeWidth();
+        dataYpoint = getPaddingTop() + dataHeight - ratioPaint.getFontMetrics().descent;
+
+        lineXpoint_1 = getPaddingLeft();
+        lineXpoint_2 = width - getPaddingRight();
+        lineYpoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -178,12 +189,7 @@ public class DailyLogItem extends View
         canvas.drawText(SLASH, slashXpoint, dataYpoint, ratioPaint);
         canvas.drawText(totalString, totalXpoint, dataYpoint, ratioPaint);
         canvas.drawText(percentageString, percentageXpoint, dataYpoint, percentagePaint);
-
-        canvas.drawLine(getPaddingLeft(),
-                getHeight() - getPaddingBottom() - linePaint.getStrokeWidth(),
-                getWidth() - getPaddingRight(),
-                getHeight() - getPaddingBottom() - linePaint.getStrokeWidth(),
-                linePaint);
+        canvas.drawLine(lineXpoint_1, lineYpoint, lineXpoint_2, lineYpoint, linePaint);
     }
 
     public void setFromRecord(DailyRecord record)
