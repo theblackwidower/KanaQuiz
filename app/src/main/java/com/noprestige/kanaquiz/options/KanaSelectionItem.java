@@ -49,8 +49,10 @@ public class KanaSelectionItem extends LinearLayout
 
     private void init(AttributeSet attrs, int defStyle)
     {
+        Context context = this.getContext();
+
         // Set up initial objects
-        LayoutInflater.from(getContext()).inflate(R.layout.kana_selection_item, this);
+        LayoutInflater.from(context).inflate(R.layout.kana_selection_item, this);
 
         lblTitle = findViewById(R.id.lblTitle);
         lblContents = findViewById(R.id.lblContents);
@@ -77,7 +79,7 @@ public class KanaSelectionItem extends LinearLayout
         );
 
         // Load attributes
-        final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
         String title = a.getString(R.styleable.KanaSelectionItem_title);
         String contents = a.getString(R.styleable.KanaSelectionItem_contents);
@@ -92,8 +94,8 @@ public class KanaSelectionItem extends LinearLayout
 
         a.recycle();
 
-        linePaint.setColor(getContext().getResources().getColor(R.color.dividingLine));
-        linePaint.setStrokeWidth(getContext().getResources().getDimension(R.dimen.dividingLine));
+        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
     }
 
     @Override
