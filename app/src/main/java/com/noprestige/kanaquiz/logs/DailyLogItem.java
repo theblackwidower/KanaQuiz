@@ -31,6 +31,7 @@ public class DailyLogItem extends View
     private int correctAnswers = -1;
     private int totalAnswers = -1;
     private Date date;
+    private boolean isDynamicSize;
 
     private String dateString_1 = "";
     private String dateString_3 = "";
@@ -111,6 +112,7 @@ public class DailyLogItem extends View
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
         setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour, defaultAttributes.getColor(0, 0)));
+        setIsDynamicSize(a.getBoolean(R.styleable.DailyLogItem_isDynamicSize, true));
 
         a.recycle();
 
@@ -129,6 +131,11 @@ public class DailyLogItem extends View
     {
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
+        repositionItems(width, height);
+    }
+
+    private void repositionItems(int width, int height)
+    {
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
         int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
@@ -153,10 +160,7 @@ public class DailyLogItem extends View
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        int desiredWidth = Math.round(
-                Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
-                        totalWidth + percentageWidth) * 2 + slashWidth) +
-                getPaddingLeft() + getPaddingRight();
+        int desiredWidth = desiredWidth();
         int desiredHeight = Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) +
                 getPaddingTop() + getPaddingBottom() + internalVerticalPadding * 2;
 
@@ -169,6 +173,14 @@ public class DailyLogItem extends View
         int height = measure(heightMode, heightSize, desiredHeight);
 
         setMeasuredDimension(width, height);
+    }
+
+    private int desiredWidth()
+    {
+        return Math.round(
+                Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
+                        totalWidth + percentageWidth) * 2 + slashWidth) +
+                getPaddingLeft() + getPaddingRight();
     }
 
     static private int measure(int mode, int size, int desired)
@@ -186,6 +198,8 @@ public class DailyLogItem extends View
     {
         super.onDraw(canvas);
 
+        correctFontSize();
+
         canvas.drawText(dateString_1, dateXpoint, dateYpoint_1, datePaint);
         canvas.drawText(dateString_2, dateXpoint, dateYpoint_2, datePaint);
         canvas.drawText(dateString_3, dateXpoint, dateYpoint_3, datePaint);
@@ -194,6 +208,16 @@ public class DailyLogItem extends View
         canvas.drawText(totalString, totalXpoint, dataYpoint, ratioPaint);
         canvas.drawText(percentageString, percentageXpoint, dataYpoint, percentagePaint);
         canvas.drawLine(lineXpoint_1, lineYpoint, lineXpoint_2, lineYpoint, linePaint);
+    }
+
+    public void correctFontSize()
+    {
+        if (isDynamicSize)
+        {
+            while (desiredWidth() > getWidth())
+                setFontSize(getFontSize() - 1);
+            repositionItems(getWidth(), getHeight());
+        }
     }
 
     public void setFromRecord(DailyRecord record)
@@ -226,6 +250,11 @@ public class DailyLogItem extends View
     public int getMainColour()
     {
         return datePaint.getColor();
+    }
+
+    public boolean getIsDynamicSize()
+    {
+        return isDynamicSize;
     }
 
     public boolean setDate(String date)
@@ -302,6 +331,11 @@ public class DailyLogItem extends View
     {
         datePaint.setColor(colour);
         ratioPaint.setColor(colour);
+    }
+
+    public void setIsDynamicSize(boolean isDynamicSize)
+    {
+        this.isDynamicSize = isDynamicSize;
     }
 
     static private String parseCount(int count)

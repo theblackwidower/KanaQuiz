@@ -5,5 +5,6 @@
         <attr name="totalAnswers" format="integer"/>
         <attr name="fontSize" format="dimension"/>
         <attr name="mainColour" format="color"/>
+        <attr name="isDynamicSize" format="boolean"/>
     </declare-styleable>
 </resources>
