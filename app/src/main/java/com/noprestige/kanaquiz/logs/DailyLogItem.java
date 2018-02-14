@@ -106,11 +106,11 @@ public class DailyLogItem extends View
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
-        setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correct_answers, -1));
-        setTotalAnswers(a.getInt(R.styleable.DailyLogItem_total_answers, -1));
-
-        setFontSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
-        setTextColour(defaultAttributes.getColor(0, 0));
+        setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correctAnswers, -1));
+        setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
+        setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics())));
+        setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour, defaultAttributes.getColor(0, 0)));
 
         a.recycle();
 
@@ -218,6 +218,16 @@ public class DailyLogItem extends View
         return this.totalAnswers;
     }
 
+    public float getFontSize()
+    {
+        return datePaint.getTextSize();
+    }
+
+    public int getMainColour()
+    {
+        return datePaint.getColor();
+    }
+
     public boolean setDate(String date)
     {
         if (date == null)
@@ -288,7 +298,7 @@ public class DailyLogItem extends View
         percentageWidth = percentagePaint.measureText(percentageString);
     }
 
-    public void setTextColour(int colour)
+    public void setMainColour(int colour)
     {
         datePaint.setColor(colour);
         ratioPaint.setColor(colour);
