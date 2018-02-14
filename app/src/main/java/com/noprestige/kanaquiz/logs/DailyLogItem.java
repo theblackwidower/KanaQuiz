@@ -109,7 +109,7 @@ public class DailyLogItem extends View
         setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correctAnswers, -1));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics())));
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
         setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour, defaultAttributes.getColor(0, 0)));
 
         a.recycle();
