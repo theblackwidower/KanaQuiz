@@ -140,7 +140,9 @@ public class DailyLogItem extends View
         int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
         dateXpoint = getPaddingLeft();
-        dateYpoint_1 = getPaddingTop() + internalVerticalPadding + dateHeight - datePaint.getFontMetrics().descent;
+        dateYpoint_1 = getPaddingTop() + internalVerticalPadding +
+                (contentHeight - dateHeight) / 2 -
+                datePaint.getFontMetrics().descent;
         dateYpoint_2 = dateYpoint_1 + dateHeight;
         dateYpoint_3 = dateYpoint_2 + dateHeight;
 
@@ -149,7 +151,9 @@ public class DailyLogItem extends View
         correctXpoint = slashXpoint - correctWidth;
         totalXpoint = slashXpoint + slashWidth;
         percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYpoint = getPaddingTop() + internalVerticalPadding + dataHeight - ratioPaint.getFontMetrics().descent;
+        dataYpoint = getPaddingTop() + internalVerticalPadding +
+                (contentHeight + dataHeight) / 2 -
+                ratioPaint.getFontMetrics().descent;
 
         lineXpoint_1 = getPaddingLeft();
         lineXpoint_2 = width - getPaddingRight();
