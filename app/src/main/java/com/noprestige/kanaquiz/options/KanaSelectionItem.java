@@ -2,7 +2,11 @@ package com.noprestige.kanaquiz.options;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,6 +24,12 @@ public class KanaSelectionItem extends LinearLayout
     private TextView lblTitle;
     private TextView lblContents;
     private CheckBox chkCheckBox;
+
+    private Paint linePaint = new Paint();
+
+    private float lineXpoint_1;
+    private float lineXpoint_2;
+    private float lineYpoint;
 
     public KanaSelectionItem(Context context)
     {
@@ -83,6 +93,66 @@ public class KanaSelectionItem extends LinearLayout
             setPrefId(prefId);
 
         a.recycle();
+
+        linePaint.setColor(Color.rgb(0x21, 0x21, 0x21));
+        linePaint.setStrokeWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getContext().getResources().getDisplayMetrics()));
+    }
+
+    @Override
+    protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight)
+    {
+        super.onSizeChanged(width, height, oldWidth, oldHeight);
+
+        lineXpoint_1 = getPaddingLeft();
+        lineXpoint_2 = width - getPaddingRight();
+        lineYpoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
+    }
+
+    //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
+        int desiredWidth = 0;
+        int desiredHeight = 0;
+
+        for (int i = 0; i < getChildCount(); i++)
+        {
+            View child = getChildAt(i);
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
+            LayoutParams lp = (LayoutParams) child.getLayoutParams();
+            desiredWidth += child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
+            desiredHeight = Math.max(desiredHeight, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
+        }
+        desiredWidth += getPaddingLeft() + getPaddingRight();
+        desiredHeight += getPaddingTop() + getPaddingBottom() + linePaint.getStrokeWidth();
+
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int width = measure(widthMode, widthSize, desiredWidth);
+        int height = measure(heightMode, heightSize, desiredHeight);
+
+        setMeasuredDimension(width, height);
+    }
+
+    static private int measure(int mode, int size, int desired)
+    {
+        if (mode == MeasureSpec.EXACTLY)
+            return size;
+        else if (mode == MeasureSpec.AT_MOST)
+            return Math.min(desired, size);
+        else
+            return desired;
+    }
+
+    @Override
+    public void dispatchDraw(Canvas canvas)
+    {
+        super.dispatchDraw(canvas);
+
+        canvas.drawLine(lineXpoint_1, lineYpoint, lineXpoint_2, lineYpoint, linePaint);
     }
 
     public String getTitle()
