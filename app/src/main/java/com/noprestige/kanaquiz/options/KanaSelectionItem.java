@@ -139,12 +139,15 @@ public class KanaSelectionItem extends LinearLayout
 
     static private int measure(int mode, int size, int desired)
     {
-        if (mode == MeasureSpec.EXACTLY)
-            return size;
-        else if (mode == MeasureSpec.AT_MOST)
-            return Math.min(desired, size);
-        else
-            return desired;
+        switch (mode)
+        {
+            case MeasureSpec.EXACTLY:
+                return size;
+            case MeasureSpec.AT_MOST:
+                return Math.min(desired, size);
+            default:
+                return desired;
+        }
     }
 
     @Override
