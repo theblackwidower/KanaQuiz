@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
-public class KanaSelectionItem extends LinearLayout
+public class KanaSelectionItem extends RelativeLayout
 {
     private String prefId;
 
@@ -105,19 +105,27 @@ public class KanaSelectionItem extends LinearLayout
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        int desiredWidth = 0;
-        int desiredHeight = 0;
+        //Need to position objects within the layout
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        for (int i = 0; i < getChildCount(); i++)
-        {
-            View child = getChildAt(i);
-            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
-            LayoutParams lp = (LayoutParams) child.getLayoutParams();
-            desiredWidth += child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
-            desiredHeight = Math.max(desiredHeight, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
-        }
-        desiredWidth += getPaddingLeft() + getPaddingRight();
-        desiredHeight += getPaddingTop() + getPaddingBottom() + linePaint.getStrokeWidth();
+        measureChildWithMargins(lblTitle, widthMeasureSpec, 0, heightMeasureSpec, 0);
+        measureChildWithMargins(lblContents, widthMeasureSpec, 0, heightMeasureSpec, 0);
+        measureChildWithMargins(chkCheckBox, widthMeasureSpec, 0, heightMeasureSpec, 0);
+
+        LayoutParams titleLayout = (LayoutParams) lblTitle.getLayoutParams();
+        LayoutParams contentsLayout = (LayoutParams) lblContents.getLayoutParams();
+        LayoutParams boxLayout = (LayoutParams) chkCheckBox.getLayoutParams();
+
+        int desiredWidth = Math.max(
+                lblTitle.getMeasuredWidth() + titleLayout.leftMargin + titleLayout.rightMargin,
+                lblContents.getMeasuredWidth() + contentsLayout.leftMargin + contentsLayout.rightMargin
+        ) + chkCheckBox.getMeasuredWidth() + boxLayout.leftMargin + boxLayout.rightMargin +
+                getPaddingLeft() + getPaddingRight();
+        int desiredHeight = Math.max(
+                lblTitle.getMeasuredHeight() + titleLayout.topMargin + titleLayout.bottomMargin +
+                        lblContents.getMeasuredHeight() + contentsLayout.topMargin + contentsLayout.bottomMargin,
+                chkCheckBox.getMeasuredHeight() + boxLayout.topMargin + boxLayout.bottomMargin
+        ) + getPaddingTop() + getPaddingBottom() + Math.round(linePaint.getStrokeWidth());
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
