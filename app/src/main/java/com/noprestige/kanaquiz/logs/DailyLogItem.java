@@ -167,13 +167,8 @@ public class DailyLogItem extends View
         int desiredHeight = Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) +
                 getPaddingTop() + getPaddingBottom() + internalVerticalPadding * 2;
 
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int width = measure(widthMode, widthSize, desiredWidth);
-        int height = measure(heightMode, heightSize, desiredHeight);
+        int width = calculateSize(widthMeasureSpec, desiredWidth);
+        int height = calculateSize(heightMeasureSpec, desiredHeight);
 
         setMeasuredDimension(width, height);
     }
@@ -186,14 +181,14 @@ public class DailyLogItem extends View
                 getPaddingLeft() + getPaddingRight();
     }
 
-    static private int measure(int mode, int size, int desired)
+    static private int calculateSize(int measureSpec, int desired)
     {
-        switch (mode)
+        switch (MeasureSpec.getMode(measureSpec))
         {
             case MeasureSpec.EXACTLY:
-                return size;
+                return MeasureSpec.getSize(measureSpec);
             case MeasureSpec.AT_MOST:
-                return Math.min(desired, size);
+                return Math.min(desired, MeasureSpec.getSize(measureSpec));
             default:
                 return desired;
         }

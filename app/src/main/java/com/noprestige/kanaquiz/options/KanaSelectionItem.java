@@ -126,25 +126,20 @@ public class KanaSelectionItem extends LinearLayout
         desiredWidth += getPaddingLeft() + getPaddingRight();
         desiredHeight += getPaddingTop() + getPaddingBottom() + linePaint.getStrokeWidth();
 
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int width = measure(widthMode, widthSize, desiredWidth);
-        int height = measure(heightMode, heightSize, desiredHeight);
+        int width = calculateSize(widthMeasureSpec, desiredWidth);
+        int height = calculateSize(heightMeasureSpec, desiredHeight);
 
         setMeasuredDimension(width, height);
     }
 
-    static private int measure(int mode, int size, int desired)
+    static private int calculateSize(int measureSpec, int desired)
     {
-        switch (mode)
+        switch (MeasureSpec.getMode(measureSpec))
         {
             case MeasureSpec.EXACTLY:
-                return size;
+                return MeasureSpec.getSize(measureSpec);
             case MeasureSpec.AT_MOST:
-                return Math.min(desired, size);
+                return Math.min(desired, MeasureSpec.getSize(measureSpec));
             default:
                 return desired;
         }
