@@ -98,6 +98,11 @@
     <string name="set_9_title">Y set</string>
     <string name="set_10_title">W set + N</string>
 
+    <string name="set_2_no_diacritics_title">K set</string>
+    <string name="set_3_no_diacritics_title">S set</string>
+    <string name="set_4_no_diacritics_title">T set</string>
+    <string name="set_6_no_diacritics_title">H set</string>
+
     <!-- SavedPreferences ID Codes -->
     <string name="prefid_hiragana_1" translatable="false">hiragana_set_1</string>
     <string name="prefid_hiragana_2" translatable="false">hiragana_set_2</string>

@@ -14,20 +14,41 @@ public abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    private static final int[] SET_TITLES = {
-            R.string.set_1_title, R.string.set_2_title,
-            R.string.set_3_title, R.string.set_4_title,
-            R.string.set_5_title, R.string.set_6_title,
-            R.string.set_7_title, R.string.set_8_title,
-            R.string.set_9_title, R.string.set_10_title};
-
     abstract KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs);
 
     abstract int getPrefId(int number);
 
     private int getSetTitle(int number)
     {
-        return SET_TITLES[number - 1];
+        switch (number)
+        {
+            case 1:
+                return R.string.set_1_title;
+            case 2:
+                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
+                        R.string.set_2_title : R.string.set_2_no_diacritics_title;
+            case 3:
+                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
+                        R.string.set_3_title : R.string.set_3_no_diacritics_title;
+            case 4:
+                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
+                        R.string.set_4_title : R.string.set_4_no_diacritics_title;
+            case 5:
+                return R.string.set_5_title;
+            case 6:
+                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
+                        R.string.set_6_title : R.string.set_6_no_diacritics_title;
+            case 7:
+                return R.string.set_7_title;
+            case 8:
+                return R.string.set_8_title;
+            case 9:
+                return R.string.set_9_title;
+            case 10:
+                return R.string.set_10_title;
+            default:
+                return 0;
+        }
     }
 
     private boolean getPref(int number)
