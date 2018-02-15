@@ -81,16 +81,9 @@ public class KanaSelectionItem extends LinearLayout
         // Load attributes
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
-        String title = a.getString(R.styleable.KanaSelectionItem_title);
-        String contents = a.getString(R.styleable.KanaSelectionItem_contents);
-        String prefId = a.getString(R.styleable.KanaSelectionItem_prefId);
-
-        if (title != null)
-            setTitle(title);
-        if (contents != null)
-            setContents(contents);
-        if (prefId != null)
-            setPrefId(prefId);
+        setTitle(a.getString(R.styleable.KanaSelectionItem_title));
+        setContents(a.getString(R.styleable.KanaSelectionItem_contents));
+        setPrefId(a.getString(R.styleable.KanaSelectionItem_prefId));
 
         a.recycle();
 
@@ -175,7 +168,8 @@ public class KanaSelectionItem extends LinearLayout
 
     public void setTitle(String title)
     {
-        lblTitle.setText(title);
+        if (title != null)
+            lblTitle.setText(title);
     }
 
     public void setContents(int resId)
@@ -185,7 +179,8 @@ public class KanaSelectionItem extends LinearLayout
 
     public void setContents(String contents)
     {
-        lblContents.setText(contents);
+        if (contents != null)
+            lblContents.setText(contents);
     }
 
     public void setPrefId(int resId)
@@ -195,9 +190,12 @@ public class KanaSelectionItem extends LinearLayout
 
     public void setPrefId(String prefId)
     {
-        this.prefId = prefId;
+        if (prefId != null)
+        {
+            this.prefId = prefId;
 
-        if (!isInEditMode())
-            chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
+            if (!isInEditMode())
+                chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
+        }
     }
 }
