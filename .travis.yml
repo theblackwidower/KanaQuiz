@@ -1,3 +1,5 @@
+before_install:
+  - yes | sdkmanager "platforms;android-27"
 language: android
 android:
   components:
