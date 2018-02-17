@@ -9,3 +9,5 @@ android:
     # emulator images
     - sys-img-armeabi-v7a-android-27
     - sys-img-armeabi-v7a-android-17
+  licenses:
+    - 'android-sdk-license-.+'
