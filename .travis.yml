@@ -1,0 +1,11 @@
+language: android
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-26.0.2
+    - android-27
+
+    # emulator images
+    - sys-img-armeabi-v7a-android-27
+    - sys-img-armeabi-v7a-android-17
