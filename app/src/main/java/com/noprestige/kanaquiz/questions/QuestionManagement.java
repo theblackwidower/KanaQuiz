@@ -236,7 +236,8 @@ public abstract class QuestionManagement
         for (int i = 1; i <= CATEGORY_COUNT; i++)
         {
             KanaSelectionItem item = new KanaSelectionItem(context);
-            item.setTitle(getSetTitle(i));
+            item.setTitle(context.getResources().getString(getSetTitle(i),
+                    context.getResources().getString(R.string.set)));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             layout.addView(item);
