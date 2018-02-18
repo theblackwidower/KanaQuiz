@@ -189,34 +189,39 @@ public class ReferenceCell extends View
 
     public static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
     {
-        TableRow row = new TableRow(context);
-
-        switch (questions.length)
+        if (questions == null)
+            return null;
+        else
         {
-            case 1:
-                row.addView(new View(context));
-                row.addView(new View(context));
-                row.addView(questions[0].generateReference(context));
-                break;
-            case 2:
-                row.addView(questions[0].generateReference(context));
-                row.addView(new View(context));
-                row.addView(new View(context));
-                row.addView(new View(context));
-                row.addView(questions[1].generateReference(context));
-                break;
-            case 3:
-                row.addView(questions[0].generateReference(context));
-                row.addView(new View(context));
-                row.addView(questions[1].generateReference(context));
-                row.addView(new View(context));
-                row.addView(questions[2].generateReference(context));
-                break;
-            default:
-                for (KanaQuestion question : questions)
-                    row.addView(question.generateReference(context));
+            TableRow row = new TableRow(context);
+
+            switch (questions.length)
+            {
+                case 1:
+                    row.addView(new View(context));
+                    row.addView(new View(context));
+                    row.addView(questions[0].generateReference(context));
+                    break;
+                case 2:
+                    row.addView(questions[0].generateReference(context));
+                    row.addView(new View(context));
+                    row.addView(new View(context));
+                    row.addView(new View(context));
+                    row.addView(questions[1].generateReference(context));
+                    break;
+                case 3:
+                    row.addView(questions[0].generateReference(context));
+                    row.addView(new View(context));
+                    row.addView(questions[1].generateReference(context));
+                    row.addView(new View(context));
+                    row.addView(questions[2].generateReference(context));
+                    break;
+                default:
+                    for (KanaQuestion question : questions)
+                        row.addView(question.generateReference(context));
+            }
+            return row;
         }
-        return row;
     }
 
     public static TableRow buildRow(Context context, KanaQuestion[] questions)
