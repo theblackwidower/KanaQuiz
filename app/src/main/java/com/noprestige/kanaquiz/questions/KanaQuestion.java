@@ -82,4 +82,9 @@ public class KanaQuestion
             cell.setKanaSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
         return cell;
     }
+
+    public String toString()
+    {
+        return kana + " = " + romanji[0];
+    }
 }
