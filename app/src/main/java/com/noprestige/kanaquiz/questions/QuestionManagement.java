@@ -129,27 +129,7 @@ public abstract class QuestionManagement
 
                 else if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaQuestion"))
                 {
-                    String thisQuestion = "";
-                    String thisAnswer = "";
-                    String thisAltAnswer = null;
-                    for (int i = 0; i < xrp.getAttributeCount(); i++)
-                    {
-                        switch (xrp.getAttributeName(i))
-                        {
-                            case "question":
-                                thisQuestion = parseXmlValue(xrp, i, resources);
-                                break;
-                            case "answer":
-                                thisAnswer = parseXmlValue(xrp, i, resources);
-                                break;
-                            case "altAnswer":
-                                thisAltAnswer = parseXmlValue(xrp, i, resources);
-                        }
-                    }
-                    if (thisAltAnswer == null)
-                        currentSet.add(new KanaQuestion(thisQuestion, thisAnswer));
-                    else
-                        currentSet.add(new KanaQuestion(thisQuestion, new String[]{thisAnswer, thisAltAnswer}));
+                    currentSet.add(parseXmlKanaQuestion(xrp, resources));
                 }
 
                 else if (eventType == XmlPullParser.END_TAG &&
@@ -227,6 +207,31 @@ public abstract class QuestionManagement
         catch (XmlPullParserException | IOException ex)
         {
         }
+    }
+
+    static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
+    {
+        String thisQuestion = "";
+        String thisAnswer = "";
+        String thisAltAnswer = null;
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "question":
+                    thisQuestion = parseXmlValue(parser, i, resources);
+                    break;
+                case "answer":
+                    thisAnswer = parseXmlValue(parser, i, resources);
+                    break;
+                case "altAnswer":
+                    thisAltAnswer = parseXmlValue(parser, i, resources);
+            }
+        }
+        if (thisAltAnswer == null)
+            return new KanaQuestion(thisQuestion, thisAnswer);
+        else
+            return new KanaQuestion(thisQuestion, new String[]{thisAnswer, thisAltAnswer});
     }
 
     static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
