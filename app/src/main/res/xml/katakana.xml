@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Questions>
-    <KanaSet number="1" prefId="@string/prefid_hiragana_1"
+    <KanaSet number="1" prefId="@string/prefid_katakana_1"
              setTitle="@string/set_1_title">
         <KanaQuestion question="ア" answer="a"/>
         <KanaQuestion question="イ" answer="i"/>
@@ -8,7 +8,7 @@
         <KanaQuestion question="エ" answer="e"/>
         <KanaQuestion question="オ" answer="o"/>
     </KanaSet>
-    <KanaSet number="2" prefId="@string/prefid_hiragana_2"
+    <KanaSet number="2" prefId="@string/prefid_katakana_2"
              setTitle="@string/set_2_title" setNoDiacriticsTitle="@string/set_2_no_diacritics_title">
         <KanaQuestion question="カ" answer="ka"/>
         <KanaQuestion question="キ" answer="ki"/>
@@ -33,7 +33,7 @@
             <KanaQuestion question="ギョ" answer="gyo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="3" prefId="@string/prefid_hiragana_3"
+    <KanaSet number="3" prefId="@string/prefid_katakana_3"
              setTitle="@string/set_3_title" setNoDiacriticsTitle="@string/set_3_no_diacritics_title">
         <KanaQuestion question="サ" answer="sa"/>
         <KanaQuestion question="シ" answer="shi"/>
@@ -58,7 +58,7 @@
             <KanaQuestion question="ジョ" answer="jo" altAnswer="jyo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="4" prefId="@string/prefid_hiragana_4"
+    <KanaSet number="4" prefId="@string/prefid_katakana_4"
              setTitle="@string/set_4_title" setNoDiacriticsTitle="@string/set_4_no_diacritics_title">
         <KanaQuestion question="タ" answer="ta"/>
         <KanaQuestion question="チ" answer="chi"/>
@@ -83,7 +83,7 @@
             <KanaQuestion question="ヂョ" answer="jo" altAnswer="dzyo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="5" prefId="@string/prefid_hiragana_5"
+    <KanaSet number="5" prefId="@string/prefid_katakana_5"
              setTitle="@string/set_5_title">
         <KanaQuestion question="ナ" answer="na"/>
         <KanaQuestion question="ニ" answer="ni"/>
@@ -96,7 +96,7 @@
             <KanaQuestion question="ニョ" answer="nyo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="6" prefId="@string/prefid_hiragana_6"
+    <KanaSet number="6" prefId="@string/prefid_katakana_6"
              setTitle="@string/set_6_title" setNoDiacriticsTitle="@string/set_6_no_diacritics_title">
         <KanaQuestion question="ハ" answer="ha"/>
         <KanaQuestion question="ヒ" answer="hi"/>
@@ -133,7 +133,7 @@
             <KanaQuestion question="ピョ" answer="pyo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="7" prefId="@string/prefid_hiragana_7"
+    <KanaSet number="7" prefId="@string/prefid_katakana_7"
              setTitle="@string/set_7_title">
         <KanaQuestion question="マ" answer="ma"/>
         <KanaQuestion question="ミ" answer="mi"/>
@@ -146,7 +146,7 @@
             <KanaQuestion question="ミョ" answer="myo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="8" prefId="@string/prefid_hiragana_8"
+    <KanaSet number="8" prefId="@string/prefid_katakana_8"
              setTitle="@string/set_8_title">
         <KanaQuestion question="ラ" answer="ra"/>
         <KanaQuestion question="リ" answer="ri"/>
@@ -159,13 +159,13 @@
             <KanaQuestion question="リョ" answer="ryo"/>
         </Section>
     </KanaSet>
-    <KanaSet number="9" prefId="@string/prefid_hiragana_9"
+    <KanaSet number="9" prefId="@string/prefid_katakana_9"
              setTitle="@string/set_9_title">
         <KanaQuestion question="ヤ" answer="ya"/>
         <KanaQuestion question="ユ" answer="yu"/>
         <KanaQuestion question="ヨ" answer="yo"/>
     </KanaSet>
-    <KanaSet number="10" prefId="@string/prefid_hiragana_10"
+    <KanaSet number="10" prefId="@string/prefid_katakana_10"
              setTitle="@string/set_10_title">
         <KanaQuestion question="ワ" answer="wa"/>
         <KanaQuestion question="ヲ" answer="wo"/>
