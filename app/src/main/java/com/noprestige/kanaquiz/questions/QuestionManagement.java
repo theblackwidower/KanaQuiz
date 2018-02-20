@@ -26,6 +26,10 @@ public abstract class QuestionManagement
 
     private String[] prefIds = new String[]{};
 
+    private String[] setTitles = new String[]{};
+
+    private String[] setNoDiacriticsTitles = new String[]{};
+
     private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
     {
         try
@@ -50,36 +54,16 @@ public abstract class QuestionManagement
         }
     }
 
-    private int getSetTitle(int number)
+    private String getSetTitle(int number)
     {
-        switch (number)
+        try
         {
-            case 1:
-                return R.string.set_1_title;
-            case 2:
-                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
-                        R.string.set_2_title : R.string.set_2_no_diacritics_title;
-            case 3:
-                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
-                        R.string.set_3_title : R.string.set_3_no_diacritics_title;
-            case 4:
-                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
-                        R.string.set_4_title : R.string.set_4_no_diacritics_title;
-            case 5:
-                return R.string.set_5_title;
-            case 6:
-                return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
-                        R.string.set_6_title : R.string.set_6_no_diacritics_title;
-            case 7:
-                return R.string.set_7_title;
-            case 8:
-                return R.string.set_8_title;
-            case 9:
-                return R.string.set_9_title;
-            case 10:
-                return R.string.set_10_title;
-            default:
-                return 0;
+            return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
+                    setTitles[number] : setNoDiacriticsTitles[number];
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return null;
         }
     }
 
@@ -87,11 +71,15 @@ public abstract class QuestionManagement
     {
         ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
         ArrayList<String> prefIdList = new ArrayList<>();
+        ArrayList<String> setTitleList = new ArrayList<>();
+        ArrayList<String> setNoDiacriticsTitleList = new ArrayList<>();
 
         int currentSetNumber = -1;
         Diacritic currentDiacritics = null;
         boolean currentIsDigraphs = false;
         String currentPrefId = "";
+        String currentSetTitle = "";
+        String currentSetNoDiacriticsTitle = null;
         int refId;
 
         ArrayList<KanaQuestion> currentSet = new ArrayList<>();
@@ -115,6 +103,13 @@ public abstract class QuestionManagement
                                 refId = xrp.getAttributeResourceValue(i, 0);
                                 currentPrefId = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId);
                                 break;
+                            case "setTitle":
+                                refId = xrp.getAttributeResourceValue(i, 0);
+                                currentSetTitle = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId, resources.getString(R.string.set));
+                                break;
+                            case "setNoDiacriticsTitle":
+                                refId = xrp.getAttributeResourceValue(i, 0);
+                                currentSetNoDiacriticsTitle = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId, resources.getString(R.string.set));
                         }
                     }
                 }
@@ -186,17 +181,23 @@ public abstract class QuestionManagement
                     {
                         if (currentSetNumber >= 0)
                         {
+                            if (currentSetNoDiacriticsTitle == null)
+                                currentSetNoDiacriticsTitle = currentSetTitle;
                             isSuccess = false;
                             while (!isSuccess)
                             {
                                 try
                                 {
                                     prefIdList.set(currentSetNumber, currentPrefId);
+                                    setTitleList.set(currentSetNumber, currentSetTitle);
+                                    setNoDiacriticsTitleList.set(currentSetNumber, currentSetNoDiacriticsTitle);
                                     isSuccess = true;
                                 }
                                 catch (IndexOutOfBoundsException ex)
                                 {
                                     prefIdList.add("");
+                                    setTitleList.add("");
+                                    setNoDiacriticsTitleList.add("");
                                 }
                             }
                         }
@@ -205,6 +206,8 @@ public abstract class QuestionManagement
                         currentDiacritics = null;
                         currentIsDigraphs = false;
                         currentPrefId = "";
+                        currentSetTitle = "";
+                        currentSetNoDiacriticsTitle = null;
                         currentSet = new ArrayList<>();
                     }
                 }
@@ -213,6 +216,10 @@ public abstract class QuestionManagement
             kanaSetList.toArray(singletonObject.kanaSets);
             singletonObject.prefIds = new String[prefIdList.size()];
             prefIdList.toArray(singletonObject.prefIds);
+            singletonObject.setTitles = new String[setTitleList.size()];
+            setTitleList.toArray(singletonObject.setTitles);
+            singletonObject.setNoDiacriticsTitles = new String[setNoDiacriticsTitleList.size()];
+            setNoDiacriticsTitleList.toArray(singletonObject.setNoDiacriticsTitles);
         }
         catch (XmlPullParserException | IOException ex)
         {
@@ -404,8 +411,7 @@ public abstract class QuestionManagement
         for (int i = 1; i <= CATEGORY_COUNT; i++)
         {
             KanaSelectionItem item = new KanaSelectionItem(context);
-            item.setTitle(context.getResources().getString(getSetTitle(i),
-                    context.getResources().getString(R.string.set)));
+            item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             layout.addView(item);
