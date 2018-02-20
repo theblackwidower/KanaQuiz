@@ -74,65 +74,69 @@ public abstract class QuestionManagement
         ArrayList<String> setTitleList = new ArrayList<>();
         ArrayList<String> setNoDiacriticsTitleList = new ArrayList<>();
 
-        int currentSetNumber = -1;
-        Diacritic currentDiacritics = null;
-        boolean currentIsDigraphs = false;
-        String currentPrefId = "";
-        String currentSetTitle = "";
-        String currentSetNoDiacriticsTitle = null;
-
-        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
-        ArrayList<KanaQuestion> backupSet = null;
         try
         {
+            int currentSetNumber = -1;
+            Diacritic currentDiacritics = null;
+            boolean currentIsDigraphs = false;
+            String currentPrefId = "";
+            String currentSetTitle = "";
+            String currentSetNoDiacriticsTitle = null;
+
+            ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+            ArrayList<KanaQuestion> backupSet = null;
+
             for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = xrp.next())
             {
-                if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaSet"))
+                if (eventType == XmlPullParser.START_TAG)
                 {
-                    currentDiacritics = Diacritic.NO_DIACRITIC;
-                    currentIsDigraphs = false;
-                    for (int i = 0; i < xrp.getAttributeCount(); i++)
+                    if (xrp.getName().equalsIgnoreCase("KanaSet"))
                     {
-                        switch (xrp.getAttributeName(i))
+                        currentDiacritics = Diacritic.NO_DIACRITIC;
+                        currentIsDigraphs = false;
+                        for (int i = 0; i < xrp.getAttributeCount(); i++)
                         {
-                            case "number":
-                                currentSetNumber = xrp.getAttributeIntValue(i, -1);
-                                break;
-                            case "prefId":
-                                currentPrefId = parseXmlValue(xrp, i, resources);
-                                break;
-                            case "setTitle":
-                                currentSetTitle = parseXmlValue(xrp, i, resources, R.string.set);
-                                break;
-                            case "setNoDiacriticsTitle":
-                                currentSetNoDiacriticsTitle = parseXmlValue(xrp, i, resources, R.string.set);
+                            switch (xrp.getAttributeName(i))
+                            {
+                                case "number":
+                                    currentSetNumber = xrp.getAttributeIntValue(i, -1);
+                                    break;
+                                case "prefId":
+                                    currentPrefId = parseXmlValue(xrp, i, resources);
+                                    break;
+                                case "setTitle":
+                                    currentSetTitle = parseXmlValue(xrp, i, resources, R.string.set);
+                                    break;
+                                case "setNoDiacriticsTitle":
+                                    currentSetNoDiacriticsTitle = parseXmlValue(xrp, i, resources, R.string.set);
+                            }
                         }
+                    }
+
+                    else if (xrp.getName().equalsIgnoreCase("Section"))
+                    {
+                        backupSet = currentSet;
+                        currentSet = new ArrayList<>();
+                        for (int i = 0; i < xrp.getAttributeCount(); i++)
+                        {
+                            switch (xrp.getAttributeName(i))
+                            {
+                                case "diacritics":
+                                    currentDiacritics = Diacritic.valueOf(xrp.getAttributeValue(i));
+                                    break;
+                                case "digraphs":
+                                    currentIsDigraphs = xrp.getAttributeBooleanValue(i, false);
+                            }
+                        }
+                    }
+
+                    else if (xrp.getName().equalsIgnoreCase("KanaQuestion"))
+                    {
+                        currentSet.add(parseXmlKanaQuestion(xrp, resources));
                     }
                 }
 
-                else if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("Section"))
-                {
-                    backupSet = currentSet;
-                    currentSet = new ArrayList<>();
-                    for (int i = 0; i < xrp.getAttributeCount(); i++)
-                    {
-                        switch (xrp.getAttributeName(i))
-                        {
-                            case "diacritics":
-                                currentDiacritics = Diacritic.valueOf(xrp.getAttributeValue(i));
-                                break;
-                            case "digraphs":
-                                currentIsDigraphs = xrp.getAttributeBooleanValue(i, false);
-                        }
-                    }
-                }
-
-                else if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaQuestion"))
-                {
-                    currentSet.add(parseXmlKanaQuestion(xrp, resources));
-                }
-
-                else if (eventType == XmlPullParser.END_TAG &&
+                else if (eventType == XmlPullParser.END_TAG && currentSetNumber >= 0 &&
                         (xrp.getName().equalsIgnoreCase("Section") || xrp.getName().equalsIgnoreCase("KanaSet")))
                 {
                     KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
@@ -151,6 +155,9 @@ public abstract class QuestionManagement
                         catch (IndexOutOfBoundsException ex)
                         {
                             kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
+                            prefIdList.add("");
+                            setTitleList.add("");
+                            setNoDiacriticsTitleList.add("");
                         }
                     }
                     if (xrp.getName().equalsIgnoreCase("Section"))
@@ -162,28 +169,12 @@ public abstract class QuestionManagement
                     }
                     else if (xrp.getName().equalsIgnoreCase("KanaSet"))
                     {
-                        if (currentSetNumber >= 0)
-                        {
-                            if (currentSetNoDiacriticsTitle == null)
-                                currentSetNoDiacriticsTitle = currentSetTitle;
-                            isSuccess = false;
-                            while (!isSuccess)
-                            {
-                                try
-                                {
-                                    prefIdList.set(currentSetNumber, currentPrefId);
-                                    setTitleList.set(currentSetNumber, currentSetTitle);
-                                    setNoDiacriticsTitleList.set(currentSetNumber, currentSetNoDiacriticsTitle);
-                                    isSuccess = true;
-                                }
-                                catch (IndexOutOfBoundsException ex)
-                                {
-                                    prefIdList.add("");
-                                    setTitleList.add("");
-                                    setNoDiacriticsTitleList.add("");
-                                }
-                            }
-                        }
+                        if (currentSetNoDiacriticsTitle == null)
+                            currentSetNoDiacriticsTitle = currentSetTitle;
+
+                        prefIdList.set(currentSetNumber, currentPrefId);
+                        setTitleList.set(currentSetNumber, currentSetTitle);
+                        setNoDiacriticsTitleList.set(currentSetNumber, currentSetNoDiacriticsTitle);
 
                         currentSetNumber = -1;
                         currentDiacritics = null;
