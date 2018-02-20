@@ -65,7 +65,9 @@ public class MainQuiz extends AppCompatActivity
 
         onConfigurationChanged(getResources().getConfiguration());
 
-        OptionsControl.initialize(this);
+        OptionsControl.initialize(getApplicationContext());
+        Hiragana.initialize(getApplicationContext());
+        Katakana.initialize(getApplicationContext());
 
         //TODO: Figure out how to run the database on a different thread.
         if (LogDatabase.DAO == null)

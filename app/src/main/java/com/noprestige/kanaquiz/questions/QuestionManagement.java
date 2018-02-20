@@ -1,6 +1,8 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 
@@ -10,13 +12,43 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 import com.noprestige.kanaquiz.reference.ReferenceTable;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 public abstract class QuestionManagement
 {
     private static final int CATEGORY_COUNT = 10;
 
-    abstract KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs);
+    private KanaQuestion[][][][] kanaSets = new KanaQuestion[][][][]{};
 
-    abstract int getPrefId(int number);
+    private String[] prefIds = new String[]{};
+
+    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
+    {
+        try
+        {
+            return kanaSets[number][diacritic.ordinal()][isDigraphs ? 1 : 0];
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return null;
+        }
+    }
+
+    private String getPrefId(int number)
+    {
+        try
+        {
+            return prefIds[number];
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return null;
+        }
+    }
 
     private int getSetTitle(int number)
     {
@@ -48,6 +80,142 @@ public abstract class QuestionManagement
                 return R.string.set_10_title;
             default:
                 return 0;
+        }
+    }
+
+    protected static void parseXml(XmlResourceParser xrp, Resources resources, QuestionManagement singletonObject)
+    {
+        ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+        ArrayList<String> prefIdList = new ArrayList<>();
+
+        int currentSetNumber = -1;
+        Diacritic currentDiacritics = null;
+        boolean currentIsDigraphs = false;
+        String currentPrefId = "";
+        int refId;
+
+        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+        ArrayList<KanaQuestion> backupSet = null;
+        try
+        {
+            for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = xrp.next())
+            {
+                if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaSet"))
+                {
+                    currentDiacritics = Diacritic.NO_DIACRITIC;
+                    currentIsDigraphs = false;
+                    for (int i = 0; i < xrp.getAttributeCount(); i++)
+                    {
+                        switch (xrp.getAttributeName(i))
+                        {
+                            case "number":
+                                currentSetNumber = xrp.getAttributeIntValue(i, -1);
+                                break;
+                            case "prefId":
+                                refId = xrp.getAttributeResourceValue(i, 0);
+                                currentPrefId = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId);
+                                break;
+                        }
+                    }
+                }
+
+                else if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("Section"))
+                {
+                    backupSet = currentSet;
+                    currentSet = new ArrayList<>();
+                    for (int i = 0; i < xrp.getAttributeCount(); i++)
+                    {
+                        switch (xrp.getAttributeName(i))
+                        {
+                            case "diacritics":
+                                currentDiacritics = Diacritic.valueOf(xrp.getAttributeValue(i));
+                                break;
+                            case "digraphs":
+                                currentIsDigraphs = xrp.getAttributeBooleanValue(i, false);
+                        }
+                    }
+                }
+
+                else if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaQuestion"))
+                {
+                    String thisQuestion = "";
+                    String thisAnswer = "";
+                    for (int i = 0; i < xrp.getAttributeCount(); i++)
+                    {
+                        switch (xrp.getAttributeName(i))
+                        {
+                            case "question":
+                                thisQuestion = xrp.getAttributeValue(i);
+                                break;
+                            case "answer":
+                                thisAnswer = xrp.getAttributeValue(i);
+                        }
+                    }
+                    currentSet.add(new KanaQuestion(thisQuestion, thisAnswer));
+                }
+
+                else if (eventType == XmlPullParser.END_TAG &&
+                        (xrp.getName().equalsIgnoreCase("Section") || xrp.getName().equalsIgnoreCase("KanaSet")))
+                {
+                    KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
+                    currentSet.toArray(currentSetArray);
+
+                    boolean isSuccess = false;
+                    while (!isSuccess)
+                    {
+                        try
+                        {
+                            KanaQuestion[][][] pulledArray = kanaSetList.get(currentSetNumber);
+                            pulledArray[currentDiacritics.ordinal()][currentIsDigraphs ? 1 : 0] = currentSetArray;
+                            kanaSetList.set(currentSetNumber, pulledArray);
+                            isSuccess = true;
+                        }
+                        catch (IndexOutOfBoundsException ex)
+                        {
+                            kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
+                        }
+                    }
+                    if (xrp.getName().equalsIgnoreCase("Section"))
+                    {
+                        currentSet = backupSet;
+                        backupSet = null;
+                        currentDiacritics = Diacritic.NO_DIACRITIC;
+                        currentIsDigraphs = false;
+                    }
+                    else if (xrp.getName().equalsIgnoreCase("KanaSet"))
+                    {
+                        if (currentSetNumber >= 0)
+                        {
+                            isSuccess = false;
+                            while (!isSuccess)
+                            {
+                                try
+                                {
+                                    prefIdList.set(currentSetNumber, currentPrefId);
+                                    isSuccess = true;
+                                }
+                                catch (IndexOutOfBoundsException ex)
+                                {
+                                    prefIdList.add("");
+                                }
+                            }
+                        }
+
+                        currentSetNumber = -1;
+                        currentDiacritics = null;
+                        currentIsDigraphs = false;
+                        currentPrefId = "";
+                        currentSet = new ArrayList<>();
+                    }
+                }
+            }
+            singletonObject.kanaSets = new KanaQuestion[kanaSetList.size()][][][];
+            kanaSetList.toArray(singletonObject.kanaSets);
+            singletonObject.prefIds = new String[prefIdList.size()];
+            prefIdList.toArray(singletonObject.prefIds);
+        }
+        catch (XmlPullParserException | IOException ex)
+        {
         }
     }
 
