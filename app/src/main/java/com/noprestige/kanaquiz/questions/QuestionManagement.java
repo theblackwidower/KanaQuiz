@@ -80,7 +80,6 @@ public abstract class QuestionManagement
         String currentPrefId = "";
         String currentSetTitle = "";
         String currentSetNoDiacriticsTitle = null;
-        int refId;
 
         ArrayList<KanaQuestion> currentSet = new ArrayList<>();
         ArrayList<KanaQuestion> backupSet = null;
@@ -100,16 +99,13 @@ public abstract class QuestionManagement
                                 currentSetNumber = xrp.getAttributeIntValue(i, -1);
                                 break;
                             case "prefId":
-                                refId = xrp.getAttributeResourceValue(i, 0);
-                                currentPrefId = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId);
+                                currentPrefId = parseXmlValue(xrp, i, resources);
                                 break;
                             case "setTitle":
-                                refId = xrp.getAttributeResourceValue(i, 0);
-                                currentSetTitle = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId, resources.getString(R.string.set));
+                                currentSetTitle = parseXmlValue(xrp, i, resources, R.string.set);
                                 break;
                             case "setNoDiacriticsTitle":
-                                refId = xrp.getAttributeResourceValue(i, 0);
-                                currentSetNoDiacriticsTitle = (refId == 0) ? xrp.getAttributeValue(i) : resources.getString(refId, resources.getString(R.string.set));
+                                currentSetNoDiacriticsTitle = parseXmlValue(xrp, i, resources, R.string.set);
                         }
                     }
                 }
@@ -141,13 +137,13 @@ public abstract class QuestionManagement
                         switch (xrp.getAttributeName(i))
                         {
                             case "question":
-                                thisQuestion = xrp.getAttributeValue(i);
+                                thisQuestion = parseXmlValue(xrp, i, resources);
                                 break;
                             case "answer":
-                                thisAnswer = xrp.getAttributeValue(i);
+                                thisAnswer = parseXmlValue(xrp, i, resources);
                                 break;
                             case "altAnswer":
-                                thisAltAnswer = xrp.getAttributeValue(i);
+                                thisAltAnswer = parseXmlValue(xrp, i, resources);
                         }
                     }
                     if (thisAltAnswer == null)
@@ -231,6 +227,19 @@ public abstract class QuestionManagement
         catch (XmlPullParserException | IOException ex)
         {
         }
+    }
+
+    static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
+    {
+        return parseXmlValue(parser, index, resources, 0);
+    }
+
+    static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
+    {
+        int refId = parser.getAttributeResourceValue(index, 0);
+        return (refId == 0) ? parser.getAttributeValue(index) :
+                (stringResource == 0) ? resources.getString(refId) :
+                        resources.getString(refId, resources.getString(stringResource));
     }
 
     private boolean getPref(int number)
