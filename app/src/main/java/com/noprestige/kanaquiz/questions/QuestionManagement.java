@@ -135,6 +135,7 @@ public abstract class QuestionManagement
                 {
                     String thisQuestion = "";
                     String thisAnswer = "";
+                    String thisAltAnswer = null;
                     for (int i = 0; i < xrp.getAttributeCount(); i++)
                     {
                         switch (xrp.getAttributeName(i))
@@ -144,9 +145,15 @@ public abstract class QuestionManagement
                                 break;
                             case "answer":
                                 thisAnswer = xrp.getAttributeValue(i);
+                                break;
+                            case "altAnswer":
+                                thisAltAnswer = xrp.getAttributeValue(i);
                         }
                     }
-                    currentSet.add(new KanaQuestion(thisQuestion, thisAnswer));
+                    if (thisAltAnswer == null)
+                        currentSet.add(new KanaQuestion(thisQuestion, thisAnswer));
+                    else
+                        currentSet.add(new KanaQuestion(thisQuestion, new String[]{thisAnswer, thisAltAnswer}));
                 }
 
                 else if (eventType == XmlPullParser.END_TAG &&
