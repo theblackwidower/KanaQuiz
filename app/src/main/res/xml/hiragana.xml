@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Questions>
+<Questions xmlns="https://www.noprestige.com"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
     <KanaSet number="1" prefId="@string/prefid_hiragana_1"
              setTitle="@string/set_1_title">
         <KanaQuestion question="あ" answer="a"/>

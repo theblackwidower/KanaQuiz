@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="https://www.noprestige.com"
+    xmlns="https://www.noprestige.com"
+    elementFormDefault="qualified">
+
+    <xs:element name="Questions">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="KanaSet" type="KanaSet" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="KanaSet">
+        <xs:sequence>
+            <xs:element name="KanaQuestion" type="KanaQuestion" maxOccurs="unbounded"/>
+            <xs:element name="Section" type="Section" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="number" type="xs:unsignedByte" use="required"/>
+        <xs:attribute name="prefId" type="xs:string" use="required"/>
+        <xs:attribute name="setTitle" type="xs:string" use="required"/>
+        <xs:attribute name="setNoDiacriticsTitle" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="Section">
+        <xs:sequence>
+            <xs:element name="KanaQuestion" type="KanaQuestion" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="diacritics" type="diacritic" use="required"/>
+        <xs:attribute name="digraphs" type="xs:boolean" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="KanaQuestion">
+        <xs:attribute name="question" type="xs:string" use="required"/>
+        <xs:attribute name="answer" type="xs:string" use="required"/>
+        <xs:attribute name="altAnswer" type="xs:string"/>
+    </xs:complexType>
+
+    <!-- ref: https://stackoverflow.com/questions/1168532/xsd-definition-for-enumerated-value -->
+    <xs:simpleType name="diacritic" final="restriction">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NO_DIACRITIC"/>
+            <xs:enumeration value="DAKUTEN"/>
+            <xs:enumeration value="HANDAKUTEN"/>
+            <xs:enumeration value="CONSONANT"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
