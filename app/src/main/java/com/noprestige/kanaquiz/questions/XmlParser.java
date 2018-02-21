@@ -73,8 +73,7 @@ abstract class XmlParser
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
             }
 
-            else if (eventType == XmlPullParser.END_TAG &&
-                    parser.getName().equalsIgnoreCase("KanaSet"))
+            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
             {
                 parseXmlStoreSet(currentSet, kanaSetList, setNumber, Diacritic.NO_DIACRITIC, false);
                 return true;
@@ -110,8 +109,7 @@ abstract class XmlParser
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
                 currentSet.add(parseXmlKanaQuestion(parser, resources));
 
-            else if (eventType == XmlPullParser.END_TAG && setNumber >= 0 &&
-                    parser.getName().equalsIgnoreCase("Section"))
+            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"))
             {
                 parseXmlStoreSet(currentSet, kanaSetList, setNumber, diacritics, isDigraphs);
                 return true;
