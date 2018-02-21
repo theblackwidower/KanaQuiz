@@ -10,19 +10,7 @@ public class KanaQuestion
     private String kana;
     private String[] romanji;
 
-    KanaQuestion(char kana, String romanji)
-    {
-        setKana(kana);
-        setRomanji(romanji);
-    }
-
     KanaQuestion(String kana, String romanji)
-    {
-        setKana(kana);
-        setRomanji(romanji);
-    }
-
-    KanaQuestion(char kana, String[] romanji)
     {
         setKana(kana);
         setRomanji(romanji);
@@ -42,11 +30,6 @@ public class KanaQuestion
     private void setRomanji(String[] romanji)
     {
         this.romanji = romanji;
-    }
-
-    private void setKana(char kana)
-    {
-        setKana(Character.toString(kana));
     }
 
     private void setKana(String kana)
