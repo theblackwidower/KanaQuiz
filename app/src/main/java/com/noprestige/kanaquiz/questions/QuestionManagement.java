@@ -16,6 +16,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public abstract class QuestionManagement
@@ -92,7 +93,7 @@ public abstract class QuestionManagement
             singletonObject.setNoDiacriticsTitles = new String[setNoDiacriticsTitleList.size()];
             setNoDiacriticsTitleList.toArray(singletonObject.setNoDiacriticsTitles);
         }
-        catch (XmlPullParserException | IOException ex)
+        catch (XmlPullParserException | IOException | ParseException ex)
         {
         }
     }
@@ -101,7 +102,7 @@ public abstract class QuestionManagement
     static private boolean parseXmlKanaSet(XmlResourceParser parser, Resources resources,
                                            ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList,
                                            ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
-            throws XmlPullParserException, IOException
+            throws XmlPullParserException, IOException, ParseException
     {
         int setNumber = -1;
         String prefId = "";
@@ -127,7 +128,7 @@ public abstract class QuestionManagement
         }
 
         if (setNumber < 0)
-            return false;
+            throw new ParseException("setNumber < 0", 0);
 
         while (kanaSetList.size() <= setNumber)
         {
@@ -164,13 +165,13 @@ public abstract class QuestionManagement
                 return true;
             }
         }
-        return false;
+        throw new ParseException("Missing KanaSet Closing Tag", 0);
     }
 
     static private boolean parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
                                                   ArrayList<KanaQuestion[][][]> kanaSetList,
                                                   int setNumber)
-            throws XmlPullParserException, IOException
+            throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
         boolean isDigraphs = false;
@@ -201,7 +202,7 @@ public abstract class QuestionManagement
                 return true;
             }
         }
-        return false;
+        throw new ParseException("Missing Section Closing Tag", 0);
     }
 
 
@@ -217,6 +218,7 @@ public abstract class QuestionManagement
     }
 
     static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
+            throws ParseException
     {
         String thisQuestion = "";
         String thisAnswer = "";
@@ -235,7 +237,9 @@ public abstract class QuestionManagement
                     thisAltAnswer = parseXmlValue(parser, i, resources);
             }
         }
-        if (thisAltAnswer == null)
+        if (thisQuestion == null || thisAnswer == null)
+            throw new ParseException("Missing Section Closing Tag", 0);
+        else if (thisAltAnswer == null)
             return new KanaQuestion(thisQuestion, thisAnswer);
         else
             return new KanaQuestion(thisQuestion, new String[]{thisAnswer, thisAltAnswer});
