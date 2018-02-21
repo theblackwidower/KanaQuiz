@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public abstract class QuestionManagement
 {
-    private static final int CATEGORY_COUNT = 10;
+    private int categoryCount = -1;
 
     private KanaQuestion[][][][] kanaSets = new KanaQuestion[][][][]{};
 
@@ -30,6 +30,11 @@ public abstract class QuestionManagement
     private String[] setTitles = new String[]{};
 
     private String[] setNoDiacriticsTitles = new String[]{};
+
+    private int getCategoryCount()
+    {
+        return categoryCount;
+    }
 
     private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
     {
@@ -84,13 +89,17 @@ public abstract class QuestionManagement
                     XmlParser.parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
                 }
             }
-            singletonObject.kanaSets = new KanaQuestion[kanaSetList.size()][][][];
+            int size = kanaSetList.size();
+
+            singletonObject.categoryCount = size - 1;
+
+            singletonObject.kanaSets = new KanaQuestion[size][][][];
             kanaSetList.toArray(singletonObject.kanaSets);
-            singletonObject.prefIds = new String[prefIdList.size()];
+            singletonObject.prefIds = new String[size];
             prefIdList.toArray(singletonObject.prefIds);
-            singletonObject.setTitles = new String[setTitleList.size()];
+            singletonObject.setTitles = new String[size];
             setTitleList.toArray(singletonObject.setTitles);
-            singletonObject.setNoDiacriticsTitles = new String[setNoDiacriticsTitleList.size()];
+            singletonObject.setNoDiacriticsTitles = new String[size];
             setNoDiacriticsTitleList.toArray(singletonObject.setNoDiacriticsTitles);
         }
         catch (XmlPullParserException | IOException | ParseException ex)
@@ -110,7 +119,7 @@ public abstract class QuestionManagement
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
             if (getPref(i))
             {
                 questionBank.addQuestions(getKanaSet(i, Diacritic.NO_DIACRITIC, false));
@@ -136,7 +145,7 @@ public abstract class QuestionManagement
 
     public boolean anySelected()
     {
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
             if (getPref(i))
                 return true;
 
@@ -146,7 +155,7 @@ public abstract class QuestionManagement
     public boolean diacriticsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
-            for (int i = 1; i <= CATEGORY_COUNT; i++)
+            for (int i = 1; i <= getCategoryCount(); i++)
                 if (getPref(i) &&
                         (getKanaSet(i, Diacritic.DAKUTEN, false) != null ||
                                 getKanaSet(i, Diacritic.HANDAKUTEN, false) != null))
@@ -158,7 +167,7 @@ public abstract class QuestionManagement
     public boolean digraphsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-            for (int i = 1; i <= CATEGORY_COUNT; i++)
+            for (int i = 1; i <= getCategoryCount(); i++)
                 if (getPref(i) &&
                         (getKanaSet(i, Diacritic.NO_DIACRITIC, true) != null))
                     return true;
@@ -170,7 +179,7 @@ public abstract class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-            for (int i = 1; i <= CATEGORY_COUNT; i++)
+            for (int i = 1; i <= getCategoryCount(); i++)
                 if (getPref(i) &&
                         (getKanaSet(i, Diacritic.DAKUTEN, true) != null ||
                                 getKanaSet(i, Diacritic.HANDAKUTEN, true) != null))
@@ -235,7 +244,7 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
             {
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, false)));
@@ -251,7 +260,7 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.NO_DIACRITIC, true)));
 
@@ -264,7 +273,7 @@ public abstract class QuestionManagement
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
             {
                 table.addView(ReferenceCell.buildRow(context, getKanaSet(i, Diacritic.DAKUTEN, true)));
@@ -280,7 +289,7 @@ public abstract class QuestionManagement
         layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
-        for (int i = 1; i <= CATEGORY_COUNT; i++)
+        for (int i = 1; i <= getCategoryCount(); i++)
         {
             KanaSelectionItem item = new KanaSelectionItem(context);
             item.setTitle(getSetTitle(i));
