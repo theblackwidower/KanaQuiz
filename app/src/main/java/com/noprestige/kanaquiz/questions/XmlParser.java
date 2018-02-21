@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 abstract class XmlParser
 {
-    static boolean parseXmlKanaSet(XmlResourceParser parser, Resources resources,
-                                   ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList,
-                                   ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
+    static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
+                                ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList,
+                                ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
     {
         int setNumber = -1;
@@ -43,7 +43,7 @@ abstract class XmlParser
         }
 
         if (setNumber < 0)
-            throw new ParseException("setNumber < 0", 0);
+            throw new ParseException("Invalid setNumber: " + setNumber, 0);
 
         while (kanaSetList.size() <= setNumber)
         {
@@ -62,7 +62,7 @@ abstract class XmlParser
 
         ArrayList<KanaQuestion> currentSet = new ArrayList<>();
 
-        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        for (int eventType = parser.getEventType(); true; eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)
             {
@@ -76,15 +76,17 @@ abstract class XmlParser
             else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
             {
                 parseXmlStoreSet(currentSet, kanaSetList, setNumber, Diacritic.NO_DIACRITIC, false);
-                return true;
+                break;
             }
+
+            else if (eventType == XmlPullParser.END_DOCUMENT)
+                throw new ParseException("Missing KanaSet Closing Tag", 0);
         }
-        throw new ParseException("Missing KanaSet Closing Tag", 0);
     }
 
-    static private boolean parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-                                                  ArrayList<KanaQuestion[][][]> kanaSetList,
-                                                  int setNumber)
+    static private void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
+                                               ArrayList<KanaQuestion[][][]> kanaSetList,
+                                               int setNumber)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -104,7 +106,7 @@ abstract class XmlParser
             }
         }
 
-        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        for (int eventType = parser.getEventType(); true; eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
                 currentSet.add(parseXmlKanaQuestion(parser, resources));
@@ -112,10 +114,11 @@ abstract class XmlParser
             else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"))
             {
                 parseXmlStoreSet(currentSet, kanaSetList, setNumber, diacritics, isDigraphs);
-                return true;
+                break;
             }
+            else if (eventType == XmlPullParser.END_DOCUMENT)
+                throw new ParseException("Missing Section Closing Tag", 0);
         }
-        throw new ParseException("Missing Section Closing Tag", 0);
     }
 
     static private void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
@@ -150,7 +153,7 @@ abstract class XmlParser
             }
         }
         if (thisQuestion == null || thisAnswer == null)
-            throw new ParseException("Missing Section Closing Tag", 0);
+            throw new ParseException("Missing attribute in KanaQuestion", 0);
         else if (thisAltAnswer == null)
             return new KanaQuestion(thisQuestion, thisAnswer);
         else
