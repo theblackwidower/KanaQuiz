@@ -76,114 +76,11 @@ public abstract class QuestionManagement
 
         try
         {
-            int currentSetNumber = -1;
-            Diacritic currentDiacritics = null;
-            boolean currentIsDigraphs = false;
-            String currentPrefId = "";
-            String currentSetTitle = "";
-            String currentSetNoDiacriticsTitle = null;
-
-            ArrayList<KanaQuestion> currentSet = new ArrayList<>();
-            ArrayList<KanaQuestion> backupSet = null;
-
             for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = xrp.next())
             {
-                if (eventType == XmlPullParser.START_TAG)
+                if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaSet"))
                 {
-                    if (xrp.getName().equalsIgnoreCase("KanaSet"))
-                    {
-                        currentDiacritics = Diacritic.NO_DIACRITIC;
-                        currentIsDigraphs = false;
-                        for (int i = 0; i < xrp.getAttributeCount(); i++)
-                        {
-                            switch (xrp.getAttributeName(i))
-                            {
-                                case "number":
-                                    currentSetNumber = xrp.getAttributeIntValue(i, -1);
-                                    break;
-                                case "prefId":
-                                    currentPrefId = parseXmlValue(xrp, i, resources);
-                                    break;
-                                case "setTitle":
-                                    currentSetTitle = parseXmlValue(xrp, i, resources, R.string.set);
-                                    break;
-                                case "setNoDiacriticsTitle":
-                                    currentSetNoDiacriticsTitle = parseXmlValue(xrp, i, resources, R.string.set);
-                            }
-                        }
-                    }
-
-                    else if (xrp.getName().equalsIgnoreCase("Section"))
-                    {
-                        backupSet = currentSet;
-                        currentSet = new ArrayList<>();
-                        for (int i = 0; i < xrp.getAttributeCount(); i++)
-                        {
-                            switch (xrp.getAttributeName(i))
-                            {
-                                case "diacritics":
-                                    currentDiacritics = Diacritic.valueOf(xrp.getAttributeValue(i));
-                                    break;
-                                case "digraphs":
-                                    currentIsDigraphs = xrp.getAttributeBooleanValue(i, false);
-                            }
-                        }
-                    }
-
-                    else if (xrp.getName().equalsIgnoreCase("KanaQuestion"))
-                    {
-                        currentSet.add(parseXmlKanaQuestion(xrp, resources));
-                    }
-                }
-
-                else if (eventType == XmlPullParser.END_TAG && currentSetNumber >= 0 &&
-                        (xrp.getName().equalsIgnoreCase("Section") || xrp.getName().equalsIgnoreCase("KanaSet")))
-                {
-                    KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
-                    currentSet.toArray(currentSetArray);
-
-                    boolean isSuccess = false;
-                    while (!isSuccess)
-                    {
-                        try
-                        {
-                            KanaQuestion[][][] pulledArray = kanaSetList.get(currentSetNumber);
-                            pulledArray[currentDiacritics.ordinal()][currentIsDigraphs ? 1 : 0] = currentSetArray;
-                            kanaSetList.set(currentSetNumber, pulledArray);
-                            isSuccess = true;
-                        }
-                        catch (IndexOutOfBoundsException ex)
-                        {
-                            kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
-                            prefIdList.add("");
-                            setTitleList.add("");
-                            setNoDiacriticsTitleList.add("");
-                        }
-                    }
-                    if (xrp.getName().equalsIgnoreCase("Section"))
-                    {
-                        currentSet = backupSet;
-                        backupSet = null;
-                        currentDiacritics = Diacritic.NO_DIACRITIC;
-                        currentIsDigraphs = false;
-                    }
-                    else if (xrp.getName().equalsIgnoreCase("KanaSet"))
-                    {
-                        if (currentSetNoDiacriticsTitle == null)
-                            currentSetNoDiacriticsTitle = currentSetTitle;
-
-                        prefIdList.set(currentSetNumber, currentPrefId);
-                        setTitleList.set(currentSetNumber, currentSetTitle);
-                        setNoDiacriticsTitleList.set(currentSetNumber, currentSetNoDiacriticsTitle);
-
-                        currentSetNumber = -1;
-                        currentDiacritics = null;
-                        currentIsDigraphs = false;
-                        currentPrefId = "";
-                        currentSetTitle = "";
-                        currentSetNoDiacriticsTitle = null;
-                        currentSet = new ArrayList<>();
-                    }
+                    parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
                 }
             }
             singletonObject.kanaSets = new KanaQuestion[kanaSetList.size()][][][];
@@ -198,6 +95,125 @@ public abstract class QuestionManagement
         catch (XmlPullParserException | IOException ex)
         {
         }
+    }
+
+
+    static private boolean parseXmlKanaSet(XmlResourceParser parser, Resources resources,
+                                           ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList,
+                                           ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
+            throws XmlPullParserException, IOException
+    {
+        int setNumber = -1;
+        String prefId = "";
+        String setTitle = "";
+        String setNoDiacriticsTitle = null;
+
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "number":
+                    setNumber = parser.getAttributeIntValue(i, -1);
+                    break;
+                case "prefId":
+                    prefId = parseXmlValue(parser, i, resources);
+                    break;
+                case "setTitle":
+                    setTitle = parseXmlValue(parser, i, resources, R.string.set);
+                    break;
+                case "setNoDiacriticsTitle":
+                    setNoDiacriticsTitle = parseXmlValue(parser, i, resources, R.string.set);
+            }
+        }
+
+        if (setNumber < 0)
+            return false;
+
+        while (kanaSetList.size() <= setNumber)
+        {
+            kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
+            prefIdList.add("");
+            setTitleList.add("");
+            setNoDiacriticsTitleList.add("");
+        }
+
+        if (setNoDiacriticsTitle == null)
+            setNoDiacriticsTitle = setTitle;
+
+        prefIdList.set(setNumber, prefId);
+        setTitleList.set(setNumber, setTitle);
+        setNoDiacriticsTitleList.set(setNumber, setNoDiacriticsTitle);
+
+        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+
+        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        {
+            if (eventType == XmlPullParser.START_TAG)
+            {
+                if (parser.getName().equalsIgnoreCase("Section"))
+                    parseXmlKanaSubsection(parser, resources, kanaSetList, setNumber);
+
+                else if (parser.getName().equalsIgnoreCase("KanaQuestion"))
+                    currentSet.add(parseXmlKanaQuestion(parser, resources));
+            }
+
+            else if (eventType == XmlPullParser.END_TAG &&
+                    parser.getName().equalsIgnoreCase("KanaSet"))
+            {
+                parseXmlStoreSet(currentSet, kanaSetList, setNumber, Diacritic.NO_DIACRITIC, false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static private boolean parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
+                                                  ArrayList<KanaQuestion[][][]> kanaSetList,
+                                                  int setNumber)
+            throws XmlPullParserException, IOException
+    {
+        Diacritic diacritics = null;
+        boolean isDigraphs = false;
+
+        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "diacritics":
+                    diacritics = Diacritic.valueOf(parser.getAttributeValue(i));
+                    break;
+                case "digraphs":
+                    isDigraphs = parser.getAttributeBooleanValue(i, false);
+            }
+        }
+
+        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        {
+            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
+                currentSet.add(parseXmlKanaQuestion(parser, resources));
+
+            else if (eventType == XmlPullParser.END_TAG && setNumber >= 0 &&
+                    parser.getName().equalsIgnoreCase("Section"))
+            {
+                parseXmlStoreSet(currentSet, kanaSetList, setNumber, diacritics, isDigraphs);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    static private void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
+                                         int setNumber, Diacritic diacritics, boolean isDigraphs)
+    {
+        KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
+        currentSet.toArray(currentSetArray);
+
+        KanaQuestion[][][] pulledArray = kanaSetList.get(setNumber);
+        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSetArray;
+        kanaSetList.set(setNumber, pulledArray);
     }
 
     static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
