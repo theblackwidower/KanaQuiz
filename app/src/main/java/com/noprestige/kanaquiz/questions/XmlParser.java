@@ -19,7 +19,6 @@ abstract class XmlParser
                                 ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
     {
-        int setNumber = -1;
         String prefId = "";
         String setTitle = "";
         String setNoDiacriticsTitle = null;
@@ -28,9 +27,6 @@ abstract class XmlParser
         {
             switch (parser.getAttributeName(i))
             {
-                case "number":
-                    setNumber = parser.getAttributeIntValue(i, -1);
-                    break;
                 case "prefId":
                     prefId = parseXmlValue(parser, i, resources);
                     break;
@@ -42,23 +38,16 @@ abstract class XmlParser
             }
         }
 
-        if (setNumber < 0)
-            throw new ParseException("Invalid setNumber: " + setNumber, 0);
-
-        while (kanaSetList.size() <= setNumber)
-        {
-            kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
-            prefIdList.add("");
-            setTitleList.add("");
-            setNoDiacriticsTitleList.add("");
-        }
-
         if (setNoDiacriticsTitle == null)
             setNoDiacriticsTitle = setTitle;
 
-        prefIdList.set(setNumber, prefId);
-        setTitleList.set(setNumber, setTitle);
-        setNoDiacriticsTitleList.set(setNumber, setNoDiacriticsTitle);
+        prefIdList.add(prefId);
+        setTitleList.add(setTitle);
+        setNoDiacriticsTitleList.add(setNoDiacriticsTitle);
+
+        int indexPoint = kanaSetList.size();
+
+        kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
 
         ArrayList<KanaQuestion> currentSet = new ArrayList<>();
 
@@ -67,7 +56,7 @@ abstract class XmlParser
             if (eventType == XmlPullParser.START_TAG)
             {
                 if (parser.getName().equalsIgnoreCase("Section"))
-                    parseXmlKanaSubsection(parser, resources, kanaSetList, setNumber);
+                    parseXmlKanaSubsection(parser, resources, kanaSetList, indexPoint);
 
                 else if (parser.getName().equalsIgnoreCase("KanaQuestion"))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
@@ -75,7 +64,7 @@ abstract class XmlParser
 
             else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
             {
-                parseXmlStoreSet(currentSet, kanaSetList, setNumber, Diacritic.NO_DIACRITIC, false);
+                parseXmlStoreSet(currentSet, kanaSetList, indexPoint, Diacritic.NO_DIACRITIC, false);
                 break;
             }
 
@@ -86,7 +75,7 @@ abstract class XmlParser
 
     static private void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
                                                ArrayList<KanaQuestion[][][]> kanaSetList,
-                                               int setNumber)
+                                               int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -113,7 +102,7 @@ abstract class XmlParser
 
             else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"))
             {
-                parseXmlStoreSet(currentSet, kanaSetList, setNumber, diacritics, isDigraphs);
+                parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
                 break;
             }
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -122,14 +111,14 @@ abstract class XmlParser
     }
 
     static private void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
-                                         int setNumber, Diacritic diacritics, boolean isDigraphs)
+                                         int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
         KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
         currentSet.toArray(currentSetArray);
 
-        KanaQuestion[][][] pulledArray = kanaSetList.get(setNumber);
+        KanaQuestion[][][] pulledArray = kanaSetList.get(indexPoint);
         pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSetArray;
-        kanaSetList.set(setNumber, pulledArray);
+        kanaSetList.set(indexPoint, pulledArray);
     }
 
     static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)

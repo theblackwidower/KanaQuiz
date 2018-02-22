@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public abstract class QuestionManagement
 {
-    private int categoryCount = -1;
+    private int categoryCount = 0;
 
     private KanaQuestion[][][][] kanaSets = new KanaQuestion[][][][]{};
 
@@ -40,7 +40,7 @@ public abstract class QuestionManagement
     {
         try
         {
-            return kanaSets[number][diacritic.ordinal()][isDigraphs ? 1 : 0];
+            return kanaSets[number - 1][diacritic.ordinal()][isDigraphs ? 1 : 0];
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -52,7 +52,7 @@ public abstract class QuestionManagement
     {
         try
         {
-            return prefIds[number];
+            return prefIds[number - 1];
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -65,7 +65,7 @@ public abstract class QuestionManagement
         try
         {
             return OptionsControl.getBoolean(R.string.prefid_diacritics) ?
-                    setTitles[number] : setNoDiacriticsTitles[number];
+                    setTitles[number - 1] : setNoDiacriticsTitles[number - 1];
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -89,17 +89,16 @@ public abstract class QuestionManagement
                     XmlParser.parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
                 }
             }
-            int size = kanaSetList.size();
 
-            singletonObject.categoryCount = size - 1;
+            singletonObject.categoryCount = kanaSetList.size();
 
-            singletonObject.kanaSets = new KanaQuestion[size][][][];
+            singletonObject.kanaSets = new KanaQuestion[singletonObject.categoryCount][][][];
             kanaSetList.toArray(singletonObject.kanaSets);
-            singletonObject.prefIds = new String[size];
+            singletonObject.prefIds = new String[singletonObject.categoryCount];
             prefIdList.toArray(singletonObject.prefIds);
-            singletonObject.setTitles = new String[size];
+            singletonObject.setTitles = new String[singletonObject.categoryCount];
             setTitleList.toArray(singletonObject.setTitles);
-            singletonObject.setNoDiacriticsTitles = new String[size];
+            singletonObject.setNoDiacriticsTitles = new String[singletonObject.categoryCount];
             setNoDiacriticsTitleList.toArray(singletonObject.setNoDiacriticsTitles);
         }
         catch (XmlPullParserException | IOException | ParseException ex)
