@@ -16,7 +16,10 @@
     <xs:element name="KanaSet">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
+                <xs:choice>
+                    <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
+                    <xs:element ref="WordQuestion" maxOccurs="unbounded"/>
+                </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="prefId" type="text" use="required"/>
@@ -42,6 +45,18 @@
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romanji" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="WordQuestion">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AltAnswer" type="text" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="romanji" type="romanji" use="required"/>
+            <xs:attribute name="kana" type="kana"/>
+            <xs:attribute name="kanji" type="kanji"/>
+            <xs:attribute name="answer" type="text" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -71,6 +86,20 @@
         <xs:restriction base="text">
             <!-- ref: https://gist.github.com/terrancesnyder/1345094 -->
             <xs:pattern value="[ぁ-んァ-ン]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="kanji">
+        <xs:restriction base="text">
+            <!-- ref: http://www.localizingjapan.com/blog/2012/01/20/regular-expressions-for-japanese-text/ -->
+            <!-- This site provided the required regex using referenced unicode codepoints. -->
+            <!--<xs:pattern value="[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]*"/>-->
+            <!-- This is incompatible with Android Studio's built-in XML validation tools. -->
+            <!-- In fact, it'll cause it to completely ignore any and all validation from any type -->
+            <!-- with this name until the entire IDE is restarted. Which is a pretty glaring error. -->
+            <!-- So I had to convert them to proper unicode characters. -->
+            <!-- ref: http://unicode.scarfboy.com/ -->
+            <xs:pattern value="[㐀-䶵一-鿋豈-頻]*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
