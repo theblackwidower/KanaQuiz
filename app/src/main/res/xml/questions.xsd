@@ -37,9 +37,11 @@
 
     <xs:element name="KanaQuestion">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AltAnswer" type="romanji" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romanji" use="required"/>
-            <xs:attribute name="altAnswer" type="romanji"/>
         </xs:complexType>
     </xs:element>
 

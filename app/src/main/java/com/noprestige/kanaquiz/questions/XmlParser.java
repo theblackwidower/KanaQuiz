@@ -122,11 +122,11 @@ abstract class XmlParser
     }
 
     static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
-            throws ParseException
+            throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = "";
         String thisAnswer = "";
-        String thisAltAnswer = null;
+        ArrayList<String> thisAltAnswers = new ArrayList<>();
         for (int i = 0; i < parser.getAttributeCount(); i++)
         {
             switch (parser.getAttributeName(i))
@@ -136,17 +136,41 @@ abstract class XmlParser
                     break;
                 case "answer":
                     thisAnswer = parseXmlValue(parser, i, resources);
-                    break;
-                case "altAnswer":
-                    thisAltAnswer = parseXmlValue(parser, i, resources);
             }
         }
         if (thisQuestion == null || thisAnswer == null)
             throw new ParseException("Missing attribute in KanaQuestion", 0);
-        else if (thisAltAnswer == null)
-            return new KanaQuestion(thisQuestion, thisAnswer);
-        else
-            return new KanaQuestion(thisQuestion, new String[]{thisAnswer, thisAltAnswer});
+
+        for (int eventType = parser.getEventType(); true; eventType = parser.next())
+        {
+            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("AltAnswer"))
+            {
+                eventType = parser.next();
+                if (eventType == XmlPullParser.TEXT)
+                {
+                    thisAltAnswers.add(parser.getText());
+                }
+                else
+                    throw new ParseException("Missing AltAnswer Content", 0);
+            }
+            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
+            {
+                if (thisAltAnswers.isEmpty())
+                    return new KanaQuestion(thisQuestion, thisAnswer);
+                else
+                {
+                    String[] allAnswers = new String[thisAltAnswers.size() + 1];
+                    allAnswers[0] = thisAnswer;
+                    for (int i = 0; i < thisAltAnswers.size(); i++)
+                    {
+                        allAnswers[i + 1] = thisAltAnswers.get(i);
+                    }
+                    return new KanaQuestion(thisQuestion, allAnswers);
+                }
+            }
+            else if (eventType == XmlPullParser.END_DOCUMENT)
+                throw new ParseException("Missing KanaQuestion Closing Tag", 0);
+        }
     }
 
     static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources)

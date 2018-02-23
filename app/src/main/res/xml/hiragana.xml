@@ -55,9 +55,15 @@
             <KanaQuestion question="しょ" answer="sho"/>
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
-            <KanaQuestion question="じゃ" answer="ja" altAnswer="jya"/>
-            <KanaQuestion question="じゅ" answer="ju" altAnswer="jyu"/>
-            <KanaQuestion question="じょ" answer="jo" altAnswer="jyo"/>
+            <KanaQuestion question="じゃ" answer="ja">
+                <AltAnswer>jya</AltAnswer>
+            </KanaQuestion>
+            <KanaQuestion question="じゅ" answer="ju">
+                <AltAnswer>jyu</AltAnswer>
+            </KanaQuestion>
+            <KanaQuestion question="じょ" answer="jo">
+                <AltAnswer>jyo</AltAnswer>
+            </KanaQuestion>
         </Section>
     </KanaSet>
     <KanaSet prefId="@string/prefid_hiragana_4"
@@ -80,9 +86,15 @@
             <KanaQuestion question="ちょ" answer="cho"/>
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
-            <KanaQuestion question="ぢゃ" answer="ja" altAnswer="dzya"/>
-            <KanaQuestion question="ぢゅ" answer="ju" altAnswer="dzyu"/>
-            <KanaQuestion question="ぢょ" answer="jo" altAnswer="dzyo"/>
+            <KanaQuestion question="ぢゃ" answer="ja">
+                <AltAnswer>dzya</AltAnswer>
+            </KanaQuestion>
+            <KanaQuestion question="ぢゅ" answer="ju">
+                <AltAnswer>dzyu</AltAnswer>
+            </KanaQuestion>
+            <KanaQuestion question="ぢょ" answer="jo">
+                <AltAnswer>dzyo</AltAnswer>
+            </KanaQuestion>
         </Section>
     </KanaSet>
     <KanaSet prefId="@string/prefid_hiragana_5"
@@ -102,7 +114,9 @@
              setTitle="@string/set_6_title" setNoDiacriticsTitle="@string/set_6_no_diacritics_title">
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
-        <KanaQuestion question="ふ" answer="fu" altAnswer="hu"/>
+        <KanaQuestion question="ふ" answer="fu">
+            <AltAnswer>hu</AltAnswer>
+        </KanaQuestion>
         <KanaQuestion question="へ" answer="he"/>
         <KanaQuestion question="ほ" answer="ho"/>
         <Section diacritics="DAKUTEN" digraphs="false">
