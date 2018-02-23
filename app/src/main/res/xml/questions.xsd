@@ -19,9 +19,9 @@
                 <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="prefId" type="xs:string" use="required"/>
-            <xs:attribute name="setTitle" type="xs:string" use="required"/>
-            <xs:attribute name="setNoDiacriticsTitle" type="xs:string"/>
+            <xs:attribute name="prefId" type="text" use="required"/>
+            <xs:attribute name="setTitle" type="text" use="required"/>
+            <xs:attribute name="setNoDiacriticsTitle" type="text"/>
         </xs:complexType>
     </xs:element>
 
@@ -37,9 +37,9 @@
 
     <xs:element name="KanaQuestion">
         <xs:complexType>
-            <xs:attribute name="question" type="xs:string" use="required"/>
-            <xs:attribute name="answer" type="xs:string" use="required"/>
-            <xs:attribute name="altAnswer" type="xs:string"/>
+            <xs:attribute name="question" type="kana" use="required"/>
+            <xs:attribute name="answer" type="romanji" use="required"/>
+            <xs:attribute name="altAnswer" type="romanji"/>
         </xs:complexType>
     </xs:element>
 
@@ -50,6 +50,25 @@
             <xs:enumeration value="DAKUTEN"/>
             <xs:enumeration value="HANDAKUTEN"/>
             <xs:enumeration value="CONSONANT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="text">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="romanji">
+        <xs:restriction base="text">
+            <xs:pattern value="[A-z]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="kana">
+        <xs:restriction base="text">
+            <!-- ref: https://gist.github.com/terrancesnyder/1345094 -->
+            <xs:pattern value="[ぁ-んァ-ン]*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
