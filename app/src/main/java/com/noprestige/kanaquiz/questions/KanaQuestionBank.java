@@ -22,7 +22,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     public void newQuestion() throws NoQuestionsException
     {
-        if (this.count() > 1)
+        if (this.count() > 0)
         {
             if (previousQuestions == null)
                 previousQuestions = new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string.prefid_repetition)));
