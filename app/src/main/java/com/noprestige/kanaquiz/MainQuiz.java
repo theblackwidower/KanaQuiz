@@ -76,8 +76,10 @@ public class MainQuiz extends AppCompatActivity
 
         //TODO: Figure out how to run the database on a different thread.
         if (LogDatabase.DAO == null)
-            LogDatabase.DAO = Room.databaseBuilder(getApplicationContext(),
-                    LogDatabase.class, "user-logs").allowMainThreadQueries().build().logDao();
+            LogDatabase.DAO = Room.databaseBuilder(
+                    getApplicationContext(), LogDatabase.class, "user-logs").
+                    addMigrations(LogDatabase.MIGRATION_1_2).
+                    allowMainThreadQueries().build().logDao();
 
         txtAnswer.setOnEditorActionListener(
                 new TextView.OnEditorActionListener()
@@ -201,18 +203,19 @@ public class MainQuiz extends AppCompatActivity
                     LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
                 else if (retryCount <= 4) //anything over 4 retrys gets no score at all
-                    totalCorrect += Math.pow(0.5f, retryCount);
+                {
+                    float score = (float) Math.pow(0.5f, retryCount);
+                    totalCorrect += score;
+                    LogDatabase.DAO.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), score);
+                }
+                else
+                    LogDatabase.DAO.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), 0);
             }
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
                 lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
-
-                if (retryCount == 0)
-                    LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
-                else
-                    LogDatabase.DAO.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
                 if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 {
@@ -228,6 +231,8 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
+                    LogDatabase.DAO.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
+
                     delayHandler.postDelayed(
                             new Runnable()
                             {
@@ -239,6 +244,9 @@ public class MainQuiz extends AppCompatActivity
                             }, 1000
                     );
                 }
+
+                if (isGetNewQuestion)
+                    LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
             }
 
             if (isGetNewQuestion)

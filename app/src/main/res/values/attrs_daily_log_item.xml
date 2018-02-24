@@ -1,7 +1,7 @@
 <resources>
     <declare-styleable name="DailyLogItem">
         <attr name="date" format="string"/>
-        <attr name="correctAnswers" format="integer"/>
+        <attr name="correctAnswers" format="float"/>
         <attr name="totalAnswers" format="integer"/>
         <attr name="fontSize" format="dimension"/>
         <attr name="mainColour" format="color"/>

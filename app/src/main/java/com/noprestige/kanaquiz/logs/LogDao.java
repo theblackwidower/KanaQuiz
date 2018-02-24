@@ -32,7 +32,7 @@ public abstract class LogDao
     public float getDailyPercentage(Date date)
     {
         DailyRecord record = getDateRecord(date);
-        return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
+        return record.correct_answers / (float) (record.total_answers);
     }
 
     public float getKanaPercentage(String kana)
@@ -53,7 +53,7 @@ public abstract class LogDao
             return record.occurrences;
     }
 
-    void addTodaysRecord(boolean isCorrect)
+    void addTodaysRecord(float score)
     {
         DailyRecord record = getDateRecord(new Date());
         if (record == null)
@@ -61,10 +61,11 @@ public abstract class LogDao
             record = new DailyRecord();
             insertDailyRecord(record);
         }
-        if (isCorrect)
-            record.correct_answers++;
-        else
-            record.incorrect_answers++;
+        if (score > 0)
+            record.correct_answers += score;
+
+        record.total_answers++;
+
         updateDailyRecord(record);
     }
 
@@ -100,15 +101,21 @@ public abstract class LogDao
 
     public void reportCorrectAnswer(String kana)
     {
-        addTodaysRecord(true);
+        addTodaysRecord(1);
         addKanaRecord(kana, true);
     }
 
     public void reportIncorrectAnswer(String kana, String romanji)
     {
-        addTodaysRecord(false);
+        addTodaysRecord(0);
         addKanaRecord(kana, false);
         addIncorrectAnswerRecord(kana, romanji);
+    }
+
+    public void reportRetriedCorrectAnswer(String kana, float score)
+    {
+        addTodaysRecord(score);
+        addKanaRecord(kana, false);
     }
 
     public void reportIncorrectRetry(String kana, String romanji)

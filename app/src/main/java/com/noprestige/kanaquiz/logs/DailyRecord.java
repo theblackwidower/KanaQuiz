@@ -14,15 +14,15 @@ public class DailyRecord
     public Date date;
 
     @ColumnInfo(name = "correct_answers")
-    public int correct_answers;
+    public float correct_answers;
 
-    @ColumnInfo(name = "incorrect_answers")
-    public int incorrect_answers;
+    @ColumnInfo(name = "total_answers")
+    public int total_answers;
 
     public DailyRecord()
     {
         date = new Date();
         correct_answers = 0;
-        incorrect_answers = 0;
+        total_answers = 0;
     }
 }

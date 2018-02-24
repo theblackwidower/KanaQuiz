@@ -27,7 +27,7 @@ import static java.util.Calendar.YEAR;
 
 public class DailyLogItem extends View
 {
-    private int correctAnswers = -1;
+    private float correctAnswers = -1;
     private int totalAnswers = -1;
     private Date date;
     private boolean isDynamicSize;
@@ -75,6 +75,8 @@ public class DailyLogItem extends View
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+    private static final DecimalFormat SMALL_COUNT_FORMATTER = new DecimalFormat("#.##");
+    private static final DecimalFormat LARGE_COUNT_FORMATTER = new DecimalFormat("#.#");
     private static final String SLASH = "/";
 
     public DailyLogItem(Context context)
@@ -106,7 +108,7 @@ public class DailyLogItem extends View
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
-        setCorrectAnswers(a.getInt(R.styleable.DailyLogItem_correctAnswers, -1));
+        setCorrectAnswers(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
@@ -225,7 +227,7 @@ public class DailyLogItem extends View
     {
         setDate(record.date);
         setCorrectAnswers(record.correct_answers);
-        setTotalAnswers(record.correct_answers + record.incorrect_answers);
+        setTotalAnswers(record.total_answers);
     }
 
     public Date getDate()
@@ -233,7 +235,7 @@ public class DailyLogItem extends View
         return this.date;
     }
 
-    public int getCorrectAnswers()
+    public float getCorrectAnswers()
     {
         return this.correctAnswers;
     }
@@ -294,7 +296,7 @@ public class DailyLogItem extends View
         dateWidth_3 = datePaint.measureText(dateString_3);
     }
 
-    public void setCorrectAnswers(int correctAnswers)
+    public void setCorrectAnswers(float correctAnswers)
     {
         this.correctAnswers = correctAnswers;
         updateAnswers();
@@ -339,6 +341,16 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
+    static private String parseCount(float count)
+    {
+        if (count < 10)
+            return SMALL_COUNT_FORMATTER.format(count);
+        else if (count < 100)
+            return LARGE_COUNT_FORMATTER.format(count);
+        else
+            return parseCount(Math.round(count));
+    }
+
     static private String parseCount(int count)
     {
         if (count < 1000)
@@ -358,7 +370,7 @@ public class DailyLogItem extends View
         {
             correctString = parseCount(correctAnswers);
             totalString = parseCount(totalAnswers);
-            float percentage = (float) correctAnswers / (float) totalAnswers;
+            float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
             percentagePaint.setColor(getPercentageColour(percentage, getResources()));
 
