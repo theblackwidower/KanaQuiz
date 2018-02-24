@@ -56,7 +56,9 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        for (int eventType = parser.getEventType(); true; eventType = parser.next())
+        for (int eventType = parser.getEventType();
+             !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
+             eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)
             {
@@ -67,15 +69,10 @@ abstract class XmlParser
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
             }
 
-            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
-            {
-                parseXmlStoreSet(currentSet, kanaSetList, indexPoint, Diacritic.NO_DIACRITIC, false);
-                break;
-            }
-
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing KanaSet closing tag", lineNumber);
         }
+        parseXmlStoreSet(currentSet, kanaSetList, indexPoint, Diacritic.NO_DIACRITIC, false);
     }
 
     static private void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
@@ -107,19 +104,17 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        for (int eventType = parser.getEventType(); true; eventType = parser.next())
+        for (int eventType = parser.getEventType();
+             !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"));
+             eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
                 currentSet.add(parseXmlKanaQuestion(parser, resources));
 
-            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"))
-            {
-                parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
-                break;
-            }
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing Section closing tag", lineNumber);
         }
+        parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
     }
 
     static private void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
@@ -167,7 +162,9 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        for (int eventType = parser.getEventType(); true; eventType = parser.next())
+        for (int eventType = parser.getEventType();
+             !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"));
+             eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("AltAnswer"))
             {
@@ -177,19 +174,18 @@ abstract class XmlParser
                 else
                     throw new ParseException("Empty AltAnswer tag", parser.getLineNumber());
             }
-            else if (eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
-            {
-                if (altAnswers.isEmpty())
-                    return null;
-                else
-                {
-                    String[] altAnswersArray = new String[altAnswers.size()];
-                    altAnswers.toArray(altAnswersArray);
-                    return altAnswersArray;
-                }
-            }
+
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing KanaQuestion closing tag", lineNumber);
+        }
+
+        if (altAnswers.isEmpty())
+            return null;
+        else
+        {
+            String[] altAnswersArray = new String[altAnswers.size()];
+            altAnswers.toArray(altAnswersArray);
+            return altAnswersArray;
         }
     }
 
