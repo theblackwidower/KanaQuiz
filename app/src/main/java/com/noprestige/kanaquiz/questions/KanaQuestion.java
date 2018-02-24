@@ -8,43 +8,43 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 public class KanaQuestion
 {
     private String kana;
-    private String[] romanji;
+    private String[] answer;
 
-    KanaQuestion(String kana, String romanji)
+    KanaQuestion(String kana, String answer)
     {
         setKana(kana);
-        setRomanji(romanji);
+        setAnswer(answer);
     }
 
-    KanaQuestion(String kana, String[] romanji)
+    KanaQuestion(String kana, String[] answer)
     {
         setKana(kana);
-        setRomanji(romanji);
+        setAnswer(answer);
     }
 
-    KanaQuestion(String kana, String romanji, String[] altRomanji)
+    KanaQuestion(String kana, String answer, String[] altAnswer)
     {
         setKana(kana);
-        setRomanji(romanji, altRomanji);
+        setAnswer(answer, altAnswer);
     }
 
-    private void setRomanji(String romanji)
+    private void setAnswer(String answer)
     {
-        this.romanji = new String[]{romanji};
+        this.answer = new String[]{answer};
     }
 
-    private void setRomanji(String[] romanji)
+    private void setAnswer(String[] answer)
     {
-        this.romanji = romanji;
+        this.answer = answer;
     }
 
-    private void setRomanji(String romanji, String[] altRomanji)
+    private void setAnswer(String answer, String[] altAnswer)
     {
-        this.romanji = new String[altRomanji.length + 1];
-        this.romanji[0] = romanji;
-//        for (int i = 0; i < altRomanji.length; i++)
-//            this.romanji[i + 1] = altRomanji[i];
-        System.arraycopy(altRomanji, 0, this.romanji, 1, altRomanji.length);
+        this.answer = new String[altAnswer.length + 1];
+        this.answer[0] = answer;
+//        for (int i = 0; i < altAnswer.length; i++)
+//            this.answer[i + 1] = altAnswer[i];
+        System.arraycopy(altAnswer, 0, this.answer, 1, altAnswer.length);
     }
 
     private void setKana(String kana)
@@ -59,7 +59,7 @@ public class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        for (String correctAnswer : romanji)
+        for (String correctAnswer : answer)
             if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
                 return true;
 
@@ -68,7 +68,7 @@ public class KanaQuestion
 
     String fetchCorrectAnswer()
     {
-        return romanji[0];
+        return answer[0];
     }
 
     public ReferenceCell generateReference(Context context)
@@ -83,6 +83,6 @@ public class KanaQuestion
 
     public String toString()
     {
-        return kana + " = " + romanji[0];
+        return kana + " = " + answer[0];
     }
 }
