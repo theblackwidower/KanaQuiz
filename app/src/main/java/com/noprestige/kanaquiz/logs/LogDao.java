@@ -12,7 +12,7 @@ import java.util.Date;
 public abstract class LogDao
 {
     @Query("SELECT * FROM daily_record WHERE date = :date")
-    abstract DailyRecord getDateRecord(Date date);
+    public abstract DailyRecord getDateRecord(Date date);
 
     @Query("SELECT * FROM kana_records WHERE kana = :kana")
     abstract KanaRecord getKanaRecord(String kana);

@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.KanaSelection;
@@ -27,6 +28,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 
 import static android.graphics.Typeface.BOLD;
 import static android.graphics.Typeface.NORMAL;
@@ -112,8 +114,17 @@ public class MainQuiz extends AppCompatActivity
 
     private void resetQuiz()
     {
-        totalQuestions = 0;
-        totalCorrect = 0;
+        DailyRecord record = LogDatabase.DAO.getDateRecord(new Date());
+        if (record == null)
+        {
+            totalQuestions = 0;
+            totalCorrect = 0;
+        }
+        else
+        {
+            totalQuestions = record.total_answers;
+            totalCorrect = record.correct_answers;
+        }
 
         lblDisplayKana.setText("");
         lblResponse.setText("");
