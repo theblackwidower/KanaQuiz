@@ -22,6 +22,12 @@ public class KanaQuestion
         setRomanji(romanji);
     }
 
+    KanaQuestion(String kana, String romanji, String[] altRomanji)
+    {
+        setKana(kana);
+        setRomanji(romanji, altRomanji);
+    }
+
     private void setRomanji(String romanji)
     {
         this.romanji = new String[]{romanji};
@@ -30,6 +36,15 @@ public class KanaQuestion
     private void setRomanji(String[] romanji)
     {
         this.romanji = romanji;
+    }
+
+    private void setRomanji(String romanji, String[] altRomanji)
+    {
+        this.romanji = new String[altRomanji.length + 1];
+        this.romanji[0] = romanji;
+//        for (int i = 0; i < altRomanji.length; i++)
+//            this.romanji[i + 1] = altRomanji[i];
+        System.arraycopy(altRomanji, 0, this.romanji, 1, altRomanji.length);
     }
 
     private void setKana(String kana)
