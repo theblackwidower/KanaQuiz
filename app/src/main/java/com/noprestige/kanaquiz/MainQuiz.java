@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -29,6 +30,8 @@ import java.text.DecimalFormat;
 
 import static android.graphics.Typeface.BOLD;
 import static android.graphics.Typeface.NORMAL;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class MainQuiz extends AppCompatActivity
 {
@@ -61,6 +64,9 @@ public class MainQuiz extends AppCompatActivity
         btnMultipleChoice = findViewById(R.id.btnMultipleChoice);
 
         oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
+
+        if (SDK_INT < 26)
+            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
 
         onConfigurationChanged(getResources().getConfiguration());
 

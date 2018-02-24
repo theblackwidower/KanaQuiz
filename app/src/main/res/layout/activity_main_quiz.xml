@@ -16,8 +16,11 @@
 
     <TextView
         android:id="@+id/lblDisplayKana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:autoSizeMaxTextSize="144sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center_vertical"
         android:text=""
         android:textAlignment="center"
         android:textSize="144sp"/>
