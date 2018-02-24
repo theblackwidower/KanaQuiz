@@ -36,7 +36,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class MainQuiz extends AppCompatActivity
 {
     private int totalQuestions;
-    private int totalCorrect;
+    private float totalCorrect;
     private boolean canSubmit;
 
     private KanaQuestionBank questionBank;
@@ -48,10 +48,11 @@ public class MainQuiz extends AppCompatActivity
 
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
+    private static final DecimalFormat SCORE_FORMATTER = new DecimalFormat("#.##");
 
     private Handler delayHandler = new Handler();
 
-    private boolean isRetrying = false;
+    private int retryCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -143,7 +144,7 @@ public class MainQuiz extends AppCompatActivity
         {
             questionBank.newQuestion();
             lblDisplayKana.setText(questionBank.getCurrentKana());
-            isRetrying = false;
+            retryCount = 0;
             if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
                 btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
             ReadyForAnswer();
@@ -171,10 +172,10 @@ public class MainQuiz extends AppCompatActivity
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(PERCENT_FORMATTER.format((float) totalCorrect / (float) totalQuestions));
+            lblScore.append(PERCENT_FORMATTER.format(totalCorrect / (float) totalQuestions));
 
             lblScore.append(System.getProperty("line.separator"));
-            lblScore.append(Integer.toString(totalCorrect));
+            lblScore.append(SCORE_FORMATTER.format(totalCorrect));
             lblScore.append(" / ");
             lblScore.append(Integer.toString(totalQuestions));
         }
@@ -186,7 +187,7 @@ public class MainQuiz extends AppCompatActivity
     {
         if (canSubmit && !answer.isEmpty())
         {
-            boolean isNewQuestion = true;
+            boolean isGetNewQuestion = true;
             canSubmit = false;
 
             if (questionBank.checkCurrentAnswer(answer))
@@ -194,11 +195,13 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setText(R.string.correct_answer);
                 lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
-                if (!isRetrying)
+                if (retryCount == 0)
                 {
                     totalCorrect++;
                     LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
+                else if (retryCount <= 4) //anything over 4 retrys gets no score at all
+                    totalCorrect += Math.pow(0.5f, retryCount);
             }
             else
             {
@@ -206,7 +209,7 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
-                if (!isRetrying)
+                if (retryCount == 0)
                     LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
                 else
                     LogDatabase.DAO.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
@@ -222,8 +225,8 @@ public class MainQuiz extends AppCompatActivity
                 {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.try_again));
-                    isRetrying = true;
-                    isNewQuestion = false;
+                    retryCount++;
+                    isGetNewQuestion = false;
 
                     delayHandler.postDelayed(
                             new Runnable()
@@ -238,7 +241,7 @@ public class MainQuiz extends AppCompatActivity
                 }
             }
 
-            if (isNewQuestion)
+            if (isGetNewQuestion)
             {
                 totalQuestions++;
                 //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
