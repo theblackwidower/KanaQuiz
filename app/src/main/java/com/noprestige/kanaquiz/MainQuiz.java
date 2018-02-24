@@ -20,10 +20,9 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.KanaSelection;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
-import com.noprestige.kanaquiz.questions.Hiragana;
 import com.noprestige.kanaquiz.questions.KanaQuestionBank;
-import com.noprestige.kanaquiz.questions.Katakana;
 import com.noprestige.kanaquiz.questions.NoQuestionsException;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
 import java.text.DecimalFormat;
@@ -66,8 +65,7 @@ public class MainQuiz extends AppCompatActivity
         onConfigurationChanged(getResources().getConfiguration());
 
         OptionsControl.initialize(getApplicationContext());
-        Hiragana.initialize(getApplicationContext());
-        Katakana.initialize(getApplicationContext());
+        QuestionManagement.initialize(getApplicationContext());
 
         //TODO: Figure out how to run the database on a different thread.
         if (LogDatabase.DAO == null)
@@ -114,8 +112,7 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        questionBank = Hiragana.QUESTIONS.getQuestionBank();
-        questionBank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
+        questionBank = QuestionManagement.getFullQuestionBank();
 
         txtAnswer.setEnabled(true);
 

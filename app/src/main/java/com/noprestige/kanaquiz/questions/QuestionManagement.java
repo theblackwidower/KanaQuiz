@@ -106,6 +106,19 @@ public abstract class QuestionManagement
         }
     }
 
+    public static void initialize(Context context)
+    {
+        Hiragana.initialize(context);
+        Katakana.initialize(context);
+    }
+
+    public static KanaQuestionBank getFullQuestionBank()
+    {
+        KanaQuestionBank bank = Hiragana.QUESTIONS.getQuestionBank();
+        bank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
+        return bank;
+    }
+
     private boolean getPref(int number)
     {
         return OptionsControl.getBoolean(getPrefId(number));
