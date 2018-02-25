@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
-    private String[] fullAnswerList = null;
+    private TreeSet<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -52,7 +52,6 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     public boolean addQuestions(KanaQuestion[] questions)
     {
         previousQuestions = null;
-        fullAnswerList = null;
         if (questions != null)
             for (KanaQuestion question : questions)
             {
@@ -61,6 +60,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 // and add 5% so any kana the user got perfect will still appear in the quiz.
                 // Times 100f to get the percentage.
                 this.add((1.05f - LogDatabase.DAO.getKanaPercentage(question.getKana())) * 100f, question);
+                fullAnswerList.add(question.fetchCorrectAnswer());
             }
         return true;
     }
@@ -68,8 +68,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     public boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
-        fullAnswerList = null;
-
+        this.fullAnswerList.addAll(questions.fullAnswerList);
         return this.merge(questions);
     }
 
@@ -80,17 +79,12 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     public String[] getPossibleAnswers(int maxChoices)
     {
-        if (fullAnswerList == null)
+        if (fullAnswerList.size() <= maxChoices)
         {
-            TreeSet<String> answers = new TreeSet<>(new GojuonOrder());
-            for (KanaQuestion question : this.values())
-                answers.add(question.fetchCorrectAnswer());
-            fullAnswerList = new String[answers.size()];
-            answers.toArray(fullAnswerList);
+            String[] answerArray = new String[fullAnswerList.size()];
+            fullAnswerList.toArray(answerArray);
+            return answerArray;
         }
-
-        if (fullAnswerList.length <= maxChoices)
-            return fullAnswerList;
         else
         {
             WeightedList<String> weightedAnswerList = new WeightedList<>();
