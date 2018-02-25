@@ -41,9 +41,10 @@ public abstract class LogDatabase extends RoomDatabase
                 correctValue = cursor.getInt(correctIndex);
                 incorrectValue = cursor.getInt(incorrectIndex);
 
-                database.execSQL("INSERT INTO daily_record (date, correct_answers, total_answers) " +
-                        "VALUES (" + dateValue + ", " + correctValue + ", " + (correctValue + incorrectValue) + ")");
+                database.execSQL("INSERT INTO daily_record (date, correct_answers, total_answers) VALUES (?, ?, ?)",
+                        new Integer[]{dateValue, correctValue, (correctValue + incorrectValue)});
             }
+            database.execSQL("DROP TABLE old_daily_record");
         }
     };
 }
