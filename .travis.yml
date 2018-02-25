@@ -8,6 +8,8 @@ android:
     - platform-tools
     - build-tools-26.0.2
     - android-27
+    - android-24
+    - android-17
     - extra-android-support
 
     # emulator images
@@ -16,7 +18,7 @@ android:
     - sys-img-armeabi-v7a-android-17
   licenses:
     - 'android-sdk-license-.+'
-    
+
 # Emulator Management: Create, Start and Wait
 before_script:
   - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
