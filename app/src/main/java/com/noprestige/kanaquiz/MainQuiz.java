@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -53,6 +54,7 @@ public class MainQuiz extends AppCompatActivity
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
     private static final DecimalFormat SCORE_FORMATTER = new DecimalFormat("#.##");
+    private static final int MAX_RETRIES = 4;
 
     private Handler delayHandler = new Handler();
 
@@ -98,7 +100,7 @@ public class MainQuiz extends AppCompatActivity
 
         oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
-        if (SDK_INT < 26)
+        if (SDK_INT < Build.VERSION_CODES.O)
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
 
         onConfigurationChanged(getResources().getConfiguration());
@@ -236,7 +238,7 @@ public class MainQuiz extends AppCompatActivity
                     totalCorrect++;
                     LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
-                else if (retryCount <= 4) //anything over 4 retrys gets no score at all
+                else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES retrys gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
