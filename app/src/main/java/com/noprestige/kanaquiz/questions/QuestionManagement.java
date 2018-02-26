@@ -114,8 +114,9 @@ public abstract class QuestionManagement
 
     public static KanaQuestionBank getFullQuestionBank()
     {
-        KanaQuestionBank bank = Hiragana.QUESTIONS.getQuestionBank();
-        bank.addQuestions(Katakana.QUESTIONS.getQuestionBank());
+        KanaQuestionBank bank = new KanaQuestionBank();
+        Hiragana.QUESTIONS.buildQuestionBank(bank);
+        Katakana.QUESTIONS.buildQuestionBank(bank);
         return bank;
     }
 
