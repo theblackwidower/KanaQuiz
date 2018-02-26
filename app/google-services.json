@@ -46,6 +46,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1071649420956-7m2a6tjup8g5a7sjv1qd2qbn1btul8q8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.noprestige.kanaquiz.dev",
+            "certificate_hash": "9179bb4b1e6ddb658d61af93d45684c27d60f4c2"
+          }
+        },
+        {
           "client_id": "1071649420956-fg8cgerc1eeaasdv5ubhr8ga1fu7drtc.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -60,8 +68,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071649420956-fg8cgerc1eeaasdv5ubhr8ga1fu7drtc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
