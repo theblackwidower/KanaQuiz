@@ -3,6 +3,7 @@ package com.noprestige.kanaquiz.questions;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class WeightedListTest
 {
@@ -18,16 +19,22 @@ public class WeightedListTest
             listOne.add(weights[i], strings[i]);
 
         int i = 0;
-        int sum = 0;
 
         for (int j = 0; j < SAMPLE_COUNT; j++)
-        {
-            sum += weights[j];
             for (int start = i; i < weights[j] + start; i++)
                 assertEquals(listOne.get(i), strings[j]);
+
+        assertEquals(listOne.maxValue(), i);
+
+        try
+        {
+            listOne.get(i);
+            assertTrue(false);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
         }
 
-        assertEquals(listOne.maxValue(), sum);
     }
 
     @Test
@@ -57,21 +64,24 @@ public class WeightedListTest
         listMerged.merge(listTwo);
 
         int i = 0;
-        int sum = 0;
 
         for (int j = 0; j < SAMPLE_COUNT_ONE; j++)
-        {
-            sum += weightsOne[j];
             for (int start = i; i < weightsOne[j] + start; i++)
                 assertEquals(listMerged.get(i), stringsOne[j]);
-        }
+
         for (int j = 0; j < SAMPLE_COUNT_TWO; j++)
-        {
-            sum += weightsTwo[j];
             for (int start = i; i < weightsTwo[j] + start; i++)
                 assertEquals(listMerged.get(i), stringsTwo[j]);
-        }
 
-        assertEquals(listMerged.maxValue(), sum);
+        assertEquals(listMerged.maxValue(), i);
+
+        try
+        {
+            listMerged.get(i);
+            assertTrue(false);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+        }
     }
 }
