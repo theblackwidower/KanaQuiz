@@ -96,7 +96,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
                     // where 102 is the number of unique correct answers in Hiragana and Katakana classes
                     weightedAnswerList.add(
-                            Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(fetchCorrectAnswer(), answer), 24)),
+                            Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
                             answer);
                 }
             }
