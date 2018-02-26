@@ -58,8 +58,8 @@ class WeightedList<E>
 
     E get(int value)
     {
-        if (value > maxValue || value < 0)
-            throw new NullPointerException();
+        if (value >= maxValue || value < 0)
+            throw new IndexOutOfBoundsException();
         else
             return map.get(map.floorKey(value));
     }
