@@ -1,8 +1,10 @@
 package com.noprestige.kanaquiz;
 
+import android.annotation.SuppressLint;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -56,6 +58,34 @@ public class MainQuiz extends AppCompatActivity
 
     private int retryCount = 0;
 
+    @SuppressLint("StaticFieldLeak")
+    private class FetchTodaysLog extends AsyncTask<Date, Void, DailyRecord>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            totalQuestions = 0;
+            totalCorrect = 0;
+        }
+
+        @Override
+        protected DailyRecord doInBackground(Date... date)
+        {
+            return LogDatabase.DAO.getDateRecord(date[0]);
+        }
+
+        @Override
+        protected void onPostExecute(DailyRecord record)
+        {
+            if (record != null)
+            {
+                totalQuestions += record.total_answers;
+                totalCorrect += record.correct_answers;
+            }
+            updateScore();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,12 +106,11 @@ public class MainQuiz extends AppCompatActivity
         OptionsControl.initialize(getApplicationContext());
         QuestionManagement.initialize(getApplicationContext());
 
-        //TODO: Figure out how to run the database on a different thread.
         if (LogDatabase.DAO == null)
             LogDatabase.DAO = Room.databaseBuilder(
                     getApplicationContext(), LogDatabase.class, "user-logs").
                     addMigrations(LogDatabase.MIGRATION_1_2).
-                    allowMainThreadQueries().build().logDao();
+                    build().logDao();
 
         txtAnswer.setOnEditorActionListener(
                 new TextView.OnEditorActionListener()
@@ -114,17 +143,7 @@ public class MainQuiz extends AppCompatActivity
 
     private void resetQuiz()
     {
-        DailyRecord record = LogDatabase.DAO.getDateRecord(new Date());
-        if (record == null)
-        {
-            totalQuestions = 0;
-            totalCorrect = 0;
-        }
-        else
-        {
-            totalQuestions = record.total_answers;
-            totalCorrect = record.correct_answers;
-        }
+        new FetchTodaysLog().execute(new Date());
 
         lblDisplayKana.setText("");
         lblResponse.setText("");
@@ -177,7 +196,11 @@ public class MainQuiz extends AppCompatActivity
                 txtAnswer.setText("");
             }
         }
+        updateScore();
+    }
 
+    private void updateScore()
+    {
         TextView lblScore = findViewById(R.id.lblScore);
 
         if (totalQuestions > 0)

@@ -1,16 +1,113 @@
 package com.noprestige.kanaquiz.logs;
 
+import android.annotation.SuppressLint;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
+import android.os.AsyncTask;
 
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 
 @Dao
 public abstract class LogDao
 {
+    @SuppressLint("StaticFieldLeak")
+    private class GetKanaPercentage extends AsyncTask<String, Void, Float>
+    {
+        @Override
+        protected Float doInBackground(String... data)
+        {
+            String kana = data[0];
+            KanaRecord record = getKanaRecord(kana);
+            if (record == null)
+                return 0.9f;
+            else
+                return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
+    {
+        @Override
+        protected Integer doInBackground(String... data)
+        {
+            String kana = data[0];
+            String romanji = data[1];
+            IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
+            if (record == null)
+                return 0;
+            else
+                return record.occurrences;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... data)
+        {
+            String kana = data[0];
+
+            addTodaysRecord(1);
+            addKanaRecord(kana, true);
+
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... data)
+        {
+            String kana = data[0];
+            String romanji = data[1];
+
+            addTodaysRecord(0);
+            addKanaRecord(kana, false);
+            addIncorrectAnswerRecord(kana, romanji);
+
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... data)
+        {
+            String kana = data[0];
+            float score = Float.parseFloat(data[1]);
+
+            addTodaysRecord(score);
+            addKanaRecord(kana, false);
+
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(String... data)
+        {
+            String kana = data[0];
+            String romanji = data[1];
+
+            addIncorrectAnswerRecord(kana, romanji);
+
+            return null;
+        }
+    }
+
     @Query("SELECT * FROM daily_record WHERE date = :date")
     public abstract DailyRecord getDateRecord(Date date);
 
@@ -37,23 +134,31 @@ public abstract class LogDao
 
     public float getKanaPercentage(String kana)
     {
-        KanaRecord record = getKanaRecord(kana);
-        if (record == null)
-            return 0.9f;
-        else
-            return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
+        try
+        {
+            return new GetKanaPercentage().execute(kana).get();
+        }
+        catch (InterruptedException | ExecutionException ex)
+        {
+            //if this happens, we have bigger problems
+            throw new RuntimeException(ex);
+        }
     }
 
     public int getIncorrectAnswerCount(String kana, String romanji)
     {
-        IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
-        if (record == null)
-            return 0;
-        else
-            return record.occurrences;
+        try
+        {
+            return new GetIncorrectAnswerCount().execute(kana, romanji).get();
+        }
+        catch (InterruptedException | ExecutionException ex)
+        {
+            //if this happens, we have bigger problems
+            throw new RuntimeException(ex);
+        }
     }
 
-    void addTodaysRecord(float score)
+    private void addTodaysRecord(float score)
     {
         DailyRecord record = getDateRecord(new Date());
         if (record == null)
@@ -69,7 +174,7 @@ public abstract class LogDao
         updateDailyRecord(record);
     }
 
-    void addKanaRecord(String kana, boolean isCorrect)
+    private void addKanaRecord(String kana, boolean isCorrect)
     {
         KanaRecord record = getKanaRecord(kana);
         if (record == null)
@@ -84,7 +189,7 @@ public abstract class LogDao
         updateKanaRecord(record);
     }
 
-    void addIncorrectAnswerRecord(String kana, String romanji)
+    private void addIncorrectAnswerRecord(String kana, String romanji)
     {
         IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
         if (record == null)
@@ -101,26 +206,22 @@ public abstract class LogDao
 
     public void reportCorrectAnswer(String kana)
     {
-        addTodaysRecord(1);
-        addKanaRecord(kana, true);
+        new ReportCorrectAnswer().execute(kana);
     }
 
     public void reportIncorrectAnswer(String kana, String romanji)
     {
-        addTodaysRecord(0);
-        addKanaRecord(kana, false);
-        addIncorrectAnswerRecord(kana, romanji);
+        new ReportIncorrectAnswer().execute(kana, romanji);
     }
 
     public void reportRetriedCorrectAnswer(String kana, float score)
     {
-        addTodaysRecord(score);
-        addKanaRecord(kana, false);
+        new ReportRetriedCorrectAnswer().execute(kana, Float.toString(score));
     }
 
     public void reportIncorrectRetry(String kana, String romanji)
     {
-        addIncorrectAnswerRecord(kana, romanji);
+        new ReportIncorrectRetry().execute(kana, romanji);
     }
 
     @Query("DELETE FROM daily_record WHERE 1 = 1")

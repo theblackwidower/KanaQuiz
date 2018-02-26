@@ -1,14 +1,31 @@
 package com.noprestige.kanaquiz.options;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
-import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.logs.LogDatabase;
 
 public class OptionsFragment extends PreferenceFragment
 {
+    private static class DeleteAll extends AsyncTask<Preference, Void, Preference>
+    {
+        @Override
+        protected Preference doInBackground(Preference... btnClearLogs)
+        {
+            LogDatabase.DAO.deleteAll();
+            return btnClearLogs[0];
+        }
+
+        @Override
+        protected void onPostExecute(Preference btnClearLogs)
+        {
+            btnClearLogs.setEnabled(false);
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -31,15 +48,13 @@ public class OptionsFragment extends PreferenceFragment
         );
 
         //ref: https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
-        final Preference btnClearLogs = findPreference("clear_logs");
-        btnClearLogs.setOnPreferenceClickListener(
+        findPreference("clear_logs").setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener()
                 {
                     @Override
-                    public boolean onPreferenceClick(Preference preference)
+                    public boolean onPreferenceClick(Preference btnClearLogs)
                     {
-                        LogDatabase.DAO.deleteAll();
-                        btnClearLogs.setEnabled(false);
+                        new DeleteAll().execute(btnClearLogs);
                         return true;
                     }
                 }
