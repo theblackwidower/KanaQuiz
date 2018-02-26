@@ -4,12 +4,14 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private TreeSet<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
+    private TreeMap<String, WeightedList<String>> weightedAnswerListCache = new TreeMap<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -87,23 +89,29 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         }
         else
         {
-            WeightedList<String> weightedAnswerList = new WeightedList<>();
-            for (String answer : fullAnswerList)
+            if (!weightedAnswerListCache.containsKey(getCurrentKana()))
             {
-                if (!answer.equals(fetchCorrectAnswer()))
+                WeightedList<String> weightedAnswerList = new WeightedList<>();
+                for (String answer : fullAnswerList)
                 {
-                    // Max value of 24 to prevent integer overflow,
-                    // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
-                    // where 102 is the number of unique correct answers in Hiragana and Katakana classes
-                    weightedAnswerList.add(
-                            Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
-                            answer);
+                    if (!answer.equals(fetchCorrectAnswer()))
+                    {
+                        // Max value of 24 to prevent integer overflow,
+                        // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
+                        // where 102 is the number of unique correct answers in Hiragana and Katakana classes
+                        weightedAnswerList.add(
+                                Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
+                                answer);
+                    }
                 }
+                weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
             }
 
             TreeSet<String> possibleAnswerStrings = new TreeSet<>(new GojuonOrder());
 
             possibleAnswerStrings.add(fetchCorrectAnswer());
+
+            WeightedList<String> weightedAnswerList = weightedAnswerListCache.get(getCurrentKana());
 
             while (possibleAnswerStrings.size() < maxChoices)
                 possibleAnswerStrings.add(weightedAnswerList.getRandom());
