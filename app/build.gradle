@@ -46,6 +46,8 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
 
     androidTestImplementation "android.arch.persistence.room:testing:1.0.0"
+
+    implementation 'com.google.firebase:firebase-core:11.8.0'
 }
 
 repositories {
@@ -54,3 +56,4 @@ repositories {
         // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
     }
 }
+apply plugin: 'com.google.gms.google-services'

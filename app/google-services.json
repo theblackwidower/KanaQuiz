@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "1071649420956",
+    "firebase_url": "https://kanaquiz-f8a30.firebaseio.com",
+    "project_id": "kanaquiz-f8a30",
+    "storage_bucket": "kanaquiz-f8a30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071649420956:android:4c9e5738df84869e",
+        "android_client_info": {
+          "package_name": "com.noprestige.kanaquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071649420956-fg8cgerc1eeaasdv5ubhr8ga1fu7drtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2sSl1zwxgErWT2hwMEsj7_SmIvxTGwco"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071649420956:android:f69c0ab991a31fc8",
+        "android_client_info": {
+          "package_name": "com.noprestige.kanaquiz.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071649420956-fg8cgerc1eeaasdv5ubhr8ga1fu7drtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2sSl1zwxgErWT2hwMEsj7_SmIvxTGwco"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
