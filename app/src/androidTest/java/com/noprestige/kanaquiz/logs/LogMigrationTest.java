@@ -1,4 +1,4 @@
-package com.noprestige.kanaquiz;
+package com.noprestige.kanaquiz.logs;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
@@ -6,8 +6,6 @@ import android.arch.persistence.room.testing.MigrationTestHelper;
 import android.database.Cursor;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-
-import com.noprestige.kanaquiz.logs.LogDatabase;
 
 import org.junit.Rule;
 import org.junit.Test;
