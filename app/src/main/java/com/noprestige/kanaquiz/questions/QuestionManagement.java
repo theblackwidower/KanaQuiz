@@ -127,7 +127,12 @@ public abstract class QuestionManagement
     public KanaQuestionBank getQuestionBank()
     {
         KanaQuestionBank questionBank = new KanaQuestionBank();
+        buildQuestionBank(questionBank);
+        return questionBank;
+    }
 
+    public void buildQuestionBank(KanaQuestionBank questionBank)
+    {
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
@@ -151,8 +156,6 @@ public abstract class QuestionManagement
                 }
                 questionBank.addQuestions(getKanaSet(i, Diacritic.CONSONANT, false));
             }
-
-        return questionBank;
     }
 
     public boolean anySelected()
