@@ -7,56 +7,61 @@ import static org.junit.Assert.assertTrue;
 
 public class WeightedListTest
 {
-    @Test
-    public void rangeTest() throws Exception
+    private WeightedList<String> demoList(int[] weights, String[] strings)
     {
-        WeightedList<String> listOne = new WeightedList<>();
+        WeightedList<String> list = new WeightedList<>();
+        final int SAMPLE_COUNT = weights.length;
+        assertEquals(strings.length, SAMPLE_COUNT);
 
-        int[] weights = new int[]{3, 8, 27, 6};
-        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
-        final int SAMPLE_COUNT = 4;
         for (int i = 0; i < SAMPLE_COUNT; i++)
-            listOne.add(weights[i], strings[i]);
+            list.add(weights[i], strings[i]);
 
-        int i = 0;
+        return list;
+    }
+
+    private int testList(int i, int[] weights, String[] strings, WeightedList<String> list)
+    {
+        final int SAMPLE_COUNT = weights.length;
+        assertEquals(strings.length, SAMPLE_COUNT);
 
         for (int j = 0; j < SAMPLE_COUNT; j++)
             for (int start = i; i < weights[j] + start; i++)
-                assertEquals(listOne.get(i), strings[j]);
+                assertEquals(list.get(i), strings[j]);
 
-        assertEquals(listOne.maxValue(), i);
+        return i;
+    }
+
+    @Test
+    public void rangeTest() throws Exception
+    {
+        int[] weights = new int[]{3, 8, 27, 6};
+        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
+        WeightedList<String> list = demoList(weights, strings);
+
+        int i = 0;
+        i = testList(i, weights, strings, list);
+        assertEquals(list.maxValue(), i);
 
         try
         {
-            listOne.get(i);
+            list.get(i);
             assertTrue(false);
         }
         catch (IndexOutOfBoundsException e)
         {
         }
-
     }
 
     @Test
     public void mergeTest() throws Exception
     {
-        WeightedList<String> listOne = new WeightedList<>();
-
         int[] weightsOne = new int[]{3, 8, 27, 6};
         String[] stringsOne = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
-        final int SAMPLE_COUNT_ONE = 4;
-
-        for (int i = 0; i < SAMPLE_COUNT_ONE; i++)
-            listOne.add(weightsOne[i], stringsOne[i]);
-
-        WeightedList<String> listTwo = new WeightedList<>();
+        WeightedList<String> listOne = demoList(weightsOne, stringsOne);
 
         int[] weightsTwo = new int[]{8, 2, 9, 21};
         String[] stringsTwo = new String[]{"Gree", "Fnex", "Moose", "Twa"};
-        final int SAMPLE_COUNT_TWO = 4;
-
-        for (int i = 0; i < SAMPLE_COUNT_TWO; i++)
-            listTwo.add(weightsTwo[i], stringsTwo[i]);
+        WeightedList<String> listTwo = demoList(weightsTwo, stringsTwo);
 
         WeightedList<String> listMerged = new WeightedList<>();
 
@@ -64,15 +69,8 @@ public class WeightedListTest
         listMerged.merge(listTwo);
 
         int i = 0;
-
-        for (int j = 0; j < SAMPLE_COUNT_ONE; j++)
-            for (int start = i; i < weightsOne[j] + start; i++)
-                assertEquals(listMerged.get(i), stringsOne[j]);
-
-        for (int j = 0; j < SAMPLE_COUNT_TWO; j++)
-            for (int start = i; i < weightsTwo[j] + start; i++)
-                assertEquals(listMerged.get(i), stringsTwo[j]);
-
+        i = testList(i, weightsOne, stringsOne, listMerged);
+        i = testList(i, weightsTwo, stringsTwo, listMerged);
         assertEquals(listMerged.maxValue(), i);
 
         try
