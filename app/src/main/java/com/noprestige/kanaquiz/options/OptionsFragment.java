@@ -63,14 +63,16 @@ public class OptionsFragment extends PreferenceFragment
 
     private boolean setSummary(Preference preference, Object newValue)
     {
+        int refId;
         if (newValue.equals(getResources().getString(R.string.prefid_on_incorrect_default)))
-            preference.setSummary(R.string.incorrect_option_move_on);
+            refId = R.string.incorrect_option_move_on;
         else if (newValue.equals(getResources().getString(R.string.prefid_on_incorrect_show_answer)))
-            preference.setSummary(R.string.incorrect_option_show_answer);
+            refId = R.string.incorrect_option_show_answer;
         else if (newValue.equals(getResources().getString(R.string.prefid_on_incorrect_retry)))
-            preference.setSummary(R.string.incorrect_option_retry);
+            refId = R.string.incorrect_option_retry;
         else
             return false;
+        preference.setSummary(refId);
         return true;
     }
 }
