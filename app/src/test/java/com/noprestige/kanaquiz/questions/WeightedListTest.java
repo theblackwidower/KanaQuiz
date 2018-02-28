@@ -2,6 +2,8 @@ package com.noprestige.kanaquiz.questions;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -76,6 +78,36 @@ public class WeightedListTest
         try
         {
             listMerged.get(i);
+            assertTrue(false);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+        }
+    }
+
+    @Test
+    public void removeTest() throws Exception
+    {
+        int[] weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
+        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
+        WeightedList<String> list = demoList(weights, strings);
+
+        assertEquals(list.remove(weights[0] + weights[1] / 2), strings[1]);
+        for (int i = 1; i < weights.length - 1; i++)
+        {
+            weights[i] = weights[i + 1];
+            strings[i] = strings[i + 1];
+        }
+        weights = Arrays.copyOf(weights, weights.length - 1);
+        strings = Arrays.copyOf(strings, strings.length - 1);
+
+        int i = 0;
+        i = testList(i, weights, strings, list);
+        assertEquals(list.maxValue(), i);
+
+        try
+        {
+            list.get(i);
             assertTrue(false);
         }
         catch (IndexOutOfBoundsException e)
