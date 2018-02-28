@@ -33,15 +33,8 @@ public class WeightedListTest
         return i;
     }
 
-    @Test
-    public void rangeTest() throws Exception
+    private void testListEnd(int i, WeightedList<String> list)
     {
-        int[] weights = new int[]{3, 8, 27, 6};
-        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
-        WeightedList<String> list = demoList(weights, strings);
-
-        int i = 0;
-        i = testList(i, weights, strings, list);
         assertEquals(list.maxValue(), i);
 
         try
@@ -52,6 +45,18 @@ public class WeightedListTest
         catch (IndexOutOfBoundsException e)
         {
         }
+    }
+
+    @Test
+    public void rangeTest() throws Exception
+    {
+        int[] weights = new int[]{3, 8, 27, 6};
+        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
+        WeightedList<String> list = demoList(weights, strings);
+
+        int i = 0;
+        i = testList(i, weights, strings, list);
+        testListEnd(i, list);
     }
 
     @Test
@@ -73,16 +78,7 @@ public class WeightedListTest
         int i = 0;
         i = testList(i, weightsOne, stringsOne, listMerged);
         i = testList(i, weightsTwo, stringsTwo, listMerged);
-        assertEquals(listMerged.maxValue(), i);
-
-        try
-        {
-            listMerged.get(i);
-            assertTrue(false);
-        }
-        catch (IndexOutOfBoundsException e)
-        {
-        }
+        testListEnd(i, listMerged);
     }
 
     @Test
@@ -103,15 +99,6 @@ public class WeightedListTest
 
         int i = 0;
         i = testList(i, weights, strings, list);
-        assertEquals(list.maxValue(), i);
-
-        try
-        {
-            list.get(i);
-            assertTrue(false);
-        }
-        catch (IndexOutOfBoundsException e)
-        {
-        }
+        testListEnd(i, list);
     }
 }
