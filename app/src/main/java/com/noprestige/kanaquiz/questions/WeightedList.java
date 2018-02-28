@@ -25,28 +25,29 @@ class WeightedList<E>
 
     E remove(int key)
     {
-        key = map.floorKey(key);
-        E returnValue = map.remove(key);
-        if (returnValue == null)
-            return null;
-        else if (map.higherKey(key) == null)
-        {
-            maxValue = key;
-            return returnValue;
-        }
+        if (key >= maxValue || key < 0)
+            throw new IndexOutOfBoundsException();
         else
         {
-            Integer thisKey = map.higherKey(key);
-            int gap = thisKey - key;
+            key = map.floorKey(key);
+            E returnValue = map.remove(key);
 
-            while (thisKey != null)
+            if (map.higherKey(key) == null)
+                maxValue = key;
+            else
             {
-                E currentElement = map.remove(thisKey);
-                map.put(thisKey - gap, currentElement);
-                thisKey = map.higherKey(thisKey);
-            }
+                Integer thisKey = map.higherKey(key);
+                int gap = thisKey - key;
 
-            maxValue -= gap;
+                while (thisKey != null)
+                {
+                    E currentElement = map.remove(thisKey);
+                    map.put(thisKey - gap, currentElement);
+                    thisKey = map.higherKey(thisKey);
+                }
+
+                maxValue -= gap;
+            }
             return returnValue;
         }
     }
