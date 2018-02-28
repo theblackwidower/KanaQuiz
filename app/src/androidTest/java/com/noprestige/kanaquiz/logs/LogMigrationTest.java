@@ -11,6 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(AndroidJUnit4.class)
 public class LogMigrationTest
 {
@@ -66,8 +68,9 @@ public class LogMigrationTest
         {
             Cursor cursor = db.query("SELECT * FROM daily_record WHERE " +
                     "date = ? AND correct_answers = ? AND total_answers = ?", data);
-            if (cursor.getCount() != 1)
-                throw new Exception("Data Missing");
+            assertEquals(cursor.getCount(), 1);
         }
+        Cursor cursor = db.query("SELECT * FROM daily_record");
+        assertEquals(cursor.getCount(), testData.length);
     }
 }
