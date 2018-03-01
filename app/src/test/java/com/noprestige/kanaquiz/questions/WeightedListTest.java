@@ -97,8 +97,34 @@ public class WeightedListTest
         weights = Arrays.copyOf(weights, weights.length - 1);
         strings = Arrays.copyOf(strings, strings.length - 1);
 
-        int i = 0;
-        i = testList(i, weights, strings, list);
-        testListEnd(i, list);
+        int j = 0;
+        j = testList(j, weights, strings, list);
+        testListEnd(j, list);
+
+        assertEquals(list.remove(weights[0] + weights[1] + weights[2] + weights[3] / 2), strings[3]);
+        for (int i = 3; i < weights.length - 1; i++)
+        {
+            weights[i] = weights[i + 1];
+            strings[i] = strings[i + 1];
+        }
+        weights = Arrays.copyOf(weights, weights.length - 1);
+        strings = Arrays.copyOf(strings, strings.length - 1);
+
+        j = 0;
+        j = testList(j, weights, strings, list);
+        testListEnd(j, list);
+
+        assertEquals(list.remove(weights[0] + weights[1] + weights[2] + weights[3] + weights[4] + weights[5] / 2), strings[5]);
+        for (int i = 5; i < weights.length - 1; i++)
+        {
+            weights[i] = weights[i + 1];
+            strings[i] = strings[i + 1];
+        }
+        weights = Arrays.copyOf(weights, weights.length - 1);
+        strings = Arrays.copyOf(strings, strings.length - 1);
+
+        j = 0;
+        j = testList(j, weights, strings, list);
+        testListEnd(j, list);
     }
 }
