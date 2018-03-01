@@ -1,7 +1,9 @@
 # KanaQuiz
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/maintainability)](https://codeclimate.com/github/theblackwidower/KanaQuiz/maintainability)
+
 [![Build Status](https://travis-ci.org/theblackwidower/KanaQuiz.svg?branch=master)](https://travis-ci.org/theblackwidower/KanaQuiz)
+[![CircleCI](https://circleci.com/gh/theblackwidower/KanaQuiz.svg?style=shield)](https://circleci.com/gh/theblackwidower/KanaQuiz)
 
 Are you trying to learn Japanese, but can't seem to remember the pronunciation of the basic Hiragana or Katakana character set?
 
