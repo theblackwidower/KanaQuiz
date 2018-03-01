@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class WeightedListTest
 {
@@ -46,7 +46,7 @@ public class WeightedListTest
         try
         {
             list.get(i);
-            assertTrue(false);
+            fail("Failed to throw error when over limit.");
         }
         catch (IndexOutOfBoundsException e)
         {
