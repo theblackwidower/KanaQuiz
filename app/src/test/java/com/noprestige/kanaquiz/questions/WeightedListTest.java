@@ -9,26 +9,32 @@ import static org.junit.Assert.assertTrue;
 
 public class WeightedListTest
 {
-    private WeightedList<String> demoList(int[] weights, String[] strings)
+    private class SampleData
+    {
+        public int[] weights;
+        public String[] strings;
+    }
+
+    private WeightedList<String> demoList(SampleData data)
     {
         WeightedList<String> list = new WeightedList<>();
-        final int SAMPLE_COUNT = weights.length;
-        assertEquals(strings.length, SAMPLE_COUNT);
+        final int SAMPLE_COUNT = data.weights.length;
+        assertEquals(data.strings.length, SAMPLE_COUNT);
 
         for (int i = 0; i < SAMPLE_COUNT; i++)
-            list.add(weights[i], strings[i]);
+            list.add(data.weights[i], data.strings[i]);
 
         return list;
     }
 
-    private int testList(int i, int[] weights, String[] strings, WeightedList<String> list)
+    private int testList(int i, SampleData data, WeightedList<String> list)
     {
-        final int SAMPLE_COUNT = weights.length;
-        assertEquals(strings.length, SAMPLE_COUNT);
+        final int SAMPLE_COUNT = data.weights.length;
+        assertEquals(data.strings.length, SAMPLE_COUNT);
 
         for (int j = 0; j < SAMPLE_COUNT; j++)
-            for (int start = i; i < weights[j] + start; i++)
-                assertEquals(list.get(i), strings[j]);
+            for (int start = i; i < data.weights[j] + start; i++)
+                assertEquals(list.get(i), data.strings[j]);
 
         return i;
     }
@@ -47,44 +53,47 @@ public class WeightedListTest
         }
     }
 
-    private void removeFromSampleData(int index, WeightedList<String> list, int[] weights, String[] strings)
+    private void removeFromSampleData(int index, WeightedList<String> list, SampleData data)
     {
-        int sum = weights[index] / 2;
+        int sum = data.weights[index] / 2;
         for (int i = 0; i < index; i++)
-            sum += weights[i];
+            sum += data.weights[i];
 
-        assertEquals(list.remove(sum), strings[index]);
-        for (int i = index; i < weights.length - 1; i++)
+        assertEquals(list.remove(sum), data.strings[index]);
+        for (int i = index; i < data.weights.length - 1; i++)
         {
-            weights[i] = weights[i + 1];
-            strings[i] = strings[i + 1];
+            data.weights[i] = data.weights[i + 1];
+            data.strings[i] = data.strings[i + 1];
         }
-        weights[weights.length - 1] = 0;
-        strings[strings.length - 1] = null;
+        data.weights[data.weights.length - 1] = 0;
+        data.strings[data.strings.length - 1] = null;
     }
 
     @Test
     public void rangeTest() throws Exception
     {
-        int[] weights = new int[]{3, 8, 27, 6};
-        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
-        WeightedList<String> list = demoList(weights, strings);
+        SampleData data = new SampleData();
+        data.weights = new int[]{3, 8, 27, 6};
+        data.strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
+        WeightedList<String> list = demoList(data);
 
         int i = 0;
-        i = testList(i, weights, strings, list);
+        i = testList(i, data, list);
         testListEnd(i, list);
     }
 
     @Test
     public void mergeTest() throws Exception
     {
-        int[] weightsOne = new int[]{3, 8, 27, 6};
-        String[] stringsOne = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
-        WeightedList<String> listOne = demoList(weightsOne, stringsOne);
+        SampleData dataOne = new SampleData();
+        dataOne.weights = new int[]{3, 8, 27, 6};
+        dataOne.strings = new String[]{"Bleh", "Foo", "Snide", "Mesh"};
+        WeightedList<String> listOne = demoList(dataOne);
 
-        int[] weightsTwo = new int[]{8, 2, 9, 21};
-        String[] stringsTwo = new String[]{"Gree", "Fnex", "Moose", "Twa"};
-        WeightedList<String> listTwo = demoList(weightsTwo, stringsTwo);
+        SampleData dataTwo = new SampleData();
+        dataTwo.weights = new int[]{8, 2, 9, 21};
+        dataTwo.strings = new String[]{"Gree", "Fnex", "Moose", "Twa"};
+        WeightedList<String> listTwo = demoList(dataTwo);
 
         WeightedList<String> listMerged = new WeightedList<>();
 
@@ -92,40 +101,41 @@ public class WeightedListTest
         listMerged.merge(listTwo);
 
         int i = 0;
-        i = testList(i, weightsOne, stringsOne, listMerged);
-        i = testList(i, weightsTwo, stringsTwo, listMerged);
+        i = testList(i, dataOne, listMerged);
+        i = testList(i, dataTwo, listMerged);
         testListEnd(i, listMerged);
     }
 
     @Test
     public void removeTest() throws Exception
     {
-        int[] weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
-        String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
-        WeightedList<String> list = demoList(weights, strings);
+        SampleData data = new SampleData();
+        data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
+        data.strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
+        WeightedList<String> list = demoList(data);
 
-        removeFromSampleData(1, list, weights, strings);
-        weights = Arrays.copyOf(weights, weights.length - 1);
-        strings = Arrays.copyOf(strings, strings.length - 1);
+        removeFromSampleData(1, list, data);
+        data.weights = Arrays.copyOf(data.weights, data.weights.length - 1);
+        data.strings = Arrays.copyOf(data.strings, data.strings.length - 1);
 
         int j = 0;
-        j = testList(j, weights, strings, list);
+        j = testList(j, data, list);
         testListEnd(j, list);
 
-        removeFromSampleData(3, list, weights, strings);
-        weights = Arrays.copyOf(weights, weights.length - 1);
-        strings = Arrays.copyOf(strings, strings.length - 1);
+        removeFromSampleData(3, list, data);
+        data.weights = Arrays.copyOf(data.weights, data.weights.length - 1);
+        data.strings = Arrays.copyOf(data.strings, data.strings.length - 1);
 
         j = 0;
-        j = testList(j, weights, strings, list);
+        j = testList(j, data, list);
         testListEnd(j, list);
 
-        removeFromSampleData(5, list, weights, strings);
-        weights = Arrays.copyOf(weights, weights.length - 1);
-        strings = Arrays.copyOf(strings, strings.length - 1);
+        removeFromSampleData(5, list, data);
+        data.weights = Arrays.copyOf(data.weights, data.weights.length - 1);
+        data.strings = Arrays.copyOf(data.strings, data.strings.length - 1);
 
         j = 0;
-        j = testList(j, weights, strings, list);
+        j = testList(j, data, list);
         testListEnd(j, list);
     }
 }
