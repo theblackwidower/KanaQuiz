@@ -47,6 +47,22 @@ public class WeightedListTest
         }
     }
 
+    private void removeFromSampleData(int index, WeightedList<String> list, int[] weights, String[] strings)
+    {
+        int sum = weights[index] / 2;
+        for (int i = 0; i < index; i++)
+            sum += weights[i];
+
+        assertEquals(list.remove(sum), strings[index]);
+        for (int i = index; i < weights.length - 1; i++)
+        {
+            weights[i] = weights[i + 1];
+            strings[i] = strings[i + 1];
+        }
+        weights[weights.length - 1] = 0;
+        strings[strings.length - 1] = null;
+    }
+
     @Test
     public void rangeTest() throws Exception
     {
@@ -88,12 +104,7 @@ public class WeightedListTest
         String[] strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
         WeightedList<String> list = demoList(weights, strings);
 
-        assertEquals(list.remove(weights[0] + weights[1] / 2), strings[1]);
-        for (int i = 1; i < weights.length - 1; i++)
-        {
-            weights[i] = weights[i + 1];
-            strings[i] = strings[i + 1];
-        }
+        removeFromSampleData(1, list, weights, strings);
         weights = Arrays.copyOf(weights, weights.length - 1);
         strings = Arrays.copyOf(strings, strings.length - 1);
 
@@ -101,12 +112,7 @@ public class WeightedListTest
         j = testList(j, weights, strings, list);
         testListEnd(j, list);
 
-        assertEquals(list.remove(weights[0] + weights[1] + weights[2] + weights[3] / 2), strings[3]);
-        for (int i = 3; i < weights.length - 1; i++)
-        {
-            weights[i] = weights[i + 1];
-            strings[i] = strings[i + 1];
-        }
+        removeFromSampleData(3, list, weights, strings);
         weights = Arrays.copyOf(weights, weights.length - 1);
         strings = Arrays.copyOf(strings, strings.length - 1);
 
@@ -114,12 +120,7 @@ public class WeightedListTest
         j = testList(j, weights, strings, list);
         testListEnd(j, list);
 
-        assertEquals(list.remove(weights[0] + weights[1] + weights[2] + weights[3] + weights[4] + weights[5] / 2), strings[5]);
-        for (int i = 5; i < weights.length - 1; i++)
-        {
-            weights[i] = weights[i + 1];
-            strings[i] = strings[i + 1];
-        }
+        removeFromSampleData(5, list, weights, strings);
         weights = Arrays.copyOf(weights, weights.length - 1);
         strings = Arrays.copyOf(strings, strings.length - 1);
 
