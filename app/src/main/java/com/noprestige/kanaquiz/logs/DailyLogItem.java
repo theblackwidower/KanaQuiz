@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.text.Html;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -353,10 +352,10 @@ public class DailyLogItem extends View
         int sixteenth = Math.round(fractionalPart * 16f);
         if (sixteenth % 2 == 1)
         {
-            returnValue.append("&#8203;<sup>");
+            returnValue.append("\u200B");
             returnValue.append(sixteenth);
-            returnValue.append("</sup>⁄₁₆");
-            return Html.fromHtml(returnValue.toString()).toString();
+            returnValue.append("⁄₁₆");
+            return returnValue.toString();
         }
         else
         {
