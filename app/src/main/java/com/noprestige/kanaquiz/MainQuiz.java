@@ -55,7 +55,7 @@ public class MainQuiz extends AppCompatActivity
     private int oldTextColour;
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
     private static final DecimalFormat SCORE_FORMATTER = new DecimalFormat("#.##");
-    private static final int MAX_RETRIES = 4;
+    private static final int MAX_RETRIES = 3;
 
     private Handler delayHandler = new Handler();
 
