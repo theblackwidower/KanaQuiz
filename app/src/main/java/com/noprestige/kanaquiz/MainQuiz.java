@@ -19,7 +19,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.noprestige.kanaquiz.logs.DailyLogItem;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.logs.LogView;
@@ -214,7 +213,7 @@ public class MainQuiz extends AppCompatActivity
             lblScore.append(PERCENT_FORMATTER.format(totalCorrect / (float) totalQuestions));
 
             lblScore.append(System.getProperty("line.separator"));
-            lblScore.append(DailyLogItem.parseToFraction(totalCorrect));
+            lblScore.append(new Fraction(totalCorrect).toString());
             lblScore.append(" / ");
             lblScore.append(Integer.toString(totalQuestions));
         }
