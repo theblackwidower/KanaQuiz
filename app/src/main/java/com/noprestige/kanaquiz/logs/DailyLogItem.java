@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.text.Html;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -341,12 +342,61 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
+    static public String parseToFraction(float count)
+    {
+        int wholeNumber = (int) Math.floor(count);
+        float fractionalPart = count - wholeNumber;
+
+        StringBuilder returnValue = new StringBuilder();
+        returnValue.append(wholeNumber);
+
+        int sixteenth = Math.round(fractionalPart * 16f);
+        if (sixteenth % 2 == 1)
+        {
+            returnValue.append("&#8203;<sup>");
+            returnValue.append(sixteenth);
+            returnValue.append("</sup>⁄₁₆");
+            return Html.fromHtml(returnValue.toString()).toString();
+        }
+        else
+        {
+            switch (sixteenth / 2)
+            {
+                case 0:
+                    break;
+                case 1:
+                    returnValue.append("⅛");
+                    break;
+                case 2:
+                    returnValue.append("¼");
+                    break;
+                case 3:
+                    returnValue.append("⅜");
+                    break;
+                case 4:
+                    returnValue.append("½");
+                    break;
+                case 5:
+                    returnValue.append("⅝");
+                    break;
+                case 6:
+                    returnValue.append("¾");
+                    break;
+                case 7:
+                    returnValue.append("⅞");
+                    break;
+                case 8:
+                    returnValue = new StringBuilder();
+                    returnValue.append(wholeNumber + 1);
+            }
+            return returnValue.toString();
+        }
+    }
+
     static private String parseCount(float count)
     {
-        if (count < 10)
-            return SMALL_COUNT_FORMATTER.format(count);
-        else if (count < 100)
-            return LARGE_COUNT_FORMATTER.format(count);
+        if (count < 100)
+            return parseToFraction(count);
         else
             return parseCount(Math.round(count));
     }
