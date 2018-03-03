@@ -125,6 +125,8 @@ public class Fraction
                     returnValue.append(denominator);
             }
         }
+        if (returnValue.length() == 0)
+            returnValue.append('0');
         return returnValue.toString();
     }
 }

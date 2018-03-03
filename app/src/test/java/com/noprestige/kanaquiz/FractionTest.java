@@ -35,6 +35,8 @@ public class FractionTest
         assertEquals(new Fraction(1f / 12f).toString(), "1⁄12");
 
         assertEquals(new Fraction(13f / 12f).toString(), "1\u200B1⁄12");
+
+        assertEquals(new Fraction(0).toString(), "0");
     }
 
 }
