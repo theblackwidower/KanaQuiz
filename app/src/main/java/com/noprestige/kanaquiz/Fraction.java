@@ -35,7 +35,8 @@ public class Fraction
     {
         simplify();
         StringBuilder returnValue = new StringBuilder();
-        returnValue.append(whole);
+        if (whole != 0)
+            returnValue.append(whole);
 
         if (numerator != 0)
         {
@@ -117,7 +118,8 @@ public class Fraction
                     }
                     break;
                 default:
-                    returnValue.append('\u200B');
+                    if (returnValue.length() > 0)
+                        returnValue.append('\u200B');
                     returnValue.append(numerator);
                     returnValue.append('⁄');
                     returnValue.append(denominator);
