@@ -11,13 +11,14 @@ public class Fraction
     static final private char NUL = '\u0000';
     static final private char[][] FRACTION_CHARS = {
             {},
-            {NUL, NUL, '½', '⅓', '¼', '⅕', '⅙', NUL, '⅛'},
-            {NUL, NUL, NUL, '⅔', NUL, '⅖'},
-            {NUL, NUL, NUL, NUL, '¾', '⅗', NUL, NUL, '⅜'},
-            {NUL, NUL, NUL, NUL, NUL, '⅘'},
-            {NUL, NUL, NUL, NUL, NUL, NUL, '⅚', NUL, '⅝'},
             {},
-            {NUL, NUL, NUL, NUL, NUL, NUL, NUL, NUL, '⅞'}};
+            {NUL, '½'},
+            {NUL, '⅓', '⅔'},
+            {NUL, '¼', NUL, '¾'},
+            {NUL, '⅕', '⅖', '⅗', '⅘'},
+            {NUL, '⅙', NUL, NUL, NUL, '⅚'},
+            {},
+            {NUL, '⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}};
 
 
     public Fraction(float value)
@@ -54,7 +55,7 @@ public class Fraction
             char fractionChar;
             try
             {
-                fractionChar = FRACTION_CHARS[numerator][denominator];
+                fractionChar = FRACTION_CHARS[denominator][numerator];
             }
             catch (ArrayIndexOutOfBoundsException ex)
             {
