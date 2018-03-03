@@ -8,6 +8,17 @@ public class Fraction
 
     static final private int[] PRIME_NUMBERS = {2, 3, 5};
     static final private int RESOLUTION = 240;
+    static final private char NUL = '\u0000';
+    static final private char[][] FRACTION_CHARS = {
+            {},
+            {NUL, NUL, '½', '⅓', '¼', '⅕', '⅙', NUL, '⅛'},
+            {NUL, NUL, NUL, '⅔', NUL, '⅖'},
+            {NUL, NUL, NUL, NUL, '¾', '⅗', NUL, NUL, '⅜'},
+            {NUL, NUL, NUL, NUL, NUL, '⅘'},
+            {NUL, NUL, NUL, NUL, NUL, NUL, '⅚', NUL, '⅝'},
+            {},
+            {NUL, NUL, NUL, NUL, NUL, NUL, NUL, NUL, '⅞'}};
+
 
     public Fraction(float value)
     {
@@ -40,89 +51,24 @@ public class Fraction
 
         if (numerator != 0)
         {
-            switch (denominator)
+            char fractionChar;
+            try
             {
-                case 2:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('½');
-                            break;
-                    }
-                    break;
-                case 3:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('⅓');
-                            break;
-                        case 2:
-                            returnValue.append('⅔');
-                            break;
-                    }
-                    break;
-                case 4:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('¼');
-                            break;
-                        case 3:
-                            returnValue.append('¾');
-                            break;
-                    }
-                    break;
-                case 5:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('⅕');
-                            break;
-                        case 2:
-                            returnValue.append('⅖');
-                            break;
-                        case 3:
-                            returnValue.append('⅗');
-                            break;
-                        case 4:
-                            returnValue.append('⅘');
-                            break;
-                    }
-                    break;
-                case 6:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('⅙');
-                            break;
-                        case 5:
-                            returnValue.append('⅚');
-                            break;
-                    }
-                    break;
-                case 8:
-                    switch (numerator)
-                    {
-                        case 1:
-                            returnValue.append('⅛');
-                            break;
-                        case 3:
-                            returnValue.append('⅜');
-                            break;
-                        case 5:
-                            returnValue.append('⅝');
-                            break;
-                        case 7:
-                            returnValue.append('⅞');
-                            break;
-                    }
-                    break;
-                default:
-                    if (returnValue.length() > 0)
-                        returnValue.append('\u200B');
-                    returnValue.append(numerator);
-                    returnValue.append('⁄');
-                    returnValue.append(denominator);
+                fractionChar = FRACTION_CHARS[numerator][denominator];
+            }
+            catch (ArrayIndexOutOfBoundsException ex)
+            {
+                fractionChar = NUL;
+            }
+            if (fractionChar != NUL)
+                returnValue.append(fractionChar);
+            else
+            {
+                if (returnValue.length() > 0)
+                    returnValue.append('\u200B');
+                returnValue.append(numerator);
+                returnValue.append('⁄');
+                returnValue.append(denominator);
             }
         }
         if (returnValue.length() == 0)
