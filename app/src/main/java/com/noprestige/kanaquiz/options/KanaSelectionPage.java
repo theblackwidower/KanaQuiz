@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.noprestige.kanaquiz.questions.Hiragana;
 import com.noprestige.kanaquiz.questions.Katakana;
@@ -27,14 +29,20 @@ public class KanaSelectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        LinearLayout screen;
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                return Hiragana.QUESTIONS.getSelectionScreen(getContext());
+                screen = Hiragana.QUESTIONS.getSelectionScreen(getContext());
+                break;
             case 1:
-                return Katakana.QUESTIONS.getSelectionScreen(getContext());
+                screen = Katakana.QUESTIONS.getSelectionScreen(getContext());
+                break;
             default:
-                return null;
+                screen = null;
         }
+        ScrollView scrollView = new ScrollView(getContext());
+        scrollView.addView(screen);
+        return scrollView;
     }
 }
