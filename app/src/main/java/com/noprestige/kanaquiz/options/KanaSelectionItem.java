@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
-public class KanaSelectionItem extends RelativeLayout
+public class KanaSelectionItem extends RelativeLayout implements Checkable
 {
     private String prefId;
 
@@ -63,7 +64,7 @@ public class KanaSelectionItem extends RelativeLayout
                 {
                     public void onClick(View view)
                     {
-                        chkCheckBox.toggle();
+                        toggle();
                     }
                 }
         );
@@ -203,7 +204,22 @@ public class KanaSelectionItem extends RelativeLayout
             this.prefId = prefId;
 
             if (!isInEditMode())
-                chkCheckBox.setChecked(OptionsControl.getBoolean(getPrefId()));
+                setChecked(OptionsControl.getBoolean(getPrefId()));
         }
+    }
+
+    public boolean isChecked()
+    {
+        return chkCheckBox.isChecked();
+    }
+
+    public void setChecked(boolean checked)
+    {
+        chkCheckBox.setChecked(checked);
+    }
+
+    public void toggle()
+    {
+        chkCheckBox.toggle();
     }
 }
