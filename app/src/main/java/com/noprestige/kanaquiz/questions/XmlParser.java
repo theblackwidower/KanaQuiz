@@ -67,6 +67,9 @@ abstract class XmlParser
 
                 else if (parser.getName().equalsIgnoreCase("KanaQuestion"))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
+
+                else if (parser.getName().equalsIgnoreCase("WordQuestion"))
+                    currentSet.add(parseXmlWordQuestion(parser, resources));
             }
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -153,6 +156,48 @@ abstract class XmlParser
             return new KanaQuestion(thisQuestion, thisAnswer);
         else
             return new KanaQuestion(thisQuestion, thisAnswer, parseXmlAltAnswers(parser));
+    }
+
+    static private WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
+            throws ParseException, XmlPullParserException, IOException
+    {
+        String thisRomanji = null;
+        String thisKana = null;
+        String thisKanji = null;
+        String thisAnswer = null;
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "romanji":
+                    thisRomanji = parseXmlValue(parser, i, resources);
+                    break;
+                case "kana":
+                    thisKana = parseXmlValue(parser, i, resources);
+                    break;
+                case "kanji":
+                    thisKanji = parseXmlValue(parser, i, resources);
+                    break;
+                case "answer":
+                    thisAnswer = parseXmlValue(parser, i, resources);
+            }
+        }
+        if (thisRomanji == null || thisAnswer == null)
+            throw new ParseException("Missing attribute in WordQuestion", 0);
+
+        WordQuestion question;
+
+        if (parser.next() == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("WordQuestion"))
+            question = new WordQuestion(thisRomanji, thisAnswer);
+        else
+            question = new WordQuestion(thisRomanji, thisAnswer, parseXmlAltAnswers(parser));
+
+        if (thisKana != null)
+            question.setKana(thisKana);
+        if (thisKanji != null)
+            question.setKanji(thisKanji);
+
+        return question;
     }
 
     static private String[] parseXmlAltAnswers(XmlResourceParser parser)
