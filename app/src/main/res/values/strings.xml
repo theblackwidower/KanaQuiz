@@ -39,7 +39,7 @@
     <string name="incorrect_option_title">On an incorrect answer&#8230;</string>
     <string name="incorrect_option_move_on">go to next question</string>
     <string name="incorrect_option_show_answer">show the correct answer</string>
-    <string name="incorrect_option_retry">retry question till the answer is correct</string>
+    <string name="incorrect_option_retry">retry question with half points</string>
 
     <string name="prefid_on_incorrect" translatable="false">action_on_incorrect</string>
     <string name="prefid_on_incorrect_default" translatable="false">move_on</string>
