@@ -35,6 +35,9 @@
     <string name="translator_credit"><!--Canadian English Translation by T Duke Perry--></string>
     <string name="translator_credit_url"><!--http://example.com--></string>
 
+    <string name="firebase_disclosure">Includes Firebase analytics and Crashlytics crash reporting</string>
+    <string name="firebase_details">Anonymous data will be transmitted to improve app development</string>
+
     <!-- Options Screen -->
     <string name="incorrect_option_title">On an incorrect answer&#8230;</string>
     <string name="incorrect_option_move_on">go to next question</string>
