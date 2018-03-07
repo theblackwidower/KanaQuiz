@@ -29,6 +29,9 @@ public class KanaSelectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        //TODO: Fix reloading issue.
+        //      All KanaSelectionItems end up deselected when the Fragment is reloaded,
+        //      either through screen rotation, or if there is a third tab.
         LinearLayout screen;
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
