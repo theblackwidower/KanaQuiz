@@ -97,8 +97,9 @@ public class KanaQuestion
 
         if (charCode < 0x3041 || charCode > 0x30FF)
             return false; //not kana anyway
-        else if (charCode >= 0x30F7 && charCode <= 0x30FA)
-            return true; //special katakana diacritics
+        else if ((charCode >= 0x30F7 && charCode <= 0x30FA) || //special katakana diacritics
+                (charCode >= 0x3099 && charCode <= 0x309C)) //single diacritic characters
+            return true;
 
         charCode %= 0x60; //can now run the calculations once for both hiragana and katakana
 
