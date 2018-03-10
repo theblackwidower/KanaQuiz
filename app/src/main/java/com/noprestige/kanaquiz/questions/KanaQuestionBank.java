@@ -60,7 +60,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 // Fetches the percentage of times the user got a kana right,
                 Float percentage = LogDatabase.DAO.getKanaPercentage(question.getKana());
                 if (percentage == null)
-                    percentage = 0.9f;
+                    percentage = 0.1f;
                 // The 1.05f is to invert the value so we get the number of times they got it wrong,
                 // and add 5% so any kana the user got perfect will still appear in the quiz.
                 // Times 100f to get the percentage.
