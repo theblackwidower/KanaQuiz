@@ -23,7 +23,7 @@ public abstract class LogDao
             String kana = data[0];
             KanaRecord record = getKanaRecord(kana);
             if (record == null)
-                return 0.9f;
+                return null;
             else
                 return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
         }
@@ -132,7 +132,7 @@ public abstract class LogDao
         return record.correct_answers / (float) (record.total_answers);
     }
 
-    public float getKanaPercentage(String kana)
+    public Float getKanaPercentage(String kana)
     {
         try
         {
