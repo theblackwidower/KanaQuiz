@@ -93,8 +93,14 @@ public class KanaQuestion
 
     public boolean isDiacritic()
     {
-        int charCode = Character.codePointAt(kana, 0);
+        for (int i = 0; i < kana.length(); i++)
+            if (isDiacritic(Character.codePointAt(kana, i)))
+                return true;
+        return false;
+    }
 
+    public boolean isDiacritic(int charCode)
+    {
         if (charCode < 0x3041 || charCode > 0x30FF)
             return false; //not kana anyway
         else if ((charCode >= 0x30F7 && charCode <= 0x30FA) || //special katakana diacritics
