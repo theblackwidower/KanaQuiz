@@ -56,13 +56,13 @@
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="ジャ" answer="ja">
-                <AltAnswer>jya</AltAnswer>
+                <AltAnswer>jya</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ジュ" answer="ju">
-                <AltAnswer>jyu</AltAnswer>
+                <AltAnswer>jyu</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ジョ" answer="jo">
-                <AltAnswer>jyo</AltAnswer>
+                <AltAnswer>jyo</AltAnswer><!--TextFugu-->
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -87,13 +87,13 @@
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="ヂャ" answer="ja">
-                <AltAnswer>dzya</AltAnswer>
+                <AltAnswer>dzya</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ヂュ" answer="ju">
-                <AltAnswer>dzyu</AltAnswer>
+                <AltAnswer>dzyu</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ヂョ" answer="jo">
-                <AltAnswer>dzyo</AltAnswer>
+                <AltAnswer>dzyo</AltAnswer><!--TextFugu-->
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -115,7 +115,7 @@
         <KanaQuestion question="ハ" answer="ha"/>
         <KanaQuestion question="ヒ" answer="hi"/>
         <KanaQuestion question="フ" answer="fu">
-            <AltAnswer>hu</AltAnswer>
+            <AltAnswer>hu</AltAnswer><!--TextFugu-->
         </KanaQuestion>
         <KanaQuestion question="ヘ" answer="he"/>
         <KanaQuestion question="ホ" answer="ho"/>
@@ -189,4 +189,10 @@
             <KanaQuestion question="ン" answer="n"/>
         </Section>
     </KanaSet>
+    <!--
+    Sources:
+    Learn Japanese to Survive: Katakana War
+    Wikipedia: https://en.wikipedia.org/wiki/Katakana#Table_of_katakana
+    TextFugu: http://www.textfugu.com/cheat-sheets/katakana-chart/
+    -->
 </Questions>

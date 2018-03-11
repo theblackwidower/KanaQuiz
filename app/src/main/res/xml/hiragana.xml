@@ -56,13 +56,13 @@
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="じゃ" answer="ja">
-                <AltAnswer>jya</AltAnswer>
+                <AltAnswer>jya</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="じゅ" answer="ju">
-                <AltAnswer>jyu</AltAnswer>
+                <AltAnswer>jyu</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="じょ" answer="jo">
-                <AltAnswer>jyo</AltAnswer>
+                <AltAnswer>jyo</AltAnswer><!--TextFugu-->
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -87,13 +87,13 @@
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="ぢゃ" answer="ja">
-                <AltAnswer>dzya</AltAnswer>
+                <AltAnswer>dzya</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ぢゅ" answer="ju">
-                <AltAnswer>dzyu</AltAnswer>
+                <AltAnswer>dzyu</AltAnswer><!--TextFugu-->
             </KanaQuestion>
             <KanaQuestion question="ぢょ" answer="jo">
-                <AltAnswer>dzyo</AltAnswer>
+                <AltAnswer>dzyo</AltAnswer><!--TextFugu-->
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -115,7 +115,7 @@
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
         <KanaQuestion question="ふ" answer="fu">
-            <AltAnswer>hu</AltAnswer>
+            <AltAnswer>hu</AltAnswer><!--TextFugu-->
         </KanaQuestion>
         <KanaQuestion question="へ" answer="he"/>
         <KanaQuestion question="ほ" answer="ho"/>
@@ -189,4 +189,10 @@
             <KanaQuestion question="ん" answer="n"/>
         </Section>
     </KanaSet>
+    <!--
+    Sources:
+    Learn Japanese to Survive: Hiragana Battle
+    Wikipedia: https://en.wikipedia.org/wiki/Hiragana#Table_of_hiragana
+    TextFugu: http://www.textfugu.com/resources/hiragana-chart/
+    -->
 </Questions>
