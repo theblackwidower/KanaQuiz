@@ -72,6 +72,21 @@ public class WeightedListTest
         data.strings[data.strings.length - 1] = null;
     }
 
+    private void adjustSampleData(int index, int adjustment, WeightedList<String> list, SampleData data)
+    {
+        int sum = data.weights[index] / 2;
+        for (int i = 0; i < index; i++)
+            sum += data.weights[i];
+
+        // confirm zero-out catches work
+        assertEquals(list.adjustWeight(sum, -data.weights[index] - 1), false);
+        assertEquals(list.adjustWeight(sum, -data.weights[index]), false);
+
+        data.weights[index] += adjustment;
+
+        assertEquals(list.adjustWeight(sum, adjustment), true);
+    }
+
     @Test
     public void rangeTest() throws Exception
     {
@@ -140,6 +155,39 @@ public class WeightedListTest
         j = 0;
         j = testList(j, data, list);
         testListEnd(j, list);
+    }
+
+    @Test
+    public void adjustWeightTest() throws Exception
+    {
+        SampleData data = new SampleData();
+        data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
+        data.strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
+        WeightedList<String> list = demoList(data);
+
+        adjustSampleData(2, -8, list, data);
+
+        int i = 0;
+        i = testList(i, data, list);
+        testListEnd(i, list);
+
+        adjustSampleData(4, 7, list, data);
+
+        i = 0;
+        i = testList(i, data, list);
+        testListEnd(i, list);
+
+        adjustSampleData(0, -1, list, data);
+
+        i = 0;
+        i = testList(i, data, list);
+        testListEnd(i, list);
+
+        adjustSampleData(7, 4, list, data);
+
+        i = 0;
+        i = testList(i, data, list);
+        testListEnd(i, list);
     }
 
     @Test

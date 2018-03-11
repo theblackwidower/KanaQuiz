@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 import java.util.TreeMap;
@@ -49,6 +50,35 @@ class WeightedList<E>
                 maxValue -= gap;
             }
             return returnValue;
+        }
+    }
+
+    boolean adjustWeight(int key, int adjustment)
+    {
+        if (key >= maxValue || key < 0)
+            throw new IndexOutOfBoundsException();
+        else
+        {
+            if (getWeight(key) + adjustment <= 0)
+                return false;
+            else
+            {
+                ArrayList<Integer> indexList = new ArrayList<>();
+                ArrayList<E> elementList = new ArrayList<>();
+
+                for (Integer thisKey = map.higherKey(key); thisKey != null; thisKey = map.higherKey(thisKey))
+                {
+                    indexList.add(thisKey + adjustment);
+                    elementList.add(map.remove(thisKey));
+                }
+
+                for (int i = 0; i < indexList.size(); i++)
+                    map.put(indexList.get(i), elementList.get(i));
+
+                maxValue += adjustment;
+
+                return true;
+            }
         }
     }
 
