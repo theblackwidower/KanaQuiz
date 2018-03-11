@@ -184,6 +184,8 @@
     <KanaSet prefId="@string/prefid_hiragana_10"
              setTitle="@string/set_10_title">
         <KanaQuestion question="わ" answer="wa"/>
+        <!--<KanaQuestion question="ゐ" answer="wi"/>-->
+        <!--<KanaQuestion question="ゑ" answer="we"/>-->
         <KanaQuestion question="を" answer="wo"/>
         <Section diacritics="CONSONANT" digraphs="false">
             <KanaQuestion question="ん" answer="n"/>

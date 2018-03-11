@@ -184,6 +184,8 @@
     <KanaSet prefId="@string/prefid_katakana_10"
              setTitle="@string/set_10_title">
         <KanaQuestion question="ワ" answer="wa"/>
+        <!--<KanaQuestion question="ヰ" answer="wi"/>-->
+        <!--<KanaQuestion question="ヱ" answer="we"/>-->
         <KanaQuestion question="ヲ" answer="wo"/>
         <Section diacritics="CONSONANT" digraphs="false">
             <KanaQuestion question="ン" answer="n"/>
