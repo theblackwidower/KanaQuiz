@@ -216,6 +216,13 @@ public class ReferenceCell extends View
                     row.addView(new View(context));
                     row.addView(questions[2].generateReference(context));
                     break;
+                case 4:
+                    row.addView(questions[0].generateReference(context));
+                    row.addView(questions[1].generateReference(context));
+                    row.addView(new View(context));
+                    row.addView(questions[2].generateReference(context));
+                    row.addView(questions[3].generateReference(context));
+                    break;
                 default:
                     for (KanaQuestion question : questions)
                         row.addView(question.generateReference(context));
