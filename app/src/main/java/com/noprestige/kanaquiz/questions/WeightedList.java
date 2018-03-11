@@ -65,6 +65,25 @@ class WeightedList<E>
             return map.get(map.floorKey(value));
     }
 
+    int getWeight(int key)
+    {
+        int lowKey = map.floorKey(key);
+        Integer highKey = map.higherKey(key);
+        if (highKey == null)
+            highKey = maxValue;
+
+        return highKey - lowKey;
+    }
+
+    int findIndex(E element)
+    {
+        for (Integer thisKey = 0; thisKey != null; thisKey = map.higherKey(thisKey))
+            if (map.get(thisKey).equals(element))
+                return thisKey;
+
+        return -1;
+    }
+
     E getRandom()
     {
         return this.get(rng.nextInt(maxValue));

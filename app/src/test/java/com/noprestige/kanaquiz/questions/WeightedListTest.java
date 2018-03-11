@@ -34,7 +34,10 @@ public class WeightedListTest
 
         for (int j = 0; j < SAMPLE_COUNT; j++)
             for (int start = i; i < data.weights[j] + start; i++)
+            {
+                assertEquals(list.getWeight(i), data.weights[j]);
                 assertEquals(list.get(i), data.strings[j]);
+            }
 
         return i;
     }
@@ -137,5 +140,21 @@ public class WeightedListTest
         j = 0;
         j = testList(j, data, list);
         testListEnd(j, list);
+    }
+
+    @Test
+    public void findIndexTest() throws Exception
+    {
+        SampleData data = new SampleData();
+        data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
+        data.strings = new String[]{"Bleh", "Foo", "Snide", "Mesh", "Gree", "Fnex", "Moose", "Twa"};
+        WeightedList<String> list = demoList(data);
+
+        int sum = 0;
+        for (int i = 0; i < data.strings.length; i++)
+        {
+            assertEquals(sum, list.findIndex(data.strings[i]));
+            sum += data.weights[i];
+        }
     }
 }
