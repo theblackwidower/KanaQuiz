@@ -32,6 +32,10 @@ Currently available on [Google Play](https://play.google.com/store/apps/details?
 _NB: The following features have no planned release date, or guarantee of release._
 
 * Kanji and vocabulary support
+* Multiple fonts
+* Multiple romanji systems
+* Obsolete kana option
+* Improved multiple choice answer selection
 
 ## Translations
 
