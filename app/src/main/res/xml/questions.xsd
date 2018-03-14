@@ -61,7 +61,7 @@
         <xs:complexType>
             <xs:simpleContent>
                 <xs:extension base="romanji">
-                    <xs:attribute name="system" type="romanization_system" use="required"/>
+                    <xs:attribute name="system" type="system_list" use="required"/>
                 </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
@@ -79,26 +79,20 @@
 
     <xs:simpleType name="romanization_system" final="restriction">
         <xs:restriction base="xs:string">
-            <!--TODO: Simplify-->
             <xs:enumeration value="HEPBURN"/>
             <xs:enumeration value="NIHON"/>
             <xs:enumeration value="KUNREI"/>
-
-            <xs:enumeration value="HEPBURN NIHON"/>
-            <xs:enumeration value="HEPBURN KUNREI"/>
-            <xs:enumeration value="NIHON HEPBURN"/>
-            <xs:enumeration value="NIHON KUNREI"/>
-            <xs:enumeration value="KUNREI HEPBURN"/>
-            <xs:enumeration value="KUNREI NIHON"/>
-
-            <xs:enumeration value="HEPBURN NIHON KUNREI"/>
-            <xs:enumeration value="HEPBURN KUNREI NIHON"/>
-            <xs:enumeration value="NIHON HEPBURN KUNREI"/>
-            <xs:enumeration value="NIHON KUNREI HEPBURN"/>
-            <xs:enumeration value="KUNREI HEPBURN NIHON"/>
-            <xs:enumeration value="KUNREI NIHON HEPBURN"/>
-
             <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ref: https://stackoverflow.com/questions/8688864/xml-schema-multiple-from-a-list-of-valid-attribute-values -->
+    <xs:simpleType name="system_list">
+        <xs:restriction>
+            <xs:simpleType>
+                <xs:list itemType="romanization_system"/>
+            </xs:simpleType>
+            <xs:minLength value="1"/>
         </xs:restriction>
     </xs:simpleType>
 
