@@ -12,11 +12,6 @@ public class WordQuestion extends KanaQuestion
         super(romanji, answer);
     }
 
-    public WordQuestion(String romanji, String answer, String[] altAnswer)
-    {
-        super(romanji, answer, altAnswer);
-    }
-
     public void setKana(String kana)
     {
         this.kana = kana;

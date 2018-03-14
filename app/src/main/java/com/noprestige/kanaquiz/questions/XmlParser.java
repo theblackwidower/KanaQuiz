@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import static com.noprestige.kanaquiz.questions.RomanizationSystem.UNKNOWN;
+
 abstract class XmlParser
 {
     static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
@@ -152,10 +154,12 @@ abstract class XmlParser
         if (thisQuestion == null || thisAnswer == null)
             throw new ParseException("Missing attribute in KanaQuestion", parser.getLineNumber());
 
-        if (parser.next() == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
-            return new KanaQuestion(thisQuestion, thisAnswer);
-        else
-            return new KanaQuestion(thisQuestion, thisAnswer, parseXmlAltAnswers(parser));
+        KanaQuestion returnValue = new KanaQuestion(thisQuestion, thisAnswer);
+
+        if (!(parser.next() == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion")))
+            parseXmlAltAnswers(returnValue, parser);
+
+        return returnValue;
     }
 
     static private WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
@@ -187,10 +191,7 @@ abstract class XmlParser
 
         WordQuestion question;
 
-        if (parser.next() == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("WordQuestion"))
-            question = new WordQuestion(thisRomanji, thisAnswer);
-        else
-            question = new WordQuestion(thisRomanji, thisAnswer, parseXmlAltAnswers(parser));
+        question = new WordQuestion(thisRomanji, thisAnswer);
 
         if (thisKana != null)
             question.setKana(thisKana);
@@ -200,11 +201,9 @@ abstract class XmlParser
         return question;
     }
 
-    static private String[] parseXmlAltAnswers(XmlResourceParser parser)
+    static private void parseXmlAltAnswers(KanaQuestion question, XmlResourceParser parser)
             throws XmlPullParserException, IOException, ParseException
     {
-        ArrayList<String> altAnswers = new ArrayList<>();
-
         int lineNumber = parser.getLineNumber();
 
         for (int eventType = parser.getEventType();
@@ -213,9 +212,21 @@ abstract class XmlParser
         {
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("AltAnswer"))
             {
-                eventType = parser.next();
-                if (eventType == XmlPullParser.TEXT)
-                    altAnswers.add(parser.getText());
+                String systemString = UNKNOWN.toString();
+                for (int i = 0; i < parser.getAttributeCount(); i++)
+                {
+                    switch (parser.getAttributeName(i))
+                    {
+                        case "system":
+                            systemString = parser.getAttributeValue(i);
+                    }
+                }
+
+                RomanizationSystem[] systemsList = parseRomanizationSystemList(systemString);
+
+                if (parser.next() == XmlPullParser.TEXT)
+                    for (RomanizationSystem system : systemsList)
+                        question.addAltAnswer(parser.getText(), system);
                 else
                     throw new ParseException("Empty AltAnswer tag", parser.getLineNumber());
             }
@@ -223,15 +234,32 @@ abstract class XmlParser
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing KanaQuestion closing tag", lineNumber);
         }
+    }
 
-        if (altAnswers.isEmpty())
-            return null;
-        else
+    static private RomanizationSystem[] parseRomanizationSystemList(String attributeString)
+    {
+        //trims and collapses whitespace
+        attributeString = attributeString.trim().replaceAll("\\s+", " ");
+
+        ArrayList<RomanizationSystem> list = new ArrayList<>();
+        StringBuilder thisItem = new StringBuilder();
+
+        for (int i = 0; i < attributeString.length(); i++)
         {
-            String[] altAnswersArray = new String[altAnswers.size()];
-            altAnswers.toArray(altAnswersArray);
-            return altAnswersArray;
+            if (attributeString.charAt(i) == ' ')
+            {
+                list.add(RomanizationSystem.valueOf(thisItem.toString()));
+                thisItem = new StringBuilder();
+            }
+            else
+                thisItem.append(attributeString.charAt(i));
         }
+
+        list.add(RomanizationSystem.valueOf(thisItem.toString()));
+
+        RomanizationSystem[] returnValue = new RomanizationSystem[list.size()];
+        list.toArray(returnValue);
+        return returnValue;
     }
 
     static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources)

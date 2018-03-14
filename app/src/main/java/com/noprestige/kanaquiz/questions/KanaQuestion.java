@@ -5,46 +5,28 @@ import android.util.TypedValue;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.TreeMap;
+
 public class KanaQuestion
 {
     private String kana;
-    private String[] answer;
+    private String defaultAnswer;
+    private TreeMap<RomanizationSystem, String> altAnswers = new TreeMap<>();
 
     KanaQuestion(String kana, String answer)
     {
         setKana(kana);
-        setAnswer(answer);
+        setDefaultAnswer(answer);
     }
 
-    KanaQuestion(String kana, String[] answer)
+    private void setDefaultAnswer(String answer)
     {
-        setKana(kana);
-        setAnswer(answer);
+        this.defaultAnswer = answer;
     }
 
-    KanaQuestion(String kana, String answer, String[] altAnswer)
+    public void addAltAnswer(String answer, RomanizationSystem system)
     {
-        setKana(kana);
-        setAnswer(answer, altAnswer);
-    }
-
-    private void setAnswer(String answer)
-    {
-        this.answer = new String[]{answer};
-    }
-
-    private void setAnswer(String[] answer)
-    {
-        this.answer = answer;
-    }
-
-    private void setAnswer(String answer, String[] altAnswer)
-    {
-        this.answer = new String[altAnswer.length + 1];
-        this.answer[0] = answer;
-//        for (int i = 0; i < altAnswer.length; i++)
-//            this.answer[i + 1] = altAnswer[i];
-        System.arraycopy(altAnswer, 0, this.answer, 1, altAnswer.length);
+        altAnswers.put(system, answer);
     }
 
     private void setKana(String kana)
@@ -59,7 +41,9 @@ public class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        for (String correctAnswer : answer)
+        if (defaultAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
+            return true;
+        for (String correctAnswer : altAnswers.values())
             if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
                 return true;
 
@@ -68,7 +52,7 @@ public class KanaQuestion
 
     String fetchCorrectAnswer()
     {
-        return answer[0];
+        return defaultAnswer;
     }
 
     public ReferenceCell generateReference(Context context)
@@ -83,7 +67,7 @@ public class KanaQuestion
 
     public String toString()
     {
-        return kana + " = " + answer[0];
+        return kana + " = " + defaultAnswer;
     }
 
     public boolean isDigraph()
