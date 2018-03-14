@@ -83,7 +83,7 @@ public class KanaQuestion
         return false;
     }
 
-    public boolean isDiacritic(int charCode)
+    static public boolean isDiacritic(int charCode)
     {
         if (charCode < 0x3041 || charCode > 0x30FF)
             return false; //not kana anyway
