@@ -3,6 +3,8 @@ package com.noprestige.kanaquiz.questions;
 import android.content.Context;
 import android.util.TypedValue;
 
+import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 import java.util.TreeMap;
@@ -52,7 +54,25 @@ public class KanaQuestion
 
     String fetchCorrectAnswer()
     {
-        return defaultAnswer;
+        if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
+            return defaultAnswer;
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
+            return fetchCorrectAnswer(RomanizationSystem.HEPBURN);
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
+            return fetchCorrectAnswer(RomanizationSystem.NIHON);
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_kunrei))
+            return fetchCorrectAnswer(RomanizationSystem.KUNREI);
+        else
+            return defaultAnswer;
+    }
+
+    String fetchCorrectAnswer(RomanizationSystem system)
+    {
+        String answer = altAnswers.get(system);
+        if (answer == null)
+            return defaultAnswer;
+        else
+            return answer;
     }
 
     public ReferenceCell generateReference(Context context)

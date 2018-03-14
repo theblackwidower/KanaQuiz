@@ -61,6 +61,32 @@
         <item>@string/prefid_on_incorrect_retry</item>
     </string-array>
 
+    <string name="romanize_system_option_title">Romanization system</string>
+    <string name="romanize_system_option_summary">For reference screen, display answer and multiple choice features</string>
+    <string name="romanize_system_option_default">Default</string>
+    <string name="romanize_system_option_hepburn">Revised Hepburn</string>
+    <string name="romanize_system_option_nihon" translatable="false">Nihon-shiki</string>
+    <string name="romanize_system_option_kunrei" translatable="false">Kunrei-shiki</string>
+
+    <string name="prefid_romanize_system" translatable="false">romanize_system</string>
+    <string name="prefid_romanize_system_default" translatable="false">default_system</string>
+    <string name="prefid_romanize_system_hepburn" translatable="false">hepburn</string>
+    <string name="prefid_romanize_system_nihon" translatable="false">nihon</string>
+    <string name="prefid_romanize_system_kunrei" translatable="false">kunrei</string>
+
+    <string-array name="romanize_system_option_item_names">
+        <item>@string/romanize_system_option_default</item>
+        <item>@string/romanize_system_option_hepburn</item>
+        <item>@string/romanize_system_option_nihon</item>
+        <item>@string/romanize_system_option_kunrei</item>
+    </string-array>
+    <string-array name="prefids_romanize_system">
+        <item>@string/prefid_romanize_system_default</item>
+        <item>@string/prefid_romanize_system_hepburn</item>
+        <item>@string/prefid_romanize_system_nihon</item>
+        <item>@string/prefid_romanize_system_kunrei</item>
+    </string-array>
+
     <string name="repetition_option_title">Repetition control</string>
     <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
     <string name="prefid_repetition" translatable="false">repeat_control</string>

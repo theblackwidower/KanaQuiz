@@ -32,6 +32,13 @@
         android:title="@string/multiple_choice_option_title"
         android:summary="@string/multiple_choice_option_summary"
         android:defaultValue="false"/>
+    <ListPreference
+        android:key="@string/prefid_romanize_system"
+        android:title="@string/romanize_system_option_title"
+        android:summary="@string/romanize_system_option_summary"
+        android:entries="@array/romanize_system_option_item_names"
+        android:entryValues="@array/prefids_romanize_system"
+        android:defaultValue="@string/prefid_romanize_system_default"/>
     <Preference
         android:key="clear_logs"
         android:title="@string/clear_logs"/>
