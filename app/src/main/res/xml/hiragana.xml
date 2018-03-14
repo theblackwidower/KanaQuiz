@@ -39,7 +39,7 @@
              setTitle="@string/set_3_title" setNoDiacriticsTitle="@string/set_3_no_diacritics_title">
         <KanaQuestion question="さ" answer="sa"/>
         <KanaQuestion question="し" answer="shi">
-            <AltAnswer>si</AltAnswer><!--Nihon and Kunrei-->
+            <AltAnswer system="NIHON KUNREI">si</AltAnswer>
         </KanaQuestion>
         <KanaQuestion question="す" answer="su"/>
         <KanaQuestion question="せ" answer="se"/>
@@ -47,7 +47,7 @@
         <Section diacritics="DAKUTEN" digraphs="false">
             <KanaQuestion question="ざ" answer="za"/>
             <KanaQuestion question="じ" answer="ji">
-                <AltAnswer>zi</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">zi</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="ず" answer="zu"/>
             <KanaQuestion question="ぜ" answer="ze"/>
@@ -55,27 +55,27 @@
         </Section>
         <Section diacritics="NO_DIACRITIC" digraphs="true">
             <KanaQuestion question="しゃ" answer="sha">
-                <AltAnswer>sya</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">sya</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="しゅ" answer="shu">
-                <AltAnswer>syu</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">syu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="しょ" answer="sho">
-                <AltAnswer>syo</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">syo</AltAnswer>
             </KanaQuestion>
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="じゃ" answer="ja">
-                <AltAnswer>jya</AltAnswer><!--TextFugu-->
-                <AltAnswer>zya</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="UNKNOWN">jya</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON KUNREI">zya</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="じゅ" answer="ju">
-                <AltAnswer>jyu</AltAnswer><!--TextFugu-->
-                <AltAnswer>zyu</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="UNKNOWN">jyu</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON KUNREI">zyu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="じょ" answer="jo">
-                <AltAnswer>jyo</AltAnswer><!--TextFugu-->
-                <AltAnswer>zyo</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="UNKNOWN">jyo</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON KUNREI">zyo</AltAnswer>
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -83,52 +83,52 @@
              setTitle="@string/set_4_title" setNoDiacriticsTitle="@string/set_4_no_diacritics_title">
         <KanaQuestion question="た" answer="ta"/>
         <KanaQuestion question="ち" answer="chi">
-            <AltAnswer>ti</AltAnswer><!--Nihon and Kunrei-->
+            <AltAnswer system="NIHON KUNREI">ti</AltAnswer>
         </KanaQuestion>
         <KanaQuestion question="つ" answer="tsu">
-            <AltAnswer>tu</AltAnswer><!--Nihon and Kunrei-->
+            <AltAnswer system="NIHON KUNREI">tu</AltAnswer>
         </KanaQuestion>
         <KanaQuestion question="て" answer="te"/>
         <KanaQuestion question="と" answer="to"/>
         <Section diacritics="DAKUTEN" digraphs="false">
             <KanaQuestion question="だ" answer="da"/>
             <KanaQuestion question="ぢ" answer="ji">
-                <AltAnswer>di</AltAnswer><!--Nihon-->
-                <AltAnswer>zi</AltAnswer><!--Kunrei-->
+                <AltAnswer system="NIHON">di</AltAnswer>
+                <AltAnswer system="KUNREI">zi</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="づ" answer="zu">
-                <AltAnswer>du</AltAnswer><!--Nihon-->
-                <AltAnswer>zu</AltAnswer><!--Kunrei-->
+                <AltAnswer system="NIHON">du</AltAnswer>
+                <AltAnswer system="KUNREI">zu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="で" answer="de"/>
             <KanaQuestion question="ど" answer="do"/>
         </Section>
         <Section diacritics="NO_DIACRITIC" digraphs="true">
             <KanaQuestion question="ちゃ" answer="cha">
-                <AltAnswer>tya</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">tya</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="ちゅ" answer="chu">
-                <AltAnswer>tyu</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">tyu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="ちょ" answer="cho">
-                <AltAnswer>tyo</AltAnswer><!--Nihon and Kunrei-->
+                <AltAnswer system="NIHON KUNREI">tyo</AltAnswer>
             </KanaQuestion>
         </Section>
         <Section diacritics="DAKUTEN" digraphs="true">
             <KanaQuestion question="ぢゃ" answer="ja">
-                <AltAnswer>dzya</AltAnswer><!--TextFugu-->
-                <AltAnswer>dya</AltAnswer><!--Nihon-->
-                <AltAnswer>zya</AltAnswer><!--Kunrei-->
+                <AltAnswer system="UNKNOWN">dzya</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON">dya</AltAnswer>
+                <AltAnswer system="KUNREI">zya</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="ぢゅ" answer="ju">
-                <AltAnswer>dzyu</AltAnswer><!--TextFugu-->
-                <AltAnswer>dyu</AltAnswer><!--Nihon-->
-                <AltAnswer>zyu</AltAnswer><!--Kunrei-->
+                <AltAnswer system="UNKNOWN">dzyu</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON">dyu</AltAnswer>
+                <AltAnswer system="KUNREI">zyu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="ぢょ" answer="jo">
-                <AltAnswer>dzyo</AltAnswer><!--TextFugu-->
-                <AltAnswer>dyo</AltAnswer><!--Nihon-->
-                <AltAnswer>zyo</AltAnswer><!--Kunrei-->
+                <AltAnswer system="UNKNOWN">dzyo</AltAnswer><!--TextFugu-->
+                <AltAnswer system="NIHON">dyo</AltAnswer>
+                <AltAnswer system="KUNREI">zyo</AltAnswer>
             </KanaQuestion>
         </Section>
     </KanaSet>
@@ -150,7 +150,7 @@
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
         <KanaQuestion question="ふ" answer="fu">
-            <AltAnswer>hu</AltAnswer><!--Nihon and Kunrei-->
+            <AltAnswer system="NIHON KUNREI">hu</AltAnswer>
         </KanaQuestion>
         <KanaQuestion question="へ" answer="he"/>
         <KanaQuestion question="ほ" answer="ho"/>
@@ -220,13 +220,13 @@
              setTitle="@string/set_10_title">
         <KanaQuestion question="わ" answer="wa"/>
         <!--<KanaQuestion question="ゐ" answer="wi">-->
-        <!--<AltAnswer>i</AltAnswer>&lt;!&ndash;Hepburn and Kunrei&ndash;&gt;-->
+        <!--<AltAnswer system="HEPBURN KUNREI">i</AltAnswer>-->
         <!--</KanaQuestion>-->
         <!--<KanaQuestion question="ゑ" answer="we">-->
-        <!--<AltAnswer>e</AltAnswer>&lt;!&ndash;Hepburn and Kunrei&ndash;&gt;-->
+        <!--<AltAnswer system="HEPBURN KUNREI">e</AltAnswer>-->
         <!--</KanaQuestion>-->
         <KanaQuestion question="を" answer="wo">
-            <AltAnswer>o</AltAnswer><!--Hepburn and Kunrei-->
+            <AltAnswer system="HEPBURN KUNREI">o</AltAnswer>
         </KanaQuestion>
         <Section diacritics="CONSONANT" digraphs="false">
             <KanaQuestion question="ん" answer="n"/>

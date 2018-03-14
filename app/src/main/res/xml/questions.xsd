@@ -41,7 +41,7 @@
     <xs:element name="KanaQuestion">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="AltAnswer" type="romanji" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="AltAnswer" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romanji" use="required"/>
@@ -50,13 +50,20 @@
 
     <xs:element name="WordQuestion">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element name="AltAnswer" type="text" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
             <xs:attribute name="romanji" type="romanji" use="required"/>
             <xs:attribute name="kana" type="kana"/>
             <xs:attribute name="kanji" type="kanji"/>
             <xs:attribute name="answer" type="text" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="AltAnswer">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="romanji">
+                    <xs:attribute name="system" type="romanization_system" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
         </xs:complexType>
     </xs:element>
 
@@ -67,6 +74,31 @@
             <xs:enumeration value="DAKUTEN"/>
             <xs:enumeration value="HANDAKUTEN"/>
             <xs:enumeration value="CONSONANT"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="romanization_system" final="restriction">
+        <xs:restriction base="xs:string">
+            <!--TODO: Simplify-->
+            <xs:enumeration value="HEPBURN"/>
+            <xs:enumeration value="NIHON"/>
+            <xs:enumeration value="KUNREI"/>
+
+            <xs:enumeration value="HEPBURN NIHON"/>
+            <xs:enumeration value="HEPBURN KUNREI"/>
+            <xs:enumeration value="NIHON HEPBURN"/>
+            <xs:enumeration value="NIHON KUNREI"/>
+            <xs:enumeration value="KUNREI HEPBURN"/>
+            <xs:enumeration value="KUNREI NIHON"/>
+
+            <xs:enumeration value="HEPBURN NIHON KUNREI"/>
+            <xs:enumeration value="HEPBURN KUNREI NIHON"/>
+            <xs:enumeration value="NIHON HEPBURN KUNREI"/>
+            <xs:enumeration value="NIHON KUNREI HEPBURN"/>
+            <xs:enumeration value="KUNREI HEPBURN NIHON"/>
+            <xs:enumeration value="KUNREI NIHON HEPBURN"/>
+
+            <xs:enumeration value="UNKNOWN"/>
         </xs:restriction>
     </xs:simpleType>
 
