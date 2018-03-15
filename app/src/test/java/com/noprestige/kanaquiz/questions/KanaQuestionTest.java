@@ -57,9 +57,9 @@ public class KanaQuestionTest
             new KanaQuestion("しょ", "sho")};
 
     private static final KanaQuestion[] HIRAGANA_KANA_SET_3_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("じゃ", new String[]{"ja", "jya"}),
-            new KanaQuestion("じゅ", new String[]{"ju", "jyu"}),
-            new KanaQuestion("じょ", new String[]{"jo", "jyo"})};
+            new KanaQuestion("じゃ", "ja"),
+            new KanaQuestion("じゅ", "ju"),
+            new KanaQuestion("じょ", "jo")};
 
     private static final KanaQuestion[] HIRAGANA_KANA_SET_4_BASE = {
             new KanaQuestion("た", "ta"),
@@ -81,9 +81,9 @@ public class KanaQuestionTest
             new KanaQuestion("ちょ", "cho")};
 
     private static final KanaQuestion[] HIRAGANA_KANA_SET_4_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("ぢゃ", new String[]{"ja", "dzya"}),
-            new KanaQuestion("ぢゅ", new String[]{"ju", "dzyu"}),
-            new KanaQuestion("ぢょ", new String[]{"jo", "dzyo"})};
+            new KanaQuestion("ぢゃ", "ja"),
+            new KanaQuestion("ぢゅ", "ju"),
+            new KanaQuestion("ぢょ", "jo")};
 
     private static final KanaQuestion[] HIRAGANA_KANA_SET_5 = {
             new KanaQuestion("な", "na"),
@@ -100,7 +100,7 @@ public class KanaQuestionTest
     private static final KanaQuestion[] HIRAGANA_KANA_SET_6_BASE = {
             new KanaQuestion("は", "ha"),
             new KanaQuestion("ひ", "hi"),
-            new KanaQuestion("ふ", new String[]{"fu", "hu"}),
+            new KanaQuestion("ふ", "fu"),
             new KanaQuestion("へ", "he"),
             new KanaQuestion("ほ", "ho")};
 
@@ -221,9 +221,9 @@ public class KanaQuestionTest
             new KanaQuestion("ショ", "sho")};
 
     private static final KanaQuestion[] KATAKANA_KANA_SET_3_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("ジャ", new String[]{"ja", "jya"}),
-            new KanaQuestion("ジュ", new String[]{"ju", "jyu"}),
-            new KanaQuestion("ジョ", new String[]{"jo", "jyo"})};
+            new KanaQuestion("ジャ", "ja"),
+            new KanaQuestion("ジュ", "ju"),
+            new KanaQuestion("ジョ", "jo")};
 
     private static final KanaQuestion[] KATAKANA_KANA_SET_4_BASE = {
             new KanaQuestion("タ", "ta"),
@@ -245,9 +245,9 @@ public class KanaQuestionTest
             new KanaQuestion("チョ", "cho")};
 
     private static final KanaQuestion[] KATAKANA_KANA_SET_4_DAKUTEN_DIGRAPHS = {
-            new KanaQuestion("ヂャ", new String[]{"ja", "dzya"}),
-            new KanaQuestion("ヂュ", new String[]{"ju", "dzyu"}),
-            new KanaQuestion("ヂョ", new String[]{"jo", "dzyo"})};
+            new KanaQuestion("ヂャ", "ja"),
+            new KanaQuestion("ヂュ", "ju"),
+            new KanaQuestion("ヂョ", "jo")};
 
     private static final KanaQuestion[] KATAKANA_KANA_SET_5 = {
             new KanaQuestion("ナ", "na"),
@@ -264,7 +264,7 @@ public class KanaQuestionTest
     private static final KanaQuestion[] KATAKANA_KANA_SET_6_BASE = {
             new KanaQuestion("ハ", "ha"),
             new KanaQuestion("ヒ", "hi"),
-            new KanaQuestion("フ", new String[]{"fu", "hu"}),
+            new KanaQuestion("フ", "fu"),
             new KanaQuestion("ヘ", "he"),
             new KanaQuestion("ホ", "ho")};
 
