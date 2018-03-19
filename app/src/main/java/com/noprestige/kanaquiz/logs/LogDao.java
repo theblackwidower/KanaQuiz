@@ -21,11 +21,20 @@ public abstract class LogDao
         protected Float doInBackground(String... data)
         {
             String kana = data[0];
-            KanaRecord record = getKanaRecord(kana);
-            if (record == null)
+            KanaRecord[] records = getKanaRecord(kana);
+            if (records.length <= 0)
                 return null;
             else
-                return (float) record.correct_answers / (float) (record.incorrect_answers + record.correct_answers);
+            {
+                int totalCorrect = 0;
+                int totalIncorrect = 0;
+                for (KanaRecord record : records)
+                {
+                    totalCorrect += record.correct_answers;
+                    totalIncorrect += record.incorrect_answers;
+                }
+                return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
+            }
         }
     }
 
@@ -37,11 +46,16 @@ public abstract class LogDao
         {
             String kana = data[0];
             String romanji = data[1];
-            IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
-            if (record == null)
+            IncorrectAnswerRecord[] records = getAnswerRecord(kana, romanji);
+            if (records.length <= 0)
                 return 0;
             else
-                return record.occurrences;
+            {
+                int totalOccurrences = 0;
+                for (IncorrectAnswerRecord record : records)
+                    totalOccurrences += record.occurrences;
+                return totalOccurrences;
+            }
         }
     }
 
@@ -112,10 +126,16 @@ public abstract class LogDao
     public abstract DailyRecord getDateRecord(Date date);
 
     @Query("SELECT * FROM kana_records WHERE kana = :kana")
-    abstract KanaRecord getKanaRecord(String kana);
+    abstract KanaRecord[] getKanaRecord(String kana);
 
     @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji")
-    abstract IncorrectAnswerRecord getAnswerRecord(String kana, String romanji);
+    abstract IncorrectAnswerRecord[] getAnswerRecord(String kana, String romanji);
+
+    @Query("SELECT * FROM kana_records WHERE kana = :kana AND date = :date")
+    abstract KanaRecord getDaysKanaRecord(String kana, Date date);
+
+    @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji AND date = :date")
+    abstract IncorrectAnswerRecord getDaysAnswerRecord(String kana, String romanji, Date date);
 
     @Query("SELECT * FROM daily_record")
     abstract DailyRecord[] getAllDailyRecords();
@@ -176,7 +196,7 @@ public abstract class LogDao
 
     private void addKanaRecord(String kana, boolean isCorrect)
     {
-        KanaRecord record = getKanaRecord(kana);
+        KanaRecord record = getDaysKanaRecord(kana, new Date());
         if (record == null)
         {
             record = new KanaRecord(kana);
@@ -191,7 +211,7 @@ public abstract class LogDao
 
     private void addIncorrectAnswerRecord(String kana, String romanji)
     {
-        IncorrectAnswerRecord record = getAnswerRecord(kana, romanji);
+        IncorrectAnswerRecord record = getDaysAnswerRecord(kana, romanji, new Date());
         if (record == null)
         {
             record = new IncorrectAnswerRecord(kana, romanji);
