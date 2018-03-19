@@ -2,13 +2,17 @@ package com.noprestige.kanaquiz.logs;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "kana_records")
+import java.util.Date;
+
+@Entity(tableName = "kana_records", primaryKeys = {"date", "kana"})
 public class KanaRecord
 {
-    @PrimaryKey
+    @ColumnInfo(name = "date")
+    @NonNull
+    public Date date;
+
     @ColumnInfo(name = "kana")
     @NonNull
     public String kana;
@@ -21,6 +25,7 @@ public class KanaRecord
 
     public KanaRecord(String kana)
     {
+        date = new Date();
         this.kana = kana;
         correct_answers = 0;
         incorrect_answers = 0;
