@@ -111,7 +111,7 @@ public class MainQuiz extends AppCompatActivity
         if (LogDatabase.DAO == null)
             LogDatabase.DAO = Room.databaseBuilder(
                     getApplicationContext(), LogDatabase.class, "user-logs").
-                    addMigrations(LogDatabase.MIGRATION_1_2).
+                    addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
                     build().logDao();
 
         txtAnswer.setOnEditorActionListener(
