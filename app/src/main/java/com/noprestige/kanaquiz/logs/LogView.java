@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
@@ -14,11 +15,13 @@ public class LogView extends AppCompatActivity
     private class FetchLogs extends AsyncTask<Void, Void, DailyRecord[]>
     {
         LinearLayout layout;
+        TextView lblLogMessage;
 
         @Override
         protected void onPreExecute()
         {
             layout = findViewById(R.id.log_view_layout);
+            lblLogMessage = findViewById(R.id.lblLogMessage);
         }
 
         @Override
@@ -30,11 +33,19 @@ public class LogView extends AppCompatActivity
         @Override
         protected void onPostExecute(DailyRecord[] records)
         {
-            for (DailyRecord record : records)
+            if (records.length > 0)
             {
-                DailyLogItem output = new DailyLogItem(getBaseContext());
-                output.setFromRecord(record);
-                layout.addView(output);
+                for (DailyRecord record : records)
+                {
+                    DailyLogItem output = new DailyLogItem(getBaseContext());
+                    output.setFromRecord(record);
+                    layout.addView(output);
+                }
+                layout.removeView(lblLogMessage);
+            }
+            else
+            {
+                lblLogMessage.setText(R.string.no_logs);
             }
         }
     }
