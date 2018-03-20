@@ -56,22 +56,29 @@ public class MultipleChoicePad extends FlowLayout
         btnChoices = new ArrayList<>();
     }
 
-    public void addChoice(final String answer)
+    private class AnswerListener implements OnClickListener
+    {
+        String answer;
+
+        AnswerListener(String answer)
+        {
+            this.answer = answer;
+        }
+
+        @Override
+        public void onClick(View view)
+        {
+            //ref: https://stackoverflow.com/questions/1521640/standard-android-button-with-a-different-color
+            view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+            onAnswerSubmit(answer);
+            btnChoices.remove(view); //prevents selected button from being re-enabled
+        }
+    }
+
+    public void addChoice(String answer)
     {
         Button btnNewButton = new Button(this.getContext());
-        btnNewButton.setOnClickListener(
-                new OnClickListener()
-                {
-                    @Override
-                    public void onClick(View view)
-                    {
-                        //ref: https://stackoverflow.com/questions/1521640/standard-android-button-with-a-different-color
-                        view.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-                        onAnswerSubmit(answer);
-                        btnChoices.remove(view); //prevents selected button from being re-enabled
-                    }
-                }
-        );
+        btnNewButton.setOnClickListener(new AnswerListener(answer));
         btnNewButton.setText(answer);
         this.addView(btnNewButton);
         btnChoices.add(btnNewButton);
