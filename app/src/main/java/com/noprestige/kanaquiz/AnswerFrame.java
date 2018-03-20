@@ -23,6 +23,8 @@ public class AnswerFrame extends LinearLayout
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
 
+    private OnAnswerListener answerListener = null;
+
     public AnswerFrame(Context context)
     {
         super(context);
@@ -63,11 +65,33 @@ public class AnswerFrame extends LinearLayout
                     {
                         String answer = v.getText().toString().trim();
                         if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
-                            ((MainQuiz) getContext()).checkAnswer(answer);
+                            checkAnswer(answer);
                         return true;
                     }
                 }
         );
+
+        btnMultipleChoice.setOnAnswerListener(
+                new OnAnswerListener()
+                {
+                    @Override
+                    public void onAnswer(String answer)
+                    {
+                        checkAnswer(answer);
+                    }
+                }
+        );
+    }
+
+    public void setOnAnswerListener(OnAnswerListener listener)
+    {
+        answerListener = listener;
+    }
+
+    private void checkAnswer(String answer)
+    {
+        if (answerListener != null)
+            answerListener.onAnswer(answer);
     }
 
     public void setTextHint(int refId)

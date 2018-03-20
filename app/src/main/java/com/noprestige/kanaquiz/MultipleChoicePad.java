@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class MultipleChoicePad extends FlowLayout
 {
     private ArrayList<Button> btnChoices = new ArrayList<>();
+    private OnAnswerListener answerListener = null;
 
     public MultipleChoicePad(Context context)
     {
@@ -37,11 +38,17 @@ public class MultipleChoicePad extends FlowLayout
     {
     }
 
+    public void setOnAnswerListener(OnAnswerListener listener)
+    {
+        answerListener = listener;
+    }
+
     public void onAnswerSubmit(String userAnswer)
     {
         for (Button btnChoice : btnChoices)
             btnChoice.setEnabled(false);
-        ((MainQuiz) getContext()).checkAnswer(userAnswer);
+        if (answerListener != null)
+            answerListener.onAnswer(userAnswer);
     }
 
     public void enableButtons()

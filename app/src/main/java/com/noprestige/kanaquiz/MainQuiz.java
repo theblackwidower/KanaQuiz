@@ -96,6 +96,17 @@ public class MainQuiz extends AppCompatActivity
 
         onConfigurationChanged(getResources().getConfiguration());
 
+        frmAnswer.setOnAnswerListener(
+                new OnAnswerListener()
+                {
+                    @Override
+                    public void onAnswer(String answer)
+                    {
+                        checkAnswer(answer);
+                    }
+                }
+        );
+
         OptionsControl.initialize(getApplicationContext());
         QuestionManagement.initialize(getApplicationContext());
 
@@ -157,7 +168,7 @@ public class MainQuiz extends AppCompatActivity
         frmAnswer.updateScore(totalCorrect, totalQuestions);
     }
 
-    public void checkAnswer(String answer)
+    private void checkAnswer(String answer)
     {
         if (canSubmit && !answer.isEmpty())
         {
