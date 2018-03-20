@@ -31,8 +31,7 @@ public abstract class OptionsControl
     public static boolean getBoolean(String prefId)
     {
         //Boolean preferences to default to true, all others default to false
-        if (resources.getString(R.string.prefid_hiragana_1).equals(prefId) ||
-                resources.getString(R.string.prefid_diacritics).equals(prefId))
+        if (resources.getString(R.string.prefid_hiragana_1).equals(prefId))
             return sharedPreferences.getBoolean(prefId, true);
         else
             return sharedPreferences.getBoolean(prefId, false);
