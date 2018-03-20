@@ -32,34 +32,10 @@
         android:gravity="center_vertical"
         android:textAlignment="center"/>
 
-    <EditText
-        android:id="@+id/txtAnswer"
+    <com.noprestige.kanaquiz.AnswerFrame
+        android:id="@+id/frmAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:imeOptions="actionGo"
-        android:inputType="textNoSuggestions"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:text=""
-        android:textAlignment="center"/>
-
-    <TextView
-        android:id="@+id/lblScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:minLines="2"
-        android:text=""
-        android:textAlignment="center"/>
-
-    <com.noprestige.kanaquiz.MultipleChoicePad
-        android:id="@+id/btnMultipleChoice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:gravity="center"
-        android:visibility="invisible"/>
-
+        android:gravity="center_horizontal"
+        android:orientation="vertical"/>
 </LinearLayout>

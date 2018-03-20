@@ -11,12 +11,8 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.logs.DailyRecord;
@@ -30,7 +26,6 @@ import com.noprestige.kanaquiz.questions.NoQuestionsException;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 
 import static android.graphics.Typeface.BOLD;
@@ -47,13 +42,10 @@ public class MainQuiz extends AppCompatActivity
     private KanaQuestionBank questionBank;
 
     private TextView lblResponse;
-    private EditText txtAnswer;
     private TextView lblDisplayKana;
-    private MultipleChoicePad btnMultipleChoice;
+    private AnswerFrame frmAnswer;
 
     private int oldTextColour;
-    private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
-    private static final DecimalFormat SCORE_FORMATTER = new DecimalFormat("#.##");
     private static final int MAX_RETRIES = 3;
 
     private Handler delayHandler = new Handler();
@@ -84,7 +76,7 @@ public class MainQuiz extends AppCompatActivity
                 totalQuestions += record.total_answers;
                 totalCorrect += record.correct_answers;
             }
-            updateScore();
+            frmAnswer.updateScore(totalCorrect, totalQuestions);
         }
     }
 
@@ -94,9 +86,8 @@ public class MainQuiz extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_quiz);
         lblResponse = findViewById(R.id.lblResponse);
-        txtAnswer = findViewById(R.id.txtAnswer);
         lblDisplayKana = findViewById(R.id.lblDisplayKana);
-        btnMultipleChoice = findViewById(R.id.btnMultipleChoice);
+        frmAnswer = findViewById(R.id.frmAnswer);
 
         oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
@@ -114,20 +105,6 @@ public class MainQuiz extends AppCompatActivity
                     addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
                     build().logDao();
 
-        txtAnswer.setOnEditorActionListener(
-                new TextView.OnEditorActionListener()
-                {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-                    {
-                        String answer = v.getText().toString().trim();
-                        if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
-                            checkAnswer(answer);
-                        return true;
-                    }
-                }
-        );
-
         resetQuiz();
         nextQuestion();
     }
@@ -138,9 +115,9 @@ public class MainQuiz extends AppCompatActivity
         super.onConfigurationChanged(newConfig);
         if (newConfig.keyboard == Configuration.KEYBOARD_NOKEYS &&
                 newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)
-            txtAnswer.setHint(R.string.answer_hint_touch);
+            frmAnswer.setTextHint(R.string.answer_hint_touch);
         else
-            txtAnswer.setHint(R.string.answer_hint_hardware);
+            frmAnswer.setTextHint(R.string.answer_hint_hardware);
     }
 
     private void resetQuiz()
@@ -155,21 +132,7 @@ public class MainQuiz extends AppCompatActivity
 
         questionBank = QuestionManagement.getFullQuestionBank();
 
-        txtAnswer.setEnabled(true);
-
-        //TODO: Fix spacing when txtAnswer is rendered invisible
-        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-        {
-            txtAnswer.setVisibility(View.INVISIBLE);
-            txtAnswer.setHeight(0);
-            btnMultipleChoice.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            txtAnswer.setVisibility(View.VISIBLE);
-            txtAnswer.setLines(1);
-            btnMultipleChoice.setVisibility(View.INVISIBLE);
-        }
+        frmAnswer.resetQuiz();
     }
 
     private void nextQuestion()
@@ -179,8 +142,7 @@ public class MainQuiz extends AppCompatActivity
             questionBank.newQuestion();
             lblDisplayKana.setText(questionBank.getCurrentKana());
             retryCount = 0;
-            if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-                btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
+            frmAnswer.setMultipleChoices(questionBank);
             ReadyForAnswer();
         }
         catch (NoQuestionsException ex)
@@ -190,35 +152,9 @@ public class MainQuiz extends AppCompatActivity
             canSubmit = false;
             lblResponse.setTypeface(null, NORMAL);
             lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
-            if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-                btnMultipleChoice.deleteChoices();
-            else
-            {
-                txtAnswer.setEnabled(false);
-                txtAnswer.setText("");
-            }
+            frmAnswer.onNoQuestions();
         }
-        updateScore();
-    }
-
-    private void updateScore()
-    {
-        TextView lblScore = findViewById(R.id.lblScore);
-
-        if (totalQuestions > 0)
-        {
-            lblScore.setText(R.string.score_label);
-            lblScore.append(": ");
-
-            lblScore.append(PERCENT_FORMATTER.format(totalCorrect / (float) totalQuestions));
-
-            lblScore.append(System.getProperty("line.separator"));
-            lblScore.append(new Fraction(totalCorrect).toString());
-            lblScore.append(" / ");
-            lblScore.append(Integer.toString(totalQuestions));
-        }
-        else
-            lblScore.setText("");
+        frmAnswer.updateScore(totalCorrect, totalQuestions);
     }
 
     public void checkAnswer(String answer)
@@ -275,7 +211,7 @@ public class MainQuiz extends AppCompatActivity
                                 public void run()
                                 {
                                     ReadyForAnswer();
-                                    btnMultipleChoice.enableButtons();
+                                    frmAnswer.enableButtons();
                                 }
                             }, 1000
                     );
@@ -309,8 +245,7 @@ public class MainQuiz extends AppCompatActivity
         else
         {
             lblResponse.setText(R.string.request_text_input);
-            txtAnswer.requestFocus();
-            txtAnswer.setText("");
+            frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
         lblResponse.setTypeface(null, NORMAL);
