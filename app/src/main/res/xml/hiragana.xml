@@ -98,7 +98,6 @@
             </KanaQuestion>
             <KanaQuestion question="づ" answer="zu">
                 <AltAnswer system="NIHON">du</AltAnswer>
-                <AltAnswer system="KUNREI">zu</AltAnswer>
             </KanaQuestion>
             <KanaQuestion question="で" answer="de"/>
             <KanaQuestion question="ど" answer="do"/>
