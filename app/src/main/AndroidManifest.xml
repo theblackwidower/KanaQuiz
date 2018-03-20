@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainQuiz"
+            android:name=".quiz.MainQuiz"
             android:configChanges="keyboard|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -24,27 +24,27 @@
             android:name=".options.OptionsScreen"
             android:label="@string/options_title"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainQuiz"/>
+            android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".options.KanaSelection"
             android:label="@string/selection_title"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainQuiz"/>
+            android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".AboutScreen"
             android:label="@string/about_title"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainQuiz"/>
+            android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".reference.ReferenceScreen"
             android:label="@string/reference_title"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainQuiz"/>
+            android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".logs.LogView"
             android:label="@string/view_logs"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainQuiz"/>
+            android:parentActivityName=".quiz.MainQuiz"/>
     </application>
 
 </manifest>

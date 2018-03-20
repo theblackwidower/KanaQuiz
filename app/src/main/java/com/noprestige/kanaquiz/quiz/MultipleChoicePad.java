@@ -1,4 +1,4 @@
-package com.noprestige.kanaquiz;
+package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
 import android.graphics.Color;

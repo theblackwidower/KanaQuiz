@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.noprestige.kanaquiz.AnswerFrame">
+    tools:context="com.noprestige.kanaquiz.quiz.AnswerFrame">
 
     <EditText
         android:id="@+id/txtAnswer"
@@ -28,7 +28,7 @@
         android:text=""
         android:textAlignment="center"/>
 
-    <com.noprestige.kanaquiz.MultipleChoicePad
+    <com.noprestige.kanaquiz.quiz.MultipleChoicePad
         android:id="@+id/btnMultipleChoice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

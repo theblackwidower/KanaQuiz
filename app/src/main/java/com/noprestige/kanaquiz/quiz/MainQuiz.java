@@ -1,4 +1,4 @@
-package com.noprestige.kanaquiz;
+package com.noprestige.kanaquiz.quiz;
 
 import android.annotation.SuppressLint;
 import android.arch.persistence.room.Room;
@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.noprestige.kanaquiz.AboutScreen;
+import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.logs.LogView;

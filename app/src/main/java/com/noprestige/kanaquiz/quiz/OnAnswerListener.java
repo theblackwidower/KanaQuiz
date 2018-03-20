@@ -1,4 +1,4 @@
-package com.noprestige.kanaquiz;
+package com.noprestige.kanaquiz.quiz;
 
 public interface OnAnswerListener
 {

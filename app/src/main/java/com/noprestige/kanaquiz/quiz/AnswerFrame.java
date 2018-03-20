@@ -1,4 +1,4 @@
-package com.noprestige.kanaquiz;
+package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.noprestige.kanaquiz.Fraction;
+import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.KanaQuestionBank;
 
