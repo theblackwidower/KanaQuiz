@@ -31,7 +31,7 @@
         android:key="@string/prefid_multiple_choice"
         android:title="@string/multiple_choice_option_title"
         android:summary="@string/multiple_choice_option_summary"
-        android:defaultValue="false"/>
+        android:defaultValue="true"/>
     <ListPreference
         android:key="@string/prefid_romanize_system"
         android:title="@string/romanize_system_option_title"
