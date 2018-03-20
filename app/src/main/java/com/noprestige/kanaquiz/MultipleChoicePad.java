@@ -6,18 +6,14 @@ import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
+
+import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 
-import static android.view.Gravity.CENTER_HORIZONTAL;
-
-public class MultipleChoicePad extends LinearLayout
+public class MultipleChoicePad extends FlowLayout
 {
     private ArrayList<Button> btnChoices = new ArrayList<>();
-
-    private LinearLayout lastRow = null;
-    private static final int MAX_COLUMNS = 3;
 
     public MultipleChoicePad(Context context)
     {
@@ -56,7 +52,6 @@ public class MultipleChoicePad extends LinearLayout
 
     public void deleteChoices()
     {
-        lastRow = null;
         this.removeAllViews();
         btnChoices = new ArrayList<>();
     }
@@ -78,14 +73,7 @@ public class MultipleChoicePad extends LinearLayout
                 }
         );
         btnNewButton.setText(answer);
-        if (lastRow == null || lastRow.getChildCount() >= MAX_COLUMNS)
-        {
-            lastRow = new LinearLayout(getContext());
-            lastRow.setOrientation(HORIZONTAL);
-            lastRow.setGravity(CENTER_HORIZONTAL);
-            this.addView(lastRow);
-        }
-        lastRow.addView(btnNewButton);
+        this.addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
 

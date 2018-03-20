@@ -56,6 +56,8 @@ dependencies {
     }
     implementation 'com.google.firebase:firebase-core:11.8.0'
     implementation 'com.google.firebase:firebase-perf:11.8.0'
+
+    implementation 'org.apmem.tools:layouts:1.10@aar'
 }
 
 repositories {
