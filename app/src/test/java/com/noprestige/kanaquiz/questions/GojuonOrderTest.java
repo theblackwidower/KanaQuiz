@@ -38,7 +38,8 @@ public class GojuonOrderTest
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", "wi", "we", "wo",
-            "n"};
+            "n"
+    };
 
     private static final String[] EXPECTED_ORDER_HEPBURN = {
             "a", "i", "u", "e", "o",
@@ -68,7 +69,8 @@ public class GojuonOrderTest
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", //"i", "e", "o",
-            "n"};
+            "n"
+    };
 
     private static final String[] EXPECTED_ORDER_NIHON = {
             "a", "i", "u", "e", "o",
@@ -98,7 +100,8 @@ public class GojuonOrderTest
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", "wi", "we", "wo",
-            "n"};
+            "n"
+    };
 
     private static final String[] EXPECTED_ORDER_KUNREI = {
             "a", "i", "u", "e", "o",
@@ -128,7 +131,8 @@ public class GojuonOrderTest
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", //"i", "e", "o",
-            "n"};
+            "n"
+    };
 
     @Test
     public void sortTest() throws Exception

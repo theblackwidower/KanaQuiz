@@ -33,7 +33,8 @@ public class GojuonOrder implements Comparator<String>
             "ra", "ri", "ru", "re", "ro",
             "rya", "ryu", "ryo",
             "wa", "wi", "we", "wo",
-            "n"};
+            "n"
+    };
 
     static void sort(String[] romanji)
     {

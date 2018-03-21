@@ -18,7 +18,8 @@ public class Fraction
             {NUL, '⅕', '⅖', '⅗', '⅘'},
             {NUL, '⅙', NUL, NUL, NUL, '⅚'},
             {},
-            {NUL, '⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}};
+            {NUL, '⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}
+    };
 
 
     public Fraction(float value)
