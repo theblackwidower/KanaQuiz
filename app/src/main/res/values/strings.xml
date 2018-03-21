@@ -24,7 +24,8 @@
     <string name="github_logo">Github Logo</string>
     <string name="twitter_logo">Twitter Logo</string>
     <string name="source_code_on_github">Full source code available on GitHub.</string>
-    <string name="copyright_claim">\u00A9 2017&#8211;2018 T Duke Perry. All rights reserved.</string>
+    <string name="copyright_claim">\u00A9 2017&#8211;2018 T Duke Perry. All rights
+        reserved.</string>
 
     <string name="special_thanks_start">Special Thanks to:</string>
     <string name="special_thanks_1">Sleepy Duck, for the Learn Japanese to Survive series</string>
@@ -36,8 +37,10 @@
     <string name="translator_credit"><!--Canadian English Translation by T Duke Perry--></string>
     <string name="translator_credit_url"><!--http://example.com--></string>
 
-    <string name="firebase_disclosure">Includes Firebase analytics and Crashlytics crash reporting</string>
-    <string name="firebase_details">Anonymous data will be transmitted to improve app development</string>
+    <string name="firebase_disclosure">Includes Firebase analytics and Crashlytics crash
+         reporting</string>
+    <string name="firebase_details">Anonymous data will be transmitted to improve app
+         development</string>
 
     <!-- Log View -->
     <string name="loading">Loading...</string>
@@ -66,7 +69,8 @@
     </string-array>
 
     <string name="romanize_system_option_title">Romanization system</string>
-    <string name="romanize_system_option_summary">For reference screen, display answer and multiple choice features</string>
+    <string name="romanize_system_option_summary">For reference screen, display answer and
+         multiple choice features</string>
     <string name="romanize_system_option_default">Default</string>
     <string name="romanize_system_option_hepburn">Revised Hepburn</string>
     <string name="romanize_system_option_nihon" translatable="false">Nihon-shiki</string>
@@ -92,7 +96,8 @@
     </string-array>
 
     <string name="repetition_option_title">Repetition control</string>
-    <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
+    <string name="repetition_option_summary">Number of consecutive questions with no
+         repeats</string>
     <string name="prefid_repetition" translatable="false">repeat_control</string>
 
     <string name="digraphs_option_title">Allow Digraphs</string>
@@ -161,6 +166,12 @@
     <string name="prefid_katakana_9" translatable="false">katakana_set_9</string>
     <string name="prefid_katakana_10" translatable="false">katakana_set_10</string>
 
-
-    <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</string>
+    <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke
+        Perry\n\nLicensed under the Apache License, Version 2.0 (the &quot;License&quot;); you
+        may not use this file except in compliance with the License. You may obtain a copy of
+        the License at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless
+        required by applicable law or agreed to in writing, software distributed under the
+        License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS
+        OF ANY KIND, either express or implied. See the License for the specific language
+        governing permissions and limitations under the License.</string>
 </resources>
