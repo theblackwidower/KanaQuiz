@@ -145,8 +145,14 @@ public class GojuonOrderTest
 
     private void checkOrder(String[] testArray)
     {
+        //to confirm the sorting is actually happening, reverse the array fed to the sorter
+        String[] reversedArray = new String[testArray.length];
+        for (int i = 0; i < testArray.length; i++)
+            reversedArray[testArray.length - 1 - i] = testArray[i];
+
         Set<String> sortedSet = new TreeSet<>(new GojuonOrder());
-        sortedSet.addAll(Arrays.asList(testArray));
+        sortedSet.addAll(Arrays.asList(reversedArray));
+
         assertArrayEquals(sortedSet.toArray(), testArray);
     }
 }
