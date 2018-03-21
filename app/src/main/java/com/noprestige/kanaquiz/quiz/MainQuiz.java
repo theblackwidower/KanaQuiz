@@ -101,16 +101,14 @@ public class MainQuiz extends AppCompatActivity
 
         onConfigurationChanged(getResources().getConfiguration());
 
-        frmAnswer.setOnAnswerListener(
-                new OnAnswerListener()
-                {
-                    @Override
-                    public void onAnswer(String answer)
-                    {
-                        checkAnswer(answer);
-                    }
-                }
-        );
+        frmAnswer.setOnAnswerListener(new OnAnswerListener()
+        {
+            @Override
+            public void onAnswer(String answer)
+            {
+                checkAnswer(answer);
+            }
+        });
 
         OptionsControl.initialize(getApplicationContext());
         QuestionManagement.initialize(getApplicationContext());
@@ -232,16 +230,14 @@ public class MainQuiz extends AppCompatActivity
 
                     LogDao.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
-                    delayHandler.postDelayed(
-                            new Runnable()
-                            {
-                                public void run()
-                                {
-                                    ReadyForAnswer();
-                                    frmAnswer.enableButtons();
-                                }
-                            }, 1000
-                    );
+                    delayHandler.postDelayed(new Runnable()
+                    {
+                        public void run()
+                        {
+                            ReadyForAnswer();
+                            frmAnswer.enableButtons();
+                        }
+                    }, 1000);
                 }
 
                 if (isGetNewQuestion)
@@ -252,15 +248,13 @@ public class MainQuiz extends AppCompatActivity
             {
                 totalQuestions++;
                 //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
-                delayHandler.postDelayed(
-                        new Runnable()
-                        {
-                            public void run()
-                            {
-                                nextQuestion();
-                            }
-                        }, 1000
-                );
+                delayHandler.postDelayed(new Runnable()
+                {
+                    public void run()
+                    {
+                        nextQuestion();
+                    }
+                }, 1000);
             }
         }
     }

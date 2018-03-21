@@ -59,25 +59,21 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         lblContents = findViewById(R.id.lblContents);
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
-        this.setOnClickListener(
-                new OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        toggle();
-                    }
-                }
-        );
+        this.setOnClickListener(new OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                toggle();
+            }
+        });
 
-        chkCheckBox.setOnCheckedChangeListener(
-                new OnCheckedChangeListener()
-                {
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-                    {
-                        OptionsControl.setBoolean(getPrefId(), isChecked);
-                    }
-                }
-        );
+        chkCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                OptionsControl.setBoolean(getPrefId(), isChecked);
+            }
+        });
 
         // Load attributes
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
