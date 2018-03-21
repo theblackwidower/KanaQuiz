@@ -50,12 +50,23 @@ public class LogView extends AppCompatActivity
         }
     }
 
+    FetchLogs fetchThread = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_view);
 
-        new FetchLogs().execute();
+        fetchThread = new FetchLogs();
+        fetchThread.execute();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        if (fetchThread != null)
+            fetchThread.cancel(true);
+        super.onDestroy();
     }
 }

@@ -54,6 +54,8 @@ public class MainQuiz extends AppCompatActivity
 
     private int retryCount = 0;
 
+    private FetchTodaysLog fetchScoreThread = null;
+
     @SuppressLint("StaticFieldLeak")
     private class FetchTodaysLog extends AsyncTask<Date, Void, DailyRecord>
     {
@@ -133,9 +135,20 @@ public class MainQuiz extends AppCompatActivity
             frmAnswer.setTextHint(R.string.answer_hint_hardware);
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        if (fetchScoreThread != null)
+            fetchScoreThread.cancel(true);
+        super.onDestroy();
+    }
+
     private void resetQuiz()
     {
-        new FetchTodaysLog().execute(new Date());
+        if (fetchScoreThread != null)
+            fetchScoreThread.cancel(true);
+        fetchScoreThread = new FetchTodaysLog();
+        fetchScoreThread.execute(new Date());
 
         lblDisplayKana.setText("");
         lblResponse.setText("");
