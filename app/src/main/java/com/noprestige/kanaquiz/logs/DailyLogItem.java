@@ -219,7 +219,7 @@ public class DailyLogItem extends View
         if (isDynamicSize)
         {
             while (desiredWidth() > getWidth())
-                setFontSize(getFontSize() - 1);
+                setDataFontSize(ratioPaint.getTextSize() - 1);
             repositionItems(getWidth(), getHeight());
         }
     }
@@ -313,17 +313,21 @@ public class DailyLogItem extends View
     {
         datePaint.setTextSize(fontSize);
 
-        fontSize *= 3;
-
-        ratioPaint.setTextSize(fontSize);
-        percentagePaint.setTextSize(fontSize);
-
         dateHeight = datePaint.getFontMetrics().descent - datePaint.getFontMetrics().ascent;
-        dataHeight = ratioPaint.getFontMetrics().descent - ratioPaint.getFontMetrics().ascent;
 
         dateWidth_1 = datePaint.measureText(dateString_1);
         dateWidth_2 = datePaint.measureText(dateString_2);
         dateWidth_3 = datePaint.measureText(dateString_3);
+
+        setDataFontSize(fontSize * 3);
+    }
+
+    private void setDataFontSize(float fontSize)
+    {
+        ratioPaint.setTextSize(fontSize);
+        percentagePaint.setTextSize(fontSize);
+
+        dataHeight = ratioPaint.getFontMetrics().descent - ratioPaint.getFontMetrics().ascent;
 
         correctWidth = ratioPaint.measureText(correctString);
         slashWidth = ratioPaint.measureText(SLASH);
