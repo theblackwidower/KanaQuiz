@@ -6,7 +6,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.logs.LogDatabase;
+import com.noprestige.kanaquiz.logs.LogDao;
 
 public class OptionsFragment extends PreferenceFragment
 {
@@ -15,7 +15,7 @@ public class OptionsFragment extends PreferenceFragment
         @Override
         protected Preference doInBackground(Preference... btnClearLogs)
         {
-            LogDatabase.DAO.deleteAll();
+            LogDao.deleteAll();
             return btnClearLogs[0];
         }
 

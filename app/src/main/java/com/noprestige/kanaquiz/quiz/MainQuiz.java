@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.noprestige.kanaquiz.AboutScreen;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
+import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.KanaSelection;
@@ -198,16 +199,16 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
+                    LogDao.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
-                    LogDatabase.DAO.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), score);
+                    LogDao.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), score);
                 }
                 else
-                    LogDatabase.DAO.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), 0);
+                    LogDao.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), 0);
             }
             else
             {
@@ -229,7 +230,7 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
-                    LogDatabase.DAO.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
+                    LogDao.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
                     delayHandler.postDelayed(
                             new Runnable()
@@ -244,7 +245,7 @@ public class MainQuiz extends AppCompatActivity
                 }
 
                 if (isGetNewQuestion)
-                    LogDatabase.DAO.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
+                    LogDao.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
             }
 
             if (isGetNewQuestion)

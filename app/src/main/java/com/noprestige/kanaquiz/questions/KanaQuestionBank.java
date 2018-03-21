@@ -1,7 +1,7 @@
 package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.logs.LogDatabase;
+import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.TreeMap;
@@ -58,7 +58,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
             for (KanaQuestion question : questions)
             {
                 // Fetches the percentage of times the user got a kana right,
-                Float percentage = LogDatabase.DAO.getKanaPercentage(question.getKana());
+                Float percentage = LogDao.getKanaPercentage(question.getKana());
                 if (percentage == null)
                     percentage = 0.1f;
                 // The 1.05f is to invert the value so we get the number of times they got it wrong,
@@ -103,7 +103,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                         // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
                         // where 102 is the number of unique correct answers in Hiragana and Katakana classes
                         weightedAnswerList.add(
-                                Math.pow(2, Math.min(LogDatabase.DAO.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
+                                Math.pow(2, Math.min(LogDao.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
                                 answer);
                     }
                 }
