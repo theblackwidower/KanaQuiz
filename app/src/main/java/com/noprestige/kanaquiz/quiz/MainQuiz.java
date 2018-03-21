@@ -200,7 +200,7 @@ public class MainQuiz extends AppCompatActivity
                     totalCorrect++;
                     LogDatabase.DAO.reportCorrectAnswer(lblDisplayKana.getText().toString());
                 }
-                else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES retrys gets no score at all
+                else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
