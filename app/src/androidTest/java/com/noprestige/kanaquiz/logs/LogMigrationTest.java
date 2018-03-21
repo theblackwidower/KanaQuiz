@@ -68,8 +68,8 @@ public class LogMigrationTest
         // but you need to validate that the data was migrated properly.
         for (Integer[] data : testData)
         {
-            Cursor cursor = db.query("SELECT * FROM daily_record WHERE " +
-                    "date = ? AND correct_answers = ? AND total_answers = ?", data);
+            Cursor cursor = db.query("SELECT * FROM daily_record WHERE date = ? AND correct_answers = ? AND " +
+                    "total_answers = ?", data);
             assertEquals(cursor.getCount(), 1);
         }
         Cursor cursor = db.query("SELECT * FROM daily_record");
@@ -136,15 +136,15 @@ public class LogMigrationTest
 
         for (Object[] kanaData : kanaTestData)
         {
-            Cursor cursor = db.query("SELECT * FROM kana_records WHERE " +
-                            "date = ? AND kana = ? AND correct_answers = ? AND incorrect_answers = ?",
+            Cursor cursor = db.query("SELECT * FROM kana_records WHERE date = ? AND kana = ? AND correct_answers = ? " +
+                            "AND incorrect_answers = ?",
                     new Object[]{currentDate, kanaData[0], kanaData[1], kanaData[2]});
             assertEquals(cursor.getCount(), 1);
         }
         for (Object[] incorrectData : incorrectTestData)
         {
-            Cursor cursor = db.query("SELECT * FROM incorrect_answers WHERE " +
-                            "date = ? AND kana = ? AND incorrect_romanji = ? AND occurrences = ?",
+            Cursor cursor = db.query("SELECT * FROM incorrect_answers WHERE date = ? AND kana = ? AND " +
+                            "incorrect_romanji = ? AND occurrences = ?",
                     new Object[]{currentDate, incorrectData[0], incorrectData[1], incorrectData[2]});
             assertEquals(cursor.getCount(), 1);
         }

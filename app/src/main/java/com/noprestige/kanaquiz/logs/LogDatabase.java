@@ -24,8 +24,8 @@ public abstract class LogDatabase extends RoomDatabase
         {
             //rebuilding entire table because ALTER TABLE can't delete columns or change data types
             database.execSQL("ALTER TABLE daily_record RENAME TO old_daily_record");
-            database.execSQL("CREATE TABLE IF NOT EXISTS daily_record " +
-                    "(date INTEGER, correct_answers REAL NOT NULL, total_answers INTEGER NOT NULL, PRIMARY KEY(date))");
+            database.execSQL("CREATE TABLE IF NOT EXISTS daily_record (date INTEGER, correct_answers REAL NOT NULL, " +
+                    "total_answers INTEGER NOT NULL, PRIMARY KEY(date))");
 
             Cursor cursor = database.query("SELECT * FROM old_daily_record");
             if (cursor.getCount() > 0)
@@ -65,14 +65,11 @@ public abstract class LogDatabase extends RoomDatabase
             database.execSQL("ALTER TABLE kana_records RENAME TO old_kana_records");
             database.execSQL("ALTER TABLE incorrect_answers RENAME TO old_incorrect_answers");
 
-            database.execSQL("CREATE TABLE IF NOT EXISTS kana_records " +
-                    "(date INTEGER NOT NULL, kana TEXT NOT NULL, " +
-                    "correct_answers INTEGER NOT NULL, incorrect_answers INTEGER NOT NULL, " +
-                    "PRIMARY KEY(date, kana))");
-            database.execSQL("CREATE TABLE IF NOT EXISTS incorrect_answers " +
-                    "(date INTEGER NOT NULL, kana TEXT NOT NULL, " +
-                    "incorrect_romanji TEXT NOT NULL, occurrences INTEGER NOT NULL, " +
-                    "PRIMARY KEY(date, kana, incorrect_romanji))");
+            database.execSQL("CREATE TABLE IF NOT EXISTS kana_records (date INTEGER NOT NULL, kana TEXT NOT NULL, " +
+                    "correct_answers INTEGER NOT NULL, incorrect_answers INTEGER NOT NULL, PRIMARY KEY(date, kana))");
+            database.execSQL("CREATE TABLE IF NOT EXISTS incorrect_answers (date INTEGER NOT NULL, kana TEXT NOT " +
+                    "NULL, incorrect_romanji TEXT NOT NULL, occurrences INTEGER NOT NULL, PRIMARY KEY(date, kana, " +
+                    "incorrect_romanji))");
 
 
             Cursor kanaCursor = database.query("SELECT * FROM old_kana_records");
