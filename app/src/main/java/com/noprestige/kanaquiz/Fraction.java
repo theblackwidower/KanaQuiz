@@ -10,15 +10,13 @@ public class Fraction
     static final private int RESOLUTION = 240;
     static final private char NUL = '\u0000';
     static final private char[][] FRACTION_CHARS = {
-            {},
-            {},
-            {NUL, '½'},
-            {NUL, '⅓', '⅔'},
-            {NUL, '¼', NUL, '¾'},
-            {NUL, '⅕', '⅖', '⅗', '⅘'},
-            {NUL, '⅙', NUL, NUL, NUL, '⅚'},
-            {},
-            {NUL, '⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}
+            {'½'},
+            {'⅓', '⅔'},
+            {'¼', NUL, '¾'},
+            {'⅕', '⅖', '⅗', '⅘'},
+            {'⅙', NUL, NUL, NUL, '⅚'},
+            {NUL},
+            {'⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}
     };
 
 
@@ -56,7 +54,7 @@ public class Fraction
             char fractionChar;
             try
             {
-                fractionChar = FRACTION_CHARS[denominator][numerator];
+                fractionChar = FRACTION_CHARS[denominator - 2][numerator - 1];
             }
             catch (ArrayIndexOutOfBoundsException ex)
             {
