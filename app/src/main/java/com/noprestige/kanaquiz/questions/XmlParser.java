@@ -271,7 +271,7 @@ abstract class XmlParser
     {
         int refId = parser.getAttributeResourceValue(index, 0);
         return (refId == 0) ? parser.getAttributeValue(index) :
-                (stringResource == 0) ? resources.getString(refId) :
-                        resources.getString(refId, resources.getString(stringResource));
+                ((stringResource == 0) ? resources.getString(refId) :
+                        resources.getString(refId, resources.getString(stringResource)));
     }
 }
