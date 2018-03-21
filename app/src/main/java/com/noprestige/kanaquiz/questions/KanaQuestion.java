@@ -87,6 +87,7 @@ public class KanaQuestion
         return cell;
     }
 
+    @Override
     public String toString()
     {
         return kana + " = " + defaultAnswer;

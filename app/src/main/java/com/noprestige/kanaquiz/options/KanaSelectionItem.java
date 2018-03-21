@@ -202,16 +202,19 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         }
     }
 
+    @Override
     public boolean isChecked()
     {
         return chkCheckBox.isChecked();
     }
 
+    @Override
     public void setChecked(boolean checked)
     {
         chkCheckBox.setChecked(checked);
     }
 
+    @Override
     public void toggle()
     {
         chkCheckBox.toggle();

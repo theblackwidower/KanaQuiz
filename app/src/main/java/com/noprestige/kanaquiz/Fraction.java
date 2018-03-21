@@ -42,6 +42,7 @@ public class Fraction
         }
     }
 
+    @Override
     public String toString()
     {
         simplify();
