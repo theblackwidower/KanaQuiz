@@ -125,8 +125,8 @@ public class DailyLogItem extends View
         linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
-        internalVerticalPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context
-                .getResources().getDisplayMetrics()));
+        internalVerticalPadding = Math.round(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
     }
 
     @Override
@@ -143,8 +143,7 @@ public class DailyLogItem extends View
         int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
         dateXpoint = getPaddingLeft();
-        dateYpoint_1 = getPaddingTop() + internalVerticalPadding +
-                (contentHeight - dateHeight) / 2 -
+        dateYpoint_1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
                 datePaint.getFontMetrics().descent;
         dateYpoint_2 = dateYpoint_1 + dateHeight;
         dateYpoint_3 = dateYpoint_2 + dateHeight;
@@ -154,8 +153,7 @@ public class DailyLogItem extends View
         correctXpoint = slashXpoint - correctWidth;
         totalXpoint = slashXpoint + slashWidth;
         percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYpoint = getPaddingTop() + internalVerticalPadding +
-                (contentHeight + dataHeight) / 2 -
+        dataYpoint = getPaddingTop() + internalVerticalPadding + (contentHeight + dataHeight) / 2 -
                 ratioPaint.getFontMetrics().descent;
 
         lineXpoint_1 = getPaddingLeft();
@@ -168,8 +166,9 @@ public class DailyLogItem extends View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         int desiredWidth = desiredWidth();
-        int desiredHeight = Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) +
-                getPaddingTop() + getPaddingBottom() + internalVerticalPadding * 2;
+        int desiredHeight =
+                Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) + getPaddingTop() +
+                        getPaddingBottom() + internalVerticalPadding * 2;
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
@@ -179,10 +178,8 @@ public class DailyLogItem extends View
 
     private int desiredWidth()
     {
-        return Math.round(
-                Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
-                        totalWidth + percentageWidth) * 2 + slashWidth) +
-                getPaddingLeft() + getPaddingRight();
+        return Math.round(Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
+                totalWidth + percentageWidth) * 2 + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
     static private int calculateSize(int measureSpec, int desired)
@@ -360,12 +357,9 @@ public class DailyLogItem extends View
         if (count < 1000)
             return Integer.toString(count);
         else if (count < 10000)
-            return Float.toString(
-                    Math.round((float) count / 100f)
-                            / 10f) + "k";
+            return Float.toString(Math.round((float) count / 100f) / 10f) + "k";
         else //if (count < 100000)
-            return Integer.toString(
-                    Math.round((float) count / 1000f)) + "k";
+            return Integer.toString(Math.round((float) count / 1000f)) + "k";
     }
 
     private void updateAnswers()

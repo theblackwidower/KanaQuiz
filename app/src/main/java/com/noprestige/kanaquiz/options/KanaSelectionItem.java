@@ -113,16 +113,14 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         LayoutParams contentsLayout = (LayoutParams) lblContents.getLayoutParams();
         LayoutParams boxLayout = (LayoutParams) chkCheckBox.getLayoutParams();
 
-        int desiredWidth = Math.max(
-                lblTitle.getMeasuredWidth() + titleLayout.leftMargin + titleLayout.rightMargin,
-                lblContents.getMeasuredWidth() + contentsLayout.leftMargin + contentsLayout.rightMargin
-        ) + chkCheckBox.getMeasuredWidth() + boxLayout.leftMargin + boxLayout.rightMargin +
-                getPaddingLeft() + getPaddingRight();
-        int desiredHeight = Math.max(
-                lblTitle.getMeasuredHeight() + titleLayout.topMargin + titleLayout.bottomMargin +
+        int desiredWidth = Math.max(lblTitle.getMeasuredWidth() + titleLayout.leftMargin + titleLayout.rightMargin,
+                lblContents.getMeasuredWidth() + contentsLayout.leftMargin + contentsLayout.rightMargin) +
+                chkCheckBox.getMeasuredWidth() + boxLayout.leftMargin + boxLayout.rightMargin + getPaddingLeft() +
+                getPaddingRight();
+        int desiredHeight = Math.max(lblTitle.getMeasuredHeight() + titleLayout.topMargin + titleLayout.bottomMargin +
                         lblContents.getMeasuredHeight() + contentsLayout.topMargin + contentsLayout.bottomMargin,
-                chkCheckBox.getMeasuredHeight() + boxLayout.topMargin + boxLayout.bottomMargin
-        ) + getPaddingTop() + getPaddingBottom() + Math.round(linePaint.getStrokeWidth());
+                chkCheckBox.getMeasuredHeight() + boxLayout.topMargin + boxLayout.bottomMargin) + getPaddingTop() +
+                getPaddingBottom() + Math.round(linePaint.getStrokeWidth());
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);

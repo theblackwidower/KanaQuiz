@@ -17,9 +17,8 @@ import static com.noprestige.kanaquiz.questions.RomanizationSystem.UNKNOWN;
 abstract class XmlParser
 {
     static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
-            ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList,
-            ArrayList<String> setTitleList, ArrayList<String> setNoDiacriticsTitleList)
-            throws XmlPullParserException, IOException, ParseException
+            ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList, ArrayList<String> setTitleList,
+            ArrayList<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -81,8 +80,7 @@ abstract class XmlParser
     }
 
     static private void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            ArrayList<KanaQuestion[][][]> kanaSetList,
-            int indexPoint)
+            ArrayList<KanaQuestion[][][]> kanaSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -270,8 +268,7 @@ abstract class XmlParser
     static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
     {
         int refId = parser.getAttributeResourceValue(index, 0);
-        return (refId == 0) ? parser.getAttributeValue(index) :
-                ((stringResource == 0) ? resources.getString(refId) :
-                        resources.getString(refId, resources.getString(stringResource)));
+        return (refId == 0) ? parser.getAttributeValue(index) : ((stringResource == 0) ? resources.getString(refId) :
+                resources.getString(refId, resources.getString(stringResource)));
     }
 }

@@ -114,8 +114,7 @@ public class MainQuiz extends AppCompatActivity
         QuestionManagement.initialize(getApplicationContext());
 
         if (LogDatabase.DAO == null)
-            LogDatabase.DAO = Room.databaseBuilder(
-                    getApplicationContext(), LogDatabase.class, "user-logs").
+            LogDatabase.DAO = Room.databaseBuilder(getApplicationContext(), LogDatabase.class, "user-logs").
                     addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
                     build().logDao();
 
@@ -214,16 +213,16 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
-                if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string
-                        .prefid_on_incorrect_show_answer))
+                if (OptionsControl
+                        .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
                 {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.show_correct_answer));
                     lblResponse.append(": ");
                     lblResponse.append(questionBank.fetchCorrectAnswer());
                 }
-                else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string
-                        .prefid_on_incorrect_retry))
+                else if (OptionsControl
+                        .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
                 {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.try_again));

@@ -26,8 +26,7 @@ public class LogMigrationTest
     public LogMigrationTest()
     {
         helper = new MigrationTestHelper(InstrumentationRegistry.getInstrumentation(),
-                LogDatabase.class.getCanonicalName(),
-                new FrameworkSQLiteOpenHelperFactory());
+                LogDatabase.class.getCanonicalName(), new FrameworkSQLiteOpenHelperFactory());
     }
 
     @Test
@@ -51,8 +50,7 @@ public class LogMigrationTest
         // db has schema version 1. insert some data using SQL queries.
         // You cannot use DAO classes because they expect the latest schema.
         for (Integer[] data : testData)
-            db.execSQL("INSERT INTO daily_record (date, correct_answers, incorrect_answers) VALUES (?, ?, ?)",
-                    data);
+            db.execSQL("INSERT INTO daily_record (date, correct_answers, incorrect_answers) VALUES (?, ?, ?)", data);
 
         // Prepare for the next version.
         db.close();
@@ -68,8 +66,9 @@ public class LogMigrationTest
         // but you need to validate that the data was migrated properly.
         for (Integer[] data : testData)
         {
-            Cursor cursor = db.query("SELECT * FROM daily_record WHERE date = ? AND correct_answers = ? AND " +
-                    "total_answers = ?", data);
+            Cursor cursor =
+                    db.query("SELECT * FROM daily_record WHERE date = ? AND correct_answers = ? AND total_answers = ?",
+                            data);
             assertEquals(cursor.getCount(), 1);
         }
         Cursor cursor = db.query("SELECT * FROM daily_record");
@@ -111,12 +110,10 @@ public class LogMigrationTest
         // db has schema version 1. insert some data using SQL queries.
         // You cannot use DAO classes because they expect the latest schema.
         for (Object[] data : kanaTestData)
-            db.execSQL("INSERT INTO kana_records (kana, correct_answers, incorrect_answers) VALUES (?, ?, ?)",
-                    data);
+            db.execSQL("INSERT INTO kana_records (kana, correct_answers, incorrect_answers) VALUES (?, ?, ?)", data);
 
         for (Object[] data : incorrectTestData)
-            db.execSQL("INSERT INTO incorrect_answers (kana, incorrect_romanji, occurrences) VALUES (?, ?, ?)",
-                    data);
+            db.execSQL("INSERT INTO incorrect_answers (kana, incorrect_romanji, occurrences) VALUES (?, ?, ?)", data);
 
         // Prepare for the next version.
         db.close();
@@ -129,16 +126,16 @@ public class LogMigrationTest
         // but you need to validate that the data was migrated properly.
         int currentDate = LogTypeConversion.dateToTimestamp(new Date());
 
-        assertEquals(db.query("SELECT * FROM kana_records WHERE NOT date = ?",
-                new Integer[]{currentDate}).getCount(), 0);
-        assertEquals(db.query("SELECT * FROM incorrect_answers WHERE NOT date = ?",
-                new Integer[]{currentDate}).getCount(), 0);
+        assertEquals(db.query("SELECT * FROM kana_records WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
+                0);
+        assertEquals(
+                db.query("SELECT * FROM incorrect_answers WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
+                0);
 
         for (Object[] kanaData : kanaTestData)
         {
             Cursor cursor = db.query("SELECT * FROM kana_records WHERE date = ? AND kana = ? AND correct_answers = ? " +
-                            "AND incorrect_answers = ?",
-                    new Object[]{currentDate, kanaData[0], kanaData[1], kanaData[2]});
+                    "AND incorrect_answers = ?", new Object[]{currentDate, kanaData[0], kanaData[1], kanaData[2]});
             assertEquals(cursor.getCount(), 1);
         }
         for (Object[] incorrectData : incorrectTestData)
