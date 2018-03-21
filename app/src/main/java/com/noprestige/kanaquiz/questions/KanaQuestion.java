@@ -56,7 +56,8 @@ public class KanaQuestion
     {
         if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
             return defaultAnswer;
-        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string
+                .prefid_romanize_system_hepburn))
             return fetchCorrectAnswer(RomanizationSystem.HEPBURN);
         else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
             return fetchCorrectAnswer(RomanizationSystem.NIHON);
@@ -81,7 +82,8 @@ public class KanaQuestion
         cell.setKana(getKana());
         cell.setRomanji(fetchCorrectAnswer());
         if (kana.length() > 1)
-            cell.setKanaSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
+            cell.setKanaSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources()
+                    .getDisplayMetrics()));
         return cell;
     }
 

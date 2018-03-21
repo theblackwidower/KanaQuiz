@@ -86,11 +86,13 @@ public abstract class QuestionManagement
 
             try
             {
-                for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = xrp.next())
+                for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = xrp
+                        .next())
                 {
                     if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaSet"))
                     {
-                        XmlParser.parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+                        XmlParser.parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList,
+                                setNoDiacriticsTitleList);
                     }
                 }
 

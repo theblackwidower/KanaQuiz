@@ -214,14 +214,16 @@ public class MainQuiz extends AppCompatActivity
                 lblResponse.setTypeface(null, BOLD);
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
-                if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
+                if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string
+                        .prefid_on_incorrect_show_answer))
                 {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.show_correct_answer));
                     lblResponse.append(": ");
                     lblResponse.append(questionBank.fetchCorrectAnswer());
                 }
-                else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
+                else if (OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string
+                        .prefid_on_incorrect_retry))
                 {
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.try_again));
@@ -247,7 +249,8 @@ public class MainQuiz extends AppCompatActivity
             if (isGetNewQuestion)
             {
                 totalQuestions++;
-                //txtAnswer.setEnabled(false); //TODO: Find a way to disable a textbox without closing the touch keyboard
+                //TODO: Find a way to disable a textbox without closing the touch keyboard
+                //txtAnswer.setEnabled(false);
                 delayHandler.postDelayed(new Runnable()
                 {
                     public void run()

@@ -123,7 +123,8 @@ public abstract class LogDatabase extends RoomDatabase
 
                     database.execSQL("INSERT INTO incorrect_answers (date, kana, incorrect_romanji, occurrences) " +
                                     "VALUES (?, ?, ?, ?)",
-                            new Object[]{currentDate, incorrectKanaValue, incorrectRomanjiValue, incorrectOccurrencesValue});
+                            new Object[]{currentDate, incorrectKanaValue, incorrectRomanjiValue,
+                                    incorrectOccurrencesValue});
                 }
             }
             database.execSQL("DROP TABLE old_incorrect_answers");

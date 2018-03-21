@@ -252,8 +252,10 @@ public class ReferenceCell extends View
         header.setText(title);
         header.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         header.setTextSize(COMPLEX_UNIT_SP, 14);
-        header.setPadding(0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
-                0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setPadding(0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 28, context
+                        .getResources().getDisplayMetrics())),
+                0, Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources()
+                        .getDisplayMetrics())));
         header.setTypeface(header.getTypeface(), 1);
         header.setAllCaps(true);
         return header;

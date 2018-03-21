@@ -41,7 +41,8 @@ public class ReferencePage extends Fragment
         else if (kanaType.equals(getResources().getString(R.string.katakana)))
             viewPager.setId(R.id.katakanaReferenceViewPager);
 
-        viewPager.setAdapter(new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType));
+        viewPager.setAdapter(new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(),
+                kanaType));
         TabLayout tabLayout = subScreen.findViewById(R.id.tabLayout);
         tabLayout.setPadding(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0,
                 getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0);

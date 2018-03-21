@@ -27,7 +27,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         if (this.count() > 0)
         {
             if (previousQuestions == null)
-                previousQuestions = new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string.prefid_repetition)));
+                previousQuestions = new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string
+                        .prefid_repetition)));
             do
                 currentQuestion = this.getRandom();
             while (!previousQuestions.add(currentQuestion));
