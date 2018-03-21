@@ -1,6 +1,5 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.annotation.SuppressLint;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -14,14 +13,13 @@ import java.util.concurrent.ExecutionException;
 @Dao
 public abstract class LogDao
 {
-    @SuppressLint("StaticFieldLeak")
-    private class GetKanaPercentage extends AsyncTask<String, Void, Float>
+    private static class GetKanaPercentage extends AsyncTask<String, Void, Float>
     {
         @Override
         protected Float doInBackground(String... data)
         {
             String kana = data[0];
-            KanaRecord[] records = getKanaRecord(kana);
+            KanaRecord[] records = LogDatabase.DAO.getKanaRecord(kana);
             if (records.length <= 0)
                 return null;
             else
@@ -38,15 +36,14 @@ public abstract class LogDao
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
+    private static class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
     {
         @Override
         protected Integer doInBackground(String... data)
         {
             String kana = data[0];
             String romanji = data[1];
-            IncorrectAnswerRecord[] records = getAnswerRecord(kana, romanji);
+            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(kana, romanji);
             if (records.length <= 0)
                 return 0;
             else
@@ -59,8 +56,7 @@ public abstract class LogDao
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
+    private static class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -74,8 +70,7 @@ public abstract class LogDao
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
+    private static class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -91,8 +86,7 @@ public abstract class LogDao
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
+    private static class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -107,8 +101,7 @@ public abstract class LogDao
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
+    private static class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -146,13 +139,13 @@ public abstract class LogDao
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public float getDailyPercentage(Date date)
+    public static float getDailyPercentage(Date date)
     {
-        DailyRecord record = getDateRecord(date);
+        DailyRecord record = LogDatabase.DAO.getDateRecord(date);
         return record.correct_answers / (float) (record.total_answers);
     }
 
-    public Float getKanaPercentage(String kana)
+    public static Float getKanaPercentage(String kana)
     {
         try
         {
@@ -165,7 +158,7 @@ public abstract class LogDao
         }
     }
 
-    public int getIncorrectAnswerCount(String kana, String romanji)
+    public static int getIncorrectAnswerCount(String kana, String romanji)
     {
         try
         {
@@ -178,68 +171,68 @@ public abstract class LogDao
         }
     }
 
-    private void addTodaysRecord(float score)
+    private static void addTodaysRecord(float score)
     {
-        DailyRecord record = getDateRecord(new Date());
+        DailyRecord record = LogDatabase.DAO.getDateRecord(new Date());
         if (record == null)
         {
             record = new DailyRecord();
-            insertDailyRecord(record);
+            LogDatabase.DAO.insertDailyRecord(record);
         }
         if (score > 0)
             record.correct_answers += score;
 
         record.total_answers++;
 
-        updateDailyRecord(record);
+        LogDatabase.DAO.updateDailyRecord(record);
     }
 
-    private void addKanaRecord(String kana, boolean isCorrect)
+    private static void addKanaRecord(String kana, boolean isCorrect)
     {
-        KanaRecord record = getDaysKanaRecord(kana, new Date());
+        KanaRecord record = LogDatabase.DAO.getDaysKanaRecord(kana, new Date());
         if (record == null)
         {
             record = new KanaRecord(kana);
-            insertKanaRecord(record);
+            LogDatabase.DAO.insertKanaRecord(record);
         }
         if (isCorrect)
             record.correct_answers++;
         else
             record.incorrect_answers++;
-        updateKanaRecord(record);
+        LogDatabase.DAO.updateKanaRecord(record);
     }
 
-    private void addIncorrectAnswerRecord(String kana, String romanji)
+    private static void addIncorrectAnswerRecord(String kana, String romanji)
     {
-        IncorrectAnswerRecord record = getDaysAnswerRecord(kana, romanji, new Date());
+        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(kana, romanji, new Date());
         if (record == null)
         {
             record = new IncorrectAnswerRecord(kana, romanji);
-            insertIncorrectAnswer(record);
+            LogDatabase.DAO.insertIncorrectAnswer(record);
         }
         else
         {
             record.occurrences++;
-            updateIncorrectAnswer(record);
+            LogDatabase.DAO.updateIncorrectAnswer(record);
         }
     }
 
-    public void reportCorrectAnswer(String kana)
+    public static void reportCorrectAnswer(String kana)
     {
         new ReportCorrectAnswer().execute(kana);
     }
 
-    public void reportIncorrectAnswer(String kana, String romanji)
+    public static void reportIncorrectAnswer(String kana, String romanji)
     {
         new ReportIncorrectAnswer().execute(kana, romanji);
     }
 
-    public void reportRetriedCorrectAnswer(String kana, float score)
+    public static void reportRetriedCorrectAnswer(String kana, float score)
     {
         new ReportRetriedCorrectAnswer().execute(kana, Float.toString(score));
     }
 
-    public void reportIncorrectRetry(String kana, String romanji)
+    public static void reportIncorrectRetry(String kana, String romanji)
     {
         new ReportIncorrectRetry().execute(kana, romanji);
     }
@@ -253,11 +246,11 @@ public abstract class LogDao
     @Query("DELETE FROM incorrect_answers WHERE 1 = 1")
     abstract void deleteAllAnswerRecords();
 
-    public void deleteAll()
+    public static void deleteAll()
     {
-        deleteAllDailyRecords();
-        deleteAllKanaRecords();
-        deleteAllAnswerRecords();
+        LogDatabase.DAO.deleteAllDailyRecords();
+        LogDatabase.DAO.deleteAllKanaRecords();
+        LogDatabase.DAO.deleteAllAnswerRecords();
     }
 
     @Insert
