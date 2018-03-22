@@ -2,9 +2,11 @@ package com.noprestige.kanaquiz.logs;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.migration.Migration;
+import android.content.Context;
 import android.database.Cursor;
 
 import java.util.Date;
@@ -15,7 +17,15 @@ public abstract class LogDatabase extends RoomDatabase
 {
     public static LogDao DAO = null;
 
-    public abstract LogDao logDao();
+    protected abstract LogDao logDao();
+
+    public static void initialize(Context context)
+    {
+        if (LogDatabase.DAO == null)
+            LogDatabase.DAO = Room.databaseBuilder(context.getApplicationContext(), LogDatabase.class, "user-logs").
+                    addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
+                    build().logDao();
+    }
 
     public static final Migration MIGRATION_1_2 = new Migration(1, 2)
     {

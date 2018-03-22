@@ -6,7 +6,7 @@ import com.noprestige.kanaquiz.R;
 
 public class Hiragana extends QuestionManagement
 {
-    public static final Hiragana QUESTIONS = new Hiragana();
+    public static Hiragana QUESTIONS = null;
 
     private Hiragana()
     {
@@ -14,6 +14,11 @@ public class Hiragana extends QuestionManagement
 
     static public void initialize(Context context)
     {
-        parseXml(context.getResources().getXml(R.xml.hiragana), context.getResources(), QUESTIONS);
+        if (QUESTIONS != null)
+        {
+            Context appContext = context.getApplicationContext();
+            QUESTIONS = new Hiragana();
+            parseXml(appContext.getResources().getXml(R.xml.hiragana), appContext.getResources(), QUESTIONS);
+        }
     }
 }

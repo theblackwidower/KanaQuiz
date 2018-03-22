@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.quiz;
 
 import android.annotation.SuppressLint;
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
@@ -112,11 +111,7 @@ public class MainQuiz extends AppCompatActivity
 
         OptionsControl.initialize(getApplicationContext());
         QuestionManagement.initialize(getApplicationContext());
-
-        if (LogDatabase.DAO == null)
-            LogDatabase.DAO = Room.databaseBuilder(getApplicationContext(), LogDatabase.class, "user-logs").
-                    addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
-                    build().logDao();
+        LogDatabase.initialize(getApplicationContext());
 
         resetQuiz();
         nextQuestion();

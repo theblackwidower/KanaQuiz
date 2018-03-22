@@ -17,10 +17,14 @@ public abstract class OptionsControl
     @SuppressLint("CommitPrefEdits")
     public static void initialize(Context context)
     {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-        editor = sharedPreferences.edit();
-        resources = context.getResources();
-        PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
+        if (sharedPreferences != null)
+        {
+            Context appContext = context.getApplicationContext();
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+            editor = sharedPreferences.edit();
+            resources = appContext.getResources();
+            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, false);
+        }
     }
 
     public static boolean getBoolean(int resId)
