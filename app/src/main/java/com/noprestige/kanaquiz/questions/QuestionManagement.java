@@ -23,6 +23,8 @@ public abstract class QuestionManagement
 {
     private boolean isInitialized = false;
 
+    private XmlResourceParser XmlResource = null;
+
     private int categoryCount = 0;
 
     private KanaQuestion[][][][] kanaSets = new KanaQuestion[][][][]{};
@@ -75,10 +77,12 @@ public abstract class QuestionManagement
         }
     }
 
-    protected static void parseXml(XmlResourceParser xrp, Resources resources, QuestionManagement singletonObject)
+    protected static void parseXml(int XmlResource, Resources resources, QuestionManagement singletonObject)
     {
         if (!singletonObject.isInitialized)
         {
+            XmlResourceParser xrp = resources.getXml(XmlResource);
+
             ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
             ArrayList<String> prefIdList = new ArrayList<>();
             ArrayList<String> setTitleList = new ArrayList<>();
@@ -96,6 +100,7 @@ public abstract class QuestionManagement
                     }
                 }
 
+                singletonObject.XmlResource = xrp;
                 singletonObject.categoryCount = kanaSetList.size();
 
                 singletonObject.kanaSets = new KanaQuestion[singletonObject.categoryCount][][][];

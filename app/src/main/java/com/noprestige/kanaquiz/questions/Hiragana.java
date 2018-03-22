@@ -16,9 +16,8 @@ public class Hiragana extends QuestionManagement
     {
         if (QUESTIONS != null)
         {
-            Context appContext = context.getApplicationContext();
             QUESTIONS = new Hiragana();
-            parseXml(appContext.getResources().getXml(R.xml.hiragana), appContext.getResources(), QUESTIONS);
+            parseXml(R.xml.hiragana, context.getApplicationContext().getResources(), QUESTIONS);
         }
     }
 }

@@ -16,9 +16,8 @@ public class Katakana extends QuestionManagement
     {
         if (QUESTIONS != null)
         {
-            Context appContext = context.getApplicationContext();
             QUESTIONS = new Katakana();
-            parseXml(appContext.getResources().getXml(R.xml.katakana), appContext.getResources(), QUESTIONS);
+            parseXml(R.xml.katakana, context.getApplicationContext().getResources(), QUESTIONS);
         }
     }
 }
