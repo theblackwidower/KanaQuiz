@@ -43,7 +43,7 @@
          development</string>
 
     <!-- Log View -->
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading&#8230;</string>
     <string name="no_logs">No Logs Found.</string>
 
     <!-- Options Screen -->
