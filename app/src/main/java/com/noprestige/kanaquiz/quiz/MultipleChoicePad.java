@@ -34,9 +34,7 @@ public class MultipleChoicePad extends FlowLayout
         init(attrs, defStyle);
     }
 
-    private void init(AttributeSet attrs, int defStyle)
-    {
-    }
+    private void init(AttributeSet attrs, int defStyle) {}
 
     public void setOnAnswerListener(OnAnswerListener listener)
     {

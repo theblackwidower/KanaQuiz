@@ -114,9 +114,7 @@ public abstract class QuestionManagement
 
                 singletonObject.isInitialized = true;
             }
-            catch (XmlPullParserException | IOException | ParseException ex)
-            {
-            }
+            catch (XmlPullParserException | IOException | ParseException ignored) {}
         }
     }
 

@@ -8,9 +8,7 @@ public class Katakana extends QuestionManagement
 {
     public static Katakana QUESTIONS = null;
 
-    private Katakana()
-    {
-    }
+    private Katakana() {}
 
     static public void initialize(Context context)
     {

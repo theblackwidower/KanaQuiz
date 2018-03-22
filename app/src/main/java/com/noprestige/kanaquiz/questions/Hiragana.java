@@ -8,9 +8,7 @@ public class Hiragana extends QuestionManagement
 {
     public static Hiragana QUESTIONS = null;
 
-    private Hiragana()
-    {
-    }
+    private Hiragana() {}
 
     static public void initialize(Context context)
     {

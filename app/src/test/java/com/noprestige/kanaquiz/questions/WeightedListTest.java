@@ -51,9 +51,7 @@ public class WeightedListTest
             list.get(i);
             fail("Failed to throw error when over limit.");
         }
-        catch (IndexOutOfBoundsException e)
-        {
-        }
+        catch (IndexOutOfBoundsException ignored) {}
     }
 
     private void removeFromSampleData(int index, WeightedList<String> list, SampleData data)
