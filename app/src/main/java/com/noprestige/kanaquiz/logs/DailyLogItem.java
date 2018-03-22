@@ -391,8 +391,8 @@ public class DailyLogItem extends View
         else if (tenth == 7)
             return resources.getColor(R.color.seventy_to_eighty);
         else if (tenth == 8)
-            return resources.getColor(R.color.eighty_to_ninty);
+            return resources.getColor(R.color.eighty_to_ninety);
         else //if (tenth >= 9)
-            return resources.getColor(R.color.above_ninty);
+            return resources.getColor(R.color.above_ninety);
     }
 }

@@ -19,6 +19,6 @@
     <color name="fifty_to_sixty">#d50000</color>
     <color name="sixty_to_seventy">#ef6c00</color><!-- got illegible warning-->
     <color name="seventy_to_eighty">#ffc400</color><!-- got illegible warning-->
-    <color name="eighty_to_ninty">#64dd17</color><!-- got illegible warning-->
-    <color name="above_ninty">#00e676</color><!-- got illegible warning-->
+    <color name="eighty_to_ninety">#64dd17</color><!-- got illegible warning-->
+    <color name="above_ninety">#00e676</color><!-- got illegible warning-->
 </resources>
