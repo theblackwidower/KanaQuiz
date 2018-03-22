@@ -11,43 +11,51 @@ import com.noprestige.kanaquiz.R;
 
 public class LogView extends AppCompatActivity
 {
-    @SuppressLint("StaticFieldLeak")
-    private class FetchLogs extends AsyncTask<Void, Void, DailyLogItem[]>
+    private static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
     {
+        @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
+        @SuppressLint("StaticFieldLeak")
         TextView lblLogMessage;
 
         @Override
-        protected void onPreExecute()
+        protected Integer doInBackground(LogView... activity)
         {
-            layout = findViewById(R.id.log_view_layout);
-            lblLogMessage = findViewById(R.id.lblLogMessage);
-        }
+            layout = activity[0].findViewById(R.id.log_view_layout);
+            lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
 
-        @Override
-        protected DailyLogItem[] doInBackground(Void... nothing)
-        {
             DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
 
-            DailyLogItem[] returnValues = new DailyLogItem[records.length];
-            for (int i = 0; i < records.length; i++)
+            for (DailyRecord record : records)
             {
-                DailyLogItem output = new DailyLogItem(getBaseContext());
-                output.setFromRecord(records[i]);
-                returnValues[i] = output;
+                DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
+                output.setFromRecord(record);
+                if (isCancelled())
+                    return null;
+                else
+                    publishProgress(output);
             }
-            return returnValues;
+            return records.length;
         }
 
         @Override
-        protected void onPostExecute(DailyLogItem[] items)
+        protected void onProgressUpdate(DailyLogItem... item)
         {
-            if (items.length > 0)
-            {
-                for (DailyLogItem item : items)
-                    layout.addView(item);
+            layout.addView(item[0], layout.getChildCount() - 1);
+        }
+
+        @Override
+        protected void onCancelled()
+        {
+            layout = null;
+            lblLogMessage = null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer count)
+        {
+            if (count > 0)
                 layout.removeView(lblLogMessage);
-            }
             else
                 lblLogMessage.setText(R.string.no_logs);
         }
@@ -62,7 +70,7 @@ public class LogView extends AppCompatActivity
         setContentView(R.layout.activity_log_view);
 
         fetchThread = new FetchLogs();
-        fetchThread.execute();
+        fetchThread.execute(this);
     }
 
     @Override
