@@ -12,7 +12,7 @@ import com.noprestige.kanaquiz.R;
 public class LogView extends AppCompatActivity
 {
     @SuppressLint("StaticFieldLeak")
-    private class FetchLogs extends AsyncTask<Void, Void, DailyRecord[]>
+    private class FetchLogs extends AsyncTask<Void, Void, DailyLogItem[]>
     {
         LinearLayout layout;
         TextView lblLogMessage;
@@ -25,28 +25,31 @@ public class LogView extends AppCompatActivity
         }
 
         @Override
-        protected DailyRecord[] doInBackground(Void... nothing)
+        protected DailyLogItem[] doInBackground(Void... nothing)
         {
-            return LogDatabase.DAO.getAllDailyRecords();
+            DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
+
+            DailyLogItem[] returnValues = new DailyLogItem[records.length];
+            for (int i = 0; i < records.length; i++)
+            {
+                DailyLogItem output = new DailyLogItem(getBaseContext());
+                output.setFromRecord(records[i]);
+                returnValues[i] = output;
+            }
+            return returnValues;
         }
 
         @Override
-        protected void onPostExecute(DailyRecord[] records)
+        protected void onPostExecute(DailyLogItem[] items)
         {
-            if (records.length > 0)
+            if (items.length > 0)
             {
-                for (DailyRecord record : records)
-                {
-                    DailyLogItem output = new DailyLogItem(getBaseContext());
-                    output.setFromRecord(record);
-                    layout.addView(output);
-                }
+                for (DailyLogItem item : items)
+                    layout.addView(item);
                 layout.removeView(lblLogMessage);
             }
             else
-            {
                 lblLogMessage.setText(R.string.no_logs);
-            }
         }
     }
 
