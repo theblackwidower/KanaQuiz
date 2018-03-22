@@ -219,7 +219,10 @@ public abstract class QuestionManagement
         KanaQuestion[] kanaSet = getKanaSet(setNumber, diacritic, false);
         if (kanaSet != null)
             for (KanaQuestion question : kanaSet)
-                returnValue.append(question.getKana() + " ");
+            {
+                returnValue.append(question.getKana());
+                returnValue.append(' ');
+            }
         return returnValue.toString();
     }
 
