@@ -12,7 +12,7 @@ public class Katakana extends QuestionManagement
 
     static public void initialize(Context context)
     {
-        if (QUESTIONS != null)
+        if (QUESTIONS == null)
         {
             QUESTIONS = new Katakana();
             parseXml(R.xml.katakana, context.getApplicationContext().getResources(), QUESTIONS);

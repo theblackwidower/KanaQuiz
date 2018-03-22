@@ -12,7 +12,7 @@ public class Hiragana extends QuestionManagement
 
     static public void initialize(Context context)
     {
-        if (QUESTIONS != null)
+        if (QUESTIONS == null)
         {
             QUESTIONS = new Hiragana();
             parseXml(R.xml.hiragana, context.getApplicationContext().getResources(), QUESTIONS);

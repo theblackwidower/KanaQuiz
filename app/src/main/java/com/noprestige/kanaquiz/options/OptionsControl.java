@@ -17,7 +17,7 @@ public abstract class OptionsControl
     @SuppressLint("CommitPrefEdits")
     public static void initialize(Context context)
     {
-        if (sharedPreferences != null)
+        if (sharedPreferences == null)
         {
             Context appContext = context.getApplicationContext();
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
