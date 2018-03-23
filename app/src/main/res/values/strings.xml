@@ -9,7 +9,6 @@
 
     <!-- Main Quiz Screen -->
     <string name="score_label">Score</string>
-    <string name="button_send">Answer</string>
     <string name="answer_hint_touch">Answer Here, Then Tap &#8216;Go&#8217;</string>
     <string name="answer_hint_hardware">Answer Here, Then Press &#8216;Enter&#8217;</string>
     <string name="no_questions">No Questions available</string>
