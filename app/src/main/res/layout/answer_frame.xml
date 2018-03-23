@@ -17,7 +17,8 @@
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:text=""
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        tools:ignore="LabelFor"/>
 
     <TextView
         android:id="@+id/lblScore"
