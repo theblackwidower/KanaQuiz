@@ -8,7 +8,7 @@ import java.util.TreeMap;
 class WeightedList<E>
 {
     private TreeMap<Integer, E> map = new TreeMap<>();
-    private int maxValue = 0;
+    private int maxValue;
 
     private static Random rng = new Random();
 

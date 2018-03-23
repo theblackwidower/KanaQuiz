@@ -61,7 +61,7 @@ public class LogView extends AppCompatActivity
         }
     }
 
-    FetchLogs fetchThread = null;
+    FetchLogs fetchThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

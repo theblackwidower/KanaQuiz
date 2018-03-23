@@ -52,9 +52,9 @@ public class MainQuiz extends AppCompatActivity
 
     private Handler delayHandler = new Handler();
 
-    private int retryCount = 0;
+    private int retryCount;
 
-    private FetchTodaysLog fetchScoreThread = null;
+    private FetchTodaysLog fetchScoreThread;
 
     @SuppressLint("StaticFieldLeak")
     private class FetchTodaysLog extends AsyncTask<Date, Void, DailyRecord>
@@ -306,7 +306,7 @@ public class MainQuiz extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
 
-        startActivityForResult(new Intent(MainQuiz.this, destination), result);
+        startActivityForResult(new Intent(this, destination), result);
         return true;
     }
 

@@ -10,9 +10,9 @@ import com.noprestige.kanaquiz.R;
 
 public abstract class OptionsControl
 {
-    static private SharedPreferences sharedPreferences;
-    static private SharedPreferences.Editor editor;
-    static private Resources resources;
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor editor;
+    private static Resources resources;
 
     @SuppressLint("CommitPrefEdits")
     public static void initialize(Context context)

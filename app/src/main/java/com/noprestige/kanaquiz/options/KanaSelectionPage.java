@@ -15,8 +15,6 @@ public class KanaSelectionPage extends Fragment
 {
     private static final String ARG_PAGE_NUMBER = "position";
 
-    public KanaSelectionPage() {}
-
     public static KanaSelectionPage newInstance(int id)
     {
         KanaSelectionPage screen = new KanaSelectionPage();

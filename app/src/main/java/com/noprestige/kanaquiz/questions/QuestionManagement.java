@@ -3,7 +3,7 @@ package com.noprestige.kanaquiz.questions;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
-import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.noprestige.kanaquiz.R;
@@ -21,19 +21,19 @@ import java.util.ArrayList;
 
 public abstract class QuestionManagement
 {
-    private boolean isInitialized = false;
+    private boolean isInitialized;
 
-    private XmlResourceParser XmlResource = null;
+    private XmlResourceParser XmlResource;
 
-    private int categoryCount = 0;
+    private int categoryCount;
 
-    private KanaQuestion[][][][] kanaSets = new KanaQuestion[][][][]{};
+    private KanaQuestion[][][][] kanaSets;
 
-    private String[] prefIds = new String[]{};
+    private String[] prefIds;
 
-    private String[] setTitles = new String[]{};
+    private String[] setTitles;
 
-    private String[] setNoDiacriticsTitles = new String[]{};
+    private String[] setNoDiacriticsTitles;
 
     private int getCategoryCount()
     {
@@ -313,7 +313,8 @@ public abstract class QuestionManagement
     public LinearLayout getSelectionScreen(Context context)
     {
         LinearLayout layout = new LinearLayout(context);
-        layout.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        layout.setLayoutParams(
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
         for (int i = 1; i <= getCategoryCount(); i++)

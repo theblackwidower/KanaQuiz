@@ -17,8 +17,6 @@ public class ReferenceSubsectionPage extends Fragment
     private static final String ARG_KANA_TYPE = "kanaType";
     private static final String ARG_REF_CATEGORY = "refCategory";
 
-    public ReferenceSubsectionPage() {}
-
     public static ReferenceSubsectionPage newInstance(String kanaType, String refCategory)
     {
         ReferenceSubsectionPage screen = new ReferenceSubsectionPage();

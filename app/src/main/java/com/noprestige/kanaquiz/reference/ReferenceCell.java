@@ -7,7 +7,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -35,7 +35,7 @@ public class ReferenceCell extends View
     private float kanaHeight;
     private float romanjiHeight;
 
-    private static TypedArray defaultAttributes = null;
+    private static TypedArray defaultAttributes;
 
     public ReferenceCell(Context context)
     {
@@ -62,14 +62,14 @@ public class ReferenceCell extends View
         if (defaultAttributes == null)
             defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
 
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
         setKana(a.getString(R.styleable.ReferenceCell_kana));
         setRomanji(a.getString(R.styleable.ReferenceCell_romanji));
         setKanaSize(a.getDimension(R.styleable.ReferenceCell_kanaSize,
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
+                TypedValue.applyDimension(COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
         setRomanjiSize(a.getDimension(R.styleable.ReferenceCell_romanjiSize,
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
+                TypedValue.applyDimension(COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
         setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
 
         a.recycle();
@@ -107,7 +107,7 @@ public class ReferenceCell extends View
         setMeasuredDimension(width, height);
     }
 
-    static private int calculateSize(int measureSpec, int desired)
+    private static int calculateSize(int measureSpec, int desired)
     {
         switch (MeasureSpec.getMode(measureSpec))
         {
@@ -250,12 +250,13 @@ public class ReferenceCell extends View
     {
         TextView header = new TextView(context);
         header.setText(title);
-        header.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        header.setLayoutParams(
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header.setTextSize(COMPLEX_UNIT_SP, 14);
-        header.setPadding(0, Math.round(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
-                0, Math.round(TypedValue
-                        .applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setPadding(0,
+                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
+                0,
+                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
         header.setTypeface(header.getTypeface(), 1);
         header.setAllCaps(true);
         return header;

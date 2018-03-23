@@ -6,11 +6,11 @@ import com.noprestige.kanaquiz.R;
 
 public class Katakana extends QuestionManagement
 {
-    public static Katakana QUESTIONS = null;
+    public static Katakana QUESTIONS;
 
     private Katakana() {}
 
-    static public void initialize(Context context)
+    public static void initialize(Context context)
     {
         if (QUESTIONS == null)
         {

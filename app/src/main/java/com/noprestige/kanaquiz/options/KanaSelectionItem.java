@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -59,7 +58,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         lblContents = findViewById(R.id.lblContents);
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
-        this.setOnClickListener(new OnClickListener()
+        this.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view)
             {
@@ -67,7 +66,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
             }
         });
 
-        chkCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener()
+        chkCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
@@ -76,7 +75,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         });
 
         // Load attributes
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
 
         setTitle(a.getString(R.styleable.KanaSelectionItem_title));
         setContents(a.getString(R.styleable.KanaSelectionItem_contents));
@@ -128,7 +127,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         setMeasuredDimension(width, height);
     }
 
-    static private int calculateSize(int measureSpec, int desired)
+    private static int calculateSize(int measureSpec, int desired)
     {
         switch (MeasureSpec.getMode(measureSpec))
         {

@@ -15,12 +15,9 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
-    private QuestionRecord previousQuestions = null;
+    private QuestionRecord previousQuestions;
 
-    KanaQuestionBank()
-    {
-        super();
-    }
+    KanaQuestionBank() {}
 
     public void newQuestion() throws NoQuestionsException
     {

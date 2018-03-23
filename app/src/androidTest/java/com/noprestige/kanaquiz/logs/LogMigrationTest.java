@@ -34,7 +34,7 @@ public class LogMigrationTest
     {
         SupportSQLiteDatabase db = helper.createDatabase(TEST_DB, 1);
 
-        Integer[][] testData = new Integer[][]{
+        Integer[][] testData = {
                 new Integer[]{20180123, 15, 4}, new Integer[]{20171121, 5, 11}, new Integer[]{20130624, 22, 2},
                 new Integer[]{20180122, 19, 87}, new Integer[]{20180101, 23, 44}, new Integer[]{20180120, 101, 26},
                 new Integer[]{20180124, 88, 21}, new Integer[]{20180125, 22, 12}, new Integer[]{20180126, 34, 19},
@@ -74,12 +74,12 @@ public class LogMigrationTest
     {
         SupportSQLiteDatabase db = helper.createDatabase(TEST_DB, 2);
 
-        Object[][] kanaTestData = new Object[][]{
+        Object[][] kanaTestData = {
                 new Object[]{"A", 15, 4}, new Object[]{"B", 5, 11}, new Object[]{"C", 22, 2}, new Object[]{"D", 19, 87},
                 new Object[]{"E", 23, 44}, new Object[]{"F", 101, 26}, new Object[]{"G", 88, 21},
                 new Object[]{"H", 22, 12}, new Object[]{"I", 34, 19}, new Object[]{"J", 4, 8},
         };
-        Object[][] incorrectTestData = new Object[][]{
+        Object[][] incorrectTestData = {
                 new Object[]{"A", "c", 6}, new Object[]{"B", "j", 7}, new Object[]{"B", "f", 7},
                 new Object[]{"C", "l", 4}, new Object[]{"D", "f", 2}, new Object[]{"D", "q", 5},
                 new Object[]{"E", "r", 23}, new Object[]{"F", "w", 7}, new Object[]{"F", "n", 1},

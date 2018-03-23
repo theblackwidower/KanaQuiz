@@ -79,7 +79,7 @@ abstract class XmlParser
         parseXmlStoreSet(currentSet, kanaSetList, indexPoint, Diacritic.NO_DIACRITIC, false);
     }
 
-    static private void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
+    private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
             ArrayList<KanaQuestion[][][]> kanaSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
@@ -120,7 +120,7 @@ abstract class XmlParser
         parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
     }
 
-    static private void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
+    private static void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
             int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
         KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
@@ -131,7 +131,7 @@ abstract class XmlParser
         kanaSetList.set(indexPoint, pulledArray);
     }
 
-    static private KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
+    private static KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = null;
@@ -160,7 +160,7 @@ abstract class XmlParser
         return returnValue;
     }
 
-    static private WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
+    private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisRomanji = null;
@@ -197,7 +197,7 @@ abstract class XmlParser
         return question;
     }
 
-    static private void parseXmlAltAnswers(KanaQuestion question, XmlResourceParser parser)
+    private static void parseXmlAltAnswers(KanaQuestion question, XmlResourceParser parser)
             throws XmlPullParserException, IOException, ParseException
     {
         int lineNumber = parser.getLineNumber();
@@ -232,7 +232,7 @@ abstract class XmlParser
         }
     }
 
-    static private RomanizationSystem[] parseRomanizationSystemList(String attributeString)
+    private static RomanizationSystem[] parseRomanizationSystemList(String attributeString)
     {
         //trims and collapses whitespace
         attributeString = attributeString.trim().replaceAll("\\s+", " ");
@@ -258,12 +258,12 @@ abstract class XmlParser
         return returnValue;
     }
 
-    static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
+    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
     {
         return parseXmlValue(parser, index, resources, 0);
     }
 
-    static private String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
+    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
     {
         int refId = parser.getAttributeResourceValue(index, 0);
         return (refId == 0) ? parser.getAttributeValue(index) : ((stringResource == 0) ? resources.getString(refId) :

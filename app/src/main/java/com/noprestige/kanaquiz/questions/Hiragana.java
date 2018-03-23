@@ -6,11 +6,11 @@ import com.noprestige.kanaquiz.R;
 
 public class Hiragana extends QuestionManagement
 {
-    public static Hiragana QUESTIONS = null;
+    public static Hiragana QUESTIONS;
 
     private Hiragana() {}
 
-    static public void initialize(Context context)
+    public static void initialize(Context context)
     {
         if (QUESTIONS == null)
         {

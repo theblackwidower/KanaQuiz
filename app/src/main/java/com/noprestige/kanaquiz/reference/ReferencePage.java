@@ -15,8 +15,6 @@ public class ReferencePage extends Fragment
 {
     private static final String ARG_KANA_TYPE = "kanaType";
 
-    public ReferencePage() {}
-
     public static ReferencePage newInstance(String kanaType)
     {
         ReferencePage screen = new ReferencePage();

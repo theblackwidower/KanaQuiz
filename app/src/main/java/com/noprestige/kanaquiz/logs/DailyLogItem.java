@@ -72,7 +72,7 @@ public class DailyLogItem extends View
 
     private int internalVerticalPadding;
 
-    private static TypedArray defaultAttributes = null;
+    private static TypedArray defaultAttributes;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
@@ -106,7 +106,7 @@ public class DailyLogItem extends View
             defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
 
         // Load attributes
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
         setCorrectAnswers(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1));
@@ -182,7 +182,7 @@ public class DailyLogItem extends View
                 totalWidth + percentageWidth) * 2 + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
-    static private int calculateSize(int measureSpec, int desired)
+    private static int calculateSize(int measureSpec, int desired)
     {
         switch (MeasureSpec.getMode(measureSpec))
         {
@@ -344,12 +344,12 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    static private String parseCount(float count)
+    private static String parseCount(float count)
     {
         return count < 100 ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
-    static private String parseCount(int count)
+    private static String parseCount(int count)
     {
         if (count < 1000)
             return Integer.toString(count);

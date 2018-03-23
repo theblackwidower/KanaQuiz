@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MultipleChoicePad extends FlowLayout
 {
     private ArrayList<Button> btnChoices = new ArrayList<>();
-    private OnAnswerListener answerListener = null;
+    private OnAnswerListener answerListener;
 
     public MultipleChoicePad(Context context)
     {
@@ -61,7 +61,7 @@ public class MultipleChoicePad extends FlowLayout
         btnChoices = new ArrayList<>();
     }
 
-    private class AnswerListener implements OnClickListener
+    private class AnswerListener implements View.OnClickListener
     {
         String answer;
 

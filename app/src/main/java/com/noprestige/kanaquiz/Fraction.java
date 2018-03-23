@@ -6,10 +6,10 @@ public class Fraction
     private int numerator;
     private int denominator;
 
-    static final private int[] PRIME_NUMBERS = {2, 3, 5};
-    static final private int RESOLUTION = 240;
-    static final private char NUL = '\u0000';
-    static final private char[][] FRACTION_CHARS = {
+    private static final int[] PRIME_NUMBERS = {2, 3, 5};
+    private static final int RESOLUTION = 240;
+    private static final char NUL = '\u0000';
+    private static final char[][] FRACTION_CHARS = {
             {'½'}, {'⅓', '⅔'}, {'¼', NUL, '¾'}, {'⅕', '⅖', '⅗', '⅘'}, {'⅙', NUL, NUL, NUL, '⅚'}, {NUL},
             {'⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}
     };

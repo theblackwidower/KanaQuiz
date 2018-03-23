@@ -25,7 +25,7 @@ public class AnswerFrame extends LinearLayout
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0.0%");
 
-    private OnAnswerListener answerListener = null;
+    private OnAnswerListener answerListener;
 
     public AnswerFrame(Context context)
     {

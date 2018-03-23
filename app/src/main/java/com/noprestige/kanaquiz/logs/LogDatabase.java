@@ -15,14 +15,14 @@ import java.util.Date;
 @TypeConverters({LogTypeConversion.class})
 public abstract class LogDatabase extends RoomDatabase
 {
-    public static LogDao DAO = null;
+    public static LogDao DAO;
 
     protected abstract LogDao logDao();
 
     public static void initialize(Context context)
     {
-        if (LogDatabase.DAO == null)
-            LogDatabase.DAO = Room.databaseBuilder(context.getApplicationContext(), LogDatabase.class, "user-logs").
+        if (DAO == null)
+            DAO = Room.databaseBuilder(context.getApplicationContext(), LogDatabase.class, "user-logs").
                     addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
                     build().logDao();
     }
