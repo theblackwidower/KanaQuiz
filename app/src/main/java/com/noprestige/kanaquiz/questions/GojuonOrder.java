@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
+import java.text.StringCharacterIterator;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -14,7 +15,7 @@ public class GojuonOrder implements Comparator<String>
     {
         try
         {
-            return getRomanjiKey(romanji, 0);
+            return getRomanjiKey(new StringCharacterIterator(romanji));
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -22,9 +23,9 @@ public class GojuonOrder implements Comparator<String>
         }
     }
 
-    private static int getRomanjiKey(String romanji, int charIndex)
+    private static int getRomanjiKey(StringCharacterIterator romanji)
     {
-        switch (romanji.charAt(charIndex))
+        switch (romanji.current())
         {
             case 'a':
                 return 0;
@@ -38,60 +39,85 @@ public class GojuonOrder implements Comparator<String>
                 return 4;
 
             case 'k':
-                return 5 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 5 + getSubKey(romanji);
             case 'g':
-                return 13 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 13 + getSubKey(romanji);
 
             case 's':
-                if (romanji.charAt(charIndex + 1) == 'h')
-                    return 21 + getAltIKey(romanji, charIndex + 2);
+                romanji.next();
+                if (romanji.current() == 'h')
+                {
+                    romanji.next();
+                    return 21 + getAltIKey(romanji);
+                }
                 else
-                    return 21 + getSubKey(romanji, charIndex + 1);
+                    return 21 + getSubKey(romanji);
             case 'z':
-                return 29 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 29 + getSubKey(romanji);
             case 'j':
-                return 29 + getAltIKey(romanji, charIndex + 1);
+                romanji.next();
+                return 29 + getAltIKey(romanji);
 
             case 't':
-                if (romanji.charAt(charIndex + 1) == 's' && romanji.charAt(charIndex + 2) == 'u')
-                    return 37 + 2;
+                romanji.next();
+                if (romanji.current() == 's')
+                {
+                    if (romanji.next() == 'u')
+                        return 37 + 2;
+                    else
+                        break;
+                }
                 else
-                    return 37 + getSubKey(romanji, charIndex + 1);
+                    return 37 + getSubKey(romanji);
             case 'c':
-                if (romanji.charAt(charIndex + 1) == 'h')
-                    return 37 + getAltIKey(romanji, charIndex + 2);
+                if (romanji.next() == 'h')
+                {
+                    romanji.next();
+                    return 37 + getAltIKey(romanji);
+                }
                 else
                     break;
             case 'd':
-                return 45 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 45 + getSubKey(romanji);
 
             case 'n':
                 try
                 {
-                    return 53 + getSubKey(romanji, charIndex + 1);
+                    romanji.next();
+                    return 53 + getSubKey(romanji);
                 }
-                catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException ex)
+                catch (ArrayIndexOutOfBoundsException ex)
                 {
+                    romanji.previous();
+                    romanji.previous();
                     return 108; //N Consonant
                 }
 
             case 'h':
-                return 61 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 61 + getSubKey(romanji);
             case 'f':
-                if (romanji.charAt(charIndex + 1) == 'u')
+                if (romanji.next() == 'u')
                     return 61 + 2;
                 else
                     break;
             case 'b':
-                return 69 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 69 + getSubKey(romanji);
             case 'p':
-                return 77 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 77 + getSubKey(romanji);
 
             case 'm':
-                return 85 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 85 + getSubKey(romanji);
 
             case 'y':
-                switch (romanji.charAt(charIndex + 1))
+                switch (romanji.next())
                 {
                     case 'a':
                         return 93;
@@ -103,10 +129,12 @@ public class GojuonOrder implements Comparator<String>
                 break;
 
             case 'r':
-                return 96 + getSubKey(romanji, charIndex + 1);
+                romanji.next();
+                return 96 + getSubKey(romanji);
 
             case 'w':
-                switch (romanji.charAt(charIndex + 1))
+                romanji.next();
+                switch (romanji.current())
                 {
                     case 'a':
                         return 104;
@@ -122,9 +150,9 @@ public class GojuonOrder implements Comparator<String>
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    private static int getSubKey(String romanji, int charIndex)
+    private static int getSubKey(StringCharacterIterator romanji)
     {
-        switch (romanji.charAt(charIndex))
+        switch (romanji.current())
         {
             case 'a':
                 return 0;
@@ -137,7 +165,7 @@ public class GojuonOrder implements Comparator<String>
             case 'o':
                 return 4;
             case 'y':
-                switch (romanji.charAt(charIndex + 1))
+                switch (romanji.next())
                 {
                     case 'a':
                         return 5;
@@ -150,9 +178,9 @@ public class GojuonOrder implements Comparator<String>
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    private static int getAltIKey(String romanji, int charIndex)
+    private static int getAltIKey(StringCharacterIterator romanji)
     {
-        switch (romanji.charAt(charIndex))
+        switch (romanji.current())
         {
             case 'i':
                 return 1;
