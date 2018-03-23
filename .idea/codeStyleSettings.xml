@@ -124,6 +124,7 @@
           <option name="WRAP_ON_TYPING" value="1" />
         </codeStyleSettings>
         <codeStyleSettings language="XML">
+          <option name="RIGHT_MARGIN" value="120" />
           <option name="FORCE_REARRANGE_MODE" value="1" />
           <option name="WRAP_ON_TYPING" value="1" />
           <indentOptions>
