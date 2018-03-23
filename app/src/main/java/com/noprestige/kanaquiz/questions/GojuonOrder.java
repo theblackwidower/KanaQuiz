@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
+import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -11,11 +12,11 @@ public class GojuonOrder implements Comparator<String>
         Arrays.sort(romanji, new GojuonOrder());
     }
 
-    private static int getSortId(String romanji)
+    private static int getSortId(StringCharacterIterator romanji)
     {
         try
         {
-            return getRomanjiKey(new StringCharacterIterator(romanji));
+            return getRomanjiKey(romanji);
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
@@ -198,6 +199,36 @@ public class GojuonOrder implements Comparator<String>
     @Override
     public int compare(String item1, String item2)
     {
-        return getSortId(item1) - getSortId(item2);
+        if (item1.equals(item2))
+            return 0;
+        else
+        {
+            StringCharacterIterator item1iterator = new StringCharacterIterator(item1);
+            StringCharacterIterator item2iterator = new StringCharacterIterator(item2);
+            int item1code = 0;
+            int item2code = 0;
+
+            while (item1iterator.current() != CharacterIterator.DONE &&
+                    item2iterator.current() != CharacterIterator.DONE && item1code == item2code)
+            {
+                item1code = getSortId(item1iterator);
+                item2code = getSortId(item2iterator);
+                item1iterator.next();
+                item2iterator.next();
+            }
+
+            item1iterator.first();
+            item2iterator.first();
+
+            while (item1code == item2code)
+            {
+                item1code = item1iterator.current();
+                item2code = item2iterator.current();
+                item1iterator.next();
+                item2iterator.next();
+            }
+
+            return item1code - item2code;
+        }
     }
 }
