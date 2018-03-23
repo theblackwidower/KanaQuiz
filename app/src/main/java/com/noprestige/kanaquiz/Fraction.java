@@ -56,9 +56,7 @@ public class Fraction
             {
                 fractionChar = NUL;
             }
-            if (fractionChar != NUL)
-                returnValue.append(fractionChar);
-            else
+            if (fractionChar == NUL)
             {
                 if (returnValue.length() > 0)
                     returnValue.append('\u200B');
@@ -66,6 +64,8 @@ public class Fraction
                 returnValue.append('⁄');
                 returnValue.append(denominator);
             }
+            else
+                returnValue.append(fractionChar);
         }
         if (returnValue.length() == 0)
             returnValue.append('0');

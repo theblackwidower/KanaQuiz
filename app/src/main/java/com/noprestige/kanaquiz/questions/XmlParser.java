@@ -87,8 +87,6 @@ abstract class XmlParser
         boolean isDigraphs = false;
         boolean isDigraphsSet = false;
 
-        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
-
         for (int i = 0; i < parser.getAttributeCount(); i++)
         {
             switch (parser.getAttributeName(i))
@@ -106,6 +104,8 @@ abstract class XmlParser
             throw new ParseException("Missing attribute in Section tag", parser.getLineNumber());
 
         int lineNumber = parser.getLineNumber();
+
+        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
 
         for (int eventType = parser.getEventType();
                 !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"));
@@ -187,9 +187,7 @@ abstract class XmlParser
         if (thisRomanji == null || thisAnswer == null)
             throw new ParseException("Missing attribute in WordQuestion", 0);
 
-        WordQuestion question;
-
-        question = new WordQuestion(thisRomanji, thisAnswer);
+        WordQuestion question = new WordQuestion(thisRomanji, thisAnswer);
 
         if (thisKana != null)
             question.setKana(thisKana);

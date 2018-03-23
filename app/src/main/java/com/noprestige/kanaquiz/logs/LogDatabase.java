@@ -44,17 +44,13 @@ public abstract class LogDatabase extends RoomDatabase
                 int correctIndex = cursor.getColumnIndex("correct_answers");
                 int incorrectIndex = cursor.getColumnIndex("incorrect_answers");
 
-                int dateValue;
-                int correctValue;
-                int incorrectValue;
-
                 while (!cursor.isLast())
                 {
                     cursor.moveToNext();
 
-                    dateValue = cursor.getInt(dateIndex);
-                    correctValue = cursor.getInt(correctIndex);
-                    incorrectValue = cursor.getInt(incorrectIndex);
+                    int dateValue = cursor.getInt(dateIndex);
+                    int correctValue = cursor.getInt(correctIndex);
+                    int incorrectValue = cursor.getInt(incorrectIndex);
 
                     database.execSQL("INSERT INTO daily_record (date, correct_answers, total_answers) VALUES (?, ?, ?)",
                             new Integer[]{dateValue, correctValue, (correctValue + incorrectValue)});
@@ -89,17 +85,13 @@ public abstract class LogDatabase extends RoomDatabase
                 int kanaCorrectIndex = kanaCursor.getColumnIndex("correct_answers");
                 int kanaIncorrectIndex = kanaCursor.getColumnIndex("incorrect_answers");
 
-                String kanaKanaValue;
-                int kanaCorrectValue;
-                int kanaIncorrectValue;
-
                 while (!kanaCursor.isLast())
                 {
                     kanaCursor.moveToNext();
 
-                    kanaKanaValue = kanaCursor.getString(kanaKanaIndex);
-                    kanaCorrectValue = kanaCursor.getInt(kanaCorrectIndex);
-                    kanaIncorrectValue = kanaCursor.getInt(kanaIncorrectIndex);
+                    String kanaKanaValue = kanaCursor.getString(kanaKanaIndex);
+                    int kanaCorrectValue = kanaCursor.getInt(kanaCorrectIndex);
+                    int kanaIncorrectValue = kanaCursor.getInt(kanaIncorrectIndex);
 
                     database.execSQL("INSERT INTO kana_records (date, kana, correct_answers, incorrect_answers) " +
                                     "VALUES (?, ?, ?, ?)",
@@ -116,17 +108,13 @@ public abstract class LogDatabase extends RoomDatabase
                 int incorrectRomanjiIndex = incorrectCursor.getColumnIndex("incorrect_romanji");
                 int incorrectOccurrencesIndex = incorrectCursor.getColumnIndex("occurrences");
 
-                String incorrectKanaValue;
-                String incorrectRomanjiValue;
-                int incorrectOccurrencesValue;
-
                 while (!incorrectCursor.isLast())
                 {
                     incorrectCursor.moveToNext();
 
-                    incorrectKanaValue = incorrectCursor.getString(incorrectKanaIndex);
-                    incorrectRomanjiValue = incorrectCursor.getString(incorrectRomanjiIndex);
-                    incorrectOccurrencesValue = incorrectCursor.getInt(incorrectOccurrencesIndex);
+                    String incorrectKanaValue = incorrectCursor.getString(incorrectKanaIndex);
+                    String incorrectRomanjiValue = incorrectCursor.getString(incorrectRomanjiIndex);
+                    int incorrectOccurrencesValue = incorrectCursor.getInt(incorrectOccurrencesIndex);
 
                     database.execSQL("INSERT INTO incorrect_answers (date, kana, incorrect_romanji, occurrences) " +
                             "VALUES (?, ?, ?, ?)", new Object[]{

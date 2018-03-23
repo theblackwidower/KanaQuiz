@@ -30,7 +30,7 @@ public class AboutScreen extends AppCompatActivity
             //ref: https://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
             translatorCredit.setPaintFlags(translatorCredit.getPaintFlags() | UNDERLINE_TEXT_FLAG);
 
-            translatorCredit.setOnClickListener(new TextView.OnClickListener()
+            translatorCredit.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View view)
                 {

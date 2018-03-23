@@ -346,10 +346,7 @@ public class DailyLogItem extends View
 
     static private String parseCount(float count)
     {
-        if (count < 100)
-            return new Fraction(count).toString();
-        else
-            return parseCount(Math.round(count));
+        return count < 100 ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
     static private String parseCount(int count)

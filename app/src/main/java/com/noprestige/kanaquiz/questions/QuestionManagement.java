@@ -82,14 +82,13 @@ public abstract class QuestionManagement
         if (!singletonObject.isInitialized)
         {
             XmlResourceParser xrp = resources.getXml(XmlResource);
-
-            ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
-            ArrayList<String> prefIdList = new ArrayList<>();
-            ArrayList<String> setTitleList = new ArrayList<>();
-            ArrayList<String> setNoDiacriticsTitleList = new ArrayList<>();
-
             try
             {
+                ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+                ArrayList<String> prefIdList = new ArrayList<>();
+                ArrayList<String> setTitleList = new ArrayList<>();
+                ArrayList<String> setNoDiacriticsTitleList = new ArrayList<>();
+
                 for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
                         eventType = xrp.next())
                 {

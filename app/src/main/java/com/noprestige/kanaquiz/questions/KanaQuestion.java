@@ -70,10 +70,7 @@ public class KanaQuestion
     String fetchCorrectAnswer(RomanizationSystem system)
     {
         String answer = altAnswers.get(system);
-        if (answer == null)
-            return defaultAnswer;
-        else
-            return answer;
+        return answer == null ? defaultAnswer : answer;
     }
 
     public ReferenceCell generateReference(Context context)
