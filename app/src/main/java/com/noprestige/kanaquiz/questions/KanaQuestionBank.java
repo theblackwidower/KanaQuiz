@@ -61,10 +61,14 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 Float percentage = LogDao.getKanaPercentage(question.getKana());
                 if (percentage == null)
                     percentage = 0.1f;
-                // The 1.05f is to invert the value so we get the number of times they got it wrong,
-                // and add 5% so any kana the user got perfect will still appear in the quiz.
+                // The 1f is to invert the value so we get the number of times they got it wrong,
                 // Times 100f to get the percentage.
-                this.add((1.05f - percentage) * 100f, question);
+                int weight = (int) Math.ceil((1f - percentage) * 100f);
+                // Setting weight to never get lower than 2,
+                // so any kana the user got perfect will still appear in the quiz.
+                if (weight < 2)
+                    weight = 2;
+                this.add(weight, question);
                 fullAnswerList.add(question.fetchCorrectAnswer());
             }
         return true;
@@ -100,8 +104,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         // Max value of 24 to prevent integer overflow,
-                        // since LOGbase2( Integer.MAX_VALUE / 102 ) ~= 24 (rounded down)
-                        // where 102 is the number of unique correct answers in Hiragana and Katakana classes
+                        // since LOGbase2( Integer.MAX_VALUE / 108 ) ~= 24 (rounded down)
+                        // where 108 is the number of unique correct answers in Hiragana and Katakana classes
                         weightedAnswerList.add(Math
                                         .pow(2, Math.min(LogDao.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
                                 answer);
