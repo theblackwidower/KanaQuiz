@@ -55,6 +55,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     {
         previousQuestions = null;
         if (questions != null)
+        {
+            boolean returnValue = true;
             for (KanaQuestion question : questions)
             {
                 // Fetches the percentage of times the user got a kana right,
@@ -68,10 +70,13 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 // so any kana the user got perfect will still appear in the quiz.
                 if (weight < 2)
                     weight = 2;
-                this.add(weight, question);
-                fullAnswerList.add(question.fetchCorrectAnswer());
+                // if any one of the additions fail, the method returns false
+                returnValue =
+                        this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
             }
-        return true;
+            return returnValue;
+        }
+        return false;
     }
 
     public boolean addQuestions(KanaQuestionBank questions)
