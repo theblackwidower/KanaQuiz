@@ -13,7 +13,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
     private Set<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
-    private Map<String, WeightedList<String>> weightedAnswerListCache = new TreeMap<>();
+    private Map<String, WeightedList<String>> weightedAnswerListCache;
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -54,6 +54,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     public boolean addQuestions(KanaQuestion[] questions)
     {
+        weightedAnswerListCache = null;
         previousQuestions = null;
         maxAnswerWeight = -1;
         if (questions != null)
@@ -83,6 +84,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     public boolean addQuestions(KanaQuestionBank questions)
     {
+        weightedAnswerListCache = null;
         previousQuestions = null;
         maxAnswerWeight = -1;
         this.fullAnswerList.addAll(questions.fullAnswerList);
@@ -117,6 +119,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         }
         else
         {
+            if (weightedAnswerListCache == null)
+                weightedAnswerListCache = new TreeMap<>();
             if (!weightedAnswerListCache.containsKey(getCurrentKana()))
             {
                 int maxCount = 0;
