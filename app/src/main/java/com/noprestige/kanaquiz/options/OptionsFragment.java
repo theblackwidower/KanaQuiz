@@ -46,15 +46,17 @@ public class OptionsFragment extends PreferenceFragment
         });
 
         //ref: https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
-        findPreference("clear_logs").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+        findPreference("clear_logs").setOnPreferenceClickListener(new clearLogsClickListener());
+    }
+
+    private static class clearLogsClickListener implements Preference.OnPreferenceClickListener
+    {
+        @Override
+        public boolean onPreferenceClick(Preference btnClearLogs)
         {
-            @Override
-            public boolean onPreferenceClick(Preference btnClearLogs)
-            {
-                new DeleteAll().execute(btnClearLogs);
-                return true;
-            }
-        });
+            new DeleteAll().execute(btnClearLogs);
+            return true;
+        }
     }
 
     private boolean setSummary(Preference preference, Object newValue)
