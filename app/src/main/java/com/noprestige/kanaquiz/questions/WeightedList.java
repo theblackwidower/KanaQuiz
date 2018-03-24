@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 class WeightedList<E>
 {
@@ -118,6 +120,15 @@ class WeightedList<E>
     E getRandom()
     {
         return this.get(rng.nextInt(maxValue));
+    }
+
+    E[] getRandom(E[] array)
+    {
+        Set<E> returnSet = new TreeSet<>();
+        while (returnSet.size() < array.length)
+            returnSet.add(getRandom());
+        returnSet.toArray(array);
+        return array;
     }
 
     int maxValue()

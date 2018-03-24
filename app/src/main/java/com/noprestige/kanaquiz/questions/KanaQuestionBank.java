@@ -4,6 +4,7 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -168,18 +169,15 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
             }
 
-            TreeSet<String> possibleAnswerStrings = new TreeSet<>(new GojuonOrder());
+            String[] possibleAnswerStrings = new String[maxChoices - 1];
+            weightedAnswerListCache.get(getCurrentKana()).getRandom(possibleAnswerStrings);
 
-            possibleAnswerStrings.add(fetchCorrectAnswer());
+            possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
+            possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
 
-            WeightedList<String> weightedAnswerList = weightedAnswerListCache.get(getCurrentKana());
+            GojuonOrder.sort(possibleAnswerStrings);
 
-            while (possibleAnswerStrings.size() < maxChoices)
-                possibleAnswerStrings.add(weightedAnswerList.getRandom());
-
-            String[] returnValue = new String[possibleAnswerStrings.size()];
-            possibleAnswerStrings.toArray(returnValue);
-            return returnValue;
+            return possibleAnswerStrings;
         }
     }
 }
