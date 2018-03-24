@@ -18,6 +18,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions;
+    private int maxAnswerWeight = -1;
 
     KanaQuestionBank() {}
 
@@ -54,6 +55,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     public boolean addQuestions(KanaQuestion[] questions)
     {
         previousQuestions = null;
+        maxAnswerWeight = -1;
         if (questions != null)
         {
             boolean returnValue = true;
@@ -82,8 +84,22 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     public boolean addQuestions(KanaQuestionBank questions)
     {
         previousQuestions = null;
+        maxAnswerWeight = -1;
         this.fullAnswerList.addAll(questions.fullAnswerList);
         return this.merge(questions);
+    }
+
+    private int getMaxAnswerWeight()
+    {
+        if (maxAnswerWeight < 0)
+        {
+            // Max value is to prevent integer overflow in the weighted answer list. Number is chosen so if every
+            // answer had this count (which is actually impossible because of the range restriction, but better to
+            // err on the side of caution) the resultant calculations of 2^count would not add up to an integer
+            // overflow.
+            maxAnswerWeight = (int) Math.floor(Math.log(Integer.MAX_VALUE / (fullAnswerList.size() - 1)) / Math.log(2));
+        }
+        return maxAnswerWeight;
     }
 
     public String[] getPossibleAnswers()
@@ -118,10 +134,9 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     }
                 }
 
-                // Because of the inherent properties of the power function used later,
-                // subtracting the same amount from each count so the lowest count is zero
-                // will not change the relative weight of each item. And doing so will also
-                // save the space I need to prevent overflow issues.
+                // Because of the inherent properties of the power function used later, subtracting the same amount
+                // from each count so the lowest count is zero will not change the relative weight of each item. And
+                // doing so will also save the space I need to prevent overflow issues.
                 if (minCount > 0)
                 {
                     maxCount -= minCount;
@@ -131,12 +146,10 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                         answerCounts.put(answer, newCount);
                     }
                 }
-                // Max value of 24 to prevent integer overflow,
-                // since LOGbase2( Integer.MAX_VALUE / 108 ) ~= 24 (rounded down)
-                // where 108 is the number of unique correct answers in Hiragana and Katakana classes
-                if (maxCount > 24)
+
+                if (maxCount > getMaxAnswerWeight())
                 {
-                    float controlFactor = 24 / maxCount;
+                    float controlFactor = getMaxAnswerWeight() / maxCount;
                     for (String answer : answerCounts.keySet())
                     {
                         float newCount = answerCounts.remove(answer) * controlFactor;
