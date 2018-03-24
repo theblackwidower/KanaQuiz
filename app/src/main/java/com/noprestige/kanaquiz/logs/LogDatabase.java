@@ -23,8 +23,7 @@ public abstract class LogDatabase extends RoomDatabase
     {
         if (DAO == null)
             DAO = Room.databaseBuilder(context.getApplicationContext(), LogDatabase.class, "user-logs").
-                    addMigrations(LogDatabase.MIGRATION_1_2, LogDatabase.MIGRATION_2_3).
-                    build().logDao();
+                    addMigrations(MIGRATION_1_2, MIGRATION_2_3).build().logDao();
     }
 
     public static final Migration MIGRATION_1_2 = new Migration(1, 2)
