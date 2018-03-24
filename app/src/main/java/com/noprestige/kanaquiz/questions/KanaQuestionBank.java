@@ -103,19 +103,51 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         {
             if (!weightedAnswerListCache.containsKey(getCurrentKana()))
             {
-                WeightedList<String> weightedAnswerList = new WeightedList<>();
+                int maxCount = 0;
+                int minCount = Integer.MAX_VALUE;
+                Map<String, Float> answerCounts = new TreeMap<>();
                 for (String answer : fullAnswerList)
                 {
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
-                        // Max value of 24 to prevent integer overflow,
-                        // since LOGbase2( Integer.MAX_VALUE / 108 ) ~= 24 (rounded down)
-                        // where 108 is the number of unique correct answers in Hiragana and Katakana classes
-                        weightedAnswerList.add(Math
-                                        .pow(2, Math.min(LogDao.getIncorrectAnswerCount(getCurrentKana(), answer), 24)),
-                                answer);
+                        //fetch all data
+                        int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
+                        maxCount = Math.max(maxCount, count);
+                        minCount = Math.min(minCount, count);
+                        answerCounts.put(answer, (float) count);
                     }
                 }
+
+                // Because of the inherent properties of the power function used later,
+                // subtracting the same amount from each count so the lowest count is zero
+                // will not change the relative weight of each item. And doing so will also
+                // save the space I need to prevent overflow issues.
+                if (minCount > 0)
+                {
+                    maxCount -= minCount;
+                    for (String answer : answerCounts.keySet())
+                    {
+                        float newCount = answerCounts.remove(answer) - minCount;
+                        answerCounts.put(answer, newCount);
+                    }
+                }
+                // Max value of 24 to prevent integer overflow,
+                // since LOGbase2( Integer.MAX_VALUE / 108 ) ~= 24 (rounded down)
+                // where 108 is the number of unique correct answers in Hiragana and Katakana classes
+                if (maxCount > 24)
+                {
+                    float controlFactor = 24 / maxCount;
+                    for (String answer : answerCounts.keySet())
+                    {
+                        float newCount = answerCounts.remove(answer) * controlFactor;
+                        answerCounts.put(answer, newCount);
+                    }
+                }
+
+                WeightedList<String> weightedAnswerList = new WeightedList<>();
+                for (String answer : answerCounts.keySet())
+                    weightedAnswerList.add(Math.pow(2, answerCounts.get(answer)), answer);
+
                 weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
             }
 
