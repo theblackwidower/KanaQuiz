@@ -168,7 +168,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         setTitle(getResources().getString(resId));
     }
 
-    public void setTitle(String title)
+    public void setTitle(CharSequence title)
     {
         if (title != null)
             lblTitle.setText(title);
@@ -179,7 +179,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         setContents(getResources().getString(resId));
     }
 
-    public void setContents(String contents)
+    public void setContents(CharSequence contents)
     {
         if (contents != null)
             lblContents.setText(contents);

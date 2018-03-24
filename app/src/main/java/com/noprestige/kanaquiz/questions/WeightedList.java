@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz.questions;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -63,8 +64,8 @@ class WeightedList<E>
                 return false;
             else
             {
-                ArrayList<Integer> indexList = new ArrayList<>();
-                ArrayList<E> elementList = new ArrayList<>();
+                List<Integer> indexList = new ArrayList<>();
+                List<E> elementList = new ArrayList<>();
 
                 for (Integer thisKey = map.higherKey(key); thisKey != null; thisKey = map.higherKey(thisKey))
                 {

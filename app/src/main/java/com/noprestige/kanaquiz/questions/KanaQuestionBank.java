@@ -4,14 +4,16 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
-    private TreeSet<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
-    private TreeMap<String, WeightedList<String>> weightedAnswerListCache = new TreeMap<>();
+    private Set<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
+    private Map<String, WeightedList<String>> weightedAnswerListCache = new TreeMap<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 

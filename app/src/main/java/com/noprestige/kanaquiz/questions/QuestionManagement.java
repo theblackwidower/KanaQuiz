@@ -18,6 +18,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class QuestionManagement
 {
@@ -64,7 +65,7 @@ public abstract class QuestionManagement
         }
     }
 
-    private String getSetTitle(int number)
+    private CharSequence getSetTitle(int number)
     {
         try
         {
@@ -84,10 +85,10 @@ public abstract class QuestionManagement
             XmlResourceParser xrp = resources.getXml(XmlResource);
             try
             {
-                ArrayList<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
-                ArrayList<String> prefIdList = new ArrayList<>();
-                ArrayList<String> setTitleList = new ArrayList<>();
-                ArrayList<String> setNoDiacriticsTitleList = new ArrayList<>();
+                List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+                List<String> prefIdList = new ArrayList<>();
+                List<String> setTitleList = new ArrayList<>();
+                List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
                 for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
                         eventType = xrp.next())
@@ -225,7 +226,7 @@ public abstract class QuestionManagement
         return returnValue.toString();
     }
 
-    private String displayContents(int setNumber)
+    private CharSequence displayContents(int setNumber)
     {
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 

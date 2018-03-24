@@ -11,10 +11,11 @@ import com.noprestige.kanaquiz.questions.Hiragana;
 import com.noprestige.kanaquiz.questions.Katakana;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class ReferencePager extends FragmentPagerAdapter
 {
-    private ArrayList<String> tabList;
+    private List<String> tabList;
 
     ReferencePager(FragmentManager fm, Context context)
     {

@@ -12,11 +12,12 @@ import com.noprestige.kanaquiz.questions.Katakana;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
     private String kanaType;
-    private ArrayList<String> tabList;
+    private List<String> tabList;
 
     ReferenceSubsectionPager(FragmentManager fm, Context context, String kanaType)
     {

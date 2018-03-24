@@ -12,7 +12,7 @@ public class GojuonOrder implements Comparator<String>
         Arrays.sort(romanji, new GojuonOrder());
     }
 
-    private static int getSortId(StringCharacterIterator romanji)
+    private static int getSortId(CharacterIterator romanji)
     {
         try
         {
@@ -24,7 +24,7 @@ public class GojuonOrder implements Comparator<String>
         }
     }
 
-    private static int getRomanjiKey(StringCharacterIterator romanji)
+    private static int getRomanjiKey(CharacterIterator romanji)
     {
         switch (romanji.current())
         {
@@ -151,7 +151,7 @@ public class GojuonOrder implements Comparator<String>
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    private static int getSubKey(StringCharacterIterator romanji)
+    private static int getSubKey(CharacterIterator romanji)
     {
         switch (romanji.current())
         {
@@ -179,7 +179,7 @@ public class GojuonOrder implements Comparator<String>
         throw new ArrayIndexOutOfBoundsException();
     }
 
-    private static int getAltIKey(StringCharacterIterator romanji)
+    private static int getAltIKey(CharacterIterator romanji)
     {
         switch (romanji.current())
         {
@@ -203,8 +203,8 @@ public class GojuonOrder implements Comparator<String>
             return 0;
         else
         {
-            StringCharacterIterator item1iterator = new StringCharacterIterator(item1);
-            StringCharacterIterator item2iterator = new StringCharacterIterator(item2);
+            CharacterIterator item1iterator = new StringCharacterIterator(item1);
+            CharacterIterator item2iterator = new StringCharacterIterator(item2);
             int item1code = 0;
             int item2code = 0;
 

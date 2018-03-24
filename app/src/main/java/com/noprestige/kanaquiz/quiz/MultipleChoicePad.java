@@ -10,10 +10,11 @@ import android.widget.Button;
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MultipleChoicePad extends FlowLayout
 {
-    private ArrayList<Button> btnChoices = new ArrayList<>();
+    private Collection<Button> btnChoices = new ArrayList<>();
     private OnAnswerListener answerListener;
 
     public MultipleChoicePad(Context context)

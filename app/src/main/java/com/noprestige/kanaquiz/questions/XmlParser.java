@@ -11,14 +11,15 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.noprestige.kanaquiz.questions.RomanizationSystem.UNKNOWN;
 
 abstract class XmlParser
 {
-    static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
-            ArrayList<KanaQuestion[][][]> kanaSetList, ArrayList<String> prefIdList, ArrayList<String> setTitleList,
-            ArrayList<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
+    static void parseXmlKanaSet(XmlResourceParser parser, Resources resources, List<KanaQuestion[][][]> kanaSetList,
+            List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -53,7 +54,7 @@ abstract class XmlParser
 
         kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
 
-        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+        List<KanaQuestion> currentSet = new ArrayList<>();
 
         int lineNumber = parser.getLineNumber();
 
@@ -80,7 +81,7 @@ abstract class XmlParser
     }
 
     private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            ArrayList<KanaQuestion[][][]> kanaSetList, int indexPoint)
+            List<KanaQuestion[][][]> kanaSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -105,7 +106,7 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        ArrayList<KanaQuestion> currentSet = new ArrayList<>();
+        List<KanaQuestion> currentSet = new ArrayList<>();
 
         for (int eventType = parser.getEventType();
                 !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"));
@@ -120,7 +121,7 @@ abstract class XmlParser
         parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
     }
 
-    private static void parseXmlStoreSet(ArrayList<KanaQuestion> currentSet, ArrayList<KanaQuestion[][][]> kanaSetList,
+    private static void parseXmlStoreSet(List<KanaQuestion> currentSet, List<KanaQuestion[][][]> kanaSetList,
             int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
         KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
@@ -197,7 +198,7 @@ abstract class XmlParser
         return question;
     }
 
-    private static void parseXmlAltAnswers(KanaQuestion question, XmlResourceParser parser)
+    private static void parseXmlAltAnswers(KanaQuestion question, XmlPullParser parser)
             throws XmlPullParserException, IOException, ParseException
     {
         int lineNumber = parser.getLineNumber();
@@ -237,7 +238,7 @@ abstract class XmlParser
         //trims and collapses whitespace
         attributeString = attributeString.trim().replaceAll("\\s+", " ");
 
-        ArrayList<RomanizationSystem> list = new ArrayList<>();
+        List<RomanizationSystem> list = new ArrayList<>();
         StringBuilder thisItem = new StringBuilder();
 
         for (int i = 0; i < attributeString.length(); i++)
