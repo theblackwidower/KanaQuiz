@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,8 +26,9 @@ public class AboutScreen extends AppCompatActivity
         {
             TextView translatorCredit = findViewById(R.id.lblTranslatorCredit);
 
-            translatorCredit.setTextColor(
-                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorAccent}).getColor(0, 0));
+            translatorCredit.setTextColor(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
+                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.colorAccent}).getColor(0, 0) :
+                    getResources().getColor(R.color.secondaryColor));
             //ref: https://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
             translatorCredit.setPaintFlags(translatorCredit.getPaintFlags() | UNDERLINE_TEXT_FLAG);
 
