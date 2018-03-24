@@ -76,8 +76,6 @@ public class DailyLogItem extends View
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
-    private static final DecimalFormat SMALL_COUNT_FORMATTER = new DecimalFormat("#.##");
-    private static final DecimalFormat LARGE_COUNT_FORMATTER = new DecimalFormat("#.#");
     private static final String SLASH = "/";
 
     public DailyLogItem(Context context)

@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -139,12 +138,6 @@ public abstract class LogDao
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public static float getDailyPercentage(Date date)
-    {
-        DailyRecord record = LogDatabase.DAO.getDateRecord(date);
-        return record.correct_answers / (float) (record.total_answers);
-    }
-
     public static Float getKanaPercentage(String kana)
     {
         try
@@ -259,24 +252,15 @@ public abstract class LogDao
     @Update
     abstract void updateDailyRecord(DailyRecord... record);
 
-    @Delete
-    abstract void deleteDailyRecord(DailyRecord record);
-
     @Insert
     abstract void insertKanaRecord(KanaRecord... record);
 
     @Update
     abstract void updateKanaRecord(KanaRecord... record);
 
-    @Delete
-    abstract void deleteKanaRecord(KanaRecord record);
-
     @Insert
     abstract void insertIncorrectAnswer(IncorrectAnswerRecord... record);
 
     @Update
     abstract void updateIncorrectAnswer(IncorrectAnswerRecord... record);
-
-    @Delete
-    abstract void deleteIncorrectAnswer(IncorrectAnswerRecord record);
 }
