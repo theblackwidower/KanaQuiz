@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
-class WeightedList<E>
+class WeightedList<E> implements Cloneable
 {
     private TreeMap<Integer, E> map = new TreeMap<>();
     private int maxValue;
@@ -117,18 +115,32 @@ class WeightedList<E>
         return -1;
     }
 
+    int getRandomKey()
+    {
+        return rng.nextInt(maxValue);
+    }
+
     E getRandom()
     {
-        return this.get(rng.nextInt(maxValue));
+        return this.get(getRandomKey());
     }
 
     E[] getRandom(E[] array)
     {
-        Set<E> returnSet = new TreeSet<>();
-        while (returnSet.size() < array.length)
-            returnSet.add(getRandom());
-        returnSet.toArray(array);
-        return array;
+        try
+        {
+            WeightedList<E> destructibleList = (WeightedList<E>) this.clone();
+
+            for (int i = 0; i < array.length; i++)
+                array[i] = destructibleList.remove(destructibleList.getRandomKey());
+
+            return array;
+        }
+        catch (CloneNotSupportedException ex)
+        {
+            //if this happens, we have bigger problems
+            throw new RuntimeException(ex);
+        }
     }
 
     int maxValue()
@@ -148,5 +160,14 @@ class WeightedList<E>
     Collection<E> values()
     {
         return map.values();
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException
+    {
+        WeightedList<E> newObject = new WeightedList<>();
+        newObject.map = (TreeMap<Integer, E>) map.clone();
+        newObject.maxValue = this.maxValue;
+        return newObject;
     }
 }
