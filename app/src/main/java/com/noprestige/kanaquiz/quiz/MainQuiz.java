@@ -180,8 +180,8 @@ public class MainQuiz extends AppCompatActivity
     {
         if (canSubmit && !answer.isEmpty())
         {
-            boolean isGetNewQuestion = true;
             canSubmit = false;
+            boolean isGetNewQuestion = true;
 
             if (questionBank.checkCurrentAnswer(answer))
             {
