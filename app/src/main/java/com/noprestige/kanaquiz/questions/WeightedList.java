@@ -165,9 +165,8 @@ class WeightedList<E> implements Cloneable
     @Override
     protected Object clone() throws CloneNotSupportedException
     {
-        WeightedList<E> newObject = new WeightedList<>();
+        WeightedList<E> newObject = (WeightedList<E>) super.clone();
         newObject.map = (TreeMap<Integer, E>) map.clone();
-        newObject.maxValue = this.maxValue;
         return newObject;
     }
 }
