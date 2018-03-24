@@ -41,7 +41,7 @@ public abstract class QuestionManagement
         return categoryCount;
     }
 
-    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs) //TODO: Clean this up
+    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
     {
         try
         {
