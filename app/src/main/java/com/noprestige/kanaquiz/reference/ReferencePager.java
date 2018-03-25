@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
-import com.noprestige.kanaquiz.questions.Hiragana;
-import com.noprestige.kanaquiz.questions.Katakana;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 
 class ReferencePager extends FragmentPagerAdapter
 {
@@ -30,9 +31,9 @@ class ReferencePager extends FragmentPagerAdapter
         }
         else
         {
-            if (Hiragana.QUESTIONS.anySelected())
+            if (HIRAGANA.anySelected())
                 tabList.add(context.getResources().getString(R.string.hiragana));
-            if (Katakana.QUESTIONS.anySelected())
+            if (KATAKANA.anySelected())
                 tabList.add(context.getResources().getString(R.string.katakana));
         }
     }

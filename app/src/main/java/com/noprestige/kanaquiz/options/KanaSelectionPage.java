@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.noprestige.kanaquiz.questions.Hiragana;
-import com.noprestige.kanaquiz.questions.Katakana;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 
 public class KanaSelectionPage extends Fragment
 {
@@ -34,10 +34,10 @@ public class KanaSelectionPage extends Fragment
         switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
         {
             case 0:
-                screen = Hiragana.QUESTIONS.getSelectionScreen(getContext());
+                screen = HIRAGANA.getSelectionScreen(getContext());
                 break;
             case 1:
-                screen = Katakana.QUESTIONS.getSelectionScreen(getContext());
+                screen = KATAKANA.getSelectionScreen(getContext());
                 break;
             default:
                 screen = null;

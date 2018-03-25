@@ -20,8 +20,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class QuestionManagement
+public class QuestionManagement
 {
+    public static QuestionManagement HIRAGANA;
+    public static QuestionManagement KATAKANA;
+
     private boolean isInitialized;
 
     private XmlResourceParser XmlResource;
@@ -118,17 +121,25 @@ public abstract class QuestionManagement
         }
     }
 
+    private QuestionManagement(int XmlResource, Resources resources)
+    {
+        parseXml(XmlResource, resources, this);
+    }
+
     public static void initialize(Context context)
     {
-        Hiragana.initialize(context);
-        Katakana.initialize(context);
+        if (HIRAGANA == null)
+            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getApplicationContext().getResources());
+
+        if (KATAKANA == null)
+            HIRAGANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
     }
 
     public static KanaQuestionBank getFullQuestionBank()
     {
         KanaQuestionBank bank = new KanaQuestionBank();
-        Hiragana.QUESTIONS.buildQuestionBank(bank);
-        Katakana.QUESTIONS.buildQuestionBank(bank);
+        HIRAGANA.buildQuestionBank(bank);
+        KATAKANA.buildQuestionBank(bank);
         return bank;
     }
 

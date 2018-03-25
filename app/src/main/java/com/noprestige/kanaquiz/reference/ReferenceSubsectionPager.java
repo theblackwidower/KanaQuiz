@@ -7,12 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
-import com.noprestige.kanaquiz.questions.Hiragana;
-import com.noprestige.kanaquiz.questions.Katakana;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
@@ -37,9 +38,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             QuestionManagement questions;
 
             if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
-                questions = Hiragana.QUESTIONS;
+                questions = HIRAGANA;
             else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
-                questions = Katakana.QUESTIONS;
+                questions = KATAKANA;
             else
                 throw new IllegalArgumentException();
 

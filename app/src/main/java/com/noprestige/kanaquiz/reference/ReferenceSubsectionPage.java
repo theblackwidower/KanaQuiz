@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
-import com.noprestige.kanaquiz.questions.Hiragana;
-import com.noprestige.kanaquiz.questions.Katakana;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 
 public class ReferenceSubsectionPage extends Fragment
 {
@@ -39,9 +40,9 @@ public class ReferenceSubsectionPage extends Fragment
         QuestionManagement questions;
 
         if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-            questions = Hiragana.QUESTIONS;
+            questions = HIRAGANA;
         else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-            questions = Katakana.QUESTIONS;
+            questions = KATAKANA;
         else
             throw new IllegalArgumentException();
 
