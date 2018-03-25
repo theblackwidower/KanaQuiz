@@ -81,41 +81,41 @@ public class QuestionManagement
         }
     }
 
-    protected static void parseXml(int XmlResource, Resources resources, QuestionManagement singletonObject)
+    private void parseXml(int XmlRefId, Resources resources)
     {
-        if (!singletonObject.isInitialized)
+        if (!isInitialized)
         {
-            XmlResourceParser xrp = resources.getXml(XmlResource);
             try
             {
+                XmlResource = resources.getXml(XmlRefId);
+
                 List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
                 List<String> prefIdList = new ArrayList<>();
                 List<String> setTitleList = new ArrayList<>();
                 List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
-                for (int eventType = xrp.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
-                        eventType = xrp.next())
+                for (int eventType = XmlResource.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
+                        eventType = XmlResource.next())
                 {
-                    if (eventType == XmlPullParser.START_TAG && xrp.getName().equalsIgnoreCase("KanaSet"))
+                    if (eventType == XmlPullParser.START_TAG && XmlResource.getName().equalsIgnoreCase("KanaSet"))
                     {
-                        XmlParser.parseXmlKanaSet(xrp, resources, kanaSetList, prefIdList, setTitleList,
+                        XmlParser.parseXmlKanaSet(XmlResource, resources, kanaSetList, prefIdList, setTitleList,
                                 setNoDiacriticsTitleList);
                     }
                 }
 
-                singletonObject.XmlResource = xrp;
-                singletonObject.categoryCount = kanaSetList.size();
+                categoryCount = kanaSetList.size();
 
-                singletonObject.kanaSets = new KanaQuestion[singletonObject.categoryCount][][][];
-                kanaSetList.toArray(singletonObject.kanaSets);
-                singletonObject.prefIds = new String[singletonObject.categoryCount];
-                prefIdList.toArray(singletonObject.prefIds);
-                singletonObject.setTitles = new String[singletonObject.categoryCount];
-                setTitleList.toArray(singletonObject.setTitles);
-                singletonObject.setNoDiacriticsTitles = new String[singletonObject.categoryCount];
-                setNoDiacriticsTitleList.toArray(singletonObject.setNoDiacriticsTitles);
+                kanaSets = new KanaQuestion[categoryCount][][][];
+                kanaSetList.toArray(kanaSets);
+                prefIds = new String[categoryCount];
+                prefIdList.toArray(prefIds);
+                setTitles = new String[categoryCount];
+                setTitleList.toArray(setTitles);
+                setNoDiacriticsTitles = new String[categoryCount];
+                setNoDiacriticsTitleList.toArray(setNoDiacriticsTitles);
 
-                singletonObject.isInitialized = true;
+                isInitialized = true;
             }
             catch (XmlPullParserException | IOException | ParseException ignored) {}
         }
@@ -123,7 +123,7 @@ public class QuestionManagement
 
     private QuestionManagement(int XmlResource, Resources resources)
     {
-        parseXml(XmlResource, resources, this);
+        parseXml(XmlResource, resources);
     }
 
     public static void initialize(Context context)
