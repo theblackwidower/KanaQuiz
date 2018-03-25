@@ -13,7 +13,8 @@ import org.junit.runner.RunWith;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
 public class LogMigrationTest
@@ -63,10 +64,10 @@ public class LogMigrationTest
             Cursor cursor =
                     db.query("SELECT * FROM daily_record WHERE date = ? AND correct_answers = ? AND total_answers = ?",
                             data);
-            assertEquals(cursor.getCount(), 1);
+            assertThat(cursor.getCount(), is(1));
         }
         Cursor cursor = db.query("SELECT * FROM daily_record");
-        assertEquals(cursor.getCount(), testData.length);
+        assertThat(cursor.getCount(), is(testData.length));
     }
 
     @Test
@@ -105,27 +106,27 @@ public class LogMigrationTest
         // but you need to validate that the data was migrated properly.
         int currentDate = LogTypeConversion.dateToTimestamp(new Date());
 
-        assertEquals(db.query("SELECT * FROM kana_records WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
-                0);
-        assertEquals(
+        assertThat(db.query("SELECT * FROM kana_records WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
+                is(0));
+        assertThat(
                 db.query("SELECT * FROM incorrect_answers WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
-                0);
+                is(0));
 
         for (Object[] kanaData : kanaTestData)
         {
             Cursor cursor = db.query("SELECT * FROM kana_records WHERE date = ? AND kana = ? AND correct_answers = ? " +
                     "AND incorrect_answers = ?", new Object[]{currentDate, kanaData[0], kanaData[1], kanaData[2]});
-            assertEquals(cursor.getCount(), 1);
+            assertThat(cursor.getCount(), is(1));
         }
         for (Object[] incorrectData : incorrectTestData)
         {
             Cursor cursor = db.query("SELECT * FROM incorrect_answers WHERE date = ? AND kana = ? AND " +
                             "incorrect_romanji = ? AND occurrences = ?",
                     new Object[]{currentDate, incorrectData[0], incorrectData[1], incorrectData[2]});
-            assertEquals(cursor.getCount(), 1);
+            assertThat(cursor.getCount(), is(1));
         }
 
-        assertEquals(db.query("SELECT * FROM kana_records").getCount(), kanaTestData.length);
-        assertEquals(db.query("SELECT * FROM incorrect_answers").getCount(), incorrectTestData.length);
+        assertThat(db.query("SELECT * FROM kana_records").getCount(), is(kanaTestData.length));
+        assertThat(db.query("SELECT * FROM incorrect_answers").getCount(), is(incorrectTestData.length));
     }
 }

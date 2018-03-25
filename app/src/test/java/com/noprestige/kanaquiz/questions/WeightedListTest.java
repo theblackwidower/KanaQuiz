@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class WeightedListTest
@@ -19,7 +20,7 @@ public class WeightedListTest
     {
         WeightedList<String> list = new WeightedList<>();
         int SAMPLE_COUNT = data.weights.length;
-        assertEquals(data.strings.length, SAMPLE_COUNT);
+        assertThat(data.strings.length, is(SAMPLE_COUNT));
 
         for (int i = 0; i < SAMPLE_COUNT; i++)
             list.add(data.weights[i], data.strings[i]);
@@ -30,13 +31,13 @@ public class WeightedListTest
     private int testList(int i, SampleData data, WeightedList<String> list)
     {
         int SAMPLE_COUNT = data.weights.length;
-        assertEquals(data.strings.length, SAMPLE_COUNT);
+        assertThat(data.strings.length, is(SAMPLE_COUNT));
 
         for (int j = 0; j < SAMPLE_COUNT; j++)
             for (int start = i; i < data.weights[j] + start; i++)
             {
-                assertEquals(list.getWeight(i), data.weights[j]);
-                assertEquals(list.get(i), data.strings[j]);
+                assertThat(list.getWeight(i), is(data.weights[j]));
+                assertThat(list.get(i), is(data.strings[j]));
             }
 
         return i;
@@ -44,7 +45,7 @@ public class WeightedListTest
 
     private void testListEnd(int i, WeightedList<String> list)
     {
-        assertEquals(list.maxValue(), i);
+        assertThat(list.maxValue(), is(i));
 
         try
         {
@@ -60,7 +61,7 @@ public class WeightedListTest
         for (int i = 0; i < index; i++)
             sum += data.weights[i];
 
-        assertEquals(list.remove(sum), data.strings[index]);
+        assertThat(list.remove(sum), is(data.strings[index]));
         for (int i = index; i < data.weights.length - 1; i++)
         {
             data.weights[i] = data.weights[i + 1];
@@ -77,12 +78,12 @@ public class WeightedListTest
             sum += data.weights[i];
 
         // confirm zero-out catches work
-        assertEquals(list.adjustWeight(sum, -data.weights[index] - 1), false);
-        assertEquals(list.adjustWeight(sum, -data.weights[index]), false);
+        assertThat(list.adjustWeight(sum, -data.weights[index] - 1), is(false));
+        assertThat(list.adjustWeight(sum, -data.weights[index]), is(false));
 
         data.weights[index] += adjustment;
 
-        assertEquals(list.adjustWeight(sum, adjustment), true);
+        assertThat(list.adjustWeight(sum, adjustment), is(true));
     }
 
     @Test
@@ -199,7 +200,7 @@ public class WeightedListTest
         int sum = 0;
         for (int i = 0; i < data.strings.length; i++)
         {
-            assertEquals(sum, list.findIndex(data.strings[i]));
+            assertThat(list.findIndex(data.strings[i]), is(sum));
             sum += data.weights[i];
         }
     }

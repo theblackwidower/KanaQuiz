@@ -2,7 +2,8 @@ package com.noprestige.kanaquiz.questions;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class KanaQuestionTest
 {
@@ -384,12 +385,12 @@ public class KanaQuestionTest
     private void assertDigraphTest(KanaQuestion[] questions, boolean expected)
     {
         for (KanaQuestion question : questions)
-            assertEquals(expected, question.isDigraph());
+            assertThat(question.isDigraph(), is(expected));
     }
 
     private void assertDiacriticTest(KanaQuestion[] questions, boolean expected)
     {
         for (KanaQuestion question : questions)
-            assertEquals(expected, question.isDiacritic());
+            assertThat(question.isDiacritic(), is(expected));
     }
 }

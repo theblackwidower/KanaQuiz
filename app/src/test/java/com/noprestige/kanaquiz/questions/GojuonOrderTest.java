@@ -69,6 +69,6 @@ public class GojuonOrderTest
         Set<String> sortedSet = new TreeSet<>(new GojuonOrder());
         sortedSet.addAll(Arrays.asList(reversedArray));
 
-        assertArrayEquals(sortedSet.toArray(), testArray);
+        assertArrayEquals(testArray, sortedSet.toArray());
     }
 }
