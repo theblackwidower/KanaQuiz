@@ -132,7 +132,7 @@ public class QuestionManagement
             HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getApplicationContext().getResources());
 
         if (KATAKANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
+            KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
     }
 
     public static KanaQuestionBank getFullQuestionBank()
