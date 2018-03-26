@@ -5,6 +5,7 @@
 [![Build Status](https://travis-ci.org/theblackwidower/KanaQuiz.svg?branch=master)](https://travis-ci.org/theblackwidower/KanaQuiz)
 [![CircleCI](https://circleci.com/gh/theblackwidower/KanaQuiz.svg?style=shield)](https://circleci.com/gh/theblackwidower/KanaQuiz)
 [![Codeship Status for theblackwidower/KanaQuiz](https://app.codeship.com/projects/7db68d50-ff29-0135-aeeb-56b253369268/status?branch=master)](https://app.codeship.com/projects/279635)
+[![Build Status](https://semaphoreci.com/api/v1/theblackwidower/kanaquiz/branches/master/badge.svg)](https://semaphoreci.com/theblackwidower/kanaquiz)
 
 Are you trying to learn Japanese, but can't seem to remember the pronunciation of the basic Hiragana or Katakana character set?
 
