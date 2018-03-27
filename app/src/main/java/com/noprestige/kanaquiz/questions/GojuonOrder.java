@@ -92,10 +92,7 @@ public class GojuonOrder implements Comparator<String>
 
             case 'y':
                 romanji.next();
-                for (int i = 0; i < Y_VOWELS.length; i++)
-                    if (romanji.current() == Y_VOWELS[i])
-                        return 93 + i;
-                break;
+                return 93 + getYVowelKey(romanji);
 
             case 'r':
                 return 96 + getSubKey(romanji);
@@ -127,9 +124,7 @@ public class GojuonOrder implements Comparator<String>
         if (romanji.current() == 'y')
         {
             romanji.next();
-            for (int i = 0; i < Y_VOWELS.length; i++)
-                if (romanji.current() == Y_VOWELS[i])
-                    return 5 + i;
+            return 5 + getYVowelKey(romanji);
         }
         throw new NotRomanjiException();
     }
@@ -139,9 +134,14 @@ public class GojuonOrder implements Comparator<String>
         if (romanji.next() == 'i')
             return 1;
 
+        return 5 + getYVowelKey(romanji);
+    }
+
+    private static int getYVowelKey(CharacterIterator romanji) throws NotRomanjiException
+    {
         for (int i = 0; i < Y_VOWELS.length; i++)
             if (romanji.current() == Y_VOWELS[i])
-                return 5 + i;
+                return i;
 
         throw new NotRomanjiException();
     }
