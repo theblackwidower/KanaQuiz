@@ -40,31 +40,25 @@ public class GojuonOrder implements Comparator<String>
                 return 4;
 
             case 'k':
-                romanji.next();
                 return 5 + getSubKey(romanji);
             case 'g':
-                romanji.next();
                 return 13 + getSubKey(romanji);
 
             case 's':
-                romanji.next();
-                if (romanji.current() == 'h')
-                {
-                    romanji.next();
+                if (romanji.next() == 'h')
                     return 21 + getAltIKey(romanji);
-                }
                 else
+                {
+                    romanji.previous();
                     return 21 + getSubKey(romanji);
+                }
             case 'z':
-                romanji.next();
                 return 29 + getSubKey(romanji);
             case 'j':
-                romanji.next();
                 return 29 + getAltIKey(romanji);
 
             case 't':
-                romanji.next();
-                if (romanji.current() == 's')
+                if (romanji.next() == 's')
                 {
                     if (romanji.next() == 'u')
                         return 37 + 2;
@@ -72,23 +66,21 @@ public class GojuonOrder implements Comparator<String>
                         break;
                 }
                 else
+                {
+                    romanji.previous();
                     return 37 + getSubKey(romanji);
+                }
             case 'c':
                 if (romanji.next() == 'h')
-                {
-                    romanji.next();
                     return 37 + getAltIKey(romanji);
-                }
                 else
                     break;
             case 'd':
-                romanji.next();
                 return 45 + getSubKey(romanji);
 
             case 'n':
                 try
                 {
-                    romanji.next();
                     return 53 + getSubKey(romanji);
                 }
                 catch (ArrayIndexOutOfBoundsException ex)
@@ -99,7 +91,6 @@ public class GojuonOrder implements Comparator<String>
                 }
 
             case 'h':
-                romanji.next();
                 return 61 + getSubKey(romanji);
             case 'f':
                 if (romanji.next() == 'u')
@@ -107,14 +98,11 @@ public class GojuonOrder implements Comparator<String>
                 else
                     break;
             case 'b':
-                romanji.next();
                 return 69 + getSubKey(romanji);
             case 'p':
-                romanji.next();
                 return 77 + getSubKey(romanji);
 
             case 'm':
-                romanji.next();
                 return 85 + getSubKey(romanji);
 
             case 'y':
@@ -130,7 +118,6 @@ public class GojuonOrder implements Comparator<String>
                 break;
 
             case 'r':
-                romanji.next();
                 return 96 + getSubKey(romanji);
 
             case 'w':
@@ -153,7 +140,7 @@ public class GojuonOrder implements Comparator<String>
 
     private static int getSubKey(CharacterIterator romanji)
     {
-        switch (romanji.current())
+        switch (romanji.next())
         {
             case 'a':
                 return 0;
@@ -181,7 +168,7 @@ public class GojuonOrder implements Comparator<String>
 
     private static int getAltIKey(CharacterIterator romanji)
     {
-        switch (romanji.current())
+        switch (romanji.next())
         {
             case 'i':
                 return 1;
