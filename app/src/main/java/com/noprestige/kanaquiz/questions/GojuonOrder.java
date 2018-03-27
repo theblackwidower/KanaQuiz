@@ -190,8 +190,8 @@ public class GojuonOrder implements Comparator<String>
             return 0;
         else
         {
-            CharacterIterator item1iterator = new StringCharacterIterator(item1);
-            CharacterIterator item2iterator = new StringCharacterIterator(item2);
+            CharacterIterator item1iterator = new StringCharacterIterator(item1.toLowerCase());
+            CharacterIterator item2iterator = new StringCharacterIterator(item2.toLowerCase());
             int item1code = 0;
             int item2code = 0;
 
@@ -204,15 +204,18 @@ public class GojuonOrder implements Comparator<String>
                 item2iterator.next();
             }
 
-            item1iterator.first();
-            item2iterator.first();
-
-            while (item1code == item2code)
+            if (item1code == item2code)
             {
-                item1code = item1iterator.current();
-                item2code = item2iterator.current();
-                item1iterator.next();
-                item2iterator.next();
+                item1iterator = new StringCharacterIterator(item1);
+                item2iterator = new StringCharacterIterator(item2);
+
+                while (item1code == item2code)
+                {
+                    item1code = item1iterator.current();
+                    item2code = item2iterator.current();
+                    item1iterator.next();
+                    item2iterator.next();
+                }
             }
 
             return item1code - item2code;
