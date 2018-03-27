@@ -22,6 +22,10 @@ public class GojuonOrder implements Comparator<String>
         {
             return 109;
         }
+        finally
+        {
+            romanji.next();
+        }
     }
 
     private static int getRomanjiKey(CharacterIterator romanji)
@@ -200,8 +204,6 @@ public class GojuonOrder implements Comparator<String>
             {
                 item1code = getSortId(item1iterator);
                 item2code = getSortId(item2iterator);
-                item1iterator.next();
-                item2iterator.next();
             }
 
             if (item1code == item2code)
@@ -209,12 +211,12 @@ public class GojuonOrder implements Comparator<String>
                 item1iterator = new StringCharacterIterator(item1);
                 item2iterator = new StringCharacterIterator(item2);
 
+                item1code = item1iterator.current();
+                item2code = item2iterator.current();
                 while (item1code == item2code)
                 {
-                    item1code = item1iterator.current();
-                    item2code = item2iterator.current();
-                    item1iterator.next();
-                    item2iterator.next();
+                    item1code = item1iterator.next();
+                    item2code = item2iterator.next();
                 }
             }
 
