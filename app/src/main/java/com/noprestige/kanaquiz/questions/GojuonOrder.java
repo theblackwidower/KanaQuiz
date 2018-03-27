@@ -7,6 +7,8 @@ import java.util.Comparator;
 
 public class GojuonOrder implements Comparator<String>
 {
+    private static class NotRomanjiException extends Exception {}
+
     static void sort(String[] romanji)
     {
         Arrays.sort(romanji, new GojuonOrder());
@@ -19,7 +21,7 @@ public class GojuonOrder implements Comparator<String>
         {
             return getRomanjiKey(romanji);
         }
-        catch (ArrayIndexOutOfBoundsException ex)
+        catch (NotRomanjiException ex)
         {
             romanji.setIndex(startIndex);
             return 109;
@@ -30,7 +32,7 @@ public class GojuonOrder implements Comparator<String>
         }
     }
 
-    private static int getRomanjiKey(CharacterIterator romanji)
+    private static int getRomanjiKey(CharacterIterator romanji) throws NotRomanjiException
     {
         switch (romanji.current())
         {
@@ -92,7 +94,7 @@ public class GojuonOrder implements Comparator<String>
                 {
                     return 53 + getSubKey(romanji);
                 }
-                catch (ArrayIndexOutOfBoundsException ex)
+                catch (NotRomanjiException ex)
                 {
                     romanji.previous();
                     romanji.previous();
@@ -143,10 +145,10 @@ public class GojuonOrder implements Comparator<String>
                 }
                 break;
         }
-        throw new ArrayIndexOutOfBoundsException();
+        throw new NotRomanjiException();
     }
 
-    private static int getSubKey(CharacterIterator romanji)
+    private static int getSubKey(CharacterIterator romanji) throws NotRomanjiException
     {
         switch (romanji.next())
         {
@@ -171,10 +173,10 @@ public class GojuonOrder implements Comparator<String>
                         return 7;
                 }
         }
-        throw new ArrayIndexOutOfBoundsException();
+        throw new NotRomanjiException();
     }
 
-    private static int getAltIKey(CharacterIterator romanji)
+    private static int getAltIKey(CharacterIterator romanji) throws NotRomanjiException
     {
         switch (romanji.next())
         {
@@ -188,7 +190,7 @@ public class GojuonOrder implements Comparator<String>
             case 'o':
                 return 7;
         }
-        throw new ArrayIndexOutOfBoundsException();
+        throw new NotRomanjiException();
     }
 
     @Override
