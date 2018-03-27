@@ -34,28 +34,25 @@ public class GojuonOrder implements Comparator<String>
         }
     }
 
+    private static final char[] VOWELS = {'a', 'i', 'u', 'e', 'o'};
+    private static final char[] MAIN_SETS = {'k', 'g', '\u0000', 'z', '\u0000', 'd', 'n', 'h', 'b', 'p', 'm'};
+    private static final char[] Y_VOWELS = {'a', 'u', 'o'};
+
     private static int getRomanjiKey(CharacterIterator romanji) throws NotRomanjiException
     {
+        for (int i = 0; i < VOWELS.length; i++)
+            if (romanji.current() == VOWELS[i])
+                return i;
+
+        for (int i = 0; i < MAIN_SETS.length; i++)
+            if (romanji.current() == MAIN_SETS[i])
+                return 5 + i * 8 + getSubKey(romanji);
+
         switch (romanji.current())
         {
             case ' ':
             case CharacterIterator.DONE:
                 return -1;
-            case 'a':
-                return 0;
-            case 'i':
-                return 1;
-            case 'u':
-                return 2;
-            case 'e':
-                return 3;
-            case 'o':
-                return 4;
-
-            case 'k':
-                return 5 + getSubKey(romanji);
-            case 'g':
-                return 13 + getSubKey(romanji);
 
             case 's':
                 if (romanji.next() == 'h')
@@ -65,8 +62,6 @@ public class GojuonOrder implements Comparator<String>
                     romanji.previous();
                     return 21 + getSubKey(romanji);
                 }
-            case 'z':
-                return 29 + getSubKey(romanji);
             case 'j':
                 return 29 + getAltIKey(romanji);
 
@@ -88,37 +83,18 @@ public class GojuonOrder implements Comparator<String>
                     return 37 + getAltIKey(romanji);
                 else
                     break;
-            case 'd':
-                return 45 + getSubKey(romanji);
 
-            case 'n':
-                return 53 + getSubKey(romanji);
-
-            case 'h':
-                return 61 + getSubKey(romanji);
             case 'f':
                 if (romanji.next() == 'u')
                     return 61 + 2;
                 else
                     break;
-            case 'b':
-                return 69 + getSubKey(romanji);
-            case 'p':
-                return 77 + getSubKey(romanji);
-
-            case 'm':
-                return 85 + getSubKey(romanji);
 
             case 'y':
-                switch (romanji.next())
-                {
-                    case 'a':
-                        return 93;
-                    case 'u':
-                        return 94;
-                    case 'o':
-                        return 95;
-                }
+                romanji.next();
+                for (int i = 0; i < Y_VOWELS.length; i++)
+                    if (romanji.current() == Y_VOWELS[i])
+                        return 93 + i;
                 break;
 
             case 'r':
@@ -143,46 +119,30 @@ public class GojuonOrder implements Comparator<String>
 
     private static int getSubKey(CharacterIterator romanji) throws NotRomanjiException
     {
-        switch (romanji.next())
+        romanji.next();
+        for (int i = 0; i < VOWELS.length; i++)
+            if (romanji.current() == VOWELS[i])
+                return i;
+
+        if (romanji.current() == 'y')
         {
-            case 'a':
-                return 0;
-            case 'i':
-                return 1;
-            case 'u':
-                return 2;
-            case 'e':
-                return 3;
-            case 'o':
-                return 4;
-            case 'y':
-                switch (romanji.next())
-                {
-                    case 'a':
-                        return 5;
-                    case 'u':
-                        return 6;
-                    case 'o':
-                        return 7;
-                }
+            romanji.next();
+            for (int i = 0; i < Y_VOWELS.length; i++)
+                if (romanji.current() == Y_VOWELS[i])
+                    return 5 + i;
         }
         throw new NotRomanjiException();
     }
 
     private static int getAltIKey(CharacterIterator romanji) throws NotRomanjiException
     {
-        switch (romanji.next())
-        {
-            case 'i':
-                return 1;
+        if (romanji.next() == 'i')
+            return 1;
 
-            case 'a':
-                return 5;
-            case 'u':
-                return 6;
-            case 'o':
-                return 7;
-        }
+        for (int i = 0; i < Y_VOWELS.length; i++)
+            if (romanji.current() == Y_VOWELS[i])
+                return 5 + i;
+
         throw new NotRomanjiException();
     }
 
