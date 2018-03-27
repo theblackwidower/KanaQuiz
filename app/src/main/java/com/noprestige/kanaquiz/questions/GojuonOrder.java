@@ -90,14 +90,14 @@ public class GojuonOrder implements Comparator<String>
                 return 45 + getSubKey(romanji);
 
             case 'n':
+                int startIndex = romanji.getIndex();
                 try
                 {
                     return 53 + getSubKey(romanji);
                 }
                 catch (NotRomanjiException ex)
                 {
-                    romanji.previous();
-                    romanji.previous();
+                    romanji.setIndex(startIndex);
                     return 108; //N Consonant
                 }
 
