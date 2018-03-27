@@ -23,8 +23,10 @@ public class GojuonOrder implements Comparator<String>
         }
         catch (NotRomanjiException ex)
         {
-            romanji.setIndex(startIndex);
-            return 109;
+            if (romanji.setIndex(startIndex) == 'n')
+                return 108; //N Consonant
+            else
+                return 109;
         }
         finally
         {
@@ -90,16 +92,7 @@ public class GojuonOrder implements Comparator<String>
                 return 45 + getSubKey(romanji);
 
             case 'n':
-                int startIndex = romanji.getIndex();
-                try
-                {
-                    return 53 + getSubKey(romanji);
-                }
-                catch (NotRomanjiException ex)
-                {
-                    romanji.setIndex(startIndex);
-                    return 108; //N Consonant
-                }
+                return 53 + getSubKey(romanji);
 
             case 'h':
                 return 61 + getSubKey(romanji);
