@@ -32,6 +32,9 @@ public class GojuonOrder implements Comparator<String>
     {
         switch (romanji.current())
         {
+            case ' ':
+            case CharacterIterator.DONE:
+                return -1;
             case 'a':
                 return 0;
             case 'i':
@@ -199,8 +202,8 @@ public class GojuonOrder implements Comparator<String>
             int item1code = 0;
             int item2code = 0;
 
-            while (item1iterator.current() != CharacterIterator.DONE &&
-                    item2iterator.current() != CharacterIterator.DONE && item1code == item2code)
+            while ((item1iterator.current() != CharacterIterator.DONE ||
+                    item2iterator.current() != CharacterIterator.DONE) && item1code == item2code)
             {
                 item1code = getSortId(item1iterator);
                 item2code = getSortId(item2iterator);
