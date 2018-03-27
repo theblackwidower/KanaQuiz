@@ -267,7 +267,12 @@ abstract class XmlParser
     private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
     {
         int refId = parser.getAttributeResourceValue(index, 0);
-        return (refId == 0) ? parser.getAttributeValue(index) : ((stringResource == 0) ? resources.getString(refId) :
-                resources.getString(refId, resources.getString(stringResource)));
+
+        if (refId == 0)
+            return parser.getAttributeValue(index);
+        else if (stringResource == 0)
+            return resources.getString(refId);
+        else
+            return resources.getString(refId, resources.getString(stringResource));
     }
 }
