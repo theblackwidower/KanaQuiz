@@ -14,12 +14,14 @@ public class GojuonOrder implements Comparator<String>
 
     private static int getSortId(CharacterIterator romanji)
     {
+        int startIndex = romanji.getIndex();
         try
         {
             return getRomanjiKey(romanji);
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
+            romanji.setIndex(startIndex);
             return 109;
         }
         finally
