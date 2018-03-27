@@ -128,8 +128,7 @@ public class GojuonOrder implements Comparator<String>
                 return 96 + getSubKey(romanji);
 
             case 'w':
-                romanji.next();
-                switch (romanji.current())
+                switch (romanji.next())
                 {
                     case 'a':
                         return 104;
