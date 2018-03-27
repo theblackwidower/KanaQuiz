@@ -17,7 +17,7 @@ public class GojuonOrderTest
             "ju", "jo",*/ "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo", "ha", "hi", "fu", "he", "ho", "hya", "hyu",
             "hyo", "ba", "bi", "bu", "be", "bo", "bya", "byu", "byo", "pa", "pi", "pu", "pe", "po", "pya", "pyu", "pyo",
             "ma", "mi", "mu", "me", "mo", "mya", "myu", "myo", "ya", "yu", "yo", "ra", "ri", "ru", "re", "ro", "rya",
-            "ryu", "ryo", "wa", "wi", "we", "wo", "n"
+            "ryu", "ryo", "wa", "wi", "we", "wo", "n", "l", "q", "v", "x"
     };
 
     private static final String[] EXPECTED_ORDER_HEPBURN = {
@@ -27,7 +27,7 @@ public class GojuonOrderTest
             "ju", "jo",*/ "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo", "ha", "hi", "fu", "he", "ho", "hya", "hyu",
             "hyo", "ba", "bi", "bu", "be", "bo", "bya", "byu", "byo", "pa", "pi", "pu", "pe", "po", "pya", "pyu", "pyo",
             "ma", "mi", "mu", "me", "mo", "mya", "myu", "myo", "ya", "yu", "yo", "ra", "ri", "ru", "re", "ro", "rya",
-            "ryu", "ryo", "wa", /*"i", "e", "o",*/ "n"
+            "ryu", "ryo", "wa", /*"i", "e", "o",*/ "n", "l", "q", "v", "x"
     };
 
     private static final String[] EXPECTED_ORDER_NIHON = {
@@ -37,7 +37,7 @@ public class GojuonOrderTest
             "dyo", "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo", "ha", "hi", "hu", "he", "ho", "hya", "hyu", "hyo",
             "ba", "bi", "bu", "be", "bo", "bya", "byu", "byo", "pa", "pi", "pu", "pe", "po", "pya", "pyu", "pyo", "ma",
             "mi", "mu", "me", "mo", "mya", "myu", "myo", "ya", "yu", "yo", "ra", "ri", "ru", "re", "ro", "rya", "ryu",
-            "ryo", "wa", "wi", "we", "wo", "n"
+            "ryo", "wa", "wi", "we", "wo", "n", "l", "q", "v", "x"
     };
 
     private static final String[] EXPECTED_ORDER_KUNREI = {
@@ -47,7 +47,7 @@ public class GojuonOrderTest
             "zyu", "zyo",*/ "na", "ni", "nu", "ne", "no", "nya", "nyu", "nyo", "ha", "hi", "hu", "he", "ho", "hya",
             "hyu", "hyo", "ba", "bi", "bu", "be", "bo", "bya", "byu", "byo", "pa", "pi", "pu", "pe", "po", "pya", "pyu",
             "pyo", "ma", "mi", "mu", "me", "mo", "mya", "myu", "myo", "ya", "yu", "yo", "ra", "ri", "ru", "re", "ro",
-            "rya", "ryu", "ryo", "wa", /*"i", "e", "o",*/ "n"
+            "rya", "ryu", "ryo", "wa", /*"i", "e", "o",*/ "n", "l", "q", "v", "x"
     };
 
     @Test
