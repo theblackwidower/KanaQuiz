@@ -47,7 +47,6 @@ public class MainQuiz extends AppCompatActivity
     private TextView lblDisplayKana;
     private AnswerFrame frmAnswer;
 
-    private int oldTextColour;
     private static final int MAX_RETRIES = 3;
 
     private Handler delayHandler = new Handler();
@@ -92,8 +91,6 @@ public class MainQuiz extends AppCompatActivity
         lblResponse = findViewById(R.id.lblResponse);
         lblDisplayKana = findViewById(R.id.lblDisplayKana);
         frmAnswer = findViewById(R.id.frmAnswer);
-
-        oldTextColour = lblResponse.getCurrentTextColor(); // TODO: replace kludge for reverting text colour
 
         if (SDK_INT < Build.VERSION_CODES.O)
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
@@ -170,7 +167,9 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
             lblResponse.setTypeface(null, NORMAL);
-            lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
+            lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
+                    android.R.attr.textColorTertiary
+            }).getColor(0, 0));
             frmAnswer.onNoQuestions();
         }
         frmAnswer.updateScore(totalCorrect, totalQuestions);
@@ -267,7 +266,9 @@ public class MainQuiz extends AppCompatActivity
         }
         canSubmit = true;
         lblResponse.setTypeface(null, NORMAL);
-        lblResponse.setTextColor(oldTextColour); // TODO: replace kludge for reverting text colours
+        lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
+                android.R.attr.textColorTertiary
+        }).getColor(0, 0));
     }
 
     @Override
