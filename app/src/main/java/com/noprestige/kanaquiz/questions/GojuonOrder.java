@@ -26,7 +26,7 @@ public class GojuonOrder implements Comparator<String>
             if (romanji.setIndex(startIndex) == 'n')
                 return 108; //N Consonant
             else
-                return 109;
+                return 109 + romanji.current();
         }
         finally
         {
@@ -165,6 +165,7 @@ public class GojuonOrder implements Comparator<String>
                 item2code = getSortId(item2iterator);
             }
 
+            // for differing same letters, different case.
             if (item1code == item2code)
             {
                 item1iterator = new StringCharacterIterator(item1);
