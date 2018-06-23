@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 
 public class LogView extends AppCompatActivity
@@ -68,6 +69,8 @@ public class LogView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_view);
+
+        AppTools.initializeManagers(getApplicationContext());
 
         fetchThread = new FetchLogs();
         fetchThread.execute(this);

@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 
 public class ReferenceScreen extends AppCompatActivity
@@ -14,6 +15,8 @@ public class ReferenceScreen extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_screen);
+
+        AppTools.initializeManagers(getApplicationContext());
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ReferencePager(getSupportFragmentManager(), this));

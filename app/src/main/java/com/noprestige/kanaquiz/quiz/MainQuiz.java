@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.AboutScreen;
+import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDao;
@@ -106,9 +107,7 @@ public class MainQuiz extends AppCompatActivity
             }
         });
 
-        OptionsControl.initialize(getApplicationContext());
-        QuestionManagement.initialize(getApplicationContext());
-        LogDatabase.initialize(getApplicationContext());
+        AppTools.initializeManagers(getApplicationContext());
 
         resetQuiz();
         nextQuestion();
