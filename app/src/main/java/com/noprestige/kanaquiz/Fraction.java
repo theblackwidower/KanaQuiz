@@ -10,8 +10,8 @@ public class Fraction
     private static final int RESOLUTION = 240;
     private static final char NUL = '\u0000';
     private static final char[][] FRACTION_CHARS = {
-            {'½'}, {'⅓', '⅔'}, {'¼', NUL, '¾'}, {'⅕', '⅖', '⅗', '⅘'}, {'⅙', NUL, NUL, NUL, '⅚'}, {NUL},
-            {'⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}
+            {'½'}, {'⅓', '⅔'}, {'¼', NUL, '¾'}, {'⅕', '⅖', '⅗', '⅘'}, {'⅙', NUL, NUL, NUL, '⅚'}, {'⅐'},
+            {'⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}, {'⅑'}, {'⅒'}
     };
 
 

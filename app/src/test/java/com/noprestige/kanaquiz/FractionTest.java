@@ -74,7 +74,7 @@ public class FractionTest
         assertThat(new Fraction(15f / 8f).toString(), is("1⅞"));
         assertThat(new Fraction(16f / 8f).toString(), is("2"));
 
-        assertThat(new Fraction(1f / 10f).toString(), is("1⁄10"));
+        assertThat(new Fraction(1f / 10f).toString(), is("⅒"));
         assertThat(new Fraction(2f / 10f).toString(), is("⅕"));
         assertThat(new Fraction(3f / 10f).toString(), is("3⁄10"));
         assertThat(new Fraction(4f / 10f).toString(), is("⅖"));
@@ -84,7 +84,7 @@ public class FractionTest
         assertThat(new Fraction(8f / 10f).toString(), is("⅘"));
         assertThat(new Fraction(9f / 10f).toString(), is("9⁄10"));
         assertThat(new Fraction(10f / 10f).toString(), is("1"));
-        assertThat(new Fraction(11f / 10f).toString(), is("1\u200B1⁄10"));
+        assertThat(new Fraction(11f / 10f).toString(), is("1⅒"));
         assertThat(new Fraction(12f / 10f).toString(), is("1⅕"));
         assertThat(new Fraction(13f / 10f).toString(), is("1\u200B3⁄10"));
         assertThat(new Fraction(14f / 10f).toString(), is("1⅖"));
