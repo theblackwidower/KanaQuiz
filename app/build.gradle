@@ -4,7 +4,7 @@ apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.0'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.noprestige.kanaquiz"
         minSdkVersion 17
@@ -58,8 +58,8 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
     }
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-    implementation 'com.google.firebase:firebase-perf:16.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-perf:16.1.0'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 }
