@@ -17,6 +17,9 @@ android:
   licenses:
     - 'android-sdk-license-.+'
 
+jdk:
+  - oraclejdk8
+
 # Emulator Management: Create, Start and Wait
 before_script:
   # anything later than android-22 will stall
