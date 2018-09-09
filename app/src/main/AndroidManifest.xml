@@ -26,7 +26,6 @@
         <activity
             android:name=".options.KanaSelection"
             android:label="@string/selection_title"
-            android:screenOrientation="portrait"
             android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".AboutScreen"
