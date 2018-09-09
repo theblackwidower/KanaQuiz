@@ -88,15 +88,11 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_quiz);
-        lblResponse = findViewById(R.id.lblResponse);
-        lblDisplayKana = findViewById(R.id.lblDisplayKana);
-        frmAnswer = findViewById(R.id.frmAnswer);
+
+        onConfigurationChanged(getResources().getConfiguration());
 
         if (SDK_INT < Build.VERSION_CODES.O)
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
-
-        onConfigurationChanged(getResources().getConfiguration());
 
         frmAnswer.setOnAnswerListener(new OnAnswerListener()
         {
@@ -117,6 +113,18 @@ public class MainQuiz extends AppCompatActivity
     public void onConfigurationChanged(Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
+
+        //TODO: Preserve current question through configuration change
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+            setContentView(R.layout.activity_horizontal_quiz);
+        else
+            setContentView(R.layout.activity_main_quiz);
+
+        lblResponse = findViewById(R.id.lblResponse);
+        lblDisplayKana = findViewById(R.id.lblDisplayKana);
+        frmAnswer = findViewById(R.id.frmAnswer);
+
         if (newConfig.keyboard == Configuration.KEYBOARD_NOKEYS &&
                 newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)
             frmAnswer.setTextHint(R.string.answer_hint_touch);
