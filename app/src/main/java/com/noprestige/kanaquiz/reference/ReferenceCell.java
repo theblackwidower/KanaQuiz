@@ -115,6 +115,7 @@ public class ReferenceCell extends View
                 return MeasureSpec.getSize(measureSpec);
             case MeasureSpec.AT_MOST:
                 return Math.min(desired, MeasureSpec.getSize(measureSpec));
+            case MeasureSpec.UNSPECIFIED:
             default:
                 return desired;
         }
