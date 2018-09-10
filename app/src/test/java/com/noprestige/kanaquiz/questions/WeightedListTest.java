@@ -10,7 +10,7 @@ import static org.junit.Assert.fail;
 
 public class WeightedListTest
 {
-    private class SampleData
+    private static class SampleData
     {
         public int[] weights;
         public String[] strings;

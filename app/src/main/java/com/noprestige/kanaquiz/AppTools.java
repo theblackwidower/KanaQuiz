@@ -8,7 +8,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 public abstract class AppTools
 {
-    private static boolean isInitialized = false;
+    private static boolean isInitialized; //defaults to false
 
     public static void initializeManagers(Context context)
     {

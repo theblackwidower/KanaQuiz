@@ -20,7 +20,7 @@ public class AboutScreen extends AppCompatActivity
 
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);
 
-        final String translatorCreditUrl = getResources().getString(R.string.translator_credit_url);
+        String translatorCreditUrl = getResources().getString(R.string.translator_credit_url);
 
         if (!translatorCreditUrl.isEmpty())
         {
