@@ -121,10 +121,10 @@ public class KanaQuestion
         else if (charCode >= 0x4C || charCode <= 0x03)
             return (charCode % 2 == 0); //K and S-sets, and first few T-set chars
 
-        else if (charCode >= 0x04 && charCode <= 0x09)
+        else if (charCode <= 0x09) // && charCode >= 0x04
             return (charCode % 2 == 1); //last few T-set chars
 
-        else if (charCode >= 0x0F && charCode <= 0x1D)
+        else if (charCode <= 0x1D) // && charCode >= 0x0F
             return (charCode % 3 != 0); //H-set with two types of diacritics
 
         else
