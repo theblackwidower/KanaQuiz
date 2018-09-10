@@ -162,7 +162,7 @@ abstract class XmlParser
     }
 
     private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
-            throws ParseException, XmlPullParserException, IOException
+            throws ParseException
     {
         String thisRomanji = null;
         String thisKana = null;

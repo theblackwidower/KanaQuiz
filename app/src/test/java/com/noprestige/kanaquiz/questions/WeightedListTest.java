@@ -87,7 +87,7 @@ public class WeightedListTest
     }
 
     @Test
-    public void rangeTest() throws Exception
+    public void rangeTest()
     {
         SampleData data = new SampleData();
         data.weights = new int[]{3, 8, 27, 6};
@@ -100,7 +100,7 @@ public class WeightedListTest
     }
 
     @Test
-    public void mergeTest() throws Exception
+    public void mergeTest()
     {
         SampleData dataOne = new SampleData();
         dataOne.weights = new int[]{3, 8, 27, 6};
@@ -124,7 +124,7 @@ public class WeightedListTest
     }
 
     @Test
-    public void removeTest() throws Exception
+    public void removeTest()
     {
         SampleData data = new SampleData();
         data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
@@ -157,7 +157,7 @@ public class WeightedListTest
     }
 
     @Test
-    public void adjustWeightTest() throws Exception
+    public void adjustWeightTest()
     {
         SampleData data = new SampleData();
         data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};
@@ -190,7 +190,7 @@ public class WeightedListTest
     }
 
     @Test
-    public void findIndexTest() throws Exception
+    public void findIndexTest()
     {
         SampleData data = new SampleData();
         data.weights = new int[]{3, 8, 27, 6, 8, 2, 9, 21};

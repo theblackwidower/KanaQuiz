@@ -259,7 +259,7 @@ public class KanaQuestionTest
     };
 
     @Test
-    public void isDigraphTest() throws Exception
+    public void isDigraphTest()
     {
         assertDigraphTest(HIRAGANA_KANA_SET_1, false);
         assertDigraphTest(HIRAGANA_KANA_SET_2_BASE, false);
@@ -321,7 +321,7 @@ public class KanaQuestionTest
     }
 
     @Test
-    public void isDiacriticTest() throws Exception
+    public void isDiacriticTest()
     {
         assertDiacriticTest(HIRAGANA_KANA_SET_1, false);
         assertDiacriticTest(HIRAGANA_KANA_SET_2_BASE, false);

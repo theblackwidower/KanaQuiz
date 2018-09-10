@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 public class FractionTest
 {
     @Test
-    public void toStringTest() throws Exception
+    public void toStringTest()
     {
         assertThat(new Fraction(0).toString(), is("0"));
 

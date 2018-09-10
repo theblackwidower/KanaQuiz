@@ -66,7 +66,7 @@ public class GojuonOrderTest
     };
 
     @Test
-    public void sortTest() throws Exception
+    public void sortTest()
     {
         checkOrder(EXPECTED_ORDER_DEFAULT);
         checkOrder(EXPECTED_ORDER_HEPBURN);
