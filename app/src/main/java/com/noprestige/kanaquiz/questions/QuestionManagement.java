@@ -27,8 +27,6 @@ public class QuestionManagement
 
     private boolean isInitialized;
 
-    private XmlResourceParser XmlResource;
-
     private int categoryCount;
 
     private KanaQuestion[][][][] kanaSets;
@@ -87,7 +85,7 @@ public class QuestionManagement
         {
             try
             {
-                XmlResource = resources.getXml(XmlRefId);
+                XmlResourceParser XmlResource = resources.getXml(XmlRefId);
 
                 List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
                 List<String> prefIdList = new ArrayList<>();
