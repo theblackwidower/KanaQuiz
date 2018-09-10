@@ -1,12 +1,13 @@
 package com.noprestige.kanaquiz.questions;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.hamcrest.CoreMatchers.is;
 
 public class GojuonOrderTest
 {
@@ -87,6 +88,6 @@ public class GojuonOrderTest
         Set<String> sortedSet = new TreeSet<>(new GojuonOrder());
         sortedSet.addAll(Arrays.asList(reversedArray));
 
-        assertArrayEquals(testArray, sortedSet.toArray());
+        Assert.assertThat(sortedSet.toArray(), is(testArray));
     }
 }
