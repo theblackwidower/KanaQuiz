@@ -129,6 +129,7 @@ class WeightedList<E> implements Cloneable
     {
         try
         {
+            @SuppressWarnings("unchecked")
             WeightedList<E> destructibleList = (WeightedList<E>) this.clone();
 
             for (int i = 0; i < array.length; i++)
@@ -162,6 +163,7 @@ class WeightedList<E> implements Cloneable
         return map.values();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected Object clone() throws CloneNotSupportedException
     {
