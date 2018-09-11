@@ -71,4 +71,12 @@ repositories {
         // Alternative URL is 'https://dl.google.com/dl/android/maven2/'
     }
 }
+
+coveralls {
+    //Unit tests
+    jacocoReportPath = "${buildDir}/reports/jacoco/debug/jacoco.xml"
+    //Instrument tests
+    //jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+}
+
 apply plugin: 'com.google.gms.google-services'

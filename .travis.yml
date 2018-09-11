@@ -30,7 +30,9 @@ before_script:
   - adb shell input keyevent 82 &
 
 after_success:
-  #unit test
-  - ./gradlew jacocoTestReportDebug coveralls
-  #android test
-  - ./gradlew createDebugCoverageReport coveralls
+  #unit test coverage
+  - ./gradlew jacocoTestReportDebug
+  #android test coverage
+  - ./gradlew createDebugCoverageReport
+  #coveralls upload
+  - ./gradlew coveralls
