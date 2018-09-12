@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -31,7 +32,7 @@ public class LogMigrationTest
     }
 
     @Test
-    public void migrate1To2() throws Exception
+    public void migrate1To2() throws IOException
     {
         SupportSQLiteDatabase db = helper.createDatabase(TEST_DB, 1);
 
@@ -71,7 +72,7 @@ public class LogMigrationTest
     }
 
     @Test
-    public void migrate2To3() throws Exception
+    public void migrate2To3() throws IOException
     {
         SupportSQLiteDatabase db = helper.createDatabase(TEST_DB, 2);
 
