@@ -19,16 +19,24 @@ abstract class XmlParser
 {
     static void parseXmlDocument(int XmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
             List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
-            throws XmlPullParserException, IOException, ParseException
     {
         XmlResourceParser parser = resources.getXml(XmlRefId);
 
-        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        try
         {
-            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
+            for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
+                    eventType = parser.next())
             {
-                parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+                if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
+                {
+                    parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+                }
             }
+        }
+        catch (XmlPullParserException | IOException | ParseException ex)
+        {
+            //if this happens, we have bigger problems
+            throw new RuntimeException(ex);
         }
     }
 
@@ -73,7 +81,8 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        for (int eventType = parser.getEventType(); !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
+        for (int eventType = parser.getEventType();
+                !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
                 eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)

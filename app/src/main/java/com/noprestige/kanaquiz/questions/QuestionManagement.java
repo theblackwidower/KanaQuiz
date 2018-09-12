@@ -11,10 +11,6 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 import com.noprestige.kanaquiz.reference.ReferenceTable;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,32 +73,24 @@ public class QuestionManagement
 
     public QuestionManagement(int XmlRefId, Resources resources)
     {
-        try
-        {
-            List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
-            List<String> prefIdList = new ArrayList<>();
-            List<String> setTitleList = new ArrayList<>();
-            List<String> setNoDiacriticsTitleList = new ArrayList<>();
+        List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+        List<String> prefIdList = new ArrayList<>();
+        List<String> setTitleList = new ArrayList<>();
+        List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
-            XmlParser.parseXmlDocument(XmlRefId, resources, kanaSetList, prefIdList, setTitleList,
-                    setNoDiacriticsTitleList);
+        XmlParser
+                .parseXmlDocument(XmlRefId, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
 
-            categoryCount = kanaSetList.size();
+        categoryCount = kanaSetList.size();
 
-            kanaSets = new KanaQuestion[categoryCount][][][];
-            kanaSetList.toArray(kanaSets);
-            prefIds = new String[categoryCount];
-            prefIdList.toArray(prefIds);
-            setTitles = new String[categoryCount];
-            setTitleList.toArray(setTitles);
-            setNoDiacriticsTitles = new String[categoryCount];
-            setNoDiacriticsTitleList.toArray(setNoDiacriticsTitles);
-        }
-        catch (XmlPullParserException | IOException | ParseException ex)
-        {
-            //if this happens, we have bigger problems
-            throw new RuntimeException(ex);
-        }
+        kanaSets = new KanaQuestion[categoryCount][][][];
+        kanaSetList.toArray(kanaSets);
+        prefIds = new String[categoryCount];
+        prefIdList.toArray(prefIds);
+        setTitles = new String[categoryCount];
+        setTitleList.toArray(setTitles);
+        setNoDiacriticsTitles = new String[categoryCount];
+        setNoDiacriticsTitleList.toArray(setNoDiacriticsTitles);
     }
 
     public static void initialize(Context context)
