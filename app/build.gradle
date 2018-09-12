@@ -73,7 +73,7 @@ repositories {
 }
 
 coveralls {
-    sourceDirs += files(sourceSets.main.java.srcDirs).files.absolutePath
+    sourceDirs += "${rootDir}/app/src/main/java/"
     //Unit tests
     jacocoReportPath = "${buildDir}/reports/jacoco/debug/jacoco.xml"
     //Instrument tests
