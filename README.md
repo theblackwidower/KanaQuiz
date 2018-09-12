@@ -7,6 +7,8 @@
 [![Codeship Status for theblackwidower/KanaQuiz](https://app.codeship.com/projects/7db68d50-ff29-0135-aeeb-56b253369268/status?branch=master)](https://app.codeship.com/projects/279635)
 [![Build Status](https://semaphoreci.com/api/v1/theblackwidower/kanaquiz/branches/master/badge.svg)](https://semaphoreci.com/theblackwidower/kanaquiz)
 
+[![Coverage Status](https://coveralls.io/repos/github/theblackwidower/KanaQuiz/badge.svg?branch=9a27b4a5f46798b626ff4519f1653e920e1953d8)](https://coveralls.io/github/theblackwidower/KanaQuiz?branch=9a27b4a5f46798b626ff4519f1653e920e1953d8)
+
 Are you trying to learn Japanese, but can't seem to remember the pronunciation of the basic Hiragana or Katakana character set?
 
 This application is here to help. It will test your knowledge, and drill the basics into your head. You can select which of the twenty different groups you wish to test yourself on. Allowing you to customize based on your skill level. Because we can't learn all this stuff at once. Records your daily progress, so you can know how much you've improved over time. Also includes a reference screen that can display all kana you're currently working on, just to remind you. 
