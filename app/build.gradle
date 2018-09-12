@@ -73,6 +73,7 @@ repositories {
 }
 
 coveralls {
+    sourceDirs += ['src/main/java']
     //Unit tests
     jacocoReportPath = "${buildDir}/reports/jacoco/debug/jacoco.xml"
     //Instrument tests
