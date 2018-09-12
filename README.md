@@ -8,6 +8,7 @@
 [![Build Status](https://semaphoreci.com/api/v1/theblackwidower/kanaquiz/branches/master/badge.svg)](https://semaphoreci.com/theblackwidower/kanaquiz)
 
 [![Coverage Status](https://coveralls.io/repos/github/theblackwidower/KanaQuiz/badge.svg?branch=9a27b4a5f46798b626ff4519f1653e920e1953d8)](https://coveralls.io/github/theblackwidower/KanaQuiz?branch=9a27b4a5f46798b626ff4519f1653e920e1953d8)
+[![codecov](https://codecov.io/gh/theblackwidower/KanaQuiz/branch/master/graph/badge.svg)](https://codecov.io/gh/theblackwidower/KanaQuiz)
 
 Are you trying to learn Japanese, but can't seem to remember the pronunciation of the basic Hiragana or Katakana character set?
 

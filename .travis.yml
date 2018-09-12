@@ -34,5 +34,7 @@ after_success:
   - ./gradlew jacocoTestReportDebug
   #android test coverage
   - ./gradlew createDebugCoverageReport
-  #coveralls upload
+  #coveralls reporting
   - ./gradlew coveralls
+  #codecov reporting
+  - bash <(curl -s https://codecov.io/bash)
