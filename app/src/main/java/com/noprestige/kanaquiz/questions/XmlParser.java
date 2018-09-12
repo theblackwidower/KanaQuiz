@@ -17,9 +17,24 @@ import static com.noprestige.kanaquiz.questions.RomanizationSystem.UNKNOWN;
 
 abstract class XmlParser
 {
-    static void parseXmlKanaSet(XmlResourceParser parser, Resources resources, List<KanaQuestion[][][]> kanaSetList,
+    static void parseXmlDocument(int XmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
             List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
+    {
+        XmlResourceParser parser = resources.getXml(XmlRefId);
+
+        for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT; eventType = parser.next())
+        {
+            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
+            {
+                parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+            }
+        }
+    }
+
+    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
+            List<KanaQuestion[][][]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
+            List<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -58,8 +73,7 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
+        for (int eventType = parser.getEventType(); !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
                 eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)

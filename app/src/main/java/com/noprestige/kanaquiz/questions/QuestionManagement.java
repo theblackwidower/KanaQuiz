@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.XmlResourceParser;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -12,7 +11,6 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 import com.noprestige.kanaquiz.reference.ReferenceTable;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -24,8 +22,6 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
-
-    private boolean isInitialized;
 
     private int categoryCount;
 
@@ -79,49 +75,34 @@ public class QuestionManagement
         }
     }
 
-    private void parseXml(int XmlRefId, Resources resources)
+    public QuestionManagement(int XmlRefId, Resources resources)
     {
-        if (!isInitialized)
+        try
         {
-            try
-            {
-                XmlResourceParser XmlResource = resources.getXml(XmlRefId);
+            List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+            List<String> prefIdList = new ArrayList<>();
+            List<String> setTitleList = new ArrayList<>();
+            List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
-                List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
-                List<String> prefIdList = new ArrayList<>();
-                List<String> setTitleList = new ArrayList<>();
-                List<String> setNoDiacriticsTitleList = new ArrayList<>();
+            XmlParser.parseXmlDocument(XmlRefId, resources, kanaSetList, prefIdList, setTitleList,
+                    setNoDiacriticsTitleList);
 
-                for (int eventType = XmlResource.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
-                        eventType = XmlResource.next())
-                {
-                    if (eventType == XmlPullParser.START_TAG && XmlResource.getName().equalsIgnoreCase("KanaSet"))
-                    {
-                        XmlParser.parseXmlKanaSet(XmlResource, resources, kanaSetList, prefIdList, setTitleList,
-                                setNoDiacriticsTitleList);
-                    }
-                }
+            categoryCount = kanaSetList.size();
 
-                categoryCount = kanaSetList.size();
-
-                kanaSets = new KanaQuestion[categoryCount][][][];
-                kanaSetList.toArray(kanaSets);
-                prefIds = new String[categoryCount];
-                prefIdList.toArray(prefIds);
-                setTitles = new String[categoryCount];
-                setTitleList.toArray(setTitles);
-                setNoDiacriticsTitles = new String[categoryCount];
-                setNoDiacriticsTitleList.toArray(setNoDiacriticsTitles);
-
-                isInitialized = true;
-            }
-            catch (XmlPullParserException | IOException | ParseException ignored) {}
+            kanaSets = new KanaQuestion[categoryCount][][][];
+            kanaSetList.toArray(kanaSets);
+            prefIds = new String[categoryCount];
+            prefIdList.toArray(prefIds);
+            setTitles = new String[categoryCount];
+            setTitleList.toArray(setTitles);
+            setNoDiacriticsTitles = new String[categoryCount];
+            setNoDiacriticsTitleList.toArray(setNoDiacriticsTitles);
         }
-    }
-
-    private QuestionManagement(int XmlResource, Resources resources)
-    {
-        parseXml(XmlResource, resources);
+        catch (XmlPullParserException | IOException | ParseException ex)
+        {
+            //if this happens, we have bigger problems
+            throw new RuntimeException(ex);
+        }
     }
 
     public static void initialize(Context context)
