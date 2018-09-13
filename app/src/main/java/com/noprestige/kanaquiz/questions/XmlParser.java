@@ -246,7 +246,7 @@ abstract class XmlParser
 
                 if (parser.next() == XmlPullParser.TEXT)
                     for (RomanizationSystem system : systemsList)
-                        question.addAltAnswer(parser.getText(), system);
+                        question.addAltRomanji(parser.getText(), system);
                 else
                     throw new ParseException("Empty AltAnswer tag", parser.getLineNumber());
             }

@@ -12,23 +12,23 @@ import java.util.TreeMap;
 public class KanaQuestion
 {
     private String kana;
-    private String defaultAnswer;
-    private TreeMap<RomanizationSystem, String> altAnswers = new TreeMap<>();
+    private String defaultRomanji;
+    private TreeMap<RomanizationSystem, String> altRomanji = new TreeMap<>();
 
-    KanaQuestion(String kana, String answer)
+    KanaQuestion(String kana, String romanji)
     {
         setKana(kana);
-        setDefaultAnswer(answer);
+        setDefaultRomanji(romanji);
     }
 
-    private void setDefaultAnswer(String answer)
+    private void setDefaultRomanji(String romanji)
     {
-        this.defaultAnswer = answer;
+        this.defaultRomanji = romanji;
     }
 
-    public void addAltAnswer(String answer, RomanizationSystem system)
+    public void addAltRomanji(String romanji, RomanizationSystem system)
     {
-        altAnswers.put(system, answer);
+        altRomanji.put(system, romanji);
     }
 
     private void setKana(String kana)
@@ -43,9 +43,9 @@ public class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        if (defaultAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
+        if (defaultRomanji.trim().toLowerCase().equals(response.trim().toLowerCase()))
             return true;
-        for (String correctAnswer : altAnswers.values())
+        for (String correctAnswer : altRomanji.values())
             if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
                 return true;
 
@@ -54,23 +54,27 @@ public class KanaQuestion
 
     String fetchCorrectAnswer()
     {
-        if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
-            return defaultAnswer;
-        else if (OptionsControl
-                .compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
-            return fetchCorrectAnswer(RomanizationSystem.HEPBURN);
-        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
-            return fetchCorrectAnswer(RomanizationSystem.NIHON);
-        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_kunrei))
-            return fetchCorrectAnswer(RomanizationSystem.KUNREI);
-        else
-            return defaultAnswer;
+        return fetchRomanji();
     }
 
-    String fetchCorrectAnswer(RomanizationSystem system)
+    String fetchRomanji()
     {
-        String answer = altAnswers.get(system);
-        return answer == null ? defaultAnswer : answer;
+        if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
+            return defaultRomanji;
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
+            return fetchRomanji(RomanizationSystem.HEPBURN);
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
+            return fetchRomanji(RomanizationSystem.NIHON);
+        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_kunrei))
+            return fetchRomanji(RomanizationSystem.KUNREI);
+        else
+            return defaultRomanji;
+    }
+
+    String fetchRomanji(RomanizationSystem system)
+    {
+        String romanji = altRomanji.get(system);
+        return romanji == null ? defaultRomanji : romanji;
     }
 
     public ReferenceCell generateReference(Context context)
@@ -87,7 +91,7 @@ public class KanaQuestion
     @Override
     public String toString()
     {
-        return kana + " = " + defaultAnswer;
+        return kana + " = " + defaultRomanji;
     }
 
     public boolean isDigraph()
