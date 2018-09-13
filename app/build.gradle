@@ -10,8 +10,8 @@ android {
         applicationId "com.noprestige.kanaquiz"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 13
-        versionName "0.11"
+        versionCode 14
+        versionName "0.12"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
