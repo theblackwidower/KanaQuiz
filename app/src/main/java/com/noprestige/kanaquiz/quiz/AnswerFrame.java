@@ -58,7 +58,8 @@ public class AnswerFrame extends LinearLayout
         ((ViewGroup) getChildAt(0)).removeAllViews();
         removeAllViews();
 
-        txtAnswer.setOnEditorActionListener((v, actionId, event) -> {
+        txtAnswer.setOnEditorActionListener((v, actionId, event) ->
+        {
             String answer = v.getText().toString().trim();
             if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
                 checkAnswer(answer);

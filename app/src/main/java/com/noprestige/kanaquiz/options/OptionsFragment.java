@@ -39,7 +39,8 @@ public class OptionsFragment extends PreferenceFragment
         onIncorrect.setOnPreferenceChangeListener(this::setSummary);
 
         //ref: https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
-        findPreference("clear_logs").setOnPreferenceClickListener(btnClearLogs -> {
+        findPreference("clear_logs").setOnPreferenceClickListener(btnClearLogs ->
+        {
             new DeleteAll().execute(btnClearLogs);
             return true;
         });

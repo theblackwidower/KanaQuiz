@@ -225,7 +225,8 @@ public class MainQuiz extends AppCompatActivity
 
                     LogDao.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
-                    delayHandler.postDelayed(() -> {
+                    delayHandler.postDelayed(() ->
+                    {
                         ReadyForAnswer();
                         frmAnswer.enableButtons();
                     }, 1000);
