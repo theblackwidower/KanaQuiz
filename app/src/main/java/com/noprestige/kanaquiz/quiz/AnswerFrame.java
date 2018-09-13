@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -59,26 +58,14 @@ public class AnswerFrame extends LinearLayout
         ((ViewGroup) getChildAt(0)).removeAllViews();
         removeAllViews();
 
-        txtAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
-                String answer = v.getText().toString().trim();
-                if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
-                    checkAnswer(answer);
-                return true;
-            }
+        txtAnswer.setOnEditorActionListener((v, actionId, event) -> {
+            String answer = v.getText().toString().trim();
+            if ((actionId == EditorInfo.IME_ACTION_GO) || (actionId == EditorInfo.IME_NULL))
+                checkAnswer(answer);
+            return true;
         });
 
-        btnMultipleChoice.setOnAnswerListener(new OnAnswerListener()
-        {
-            @Override
-            public void onAnswer(String answer)
-            {
-                checkAnswer(answer);
-            }
-        });
+        btnMultipleChoice.setOnAnswerListener(this::checkAnswer);
     }
 
     public void setOnAnswerListener(OnAnswerListener listener)

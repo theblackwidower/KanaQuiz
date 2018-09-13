@@ -6,10 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Checkable;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,21 +56,10 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         lblContents = findViewById(R.id.lblContents);
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
-        this.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
-                toggle();
-            }
-        });
+        this.setOnClickListener(view -> toggle());
 
-        chkCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                OptionsControl.setBoolean(getPrefId(), isChecked);
-            }
-        });
+        chkCheckBox.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));
 
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);

@@ -94,14 +94,7 @@ public class MainQuiz extends AppCompatActivity
         if (SDK_INT < Build.VERSION_CODES.O)
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
 
-        frmAnswer.setOnAnswerListener(new OnAnswerListener()
-        {
-            @Override
-            public void onAnswer(String answer)
-            {
-                checkAnswer(answer);
-            }
-        });
+        frmAnswer.setOnAnswerListener(this::checkAnswer);
 
         AppTools.initializeManagers(getApplicationContext());
 
@@ -232,13 +225,9 @@ public class MainQuiz extends AppCompatActivity
 
                     LogDao.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
 
-                    delayHandler.postDelayed(new Runnable()
-                    {
-                        public void run()
-                        {
-                            ReadyForAnswer();
-                            frmAnswer.enableButtons();
-                        }
+                    delayHandler.postDelayed(() -> {
+                        ReadyForAnswer();
+                        frmAnswer.enableButtons();
                     }, 1000);
                 }
 
@@ -251,13 +240,7 @@ public class MainQuiz extends AppCompatActivity
                 totalQuestions++;
                 //TODO: Find a way to disable a textbox without closing the touch keyboard
                 //txtAnswer.setEnabled(false);
-                delayHandler.postDelayed(new Runnable()
-                {
-                    public void run()
-                    {
-                        nextQuestion();
-                    }
-                }, 1000);
+                delayHandler.postDelayed(this::nextQuestion, 1000);
             }
         }
     }
