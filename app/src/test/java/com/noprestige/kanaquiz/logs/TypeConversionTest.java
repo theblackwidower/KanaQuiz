@@ -2,17 +2,17 @@ package com.noprestige.kanaquiz.logs;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class TypeConversionTest
 {
     private void assertConversion(int year, int month, int day, int all)
     {
         LocalDate dateObject = new LocalDate(year, month, day);
-        Assert.assertThat(LogTypeConversion.dateToTimestamp(dateObject), is(all));
+        assertThat(LogTypeConversion.dateToTimestamp(dateObject), is(all));
     }
 
     @Test
