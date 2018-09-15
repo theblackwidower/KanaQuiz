@@ -4,14 +4,14 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 @Entity(tableName = "incorrect_answers", primaryKeys = {"date", "kana", "incorrect_romanji"})
 public class IncorrectAnswerRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
-    public Date date;
+    public LocalDate date;
 
     @ColumnInfo(name = "kana")
     @NonNull
@@ -26,7 +26,7 @@ public class IncorrectAnswerRecord
 
     public IncorrectAnswerRecord(String kana, String incorrect_romanji)
     {
-        date = new Date();
+        date = LocalDate.now();
         this.kana = kana;
         this.incorrect_romanji = incorrect_romanji;
         occurrences = 1;

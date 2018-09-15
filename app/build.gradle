@@ -63,6 +63,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:16.1.0'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
+
+    implementation 'joda-time:joda-time:2.10'
 }
 
 repositories {

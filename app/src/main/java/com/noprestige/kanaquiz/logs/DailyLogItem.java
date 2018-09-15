@@ -13,24 +13,15 @@ import android.view.View;
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import org.joda.time.LocalDate;
 
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.LONG;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
+import java.text.DecimalFormat;
 
 public class DailyLogItem extends View
 {
     private float correctAnswers = -1;
     private int totalAnswers = -1;
-    private Date date;
+    private LocalDate date;
     private boolean isDynamicSize;
 
     private String dateString_1 = "";
@@ -75,7 +66,6 @@ public class DailyLogItem extends View
     private static TypedArray defaultAttributes;
 
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
-    private static final SimpleDateFormat DATE_INPUT_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
     private static final String SLASH = "/";
 
     public DailyLogItem(Context context)
@@ -228,7 +218,7 @@ public class DailyLogItem extends View
         setTotalAnswers(record.total_answers);
     }
 
-    public Date getDate()
+    public LocalDate getDate()
     {
         return this.date;
     }
@@ -263,31 +253,24 @@ public class DailyLogItem extends View
         if (date == null)
             return false;
         else
-            try
-            {
-                setDate(DATE_INPUT_FORMATTER.parse(date));
-                return true;
-            }
-            catch (ParseException ex)
-            {
-                return false;
-            }
+        {
+            setDate(LocalDate.parse(date));
+            return true;
+        }
     }
 
-    public void setDate(Date date)
+    public void setDate(LocalDate date)
     {
         this.date = date;
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
 
-        dateString_1 = calendar.getDisplayName(DAY_OF_WEEK, LONG, Locale.getDefault());
+        dateString_1 = date.toString("EEEE"); // Output day of week by full name
 
-        dateString_2 = calendar.getDisplayName(MONTH, LONG, Locale.getDefault());
+        dateString_2 = date.toString("MMMM"); // Output month by full name
         dateString_2 += " ";
-        dateString_2 += Integer.toString(calendar.get(DAY_OF_MONTH));
+        dateString_2 += Integer.toString(date.getDayOfMonth());
 
-        dateString_3 = Integer.toString(calendar.get(YEAR));
+        dateString_3 = Integer.toString(date.getYear());
 
         dateWidth_1 = datePaint.measureText(dateString_1);
         dateWidth_2 = datePaint.measureText(dateString_2);

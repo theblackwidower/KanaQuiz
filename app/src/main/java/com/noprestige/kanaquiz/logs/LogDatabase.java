@@ -9,7 +9,7 @@ import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.database.Cursor;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 @Database(entities = {DailyRecord.class, KanaRecord.class, IncorrectAnswerRecord.class}, version = 3)
 @TypeConverters({LogTypeConversion.class})
@@ -64,7 +64,7 @@ public abstract class LogDatabase extends RoomDatabase
         @Override
         public void migrate(SupportSQLiteDatabase database)
         {
-            int currentDate = LogTypeConversion.dateToTimestamp(new Date());
+            int currentDate = LogTypeConversion.dateToTimestamp(LocalDate.now());
 
             //rebuilding tables because ALTER TABLE can't alter, or even add to, the primary key
             database.execSQL("ALTER TABLE kana_records RENAME TO old_kana_records");

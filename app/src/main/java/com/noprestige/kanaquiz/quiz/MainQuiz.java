@@ -29,7 +29,7 @@ import com.noprestige.kanaquiz.questions.NoQuestionsException;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 import static android.graphics.Typeface.BOLD;
 import static android.graphics.Typeface.NORMAL;
@@ -57,7 +57,7 @@ public class MainQuiz extends AppCompatActivity
     private FetchTodaysLog fetchScoreThread;
 
     @SuppressLint("StaticFieldLeak")
-    private class FetchTodaysLog extends AsyncTask<Date, Void, DailyRecord>
+    private class FetchTodaysLog extends AsyncTask<LocalDate, Void, DailyRecord>
     {
         @Override
         protected void onPreExecute()
@@ -67,7 +67,7 @@ public class MainQuiz extends AppCompatActivity
         }
 
         @Override
-        protected DailyRecord doInBackground(Date... date)
+        protected DailyRecord doInBackground(LocalDate... date)
         {
             return LogDatabase.DAO.getDateRecord(date[0]);
         }
@@ -138,7 +138,7 @@ public class MainQuiz extends AppCompatActivity
         if (fetchScoreThread != null)
             fetchScoreThread.cancel(true);
         fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(new Date());
+        fetchScoreThread.execute(LocalDate.now());
 
         lblDisplayKana.setText("");
         lblResponse.setText("");

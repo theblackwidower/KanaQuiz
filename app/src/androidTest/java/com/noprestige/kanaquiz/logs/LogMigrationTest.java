@@ -7,12 +7,12 @@ import android.database.Cursor;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.joda.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -105,7 +105,7 @@ public class LogMigrationTest
 
         // MigrationTestHelper automatically verifies the schema changes,
         // but you need to validate that the data was migrated properly.
-        int currentDate = LogTypeConversion.dateToTimestamp(new Date());
+        int currentDate = LogTypeConversion.dateToTimestamp(LocalDate.now());
 
         assertThat(db.query("SELECT * FROM kana_records WHERE NOT date = ?", new Integer[]{currentDate}).getCount(),
                 is(0));

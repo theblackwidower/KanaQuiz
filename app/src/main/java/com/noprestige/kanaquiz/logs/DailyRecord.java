@@ -4,14 +4,14 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
 
 @Entity(tableName = "daily_record")
 public class DailyRecord
 {
     @PrimaryKey
     @ColumnInfo(name = "date")
-    public Date date;
+    public LocalDate date;
 
     @ColumnInfo(name = "correct_answers")
     public float correct_answers;
@@ -21,7 +21,7 @@ public class DailyRecord
 
     public DailyRecord()
     {
-        date = new Date();
+        date = LocalDate.now();
         correct_answers = 0;
         total_answers = 0;
     }

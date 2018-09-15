@@ -2,32 +2,19 @@ package com.noprestige.kanaquiz.logs;
 
 import android.arch.persistence.room.TypeConverter;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
+import org.joda.time.LocalDate;
 
 public class LogTypeConversion
 {
     @TypeConverter
-    public static Date fromTimestamp(Integer value)
+    public static LocalDate fromTimestamp(Integer value)
     {
-        return value == null ? null :
-                new GregorianCalendar(value / 10000, value % 10000 / 100 - 1, value % 100).getTime();
+        return value == null ? null : new LocalDate(value / 10000, value % 10000 / 100, value % 100);
     }
 
     @TypeConverter
-    public static Integer dateToTimestamp(Date date)
+    public static Integer dateToTimestamp(LocalDate date)
     {
-        if (date == null)
-            return null;
-        else
-        {
-            GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
-            return calendar.get(YEAR) * 10000 + (calendar.get(MONTH) + 1) * 100 + calendar.get(DAY_OF_MONTH);
-        }
+        return date == null ? null : date.getYear() * 10000 + date.getMonthOfYear() * 100 + date.getDayOfMonth();
     }
 }

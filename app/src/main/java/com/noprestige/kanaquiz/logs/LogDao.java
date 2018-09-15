@@ -6,7 +6,8 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 import android.os.AsyncTask;
 
-import java.util.Date;
+import org.joda.time.LocalDate;
+
 import java.util.concurrent.ExecutionException;
 
 @Dao
@@ -115,7 +116,7 @@ public abstract class LogDao
     }
 
     @Query("SELECT * FROM daily_record WHERE date = :date")
-    public abstract DailyRecord getDateRecord(Date date);
+    public abstract DailyRecord getDateRecord(LocalDate date);
 
     @Query("SELECT * FROM kana_records WHERE kana = :kana")
     abstract KanaRecord[] getKanaRecord(String kana);
@@ -124,10 +125,10 @@ public abstract class LogDao
     abstract IncorrectAnswerRecord[] getAnswerRecord(String kana, String romanji);
 
     @Query("SELECT * FROM kana_records WHERE kana = :kana AND date = :date")
-    abstract KanaRecord getDaysKanaRecord(String kana, Date date);
+    abstract KanaRecord getDaysKanaRecord(String kana, LocalDate date);
 
     @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji AND date = :date")
-    abstract IncorrectAnswerRecord getDaysAnswerRecord(String kana, String romanji, Date date);
+    abstract IncorrectAnswerRecord getDaysAnswerRecord(String kana, String romanji, LocalDate date);
 
     @Query("SELECT * FROM daily_record")
     abstract DailyRecord[] getAllDailyRecords();
@@ -166,7 +167,7 @@ public abstract class LogDao
 
     private static void addTodaysRecord(float score)
     {
-        DailyRecord record = LogDatabase.DAO.getDateRecord(new Date());
+        DailyRecord record = LogDatabase.DAO.getDateRecord(LocalDate.now());
         if (record == null)
         {
             record = new DailyRecord();
@@ -182,7 +183,7 @@ public abstract class LogDao
 
     private static void addKanaRecord(String kana, boolean isCorrect)
     {
-        KanaRecord record = LogDatabase.DAO.getDaysKanaRecord(kana, new Date());
+        KanaRecord record = LogDatabase.DAO.getDaysKanaRecord(kana, LocalDate.now());
         if (record == null)
         {
             record = new KanaRecord(kana);
@@ -197,7 +198,7 @@ public abstract class LogDao
 
     private static void addIncorrectAnswerRecord(String kana, String romanji)
     {
-        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(kana, romanji, new Date());
+        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(kana, romanji, LocalDate.now());
         if (record == null)
         {
             record = new IncorrectAnswerRecord(kana, romanji);
