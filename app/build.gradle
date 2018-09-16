@@ -65,6 +65,10 @@ dependencies {
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
     implementation 'joda-time:joda-time:2.10'
+    //implementation 'org.joda:joda-convert:2.1.1' //fixes issues with proguard
+    //using 'classic' variant fixes issues with desugar
+    //ref: https://github.com/JodaOrg/joda-convert/issues/24
+    implementation group: 'org.joda', name: 'joda-convert', version: '2.1.1', classifier: 'classic'
 }
 
 repositories {
