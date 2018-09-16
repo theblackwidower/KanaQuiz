@@ -61,7 +61,8 @@ public class KanaQuestion
     {
         if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
             return defaultRomanji;
-        else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
+        else if (OptionsControl
+                .compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
             return fetchRomanji(RomanizationSystem.HEPBURN);
         else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
             return fetchRomanji(RomanizationSystem.NIHON);
