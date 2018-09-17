@@ -80,25 +80,25 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 if (weight < 2)
                     weight = 2;
                 // if any one of the additions fail, the method returns false
-                returnValue =
-                        this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                // Storing answers in specialized answer lists for more specialized answer selection
-                Set<String> specialList;
-
-                if (question.isDiacritic() && question.isDigraph())
-                    specialList = diacriticDigraphAnswerList;
-                else if (question.isDiacritic())
-                    specialList = diacriticAnswerList;
-                else if (question.isDigraph())
-                    specialList = digraphAnswerList;
-                else
-                    specialList = basicAnswerList;
-
-                returnValue = specialList.add(question.fetchCorrectAnswer()) && returnValue;
+                returnValue = this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) &&
+                        // Storing answers in specialized answer lists for more specialized answer selection
+                        getSpecialList(question).add(question.fetchCorrectAnswer()) && returnValue;
             }
             return returnValue;
         }
         return false;
+    }
+
+    private Set<String> getSpecialList(KanaQuestion question)
+    {
+        if (question.isDiacritic() && question.isDigraph())
+            return diacriticDigraphAnswerList;
+        else if (question.isDiacritic())
+            return diacriticAnswerList;
+        else if (question.isDigraph())
+            return digraphAnswerList;
+        else
+            return basicAnswerList;
     }
 
     public boolean addQuestions(KanaQuestionBank questions)
@@ -155,6 +155,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     {
                         //fetch all data
                         int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
+                        if (getSpecialList(currentQuestion).contains(getCurrentKana()))
+                            count += 2;
                         maxCount = Math.max(maxCount, count);
                         minCount = Math.min(minCount, count);
                         answerCounts.put(answer, (float) count);
