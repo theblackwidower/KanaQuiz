@@ -66,9 +66,6 @@ abstract class XmlParser
         if (prefId == null || setTitle == null)
             throw new ParseException("Missing attribute in KanaSet", parser.getLineNumber());
 
-        if (setNoDiacriticsTitle == null)
-            setNoDiacriticsTitle = setTitle;
-
         prefIdList.add(prefId);
         setTitleList.add(setTitle);
         setNoDiacriticsTitleList.add(setNoDiacriticsTitle);

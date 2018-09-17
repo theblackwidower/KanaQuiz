@@ -62,8 +62,8 @@ public class QuestionManagement
     {
         try
         {
-            return OptionsControl.getBoolean(R.string.prefid_diacritics) ? setTitles[number - 1] :
-                    setNoDiacriticsTitles[number - 1];
+            return OptionsControl.getBoolean(R.string.prefid_diacritics) || setNoDiacriticsTitles[number - 1] == null ?
+                    setTitles[number - 1] : setNoDiacriticsTitles[number - 1];
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
