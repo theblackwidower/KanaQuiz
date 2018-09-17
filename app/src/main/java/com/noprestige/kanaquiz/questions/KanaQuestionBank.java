@@ -16,6 +16,11 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     private Set<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
     private Map<String, WeightedList<String>> weightedAnswerListCache;
 
+    private Set<String> basicAnswerList = new TreeSet<>(new GojuonOrder());
+    private Set<String> diacriticAnswerList = new TreeSet<>(new GojuonOrder());
+    private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
+    private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
+
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions;
@@ -77,6 +82,12 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 // if any one of the additions fail, the method returns false
                 returnValue =
                         this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+                // Storing answers in specialized answer lists for more specialized answer selection
+                returnValue = (question.isDiacritic() ?
+                        (question.isDigraph() ? diacriticDigraphAnswerList.add(question.fetchCorrectAnswer()) :
+                                diacriticAnswerList.add(question.fetchCorrectAnswer())) :
+                        (question.isDigraph() ? digraphAnswerList.add(question.fetchCorrectAnswer()) :
+                                basicAnswerList.add(question.fetchCorrectAnswer()))) && returnValue;
             }
             return returnValue;
         }
@@ -89,6 +100,10 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         previousQuestions = null;
         maxAnswerWeight = -1;
         this.fullAnswerList.addAll(questions.fullAnswerList);
+        this.basicAnswerList.addAll(questions.basicAnswerList);
+        this.diacriticAnswerList.addAll(questions.diacriticAnswerList);
+        this.digraphAnswerList.addAll(questions.digraphAnswerList);
+        this.diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
         return this.merge(questions);
     }
 
