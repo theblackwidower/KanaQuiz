@@ -21,4 +21,16 @@ public class WordQuestion extends KanaQuestion
     {
         this.kanji = kanji;
     }
+
+    @Override
+    public boolean isDiacritic()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isDigraph()
+    {
+        return false;
+    }
 }
