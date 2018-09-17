@@ -60,10 +60,15 @@ public class QuestionManagement
 
     private CharSequence getSetTitle(int number)
     {
+        return getSetTitle(number, OptionsControl.getBoolean(R.string.prefid_diacritics));
+    }
+
+    private CharSequence getSetTitle(int number, boolean isDiacriticsActive)
+    {
         try
         {
-            return OptionsControl.getBoolean(R.string.prefid_diacritics) || setNoDiacriticsTitles[number - 1] == null ?
-                    setTitles[number - 1] : setNoDiacriticsTitles[number - 1];
+            return isDiacriticsActive || setNoDiacriticsTitles[number - 1] == null ? setTitles[number - 1] :
+                    setNoDiacriticsTitles[number - 1];
         }
         catch (ArrayIndexOutOfBoundsException ex)
         {
