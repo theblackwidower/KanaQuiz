@@ -83,11 +83,18 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 returnValue =
                         this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
                 // Storing answers in specialized answer lists for more specialized answer selection
-                returnValue = (question.isDiacritic() ?
-                        (question.isDigraph() ? diacriticDigraphAnswerList.add(question.fetchCorrectAnswer()) :
-                                diacriticAnswerList.add(question.fetchCorrectAnswer())) :
-                        (question.isDigraph() ? digraphAnswerList.add(question.fetchCorrectAnswer()) :
-                                basicAnswerList.add(question.fetchCorrectAnswer()))) && returnValue;
+                Set<String> specialList;
+
+                if (question.isDiacritic() && question.isDigraph())
+                    specialList = diacriticDigraphAnswerList;
+                else if (question.isDiacritic())
+                    specialList = diacriticAnswerList;
+                else if (question.isDigraph())
+                    specialList = digraphAnswerList;
+                else
+                    specialList = basicAnswerList;
+
+                returnValue = specialList.add(question.fetchCorrectAnswer()) && returnValue;
             }
             return returnValue;
         }
