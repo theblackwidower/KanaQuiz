@@ -74,7 +74,7 @@ public class KanaQuestion
 
     String fetchRomanji(RomanizationSystem system)
     {
-        String romanji = altRomanji.get(system);
+        String romanji = (system == null ? null : altRomanji.get(system));
         return romanji == null ? defaultRomanji : romanji;
     }
 
