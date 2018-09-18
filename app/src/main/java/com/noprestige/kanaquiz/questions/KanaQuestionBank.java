@@ -26,8 +26,6 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     private QuestionRecord previousQuestions;
     private int maxAnswerWeight = -1;
 
-    KanaQuestionBank() {}
-
     public void newQuestion() throws NoQuestionsException
     {
         if (this.count() > 0)
