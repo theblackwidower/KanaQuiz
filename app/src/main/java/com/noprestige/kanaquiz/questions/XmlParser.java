@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import static com.noprestige.kanaquiz.questions.RomanizationSystem.UNKNOWN;
-
 abstract class XmlParser
 {
     static void parseXmlDocument(int XmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
@@ -232,17 +230,16 @@ abstract class XmlParser
         {
             if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("AltAnswer"))
             {
-                String systemString = UNKNOWN.toString();
+                RomanizationSystem[] systemsList = null;
+
                 for (int i = 0; i < parser.getAttributeCount(); i++)
                 {
                     switch (parser.getAttributeName(i))
                     {
                         case "system":
-                            systemString = parser.getAttributeValue(i);
+                            systemsList = parseRomanizationSystemList(parser.getAttributeValue(i));
                     }
                 }
-
-                RomanizationSystem[] systemsList = parseRomanizationSystemList(systemString);
 
                 if (parser.next() == XmlPullParser.TEXT)
                     for (RomanizationSystem system : systemsList)
