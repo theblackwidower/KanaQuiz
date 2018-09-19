@@ -187,8 +187,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings = new String[maxChoices - 1];
-            weightedAnswerListCache.get(getCurrentKana()).getRandom(possibleAnswerStrings);
+            String[] possibleAnswerStrings =
+                    weightedAnswerListCache.get(getCurrentKana()).getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
