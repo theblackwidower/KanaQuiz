@@ -13,7 +13,7 @@ public class KanaQuestion
 {
     private String kana;
     private String defaultRomanji;
-    private TreeMap<RomanizationSystem, String> altRomanji = new TreeMap<>();
+    private TreeMap<RomanizationSystem, String> altRomanji = null;
 
     KanaQuestion(String kana, String romanji)
     {
@@ -28,6 +28,8 @@ public class KanaQuestion
 
     public void addAltRomanji(String romanji, RomanizationSystem system)
     {
+        if (altRomanji == null)
+            altRomanji = new TreeMap<>();
         altRomanji.put(system, romanji);
     }
 
@@ -45,9 +47,10 @@ public class KanaQuestion
     {
         if (defaultRomanji.trim().toLowerCase().equals(response.trim().toLowerCase()))
             return true;
-        for (String correctAnswer : altRomanji.values())
-            if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
-                return true;
+        if (altRomanji != null)
+            for (String correctAnswer : altRomanji.values())
+                if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
+                    return true;
 
         return false;
     }
@@ -74,7 +77,7 @@ public class KanaQuestion
 
     String fetchRomanji(RomanizationSystem system)
     {
-        String romanji = (system == null ? null : altRomanji.get(system));
+        String romanji = ((system == null || altRomanji == null) ? null : altRomanji.get(system));
         return romanji == null ? defaultRomanji : romanji;
     }
 
