@@ -143,11 +143,8 @@ abstract class XmlParser
     private static void parseXmlStoreSet(List<KanaQuestion> currentSet, List<KanaQuestion[][][]> kanaSetList,
             int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
-        KanaQuestion[] currentSetArray = new KanaQuestion[currentSet.size()];
-        currentSet.toArray(currentSetArray);
-
         KanaQuestion[][][] pulledArray = kanaSetList.get(indexPoint);
-        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSetArray;
+        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new KanaQuestion[currentSet.size()]);
         kanaSetList.set(indexPoint, pulledArray);
     }
 
@@ -276,9 +273,7 @@ abstract class XmlParser
 
         list.add(RomanizationSystem.valueOf(thisItem.toString()));
 
-        RomanizationSystem[] returnValue = new RomanizationSystem[list.size()];
-        list.toArray(returnValue);
-        return returnValue;
+        return list.toArray(new RomanizationSystem[list.size()]);
     }
 
     private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)

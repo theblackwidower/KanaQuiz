@@ -133,11 +133,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     public String[] getPossibleAnswers(int maxChoices)
     {
         if (fullAnswerList.size() <= maxChoices)
-        {
-            String[] answerArray = new String[fullAnswerList.size()];
-            fullAnswerList.toArray(answerArray);
-            return answerArray;
-        }
+            return fullAnswerList.toArray(new String[fullAnswerList.size()]);
         else
         {
             if (weightedAnswerListCache == null)
