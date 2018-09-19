@@ -11,31 +11,20 @@ import java.util.TreeMap;
 
 public class KanaQuestion
 {
-    private String kana;
-    private String defaultRomanji;
-    private TreeMap<RomanizationSystem, String> altRomanji = null;
+    private final String kana;
+    private final String defaultRomanji;
+    private final TreeMap<RomanizationSystem, String> altRomanji;
 
     KanaQuestion(String kana, String romanji)
     {
-        setKana(kana);
-        setDefaultRomanji(romanji);
+        this(kana, romanji, null);
     }
 
-    private void setDefaultRomanji(String romanji)
-    {
-        this.defaultRomanji = romanji;
-    }
-
-    public void addAltRomanji(String romanji, RomanizationSystem system)
-    {
-        if (altRomanji == null)
-            altRomanji = new TreeMap<>();
-        altRomanji.put(system, romanji);
-    }
-
-    private void setKana(String kana)
+    KanaQuestion(String kana, String romanji, TreeMap<RomanizationSystem, String> altRomanji)
     {
         this.kana = kana.trim();
+        this.defaultRomanji = romanji.trim();
+        this.altRomanji = altRomanji;
     }
 
     String getKana()
