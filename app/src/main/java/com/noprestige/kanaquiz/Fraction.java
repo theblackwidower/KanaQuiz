@@ -40,13 +40,13 @@ public class Fraction
     @Override
     public String toString()
     {
-        simplify();
         StringBuilder returnValue = new StringBuilder();
         if (whole != 0)
             returnValue.append(whole);
 
         if (numerator != 0)
         {
+            simplify();
             char fractionChar;
             try
             {
