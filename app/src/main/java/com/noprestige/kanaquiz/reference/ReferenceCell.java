@@ -3,6 +3,7 @@ package com.noprestige.kanaquiz.reference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -258,7 +259,7 @@ public class ReferenceCell extends View
                 Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
                 0,
                 Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
-        header.setTypeface(header.getTypeface(), 1);
+        header.setTypeface(header.getTypeface(), Typeface.BOLD);
         header.setAllCaps(true);
         return header;
     }

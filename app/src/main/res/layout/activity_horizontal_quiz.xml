@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:weightSum="2"
     tools:context="com.noprestige.kanaquiz.quiz.MainQuiz"
-    tools:menu="@menu/menu">
+    tools:menu="@menu/main">
 
     <LinearLayout
         android:layout_width="0dp"
