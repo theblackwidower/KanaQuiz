@@ -7,20 +7,20 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
-import java.util.TreeMap;
+import java.util.Map;
 
 public class KanaQuestion
 {
     private final String kana;
     private final String defaultRomanji;
-    private final TreeMap<RomanizationSystem, String> altRomanji;
+    private final Map<RomanizationSystem, String> altRomanji;
 
     KanaQuestion(String kana, String romanji)
     {
         this(kana, romanji, null);
     }
 
-    KanaQuestion(String kana, String romanji, TreeMap<RomanizationSystem, String> altRomanji)
+    KanaQuestion(String kana, String romanji, Map<RomanizationSystem, String> altRomanji)
     {
         this.kana = kana.trim();
         this.defaultRomanji = romanji.trim();
