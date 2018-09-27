@@ -37,6 +37,11 @@ public class Fraction
         }
     }
 
+    public float getDecimal()
+    {
+        return whole + ((float) numerator / (float) denominator);
+    }
+
     @Override
     public String toString()
     {
