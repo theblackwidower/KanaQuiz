@@ -88,10 +88,10 @@ public class QuestionManagement
 
         categoryCount = kanaSetList.size();
 
-        kanaSets = kanaSetList.toArray(new KanaQuestion[kanaSetList.size()][][][]);
-        prefIds = prefIdList.toArray(new String[prefIdList.size()]);
-        setTitles = setTitleList.toArray(new String[setTitleList.size()]);
-        setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[setNoDiacriticsTitleList.size()]);
+        kanaSets = kanaSetList.toArray(new KanaQuestion[0][][][]);
+        prefIds = prefIdList.toArray(new String[0]);
+        setTitles = setTitleList.toArray(new String[0]);
+        setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
     }
 
     public static void initialize(Context context)

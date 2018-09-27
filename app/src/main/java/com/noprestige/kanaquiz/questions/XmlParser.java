@@ -144,7 +144,7 @@ abstract class XmlParser
             int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
         KanaQuestion[][][] pulledArray = kanaSetList.get(indexPoint);
-        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new KanaQuestion[currentSet.size()]);
+        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new KanaQuestion[0]);
         kanaSetList.set(indexPoint, pulledArray);
     }
 
@@ -273,7 +273,7 @@ abstract class XmlParser
 
         list.add(RomanizationSystem.valueOf(thisItem.toString()));
 
-        return list.toArray(new RomanizationSystem[list.size()]);
+        return list.toArray(new RomanizationSystem[0]);
     }
 
     private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
