@@ -19,15 +19,15 @@ public class QuestionManagement
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
 
-    private int categoryCount;
+    private final int categoryCount;
 
-    private KanaQuestion[][][][] kanaSets;
+    private final KanaQuestion[][][][] kanaSets;
 
-    private String[] prefIds;
+    private final String[] prefIds;
 
-    private String[] setTitles;
+    private final String[] setTitles;
 
-    private String[] setNoDiacriticsTitles;
+    private final String[] setNoDiacriticsTitles;
 
     private int getCategoryCount()
     {
