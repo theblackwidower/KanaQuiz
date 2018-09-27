@@ -18,6 +18,8 @@
         android:selectAllOnFocus="true"
         android:text=""
         android:textAlignment="center"
+        android:importantForAutofill="no"
+        tools:targetApi="o"
         tools:ignore="LabelFor"/>
 
     <TextView
