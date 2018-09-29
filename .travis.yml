@@ -22,6 +22,9 @@ jdk:
 
 # Emulator Management: Create, Start and Wait
 before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
   # anything later than android-22 will stall
   # ref: https://github.com/travis-ci/travis-ci/issues/8188
   - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
@@ -38,3 +41,9 @@ after_success:
   - ./gradlew coveralls
   #codecov reporting
   - bash <(curl -s https://codecov.io/bash)
+  #Code Climate coverage reporting
+  - export JACOCO_SOURCE_PATH="app/src/main/java/ app/build/generated/source/apt/debug/"
+  - ./cc-test-reporter format-coverage -t jacoco -o app/build/reports/jacoco/debug/jacoco.json app/build/reports/jacoco/debug/jacoco.xml
+  - ./cc-test-reporter format-coverage -t jacoco -o app/build/reports/coverage/debug/report.json app/build/reports/coverage/debug/report.xml
+  - ./cc-test-reporter sum-coverage -o app/build/reports/climatecoverage.json -p 2 app/build/reports/jacoco/debug/jacoco.json app/build/reports/coverage/debug/report.json
+  - ./cc-test-reporter upload-coverage -i app/build/reports/climatecoverage.json
