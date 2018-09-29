@@ -1,5 +1,6 @@
 # KanaQuiz
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a23dc3bb53d8478c90827b4ba888f774)](https://app.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&utm_medium=referral&utm_content=theblackwidower/KanaQuiz&utm_campaign=Badge_Grade_Settings)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/maintainability)](https://codeclimate.com/github/theblackwidower/KanaQuiz/maintainability)
 
 [![Build Status](https://travis-ci.org/theblackwidower/KanaQuiz.svg?branch=master)](https://travis-ci.org/theblackwidower/KanaQuiz)
