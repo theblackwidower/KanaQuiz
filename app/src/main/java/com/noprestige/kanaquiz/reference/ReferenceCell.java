@@ -1,9 +1,12 @@
 package com.noprestige.kanaquiz.reference;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
+import android.support.design.widget.Snackbar;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -75,8 +78,22 @@ public class ReferenceCell extends View
 
         a.recycle();
 
+        setOnLongClickListener(view -> copyItem());
+
         kanaPaint.setAntiAlias(true);
         romanjiPaint.setAntiAlias(true);
+    }
+
+    private boolean copyItem()
+    {
+        //TODO: Allow the ability to select and copy multiple items at once.
+        String data = kana + " - " + romanji;
+        ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("Kana Reference", data));
+
+        String message = "'" + data + "' " + getContext().getResources().getString(R.string.clipboard_message);
+        Snackbar.make(this, message, Snackbar.LENGTH_LONG).show();
+        return true;
     }
 
     @Override

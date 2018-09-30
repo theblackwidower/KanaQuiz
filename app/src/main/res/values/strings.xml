@@ -117,6 +117,7 @@
     <string name="digraphs_title">Digraphs</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
+    <string name="clipboard_message">Copied to clipboard</string>
 
     <!-- Kana Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
