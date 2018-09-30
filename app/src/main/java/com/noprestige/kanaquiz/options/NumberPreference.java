@@ -54,7 +54,7 @@ class NumberPreference extends DialogPreference
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue)
     {
         if (restorePersistedValue)
-            repetitionLimit = this.getPersistedInt(0);
+            repetitionLimit = getPersistedInt(0);
         else
         {
             repetitionLimit = (Integer) defaultValue;

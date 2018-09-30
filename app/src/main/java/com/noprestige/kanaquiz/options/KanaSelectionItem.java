@@ -47,7 +47,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
 
     private void init(AttributeSet attrs, int defStyle)
     {
-        Context context = this.getContext();
+        Context context = getContext();
 
         // Set up initial objects
         LayoutInflater.from(context).inflate(R.layout.kana_selection_item, this);
@@ -56,7 +56,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
         lblContents = findViewById(R.id.lblContents);
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
-        this.setOnClickListener(view -> toggle());
+        setOnClickListener(view -> toggle());
 
         chkCheckBox.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));

@@ -23,7 +23,7 @@ public class KanaQuestion
     KanaQuestion(String kana, String romanji, Map<RomanizationSystem, String> altRomanji)
     {
         this.kana = kana.trim();
-        this.defaultRomanji = romanji.trim();
+        defaultRomanji = romanji.trim();
         this.altRomanji = altRomanji;
     }
 

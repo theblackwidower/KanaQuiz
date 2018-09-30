@@ -58,7 +58,7 @@ public class ReferenceCell extends View
 
     private void init(AttributeSet attrs, int defStyle)
     {
-        Context context = this.getContext();
+        Context context = getContext();
 
         if (defaultAttributes == null)
             defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
@@ -133,7 +133,7 @@ public class ReferenceCell extends View
 
     public String getKana()
     {
-        return this.kana;
+        return kana;
     }
 
     public float getKanaSize()
@@ -143,7 +143,7 @@ public class ReferenceCell extends View
 
     public String getRomanji()
     {
-        return this.romanji;
+        return romanji;
     }
 
     public float getRomanjiSize()
@@ -167,7 +167,7 @@ public class ReferenceCell extends View
     {
         kanaPaint.setTextSize(kanaSize);
         kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
-        kanaWidth = kanaPaint.measureText(this.kana);
+        kanaWidth = kanaPaint.measureText(kana);
     }
 
     public void setRomanji(String romanji)
@@ -180,7 +180,7 @@ public class ReferenceCell extends View
     {
         romanjiPaint.setTextSize(romanjiSize);
         romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
-        romanjiWidth = romanjiPaint.measureText(this.romanji);
+        romanjiWidth = romanjiPaint.measureText(romanji);
     }
 
     public void setColour(int colour)

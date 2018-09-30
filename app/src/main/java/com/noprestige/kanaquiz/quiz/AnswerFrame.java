@@ -46,7 +46,7 @@ public class AnswerFrame extends LinearLayout
 
     private void init()
     {
-        Context context = this.getContext();
+        Context context = getContext();
 
         // Set up initial objects
         LayoutInflater.from(context).inflate(R.layout.answer_frame, this);

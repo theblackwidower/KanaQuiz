@@ -22,7 +22,7 @@ class WeightedList<E> implements Cloneable
 
     boolean add(double weight, E element)
     {
-        return this.add((int) Math.ceil(weight), element);
+        return add((int) Math.ceil(weight), element);
     }
 
     E remove(int key)
@@ -122,14 +122,14 @@ class WeightedList<E> implements Cloneable
 
     E getRandom()
     {
-        return this.get(getRandomKey());
+        return get(getRandomKey());
     }
 
     E[] getRandom(E[] array)
     {
         try
         {
-            WeightedList<E> destructibleList = this.clone();
+            WeightedList<E> destructibleList = clone();
 
             for (int i = 0; i < array.length; i++)
                 array[i] = destructibleList.remove(destructibleList.getRandomKey());
@@ -151,8 +151,8 @@ class WeightedList<E> implements Cloneable
     boolean merge(WeightedList<E> list)
     {
         for (Integer oldKey : list.map.keySet())
-            map.put(this.maxValue + oldKey, list.map.get(oldKey));
-        this.maxValue += list.maxValue;
+            map.put(maxValue + oldKey, list.map.get(oldKey));
+        maxValue += list.maxValue;
 
         return true;
     }

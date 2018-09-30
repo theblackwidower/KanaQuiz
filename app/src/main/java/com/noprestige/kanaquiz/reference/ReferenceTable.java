@@ -10,7 +10,7 @@ public class ReferenceTable extends TableLayout
     public ReferenceTable(Context context)
     {
         super(context);
-        this.setLayoutParams(
+        setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 

@@ -53,7 +53,7 @@ public class MultipleChoicePad extends FlowLayout
 
     public void deleteChoices()
     {
-        this.removeAllViews();
+        removeAllViews();
         btnChoices = new ArrayList<>();
     }
 
@@ -67,10 +67,10 @@ public class MultipleChoicePad extends FlowLayout
 
     public void addChoice(String answer)
     {
-        Button btnNewButton = new Button(this.getContext());
+        Button btnNewButton = new Button(getContext());
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
         btnNewButton.setText(answer);
-        this.addView(btnNewButton);
+        addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
 

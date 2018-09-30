@@ -28,13 +28,13 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
     public void newQuestion() throws NoQuestionsException
     {
-        if (this.count() > 0)
+        if (count() > 0)
         {
             if (previousQuestions == null)
                 previousQuestions =
-                        new QuestionRecord(Math.min(this.count(), OptionsControl.getInt(R.string.prefid_repetition)));
+                        new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
             do
-                currentQuestion = this.getRandom();
+                currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
         }
         else
@@ -78,7 +78,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 if (weight < 2)
                     weight = 2;
                 // if any one of the additions fail, the method returns false
-                returnValue = this.add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) &&
+                returnValue = add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) &&
                         // Storing answers in specialized answer lists for more specialized answer selection
                         getSpecialList(question).add(question.fetchCorrectAnswer()) && returnValue;
             }
@@ -104,12 +104,12 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         weightedAnswerListCache = null;
         previousQuestions = null;
         maxAnswerWeight = -1;
-        this.fullAnswerList.addAll(questions.fullAnswerList);
-        this.basicAnswerList.addAll(questions.basicAnswerList);
-        this.diacriticAnswerList.addAll(questions.diacriticAnswerList);
-        this.digraphAnswerList.addAll(questions.digraphAnswerList);
-        this.diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
-        return this.merge(questions);
+        fullAnswerList.addAll(questions.fullAnswerList);
+        basicAnswerList.addAll(questions.basicAnswerList);
+        diacriticAnswerList.addAll(questions.diacriticAnswerList);
+        digraphAnswerList.addAll(questions.digraphAnswerList);
+        diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
+        return merge(questions);
     }
 
     private int getMaxAnswerWeight()

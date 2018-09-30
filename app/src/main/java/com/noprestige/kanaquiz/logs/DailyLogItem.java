@@ -88,7 +88,7 @@ public class DailyLogItem extends View
 
     private void init(AttributeSet attrs, int defStyle)
     {
-        Context context = this.getContext();
+        Context context = getContext();
 
         if (defaultAttributes == null)
             defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
@@ -220,17 +220,17 @@ public class DailyLogItem extends View
 
     public LocalDate getDate()
     {
-        return this.date;
+        return date;
     }
 
     public float getCorrectAnswers()
     {
-        return this.correctAnswers;
+        return correctAnswers;
     }
 
     public int getTotalAnswers()
     {
-        return this.totalAnswers;
+        return totalAnswers;
     }
 
     public float getFontSize()

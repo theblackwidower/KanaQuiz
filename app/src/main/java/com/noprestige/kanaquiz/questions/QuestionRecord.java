@@ -12,13 +12,13 @@ class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
     @Override
     public boolean add(KanaQuestion question)
     {
-        if (super.contains(question))
+        if (contains(question))
             return false;
         else
         {
             super.add(question);
-            if (super.remainingCapacity() == 0)
-                super.remove();
+            if (remainingCapacity() == 0)
+                remove();
             return true;
         }
     }
