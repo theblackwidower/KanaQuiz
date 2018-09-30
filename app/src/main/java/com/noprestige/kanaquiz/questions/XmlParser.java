@@ -26,7 +26,7 @@ abstract class XmlParser
             for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
                     eventType = parser.next())
             {
-                if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaSet"))
+                if (eventType == XmlPullParser.START_TAG && "KanaSet".equalsIgnoreCase(parser.getName()))
                 {
                     parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
                 }
@@ -78,18 +78,18 @@ abstract class XmlParser
         int lineNumber = parser.getLineNumber();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaSet"));
+                !(eventType == XmlPullParser.END_TAG && "KanaSet".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)
             {
-                if (parser.getName().equalsIgnoreCase("Section"))
+                if ("Section".equalsIgnoreCase(parser.getName()))
                     parseXmlKanaSubsection(parser, resources, kanaSetList, indexPoint);
 
-                else if (parser.getName().equalsIgnoreCase("KanaQuestion"))
+                else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
 
-                else if (parser.getName().equalsIgnoreCase("WordQuestion"))
+                else if ("WordQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlWordQuestion(parser, resources));
             }
 
@@ -128,10 +128,10 @@ abstract class XmlParser
         List<KanaQuestion> currentSet = new ArrayList<>();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("Section"));
+                !(eventType == XmlPullParser.END_TAG && "Section".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
-            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"))
+            if (eventType == XmlPullParser.START_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName()))
                 currentSet.add(parseXmlKanaQuestion(parser, resources));
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -171,7 +171,7 @@ abstract class XmlParser
 
         TreeMap<RomanizationSystem, String> thisAltAnswers = null;
 
-        if (!(parser.next() == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion")))
+        if (!(parser.next() == XmlPullParser.END_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlAltAnswers(parser);
 
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
@@ -222,10 +222,10 @@ abstract class XmlParser
         TreeMap<RomanizationSystem, String> thisAltAnswers = new TreeMap<>();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("KanaQuestion"));
+                !(eventType == XmlPullParser.END_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
-            if (eventType == XmlPullParser.START_TAG && parser.getName().equalsIgnoreCase("AltAnswer"))
+            if (eventType == XmlPullParser.START_TAG && "AltAnswer".equalsIgnoreCase(parser.getName()))
             {
                 RomanizationSystem[] systemsList = null;
 
