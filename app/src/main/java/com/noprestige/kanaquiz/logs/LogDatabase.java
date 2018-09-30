@@ -12,7 +12,7 @@ import android.database.Cursor;
 import org.joda.time.LocalDate;
 
 @Database(entities = {DailyRecord.class, KanaRecord.class, IncorrectAnswerRecord.class}, version = 3)
-@TypeConverters({LogTypeConversion.class})
+@TypeConverters(LogTypeConversion.class)
 public abstract class LogDatabase extends RoomDatabase
 {
     public static LogDao DAO;
