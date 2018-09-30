@@ -10,7 +10,7 @@ import com.noprestige.kanaquiz.logs.LogDao;
 
 public class OptionsFragment extends PreferenceFragment
 {
-    private static class DeleteAll extends AsyncTask<Preference, Void, Preference>
+    static class DeleteAll extends AsyncTask<Preference, Void, Preference>
     {
         @Override
         protected Preference doInBackground(Preference... btnClearLogs)

@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 @Dao
 public abstract class LogDao
 {
-    private static class GetKanaPercentage extends AsyncTask<String, Void, Float>
+    static class GetKanaPercentage extends AsyncTask<String, Void, Float>
     {
         @Override
         protected Float doInBackground(String... data)
@@ -36,7 +36,7 @@ public abstract class LogDao
         }
     }
 
-    private static class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
+    static class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
     {
         @Override
         protected Integer doInBackground(String... data)
@@ -56,7 +56,7 @@ public abstract class LogDao
         }
     }
 
-    private static class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
+    static class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -70,7 +70,7 @@ public abstract class LogDao
         }
     }
 
-    private static class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
+    static class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -86,7 +86,7 @@ public abstract class LogDao
         }
     }
 
-    private static class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
+    static class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -101,7 +101,7 @@ public abstract class LogDao
         }
     }
 
-    private static class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
+    static class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
     {
         @Override
         protected Void doInBackground(String... data)
@@ -165,7 +165,7 @@ public abstract class LogDao
         }
     }
 
-    private static void addTodaysRecord(float score)
+    static void addTodaysRecord(float score)
     {
         DailyRecord record = LogDatabase.DAO.getDateRecord(LocalDate.now());
         if (record == null)
@@ -181,7 +181,7 @@ public abstract class LogDao
         LogDatabase.DAO.updateDailyRecord(record);
     }
 
-    private static void addKanaRecord(String kana, boolean isCorrect)
+    static void addKanaRecord(String kana, boolean isCorrect)
     {
         KanaRecord record = LogDatabase.DAO.getDaysKanaRecord(kana, LocalDate.now());
         if (record == null)
@@ -196,7 +196,7 @@ public abstract class LogDao
         LogDatabase.DAO.updateKanaRecord(record);
     }
 
-    private static void addIncorrectAnswerRecord(String kana, String romanji)
+    static void addIncorrectAnswerRecord(String kana, String romanji)
     {
         IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(kana, romanji, LocalDate.now());
         if (record == null)

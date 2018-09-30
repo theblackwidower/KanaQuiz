@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 public class GojuonOrder implements Comparator<String>
 {
-    private static class NotRomanjiException extends Exception {}
+    static class NotRomanjiException extends Exception {}
 
     static void sort(String[] romanji)
     {

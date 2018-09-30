@@ -12,7 +12,7 @@ import com.noprestige.kanaquiz.R;
 
 public class LogView extends AppCompatActivity
 {
-    private static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
+    static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
     {
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;

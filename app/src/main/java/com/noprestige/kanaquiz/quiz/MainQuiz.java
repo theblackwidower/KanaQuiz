@@ -38,15 +38,15 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class MainQuiz extends AppCompatActivity
 {
-    private int totalQuestions;
-    private float totalCorrect;
+    int totalQuestions;
+    float totalCorrect;
     private boolean canSubmit;
 
     private KanaQuestionBank questionBank;
 
     private TextView lblResponse;
     private TextView lblDisplayKana;
-    private AnswerFrame frmAnswer;
+    AnswerFrame frmAnswer;
 
     private static final int MAX_RETRIES = 3;
 
@@ -57,7 +57,7 @@ public class MainQuiz extends AppCompatActivity
     private FetchTodaysLog fetchScoreThread;
 
     @SuppressLint("StaticFieldLeak")
-    private class FetchTodaysLog extends AsyncTask<LocalDate, Void, DailyRecord>
+    class FetchTodaysLog extends AsyncTask<LocalDate, Void, DailyRecord>
     {
         @Override
         protected void onPreExecute()
