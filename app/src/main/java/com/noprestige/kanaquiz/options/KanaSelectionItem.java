@@ -23,9 +23,9 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
 
     private Paint linePaint = new Paint();
 
-    private float lineXpoint_1;
-    private float lineXpoint_2;
-    private float lineYpoint;
+    private float lineXPoint_1;
+    private float lineXPoint_2;
+    private float lineYPoint;
 
     public KanaSelectionItem(Context context)
     {
@@ -79,9 +79,9 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
     {
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
-        lineXpoint_1 = getPaddingLeft();
-        lineXpoint_2 = width - getPaddingRight();
-        lineYpoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
+        lineXPoint_1 = getPaddingLeft();
+        lineXPoint_2 = width - getPaddingRight();
+        lineYPoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -133,7 +133,7 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
     {
         super.dispatchDraw(canvas);
 
-        canvas.drawLine(lineXpoint_1, lineYpoint, lineXpoint_2, lineYpoint, linePaint);
+        canvas.drawLine(lineXPoint_1, lineYPoint, lineXPoint_2, lineYPoint, linePaint);
     }
 
     public String getTitle()

@@ -36,19 +36,19 @@ public class DailyLogItem extends View
     private TextPaint percentagePaint = new TextPaint();
     private Paint linePaint = new Paint();
 
-    private float dateXpoint;
-    private float dateYpoint_1;
-    private float dateYpoint_2;
-    private float dateYpoint_3;
-    private float correctXpoint;
-    private float slashXpoint;
-    private float totalXpoint;
-    private float percentageXpoint;
-    private float dataYpoint;
+    private float dateXPoint;
+    private float dateYPoint_1;
+    private float dateYPoint_2;
+    private float dateYPoint_3;
+    private float correctXPoint;
+    private float slashXPoint;
+    private float totalXPoint;
+    private float percentageXPoint;
+    private float dataYPoint;
 
-    private float lineXpoint_1;
-    private float lineXpoint_2;
-    private float lineYpoint;
+    private float lineXPoint_1;
+    private float lineXPoint_2;
+    private float lineYPoint;
 
     private float dateWidth_1;
     private float dateWidth_2;
@@ -130,23 +130,23 @@ public class DailyLogItem extends View
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
         int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
-        dateXpoint = getPaddingLeft();
-        dateYpoint_1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
+        dateXPoint = getPaddingLeft();
+        dateYPoint_1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
                 datePaint.getFontMetrics().descent;
-        dateYpoint_2 = dateYpoint_1 + dateHeight;
-        dateYpoint_3 = dateYpoint_2 + dateHeight;
+        dateYPoint_2 = dateYPoint_1 + dateHeight;
+        dateYPoint_3 = dateYPoint_2 + dateHeight;
 
-        slashXpoint = getPaddingLeft() + (contentWidth - slashWidth) / 2;
+        slashXPoint = getPaddingLeft() + (contentWidth - slashWidth) / 2;
 
-        correctXpoint = slashXpoint - correctWidth;
-        totalXpoint = slashXpoint + slashWidth;
-        percentageXpoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYpoint = getPaddingTop() + internalVerticalPadding + (contentHeight + dataHeight) / 2 -
+        correctXPoint = slashXPoint - correctWidth;
+        totalXPoint = slashXPoint + slashWidth;
+        percentageXPoint = getPaddingLeft() + contentWidth - percentageWidth;
+        dataYPoint = getPaddingTop() + internalVerticalPadding + (contentHeight + dataHeight) / 2 -
                 ratioPaint.getFontMetrics().descent;
 
-        lineXpoint_1 = getPaddingLeft();
-        lineXpoint_2 = width - getPaddingRight();
-        lineYpoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
+        lineXPoint_1 = getPaddingLeft();
+        lineXPoint_2 = width - getPaddingRight();
+        lineYPoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -191,14 +191,14 @@ public class DailyLogItem extends View
 
         correctFontSize();
 
-        canvas.drawText(dateString_1, dateXpoint, dateYpoint_1, datePaint);
-        canvas.drawText(dateString_2, dateXpoint, dateYpoint_2, datePaint);
-        canvas.drawText(dateString_3, dateXpoint, dateYpoint_3, datePaint);
-        canvas.drawText(correctString, correctXpoint, dataYpoint, ratioPaint);
-        canvas.drawText(SLASH, slashXpoint, dataYpoint, ratioPaint);
-        canvas.drawText(totalString, totalXpoint, dataYpoint, ratioPaint);
-        canvas.drawText(percentageString, percentageXpoint, dataYpoint, percentagePaint);
-        canvas.drawLine(lineXpoint_1, lineYpoint, lineXpoint_2, lineYpoint, linePaint);
+        canvas.drawText(dateString_1, dateXPoint, dateYPoint_1, datePaint);
+        canvas.drawText(dateString_2, dateXPoint, dateYPoint_2, datePaint);
+        canvas.drawText(dateString_3, dateXPoint, dateYPoint_3, datePaint);
+        canvas.drawText(correctString, correctXPoint, dataYPoint, ratioPaint);
+        canvas.drawText(SLASH, slashXPoint, dataYPoint, ratioPaint);
+        canvas.drawText(totalString, totalXPoint, dataYPoint, ratioPaint);
+        canvas.drawText(percentageString, percentageXPoint, dataYPoint, percentagePaint);
+        canvas.drawLine(lineXPoint_1, lineYPoint, lineXPoint_2, lineYPoint, linePaint);
     }
 
     public void correctFontSize()

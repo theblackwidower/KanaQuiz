@@ -25,10 +25,10 @@ public class ReferenceCell extends View
     private TextPaint kanaPaint = new TextPaint();
     private TextPaint romanjiPaint = new TextPaint();
 
-    private float kanaXpoint;
-    private float kanaYpoint;
-    private float romanjiXpoint;
-    private float romanjiYpoint;
+    private float kanaXPoint;
+    private float kanaYPoint;
+    private float romanjiXPoint;
+    private float romanjiYPoint;
 
     private float kanaWidth;
     private float romanjiWidth;
@@ -89,10 +89,10 @@ public class ReferenceCell extends View
 
         float fullHeight = kanaHeight + romanjiHeight;
 
-        kanaXpoint = getPaddingLeft() + (contentWidth - kanaWidth) / 2;
-        kanaYpoint = getPaddingTop() + (contentHeight - fullHeight) / 2 - kanaPaint.getFontMetrics().ascent;
-        romanjiXpoint = getPaddingLeft() + (contentWidth - romanjiWidth) / 2;
-        romanjiYpoint = getPaddingTop() + (contentHeight + fullHeight) / 2 - romanjiPaint.getFontMetrics().descent;
+        kanaXPoint = getPaddingLeft() + (contentWidth - kanaWidth) / 2;
+        kanaYPoint = getPaddingTop() + (contentHeight - fullHeight) / 2 - kanaPaint.getFontMetrics().ascent;
+        romanjiXPoint = getPaddingLeft() + (contentWidth - romanjiWidth) / 2;
+        romanjiYPoint = getPaddingTop() + (contentHeight + fullHeight) / 2 - romanjiPaint.getFontMetrics().descent;
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -127,8 +127,8 @@ public class ReferenceCell extends View
     {
         super.onDraw(canvas);
 
-        canvas.drawText(kana, kanaXpoint, kanaYpoint, kanaPaint);
-        canvas.drawText(romanji, romanjiXpoint, romanjiYpoint, romanjiPaint);
+        canvas.drawText(kana, kanaXPoint, kanaYPoint, kanaPaint);
+        canvas.drawText(romanji, romanjiXPoint, romanjiYPoint, romanjiPaint);
     }
 
     public String getKana()
