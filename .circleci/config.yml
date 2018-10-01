@@ -35,11 +35,7 @@ jobs:
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
           name: Test with Firebase Test Lab
-          command: >
-            sudo gcloud firebase test android run
-              --type instrumentation
-              --app app/build/outputs/apk/debug/app-debug.apk
-              --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          command: sudo gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
       - store_artifacts:
           path: app/build/reports
           destination: reports
