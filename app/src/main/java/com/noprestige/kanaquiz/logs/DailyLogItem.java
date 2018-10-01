@@ -24,9 +24,9 @@ public class DailyLogItem extends View
     private LocalDate date;
     private boolean isDynamicSize;
 
-    private String dateString_1 = "";
-    private String dateString_3 = "";
-    private String dateString_2 = "";
+    private String dateString1 = "";
+    private String dateString3 = "";
+    private String dateString2 = "";
     private String correctString = "";
     private String totalString = "";
     private String percentageString = "";
@@ -37,22 +37,22 @@ public class DailyLogItem extends View
     private Paint linePaint = new Paint();
 
     private float dateXPoint;
-    private float dateYPoint_1;
-    private float dateYPoint_2;
-    private float dateYPoint_3;
+    private float dateYPoint1;
+    private float dateYPoint2;
+    private float dateYPoint3;
     private float correctXPoint;
     private float slashXPoint;
     private float totalXPoint;
     private float percentageXPoint;
     private float dataYPoint;
 
-    private float lineXPoint_1;
-    private float lineXPoint_2;
+    private float lineXPoint1;
+    private float lineXPoint2;
     private float lineYPoint;
 
-    private float dateWidth_1;
-    private float dateWidth_2;
-    private float dateWidth_3;
+    private float dateWidth1;
+    private float dateWidth2;
+    private float dateWidth3;
     private float correctWidth;
     private float slashWidth;
     private float totalWidth;
@@ -131,10 +131,10 @@ public class DailyLogItem extends View
         int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
 
         dateXPoint = getPaddingLeft();
-        dateYPoint_1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
+        dateYPoint1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
                 datePaint.getFontMetrics().descent;
-        dateYPoint_2 = dateYPoint_1 + dateHeight;
-        dateYPoint_3 = dateYPoint_2 + dateHeight;
+        dateYPoint2 = dateYPoint1 + dateHeight;
+        dateYPoint3 = dateYPoint2 + dateHeight;
 
         slashXPoint = getPaddingLeft() + (contentWidth - slashWidth) / 2;
 
@@ -144,8 +144,8 @@ public class DailyLogItem extends View
         dataYPoint = getPaddingTop() + internalVerticalPadding + (contentHeight + dataHeight) / 2 -
                 ratioPaint.getFontMetrics().descent;
 
-        lineXPoint_1 = getPaddingLeft();
-        lineXPoint_2 = width - getPaddingRight();
+        lineXPoint1 = getPaddingLeft();
+        lineXPoint2 = width - getPaddingRight();
         lineYPoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
     }
 
@@ -166,7 +166,7 @@ public class DailyLogItem extends View
 
     private int desiredWidth()
     {
-        return Math.round(Math.max(Math.max(dateWidth_1, Math.max(dateWidth_2, dateWidth_3)) + correctWidth,
+        return Math.round(Math.max(Math.max(dateWidth1, Math.max(dateWidth2, dateWidth3)) + correctWidth,
                 totalWidth + percentageWidth) * 2 + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
@@ -191,14 +191,14 @@ public class DailyLogItem extends View
 
         correctFontSize();
 
-        canvas.drawText(dateString_1, dateXPoint, dateYPoint_1, datePaint);
-        canvas.drawText(dateString_2, dateXPoint, dateYPoint_2, datePaint);
-        canvas.drawText(dateString_3, dateXPoint, dateYPoint_3, datePaint);
+        canvas.drawText(dateString1, dateXPoint, dateYPoint1, datePaint);
+        canvas.drawText(dateString2, dateXPoint, dateYPoint2, datePaint);
+        canvas.drawText(dateString3, dateXPoint, dateYPoint3, datePaint);
         canvas.drawText(correctString, correctXPoint, dataYPoint, ratioPaint);
         canvas.drawText(SLASH, slashXPoint, dataYPoint, ratioPaint);
         canvas.drawText(totalString, totalXPoint, dataYPoint, ratioPaint);
         canvas.drawText(percentageString, percentageXPoint, dataYPoint, percentagePaint);
-        canvas.drawLine(lineXPoint_1, lineYPoint, lineXPoint_2, lineYPoint, linePaint);
+        canvas.drawLine(lineXPoint1, lineYPoint, lineXPoint2, lineYPoint, linePaint);
     }
 
     public void correctFontSize()
@@ -214,8 +214,8 @@ public class DailyLogItem extends View
     public void setFromRecord(DailyRecord record)
     {
         setDate(record.date);
-        setCorrectAnswers(record.correct_answers);
-        setTotalAnswers(record.total_answers);
+        setCorrectAnswers(record.correctAnswers);
+        setTotalAnswers(record.totalAnswers);
     }
 
     public LocalDate getDate()
@@ -264,17 +264,17 @@ public class DailyLogItem extends View
         this.date = date;
 
 
-        dateString_1 = date.toString("EEEE"); // Output day of week by full name
+        dateString1 = date.toString("EEEE"); // Output day of week by full name
 
-        dateString_2 = date.toString("MMMM"); // Output month by full name
-        dateString_2 += " ";
-        dateString_2 += Integer.toString(date.getDayOfMonth());
+        dateString2 = date.toString("MMMM"); // Output month by full name
+        dateString2 += " ";
+        dateString2 += Integer.toString(date.getDayOfMonth());
 
-        dateString_3 = Integer.toString(date.getYear());
+        dateString3 = Integer.toString(date.getYear());
 
-        dateWidth_1 = datePaint.measureText(dateString_1);
-        dateWidth_2 = datePaint.measureText(dateString_2);
-        dateWidth_3 = datePaint.measureText(dateString_3);
+        dateWidth1 = datePaint.measureText(dateString1);
+        dateWidth2 = datePaint.measureText(dateString2);
+        dateWidth3 = datePaint.measureText(dateString3);
     }
 
     public void setCorrectAnswers(float correctAnswers)
@@ -295,9 +295,9 @@ public class DailyLogItem extends View
 
         dateHeight = datePaint.getFontMetrics().descent - datePaint.getFontMetrics().ascent;
 
-        dateWidth_1 = datePaint.measureText(dateString_1);
-        dateWidth_2 = datePaint.measureText(dateString_2);
-        dateWidth_3 = datePaint.measureText(dateString_3);
+        dateWidth1 = datePaint.measureText(dateString1);
+        dateWidth2 = datePaint.measureText(dateString2);
+        dateWidth3 = datePaint.measureText(dateString3);
 
         setDataFontSize(fontSize * 3);
     }

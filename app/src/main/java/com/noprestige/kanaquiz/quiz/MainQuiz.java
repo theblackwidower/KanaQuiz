@@ -77,8 +77,8 @@ public class MainQuiz extends AppCompatActivity
         {
             if (record != null)
             {
-                totalQuestions += record.total_answers;
-                totalCorrect += record.correct_answers;
+                totalQuestions += record.totalAnswers;
+                totalCorrect += record.correctAnswers;
             }
             frmAnswer.updateScore(totalCorrect, totalQuestions);
         }
@@ -159,7 +159,7 @@ public class MainQuiz extends AppCompatActivity
             lblDisplayKana.setText(questionBank.getCurrentKana());
             retryCount = 0;
             frmAnswer.setMultipleChoices(questionBank);
-            ReadyForAnswer();
+            readyForAnswer();
         }
         catch (NoQuestionsException ex)
         {
@@ -227,7 +227,7 @@ public class MainQuiz extends AppCompatActivity
 
                     delayHandler.postDelayed(() ->
                     {
-                        ReadyForAnswer();
+                        readyForAnswer();
                         frmAnswer.enableButtons();
                     }, 1000);
                 }
@@ -246,7 +246,7 @@ public class MainQuiz extends AppCompatActivity
         }
     }
 
-    private void ReadyForAnswer()
+    private void readyForAnswer()
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
             lblResponse.setText(R.string.request_multiple_choice);

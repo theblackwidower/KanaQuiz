@@ -28,8 +28,8 @@ public abstract class LogDao
                 int totalIncorrect = 0;
                 for (KanaRecord record : records)
                 {
-                    totalCorrect += record.correct_answers;
-                    totalIncorrect += record.incorrect_answers;
+                    totalCorrect += record.correctAnswers;
+                    totalIncorrect += record.incorrectAnswers;
                 }
                 return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
             }
@@ -174,9 +174,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertDailyRecord(record);
         }
         if (score > 0)
-            record.correct_answers += score;
+            record.correctAnswers += score;
 
-        record.total_answers++;
+        record.totalAnswers++;
 
         LogDatabase.DAO.updateDailyRecord(record);
     }
@@ -190,9 +190,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertKanaRecord(record);
         }
         if (isCorrect)
-            record.correct_answers++;
+            record.correctAnswers++;
         else
-            record.incorrect_answers++;
+            record.incorrectAnswers++;
         LogDatabase.DAO.updateKanaRecord(record);
     }
 

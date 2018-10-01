@@ -76,7 +76,7 @@ public class QuestionManagement
         }
     }
 
-    public QuestionManagement(int XmlRefId, Resources resources)
+    public QuestionManagement(int xmlRefId, Resources resources)
     {
         List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
         List<String> prefIdList = new ArrayList<>();
@@ -84,7 +84,7 @@ public class QuestionManagement
         List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
         XmlParser
-                .parseXmlDocument(XmlRefId, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+                .parseXmlDocument(xmlRefId, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
 
         categoryCount = kanaSetList.size();
 

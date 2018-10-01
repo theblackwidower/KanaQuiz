@@ -19,16 +19,16 @@ public class IncorrectAnswerRecord
 
     @ColumnInfo(name = "incorrect_romanji")
     @NonNull
-    public String incorrect_romanji;
+    public String incorrectRomanji;
 
     @ColumnInfo(name = "occurrences")
     public int occurrences;
 
-    public IncorrectAnswerRecord(String kana, String incorrect_romanji)
+    public IncorrectAnswerRecord(String kana, String incorrectRomanji)
     {
         date = LocalDate.now();
         this.kana = kana;
-        this.incorrect_romanji = incorrect_romanji;
+        this.incorrectRomanji = incorrectRomanji;
         occurrences = 1;
     }
 }

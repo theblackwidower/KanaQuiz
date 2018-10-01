@@ -16,10 +16,10 @@ import java.util.TreeMap;
 
 abstract class XmlParser
 {
-    static void parseXmlDocument(int XmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
+    static void parseXmlDocument(int xmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
             List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
     {
-        XmlResourceParser parser = resources.getXml(XmlRefId);
+        XmlResourceParser parser = resources.getXml(xmlRefId);
 
         try
         {

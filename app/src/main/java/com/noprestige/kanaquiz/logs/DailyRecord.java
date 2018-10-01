@@ -14,15 +14,15 @@ public class DailyRecord
     public LocalDate date;
 
     @ColumnInfo(name = "correct_answers")
-    public float correct_answers;
+    public float correctAnswers;
 
     @ColumnInfo(name = "total_answers")
-    public int total_answers;
+    public int totalAnswers;
 
     public DailyRecord()
     {
         date = LocalDate.now();
-        correct_answers = 0;
-        total_answers = 0;
+        correctAnswers = 0;
+        totalAnswers = 0;
     }
 }

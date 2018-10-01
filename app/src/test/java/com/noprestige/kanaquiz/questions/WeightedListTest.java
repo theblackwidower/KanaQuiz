@@ -19,10 +19,10 @@ public class WeightedListTest
     private WeightedList<String> demoList(SampleData data)
     {
         WeightedList<String> list = new WeightedList<>();
-        int SAMPLE_COUNT = data.weights.length;
-        assertThat(data.strings.length, is(SAMPLE_COUNT));
+        int sampleCount = data.weights.length;
+        assertThat(data.strings.length, is(sampleCount));
 
-        for (int i = 0; i < SAMPLE_COUNT; i++)
+        for (int i = 0; i < sampleCount; i++)
             list.add(data.weights[i], data.strings[i]);
 
         return list;
@@ -30,10 +30,10 @@ public class WeightedListTest
 
     private int testList(int i, SampleData data, WeightedList<String> list)
     {
-        int SAMPLE_COUNT = data.weights.length;
-        assertThat(data.strings.length, is(SAMPLE_COUNT));
+        int sampleCount = data.weights.length;
+        assertThat(data.strings.length, is(sampleCount));
 
-        for (int j = 0; j < SAMPLE_COUNT; j++)
+        for (int j = 0; j < sampleCount; j++)
             for (int start = i; i < data.weights[j] + start; i++)
             {
                 assertThat(list.getWeight(i), is(data.weights[j]));

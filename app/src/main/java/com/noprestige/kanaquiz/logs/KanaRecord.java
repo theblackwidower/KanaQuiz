@@ -18,16 +18,16 @@ public class KanaRecord
     public String kana;
 
     @ColumnInfo(name = "correct_answers")
-    public int correct_answers;
+    public int correctAnswers;
 
     @ColumnInfo(name = "incorrect_answers")
-    public int incorrect_answers;
+    public int incorrectAnswers;
 
     public KanaRecord(String kana)
     {
         date = LocalDate.now();
         this.kana = kana;
-        correct_answers = 0;
-        incorrect_answers = 0;
+        correctAnswers = 0;
+        incorrectAnswers = 0;
     }
 }

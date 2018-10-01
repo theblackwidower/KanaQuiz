@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
 public class XmlParserTest
 {
     @Test
-    public void ParsingTest()
+    public void parsingTest()
     {
         List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
         List<String> prefIdList = new ArrayList<>();

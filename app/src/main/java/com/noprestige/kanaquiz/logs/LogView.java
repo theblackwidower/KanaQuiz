@@ -51,7 +51,7 @@ public class LogView extends AppCompatActivity
                 output.setFromRecord(record);
 
                 graphSeries.appendData(new DataPoint(Days.daysBetween(GRAPH_EPOCH, record.date).getDays(),
-                        (record.correct_answers / record.total_answers) * 100f), true, 1000, true);
+                        (record.correctAnswers / record.totalAnswers) * 100f), true, 1000, true);
 
                 if (isCancelled())
                     return null;
