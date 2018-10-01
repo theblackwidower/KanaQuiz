@@ -16,6 +16,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/logGraph"/>
+
         <TextView
             android:id="@+id/lblLogMessage"
             android:layout_width="match_parent"

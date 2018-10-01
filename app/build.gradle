@@ -76,6 +76,8 @@ dependencies {
     //using 'classic' variant fixes issues with desugar
     //ref: https://github.com/JodaOrg/joda-convert/issues/24
     implementation group: 'org.joda', name: 'joda-convert', version: '2.1.1', classifier: 'classic'
+
+    implementation 'com.jjoe64:graphview:4.2.2'
 }
 
 repositories {

@@ -7,23 +7,41 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
 
 public class LogView extends AppCompatActivity
 {
     static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
     {
+        static final LocalDate GRAPH_EPOCH = new LocalDate(2015, 1, 1);
+
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
         @SuppressLint("StaticFieldLeak")
         TextView lblLogMessage;
+        @SuppressLint("StaticFieldLeak")
+        GraphView logGraph;
+        LineGraphSeries<DataPoint> graphSeries;
+
+        @Override
+        protected void onPreExecute()
+        {
+            graphSeries = new LineGraphSeries<>();
+        }
 
         @Override
         protected Integer doInBackground(LogView... activity)
         {
             layout = activity[0].findViewById(R.id.log_view_layout);
             lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
+            logGraph = activity[0].findViewById(R.id.logGraph);
 
             DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
 
@@ -31,6 +49,10 @@ public class LogView extends AppCompatActivity
             {
                 DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
                 output.setFromRecord(record);
+
+                graphSeries.appendData(new DataPoint(Days.daysBetween(GRAPH_EPOCH, record.date).getDays(),
+                        (record.correct_answers / record.total_answers) * 100f), true, 1000, true);
+
                 if (isCancelled())
                     return null;
                 else
@@ -43,6 +65,7 @@ public class LogView extends AppCompatActivity
         protected void onProgressUpdate(DailyLogItem... item)
         {
             layout.addView(item[0], layout.getChildCount() - 1);
+            logGraph.addSeries(graphSeries);
         }
 
         @Override
@@ -50,6 +73,7 @@ public class LogView extends AppCompatActivity
         {
             layout = null;
             lblLogMessage = null;
+            logGraph = null;
         }
 
         @Override
