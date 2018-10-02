@@ -44,7 +44,7 @@ public class ReferenceSubsectionPage extends Fragment
         else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
             questions = KATAKANA;
         else
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
 
         if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
             layout.addView(questions.getMainReferenceTable(container.getContext()));

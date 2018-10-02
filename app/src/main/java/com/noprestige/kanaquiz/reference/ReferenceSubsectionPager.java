@@ -42,7 +42,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
                 questions = KATAKANA;
             else
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
 
             if (questions.anySelected())
                 tabList.add(context.getResources().getString(R.string.base_form_title));

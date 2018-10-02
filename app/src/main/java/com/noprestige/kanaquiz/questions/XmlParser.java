@@ -35,6 +35,7 @@ abstract class XmlParser
         catch (XmlPullParserException | IOException | ParseException ex)
         {
             //if this happens, we have bigger problems
+            //noinspection ProhibitedExceptionThrown
             throw new RuntimeException(ex);
         }
     }

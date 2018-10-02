@@ -28,7 +28,9 @@ class WeightedList<E> implements Cloneable
     E remove(int key)
     {
         if ((key >= maxValue) || (key < 0))
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(
+                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
+                            Integer.toString(maxValue) + ".");
         else
         {
             key = map.floorKey(key);
@@ -57,7 +59,9 @@ class WeightedList<E> implements Cloneable
     boolean adjustWeight(int key, int adjustment)
     {
         if ((key >= maxValue) || (key < 0))
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(
+                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
+                            Integer.toString(maxValue) + ".");
         else
         {
             if ((getWeight(key) + adjustment) <= 0)
@@ -91,7 +95,9 @@ class WeightedList<E> implements Cloneable
     E get(int value)
     {
         if ((value >= maxValue) || (value < 0))
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException(
+                    "(" + Integer.toString(value) + ") is an invalid key. The key must be between 0 and " +
+                            Integer.toString(maxValue) + ".");
         else
             return map.get(map.floorKey(value));
     }
@@ -139,6 +145,7 @@ class WeightedList<E> implements Cloneable
         catch (CloneNotSupportedException ex)
         {
             //if this happens, we have bigger problems
+            //noinspection ProhibitedExceptionThrown
             throw new RuntimeException(ex);
         }
     }

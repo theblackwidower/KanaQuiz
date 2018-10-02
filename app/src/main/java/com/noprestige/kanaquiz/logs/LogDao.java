@@ -148,6 +148,7 @@ public abstract class LogDao
         catch (InterruptedException | ExecutionException ex)
         {
             //if this happens, we have bigger problems
+            //noinspection ProhibitedExceptionThrown
             throw new RuntimeException(ex);
         }
     }
@@ -161,6 +162,7 @@ public abstract class LogDao
         catch (InterruptedException | ExecutionException ex)
         {
             //if this happens, we have bigger problems
+            //noinspection ProhibitedExceptionThrown
             throw new RuntimeException(ex);
         }
     }
