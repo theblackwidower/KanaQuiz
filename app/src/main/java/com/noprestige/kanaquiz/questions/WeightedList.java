@@ -27,7 +27,7 @@ class WeightedList<E> implements Cloneable
 
     E remove(int key)
     {
-        if (key >= maxValue || key < 0)
+        if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException();
         else
         {
@@ -56,11 +56,11 @@ class WeightedList<E> implements Cloneable
 
     boolean adjustWeight(int key, int adjustment)
     {
-        if (key >= maxValue || key < 0)
+        if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException();
         else
         {
-            if (getWeight(key) + adjustment <= 0)
+            if ((getWeight(key) + adjustment) <= 0)
                 return false;
             else
             {
@@ -90,7 +90,7 @@ class WeightedList<E> implements Cloneable
 
     E get(int value)
     {
-        if (value >= maxValue || value < 0)
+        if ((value >= maxValue) || (value < 0))
             throw new IndexOutOfBoundsException();
         else
             return map.get(map.floorKey(value));

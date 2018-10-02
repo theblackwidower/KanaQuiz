@@ -27,7 +27,7 @@ public class Fraction
     {
         for (int prime : PRIME_NUMBERS)
         {
-            if (denominator % prime == 0 && numerator % prime == 0)
+            if (((denominator % prime) == 0) && ((numerator % prime) == 0))
             {
                 numerator /= prime;
                 denominator /= prime;

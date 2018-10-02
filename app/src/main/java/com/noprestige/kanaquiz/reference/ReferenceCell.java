@@ -106,10 +106,10 @@ public class ReferenceCell extends View
 
         float fullHeight = kanaHeight + romanjiHeight;
 
-        kanaXPoint = getPaddingLeft() + (contentWidth - kanaWidth) / 2;
-        kanaYPoint = getPaddingTop() + (contentHeight - fullHeight) / 2 - kanaPaint.getFontMetrics().ascent;
-        romanjiXPoint = getPaddingLeft() + (contentWidth - romanjiWidth) / 2;
-        romanjiYPoint = getPaddingTop() + (contentHeight + fullHeight) / 2 - romanjiPaint.getFontMetrics().descent;
+        kanaXPoint = getPaddingLeft() + ((contentWidth - kanaWidth) / 2);
+        kanaYPoint = getPaddingTop() + (((contentHeight - fullHeight) / 2) - kanaPaint.getFontMetrics().ascent);
+        romanjiXPoint = getPaddingLeft() + ((contentWidth - romanjiWidth) / 2);
+        romanjiYPoint = getPaddingTop() + (((contentHeight + fullHeight) / 2) - romanjiPaint.getFontMetrics().descent);
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
@@ -176,7 +176,7 @@ public class ReferenceCell extends View
 
     public void setKana(String kana)
     {
-        this.kana = kana == null ? "" : kana;
+        this.kana = (kana == null) ? "" : kana;
         kanaWidth = kanaPaint.measureText(this.kana);
     }
 
@@ -189,7 +189,7 @@ public class ReferenceCell extends View
 
     public void setRomanji(String romanji)
     {
-        this.romanji = romanji == null ? "" : romanji;
+        this.romanji = (romanji == null) ? "" : romanji;
         romanjiWidth = romanjiPaint.measureText(this.romanji);
     }
 

@@ -67,7 +67,7 @@ public class QuestionManagement
     {
         try
         {
-            return isDiacriticsActive || setNoDiacriticsTitles[number - 1] == null ? setTitles[number - 1] :
+            return (isDiacriticsActive || (setNoDiacriticsTitles[number - 1] == null)) ? setTitles[number - 1] :
                     setNoDiacriticsTitles[number - 1];
         }
         catch (ArrayIndexOutOfBoundsException ex)
@@ -163,8 +163,8 @@ public class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && (getKanaSet(i, Diacritic.DAKUTEN, false) != null ||
-                        getKanaSet(i, Diacritic.HANDAKUTEN, false) != null))
+                if (getPref(i) && ((getKanaSet(i, Diacritic.DAKUTEN, false) != null) ||
+                        (getKanaSet(i, Diacritic.HANDAKUTEN, false) != null)))
                     return true;
 
         return false;
@@ -185,8 +185,8 @@ public class QuestionManagement
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && (getKanaSet(i, Diacritic.DAKUTEN, true) != null ||
-                        getKanaSet(i, Diacritic.HANDAKUTEN, true) != null))
+                if (getPref(i) && ((getKanaSet(i, Diacritic.DAKUTEN, true) != null) ||
+                        (getKanaSet(i, Diacritic.HANDAKUTEN, true) != null)))
                     return true;
 
         return false;

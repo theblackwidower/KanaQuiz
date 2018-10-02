@@ -26,7 +26,7 @@ abstract class XmlParser
             for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
                     eventType = parser.next())
             {
-                if (eventType == XmlPullParser.START_TAG && "KanaSet".equalsIgnoreCase(parser.getName()))
+                if ((eventType == XmlPullParser.START_TAG) && "KanaSet".equalsIgnoreCase(parser.getName()))
                 {
                     parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
                 }
@@ -62,7 +62,7 @@ abstract class XmlParser
             }
         }
 
-        if (prefId == null || setTitle == null)
+        if ((prefId == null) || (setTitle == null))
             throw new ParseException("Missing attribute in KanaSet", parser.getLineNumber());
 
         prefIdList.add(prefId);
@@ -78,7 +78,7 @@ abstract class XmlParser
         int lineNumber = parser.getLineNumber();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && "KanaSet".equalsIgnoreCase(parser.getName()));
+                !((eventType == XmlPullParser.END_TAG) && "KanaSet".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)
@@ -120,7 +120,7 @@ abstract class XmlParser
             }
         }
 
-        if (diacritics == null || !isDigraphsSet)
+        if ((diacritics == null) || !isDigraphsSet)
             throw new ParseException("Missing attribute in Section tag", parser.getLineNumber());
 
         int lineNumber = parser.getLineNumber();
@@ -128,10 +128,10 @@ abstract class XmlParser
         List<KanaQuestion> currentSet = new ArrayList<>();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && "Section".equalsIgnoreCase(parser.getName()));
+                !((eventType == XmlPullParser.END_TAG) && "Section".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
-            if (eventType == XmlPullParser.START_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName()))
+            if ((eventType == XmlPullParser.START_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()))
                 currentSet.add(parseXmlKanaQuestion(parser, resources));
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -166,12 +166,12 @@ abstract class XmlParser
             }
         }
 
-        if (thisQuestion == null || thisAnswer == null)
+        if ((thisQuestion == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in KanaQuestion", parser.getLineNumber());
 
         TreeMap<RomanizationSystem, String> thisAltAnswers = null;
 
-        if (!(parser.next() == XmlPullParser.END_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName())))
+        if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlAltAnswers(parser);
 
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
@@ -201,7 +201,7 @@ abstract class XmlParser
                     thisAnswer = parseXmlValue(parser, i, resources);
             }
         }
-        if (thisRomanji == null || thisAnswer == null)
+        if ((thisRomanji == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in WordQuestion", 0);
 
         WordQuestion question = new WordQuestion(thisRomanji, thisAnswer);
@@ -222,10 +222,10 @@ abstract class XmlParser
         TreeMap<RomanizationSystem, String> thisAltAnswers = new TreeMap<>();
 
         for (int eventType = parser.getEventType();
-                !(eventType == XmlPullParser.END_TAG && "KanaQuestion".equalsIgnoreCase(parser.getName()));
+                !((eventType == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
-            if (eventType == XmlPullParser.START_TAG && "AltAnswer".equalsIgnoreCase(parser.getName()))
+            if ((eventType == XmlPullParser.START_TAG) && "AltAnswer".equalsIgnoreCase(parser.getName()))
             {
                 RomanizationSystem[] systemsList = null;
 

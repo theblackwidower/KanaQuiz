@@ -46,7 +46,7 @@ public class GojuonOrder implements Comparator<String>
 
         for (int i = 0; i < MAIN_SETS.length; i++)
             if (romanji.current() == MAIN_SETS[i])
-                return 5 + i * 8 + getSubKey(romanji);
+                return 5 + (i * 8) + getSubKey(romanji);
 
         switch (romanji.current())
         {
@@ -158,8 +158,8 @@ public class GojuonOrder implements Comparator<String>
             int item1code = 0;
             int item2code = 0;
 
-            while ((item1iterator.current() != CharacterIterator.DONE ||
-                    item2iterator.current() != CharacterIterator.DONE) && item1code == item2code)
+            while (((item1iterator.current() != CharacterIterator.DONE) ||
+                    (item2iterator.current() != CharacterIterator.DONE)) && (item1code == item2code))
             {
                 item1code = getSortId(item1iterator);
                 item2code = getSortId(item2iterator);

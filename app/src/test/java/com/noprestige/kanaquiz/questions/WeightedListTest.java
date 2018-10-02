@@ -34,7 +34,7 @@ public class WeightedListTest
         assertThat(data.strings.length, is(sampleCount));
 
         for (int j = 0; j < sampleCount; j++)
-            for (int start = i; i < data.weights[j] + start; i++)
+            for (int start = i; i < (data.weights[j] + start); i++)
             {
                 assertThat(list.getWeight(i), is(data.weights[j]));
                 assertThat(list.get(i), is(data.strings[j]));
@@ -62,7 +62,7 @@ public class WeightedListTest
             sum += data.weights[i];
 
         assertThat(list.remove(sum), is(data.strings[index]));
-        for (int i = index; i < data.weights.length - 1; i++)
+        for (int i = index; i < (data.weights.length - 1); i++)
         {
             data.weights[i] = data.weights[i + 1];
             data.strings[i] = data.strings[i + 1];

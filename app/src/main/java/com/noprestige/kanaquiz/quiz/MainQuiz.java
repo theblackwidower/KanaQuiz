@@ -118,8 +118,8 @@ public class MainQuiz extends AppCompatActivity
         lblDisplayKana = findViewById(R.id.lblDisplayKana);
         frmAnswer = findViewById(R.id.frmAnswer);
 
-        if (newConfig.keyboard == Configuration.KEYBOARD_NOKEYS &&
-                newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)
+        if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
+                (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES))
             frmAnswer.setTextHint(R.string.answer_hint_touch);
         else
             frmAnswer.setTextHint(R.string.answer_hint_hardware);

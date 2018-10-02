@@ -128,21 +128,21 @@ public class DailyLogItem extends View
     private void repositionItems(int width, int height)
     {
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
-        int contentHeight = height - getPaddingTop() - getPaddingBottom() - internalVerticalPadding * 2;
+        int contentHeight = height - getPaddingTop() - getPaddingBottom() - (internalVerticalPadding * 2);
 
         dateXPoint = getPaddingLeft();
-        dateYPoint1 = getPaddingTop() + internalVerticalPadding + (contentHeight - dateHeight) / 2 -
-                datePaint.getFontMetrics().descent;
+        dateYPoint1 = getPaddingTop() + internalVerticalPadding +
+                (((contentHeight - dateHeight) / 2) - datePaint.getFontMetrics().descent);
         dateYPoint2 = dateYPoint1 + dateHeight;
         dateYPoint3 = dateYPoint2 + dateHeight;
 
-        slashXPoint = getPaddingLeft() + (contentWidth - slashWidth) / 2;
+        slashXPoint = getPaddingLeft() + ((contentWidth - slashWidth) / 2);
 
         correctXPoint = slashXPoint - correctWidth;
         totalXPoint = slashXPoint + slashWidth;
-        percentageXPoint = getPaddingLeft() + contentWidth - percentageWidth;
-        dataYPoint = getPaddingTop() + internalVerticalPadding + (contentHeight + dataHeight) / 2 -
-                ratioPaint.getFontMetrics().descent;
+        percentageXPoint = getPaddingLeft() + (contentWidth - percentageWidth);
+        dataYPoint = getPaddingTop() + internalVerticalPadding +
+                (((contentHeight + dataHeight) / 2) - ratioPaint.getFontMetrics().descent);
 
         lineXPoint1 = getPaddingLeft();
         lineXPoint2 = width - getPaddingRight();
@@ -156,7 +156,7 @@ public class DailyLogItem extends View
         int desiredWidth = desiredWidth();
         int desiredHeight =
                 Math.round(Math.max(dateHeight * 3, dataHeight) + linePaint.getStrokeWidth()) + getPaddingTop() +
-                        getPaddingBottom() + internalVerticalPadding * 2;
+                        getPaddingBottom() + (internalVerticalPadding * 2);
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
@@ -166,8 +166,8 @@ public class DailyLogItem extends View
 
     private int desiredWidth()
     {
-        return Math.round(Math.max(Math.max(dateWidth1, Math.max(dateWidth2, dateWidth3)) + correctWidth,
-                totalWidth + percentageWidth) * 2 + slashWidth) + getPaddingLeft() + getPaddingRight();
+        return Math.round((Math.max(Math.max(dateWidth1, Math.max(dateWidth2, dateWidth3)) + correctWidth,
+                totalWidth + percentageWidth) * 2) + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
     private static int calculateSize(int measureSpec, int desired)
@@ -328,7 +328,7 @@ public class DailyLogItem extends View
 
     private static String parseCount(float count)
     {
-        return count < 100 ? new Fraction(count).toString() : parseCount(Math.round(count));
+        return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
     private static String parseCount(int count)
@@ -343,7 +343,7 @@ public class DailyLogItem extends View
 
     private void updateAnswers()
     {
-        if (correctAnswers >= 0 && totalAnswers >= 0)
+        if ((correctAnswers >= 0) && (totalAnswers >= 0))
         {
             correctString = parseCount(correctAnswers);
             totalString = parseCount(totalAnswers);
