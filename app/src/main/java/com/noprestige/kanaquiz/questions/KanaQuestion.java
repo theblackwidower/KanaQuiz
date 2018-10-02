@@ -34,11 +34,11 @@ public class KanaQuestion
 
     boolean checkAnswer(String response)
     {
-        if (defaultRomanji.trim().toLowerCase().equals(response.trim().toLowerCase()))
+        if (defaultRomanji.trim().equalsIgnoreCase(response.trim()))
             return true;
         if (altRomanji != null)
             for (String correctAnswer : altRomanji.values())
-                if (correctAnswer.trim().toLowerCase().equals(response.trim().toLowerCase()))
+                if (correctAnswer.trim().equalsIgnoreCase(response.trim()))
                     return true;
 
         return false;
