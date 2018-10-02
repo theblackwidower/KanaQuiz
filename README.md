@@ -23,24 +23,24 @@ Currently available on [Google Play](https://play.google.com/store/apps/details?
 
 ## Feature set
 
-* Supports Hiragana and Katakana character sets
-* Ten different character groupings for each set, allowing a gradual progression through the characters
-* Can answer questions by entering them using the on-screen keyboard, or as multiple choice questions
-* Built-in kana reference sheet
-* Supports both digraphs (ひゃ, みゅ, リュ) and diacritics (が, ぴ)
-* User can select app behaviour on an incorrect answer from three different options: retry until the correct answer is given, show the correct answer and move on, or hide the correct answer and move on
-* Support for the three major romanji systems: Revised Hepburn, Nihon-shiki, and Kunrei-shiki
-* A daily log will show your progress over time
-* Dynamic AI chooses the kana you have the most trouble with
+  * Supports Hiragana and Katakana character sets
+  * Ten different character groupings for each set, allowing a gradual progression through the characters
+  * Can answer questions by entering them using the on-screen keyboard, or as multiple choice questions
+  * Built-in kana reference sheet
+  * Supports both digraphs (ひゃ, みゅ, リュ) and diacritics (が, ぴ)
+  * User can select app behaviour on an incorrect answer from three different options: retry until the correct answer is given, show the correct answer and move on, or hide the correct answer and move on
+  * Support for the three major romanji systems: Revised Hepburn, Nihon-shiki, and Kunrei-shiki
+  * A daily log will show your progress over time
+  * Dynamic AI chooses the kana you have the most trouble with
 
 ## Upcoming features
 
 _NB: The following features have no planned release date, or guarantee of release._
 
-* Kanji and vocabulary support
-* Multiple fonts
-* Obsolete kana option
-* Improved multiple choice answer selection
+  * Kanji and vocabulary support
+  * Multiple fonts
+  * Obsolete kana option
+  * Improved multiple choice answer selection
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
