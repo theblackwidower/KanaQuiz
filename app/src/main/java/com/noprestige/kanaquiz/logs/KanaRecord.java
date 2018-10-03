@@ -1,10 +1,10 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.support.annotation.NonNull;
-
 import org.joda.time.LocalDate;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 
 @Entity(tableName = "kana_records", primaryKeys = {"date", "kana"})
 public class KanaRecord

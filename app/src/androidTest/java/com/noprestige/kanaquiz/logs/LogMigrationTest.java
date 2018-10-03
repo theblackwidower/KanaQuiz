@@ -1,11 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.db.framework.FrameworkSQLiteOpenHelperFactory;
-import android.arch.persistence.room.testing.MigrationTestHelper;
 import android.database.Cursor;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.joda.time.LocalDate;
 import org.junit.Rule;
@@ -13,6 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+
+import androidx.room.testing.MigrationTestHelper;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

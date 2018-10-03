@@ -1,11 +1,12 @@
 package com.noprestige.kanaquiz.options;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 import com.noprestige.kanaquiz.R;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 class KanaSelectionPager extends FragmentPagerAdapter
 {

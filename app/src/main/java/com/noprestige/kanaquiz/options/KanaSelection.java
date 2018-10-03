@@ -1,12 +1,13 @@
 package com.noprestige.kanaquiz.options;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 public class KanaSelection extends AppCompatActivity
 {

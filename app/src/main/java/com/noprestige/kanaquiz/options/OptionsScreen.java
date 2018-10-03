@@ -1,9 +1,10 @@
 package com.noprestige.kanaquiz.options;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.noprestige.kanaquiz.AppTools;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class OptionsScreen extends AppCompatActivity
 {

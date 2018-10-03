@@ -7,9 +7,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -30,6 +27,10 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
 import org.joda.time.LocalDate;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
 
 import static android.graphics.Typeface.BOLD;
 import static android.graphics.Typeface.NORMAL;

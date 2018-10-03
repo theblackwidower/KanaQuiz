@@ -1,11 +1,11 @@
 package com.noprestige.kanaquiz.questions;
 
-import android.support.test.InstrumentationRegistry;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.test.InstrumentationRegistry;
 
 import static com.noprestige.kanaquiz.questions.Diacritic.CONSONANT;
 import static com.noprestige.kanaquiz.questions.Diacritic.DAKUTEN;

@@ -3,7 +3,6 @@ package com.noprestige.kanaquiz.logs;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +14,8 @@ import com.noprestige.kanaquiz.R;
 
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LogView extends AppCompatActivity
 {

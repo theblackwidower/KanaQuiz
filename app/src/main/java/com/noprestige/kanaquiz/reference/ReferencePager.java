@@ -1,15 +1,16 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;

@@ -1,8 +1,8 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.arch.persistence.room.TypeConverter;
-
 import org.joda.time.LocalDate;
+
+import androidx.room.TypeConverter;
 
 public class LogTypeConversion
 {

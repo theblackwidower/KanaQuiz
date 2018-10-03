@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Typeface;
-import android.support.design.widget.Snackbar;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.KanaQuestion;
 

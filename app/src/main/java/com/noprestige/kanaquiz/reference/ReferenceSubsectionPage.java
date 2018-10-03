@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,8 @@ import android.view.ViewGroup;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+
+import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;

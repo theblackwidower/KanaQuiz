@@ -1,15 +1,16 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.R;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 public class ReferencePage extends Fragment
 {

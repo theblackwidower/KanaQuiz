@@ -1,14 +1,15 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
 import android.os.AsyncTask;
 
 import org.joda.time.LocalDate;
 
 import java.util.concurrent.ExecutionException;
+
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
 
 @Dao
 public abstract class LogDao
