@@ -60,8 +60,8 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
         transitive = true
     }
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.firebase:firebase-perf:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation 'com.google.firebase:firebase-perf:16.1.2'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
