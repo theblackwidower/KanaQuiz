@@ -19,7 +19,7 @@ Open source and ad free.
 
 This application is in a state of constant development. Any additional feature requests can be sent via email, or submitted as an issue here, on GitHub. If they are appropriate, they will likely be added to the next release.
 
-Currently available on [Google Play](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz).
+Currently available on [Google Play™](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz).
 
 ## Feature set
 
