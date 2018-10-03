@@ -55,6 +55,7 @@ _NB: The following features have no planned release date, or guarantee of releas
 [![Coverage Status](https://coveralls.io/repos/github/theblackwidower/KanaQuiz/badge.svg?branch=master)](https://coveralls.io/github/theblackwidower/KanaQuiz?branch=master)
 [![codecov](https://codecov.io/gh/theblackwidower/KanaQuiz/branch/master/graph/badge.svg)](https://codecov.io/gh/theblackwidower/KanaQuiz)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/test_coverage)](https://codeclimate.com/github/theblackwidower/KanaQuiz/test_coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b0af5712d54745ada2893d82c55a680b)](https://www.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&utm_medium=referral&utm_content=theblackwidower/KanaQuiz&utm_campaign=Badge_Coverage)
 
 ## Translations
 
