@@ -82,9 +82,9 @@ repositories {
 coveralls {
     sourceDirs += "${rootDir}/app/src/main/java/"
     //Unit tests
-    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml, " +
-            //Instrument tests
-            "${buildDir}/reports/coverage/debug/report.xml"
+    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
+    //Instrument tests
+    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
 }
 
 apply plugin: 'com.google.gms.google-services'
