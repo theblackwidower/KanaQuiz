@@ -46,6 +46,9 @@ public class LogView extends AppCompatActivity
 
             DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
 
+            if (records.length == 0)
+                return 0;
+
             startDate = records[0].date;
 
             for (DailyRecord record : records)
