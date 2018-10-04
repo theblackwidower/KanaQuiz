@@ -47,3 +47,8 @@ after_success:
   - ./cc-test-reporter format-coverage -t jacoco -o app/build/reports/coverage/debug/report.json app/build/reports/coverage/debug/report.xml
   - ./cc-test-reporter sum-coverage -o app/build/reports/climatecoverage.json -p 2 app/build/reports/jacoco/debug/jacoco.json app/build/reports/coverage/debug/report.json
   - ./cc-test-reporter upload-coverage -i app/build/reports/climatecoverage.json
+  #Codacy coverage reporting
+  - wget https://github.com/codacy/codacy-coverage-reporter/releases/download/4.0.3/codacy-coverage-reporter-4.0.3-assembly.jar -O codacy-coverage-reporter.jar
+  - java -jar codacy-coverage-reporter.jar report -l Java -r app/build/reports/jacoco/debug/jacoco.xml --partial
+  - java -jar codacy-coverage-reporter.jar report -l Java -r app/build/reports/coverage/debug/report.xml --partial
+  - java -jar codacy-coverage-reporter.jar final
