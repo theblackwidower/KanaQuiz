@@ -382,6 +382,216 @@ public class KanaQuestionTest
         assertDiacriticTest(KATAKANA_KANA_SET_10_N_CONSONANT, false);
     }
 
+    @Test
+    public void isDiacriticCharTest()
+    {
+        /*
+        Unicode chart:
+        	ぁ	あ	ぃ	い	ぅ	う	ぇ	え	ぉ	お	か	が	き	ぎ	く
+        ぐ	け	げ	こ	ご	さ	ざ	し	じ	す	ず	せ	ぜ	そ	ぞ	た
+        だ	ち	ぢ	っ	つ	づ	て	で	と	ど	な	に	ぬ	ね	の	は
+        ば	ぱ	ひ	び	ぴ	ふ	ぶ	ぷ	へ	べ	ぺ	ほ	ぼ	ぽ	ま	み
+        む	め	も	ゃ	や	ゅ	ゆ	ょ	よ	ら	り	る	れ	ろ	ゎ	わ
+        ゐ	ゑ	を	ん	ゔ	ゕ	ゖ			゙	゚	゛	゜	ゝ	ゞ	ゟ
+        ゠	ァ	ア	ィ	イ	ゥ	ウ	ェ	エ	ォ	オ	カ	ガ	キ	ギ	ク
+        グ	ケ	ゲ	コ	ゴ	サ	ザ	シ	ジ	ス	ズ	セ	ゼ	ソ	ゾ	タ
+        ダ	チ	ヂ	ッ	ツ	ヅ	テ	デ	ト	ド	ナ	ニ	ヌ	ネ	ノ	ハ
+        バ	パ	ヒ	ビ	ピ	フ	ブ	プ	ヘ	ベ	ペ	ホ	ボ	ポ	マ	ミ
+        ム	メ	モ	ャ	ヤ	ュ	ユ	ョ	ヨ	ラ	リ	ル	レ	ロ	ヮ	ワ
+        ヰ	ヱ	ヲ	ン	ヴ	ヵ	ヶ	ヷ	ヸ	ヹ	ヺ	・	ー	ヽ	ヾ	ヿ
+        */
+
+        assertThat(KanaQuestion.isDiacritic('ぁ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('あ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぃ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('い'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぅ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('う'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぇ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('え'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぉ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('お'), is(false));
+        assertThat(KanaQuestion.isDiacritic('か'), is(false));
+        assertThat(KanaQuestion.isDiacritic('が'), is(true));
+        assertThat(KanaQuestion.isDiacritic('き'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぎ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('く'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぐ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('け'), is(false));
+        assertThat(KanaQuestion.isDiacritic('げ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('こ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ご'), is(true));
+        assertThat(KanaQuestion.isDiacritic('さ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ざ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('し'), is(false));
+        assertThat(KanaQuestion.isDiacritic('じ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('す'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ず'), is(true));
+        assertThat(KanaQuestion.isDiacritic('せ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぜ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('そ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぞ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('た'), is(false));
+        assertThat(KanaQuestion.isDiacritic('だ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ち'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぢ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('っ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('つ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('づ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('て'), is(false));
+        assertThat(KanaQuestion.isDiacritic('で'), is(true));
+        assertThat(KanaQuestion.isDiacritic('と'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ど'), is(true));
+        assertThat(KanaQuestion.isDiacritic('な'), is(false));
+        assertThat(KanaQuestion.isDiacritic('に'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぬ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ね'), is(false));
+        assertThat(KanaQuestion.isDiacritic('の'), is(false));
+        assertThat(KanaQuestion.isDiacritic('は'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ば'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ぱ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ひ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('び'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ぴ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ふ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぶ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ぷ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('へ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('べ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ぺ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ほ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ぼ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ぽ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ま'), is(false));
+        assertThat(KanaQuestion.isDiacritic('み'), is(false));
+        assertThat(KanaQuestion.isDiacritic('む'), is(false));
+        assertThat(KanaQuestion.isDiacritic('め'), is(false));
+        assertThat(KanaQuestion.isDiacritic('も'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゃ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('や'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゅ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゆ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ょ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('よ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ら'), is(false));
+        assertThat(KanaQuestion.isDiacritic('り'), is(false));
+        assertThat(KanaQuestion.isDiacritic('る'), is(false));
+        assertThat(KanaQuestion.isDiacritic('れ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ろ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゎ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('わ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゐ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゑ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('を'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ん'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゔ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ゕ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゖ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('゙'), is(true));
+        assertThat(KanaQuestion.isDiacritic('゚'), is(true));
+        assertThat(KanaQuestion.isDiacritic('゛'), is(true));
+        assertThat(KanaQuestion.isDiacritic('゜'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ゝ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゞ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ゟ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('゠'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ァ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ア'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ィ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('イ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゥ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ウ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ェ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('エ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ォ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('オ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('カ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ガ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('キ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ギ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ク'), is(false));
+        assertThat(KanaQuestion.isDiacritic('グ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ケ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゲ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('コ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゴ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('サ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ザ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('シ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ジ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ス'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ズ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('セ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゼ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ソ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ゾ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('タ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ダ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('チ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヂ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ッ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ツ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヅ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('テ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('デ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ト'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ド'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ナ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ニ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヌ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ネ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ノ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ハ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('バ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('パ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヒ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ビ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ピ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('フ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ブ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('プ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヘ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ベ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ペ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ホ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ボ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ポ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('マ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ミ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ム'), is(false));
+        assertThat(KanaQuestion.isDiacritic('メ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('モ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ャ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヤ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ュ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ユ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ョ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヨ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ラ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('リ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ル'), is(false));
+        assertThat(KanaQuestion.isDiacritic('レ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ロ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヮ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ワ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヰ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヱ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヲ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ン'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヴ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヵ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヶ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヷ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヸ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヹ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヺ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('・'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ー'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヽ'), is(false));
+        assertThat(KanaQuestion.isDiacritic('ヾ'), is(true));
+        assertThat(KanaQuestion.isDiacritic('ヿ'), is(false));
+    }
+
     private void assertDigraphTest(KanaQuestion[] questions, boolean expected)
     {
         for (KanaQuestion question : questions)
