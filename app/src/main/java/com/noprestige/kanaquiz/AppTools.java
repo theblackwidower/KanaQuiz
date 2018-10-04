@@ -20,4 +20,17 @@ public abstract class AppTools
             isInitialized = true;
         }
     }
+
+    public static boolean isFirebaseInstalled()
+    {
+        try
+        {
+            Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
+            return true;
+        }
+        catch (ClassNotFoundException ex)
+        {
+            return false;
+        }
+    }
 }

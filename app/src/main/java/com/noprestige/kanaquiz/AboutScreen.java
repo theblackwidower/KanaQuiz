@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,10 @@ public class AboutScreen extends AppCompatActivity
         setContentView(R.layout.activity_about_screen);
 
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);
+
+        if (!AppTools.isFirebaseInstalled())
+            ((ViewManager) findViewById(R.id.lblFirebaseDisclosure).getParent())
+                    .removeView(findViewById(R.id.lblFirebaseDisclosure));
 
         String translatorCreditUrl = getResources().getString(R.string.translator_credit_url);
 
