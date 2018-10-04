@@ -21,7 +21,7 @@ public class LogView extends AppCompatActivity
 {
     static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
     {
-        static final LocalDate GRAPH_EPOCH = new LocalDate(2015, 1, 1);
+        LocalDate startDate;
 
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
@@ -46,12 +46,14 @@ public class LogView extends AppCompatActivity
 
             DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
 
+            startDate = records[0].date;
+
             for (DailyRecord record : records)
             {
                 DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
                 output.setFromRecord(record);
 
-                graphSeries.appendData(new DataPoint(Days.daysBetween(GRAPH_EPOCH, record.date).getDays(),
+                graphSeries.appendData(new DataPoint(Days.daysBetween(startDate, record.date).getDays(),
                         (record.correctAnswers / record.totalAnswers) * 100f), true, 1000, true);
 
                 if (isCancelled())
@@ -66,6 +68,7 @@ public class LogView extends AppCompatActivity
         protected void onProgressUpdate(DailyLogItem... item)
         {
             layout.addView(item[0], layout.getChildCount() - 1);
+            logGraph.getViewport().setMaxX(Days.daysBetween(startDate, item[0].getDate()).getDays());
             logGraph.addSeries(graphSeries);
         }
 
@@ -99,6 +102,16 @@ public class LogView extends AppCompatActivity
 
         fetchThread = new FetchLogs();
         fetchThread.execute(this);
+
+        GraphView logGraph = findViewById(R.id.logGraph);
+
+        logGraph.getViewport().setYAxisBoundsManual(true);
+        logGraph.getViewport().setMinY(0);
+        logGraph.getViewport().setMaxY(100);
+        logGraph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
+        logGraph.getViewport().setXAxisBoundsManual(true);
+        logGraph.getViewport().setMinX(0);
     }
 
     @Override
