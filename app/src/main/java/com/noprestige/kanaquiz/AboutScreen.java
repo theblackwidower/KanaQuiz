@@ -52,6 +52,11 @@ public class AboutScreen extends AppCompatActivity
         toSite("https://github.com/" + githubAddress);
     }
 
+    public void toPrivacyPolicy(View view)
+    {
+        toGithub("theblackwidower/KanaQuiz/blob/master/privacy_policy.md");
+    }
+
     public void toAppGithub(View view)
     {
         toGithub("theblackwidower/KanaQuiz");
