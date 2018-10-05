@@ -1,27 +1,27 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.firebase.firebase-perf'
-apply plugin: "com.vanniktech.android.junit.jacoco"
+apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.noprestige.kanaquiz"
+        applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 14
-        versionName "0.12"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionName '0.12'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
+                arguments = ['room.schemaLocation':
+                                     '$projectDir/schemas'.toString()]
             }
         }
     }
     sourceSets {
-        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        androidTest.assets.srcDirs += files('$projectDir/schemas'.toString())
     }
     buildTypes {
         release {
@@ -32,8 +32,8 @@ android {
         }
         debug {
             testCoverageEnabled true
-            applicationIdSuffix ".dev"
-            versionNameSuffix " (dev)"
+            applicationIdSuffix '.dev'
+            versionNameSuffix ' (dev)'
             debuggable true
         }
     }
@@ -50,10 +50,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'
 
-    implementation "androidx.room:room-runtime:2.0.0"
-    annotationProcessor "androidx.room:room-compiler:2.0.0"
+    implementation 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
 
-    androidTestImplementation "androidx.room:room-testing:2.0.0"
+    androidTestImplementation 'androidx.room:room-testing:2.0.0'
 
     releaseImplementation('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
         transitive = true
@@ -76,11 +76,11 @@ repositories {
 }
 
 coveralls {
-    sourceDirs += "${rootDir}/app/src/main/java/"
+    sourceDirs += '${rootDir}/app/src/main/java/'
     //Unit tests
-    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
+    jacocoReportPath '${buildDir}/reports/jacoco/debug/jacoco.xml'
     //Instrument tests
-    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
+    //jacocoReportPath '${buildDir}/reports/coverage/debug/report.xml'
 }
 
 apply plugin: 'com.google.gms.google-services'
