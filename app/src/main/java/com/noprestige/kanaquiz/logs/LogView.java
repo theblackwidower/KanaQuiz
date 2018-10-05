@@ -1,8 +1,10 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +18,8 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class LogView extends AppCompatActivity
 {
@@ -100,6 +104,7 @@ public class LogView extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_view);
+        onConfigurationChanged(getResources().getConfiguration());
 
         AppTools.initializeManagers(getApplicationContext());
 
@@ -115,6 +120,46 @@ public class LogView extends AppCompatActivity
         logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
         logGraph.getViewport().setXAxisBoundsManual(true);
         logGraph.getViewport().setMinX(0);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+
+        int viewOrientation;
+
+        int graphWidth;
+        int graphHeight;
+
+        int listWidth;
+        int listHeight;
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            viewOrientation = LinearLayout.HORIZONTAL;
+
+            graphWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
+                    getApplicationContext().getResources().getDisplayMetrics()));
+            graphHeight = MATCH_PARENT;
+
+            listWidth = 0;
+            listHeight = MATCH_PARENT;
+        }
+        else
+        {
+            viewOrientation = LinearLayout.VERTICAL;
+
+            graphWidth = MATCH_PARENT;
+            graphHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
+                    getApplicationContext().getResources().getDisplayMetrics()));
+
+            listWidth = MATCH_PARENT;
+            listHeight = 0;
+        }
+        ((LinearLayout) findViewById(R.id.activity_log_view)).setOrientation(viewOrientation);
+        findViewById(R.id.logGraph).setLayoutParams(new LinearLayout.LayoutParams(graphWidth, graphHeight));
+        findViewById(R.id.logViewScroll).setLayoutParams(new LinearLayout.LayoutParams(listWidth, listHeight, 1));
     }
 
     @Override

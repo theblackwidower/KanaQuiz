@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:id="@+id/activity_log_view"
     tools:context="com.noprestige.kanaquiz.logs.LogView">
 
     <com.jjoe64.graphview.GraphView
@@ -17,6 +18,7 @@
         android:id="@+id/logGraph"/>
 
     <ScrollView
+        android:id="@+id/logViewScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
