@@ -16,12 +16,12 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
-                                     '$projectDir/schemas'.toString()]
+                                     "$projectDir/schemas".toString()]
             }
         }
     }
     sourceSets {
-        androidTest.assets.srcDirs += files('$projectDir/schemas'.toString())
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
     buildTypes {
         release {
@@ -76,11 +76,11 @@ repositories {
 }
 
 coveralls {
-    sourceDirs += '${rootDir}/app/src/main/java/'
+    sourceDirs += "${rootDir}/app/src/main/java/"
     //Unit tests
-    jacocoReportPath '${buildDir}/reports/jacoco/debug/jacoco.xml'
+    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
     //Instrument tests
-    //jacocoReportPath '${buildDir}/reports/coverage/debug/report.xml'
+    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
 }
 
 apply plugin: 'com.google.gms.google-services'
