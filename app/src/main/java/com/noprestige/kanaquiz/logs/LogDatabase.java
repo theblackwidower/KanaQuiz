@@ -3,7 +3,7 @@ package com.noprestige.kanaquiz.logs;
 import android.content.Context;
 import android.database.Cursor;
 
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import androidx.room.Database;
 import androidx.room.Room;

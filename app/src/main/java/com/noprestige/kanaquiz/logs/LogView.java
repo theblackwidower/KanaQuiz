@@ -14,12 +14,12 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 
-import org.joda.time.Days;
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static org.threeten.bp.temporal.ChronoUnit.DAYS;
 
 public class LogView extends AppCompatActivity
 {
@@ -60,7 +60,7 @@ public class LogView extends AppCompatActivity
                 DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
                 output.setFromRecord(record);
 
-                graphSeries.appendData(new DataPoint(Days.daysBetween(startDate, record.date).getDays(),
+                graphSeries.appendData(new DataPoint(startDate.until(record.date, DAYS),
                         (record.correctAnswers / record.totalAnswers) * 100f), true, 1000, true);
 
                 if (isCancelled())
@@ -75,7 +75,7 @@ public class LogView extends AppCompatActivity
         protected void onProgressUpdate(DailyLogItem... item)
         {
             layout.addView(item[0], layout.getChildCount() - 1);
-            logGraph.getViewport().setMaxX(Days.daysBetween(startDate, item[0].getDate()).getDays());
+            logGraph.getViewport().setMaxX(startDate.until(item[0].getDate(), DAYS));
             logGraph.addSeries(graphSeries);
         }
 

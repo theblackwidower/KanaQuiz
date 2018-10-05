@@ -2,10 +2,10 @@ package com.noprestige.kanaquiz.logs;
 
 import android.database.Cursor;
 
-import org.joda.time.LocalDate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.threeten.bp.LocalDate;
 
 import java.io.IOException;
 

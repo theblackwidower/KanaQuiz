@@ -13,9 +13,11 @@ import android.view.View;
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.TextStyle;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class DailyLogItem extends View
 {
@@ -264,9 +266,9 @@ public class DailyLogItem extends View
         this.date = date;
 
 
-        dateString1 = date.toString("EEEE"); // Output day of week by full name
+        dateString1 = date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
 
-        dateString2 = date.toString("MMMM"); // Output month by full name
+        dateString2 = date.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
         dateString2 += " ";
         dateString2 += Integer.toString(date.getDayOfMonth());
 

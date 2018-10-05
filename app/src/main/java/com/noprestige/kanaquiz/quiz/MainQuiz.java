@@ -26,7 +26,7 @@ import com.noprestige.kanaquiz.questions.NoQuestionsException;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;

@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz.logs;
 
 import android.os.AsyncTask;
 
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import java.util.concurrent.ExecutionException;
 

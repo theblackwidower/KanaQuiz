@@ -1,6 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
-import org.joda.time.LocalDate;
+import org.threeten.bp.LocalDate;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
