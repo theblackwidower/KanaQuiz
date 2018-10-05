@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz;
 
 import android.content.Context;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
@@ -14,6 +15,7 @@ public abstract class AppTools
     {
         if (!isInitialized)
         {
+            AndroidThreeTen.init(context.getApplicationContext());
             OptionsControl.initialize(context.getApplicationContext());
             QuestionManagement.initialize(context.getApplicationContext());
             LogDatabase.initialize(context.getApplicationContext());
