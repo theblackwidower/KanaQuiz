@@ -63,9 +63,9 @@ public class KanaSelectionPage extends Fragment
     }
 
     @Override
-    public void onDestroyView()
+    public void onStop()
     {
-        super.onDestroyView();
+        super.onStop();
         //This block of code could also work in the onPause and onStop methods
         int count = screen.getChildCount();
         boolean[] record = new boolean[count];
