@@ -2,6 +2,8 @@ package com.noprestige.kanaquiz.logs;
 
 import android.database.Cursor;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +32,7 @@ public class LogMigrationTest
     {
         helper = new MigrationTestHelper(InstrumentationRegistry.getInstrumentation(),
                 LogDatabase.class.getCanonicalName(), new FrameworkSQLiteOpenHelperFactory());
+        AndroidThreeTen.init(InstrumentationRegistry.getContext());
     }
 
     @Test
