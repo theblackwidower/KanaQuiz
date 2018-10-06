@@ -32,7 +32,7 @@ public class LogMigrationTest
     {
         helper = new MigrationTestHelper(InstrumentationRegistry.getInstrumentation(),
                 LogDatabase.class.getCanonicalName(), new FrameworkSQLiteOpenHelperFactory());
-        AndroidThreeTen.init(InstrumentationRegistry.getContext());
+        AndroidThreeTen.init(InstrumentationRegistry.getTargetContext());
     }
 
     @Test
