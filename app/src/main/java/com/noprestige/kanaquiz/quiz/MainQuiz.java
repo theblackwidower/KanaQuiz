@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.AboutScreen;
-import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDao;
@@ -96,8 +95,6 @@ public class MainQuiz extends AppCompatActivity
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
 
         frmAnswer.setOnAnswerListener(this::checkAnswer);
-
-        AppTools.initializeManagers(getApplicationContext());
 
         resetQuiz();
         nextQuestion();

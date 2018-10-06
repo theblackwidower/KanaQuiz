@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 
 import org.threeten.bp.LocalDate;
@@ -105,8 +104,6 @@ public class LogView extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_view);
         onConfigurationChanged(getResources().getConfiguration());
-
-        AppTools.initializeManagers(getApplicationContext());
 
         fetchThread = new FetchLogs();
         fetchThread.execute(this);

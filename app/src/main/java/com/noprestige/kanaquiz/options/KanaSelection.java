@@ -3,7 +3,6 @@ package com.noprestige.kanaquiz.options;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
-import com.noprestige.kanaquiz.AppTools;
 import com.noprestige.kanaquiz.R;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +15,6 @@ public class KanaSelection extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabbed_screen);
-
-        AppTools.initializeManagers(getApplicationContext());
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new KanaSelectionPager(getSupportFragmentManager(), this));

@@ -22,7 +22,7 @@ public class AboutScreen extends AppCompatActivity
 
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);
 
-        if (!AppTools.isFirebaseInstalled())
+        if (!KanaQuiz.isFirebaseInstalled())
             ((ViewManager) findViewById(R.id.lblFirebaseDisclosure).getParent())
                     .removeView(findViewById(R.id.lblFirebaseDisclosure));
 
