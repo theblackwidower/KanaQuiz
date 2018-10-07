@@ -41,6 +41,9 @@ android {
             //TODO: Get this working.
             //manifestPlaceholders = [mainClassName:".KanaQuizPure"]
             versionNameSuffix '-pure'
+            //TODO: Disable plugins on specific builds, and reenable Proguard
+            minifyEnabled false
+            shrinkResources false
         }
     }
     compileOptions {
