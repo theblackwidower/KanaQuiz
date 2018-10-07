@@ -120,6 +120,7 @@
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>
+    <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
     <!-- Kana Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>

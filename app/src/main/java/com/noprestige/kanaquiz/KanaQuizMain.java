@@ -7,7 +7,7 @@ import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
-public class KanaQuiz extends Application
+public abstract class KanaQuizMain extends Application
 {
     @Override
     public void onCreate()
