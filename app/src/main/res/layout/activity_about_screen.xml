@@ -112,23 +112,23 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lblFirebaseDisclosure"
+                android:id="@+id/lblPrivacyDisclosure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/lblDisclosureStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/firebase_disclosure"
                     android:textSize="14sp"/>
 
                 <TextView
+                    android:id="@+id/lblDisclosureDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@string/firebase_details"
                     android:textSize="14sp"/>
 
                 <TextView

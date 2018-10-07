@@ -38,6 +38,9 @@
     <string name="firebase_disclosure">Includes Firebase analytics and Crashlytics crash reporting</string>
     <string name="firebase_details">Anonymous data will be transmitted to improve app development</string>
 
+    <string name="acra_disclosure">Includes ACRA crash reporting framework</string>
+    <string name="acra_details">In the event of a crash, an report can be instantly sent to the developer via email</string>
+
     <string name="privacy_policy">Privacy Policy</string>
 
     <!-- Log View -->

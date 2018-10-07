@@ -22,9 +22,19 @@ public class AboutScreen extends AppCompatActivity
 
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);
 
-        if (!KanaQuiz.isFirebaseInstalled())
-            ((ViewManager) findViewById(R.id.lblFirebaseDisclosure).getParent())
-                    .removeView(findViewById(R.id.lblFirebaseDisclosure));
+        if (KanaQuiz.isFirebaseInstalled())
+        {
+            ((TextView) findViewById(R.id.lblDisclosureStart)).setText(R.string.firebase_disclosure);
+            ((TextView) findViewById(R.id.lblDisclosureDetails)).setText(R.string.firebase_details);
+        }
+        else if (KanaQuiz.isAcraInstalled())
+        {
+            ((TextView) findViewById(R.id.lblDisclosureStart)).setText(R.string.acra_disclosure);
+            ((TextView) findViewById(R.id.lblDisclosureDetails)).setText(R.string.acra_details);
+        }
+        else
+            ((ViewManager) findViewById(R.id.lblPrivacyDisclosure).getParent())
+                    .removeView(findViewById(R.id.lblPrivacyDisclosure));
 
         String translatorCreditUrl = getResources().getString(R.string.translator_credit_url);
 

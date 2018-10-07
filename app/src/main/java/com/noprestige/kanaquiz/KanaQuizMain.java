@@ -32,4 +32,17 @@ public abstract class KanaQuizMain extends Application
             return false;
         }
     }
+
+    public static boolean isAcraInstalled()
+    {
+        try
+        {
+            Class.forName("org.acra.ACRA");
+            return true;
+        }
+        catch (ClassNotFoundException ex)
+        {
+            return false;
+        }
+    }
 }
