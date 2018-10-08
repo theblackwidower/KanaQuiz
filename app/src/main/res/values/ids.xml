@@ -2,4 +2,5 @@
 <resources>
     <item name="hiraganaReferenceViewPager" type="id"/>
     <item name="katakanaReferenceViewPager" type="id"/>
+    <item name="vocabularyReferenceViewPager" type="id"/>
 </resources>

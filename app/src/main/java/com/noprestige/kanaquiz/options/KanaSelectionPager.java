@@ -27,7 +27,7 @@ class KanaSelectionPager extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -39,6 +39,8 @@ class KanaSelectionPager extends FragmentPagerAdapter
                 return context.getResources().getString(R.string.hiragana);
             case 1:
                 return context.getResources().getString(R.string.katakana);
+            case 2:
+                return context.getResources().getString(R.string.vocabulary);
             default:
                 return "";
         }

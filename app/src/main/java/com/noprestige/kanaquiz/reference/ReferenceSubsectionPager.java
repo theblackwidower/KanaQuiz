@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
@@ -28,7 +29,14 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
 
         tabList = new ArrayList<>(3);
 
-        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+        if (kanaType.equals(context.getResources().getString(R.string.vocabulary)))
+        {
+            boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+            for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
+                if (isFullReference || VOCABULARY.getPref(i))
+                    tabList.add(VOCABULARY.getSetTitle(i).toString());
+        }
+        else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
             tabList.add(context.getResources().getString(R.string.base_form_title));
             tabList.add(context.getResources().getString(R.string.diacritics_title));

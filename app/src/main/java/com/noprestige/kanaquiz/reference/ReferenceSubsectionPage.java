@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class ReferenceSubsectionPage extends Fragment
 {
@@ -40,24 +41,33 @@ public class ReferenceSubsectionPage extends Fragment
 
         QuestionManagement questions;
 
-        if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
-            questions = HIRAGANA;
-        else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
-            questions = KATAKANA;
-        else
-            throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
-
-        if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
-            layout.addView(questions.getMainReferenceTable(container.getContext()));
-        else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
-            layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
-        else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
+        if (kanaType.equals(getContext().getResources().getString(R.string.vocabulary)))
         {
-            layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
-            if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
+            for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
+                if (refCategory.equals(VOCABULARY.getSetTitle(i).toString()))
+                    layout.addView(VOCABULARY.getVocabReferenceTable(container.getContext(), i));
+        }
+        else
+        {
+            if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
+                questions = HIRAGANA;
+            else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
+                questions = KATAKANA;
+            else
+                throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
+
+            if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
+                layout.addView(questions.getMainReferenceTable(container.getContext()));
+            else if (refCategory.equals(getContext().getResources().getString(R.string.diacritics_title)))
+                layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
+            else if (refCategory.equals(getContext().getResources().getString(R.string.digraphs_title)))
             {
-                layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
-                layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
+                layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
+                if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
+                {
+                    layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
+                    layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
+                }
             }
         }
 

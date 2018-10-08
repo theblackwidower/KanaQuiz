@@ -14,8 +14,10 @@
     <string name="no_questions">No Questions available</string>
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
-    <string name="request_text_input">Enter the Romanji equivalent</string>
-    <string name="request_multiple_choice">Select the Romanji equivalent</string>
+    <string name="request_kana_text_input">Enter the Romanji equivalent</string>
+    <string name="request_kana_multiple_choice">Select the Romanji equivalent</string>
+    <string name="request_vocab_text_input">Enter the English translation</string>
+    <string name="request_vocab_multiple_choice">Select the English translation</string>
     <string name="try_again">Try again</string>
     <string name="show_correct_answer">The correct answer is</string>
 
@@ -128,6 +130,7 @@
     <!-- Kana Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>
+    <string name="vocabulary">Vocabulary</string>
     <string name="set">set</string>
     <string name="set_1_title">Base %1$s</string>
     <string name="set_2_title" translatable="false">K/G %1$s</string>
@@ -144,6 +147,9 @@
     <string name="set_3_no_diacritics_title" translatable="false">S %1$s</string>
     <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
     <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
+
+    <string name="vocab_set_1_title">Intro %1$s</string>
+    <string name="vocab_set_2_title">Animals</string>
 
     <!-- SavedPreferences ID Codes -->
     <string name="prefid_hiragana_1" translatable="false">hiragana_set_1</string>
@@ -167,6 +173,9 @@
     <string name="prefid_katakana_8" translatable="false">katakana_set_8</string>
     <string name="prefid_katakana_9" translatable="false">katakana_set_9</string>
     <string name="prefid_katakana_10" translatable="false">katakana_set_10</string>
+
+    <string name="prefid_vocabulary_1" translatable="false">vocabulary_set_1</string>
+    <string name="prefid_vocabulary_2" translatable="false">vocabulary_set_2</string>
 
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
         the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with

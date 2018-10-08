@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferencePager extends FragmentPagerAdapter
 {
@@ -23,12 +24,13 @@ class ReferencePager extends FragmentPagerAdapter
     {
         super(fm);
 
-        tabList = new ArrayList<>(2);
+        tabList = new ArrayList<>(3);
 
         if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
             tabList.add(context.getResources().getString(R.string.hiragana));
             tabList.add(context.getResources().getString(R.string.katakana));
+            tabList.add(context.getResources().getString(R.string.vocabulary));
         }
         else
         {
@@ -36,6 +38,8 @@ class ReferencePager extends FragmentPagerAdapter
                 tabList.add(context.getResources().getString(R.string.hiragana));
             if (KATAKANA.anySelected())
                 tabList.add(context.getResources().getString(R.string.katakana));
+            if (VOCABULARY.anySelected())
+                tabList.add(context.getResources().getString(R.string.vocabulary));
         }
     }
 

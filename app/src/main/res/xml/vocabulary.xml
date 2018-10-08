@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions xmlns="https://www.noprestige.com"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+    <KanaSet prefId="@string/prefid_vocabulary_1"
+             setTitle="@string/vocab_set_1_title">
+        <WordQuestion romanji="Hai" kana="はい" answer="Yes"/>
+        <WordQuestion romanji="Iie" kana="いいえ" answer="No"/>
+        <WordQuestion romanji="Watashi" kana="わたし" answer="I"/>
+        <WordQuestion romanji="Anata" kana="あなた" answer="You"/>
+        <WordQuestion romanji="Pen" kana="ペン" answer="Pen"/> <!--Katakana-->
+        <WordQuestion romanji="Enpitsu" kana="えんぴつ" answer="Pencil"/>
+        <WordQuestion romanji="Tsukue" kana="つくえ" answer="Desk"/>
+        <WordQuestion romanji="Isu" kana="いす" answer="Chair"/>
+        <WordQuestion romanji="Hon" kana="ほん" answer="Book"/>
+        <WordQuestion romanji="Noto" kana="のと" answer="Notebook"/>
+    </KanaSet>
+    <KanaSet prefId="@string/prefid_vocabulary_2"
+             setTitle="@string/vocab_set_2_title">
+        <WordQuestion romanji="Inu" kana="いぬ" answer="Dog"/>
+        <WordQuestion romanji="Neko" kana="ねこ" answer="Cat"/>
+        <WordQuestion romanji="Uma" kana="うま" answer="Horse"/>
+        <WordQuestion romanji="Buta" kana="ぶた" answer="Pig"/>
+        <WordQuestion romanji="Ika" kana="いか" answer="Squid"/>
+        <WordQuestion romanji="Ahiru" kana="あひる" answer="Duck"/>
+        <WordQuestion romanji="Ushi" kana="うし" answer="Cow"/>
+        <WordQuestion romanji="Sakana" kana="さかな" answer="Fish"/>
+        <WordQuestion romanji="Tori" kana="とり" answer="Bird"/>
+        <WordQuestion romanji="Kame" kana="かめ" answer="Turtle"/>
+    </KanaSet>
+</Questions>

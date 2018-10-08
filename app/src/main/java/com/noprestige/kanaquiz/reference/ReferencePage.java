@@ -39,6 +39,8 @@ public class ReferencePage extends Fragment
             viewPager.setId(R.id.hiraganaReferenceViewPager);
         else if (kanaType.equals(getResources().getString(R.string.katakana)))
             viewPager.setId(R.id.katakanaReferenceViewPager);
+        else if (kanaType.equals(getResources().getString(R.string.vocabulary)))
+            viewPager.setId(R.id.vocabularyReferenceViewPager);
 
         viewPager.setAdapter(
                 new ReferenceSubsectionPager(getActivity().getSupportFragmentManager(), getContext(), kanaType));

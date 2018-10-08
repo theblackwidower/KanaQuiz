@@ -13,7 +13,7 @@ import java.util.TreeSet;
 public class KanaQuestionBank extends WeightedList<KanaQuestion>
 {
     private KanaQuestion currentQuestion;
-    private Set<String> fullAnswerList = new TreeSet<>(new GojuonOrder());
+    private Set<String> fullKanaAnswerList = new TreeSet<>(new GojuonOrder());
     private Map<String, WeightedList<String>> weightedAnswerListCache;
 
     private Set<String> basicAnswerList = new TreeSet<>(new GojuonOrder());
@@ -21,10 +21,18 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
     private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
 
+    private Set<String> wordAnswerList = new TreeSet<>(new GojuonOrder());
+
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions;
-    private int maxAnswerWeight = -1;
+    private int maxKanaAnswerWeight = -1;
+    private int maxWordAnswerWeight = -1;
+
+    public boolean isCurrentQuestionVocab()
+    {
+        return (currentQuestion instanceof WordQuestion);
+    }
 
     public void newQuestion() throws NoQuestionsException
     {
@@ -60,7 +68,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     {
         weightedAnswerListCache = null;
         previousQuestions = null;
-        maxAnswerWeight = -1;
+        maxKanaAnswerWeight = -1;
+        maxWordAnswerWeight = -1;
         if (questions != null)
         {
             boolean returnValue = true;
@@ -78,9 +87,13 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 if (weight < 2)
                     weight = 2;
                 // if any one of the additions fail, the method returns false
-                returnValue = add(weight, question) && fullAnswerList.add(question.fetchCorrectAnswer()) &&
-                        // Storing answers in specialized answer lists for more specialized answer selection
-                        getSpecialList(question).add(question.fetchCorrectAnswer()) && returnValue;
+                returnValue = add(weight, question) && returnValue;
+                if (question instanceof WordQuestion)
+                    returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+                else
+                    returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+                // Storing answers in specialized answer lists for more specialized answer selection
+                returnValue = getSpecialList(question).add(question.fetchCorrectAnswer()) && returnValue;
             }
             return returnValue;
         }
@@ -103,86 +116,70 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
     {
         weightedAnswerListCache = null;
         previousQuestions = null;
-        maxAnswerWeight = -1;
-        fullAnswerList.addAll(questions.fullAnswerList);
+        maxKanaAnswerWeight = -1;
+        maxWordAnswerWeight = -1;
+        fullKanaAnswerList.addAll(questions.fullKanaAnswerList);
         basicAnswerList.addAll(questions.basicAnswerList);
         diacriticAnswerList.addAll(questions.diacriticAnswerList);
         digraphAnswerList.addAll(questions.digraphAnswerList);
         diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
+        wordAnswerList.addAll(questions.wordAnswerList);
         return merge(questions);
     }
 
-    private int getMaxAnswerWeight()
+    private int getMaxKanaAnswerWeight()
     {
-        if (maxAnswerWeight < 0)
-        {
-            // Max value is to prevent integer overflow in the weighted answer list. Number is chosen so if every
-            // answer had this count (which is actually impossible because of the range restriction, but better to
-            // err on the side of caution) the resultant calculations of 2^count would not add up to an integer
-            // overflow.
-            maxAnswerWeight = (int) Math.floor(Math.log(Integer.MAX_VALUE / (fullAnswerList.size() - 1)) / Math.log(2));
-        }
-        return maxAnswerWeight;
+        if (maxKanaAnswerWeight < 0)
+            maxKanaAnswerWeight = getMaxAnswerWeight(fullKanaAnswerList);
+        return maxKanaAnswerWeight;
+    }
+
+    private int getMaxWordAnswerWeight()
+    {
+        if (maxWordAnswerWeight < 0)
+            maxWordAnswerWeight = getMaxAnswerWeight(wordAnswerList);
+        return maxWordAnswerWeight;
+    }
+
+    private int getMaxAnswerWeight(Set<String> list)
+    {
+        // Max value is to prevent integer overflow in the weighted answer list. Number is chosen so if every
+        // answer had this count (which is actually impossible because of the range restriction, but better to
+        // err on the side of caution) the resultant calculations of 2^count would not add up to an integer
+        // overflow.
+        return (int) Math.floor(Math.log(Integer.MAX_VALUE / (list.size() - 1)) / Math.log(2));
     }
 
     public String[] getPossibleAnswers()
     {
-        return getPossibleAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        return (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
+                getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
     }
 
-    public String[] getPossibleAnswers(int maxChoices)
+
+    public String[] getPossibleWordAnswers(int maxChoices)
     {
-        if (fullAnswerList.size() <= maxChoices)
-            return fullAnswerList.toArray(new String[0]);
+        if (wordAnswerList.size() <= maxChoices)
+            return wordAnswerList.toArray(new String[0]);
         else
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
             if (!weightedAnswerListCache.containsKey(getCurrentKana()))
             {
-                int maxCount = 0;
-                int minCount = Integer.MAX_VALUE;
-                Map<String, Float> answerCounts = new TreeMap<>();
-                for (String answer : fullAnswerList)
+                Map<String, Integer> answerCounts = new TreeMap<>();
+                for (String answer : wordAnswerList)
                 {
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
                         int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
-                        if (getSpecialList(currentQuestion).contains(getCurrentKana()))
-                            count += 2;
-                        maxCount = Math.max(maxCount, count);
-                        minCount = Math.min(minCount, count);
-                        answerCounts.put(answer, (float) count);
+                        answerCounts.put(answer, count);
                     }
                 }
 
-                // Because of the inherent properties of the power function used later, subtracting the same amount
-                // from each count so the lowest count is zero will not change the relative weight of each item. And
-                // doing so will also save the space I need to prevent overflow issues.
-                if (minCount > 0)
-                {
-                    maxCount -= minCount;
-                    for (String answer : answerCounts.keySet())
-                    {
-                        float newCount = answerCounts.remove(answer) - minCount;
-                        answerCounts.put(answer, newCount);
-                    }
-                }
-
-                if (maxCount > getMaxAnswerWeight())
-                {
-                    float controlFactor = getMaxAnswerWeight() / maxCount;
-                    for (String answer : answerCounts.keySet())
-                    {
-                        float newCount = answerCounts.remove(answer) * controlFactor;
-                        answerCounts.put(answer, newCount);
-                    }
-                }
-
-                WeightedList<String> weightedAnswerList = new WeightedList<>();
-                for (String answer : answerCounts.keySet())
-                    weightedAnswerList.add(Math.pow(2, answerCounts.get(answer)), answer);
+                WeightedList<String> weightedAnswerList =
+                        generateWeightedAnswerList(answerCounts, getMaxWordAnswerWeight());
 
                 weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
             }
@@ -197,5 +194,92 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
 
             return possibleAnswerStrings;
         }
+    }
+
+    public String[] getPossibleKanaAnswers(int maxChoices)
+    {
+        if (fullKanaAnswerList.size() <= maxChoices)
+            return fullKanaAnswerList.toArray(new String[0]);
+        else
+        {
+            if (weightedAnswerListCache == null)
+                weightedAnswerListCache = new TreeMap<>();
+            if (!weightedAnswerListCache.containsKey(getCurrentKana()))
+            {
+                Map<String, Integer> answerCounts = new TreeMap<>();
+                for (String answer : fullKanaAnswerList)
+                {
+                    if (!answer.equals(fetchCorrectAnswer()))
+                    {
+                        //fetch all data
+                        int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
+                        if (getSpecialList(currentQuestion).contains(getCurrentKana()))
+                            count += 2;
+                        answerCounts.put(answer, count);
+                    }
+                }
+
+                WeightedList<String> weightedAnswerList =
+                        generateWeightedAnswerList(answerCounts, getMaxKanaAnswerWeight());
+
+                weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
+            }
+
+            String[] possibleAnswerStrings =
+                    weightedAnswerListCache.get(getCurrentKana()).getRandom(new String[maxChoices - 1]);
+
+            possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
+            possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
+
+            GojuonOrder.sort(possibleAnswerStrings);
+
+            return possibleAnswerStrings;
+        }
+    }
+
+    private static WeightedList<String> generateWeightedAnswerList(Map<String, Integer> answerCounts,
+            int maxAnswerWeight)
+    {
+        int maxCount = 0;
+        int minCount = Integer.MAX_VALUE;
+
+        Map<String, Float> newAnswerCount = new TreeMap<>();
+
+        for (String answer : answerCounts.keySet())
+        {
+            int count = answerCounts.get(answer);
+            maxCount = Math.max(maxCount, count);
+            minCount = Math.min(minCount, count);
+            newAnswerCount.put(answer, (float) count);
+        }
+
+        // Because of the inherent properties of the power function used later, subtracting the same amount
+        // from each count so the lowest count is zero will not change the relative weight of each item. And
+        // doing so will also save the space I need to prevent overflow issues.
+        if (minCount > 0)
+        {
+            maxCount -= minCount;
+            for (String answer : newAnswerCount.keySet())
+            {
+                float newCount = newAnswerCount.remove(answer) - minCount;
+                newAnswerCount.put(answer, newCount);
+            }
+        }
+
+        if (maxCount > maxAnswerWeight)
+        {
+            float controlFactor = maxAnswerWeight / maxCount;
+            for (String answer : newAnswerCount.keySet())
+            {
+                float newCount = newAnswerCount.remove(answer) * controlFactor;
+                newAnswerCount.put(answer, newCount);
+            }
+        }
+
+        WeightedList<String> weightedAnswerList = new WeightedList<>();
+        for (String answer : newAnswerCount.keySet())
+            weightedAnswerList.add(Math.pow(2, newAnswerCount.get(answer)), answer);
+
+        return weightedAnswerList;
     }
 }

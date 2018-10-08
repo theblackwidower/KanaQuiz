@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -18,6 +19,7 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
+    public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
 
@@ -29,7 +31,7 @@ public class QuestionManagement
 
     private final String[] setNoDiacriticsTitles;
 
-    private int getCategoryCount()
+    public int getCategoryCount()
     {
         return categoryCount;
     }
@@ -58,7 +60,7 @@ public class QuestionManagement
         }
     }
 
-    private CharSequence getSetTitle(int number)
+    public CharSequence getSetTitle(int number)
     {
         return getSetTitle(number, OptionsControl.getBoolean(R.string.prefid_diacritics));
     }
@@ -101,6 +103,9 @@ public class QuestionManagement
 
         if (KATAKANA == null)
             KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
+
+        if (VOCABULARY == null)
+            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
     }
 
     public static KanaQuestionBank getFullQuestionBank()
@@ -108,10 +113,11 @@ public class QuestionManagement
         KanaQuestionBank bank = new KanaQuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
+        VOCABULARY.buildQuestionBank(bank);
         return bank;
     }
 
-    private boolean getPref(int number)
+    public boolean getPref(int number)
     {
         return OptionsControl.getBoolean(getPrefId(number));
     }
@@ -288,6 +294,19 @@ public class QuestionManagement
             }
 
         return table;
+    }
+
+    public View getVocabReferenceTable(Context context, int setNumber)
+    {
+        LinearLayout layout = new LinearLayout(context);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        KanaQuestion[] kanaSet = getKanaSet(setNumber, Diacritic.NO_DIACRITIC, false);
+
+        for (KanaQuestion question : kanaSet)
+            layout.addView(question.generateReference(context));
+
+        return layout;
     }
 
     public LinearLayout getSelectionScreen(Context context)

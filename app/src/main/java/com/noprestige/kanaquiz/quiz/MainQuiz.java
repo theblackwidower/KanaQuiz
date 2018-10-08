@@ -247,10 +247,17 @@ public class MainQuiz extends AppCompatActivity
     private void readyForAnswer()
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            lblResponse.setText(R.string.request_multiple_choice);
+            if (questionBank.isCurrentQuestionVocab())
+                lblResponse.setText(R.string.request_vocab_multiple_choice);
+            else
+                lblResponse.setText(R.string.request_kana_multiple_choice);
         else
         {
-            lblResponse.setText(R.string.request_text_input);
+            if (questionBank.isCurrentQuestionVocab())
+                lblResponse.setText(R.string.request_vocab_text_input);
+            else
+                lblResponse.setText(R.string.request_kana_text_input);
+
             frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
