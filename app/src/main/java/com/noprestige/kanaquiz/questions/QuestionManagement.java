@@ -2,6 +2,8 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -11,6 +13,8 @@ import com.noprestige.kanaquiz.options.KanaSelectionItem;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 import com.noprestige.kanaquiz.reference.ReferenceTable;
+
+import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,13 +302,20 @@ public class QuestionManagement
 
     public View getVocabReferenceTable(Context context, int setNumber)
     {
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
+        FlowLayout layout = new FlowLayout(context);
+        layout.setGravity(Gravity.FILL);
 
         KanaQuestion[] kanaSet = getKanaSet(setNumber, Diacritic.NO_DIACRITIC, false);
 
+        int padding = (int) TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+
         for (KanaQuestion question : kanaSet)
-            layout.addView(question.generateReference(context));
+        {
+            ReferenceCell cell = question.generateReference(context);
+            cell.setPadding(padding, 0, padding, 0);
+            layout.addView(cell);
+        }
 
         return layout;
     }
