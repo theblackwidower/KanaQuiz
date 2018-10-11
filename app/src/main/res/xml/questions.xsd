@@ -111,7 +111,7 @@
     <xs:simpleType name="kana">
         <xs:restriction base="text">
             <!-- ref: https://gist.github.com/terrancesnyder/1345094 -->
-            <xs:pattern value="[ぁ-んァ-ン]*"/>
+            <xs:pattern value="[ぁ-ゖ゙-ゟァ-ヿ]*"/>
         </xs:restriction>
     </xs:simpleType>
 
