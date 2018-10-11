@@ -128,4 +128,33 @@ public class KanaQuestion
             return ((charCode == 0x34) || (charCode == 0x3E));
         //two special characters at the end of the block, which I'm counting.
     }
+
+    enum KanaSystem
+    {
+        HIRAGANA,
+        KATAKANA,
+        DIACRITIC_MARK,
+        BOTH_KANA,
+        NO_KANA
+    }
+
+    public static KanaSystem whatKanaSystem(int charCode)
+    {
+        if ((charCode < 0x3041) || (charCode > 0x30FF))
+            return KanaSystem.NO_KANA; //not kana anyway
+        else if ((charCode <= 0x3096) || ((charCode >= 0x309D) && (charCode <= 0x309F)))
+            return KanaSystem.HIRAGANA;
+        else if (((charCode >= 0x30A1) && (charCode <= 0x30FA)) || (charCode >= 0x30FD))
+            return KanaSystem.KATAKANA;
+        else if ((charCode >= 0x3099) && (charCode <= 0x309C))
+            return KanaSystem.DIACRITIC_MARK;
+        else if (charCode == 0x30A0) // Double hyphen
+            return KanaSystem.BOTH_KANA;
+        else if (charCode == 0x30FC) // Prolonged sound mark
+            return KanaSystem.BOTH_KANA;
+        else if (charCode == 0x30FB) // Middle Dot
+            return KanaSystem.KATAKANA;
+        else
+            return KanaSystem.NO_KANA; //possibly a reserved character in the block
+    }
 }
