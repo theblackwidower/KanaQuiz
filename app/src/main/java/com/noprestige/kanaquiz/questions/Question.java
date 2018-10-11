@@ -18,10 +18,10 @@ public abstract class Question
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);
-        cell.setKana(getQuestionText());
-        cell.setRomanji(fetchCorrectAnswer());
+        cell.setSubject(getQuestionText());
+        cell.setDescription(fetchCorrectAnswer());
         if (getQuestionText().length() > 1)
-            cell.setKanaSize(TypedValue
+            cell.setSubjectSize(TypedValue
                     .applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
         return cell;
     }

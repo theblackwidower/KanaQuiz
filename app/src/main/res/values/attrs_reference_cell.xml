@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ReferenceCell">
-        <attr name="kana" format="string"/>
-        <attr name="romanji" format="string"/>
-        <attr name="kanaSize" format="dimension"/>
-        <attr name="romanjiSize" format="dimension"/>
+        <attr name="subject" format="string"/>
+        <attr name="description" format="string"/>
+        <attr name="subjectSize" format="dimension"/>
+        <attr name="descriptionSize" format="dimension"/>
         <attr name="colour" format="color"/>
     </declare-styleable>
 </resources>

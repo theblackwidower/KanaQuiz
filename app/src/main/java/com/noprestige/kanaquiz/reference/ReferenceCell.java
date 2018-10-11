@@ -22,22 +22,22 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class ReferenceCell extends View
 {
-    private String kana;
-    private String romanji;
+    private String subject;
+    private String description;
 
-    private TextPaint kanaPaint = new TextPaint();
-    private TextPaint romanjiPaint = new TextPaint();
+    private TextPaint subjectPaint = new TextPaint();
+    private TextPaint descriptionPaint = new TextPaint();
 
-    private float kanaXPoint;
-    private float kanaYPoint;
-    private float romanjiXPoint;
-    private float romanjiYPoint;
+    private float subjectXPoint;
+    private float subjectYPoint;
+    private float descriptionXPoint;
+    private float descriptionYPoint;
 
-    private float kanaWidth;
-    private float romanjiWidth;
+    private float subjectWidth;
+    private float descriptionWidth;
 
-    private float kanaHeight;
-    private float romanjiHeight;
+    private float subjectHeight;
+    private float descriptionHeight;
 
     private static TypedArray defaultAttributes;
 
@@ -68,11 +68,11 @@ public class ReferenceCell extends View
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
-        setKana(a.getString(R.styleable.ReferenceCell_kana));
-        setRomanji(a.getString(R.styleable.ReferenceCell_romanji));
-        setKanaSize(a.getDimension(R.styleable.ReferenceCell_kanaSize,
+        setSubject(a.getString(R.styleable.ReferenceCell_subject));
+        setDescription(a.getString(R.styleable.ReferenceCell_description));
+        setSubjectSize(a.getDimension(R.styleable.ReferenceCell_subjectSize,
                 TypedValue.applyDimension(COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
-        setRomanjiSize(a.getDimension(R.styleable.ReferenceCell_romanjiSize,
+        setDescriptionSize(a.getDimension(R.styleable.ReferenceCell_descriptionSize,
                 TypedValue.applyDimension(COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
         setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
 
@@ -80,14 +80,14 @@ public class ReferenceCell extends View
 
         setOnLongClickListener(view -> copyItem());
 
-        kanaPaint.setAntiAlias(true);
-        romanjiPaint.setAntiAlias(true);
+        subjectPaint.setAntiAlias(true);
+        descriptionPaint.setAntiAlias(true);
     }
 
     private boolean copyItem()
     {
         //TODO: Allow the ability to select and copy multiple items at once.
-        String data = kana + " - " + romanji;
+        String data = subject + " - " + description;
         ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setPrimaryClip(ClipData.newPlainText("Kana Reference", data));
 
@@ -104,20 +104,21 @@ public class ReferenceCell extends View
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
         int contentHeight = height - getPaddingTop() - getPaddingBottom();
 
-        float fullHeight = kanaHeight + romanjiHeight;
+        float fullHeight = subjectHeight + descriptionHeight;
 
-        kanaXPoint = getPaddingLeft() + ((contentWidth - kanaWidth) / 2);
-        kanaYPoint = getPaddingTop() + (((contentHeight - fullHeight) / 2) - kanaPaint.getFontMetrics().ascent);
-        romanjiXPoint = getPaddingLeft() + ((contentWidth - romanjiWidth) / 2);
-        romanjiYPoint = getPaddingTop() + (((contentHeight + fullHeight) / 2) - romanjiPaint.getFontMetrics().descent);
+        subjectXPoint = getPaddingLeft() + ((contentWidth - subjectWidth) / 2);
+        subjectYPoint = getPaddingTop() + (((contentHeight - fullHeight) / 2) - subjectPaint.getFontMetrics().ascent);
+        descriptionXPoint = getPaddingLeft() + ((contentWidth - descriptionWidth) / 2);
+        descriptionYPoint =
+                getPaddingTop() + (((contentHeight + fullHeight) / 2) - descriptionPaint.getFontMetrics().descent);
     }
 
     //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
-        int desiredWidth = Math.round(Math.max(kanaWidth, romanjiWidth)) + getPaddingLeft() + getPaddingRight();
-        int desiredHeight = Math.round(kanaHeight + romanjiHeight) + getPaddingTop() + getPaddingBottom();
+        int desiredWidth = Math.round(Math.max(subjectWidth, descriptionWidth)) + getPaddingLeft() + getPaddingRight();
+        int desiredHeight = Math.round(subjectHeight + descriptionHeight) + getPaddingTop() + getPaddingBottom();
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
@@ -144,66 +145,66 @@ public class ReferenceCell extends View
     {
         super.onDraw(canvas);
 
-        canvas.drawText(kana, kanaXPoint, kanaYPoint, kanaPaint);
-        canvas.drawText(romanji, romanjiXPoint, romanjiYPoint, romanjiPaint);
+        canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
+        canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
     }
 
-    public String getKana()
+    public String getSubject()
     {
-        return kana;
+        return subject;
     }
 
-    public float getKanaSize()
+    public float getSubjectSize()
     {
-        return kanaPaint.getTextSize();
+        return subjectPaint.getTextSize();
     }
 
-    public String getRomanji()
+    public String getDescription()
     {
-        return romanji;
+        return description;
     }
 
-    public float getRomanjiSize()
+    public float getDescriptionSize()
     {
-        return romanjiPaint.getTextSize();
+        return descriptionPaint.getTextSize();
     }
 
     public int getColour()
     {
-        return kanaPaint.getColor();
-        //return romanjiPaint.getColor();
+        return subjectPaint.getColor();
+        //return descriptionPaint.getColor();
     }
 
-    public void setKana(String kana)
+    public void setSubject(String subject)
     {
-        this.kana = (kana == null) ? "" : kana;
-        kanaWidth = kanaPaint.measureText(this.kana);
+        this.subject = (subject == null) ? "" : subject;
+        subjectWidth = subjectPaint.measureText(this.subject);
     }
 
-    public void setKanaSize(float kanaSize)
+    public void setSubjectSize(float subjectSize)
     {
-        kanaPaint.setTextSize(kanaSize);
-        kanaHeight = kanaPaint.getFontMetrics().descent - kanaPaint.getFontMetrics().ascent;
-        kanaWidth = kanaPaint.measureText(kana);
+        subjectPaint.setTextSize(subjectSize);
+        subjectHeight = subjectPaint.getFontMetrics().descent - subjectPaint.getFontMetrics().ascent;
+        subjectWidth = subjectPaint.measureText(subject);
     }
 
-    public void setRomanji(String romanji)
+    public void setDescription(String description)
     {
-        this.romanji = (romanji == null) ? "" : romanji;
-        romanjiWidth = romanjiPaint.measureText(this.romanji);
+        this.description = (description == null) ? "" : description;
+        descriptionWidth = descriptionPaint.measureText(this.description);
     }
 
-    public void setRomanjiSize(float romanjiSize)
+    public void setDescriptionSize(float descriptionSize)
     {
-        romanjiPaint.setTextSize(romanjiSize);
-        romanjiHeight = romanjiPaint.getFontMetrics().descent - romanjiPaint.getFontMetrics().ascent;
-        romanjiWidth = romanjiPaint.measureText(romanji);
+        descriptionPaint.setTextSize(descriptionSize);
+        descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
+        descriptionWidth = descriptionPaint.measureText(description);
     }
 
     public void setColour(int colour)
     {
-        kanaPaint.setColor(colour);
-        romanjiPaint.setColor(colour);
+        subjectPaint.setColor(colour);
+        descriptionPaint.setColor(colour);
     }
 
     public static TableRow buildSpecialRow(Context context, Question[] questions)
