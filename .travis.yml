@@ -42,7 +42,7 @@ after_success:
   #codecov reporting
   - bash <(curl -s https://codecov.io/bash)
   #Code Climate coverage reporting
-  - export JACOCO_SOURCE_PATH="app/src/main/java/ app/build/generated/source/apt/debug/"
+  - export JACOCO_SOURCE_PATH="app/src/main/java/ app/src/debug/java/ app/build/generated/source/apt/debug/"
   - ./cc-test-reporter format-coverage -t jacoco -o app/build/reports/jacoco/debug/jacoco.json app/build/reports/jacoco/debug/jacoco.xml
   - ./cc-test-reporter format-coverage -t jacoco -o app/build/reports/coverage/debug/report.json app/build/reports/coverage/debug/report.xml
   - ./cc-test-reporter sum-coverage -o app/build/reports/climatecoverage.json -p 2 app/build/reports/jacoco/debug/jacoco.json app/build/reports/coverage/debug/report.json
