@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.questions.KanaQuestion;
+import com.noprestige.kanaquiz.questions.Question;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
@@ -206,7 +206,7 @@ public class ReferenceCell extends View
         romanjiPaint.setColor(colour);
     }
 
-    public static TableRow buildSpecialRow(Context context, KanaQuestion[] questions)
+    public static TableRow buildSpecialRow(Context context, Question[] questions)
     {
         if (questions == null)
             return null;
@@ -243,14 +243,14 @@ public class ReferenceCell extends View
                     row.addView(questions[3].generateReference(context));
                     break;
                 default:
-                    for (KanaQuestion question : questions)
+                    for (Question question : questions)
                         row.addView(question.generateReference(context));
             }
             return row;
         }
     }
 
-    public static TableRow buildRow(Context context, KanaQuestion[] questions)
+    public static TableRow buildRow(Context context, Question[] questions)
     {
         if (questions == null)
             return null;
@@ -258,7 +258,7 @@ public class ReferenceCell extends View
         {
             TableRow row = new TableRow(context);
 
-            for (KanaQuestion question : questions)
+            for (Question question : questions)
                 row.addView(question.generateReference(context));
 
             return row;

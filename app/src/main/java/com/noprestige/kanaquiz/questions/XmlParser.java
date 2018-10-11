@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 abstract class XmlParser
 {
-    static void parseXmlDocument(int xmlRefId, Resources resources, List<KanaQuestion[][][]> kanaSetList,
+    static void parseXmlDocument(int xmlRefId, Resources resources, List<Question[][][]> kanaSetList,
             List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
@@ -40,8 +40,8 @@ abstract class XmlParser
         }
     }
 
-    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
-            List<KanaQuestion[][][]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
+    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources, List<Question[][][]> kanaSetList,
+            List<String> prefIdList, List<String> setTitleList,
             List<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
@@ -72,9 +72,9 @@ abstract class XmlParser
 
         int indexPoint = kanaSetList.size();
 
-        kanaSetList.add(new KanaQuestion[Diacritic.values().length][2][]);
+        kanaSetList.add(new Question[Diacritic.values().length][2][]);
 
-        List<KanaQuestion> currentSet = new ArrayList<>();
+        List<Question> currentSet = new ArrayList<>();
 
         int lineNumber = parser.getLineNumber();
 
@@ -101,7 +101,7 @@ abstract class XmlParser
     }
 
     private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            List<KanaQuestion[][][]> kanaSetList, int indexPoint)
+            List<Question[][][]> kanaSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -126,7 +126,7 @@ abstract class XmlParser
 
         int lineNumber = parser.getLineNumber();
 
-        List<KanaQuestion> currentSet = new ArrayList<>();
+        List<Question> currentSet = new ArrayList<>();
 
         for (int eventType = parser.getEventType();
                 !((eventType == XmlPullParser.END_TAG) && "Section".equalsIgnoreCase(parser.getName()));
@@ -141,11 +141,11 @@ abstract class XmlParser
         parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
     }
 
-    private static void parseXmlStoreSet(List<KanaQuestion> currentSet, List<KanaQuestion[][][]> kanaSetList,
+    private static void parseXmlStoreSet(List<Question> currentSet, List<Question[][][]> kanaSetList,
             int indexPoint, Diacritic diacritics, boolean isDigraphs)
     {
-        KanaQuestion[][][] pulledArray = kanaSetList.get(indexPoint);
-        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new KanaQuestion[0]);
+        Question[][][] pulledArray = kanaSetList.get(indexPoint);
+        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new Question[0]);
         kanaSetList.set(indexPoint, pulledArray);
     }
 
@@ -205,14 +205,7 @@ abstract class XmlParser
         if ((thisRomanji == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in WordQuestion", 0);
 
-        WordQuestion question = new WordQuestion(thisRomanji, thisAnswer);
-
-        if (thisKana != null)
-            question.setKana(thisKana);
-        if (thisKanji != null)
-            question.setKanji(thisKanji);
-
-        return question;
+        return new WordQuestion(thisRomanji, thisAnswer, thisKana, thisKanji);
     }
 
     private static TreeMap<RomanizationSystem, String> parseXmlAltAnswers(XmlPullParser parser)

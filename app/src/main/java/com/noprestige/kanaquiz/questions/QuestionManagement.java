@@ -27,7 +27,7 @@ public class QuestionManagement
 
     private final int categoryCount;
 
-    private final KanaQuestion[][][][] kanaSets;
+    private final Question[][][][] kanaSets;
 
     private final String[] prefIds;
 
@@ -40,7 +40,7 @@ public class QuestionManagement
         return categoryCount;
     }
 
-    private KanaQuestion[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
+    private Question[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
     {
         try
         {
@@ -84,7 +84,7 @@ public class QuestionManagement
 
     public QuestionManagement(int xmlRefId, Resources resources)
     {
-        List<KanaQuestion[][][]> kanaSetList = new ArrayList<>();
+        List<Question[][][]> kanaSetList = new ArrayList<>();
         List<String> prefIdList = new ArrayList<>();
         List<String> setTitleList = new ArrayList<>();
         List<String> setNoDiacriticsTitleList = new ArrayList<>();
@@ -94,7 +94,7 @@ public class QuestionManagement
 
         categoryCount = kanaSetList.size();
 
-        kanaSets = kanaSetList.toArray(new KanaQuestion[0][][][]);
+        kanaSets = kanaSetList.toArray(new Question[0][][][]);
         prefIds = prefIdList.toArray(new String[0]);
         setTitles = setTitleList.toArray(new String[0]);
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
@@ -112,9 +112,9 @@ public class QuestionManagement
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
     }
 
-    public static KanaQuestionBank getFullQuestionBank()
+    public static QuestionBank getFullQuestionBank()
     {
-        KanaQuestionBank bank = new KanaQuestionBank();
+        QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
@@ -126,14 +126,14 @@ public class QuestionManagement
         return OptionsControl.getBoolean(getPrefId(number));
     }
 
-    public KanaQuestionBank getQuestionBank()
+    public QuestionBank getQuestionBank()
     {
-        KanaQuestionBank questionBank = new KanaQuestionBank();
+        QuestionBank questionBank = new QuestionBank();
         buildQuestionBank(questionBank);
         return questionBank;
     }
 
-    public void buildQuestionBank(KanaQuestionBank questionBank)
+    public void buildQuestionBank(QuestionBank questionBank)
     {
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
@@ -205,11 +205,11 @@ public class QuestionManagement
     private String getKanaSetDisplay(int setNumber, Diacritic diacritic)
     {
         StringBuilder returnValue = new StringBuilder();
-        KanaQuestion[] kanaSet = getKanaSet(setNumber, diacritic, false);
+        Question[] kanaSet = getKanaSet(setNumber, diacritic, false);
         if (kanaSet != null)
-            for (KanaQuestion question : kanaSet)
+            for (Question question : kanaSet)
             {
-                returnValue.append(question.getKana());
+                returnValue.append(question.getQuestionText());
                 returnValue.append(' ');
             }
         return returnValue.toString();
@@ -305,12 +305,12 @@ public class QuestionManagement
         FlowLayout layout = new FlowLayout(context);
         layout.setGravity(Gravity.FILL);
 
-        KanaQuestion[] kanaSet = getKanaSet(setNumber, Diacritic.NO_DIACRITIC, false);
+        Question[] kanaSet = getKanaSet(setNumber, Diacritic.NO_DIACRITIC, false);
 
         int padding = (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
 
-        for (KanaQuestion question : kanaSet)
+        for (Question question : kanaSet)
         {
             ReferenceCell cell = question.generateReference(context);
             cell.setPadding(padding, 0, padding, 0);

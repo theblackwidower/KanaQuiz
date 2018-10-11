@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
-import com.noprestige.kanaquiz.questions.KanaQuestionBank;
+import com.noprestige.kanaquiz.questions.QuestionBank;
 
 import java.text.DecimalFormat;
 
@@ -102,7 +102,7 @@ public class AnswerFrame extends LinearLayout
         }
     }
 
-    public void setMultipleChoices(KanaQuestionBank questionBank)
+    public void setMultipleChoices(QuestionBank questionBank)
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
             btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());

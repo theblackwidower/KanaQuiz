@@ -2,7 +2,7 @@ package com.noprestige.kanaquiz.questions;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
+class QuestionRecord extends ArrayBlockingQueue<Question>
 {
     QuestionRecord(int capacity)
     {
@@ -10,7 +10,7 @@ class QuestionRecord extends ArrayBlockingQueue<KanaQuestion>
     }
 
     @Override
-    public boolean add(KanaQuestion question)
+    public boolean add(Question question)
     {
         if (contains(question))
             return false;

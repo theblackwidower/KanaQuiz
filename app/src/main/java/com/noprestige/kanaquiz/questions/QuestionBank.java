@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class KanaQuestionBank extends WeightedList<KanaQuestion>
+public class QuestionBank extends WeightedList<Question>
 {
-    private KanaQuestion currentQuestion;
+    private Question currentQuestion;
     private Set<String> fullKanaAnswerList = new TreeSet<>(new GojuonOrder());
     private Map<String, WeightedList<String>> weightedAnswerListCache;
 
@@ -49,9 +49,9 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
             throw new NoQuestionsException();
     }
 
-    public String getCurrentKana()
+    public String getCurrentQuestionText()
     {
-        return currentQuestion.getKana();
+        return currentQuestion.getQuestionText();
     }
 
     public boolean checkCurrentAnswer(String response)
@@ -64,7 +64,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         return currentQuestion.fetchCorrectAnswer();
     }
 
-    public boolean addQuestions(KanaQuestion[] questions)
+    public boolean addQuestions(Question[] questions)
     {
         weightedAnswerListCache = null;
         previousQuestions = null;
@@ -73,10 +73,10 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         if (questions != null)
         {
             boolean returnValue = true;
-            for (KanaQuestion question : questions)
+            for (Question question : questions)
             {
                 // Fetches the percentage of times the user got a kana right,
-                Float percentage = LogDao.getKanaPercentage(question.getKana());
+                Float percentage = LogDao.getKanaPercentage(question.toString());
                 if (percentage == null)
                     percentage = 0.1f;
                 // The 1f is to invert the value so we get the number of times they got it wrong,
@@ -90,10 +90,13 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 returnValue = add(weight, question) && returnValue;
                 if (question instanceof WordQuestion)
                     returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                else
+                else if (question instanceof KanaQuestion)
+                {
                     returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                // Storing answers in specialized answer lists for more specialized answer selection
-                returnValue = getSpecialList(question).add(question.fetchCorrectAnswer()) && returnValue;
+                    // Storing answers in specialized answer lists for more specialized answer selection
+                    returnValue =
+                            getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
+                }
             }
             return returnValue;
         }
@@ -112,7 +115,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
             return basicAnswerList;
     }
 
-    public boolean addQuestions(KanaQuestionBank questions)
+    public boolean addQuestions(QuestionBank questions)
     {
         weightedAnswerListCache = null;
         previousQuestions = null;
@@ -165,7 +168,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(getCurrentKana()))
+            if (!weightedAnswerListCache.containsKey(currentQuestion.toString()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : wordAnswerList)
@@ -173,7 +176,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.toString(), answer);
                         answerCounts.put(answer, count);
                     }
                 }
@@ -181,11 +184,11 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxWordAnswerWeight());
 
-                weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
+                weightedAnswerListCache.put(currentQuestion.toString(), weightedAnswerList);
             }
 
             String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(getCurrentKana()).getRandom(new String[maxChoices - 1]);
+                    weightedAnswerListCache.get(currentQuestion.toString()).getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
@@ -204,7 +207,7 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(getCurrentKana()))
+            if (!weightedAnswerListCache.containsKey(currentQuestion.toString()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : fullKanaAnswerList)
@@ -212,8 +215,8 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(getCurrentKana(), answer);
-                        if (getSpecialList(currentQuestion).contains(getCurrentKana()))
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.toString(), answer);
+                        if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.toString()))
                             count += 2;
                         answerCounts.put(answer, count);
                     }
@@ -222,11 +225,11 @@ public class KanaQuestionBank extends WeightedList<KanaQuestion>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxKanaAnswerWeight());
 
-                weightedAnswerListCache.put(getCurrentKana(), weightedAnswerList);
+                weightedAnswerListCache.put(currentQuestion.toString(), weightedAnswerList);
             }
 
             String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(getCurrentKana()).getRandom(new String[maxChoices - 1]);
+                    weightedAnswerListCache.get(currentQuestion.toString()).getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();

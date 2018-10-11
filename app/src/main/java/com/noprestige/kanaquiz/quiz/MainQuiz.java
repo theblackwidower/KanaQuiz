@@ -20,8 +20,8 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.KanaSelection;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
-import com.noprestige.kanaquiz.questions.KanaQuestionBank;
 import com.noprestige.kanaquiz.questions.NoQuestionsException;
+import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
@@ -42,7 +42,7 @@ public class MainQuiz extends AppCompatActivity
     float totalCorrect;
     private boolean canSubmit;
 
-    private KanaQuestionBank questionBank;
+    private QuestionBank questionBank;
 
     private TextView lblResponse;
     private TextView lblDisplayKana;
@@ -154,7 +154,7 @@ public class MainQuiz extends AppCompatActivity
         try
         {
             questionBank.newQuestion();
-            lblDisplayKana.setText(questionBank.getCurrentKana());
+            lblDisplayKana.setText(questionBank.getCurrentQuestionText());
             retryCount = 0;
             frmAnswer.setMultipleChoices(questionBank);
             readyForAnswer();

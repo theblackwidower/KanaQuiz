@@ -1,36 +1,41 @@
 package com.noprestige.kanaquiz.questions;
 
-public class WordQuestion extends KanaQuestion
+public class WordQuestion extends Question
 {
-    private String romanji;
-    private String kana;
-    private String kanji;
-    private String answer;
+    private final String romanji;
+    private final String kana;
+    private final String kanji;
+    private final String answer;
 
-    public WordQuestion(String romanji, String answer)
+    public WordQuestion(String romanji, String answer, String kana, String kanji)
     {
-        super(romanji, answer);
-    }
-
-    public void setKana(String kana)
-    {
-        this.kana = kana;
-    }
-
-    public void setKanji(String kanji)
-    {
-        this.kanji = kanji;
+        this.romanji = romanji.trim();
+        this.answer = answer.trim();
+        this.kana = (kana != null) ? kana.trim() : null;
+        this.kanji = (kanji != null) ? kanji.trim() : null;
     }
 
     @Override
-    public boolean isDiacritic()
+    public String getQuestionText()
     {
-        return false;
+        return romanji;
     }
 
     @Override
-    public boolean isDigraph()
+    boolean checkAnswer(String response)
     {
-        return false;
+        return answer.trim().equalsIgnoreCase(response.trim());
+    }
+
+    @Override
+    String fetchCorrectAnswer()
+    {
+        return answer;
+    }
+
+    @Override
+    public String toString()
+    {
+        return romanji;
     }
 }
