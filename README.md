@@ -41,6 +41,8 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Multiple fonts
   * Obsolete kana option
   * Improved multiple choice answer selection
+  * Finer question selection feature
+  * User-made question lists
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
