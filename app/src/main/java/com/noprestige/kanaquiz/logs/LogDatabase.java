@@ -12,7 +12,7 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {DailyRecord.class, KanaRecord.class, IncorrectAnswerRecord.class}, version = 3)
+@Database(entities = {DailyRecord.class, QuestionRecord.class, IncorrectAnswerRecord.class}, version = 3)
 @TypeConverters(LogTypeConversion.class)
 public abstract class LogDatabase extends RoomDatabase
 {

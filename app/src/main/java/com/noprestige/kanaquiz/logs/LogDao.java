@@ -19,15 +19,15 @@ public abstract class LogDao
         @Override
         protected Float doInBackground(String... data)
         {
-            String kana = data[0];
-            KanaRecord[] records = LogDatabase.DAO.getKanaRecord(kana);
+            String question = data[0];
+            QuestionRecord[] records = LogDatabase.DAO.getQuestionRecord(question);
             if (records.length <= 0)
                 return null;
             else
             {
                 int totalCorrect = 0;
                 int totalIncorrect = 0;
-                for (KanaRecord record : records)
+                for (QuestionRecord record : records)
                 {
                     totalCorrect += record.correctAnswers;
                     totalIncorrect += record.incorrectAnswers;
@@ -42,9 +42,9 @@ public abstract class LogDao
         @Override
         protected Integer doInBackground(String... data)
         {
-            String kana = data[0];
-            String romanji = data[1];
-            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(kana, romanji);
+            String question = data[0];
+            String answer = data[1];
+            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(question, answer);
             if (records.length <= 0)
                 return 0;
             else
@@ -62,10 +62,10 @@ public abstract class LogDao
         @Override
         protected Void doInBackground(String... data)
         {
-            String kana = data[0];
+            String question = data[0];
 
             addTodaysRecord(1);
-            addKanaRecord(kana, true);
+            addQuestionRecord(question, true);
 
             return null;
         }
@@ -76,12 +76,12 @@ public abstract class LogDao
         @Override
         protected Void doInBackground(String... data)
         {
-            String kana = data[0];
-            String romanji = data[1];
+            String question = data[0];
+            String answer = data[1];
 
             addTodaysRecord(0);
-            addKanaRecord(kana, false);
-            addIncorrectAnswerRecord(kana, romanji);
+            addQuestionRecord(question, false);
+            addIncorrectAnswerRecord(question, answer);
 
             return null;
         }
@@ -92,11 +92,11 @@ public abstract class LogDao
         @Override
         protected Void doInBackground(String... data)
         {
-            String kana = data[0];
+            String question = data[0];
             float score = Float.parseFloat(data[1]);
 
             addTodaysRecord(score);
-            addKanaRecord(kana, false);
+            addQuestionRecord(question, false);
 
             return null;
         }
@@ -107,10 +107,10 @@ public abstract class LogDao
         @Override
         protected Void doInBackground(String... data)
         {
-            String kana = data[0];
-            String romanji = data[1];
+            String question = data[0];
+            String answer = data[1];
 
-            addIncorrectAnswerRecord(kana, romanji);
+            addIncorrectAnswerRecord(question, answer);
 
             return null;
         }
@@ -119,32 +119,32 @@ public abstract class LogDao
     @Query("SELECT * FROM daily_record WHERE date = :date")
     public abstract DailyRecord getDateRecord(LocalDate date);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :kana")
-    abstract KanaRecord[] getKanaRecord(String kana);
+    @Query("SELECT * FROM kana_records WHERE kana = :question")
+    abstract QuestionRecord[] getQuestionRecord(String question);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji")
-    abstract IncorrectAnswerRecord[] getAnswerRecord(String kana, String romanji);
+    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer")
+    abstract IncorrectAnswerRecord[] getAnswerRecord(String question, String answer);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :kana AND date = :date")
-    abstract KanaRecord getDaysKanaRecord(String kana, LocalDate date);
+    @Query("SELECT * FROM kana_records WHERE kana = :question AND date = :date")
+    abstract QuestionRecord getDaysQuestionRecord(String question, LocalDate date);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :kana AND incorrect_romanji = :romanji AND date = :date")
-    abstract IncorrectAnswerRecord getDaysAnswerRecord(String kana, String romanji, LocalDate date);
+    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer AND date = :date")
+    abstract IncorrectAnswerRecord getDaysAnswerRecord(String question, String answer, LocalDate date);
 
     @Query("SELECT * FROM daily_record")
     abstract DailyRecord[] getAllDailyRecords();
 
     @Query("SELECT * FROM kana_records")
-    abstract KanaRecord[] getAllKanaRecords();
+    abstract QuestionRecord[] getAllQuestionRecords();
 
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public static Float getKanaPercentage(String kana)
+    public static Float getKanaPercentage(String question)
     {
         try
         {
-            return new GetKanaPercentage().execute(kana).get();
+            return new GetKanaPercentage().execute(question).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {
@@ -154,11 +154,11 @@ public abstract class LogDao
         }
     }
 
-    public static int getIncorrectAnswerCount(String kana, String romanji)
+    public static int getIncorrectAnswerCount(String question, String answer)
     {
         try
         {
-            return new GetIncorrectAnswerCount().execute(kana, romanji).get();
+            return new GetIncorrectAnswerCount().execute(question, answer).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {
@@ -184,27 +184,27 @@ public abstract class LogDao
         LogDatabase.DAO.updateDailyRecord(record);
     }
 
-    static void addKanaRecord(String kana, boolean isCorrect)
+    static void addQuestionRecord(String question, boolean isCorrect)
     {
-        KanaRecord record = LogDatabase.DAO.getDaysKanaRecord(kana, LocalDate.now());
+        QuestionRecord record = LogDatabase.DAO.getDaysQuestionRecord(question, LocalDate.now());
         if (record == null)
         {
-            record = new KanaRecord(kana);
-            LogDatabase.DAO.insertKanaRecord(record);
+            record = new QuestionRecord(question);
+            LogDatabase.DAO.insertQuestionRecord(record);
         }
         if (isCorrect)
             record.correctAnswers++;
         else
             record.incorrectAnswers++;
-        LogDatabase.DAO.updateKanaRecord(record);
+        LogDatabase.DAO.updateQuestionRecord(record);
     }
 
-    static void addIncorrectAnswerRecord(String kana, String romanji)
+    static void addIncorrectAnswerRecord(String question, String answer)
     {
-        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(kana, romanji, LocalDate.now());
+        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(question, answer, LocalDate.now());
         if (record == null)
         {
-            record = new IncorrectAnswerRecord(kana, romanji);
+            record = new IncorrectAnswerRecord(question, answer);
             LogDatabase.DAO.insertIncorrectAnswer(record);
         }
         else
@@ -214,31 +214,31 @@ public abstract class LogDao
         }
     }
 
-    public static void reportCorrectAnswer(String kana)
+    public static void reportCorrectAnswer(String question)
     {
-        new ReportCorrectAnswer().execute(kana);
+        new ReportCorrectAnswer().execute(question);
     }
 
-    public static void reportIncorrectAnswer(String kana, String romanji)
+    public static void reportIncorrectAnswer(String question, String answer)
     {
-        new ReportIncorrectAnswer().execute(kana, romanji);
+        new ReportIncorrectAnswer().execute(question, answer);
     }
 
-    public static void reportRetriedCorrectAnswer(String kana, float score)
+    public static void reportRetriedCorrectAnswer(String question, float score)
     {
-        new ReportRetriedCorrectAnswer().execute(kana, Float.toString(score));
+        new ReportRetriedCorrectAnswer().execute(question, Float.toString(score));
     }
 
-    public static void reportIncorrectRetry(String kana, String romanji)
+    public static void reportIncorrectRetry(String question, String answer)
     {
-        new ReportIncorrectRetry().execute(kana, romanji);
+        new ReportIncorrectRetry().execute(question, answer);
     }
 
     @Query("DELETE FROM daily_record WHERE 1 = 1")
     abstract void deleteAllDailyRecords();
 
     @Query("DELETE FROM kana_records WHERE 1 = 1")
-    abstract void deleteAllKanaRecords();
+    abstract void deleteAllQuestionRecords();
 
     @Query("DELETE FROM incorrect_answers WHERE 1 = 1")
     abstract void deleteAllAnswerRecords();
@@ -246,7 +246,7 @@ public abstract class LogDao
     public static void deleteAll()
     {
         LogDatabase.DAO.deleteAllDailyRecords();
-        LogDatabase.DAO.deleteAllKanaRecords();
+        LogDatabase.DAO.deleteAllQuestionRecords();
         LogDatabase.DAO.deleteAllAnswerRecords();
     }
 
@@ -257,10 +257,10 @@ public abstract class LogDao
     abstract void updateDailyRecord(DailyRecord... record);
 
     @Insert
-    abstract void insertKanaRecord(KanaRecord... record);
+    abstract void insertQuestionRecord(QuestionRecord... record);
 
     @Update
-    abstract void updateKanaRecord(KanaRecord... record);
+    abstract void updateQuestionRecord(QuestionRecord... record);
 
     @Insert
     abstract void insertIncorrectAnswer(IncorrectAnswerRecord... record);

@@ -6,8 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
+//TODO: Edit field name 'kana' to 'question' and table name from 'kana_records' to 'question_records' on next major,
+// migration-requiring database change
 @Entity(tableName = "kana_records", primaryKeys = {"date", "kana"})
-public class KanaRecord
+public class QuestionRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
@@ -15,7 +17,7 @@ public class KanaRecord
 
     @ColumnInfo(name = "kana")
     @NonNull
-    public String kana;
+    public String question;
 
     @ColumnInfo(name = "correct_answers")
     public int correctAnswers;
@@ -23,10 +25,10 @@ public class KanaRecord
     @ColumnInfo(name = "incorrect_answers")
     public int incorrectAnswers;
 
-    public KanaRecord(String kana)
+    public QuestionRecord(String question)
     {
         date = LocalDate.now();
-        this.kana = kana;
+        this.question = question;
         correctAnswers = 0;
         incorrectAnswers = 0;
     }

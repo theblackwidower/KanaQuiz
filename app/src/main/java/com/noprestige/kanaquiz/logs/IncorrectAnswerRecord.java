@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
+//TODO: Edit field names 'kana' and 'incorrect_romanji' to 'question' and 'incorrect_answer' on next major,
+// migration-requiring database change
 @Entity(tableName = "incorrect_answers", primaryKeys = {"date", "kana", "incorrect_romanji"})
 public class IncorrectAnswerRecord
 {
@@ -15,20 +17,20 @@ public class IncorrectAnswerRecord
 
     @ColumnInfo(name = "kana")
     @NonNull
-    public String kana;
+    public String question;
 
     @ColumnInfo(name = "incorrect_romanji")
     @NonNull
-    public String incorrectRomanji;
+    public String incorrectAnswer;
 
     @ColumnInfo(name = "occurrences")
     public int occurrences;
 
-    public IncorrectAnswerRecord(String kana, String incorrectRomanji)
+    public IncorrectAnswerRecord(String question, String incorrectAnswer)
     {
         date = LocalDate.now();
-        this.kana = kana;
-        this.incorrectRomanji = incorrectRomanji;
+        this.question = question;
+        this.incorrectAnswer = incorrectAnswer;
         occurrences = 1;
     }
 }
