@@ -98,6 +98,28 @@
         <item>@string/prefid_romanize_system_kunrei</item>
     </string-array>
 
+    <string name="vocab_display_option_title">Preferred Vocabulary Question Format</string>
+    <string name="vocab_display_option_summary">Which character set should be used for vocabulary questions</string>
+    <string name="vocab_display_option_romanji" translatable="false">Romanji</string>
+    <string name="vocab_display_option_kana" translatable="false">Hiragana/Katakana</string>
+    <string name="vocab_display_option_kanji" translatable="false">Kanji</string>
+
+    <string name="prefid_vocab_display" translatable="false">vocab_display</string>
+    <string name="prefid_vocab_display_romanji" translatable="false">romanji</string>
+    <string name="prefid_vocab_display_kana" translatable="false">kana</string>
+    <string name="prefid_vocab_display_kanji" translatable="false">kanji</string>
+
+    <string-array name="vocab_display_option_item_names">
+        <item>@string/vocab_display_option_romanji</item>
+        <item>@string/vocab_display_option_kana</item>
+        <item>@string/vocab_display_option_kanji</item>
+    </string-array>
+    <string-array name="prefids_vocab_display">
+        <item>@string/prefid_vocab_display_romanji</item>
+        <item>@string/prefid_vocab_display_kana</item>
+        <item>@string/prefid_vocab_display_kanji</item>
+    </string-array>
+
     <string name="repetition_option_title">Repetition control</string>
     <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
     <string name="prefid_repetition" translatable="false">repeat_control</string>
