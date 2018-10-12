@@ -8,11 +8,13 @@ import android.preference.PreferenceManager;
 
 import com.noprestige.kanaquiz.R;
 
-public abstract class OptionsControl
+public final class OptionsControl
 {
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static Resources resources;
+
+    private OptionsControl() {}
 
     @SuppressLint("CommitPrefEdits")
     public static void initialize(Context context)

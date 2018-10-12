@@ -4,8 +4,10 @@ import org.threeten.bp.LocalDate;
 
 import androidx.room.TypeConverter;
 
-public class LogTypeConversion
+public final class LogTypeConversion
 {
+    private LogTypeConversion() {}
+
     @TypeConverter
     public static LocalDate fromTimestamp(Integer value)
     {

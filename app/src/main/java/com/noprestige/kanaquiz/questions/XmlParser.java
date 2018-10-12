@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-abstract class XmlParser
+final class XmlParser
 {
+    private XmlParser() {}
+
     static void parseXmlDocument(int xmlRefId, Resources resources, List<Question[][][]> kanaSetList,
             List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
     {
