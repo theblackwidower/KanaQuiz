@@ -39,7 +39,7 @@ android {
         pure {
             initWith release
             //TODO: Get this working.
-            //manifestPlaceholders = [mainClassName:".KanaQuizPure"]
+            //manifestPlaceholders = [mainClassName:'.KanaQuizPure']
             versionNameSuffix '-pure'
             //TODO: Disable plugins on specific builds, and reenable Proguard
             minifyEnabled false
@@ -76,9 +76,9 @@ dependencies {
 
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation "ch.acra:acra-mail:5.1.3"
-    pureImplementation "ch.acra:acra-toast:5.1.3"
-    pureImplementation "ch.acra:acra-limiter:5.1.3"
+    pureImplementation 'ch.acra:acra-mail:5.1.3'
+    pureImplementation 'ch.acra:acra-toast:5.1.3'
+    pureImplementation 'ch.acra:acra-limiter:5.1.3'
 }
 
 repositories {
