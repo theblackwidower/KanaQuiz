@@ -208,10 +208,16 @@ public class QuestionManagement
         Question[] kanaSet = getKanaSet(setNumber, diacritic, false);
         if (kanaSet != null)
             for (Question question : kanaSet)
-            {
-                returnValue.append(question.getQuestionText());
-                returnValue.append(' ');
-            }
+                if (question instanceof KanaQuestion)
+                {
+                    returnValue.append(question.getQuestionText());
+                    returnValue.append(' ');
+                }
+                else if (question instanceof WordQuestion)
+                {
+                    returnValue.append(question.fetchCorrectAnswer());
+                    returnValue.append(", ");
+                }
         return returnValue.toString();
     }
 
@@ -228,6 +234,9 @@ public class QuestionManagement
         }
 
         returnValue.append(getKanaSetDisplay(setNumber, Diacritic.CONSONANT));
+
+        if (returnValue.codePointAt(returnValue.length() - 2) == ',')
+            returnValue.deleteCharAt(returnValue.length() - 2);
 
         return returnValue.toString();
     }
