@@ -14,7 +14,6 @@ buildscript {
         classpath 'com.google.gms:google-services:4.1.0'
         classpath 'io.fabric.tools:gradle:1.26.1'
         classpath 'com.google.firebase:firebase-plugins:1.1.5'
-        classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.13.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,6 +21,7 @@ buildscript {
 }
 
 plugins {
+    id 'com.vanniktech.android.junit.jacoco' version '0.13.0'
     id 'com.github.kt3k.coveralls' version '2.8.2'
     id 'com.github.ben-manes.versions' version '0.20.0'
 }
@@ -29,9 +29,7 @@ plugins {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url 'https://maven.google.com/'
-        }
+        google()
     }
 }
 
