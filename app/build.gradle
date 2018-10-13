@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: 'com.google.firebase.firebase-perf'
+//ref: https://stackoverflow.com/a/49739351/3582371
+if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release')) {
+    apply plugin: 'io.fabric'
+    apply plugin: 'com.google.firebase.firebase-perf'
+}
 
 android {
     compileSdkVersion 28
@@ -40,9 +43,6 @@ android {
             //TODO: Get this working.
             //manifestPlaceholders = [mainClassName:'.KanaQuizPure']
             versionNameSuffix '-pure'
-            //TODO: Disable plugins on specific builds, and reenable Proguard
-            minifyEnabled false
-            shrinkResources false
         }
     }
     compileOptions {
@@ -86,4 +86,7 @@ coveralls {
     //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
 }
 
-apply plugin: 'com.google.gms.google-services'
+//ref: https://stackoverflow.com/a/49739351/3582371
+if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release')) {
+    apply plugin: 'com.google.gms.google-services'
+}
