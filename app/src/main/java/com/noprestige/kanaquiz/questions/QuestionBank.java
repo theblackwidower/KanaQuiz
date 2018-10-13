@@ -76,7 +76,7 @@ public class QuestionBank extends WeightedList<Question>
             for (Question question : questions)
             {
                 // Fetches the percentage of times the user got a kana right,
-                Float percentage = LogDao.getKanaPercentage(question.toString());
+                Float percentage = LogDao.getKanaPercentage(question.getDatabaseKey());
                 if (percentage == null)
                     percentage = 0.1f;
                 // The 1f is to invert the value so we get the number of times they got it wrong,
@@ -168,7 +168,7 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.toString()))
+            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : wordAnswerList)
@@ -176,7 +176,7 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.toString(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
                         answerCounts.put(answer, count);
                     }
                 }
@@ -184,11 +184,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxWordAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.toString(), weightedAnswerList);
+                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
             String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.toString()).getRandom(new String[maxChoices - 1]);
+                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
@@ -207,7 +207,7 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.toString()))
+            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : fullKanaAnswerList)
@@ -215,8 +215,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.toString(), answer);
-                        if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.toString()))
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.getDatabaseKey()))
                             count += 2;
                         answerCounts.put(answer, count);
                     }
@@ -225,11 +225,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxKanaAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.toString(), weightedAnswerList);
+                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
             String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.toString()).getRandom(new String[maxChoices - 1]);
+                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();

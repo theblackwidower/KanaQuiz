@@ -13,7 +13,7 @@ public abstract class Question
 
     abstract String fetchCorrectAnswer();
 
-    public abstract String toString();
+    abstract String getDatabaseKey();
 
     public ReferenceCell generateReference(Context context)
     {

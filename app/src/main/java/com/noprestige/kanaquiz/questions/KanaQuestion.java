@@ -67,7 +67,7 @@ public class KanaQuestion extends Question
     }
 
     @Override
-    public String toString()
+    String getDatabaseKey()
     {
         return kana;
     }
