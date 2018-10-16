@@ -208,12 +208,12 @@ public class QuestionManagement
         Question[] kanaSet = getKanaSet(setNumber, diacritic, false);
         if (kanaSet != null)
             for (Question question : kanaSet)
-                if (question instanceof KanaQuestion)
+                if (question.getClass().equals(KanaQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
                     returnValue.append(' ');
                 }
-                else if (question instanceof WordQuestion)
+                else if (question.getClass().equals(WordQuestion.class))
                 {
                     returnValue.append(question.fetchCorrectAnswer());
                     returnValue.append(", ");
