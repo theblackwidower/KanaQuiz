@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferencePager extends FragmentPagerAdapter
 {
@@ -29,7 +30,7 @@ class ReferencePager extends FragmentPagerAdapter
         {
             tabList.add(context.getResources().getString(R.string.hiragana));
             tabList.add(context.getResources().getString(R.string.katakana));
-//            tabList.add(context.getResources().getString(R.string.vocabulary));
+            tabList.add(context.getResources().getString(R.string.vocabulary));
         }
         else
         {
@@ -37,9 +38,8 @@ class ReferencePager extends FragmentPagerAdapter
                 tabList.add(context.getResources().getString(R.string.hiragana));
             if (KATAKANA.anySelected())
                 tabList.add(context.getResources().getString(R.string.katakana));
-            //TODO: fix issue with tab transition
-//            if (VOCABULARY.anySelected())
-//                tabList.add(context.getResources().getString(R.string.vocabulary));
+            if (VOCABULARY.anySelected())
+                tabList.add(context.getResources().getString(R.string.vocabulary));
         }
     }
 
