@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">The Kana Quiz</string>
 
-    <string name="selection_title">Kana Selection</string>
-    <string name="reference_title">Kana Reference</string>
+    <string name="selection_title">Question Selection</string>
+    <string name="reference_title">Quick Reference</string>
     <string name="options_title">Options</string>
     <string name="about_title">About</string>
 
@@ -136,7 +136,7 @@
     <string name="prefid_diacritics" translatable="false">allow_diacritics</string>
 
     <string name="full_reference_option_title">Display full reference</string>
-    <string name="full_reference_option_summary">Reference screen will display all kana</string>
+    <string name="full_reference_option_summary">Reference screen will display everything</string>
     <string name="prefid_full_reference" translatable="false">full_reference</string>
 
     <string name="multiple_choice_option_title">Multiple Choice Questions</string>
@@ -152,7 +152,7 @@
     <string name="clipboard_message">Copied to clipboard</string>
     <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
-    <!-- Kana Selection -->
+    <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>
     <string name="vocabulary">Vocabulary</string>
