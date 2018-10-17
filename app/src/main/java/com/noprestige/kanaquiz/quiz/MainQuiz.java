@@ -17,9 +17,9 @@ import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.logs.LogView;
-import com.noprestige.kanaquiz.options.KanaSelection;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
+import com.noprestige.kanaquiz.options.QuestionSelection;
 import com.noprestige.kanaquiz.questions.NoQuestionsException;
 import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
@@ -283,7 +283,7 @@ public class MainQuiz extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.mnuSelection:
-                destination = KanaSelection.class;
+                destination = QuestionSelection.class;
                 result = 1;
                 break;
             case R.id.mnuReference:

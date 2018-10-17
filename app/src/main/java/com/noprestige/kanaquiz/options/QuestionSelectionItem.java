@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
-public class KanaSelectionItem extends RelativeLayout implements Checkable
+public class QuestionSelectionItem extends RelativeLayout implements Checkable
 {
     private String prefId;
 
@@ -27,19 +27,19 @@ public class KanaSelectionItem extends RelativeLayout implements Checkable
     private float lineXPoint2;
     private float lineYPoint;
 
-    public KanaSelectionItem(Context context)
+    public QuestionSelectionItem(Context context)
     {
         super(context);
         init(null, 0);
     }
 
-    public KanaSelectionItem(Context context, AttributeSet attrs)
+    public QuestionSelectionItem(Context context, AttributeSet attrs)
     {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public KanaSelectionItem(Context context, AttributeSet attrs, int defStyle)
+    public QuestionSelectionItem(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
         init(attrs, defStyle);

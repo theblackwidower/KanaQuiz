@@ -14,15 +14,15 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
-public class KanaSelectionPage extends Fragment
+public class QuestionSelectionPage extends Fragment
 {
     private static final String ARG_PAGE_NUMBER = "position";
     private static final String ARG_ITEM_STATES = "states";
     LinearLayout screen;
 
-    public static KanaSelectionPage newInstance(int id)
+    public static QuestionSelectionPage newInstance(int id)
     {
-        KanaSelectionPage screen = new KanaSelectionPage();
+        QuestionSelectionPage screen = new QuestionSelectionPage();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE_NUMBER, id);
         screen.setArguments(args);

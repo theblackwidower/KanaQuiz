@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.options.KanaSelectionItem;
 import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.options.QuestionSelectionItem;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 import com.noprestige.kanaquiz.reference.ReferenceTable;
 
@@ -338,7 +338,7 @@ public class QuestionManagement
 
         for (int i = 1; i <= getCategoryCount(); i++)
         {
-            KanaSelectionItem item = new KanaSelectionItem(context);
+            QuestionSelectionItem item = new QuestionSelectionItem(context);
             item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));

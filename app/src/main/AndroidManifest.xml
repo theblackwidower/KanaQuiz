@@ -25,7 +25,7 @@
             android:label="@string/options_title"
             android:parentActivityName=".quiz.MainQuiz"/>
         <activity
-            android:name=".options.KanaSelection"
+            android:name=".options.QuestionSelection"
             android:label="@string/selection_title"
             android:parentActivityName=".quiz.MainQuiz"/>
         <activity

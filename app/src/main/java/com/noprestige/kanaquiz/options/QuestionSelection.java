@@ -8,7 +8,7 @@ import com.noprestige.kanaquiz.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-public class KanaSelection extends AppCompatActivity
+public class QuestionSelection extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -17,7 +17,7 @@ public class KanaSelection extends AppCompatActivity
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new KanaSelectionPager(getSupportFragmentManager(), this));
+        viewPager.setAdapter(new QuestionSelectionPager(getSupportFragmentManager(), this));
         ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
     }
 }

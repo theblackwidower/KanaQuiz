@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-class KanaSelectionPager extends FragmentPagerAdapter
+class QuestionSelectionPager extends FragmentPagerAdapter
 {
     private Context context;
 
-    KanaSelectionPager(FragmentManager fm, Context context)
+    QuestionSelectionPager(FragmentManager fm, Context context)
     {
         super(fm);
         this.context = context;
@@ -21,7 +21,7 @@ class KanaSelectionPager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return KanaSelectionPage.newInstance(position);
+        return QuestionSelectionPage.newInstance(position);
     }
 
     @Override
