@@ -22,8 +22,9 @@ public class ReferenceScreen extends AppCompatActivity
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new ReferencePager(getSupportFragmentManager(), this));
-        if (viewPager.getChildCount() == 0)
+        ReferencePager pagerAdapter = new ReferencePager(getSupportFragmentManager(), this);
+        viewPager.setAdapter(pagerAdapter);
+        if (pagerAdapter.getCount() == 0)
         {
             TextView lblEmpty = new TextView(this);
             lblEmpty.setText(R.string.no_reference);
