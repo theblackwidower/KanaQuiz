@@ -69,13 +69,13 @@ dependencies {
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation 'ch.acra:acra-mail:5.2.0'
-    pureImplementation 'ch.acra:acra-toast:5.2.0'
-    pureImplementation 'ch.acra:acra-limiter:5.2.0'
+    pureImplementation 'ch.acra:acra-mail:5.2.1'
+    pureImplementation 'ch.acra:acra-toast:5.2.1'
+    pureImplementation 'ch.acra:acra-limiter:5.2.1'
 }
 
 coveralls {
