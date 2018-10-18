@@ -7,6 +7,8 @@ import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
+import java.lang.reflect.InvocationTargetException;
+
 public abstract class KanaQuizMain extends Application
 {
     @Override
@@ -37,12 +39,12 @@ public abstract class KanaQuizMain extends Application
     {
         try
         {
-            Class.forName("org.acra.ACRA");
-            return true;
+            return (boolean) Class.forName("org.acra.ACRA").getMethod("isInitialised").invoke(null);
         }
-        catch (ClassNotFoundException ex)
-        {
-            return false;
-        }
+        catch (ClassNotFoundException ignored) { }
+        catch (NoSuchMethodException ignored) { }
+        catch (IllegalAccessException ignored) { }
+        catch (InvocationTargetException ignored) { }
+        return false;
     }
 }
