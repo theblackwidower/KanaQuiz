@@ -199,8 +199,8 @@
     <string name="prefid_katakana_9" translatable="false">katakana_set_9</string>
     <string name="prefid_katakana_10" translatable="false">katakana_set_10</string>
 
-    <string name="prefid_vocabulary_1" translatable="false">vocabulary_set_1</string>
-    <string name="prefid_vocabulary_2" translatable="false">vocabulary_set_2</string>
+    <string name="prefid_vocabulary_1" translatable="false">vocabulary_set_intro</string>
+    <string name="prefid_vocabulary_2" translatable="false">vocabulary_set_animals</string>
 
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
         the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with
