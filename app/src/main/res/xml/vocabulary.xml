@@ -2,13 +2,16 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="vocabulary_set_intro"
-             setTitle="@string/vocab_set_1_title">
+    <KanaSet prefId="vocabulary_set_basic"
+             setTitle="@string/vocab_set_basic_title">
         <WordQuestion romanji="Hai" kana="はい" answer="Yes"/>
         <WordQuestion romanji="Iie" kana="いいえ" answer="No"/> <!-- 否 (not normally used) -->
         <WordQuestion romanji="Watashi" kana="わたし" kanji="私" answer="I"/>
         <WordQuestion romanji="Anata" kana="あなた" kanji="貴方" answer="You"/>
         <!-- Re: Anata: The kanji can be gendered: 貴女 refers only to females and 貴男 refers only to males -->
+    </KanaSet>
+    <KanaSet prefId="vocabulary_set_study"
+             setTitle="@string/vocab_set_study_title">
         <WordQuestion romanji="Pen" kana="ペン" answer="Pen"/> <!--Katakana-->
         <WordQuestion romanji="Enpitsu" kana="えんぴつ" kanji="鉛筆" answer="Pencil"/>
         <WordQuestion romanji="Tsukue" kana="つくえ" kanji="机" answer="Desk"/>
@@ -17,7 +20,7 @@
         <WordQuestion romanji="Noto" kana="ノート" answer="Notebook"/> <!--Katakana-->
     </KanaSet>
     <KanaSet prefId="vocabulary_set_animals"
-             setTitle="@string/vocab_set_2_title">
+             setTitle="@string/vocab_set_animals_title">
         <WordQuestion romanji="Inu" kana="いぬ" kanji="犬" answer="Dog"/>
         <WordQuestion romanji="Neko" kana="ねこ" kanji="猫" answer="Cat"/>
         <WordQuestion romanji="Uma" kana="うま" kanji="馬" answer="Horse"/>

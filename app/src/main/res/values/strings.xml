@@ -173,8 +173,9 @@
     <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
     <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
 
-    <string name="vocab_set_1_title">Intro %1$s</string>
-    <string name="vocab_set_2_title">Animals</string>
+    <string name="vocab_set_basic_title">Basic vocabulary</string>
+    <string name="vocab_set_study_title">Study Supplies</string>
+    <string name="vocab_set_animals_title">Animals</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
