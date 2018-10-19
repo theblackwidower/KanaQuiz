@@ -44,6 +44,7 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Finer question selection feature
   * User-made question lists
   * Furigana option
+  * Export logs and preferences
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
