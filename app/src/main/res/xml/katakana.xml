@@ -2,14 +2,14 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="@string/prefid_katakana_1" setTitle="@string/set_1_title">
+    <KanaSet prefId="katakana_set_1" setTitle="@string/set_1_title">
         <KanaQuestion question="ア" answer="a"/>
         <KanaQuestion question="イ" answer="i"/>
         <KanaQuestion question="ウ" answer="u"/>
         <KanaQuestion question="エ" answer="e"/>
         <KanaQuestion question="オ" answer="o"/>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_2" setTitle="@string/set_2_title"
+    <KanaSet prefId="katakana_set_2" setTitle="@string/set_2_title"
              setNoDiacriticsTitle="@string/set_2_no_diacritics_title">
         <KanaQuestion question="カ" answer="ka"/>
         <KanaQuestion question="キ" answer="ki"/>
@@ -34,7 +34,7 @@
             <KanaQuestion question="ギョ" answer="gyo"/>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_3" setTitle="@string/set_3_title"
+    <KanaSet prefId="katakana_set_3" setTitle="@string/set_3_title"
              setNoDiacriticsTitle="@string/set_3_no_diacritics_title">
         <KanaQuestion question="サ" answer="sa"/>
         <KanaQuestion question="シ" answer="shi">
@@ -78,7 +78,7 @@
             </KanaQuestion>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_4" setTitle="@string/set_4_title"
+    <KanaSet prefId="katakana_set_4" setTitle="@string/set_4_title"
              setNoDiacriticsTitle="@string/set_4_no_diacritics_title">
         <KanaQuestion question="タ" answer="ta"/>
         <KanaQuestion question="チ" answer="chi">
@@ -130,7 +130,7 @@
             </KanaQuestion>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_5" setTitle="@string/set_5_title">
+    <KanaSet prefId="katakana_set_5" setTitle="@string/set_5_title">
         <KanaQuestion question="ナ" answer="na"/>
         <KanaQuestion question="ニ" answer="ni"/>
         <KanaQuestion question="ヌ" answer="nu"/>
@@ -142,7 +142,7 @@
             <KanaQuestion question="ニョ" answer="nyo"/>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_6" setTitle="@string/set_6_title"
+    <KanaSet prefId="katakana_set_6" setTitle="@string/set_6_title"
              setNoDiacriticsTitle="@string/set_6_no_diacritics_title">
         <KanaQuestion question="ハ" answer="ha"/>
         <KanaQuestion question="ヒ" answer="hi"/>
@@ -181,7 +181,7 @@
             <KanaQuestion question="ピョ" answer="pyo"/>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_7" setTitle="@string/set_7_title">
+    <KanaSet prefId="katakana_set_7" setTitle="@string/set_7_title">
         <KanaQuestion question="マ" answer="ma"/>
         <KanaQuestion question="ミ" answer="mi"/>
         <KanaQuestion question="ム" answer="mu"/>
@@ -193,7 +193,7 @@
             <KanaQuestion question="ミョ" answer="myo"/>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_8" setTitle="@string/set_8_title">
+    <KanaSet prefId="katakana_set_8" setTitle="@string/set_8_title">
         <KanaQuestion question="ラ" answer="ra"/>
         <KanaQuestion question="リ" answer="ri"/>
         <KanaQuestion question="ル" answer="ru"/>
@@ -205,12 +205,12 @@
             <KanaQuestion question="リョ" answer="ryo"/>
         </Section>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_9" setTitle="@string/set_9_title">
+    <KanaSet prefId="katakana_set_9" setTitle="@string/set_9_title">
         <KanaQuestion question="ヤ" answer="ya"/>
         <KanaQuestion question="ユ" answer="yu"/>
         <KanaQuestion question="ヨ" answer="yo"/>
     </KanaSet>
-    <KanaSet prefId="@string/prefid_katakana_10" setTitle="@string/set_10_title">
+    <KanaSet prefId="katakana_set_10" setTitle="@string/set_10_title">
         <KanaQuestion question="ワ" answer="wa"/>
         <!--<KanaQuestion question="ヰ" answer="wi">-->
         <!--<AltAnswer system="HEPBURN KUNREI">i</AltAnswer>-->

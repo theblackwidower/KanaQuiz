@@ -2,7 +2,7 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="@string/prefid_vocabulary_1"
+    <KanaSet prefId="vocabulary_set_intro"
              setTitle="@string/vocab_set_1_title">
         <WordQuestion romanji="Hai" kana="はい" answer="Yes"/>
         <WordQuestion romanji="Iie" kana="いいえ" answer="No"/> <!-- 否 (not normally used) -->
@@ -16,7 +16,7 @@
         <WordQuestion romanji="Hon" kana="ほん" kanji="本" answer="Book"/>
         <WordQuestion romanji="Noto" kana="ノート" answer="Notebook"/> <!--Katakana-->
     </KanaSet>
-    <KanaSet prefId="@string/prefid_vocabulary_2"
+    <KanaSet prefId="vocabulary_set_animals"
              setTitle="@string/vocab_set_2_title">
         <WordQuestion romanji="Inu" kana="いぬ" kanji="犬" answer="Dog"/>
         <WordQuestion romanji="Neko" kana="ねこ" kanji="猫" answer="Cat"/>

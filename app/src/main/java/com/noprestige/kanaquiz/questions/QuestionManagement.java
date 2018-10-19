@@ -52,7 +52,7 @@ public class QuestionManagement
         }
     }
 
-    private String getPrefId(int number)
+    public String getPrefId(int number)
     {
         try
         {
