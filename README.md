@@ -78,4 +78,6 @@ If you don't wish to go through the hassle of installing Android Studio, you can
 
 If you don't wish to bother with pull requests, using the template listed above you can also submit your translation through email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com?subject=KanaQuiz%20Translation), with the subject "KanaQuiz Translation".
 
+I'll also ask, if possible, for any translators to also update the [vocabulary.xml](https://github.com/theblackwidower/KanaQuiz/blob/master/app/src/main/res/xml/vocabulary.xml) file by replacing the English answers with answers in their own language, and insert it into a language-specific directory (app\src\main\res\xml-[language code]), so it'll be automatically included as part of the translation package.
+
 If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
