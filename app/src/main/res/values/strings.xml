@@ -43,7 +43,7 @@
     <string name="acra_disclosure">Includes ACRA crash reporting framework</string>
     <string name="acra_details">In the event of a crash, a report can be instantly sent to the developer via email</string>
 
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
 
     <!-- Reference Screen -->
     <string name="no_reference">No Reference Items Available</string>
