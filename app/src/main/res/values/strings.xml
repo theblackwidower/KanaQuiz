@@ -176,6 +176,8 @@
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
     <string name="vocab_set_animals_title">Animals</string>
+    <string name="vocab_set_numbers_title">Numbers 0–10</string>
+    <string name="vocab_set_big_numbers_title">Numbers 100 &amp; over</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under

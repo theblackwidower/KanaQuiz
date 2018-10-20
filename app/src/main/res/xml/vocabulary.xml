@@ -32,10 +32,38 @@
         <WordQuestion romanji="Tori" kana="とり" kanji="鳥" answer="Bird"/>
         <WordQuestion romanji="Kame" kana="かめ" kanji="亀" answer="Turtle"/>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_numbers"
+             setTitle="@string/vocab_set_numbers_title">
+        <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
+        <!--<WordQuestion romanji="Zero" kana="ゼロ" kanji="零" answer="0"/>-->
+        <WordQuestion romanji="Ichi" kana="いち" kanji="一" answer="1"/>
+        <WordQuestion romanji="Ni" kana="に" kanji="二" answer="2"/>
+        <WordQuestion romanji="San" kana="さん" kanji="三" answer="3"/>
+        <WordQuestion romanji="Yon" kana="よん" kanji="四" answer="4"/>
+        <!--<WordQuestion romanji="Shi" kana="し" kanji="四" answer="4"/>-->
+        <WordQuestion romanji="Go" kana="ご" kanji="五" answer="5"/>
+        <WordQuestion romanji="Roku" kana="ろく" kanji="六" answer="6"/>
+        <WordQuestion romanji="Nana" kana="なな" kanji="七" answer="7"/>
+        <!--<WordQuestion romanji="Shichi" kana="しち" kanji="七" answer="7"/>-->
+        <WordQuestion romanji="Hachi" kana="はち" kanji="八" answer="8"/>
+        <WordQuestion romanji="Kyū" kana="きゅう" kanji="九" answer="9"/>
+        <WordQuestion romanji="Jū" kana="じゅう" kanji="十" answer="10"/>
+    </KanaSet>
+    <KanaSet prefId="vocabulary_set_big_numbers"
+             setTitle="@string/vocab_set_big_numbers_title">
+        <WordQuestion romanji="Hyaku" kana="ひゃく" kanji="百" answer="Hundred"/><!-- 100 or 10^2 -->
+        <WordQuestion romanji="Sen" kana="せん" kanji="千" answer="Thousand"/><!-- 1,000 or 10^3 -->
+        <WordQuestion romanji="Man" kana="まん" kanji="万" answer="Ten Thousand"/><!-- 10,000 or 10^4 -->
+        <WordQuestion romanji="Oku" kana="おく" kanji="億" answer="Hundred Million"/><!-- 100,000,000 or 10^8 -->
+        <WordQuestion romanji="Chō" kana="ちょう" kanji="兆" answer="Trillion"/><!-- 1,000,000,000,000 or 10^12 -->
+        <WordQuestion romanji="Kei" kana="けい" kanji="京" answer="Ten Quadrillion"/>
+        <!-- 10,000,000,000,000,000 or 10^16 -->
+    </KanaSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
     Learn Japanese to Survive: Katakana War
     Jisho (looks up Kanji from kana): https://jisho.org
+    Wikipedia: https://en.wikipedia.org/wiki/Japanese_numerals
     -->
 </Questions>
