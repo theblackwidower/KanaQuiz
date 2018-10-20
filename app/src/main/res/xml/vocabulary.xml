@@ -32,19 +32,6 @@
         <WordQuestion romanji="Tori" kana="とり" kanji="鳥" answer="Bird"/>
         <WordQuestion romanji="Kame" kana="かめ" kanji="亀" answer="Turtle"/>
     </KanaSet>
-    <KanaSet prefId="vocabulary_set_people"
-             setTitle="@string/vocab_set_people_title">
-        <!--<WordQuestion romanji="San" kana="さん" answer="Honorific"/>-->
-        <WordQuestion romanji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>
-        <WordQuestion romanji="Tomodachi" kana="ともだち" kanji="友達" answer="Friend"/>
-        <WordQuestion romanji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
-        <WordQuestion romanji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/>
-        <WordQuestion romanji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
-        <WordQuestion romanji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
-        <WordQuestion romanji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/>
-        <WordQuestion romanji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
-        <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/>
-    </KanaSet>
     <KanaSet prefId="vocabulary_set_transport"
              setTitle="@string/vocab_set_transport_title">
         <WordQuestion romanji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>
@@ -58,18 +45,18 @@
         <WordQuestion romanji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
         <WordQuestion romanji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
     </KanaSet>
-    <KanaSet prefId="vocabulary_set_home"
-             setTitle="@string/vocab_set_home_title">
-        <WordQuestion romanji="Uchi" kana="うち" kanji="家" answer="House"/>
-        <WordQuestion romanji="Heya" kana="へや" kanji="部屋" answer="Room"/>
-        <WordQuestion romanji="Beddo" kana="ベッド" answer="Bed"/> <!--Katakana-->
-        <WordQuestion romanji="Makura" kana="まくら" kanji="枕" answer="Pillow"/>
-        <WordQuestion romanji="Moufu" kana="もうふ" kanji="毛布" answer="Blanket"/>
-        <WordQuestion romanji="Ofuro" kana="おふろ" kanji="お風呂" answer="Bath"/>
-        <WordQuestion romanji="Mado" kana="まど" kanji="窓" answer="Window"/>
-        <WordQuestion romanji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
-        <WordQuestion romanji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
-        <WordQuestion romanji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
+    <KanaSet prefId="vocabulary_set_people"
+             setTitle="@string/vocab_set_people_title">
+        <!--<WordQuestion romanji="San" kana="さん" answer="Honorific"/>-->
+        <WordQuestion romanji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>
+        <WordQuestion romanji="Tomodachi" kana="ともだち" kanji="友達" answer="Friend"/>
+        <WordQuestion romanji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
+        <WordQuestion romanji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/>
+        <WordQuestion romanji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
+        <WordQuestion romanji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
+        <WordQuestion romanji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/>
+        <WordQuestion romanji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
+        <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/>
     </KanaSet>
     <KanaSet prefId="vocabulary_set_food"
              setTitle="@string/vocab_set_food_title">
@@ -83,6 +70,19 @@
         <WordQuestion romanji="Asagohan" kana="あさごはん" kanji="朝ご飯" answer="Breakfast"/>
         <WordQuestion romanji="Hirugohan" kana="ひるごはん" kanji="昼ご飯" answer="Lunch"/>
         <WordQuestion romanji="Bangohan" kana="ばんごはん" kanji="晩御飯" answer="Dinner"/>
+    </KanaSet>
+    <KanaSet prefId="vocabulary_set_home"
+             setTitle="@string/vocab_set_home_title">
+        <WordQuestion romanji="Uchi" kana="うち" kanji="家" answer="House"/>
+        <WordQuestion romanji="Heya" kana="へや" kanji="部屋" answer="Room"/>
+        <WordQuestion romanji="Beddo" kana="ベッド" answer="Bed"/> <!--Katakana-->
+        <WordQuestion romanji="Makura" kana="まくら" kanji="枕" answer="Pillow"/>
+        <WordQuestion romanji="Moufu" kana="もうふ" kanji="毛布" answer="Blanket"/>
+        <WordQuestion romanji="Ofuro" kana="おふろ" kanji="お風呂" answer="Bath"/>
+        <WordQuestion romanji="Mado" kana="まど" kanji="窓" answer="Window"/>
+        <WordQuestion romanji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
+        <WordQuestion romanji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
+        <WordQuestion romanji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
     </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
