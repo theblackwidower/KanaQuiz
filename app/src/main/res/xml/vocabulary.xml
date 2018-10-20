@@ -45,6 +45,19 @@
         <WordQuestion romanji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
         <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_transport"
+             setTitle="@string/vocab_set_transport_title">
+        <WordQuestion romanji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>
+        <WordQuestion romanji="Jitensha" kana="じてんしゃ" kanji="自転車" answer="Bicycle"/>
+        <WordQuestion romanji="Jidousha" kana="じどうしゃ" kanji="自動車" answer="Car"/>
+        <WordQuestion romanji="Hikouki" kana="ひこうき" kanji="飛行機" answer="Airplane"/>
+        <WordQuestion romanji="Basu" kana="バス" answer="Bus"/> <!--Katakana-->
+        <WordQuestion romanji="Fune" kana="ふね" kanji="船" answer="Boat"/>
+        <WordQuestion romanji="Eki" kana="えき" kanji="駅" answer="Rail Station"/>
+        <WordQuestion romanji="Kuukou" kana="くうこう" kanji="空港" answer="Airport"/>
+        <WordQuestion romanji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
+        <WordQuestion romanji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
+    </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
         <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
