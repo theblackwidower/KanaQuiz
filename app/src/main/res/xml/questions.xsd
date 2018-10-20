@@ -104,7 +104,7 @@
 
     <xs:simpleType name="romanji">
         <xs:restriction base="text">
-            <xs:pattern value="[A-z]*"/>
+            <xs:pattern value="['\-A-Za-zĀāĒēĪīŌōŪū]*"/>
         </xs:restriction>
     </xs:simpleType>
 
