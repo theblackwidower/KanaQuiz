@@ -58,6 +58,19 @@
         <WordQuestion romanji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
         <WordQuestion romanji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_home"
+             setTitle="@string/vocab_set_home_title">
+        <WordQuestion romanji="Uchi" kana="うち" kanji="家" answer="House"/>
+        <WordQuestion romanji="Heya" kana="へや" kanji="部屋" answer="Room"/>
+        <WordQuestion romanji="Beddo" kana="ベッド" answer="Bed"/> <!--Katakana-->
+        <WordQuestion romanji="Makura" kana="まくら" kanji="枕" answer="Pillow"/>
+        <WordQuestion romanji="Moufu" kana="もうふ" kanji="毛布" answer="Blanket"/>
+        <WordQuestion romanji="Ofuro" kana="おふろ" kanji="お風呂" answer="Bath"/>
+        <WordQuestion romanji="Mado" kana="まど" kanji="窓" answer="Window"/>
+        <WordQuestion romanji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
+        <WordQuestion romanji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
+        <WordQuestion romanji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
+    </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
         <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
