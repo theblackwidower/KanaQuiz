@@ -125,7 +125,7 @@
             <!-- with this name until the entire IDE is restarted. Which is a pretty glaring error. -->
             <!-- So I had to convert them to proper unicode characters. -->
             <!-- ref: http://unicode.scarfboy.com/ -->
-            <xs:pattern value="[㐀-䶵一-鿋豈-頻]*"/>
+            <xs:pattern value="[ぁ-ゖ゙-ゟ]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙-ゟ]*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

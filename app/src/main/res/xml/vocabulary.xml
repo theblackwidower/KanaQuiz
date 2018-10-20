@@ -32,6 +32,19 @@
         <WordQuestion romanji="Tori" kana="とり" kanji="鳥" answer="Bird"/>
         <WordQuestion romanji="Kame" kana="かめ" kanji="亀" answer="Turtle"/>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_people"
+             setTitle="@string/vocab_set_people_title">
+        <!--<WordQuestion romanji="San" kana="さん" answer="Honorific"/>-->
+        <WordQuestion romanji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>
+        <WordQuestion romanji="Tomodachi" kana="ともだち" kanji="友達" answer="Friend"/>
+        <WordQuestion romanji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
+        <WordQuestion romanji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/>
+        <WordQuestion romanji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
+        <WordQuestion romanji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
+        <WordQuestion romanji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/>
+        <WordQuestion romanji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
+        <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/>
+    </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
         <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
