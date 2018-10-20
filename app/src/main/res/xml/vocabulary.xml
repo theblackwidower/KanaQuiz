@@ -71,6 +71,19 @@
         <WordQuestion romanji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
         <WordQuestion romanji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_food"
+             setTitle="@string/vocab_set_food_title">
+        <WordQuestion romanji="Kudamono" kana="くだもの" kanji="果物" answer="Fruit"/>
+        <WordQuestion romanji="Yasai" kana="やさい" kanji="野菜" answer="Vegetable"/>
+        <WordQuestion romanji="Mizu" kana="みず" kanji="水" answer="Water"/>
+        <WordQuestion romanji="Ocha" kana="おちゃ" kanji="お茶" answer="Green Tea"/>
+        <WordQuestion romanji="Gyuunyuu" kana="ぎゅうにゅう" kanji="牛乳" answer="Milk"/>
+        <WordQuestion romanji="Niku" kana="にく" kanji="肉" answer="Meat"/>
+        <WordQuestion romanji="Pan" kana="パン" answer="Bread"/> <!--Katakana-->
+        <WordQuestion romanji="Asagohan" kana="あさごはん" kanji="朝ご飯" answer="Breakfast"/>
+        <WordQuestion romanji="Hirugohan" kana="ひるごはん" kanji="昼ご飯" answer="Lunch"/>
+        <WordQuestion romanji="Bangohan" kana="ばんごはん" kanji="晩御飯" answer="Dinner"/>
+    </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
         <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
