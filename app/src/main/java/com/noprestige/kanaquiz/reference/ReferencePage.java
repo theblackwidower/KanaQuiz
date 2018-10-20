@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 public class ReferencePage extends Fragment
 {
     private static final String ARG_KANA_TYPE = "kanaType";
+    private static final int MAX_TABS = 4;
 
     public static ReferencePage newInstance(String kanaType)
     {
@@ -43,8 +44,12 @@ public class ReferencePage extends Fragment
             viewPager.setId(R.id.vocabularyReferenceViewPager);
 
         //ref: https://stackoverflow.com/a/40829361/3582371
-        viewPager.setAdapter(new ReferenceSubsectionPager(getChildFragmentManager(), getContext(), kanaType));
+        ReferenceSubsectionPager pagerAdapter =
+                new ReferenceSubsectionPager(getChildFragmentManager(), getContext(), kanaType);
+        viewPager.setAdapter(pagerAdapter);
         TabLayout tabLayout = subScreen.findViewById(R.id.tabLayout);
+        if (pagerAdapter.getCount() > MAX_TABS)
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setPadding(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0,
                 getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0);
         tabLayout.setupWithViewPager(viewPager);
