@@ -3,6 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="https://www.noprestige.com"
     xmlns="https://www.noprestige.com"
+    xmlns:kq="https://www.noprestige.com"
     elementFormDefault="qualified">
 
     <xs:element name="Questions">
@@ -11,6 +12,17 @@
                 <xs:element ref="KanaSet" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
+        <!-- ref: https://stackoverflow.com/a/5541804/3582371 -->
+        <!-- ref: https://stackoverflow.com/a/22353694/3582371 -->
+        <!-- ref: https://msdn.microsoft.com/en-us/library/ms256086(v=vs.110).aspx#Anchor_0 -->
+        <xs:unique name="KanaPrimaryKey">
+            <xs:selector xpath="*/kq:KanaQuestion|*/*/kq:KanaQuestion"/>
+            <xs:field xpath="@question"/>
+        </xs:unique>
+        <xs:unique name="WordPrimaryKey">
+            <xs:selector xpath="*/kq:WordQuestion"/>
+            <xs:field xpath="@romanji"/>
+        </xs:unique>
     </xs:element>
 
     <xs:element name="KanaSet">
