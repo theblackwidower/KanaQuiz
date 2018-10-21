@@ -50,7 +50,7 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
         Context context = getContext();
 
         // Set up initial objects
-        LayoutInflater.from(context).inflate(R.layout.kana_selection_item, this);
+        LayoutInflater.from(context).inflate(R.layout.question_selection_item, this);
 
         lblTitle = findViewById(R.id.lblTitle);
         lblContents = findViewById(R.id.lblContents);
