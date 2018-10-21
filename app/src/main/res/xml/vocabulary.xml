@@ -36,12 +36,12 @@
              setTitle="@string/vocab_set_transport_title">
         <WordQuestion romanji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>
         <WordQuestion romanji="Jitensha" kana="じてんしゃ" kanji="自転車" answer="Bicycle"/>
-        <WordQuestion romanji="Jidousha" kana="じどうしゃ" kanji="自動車" answer="Car"/>
-        <WordQuestion romanji="Hikouki" kana="ひこうき" kanji="飛行機" answer="Airplane"/>
+        <WordQuestion romanji="Jidousha" kana="じどうしゃ" kanji="自動車" answer="Car"/> <!-- Jidōsha -->
+        <WordQuestion romanji="Hikouki" kana="ひこうき" kanji="飛行機" answer="Airplane"/> <!-- Hikōki -->
         <WordQuestion romanji="Basu" kana="バス" answer="Bus"/> <!--Katakana-->
         <WordQuestion romanji="Fune" kana="ふね" kanji="船" answer="Boat"/>
         <WordQuestion romanji="Eki" kana="えき" kanji="駅" answer="Rail Station"/>
-        <WordQuestion romanji="Kuukou" kana="くうこう" kanji="空港" answer="Airport"/>
+        <WordQuestion romanji="Kuukou" kana="くうこう" kanji="空港" answer="Airport"/> <!-- Kūkō -->
         <WordQuestion romanji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
         <WordQuestion romanji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
     </KanaSet>
@@ -51,12 +51,12 @@
         <WordQuestion romanji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>
         <WordQuestion romanji="Tomodachi" kana="ともだち" kanji="友達" answer="Friend"/>
         <WordQuestion romanji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
-        <WordQuestion romanji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/>
+        <WordQuestion romanji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/> <!-- Otōsan -->
         <WordQuestion romanji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
         <WordQuestion romanji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
-        <WordQuestion romanji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/>
+        <WordQuestion romanji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/> <!-- Otōto -->
         <WordQuestion romanji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
-        <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/>
+        <WordQuestion romanji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/> <!-- Imōto -->
     </KanaSet>
     <KanaSet prefId="vocabulary_set_food"
              setTitle="@string/vocab_set_food_title">
@@ -64,7 +64,7 @@
         <WordQuestion romanji="Yasai" kana="やさい" kanji="野菜" answer="Vegetable"/>
         <WordQuestion romanji="Mizu" kana="みず" kanji="水" answer="Water"/>
         <WordQuestion romanji="Ocha" kana="おちゃ" kanji="お茶" answer="Green Tea"/>
-        <WordQuestion romanji="Gyuunyuu" kana="ぎゅうにゅう" kanji="牛乳" answer="Milk"/>
+        <WordQuestion romanji="Gyuunyuu" kana="ぎゅうにゅう" kanji="牛乳" answer="Milk"/> <!-- Gyūnyū -->
         <WordQuestion romanji="Niku" kana="にく" kanji="肉" answer="Meat"/>
         <WordQuestion romanji="Pan" kana="パン" answer="Bread"/> <!--Katakana-->
         <WordQuestion romanji="Asagohan" kana="あさごはん" kanji="朝ご飯" answer="Breakfast"/>
@@ -77,7 +77,7 @@
         <WordQuestion romanji="Heya" kana="へや" kanji="部屋" answer="Room"/>
         <WordQuestion romanji="Beddo" kana="ベッド" answer="Bed"/> <!--Katakana-->
         <WordQuestion romanji="Makura" kana="まくら" kanji="枕" answer="Pillow"/>
-        <WordQuestion romanji="Moufu" kana="もうふ" kanji="毛布" answer="Blanket"/>
+        <WordQuestion romanji="Moufu" kana="もうふ" kanji="毛布" answer="Blanket"/> <!-- Mōfu-->
         <WordQuestion romanji="Ofuro" kana="おふろ" kanji="お風呂" answer="Bath"/>
         <WordQuestion romanji="Mado" kana="まど" kanji="窓" answer="Window"/>
         <WordQuestion romanji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
@@ -98,8 +98,8 @@
         <WordQuestion romanji="Nana" kana="なな" kanji="七" answer="7"/>
         <!--<WordQuestion romanji="Shichi" kana="しち" kanji="七" answer="7"/>-->
         <WordQuestion romanji="Hachi" kana="はち" kanji="八" answer="8"/>
-        <WordQuestion romanji="Kyū" kana="きゅう" kanji="九" answer="9"/>
-        <WordQuestion romanji="Jū" kana="じゅう" kanji="十" answer="10"/>
+        <WordQuestion romanji="Kyuu" kana="きゅう" kanji="九" answer="9"/> <!-- Kyū -->
+        <WordQuestion romanji="Juu" kana="じゅう" kanji="十" answer="10"/> <!-- Jū -->
     </KanaSet>
     <KanaSet prefId="vocabulary_set_big_numbers"
              setTitle="@string/vocab_set_big_numbers_title">
@@ -107,7 +107,8 @@
         <WordQuestion romanji="Sen" kana="せん" kanji="千" answer="Thousand"/><!-- 1,000 or 10^3 -->
         <WordQuestion romanji="Man" kana="まん" kanji="万" answer="Ten Thousand"/><!-- 10,000 or 10^4 -->
         <WordQuestion romanji="Oku" kana="おく" kanji="億" answer="Hundred Million"/><!-- 100,000,000 or 10^8 -->
-        <WordQuestion romanji="Chō" kana="ちょう" kanji="兆" answer="Trillion"/><!-- 1,000,000,000,000 or 10^12 -->
+        <WordQuestion romanji="Chou" kana="ちょう" kanji="兆" answer="Trillion"/> <!-- Chō -->
+        <!-- 1,000,000,000,000 or 10^12 -->
         <WordQuestion romanji="Kei" kana="けい" kanji="京" answer="Ten Quadrillion"/>
         <!-- 10,000,000,000,000,000 or 10^16 -->
     </KanaSet>

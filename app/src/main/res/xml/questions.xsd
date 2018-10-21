@@ -116,7 +116,7 @@
 
     <xs:simpleType name="romanji">
         <xs:restriction base="text">
-            <xs:pattern value="['\-A-Za-zĀāĒēĪīŌōŪū]*"/>
+            <xs:pattern value="['\-A-Za-z]*"/> <!-- Macrons removed for consistency: ĀāĒēĪīŌōŪū -->
         </xs:restriction>
     </xs:simpleType>
 
