@@ -23,6 +23,10 @@
             <xs:selector xpath="*/kq:WordQuestion"/>
             <xs:field xpath="@romanji"/>
         </xs:unique>
+        <xs:unique name="SetPrimaryKey">
+            <xs:selector xpath="kq:KanaSet"/>
+            <xs:field xpath="@prefId"/>
+        </xs:unique>
     </xs:element>
 
     <xs:element name="KanaSet">
@@ -38,6 +42,11 @@
             <xs:attribute name="setTitle" type="text" use="required"/>
             <xs:attribute name="setNoDiacriticsTitle" type="text"/>
         </xs:complexType>
+        <xs:unique name="UniqueSection">
+            <xs:selector xpath="kq:Section"/>
+            <xs:field xpath="@diacritics"/>
+            <xs:field xpath="@digraphs"/>
+        </xs:unique>
     </xs:element>
 
     <xs:element name="Section">
@@ -45,6 +54,7 @@
             <xs:sequence>
                 <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
             </xs:sequence>
+            <!-- TODO: Set diacritics="NO_DIACRITIC" digraphs="false" as an invalid combination of attributes -->
             <xs:attribute name="diacritics" type="diacritic" use="required"/>
             <xs:attribute name="digraphs" type="xs:boolean" use="required"/>
         </xs:complexType>
