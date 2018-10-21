@@ -63,7 +63,7 @@
     <xs:element name="WordQuestion">
         <xs:complexType>
             <xs:attribute name="romanji" type="romanji" use="required"/>
-            <xs:attribute name="kana" type="kana"/>
+            <xs:attribute name="kana" type="kana" use="required"/>
             <xs:attribute name="kanji" type="kanji"/>
             <xs:attribute name="answer" type="text" use="required"/>
         </xs:complexType>

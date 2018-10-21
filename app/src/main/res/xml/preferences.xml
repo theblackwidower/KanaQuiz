@@ -28,7 +28,7 @@
         android:summary="@string/vocab_display_option_summary"
         android:entries="@array/vocab_display_option_item_names"
         android:entryValues="@array/prefids_vocab_display"
-        android:defaultValue="@string/prefid_vocab_display_romanji"/>
+        android:defaultValue="@string/prefid_vocab_display_kana"/>
     <CheckBoxPreference
         android:key="@string/prefid_full_reference"
         android:title="@string/full_reference_option_title"
