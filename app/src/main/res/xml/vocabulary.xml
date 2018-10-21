@@ -112,6 +112,45 @@
         <WordQuestion romanji="Kei" kana="けい" kanji="京" answer="Ten Quadrillion"/>
         <!-- 10,000,000,000,000,000 or 10^16 -->
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_places"
+             setTitle="@string/vocab_set_places_title">
+        <WordQuestion romanji="Apato" kana="アパート" answer="Apartment"/> <!--Katakana-->
+        <WordQuestion romanji="Depato" kana="デパート" answer="Department Store"/> <!--Katakana-->
+        <WordQuestion romanji="Konbini" kana="コンビニ" answer="Convenience Store"/> <!--Katakana-->
+        <WordQuestion romanji="Hoteru" kana="ホテル" answer="Hotel"/> <!--Katakana-->
+        <WordQuestion romanji="Resutoran" kana="レストラン" answer="Restaurant"/> <!--Katakana-->
+        <WordQuestion romanji="Mise" kana="みせ" kanji="店" answer="Shop"/>
+        <WordQuestion romanji="Kouen" kana="こうえん" kanji="公園" answer="Park"/>
+        <WordQuestion romanji="Ginkou" kana="ぎんこう" kanji="銀行" answer="Bank"/>
+        <WordQuestion romanji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/>
+        <WordQuestion romanji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Post Office"/>
+    </KanaSet>
+    <KanaSet prefId="vocabulary_set_clothing"
+             setTitle="@string/vocab_set_clothing_title">
+        <WordQuestion romanji="Shatsu" kana="シャツ" answer="Shirt"/> <!--Katakana-->
+        <WordQuestion romanji="Zubon" kana="ズボン" answer="Pants"/> <!--Katakana-->
+        <WordQuestion romanji="Sukato" kana="スカート" answer="Skirt"/> <!--Katakana-->
+        <WordQuestion romanji="Beruto" kana="ベルト" answer="Belt"/> <!--Katakana-->
+        <WordQuestion romanji="Botan" kana="ボタン" answer="Button"/> <!--Katakana-->
+        <WordQuestion romanji="Fuku" kana="ふく" kanji="服" answer="Clothes"/>
+        <WordQuestion romanji="Megane" kana="めがね" kanji="眼鏡" answer="Glasses"/>
+        <WordQuestion romanji="Kutsu" kana="くつ" kanji="靴" answer="Shoes"/>
+        <WordQuestion romanji="Kutsushita" kana="くつした" kanji="靴下" answer="Socks"/>
+        <WordQuestion romanji="Kimono" kana="きもの" kanji="着物" answer="Kimono"/>
+    </KanaSet>
+    <KanaSet prefId="vocabulary_set_home_2"
+             setTitle="@string/vocab_set_home_2_title">
+        <WordQuestion romanji="Konpyuuta" kana="コンピュータ" answer="Computer"/> <!--Katakana-->
+        <WordQuestion romanji="Terebi" kana="テレビ" answer="Television"/> <!--Katakana-->
+        <WordQuestion romanji="Toire" kana="トイレ" answer="Toilet"/> <!--Katakana-->
+        <!--<WordQuestion romanji="Beddo" kana="ベッド" answer="Bed"/> &lt;!&ndash;Katakana&ndash;&gt;-->
+        <WordQuestion romanji="Sofaa" kana="ソファー" answer="Sofa"/> <!--Katakana-->
+        <WordQuestion romanji="Houki" kana="ほうき" kanji="箒" answer="Broom"/>
+        <WordQuestion romanji="Hashi" kana="はし" kanji="箸" answer="Chopsticks"/>
+        <WordQuestion romanji="Kagu" kana="かぐ" kanji="家具" answer="Furniture"/>
+        <WordQuestion romanji="Kagi" kana="かぎ" kanji="鍵" answer="Key"/>
+        <WordQuestion romanji="Osara" kana="おさら" kanji="お皿" answer="Plate"/>
+    </KanaSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
