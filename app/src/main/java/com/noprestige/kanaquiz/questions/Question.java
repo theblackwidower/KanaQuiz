@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
-import android.util.TypedValue;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
@@ -20,9 +19,6 @@ public abstract class Question
         ReferenceCell cell = new ReferenceCell(context);
         cell.setSubject(getQuestionText());
         cell.setDescription(fetchCorrectAnswer());
-        if (getQuestionText().length() > 1)
-            cell.setSubjectSize(TypedValue
-                    .applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
         return cell;
     }
 
