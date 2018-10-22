@@ -45,6 +45,9 @@ _NB: The following features have no planned release date, or guarantee of releas
   * User-made question lists
   * Furigana option
   * Export logs and preferences
+  * Pronunciation Guide
+  * Number questions
+  * Reverse questions mode (questions in English, answers in Japanese)
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
