@@ -48,6 +48,7 @@ public class ReferencePage extends Fragment
                 new ReferenceSubsectionPager(getChildFragmentManager(), getContext(), kanaType);
         viewPager.setAdapter(pagerAdapter);
         TabLayout tabLayout = subScreen.findViewById(R.id.tabLayout);
+        //TODO: Make this check more dynamic, accounting for screen width and actual tab width
         if (pagerAdapter.getCount() > MAX_TABS)
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setPadding(getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin) / 4, 0,
