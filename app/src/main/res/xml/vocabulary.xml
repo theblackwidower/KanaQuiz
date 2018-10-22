@@ -86,20 +86,20 @@
     </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
-        <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="0"/> <!-- 〇 (maru) is valid -->
-        <!--<WordQuestion romanji="Zero" kana="ゼロ" kanji="零" answer="0"/>-->
-        <WordQuestion romanji="Ichi" kana="いち" kanji="一" answer="1"/>
-        <WordQuestion romanji="Ni" kana="に" kanji="二" answer="2"/>
-        <WordQuestion romanji="San" kana="さん" kanji="三" answer="3"/>
-        <WordQuestion romanji="Yon" kana="よん" kanji="四" answer="4"/>
-        <!--<WordQuestion romanji="Shi" kana="し" kanji="四" answer="4"/>-->
-        <WordQuestion romanji="Go" kana="ご" kanji="五" answer="5"/>
-        <WordQuestion romanji="Roku" kana="ろく" kanji="六" answer="6"/>
-        <WordQuestion romanji="Nana" kana="なな" kanji="七" answer="7"/>
-        <!--<WordQuestion romanji="Shichi" kana="しち" kanji="七" answer="7"/>-->
-        <WordQuestion romanji="Hachi" kana="はち" kanji="八" answer="8"/>
-        <WordQuestion romanji="Kyuu" kana="きゅう" kanji="九" answer="9"/> <!-- Kyū -->
-        <WordQuestion romanji="Juu" kana="じゅう" kanji="十" answer="10"/> <!-- Jū -->
+        <WordQuestion romanji="Rei" kana="れい" kanji="零" answer="Zero"/> <!-- 〇 (maru) is valid -->
+        <!--<WordQuestion romanji="Zero" kana="ゼロ" kanji="零" answer="Zero"/>-->
+        <WordQuestion romanji="Ichi" kana="いち" kanji="一" answer="One"/>
+        <WordQuestion romanji="Ni" kana="に" kanji="二" answer="Two"/>
+        <WordQuestion romanji="San" kana="さん" kanji="三" answer="Three"/>
+        <WordQuestion romanji="Yon" kana="よん" kanji="四" answer="Four"/>
+        <!--<WordQuestion romanji="Shi" kana="し" kanji="四" answer="Four"/>-->
+        <WordQuestion romanji="Go" kana="ご" kanji="五" answer="Five"/>
+        <WordQuestion romanji="Roku" kana="ろく" kanji="六" answer="Six"/>
+        <WordQuestion romanji="Nana" kana="なな" kanji="七" answer="Seven"/>
+        <!--<WordQuestion romanji="Shichi" kana="しち" kanji="七" answer="Seven"/>-->
+        <WordQuestion romanji="Hachi" kana="はち" kanji="八" answer="Eight"/>
+        <WordQuestion romanji="Kyuu" kana="きゅう" kanji="九" answer="Nine"/> <!-- Kyū -->
+        <WordQuestion romanji="Juu" kana="じゅう" kanji="十" answer="Ten"/> <!-- Jū -->
     </KanaSet>
     <KanaSet prefId="vocabulary_set_places"
              setTitle="@string/vocab_set_places_title">
