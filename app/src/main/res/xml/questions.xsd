@@ -27,6 +27,14 @@
             <xs:selector xpath="kq:KanaSet"/>
             <xs:field xpath="@prefId"/>
         </xs:unique>
+        <xs:unique name="WordUniqueKana">
+            <xs:selector xpath="*/kq:WordQuestion"/>
+            <xs:field xpath="@kana"/>
+        </xs:unique>
+        <xs:unique name="WordUniqueKanji">
+            <xs:selector xpath="*/kq:WordQuestion"/>
+            <xs:field xpath="@kanji"/>
+        </xs:unique>
     </xs:element>
 
     <xs:element name="KanaSet">
