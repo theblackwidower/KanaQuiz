@@ -3,6 +3,7 @@ package com.noprestige.kanaquiz.quiz;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import java.util.Collection;
 
 public class MultipleChoicePad extends FlowLayout
 {
-    private Collection<Button> btnChoices = new ArrayList<>();
+    Collection<Button> btnChoices = new ArrayList<>();
     private OnAnswerListener answerListener;
 
     public MultipleChoicePad(Context context)
@@ -77,7 +78,48 @@ public class MultipleChoicePad extends FlowLayout
     public void setChoices(String[] answers)
     {
         deleteChoices();
+        setVisibility(View.INVISIBLE);
         for (String answer : answers)
             addChoice(answer);
+
+        new NormalizeSizeTask().execute(this);
+    }
+
+    static class NormalizeSizeTask extends AsyncTask<MultipleChoicePad, Void, MultipleChoicePad>
+    {
+        private int maxSize;
+
+        @Override
+        protected MultipleChoicePad doInBackground(MultipleChoicePad... item)
+        {
+            try
+            {
+                do
+                {
+                    Thread.sleep(100);
+                    for (Button btnChoice : item[0].btnChoices)
+                    {
+                        int thisWidth = btnChoice.getWidth();
+                        if (thisWidth > maxSize)
+                            maxSize = thisWidth;
+                    }
+                }
+                while (maxSize == 0);
+            }
+            catch (InterruptedException ignored)
+            {
+                cancel(true);
+            }
+            return item[0];
+        }
+
+        @Override
+        protected void onPostExecute(MultipleChoicePad item)
+        {
+            if (maxSize > 0)
+                for (Button btnChoice : item.btnChoices)
+                    btnChoice.setWidth(maxSize);
+            item.setVisibility(View.VISIBLE);
+        }
     }
 }
