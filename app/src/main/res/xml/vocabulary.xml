@@ -101,17 +101,6 @@
         <WordQuestion romanji="Kyuu" kana="きゅう" kanji="九" answer="9"/> <!-- Kyū -->
         <WordQuestion romanji="Juu" kana="じゅう" kanji="十" answer="10"/> <!-- Jū -->
     </KanaSet>
-    <KanaSet prefId="vocabulary_set_big_numbers"
-             setTitle="@string/vocab_set_big_numbers_title">
-        <WordQuestion romanji="Hyaku" kana="ひゃく" kanji="百" answer="Hundred"/><!-- 100 or 10^2 -->
-        <WordQuestion romanji="Sen" kana="せん" kanji="千" answer="Thousand"/><!-- 1,000 or 10^3 -->
-        <WordQuestion romanji="Man" kana="まん" kanji="万" answer="Ten Thousand"/><!-- 10,000 or 10^4 -->
-        <WordQuestion romanji="Oku" kana="おく" kanji="億" answer="Hundred Million"/><!-- 100,000,000 or 10^8 -->
-        <WordQuestion romanji="Chou" kana="ちょう" kanji="兆" answer="Trillion"/> <!-- Chō -->
-        <!-- 1,000,000,000,000 or 10^12 -->
-        <WordQuestion romanji="Kei" kana="けい" kanji="京" answer="Ten Quadrillion"/>
-        <!-- 10,000,000,000,000,000 or 10^16 -->
-    </KanaSet>
     <KanaSet prefId="vocabulary_set_places"
              setTitle="@string/vocab_set_places_title">
         <WordQuestion romanji="Apato" kana="アパート" answer="Apartment"/> <!--Katakana-->
