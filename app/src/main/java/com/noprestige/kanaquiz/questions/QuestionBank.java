@@ -21,7 +21,7 @@ public class QuestionBank extends WeightedList<Question>
     private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
     private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
 
-    private Set<String> wordAnswerList = new TreeSet<>(new GojuonOrder());
+    private Set<String> wordAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
@@ -193,7 +193,7 @@ public class QuestionBank extends WeightedList<Question>
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
 
-            GojuonOrder.sort(possibleAnswerStrings);
+            Arrays.sort(possibleAnswerStrings);
 
             return possibleAnswerStrings;
         }
