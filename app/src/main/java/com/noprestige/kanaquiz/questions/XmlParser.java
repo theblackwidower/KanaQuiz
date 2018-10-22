@@ -43,8 +43,8 @@ final class XmlParser
     }
 
     private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources, List<Question[][][]> kanaSetList,
-            List<String> prefIdList, List<String> setTitleList,
-            List<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
+            List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -103,8 +103,7 @@ final class XmlParser
     }
 
     private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            List<Question[][][]> kanaSetList, int indexPoint)
-            throws XmlPullParserException, IOException, ParseException
+            List<Question[][][]> kanaSetList, int indexPoint) throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
         boolean isDigraphs = false;
@@ -143,8 +142,8 @@ final class XmlParser
         parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
     }
 
-    private static void parseXmlStoreSet(List<Question> currentSet, List<Question[][][]> kanaSetList,
-            int indexPoint, Diacritic diacritics, boolean isDigraphs)
+    private static void parseXmlStoreSet(List<Question> currentSet, List<Question[][][]> kanaSetList, int indexPoint,
+            Diacritic diacritics, boolean isDigraphs)
     {
         Question[][][] pulledArray = kanaSetList.get(indexPoint);
         pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new Question[0]);
