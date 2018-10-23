@@ -62,11 +62,11 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
                 (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));
 
         // Load attributes
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KanaSelectionItem, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.QuestionSelectionItem, defStyle, 0);
 
-        setTitle(a.getString(R.styleable.KanaSelectionItem_title));
-        setContents(a.getString(R.styleable.KanaSelectionItem_contents));
-        setPrefId(a.getString(R.styleable.KanaSelectionItem_prefId));
+        setTitle(a.getString(R.styleable.QuestionSelectionItem_title));
+        setContents(a.getString(R.styleable.QuestionSelectionItem_contents));
+        setPrefId(a.getString(R.styleable.QuestionSelectionItem_prefId));
 
         a.recycle();
 
