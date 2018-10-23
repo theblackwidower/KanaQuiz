@@ -260,7 +260,7 @@ final class XmlParser
             if (attributeString.charAt(i) == ' ')
             {
                 list.add(RomanizationSystem.valueOf(thisItem.toString()));
-                thisItem = new StringBuilder();
+                thisItem.setLength(0);
             }
             else
                 thisItem.append(attributeString.charAt(i));
