@@ -249,26 +249,13 @@ final class XmlParser
 
     private static RomanizationSystem[] parseRomanizationSystemList(String attributeString)
     {
-        //trims and collapses whitespace
-        attributeString = attributeString.trim().replaceAll("\\s+", " ");
+        String[] stringList = attributeString.trim().split("\\s+");
+        RomanizationSystem[] systemList = new RomanizationSystem[stringList.length];
 
-        List<RomanizationSystem> list = new ArrayList<>();
-        StringBuilder thisItem = new StringBuilder();
+        for (int i = 0; i < stringList.length; i++)
+            systemList[i] = RomanizationSystem.valueOf(stringList[i]);
 
-        for (int i = 0; i < attributeString.length(); i++)
-        {
-            if (attributeString.charAt(i) == ' ')
-            {
-                list.add(RomanizationSystem.valueOf(thisItem.toString()));
-                thisItem.setLength(0);
-            }
-            else
-                thisItem.append(attributeString.charAt(i));
-        }
-
-        list.add(RomanizationSystem.valueOf(thisItem.toString()));
-
-        return list.toArray(new RomanizationSystem[0]);
+        return systemList;
     }
 
     private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
