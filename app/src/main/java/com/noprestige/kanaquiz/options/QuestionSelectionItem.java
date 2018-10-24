@@ -4,21 +4,23 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.CheckBox;
 import android.widget.Checkable;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
-public class QuestionSelectionItem extends RelativeLayout implements Checkable
+public class QuestionSelectionItem extends LinearLayout implements Checkable
 {
     private String prefId;
+    private String title;
+    private String contents;
 
-    private TextView lblTitle;
-    private TextView lblContents;
+    private TextView lblText;
     private CheckBox chkCheckBox;
 
     private Paint linePaint = new Paint();
@@ -52,8 +54,7 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
         // Set up initial objects
         LayoutInflater.from(context).inflate(R.layout.question_selection_item, this);
 
-        lblTitle = findViewById(R.id.lblTitle);
-        lblContents = findViewById(R.id.lblContents);
+        lblText = findViewById(R.id.lblText);
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
         setOnClickListener(view -> toggle());
@@ -84,50 +85,6 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
         lineYPoint = height - getPaddingBottom() - linePaint.getStrokeWidth();
     }
 
-    //ref: http://stackoverflow.com/questions/13273838/onmeasure-wrap-content-how-do-i-know-the-size-to-wrap
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-    {
-        //Need to position objects within the layout
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        measureChildWithMargins(lblTitle, widthMeasureSpec, 0, heightMeasureSpec, 0);
-        measureChildWithMargins(lblContents, widthMeasureSpec, 0, heightMeasureSpec, 0);
-        measureChildWithMargins(chkCheckBox, widthMeasureSpec, 0, heightMeasureSpec, 0);
-
-        LayoutParams titleLayout = (LayoutParams) lblTitle.getLayoutParams();
-        LayoutParams contentsLayout = (LayoutParams) lblContents.getLayoutParams();
-        LayoutParams boxLayout = (LayoutParams) chkCheckBox.getLayoutParams();
-
-        int desiredWidth = Math.max(lblTitle.getMeasuredWidth() + titleLayout.leftMargin + titleLayout.rightMargin,
-                lblContents.getMeasuredWidth() + contentsLayout.leftMargin + contentsLayout.rightMargin) +
-                chkCheckBox.getMeasuredWidth() + boxLayout.leftMargin + boxLayout.rightMargin + getPaddingLeft() +
-                getPaddingRight();
-        int desiredHeight = Math.max(lblTitle.getMeasuredHeight() + titleLayout.topMargin + titleLayout.bottomMargin +
-                        lblContents.getMeasuredHeight() + contentsLayout.topMargin + contentsLayout.bottomMargin,
-                chkCheckBox.getMeasuredHeight() + boxLayout.topMargin + boxLayout.bottomMargin) + getPaddingTop() +
-                getPaddingBottom() + Math.round(linePaint.getStrokeWidth());
-
-        int width = calculateSize(widthMeasureSpec, desiredWidth);
-        int height = calculateSize(heightMeasureSpec, desiredHeight);
-
-        setMeasuredDimension(width, height);
-    }
-
-    private static int calculateSize(int measureSpec, int desired)
-    {
-        switch (MeasureSpec.getMode(measureSpec))
-        {
-            case MeasureSpec.EXACTLY:
-                return MeasureSpec.getSize(measureSpec);
-            case MeasureSpec.AT_MOST:
-                return Math.min(desired, MeasureSpec.getSize(measureSpec));
-            case MeasureSpec.UNSPECIFIED:
-            default:
-                return desired;
-        }
-    }
-
     @Override
     public void dispatchDraw(Canvas canvas)
     {
@@ -138,12 +95,12 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
 
     public String getTitle()
     {
-        return (String) lblTitle.getText();
+        return title;
     }
 
     public String getContents()
     {
-        return (String) lblContents.getText();
+        return contents;
     }
 
     public String getPrefId()
@@ -159,7 +116,10 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
     public void setTitle(CharSequence title)
     {
         if (title != null)
-            lblTitle.setText(title);
+        {
+            this.title = title.toString();
+            buildTextBox();
+        }
     }
 
     public void setContents(int resId)
@@ -170,7 +130,16 @@ public class QuestionSelectionItem extends RelativeLayout implements Checkable
     public void setContents(CharSequence contents)
     {
         if (contents != null)
-            lblContents.setText(contents);
+        {
+            this.contents = contents.toString();
+            buildTextBox();
+        }
+    }
+
+    private void buildTextBox()
+    {
+        if ((title != null) && (contents != null))
+            lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + contents));
     }
 
     public void setPrefId(int resId)
