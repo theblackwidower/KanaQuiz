@@ -117,8 +117,12 @@ public class MultipleChoicePad extends FlowLayout
         protected void onPostExecute(MultipleChoicePad item)
         {
             if (maxSize > 0)
+            {
+                if ((maxSize * 2) > item.getMeasuredWidth())
+                    maxSize = (item.getMeasuredWidth() / 2);
                 for (Button btnChoice : item.btnChoices)
                     btnChoice.setWidth(maxSize);
+            }
             item.setVisibility(View.VISIBLE);
         }
     }
