@@ -215,7 +215,7 @@ public class QuestionManagement
                 }
                 else if (question.getClass().equals(WordQuestion.class))
                 {
-                    returnValue.append(question.fetchCorrectAnswer());
+                    returnValue.append(question.fetchCorrectAnswer().replace(' ', '\u00A0'));
                     returnValue.append(", ");
                 }
         return returnValue.toString();
