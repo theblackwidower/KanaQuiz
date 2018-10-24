@@ -14,7 +14,7 @@
     tools:menu="@menu/main">
 
     <TextView
-        android:id="@+id/lblDisplayKana"
+        android:id="@+id/lblQuestion"
         android:layout_width="match_parent"
         android:layout_height="195dp"
         android:autoSizeMaxTextSize="144sp"

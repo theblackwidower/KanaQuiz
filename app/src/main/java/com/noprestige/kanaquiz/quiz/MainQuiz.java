@@ -45,7 +45,7 @@ public class MainQuiz extends AppCompatActivity
     private QuestionBank questionBank;
 
     private TextView lblResponse;
-    private TextView lblDisplayKana;
+    private TextView lblQuestion;
     AnswerFrame frmAnswer;
 
     private static final int MAX_RETRIES = 3;
@@ -92,7 +92,7 @@ public class MainQuiz extends AppCompatActivity
         onConfigurationChanged(getResources().getConfiguration());
 
         if (SDK_INT < Build.VERSION_CODES.O)
-            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblDisplayKana, 12, 144, 2, COMPLEX_UNIT_SP);
+            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblQuestion, 12, 144, 2, COMPLEX_UNIT_SP);
 
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
@@ -113,7 +113,7 @@ public class MainQuiz extends AppCompatActivity
             setContentView(R.layout.activity_main_quiz);
 
         lblResponse = findViewById(R.id.lblResponse);
-        lblDisplayKana = findViewById(R.id.lblDisplayKana);
+        lblQuestion = findViewById(R.id.lblQuestion);
         frmAnswer = findViewById(R.id.frmAnswer);
 
         if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
@@ -138,7 +138,7 @@ public class MainQuiz extends AppCompatActivity
         fetchScoreThread = new FetchTodaysLog();
         fetchScoreThread.execute(LocalDate.now());
 
-        lblDisplayKana.setText("");
+        lblQuestion.setText("");
         lblResponse.setText("");
 
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
@@ -154,14 +154,14 @@ public class MainQuiz extends AppCompatActivity
         try
         {
             questionBank.newQuestion();
-            lblDisplayKana.setText(questionBank.getCurrentQuestionText());
+            lblQuestion.setText(questionBank.getCurrentQuestionText());
             retryCount = 0;
             frmAnswer.setMultipleChoices(questionBank);
             readyForAnswer();
         }
         catch (NoQuestionsException ex)
         {
-            lblDisplayKana.setText("");
+            lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
             lblResponse.setTypeface(null, NORMAL);
@@ -188,16 +188,16 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDao.reportCorrectAnswer(lblDisplayKana.getText().toString());
+                    LogDao.reportCorrectAnswer(lblQuestion.getText().toString());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
-                    LogDao.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), score);
+                    LogDao.reportRetriedCorrectAnswer(lblQuestion.getText().toString(), score);
                 }
                 else
-                    LogDao.reportRetriedCorrectAnswer(lblDisplayKana.getText().toString(), 0);
+                    LogDao.reportRetriedCorrectAnswer(lblQuestion.getText().toString(), 0);
             }
             else
             {
@@ -221,7 +221,7 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
-                    LogDao.reportIncorrectRetry(lblDisplayKana.getText().toString(), answer);
+                    LogDao.reportIncorrectRetry(lblQuestion.getText().toString(), answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -231,7 +231,7 @@ public class MainQuiz extends AppCompatActivity
                 }
 
                 if (isGetNewQuestion)
-                    LogDao.reportIncorrectAnswer(lblDisplayKana.getText().toString(), answer);
+                    LogDao.reportIncorrectAnswer(lblQuestion.getText().toString(), answer);
             }
 
             if (isGetNewQuestion)
