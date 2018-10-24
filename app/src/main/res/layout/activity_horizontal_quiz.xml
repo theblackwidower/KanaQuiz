@@ -28,6 +28,7 @@
             android:autoSizeMaxTextSize="144sp"
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
+            android:maxLines="1"
             android:text=""
             android:textAlignment="center"
             android:textSize="144sp"
