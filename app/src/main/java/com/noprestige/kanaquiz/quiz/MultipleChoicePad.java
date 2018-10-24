@@ -70,7 +70,7 @@ public class MultipleChoicePad extends FlowLayout
     {
         Button btnNewButton = new Button(getContext());
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
-        btnNewButton.setText(answer);
+        btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator")));
         addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
@@ -87,7 +87,8 @@ public class MultipleChoicePad extends FlowLayout
 
     static class NormalizeSizeTask extends AsyncTask<MultipleChoicePad, Void, MultipleChoicePad>
     {
-        private int maxSize;
+        private int maxWidth;
+        private int maxHeight;
 
         @Override
         protected MultipleChoicePad doInBackground(MultipleChoicePad... item)
@@ -100,11 +101,15 @@ public class MultipleChoicePad extends FlowLayout
                     for (Button btnChoice : item[0].btnChoices)
                     {
                         int thisWidth = btnChoice.getWidth();
-                        if (thisWidth > maxSize)
-                            maxSize = thisWidth;
+                        if (thisWidth > maxWidth)
+                            maxWidth = thisWidth;
+
+                        int thisHeight = btnChoice.getHeight();
+                        if (thisHeight > maxHeight)
+                            maxHeight = thisHeight;
                     }
                 }
-                while (maxSize == 0);
+                while ((maxWidth == 0) || (maxHeight == 0));
             }
             catch (InterruptedException ignored)
             {
@@ -116,13 +121,14 @@ public class MultipleChoicePad extends FlowLayout
         @Override
         protected void onPostExecute(MultipleChoicePad item)
         {
-            if (maxSize > 0)
-            {
-                if ((maxSize * 2) > item.getMeasuredWidth())
-                    maxSize = (item.getMeasuredWidth() / 2);
+            if (maxWidth > 0)
                 for (Button btnChoice : item.btnChoices)
-                    btnChoice.setWidth(maxSize);
-            }
+                    btnChoice.setWidth(maxWidth);
+
+            if (maxHeight > 0)
+                for (Button btnChoice : item.btnChoices)
+                    btnChoice.setHeight(maxHeight);
+
             item.setVisibility(View.VISIBLE);
         }
     }
