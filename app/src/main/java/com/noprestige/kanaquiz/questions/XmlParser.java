@@ -182,7 +182,7 @@ final class XmlParser
     private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
             throws ParseException
     {
-        String thisRomanji = null;
+        String thisRomaji = null;
         String thisKana = null;
         String thisKanji = null;
         String thisAnswer = null;
@@ -190,8 +190,8 @@ final class XmlParser
         {
             switch (parser.getAttributeName(i))
             {
-                case "romanji":
-                    thisRomanji = parseXmlValue(parser, i, resources);
+                case "romaji":
+                    thisRomaji = parseXmlValue(parser, i, resources);
                     break;
                 case "kana":
                     thisKana = parseXmlValue(parser, i, resources);
@@ -203,10 +203,10 @@ final class XmlParser
                     thisAnswer = parseXmlValue(parser, i, resources);
             }
         }
-        if ((thisRomanji == null) || (thisAnswer == null))
+        if ((thisRomaji == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in WordQuestion", 0);
 
-        return new WordQuestion(thisRomanji, thisAnswer, thisKana, thisKanji);
+        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji);
     }
 
     private static TreeMap<RomanizationSystem, String> parseXmlAltAnswers(XmlPullParser parser)

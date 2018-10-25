@@ -7,30 +7,30 @@ import java.util.Comparator;
 
 public class GojuonOrder implements Comparator<String>
 {
-    static class NotRomanjiException extends Exception {}
+    static class NotRomajiException extends Exception {}
 
-    static void sort(String[] romanji)
+    static void sort(String[] romaji)
     {
-        Arrays.sort(romanji, new GojuonOrder());
+        Arrays.sort(romaji, new GojuonOrder());
     }
 
-    private static int getSortId(CharacterIterator romanji)
+    private static int getSortId(CharacterIterator romaji)
     {
-        int startIndex = romanji.getIndex();
+        int startIndex = romaji.getIndex();
         try
         {
-            return getRomanjiKey(romanji);
+            return getRomajiKey(romaji);
         }
-        catch (NotRomanjiException ex)
+        catch (NotRomajiException ex)
         {
-            if (romanji.setIndex(startIndex) == 'n')
+            if (romaji.setIndex(startIndex) == 'n')
                 return 108; //N Consonant
             else
-                return 109 + romanji.current();
+                return 109 + romaji.current();
         }
         finally
         {
-            romanji.next();
+            romaji.next();
         }
     }
 
@@ -38,67 +38,67 @@ public class GojuonOrder implements Comparator<String>
     private static final char[] MAIN_SETS = {'k', 'g', '\u0000', 'z', '\u0000', 'd', 'n', 'h', 'b', 'p', 'm'};
     private static final char[] Y_VOWELS = {'a', 'u', 'o'};
 
-    private static int getRomanjiKey(CharacterIterator romanji) throws NotRomanjiException
+    private static int getRomajiKey(CharacterIterator romaji) throws NotRomajiException
     {
         for (int i = 0; i < VOWELS.length; i++)
-            if (romanji.current() == VOWELS[i])
+            if (romaji.current() == VOWELS[i])
                 return i;
 
         for (int i = 0; i < MAIN_SETS.length; i++)
-            if (romanji.current() == MAIN_SETS[i])
-                return 5 + (i * 8) + getSubKey(romanji);
+            if (romaji.current() == MAIN_SETS[i])
+                return 5 + (i * 8) + getSubKey(romaji);
 
-        switch (romanji.current())
+        switch (romaji.current())
         {
             case ' ':
             case CharacterIterator.DONE:
                 return -1;
 
             case 's':
-                if (romanji.next() == 'h')
-                    return 21 + getAltIKey(romanji);
+                if (romaji.next() == 'h')
+                    return 21 + getAltIKey(romaji);
                 else
                 {
-                    romanji.previous();
-                    return 21 + getSubKey(romanji);
+                    romaji.previous();
+                    return 21 + getSubKey(romaji);
                 }
             case 'j':
-                return 29 + getAltIKey(romanji);
+                return 29 + getAltIKey(romaji);
 
             case 't':
-                if (romanji.next() == 's')
+                if (romaji.next() == 's')
                 {
-                    if (romanji.next() == 'u')
+                    if (romaji.next() == 'u')
                         return 37 + 2;
                     else
                         break;
                 }
                 else
                 {
-                    romanji.previous();
-                    return 37 + getSubKey(romanji);
+                    romaji.previous();
+                    return 37 + getSubKey(romaji);
                 }
             case 'c':
-                if (romanji.next() == 'h')
-                    return 37 + getAltIKey(romanji);
+                if (romaji.next() == 'h')
+                    return 37 + getAltIKey(romaji);
                 else
                     break;
 
             case 'f':
-                if (romanji.next() == 'u')
+                if (romaji.next() == 'u')
                     return 61 + 2;
                 else
                     break;
 
             case 'y':
-                romanji.next();
-                return 93 + getYVowelKey(romanji);
+                romaji.next();
+                return 93 + getYVowelKey(romaji);
 
             case 'r':
-                return 96 + getSubKey(romanji);
+                return 96 + getSubKey(romaji);
 
             case 'w':
-                switch (romanji.next())
+                switch (romaji.next())
                 {
                     case 'a':
                         return 104;
@@ -111,39 +111,39 @@ public class GojuonOrder implements Comparator<String>
                 }
                 break;
         }
-        throw new NotRomanjiException();
+        throw new NotRomajiException();
     }
 
-    private static int getSubKey(CharacterIterator romanji) throws NotRomanjiException
+    private static int getSubKey(CharacterIterator romaji) throws NotRomajiException
     {
-        romanji.next();
+        romaji.next();
         for (int i = 0; i < VOWELS.length; i++)
-            if (romanji.current() == VOWELS[i])
+            if (romaji.current() == VOWELS[i])
                 return i;
 
-        if (romanji.current() == 'y')
+        if (romaji.current() == 'y')
         {
-            romanji.next();
-            return 5 + getYVowelKey(romanji);
+            romaji.next();
+            return 5 + getYVowelKey(romaji);
         }
-        throw new NotRomanjiException();
+        throw new NotRomajiException();
     }
 
-    private static int getAltIKey(CharacterIterator romanji) throws NotRomanjiException
+    private static int getAltIKey(CharacterIterator romaji) throws NotRomajiException
     {
-        if (romanji.next() == 'i')
+        if (romaji.next() == 'i')
             return 1;
 
-        return 5 + getYVowelKey(romanji);
+        return 5 + getYVowelKey(romaji);
     }
 
-    private static int getYVowelKey(CharacterIterator romanji) throws NotRomanjiException
+    private static int getYVowelKey(CharacterIterator romaji) throws NotRomajiException
     {
         for (int i = 0; i < Y_VOWELS.length; i++)
-            if (romanji.current() == Y_VOWELS[i])
+            if (romaji.current() == Y_VOWELS[i])
                 return i;
 
-        throw new NotRomanjiException();
+        throw new NotRomajiException();
     }
 
     @Override

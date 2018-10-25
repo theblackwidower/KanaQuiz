@@ -12,19 +12,19 @@ import java.util.Map;
 public class KanaQuestion extends Question
 {
     private final String kana;
-    private final String defaultRomanji;
-    private final Map<RomanizationSystem, String> altRomanji;
+    private final String defaultRomaji;
+    private final Map<RomanizationSystem, String> altRomaji;
 
-    KanaQuestion(String kana, String romanji)
+    KanaQuestion(String kana, String romaji)
     {
-        this(kana, romanji, null);
+        this(kana, romaji, null);
     }
 
-    KanaQuestion(String kana, String romanji, Map<RomanizationSystem, String> altRomanji)
+    KanaQuestion(String kana, String romaji, Map<RomanizationSystem, String> altRomaji)
     {
         this.kana = kana.trim();
-        defaultRomanji = romanji.trim();
-        this.altRomanji = altRomanji;
+        defaultRomaji = romaji.trim();
+        this.altRomaji = altRomaji;
     }
 
     String getQuestionText()
@@ -34,10 +34,10 @@ public class KanaQuestion extends Question
 
     boolean checkAnswer(String response)
     {
-        if (defaultRomanji.trim().equalsIgnoreCase(response.trim()))
+        if (defaultRomaji.trim().equalsIgnoreCase(response.trim()))
             return true;
-        if (altRomanji != null)
-            for (String correctAnswer : altRomanji.values())
+        if (altRomaji != null)
+            for (String correctAnswer : altRomaji.values())
                 if (correctAnswer.trim().equalsIgnoreCase(response.trim()))
                     return true;
 
@@ -46,28 +46,28 @@ public class KanaQuestion extends Question
 
     String fetchCorrectAnswer()
     {
-        return fetchRomanji();
+        return fetchRomaji();
     }
 
-    String fetchRomanji()
+    String fetchRomaji()
     {
         if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))
-            return defaultRomanji;
+            return defaultRomaji;
         else if (OptionsControl
                 .compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_hepburn))
-            return fetchRomanji(RomanizationSystem.HEPBURN);
+            return fetchRomaji(RomanizationSystem.HEPBURN);
         else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_nihon))
-            return fetchRomanji(RomanizationSystem.NIHON);
+            return fetchRomaji(RomanizationSystem.NIHON);
         else if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_kunrei))
-            return fetchRomanji(RomanizationSystem.KUNREI);
+            return fetchRomaji(RomanizationSystem.KUNREI);
         else
-            return defaultRomanji;
+            return defaultRomaji;
     }
 
-    String fetchRomanji(RomanizationSystem system)
+    String fetchRomaji(RomanizationSystem system)
     {
-        String romanji = (((system == null) || (altRomanji == null)) ? null : altRomanji.get(system));
-        return (romanji == null) ? defaultRomanji : romanji;
+        String romaji = (((system == null) || (altRomaji == null)) ? null : altRomaji.get(system));
+        return (romaji == null) ? defaultRomaji : romaji;
     }
 
     @Override

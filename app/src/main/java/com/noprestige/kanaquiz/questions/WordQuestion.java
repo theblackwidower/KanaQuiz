@@ -9,14 +9,14 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public class WordQuestion extends Question
 {
-    private final String romanji;
+    private final String romaji;
     private final String kana;
     private final String kanji;
     private final String answer;
 
-    public WordQuestion(String romanji, String answer, String kana, String kanji)
+    public WordQuestion(String romaji, String answer, String kana, String kanji)
     {
-        this.romanji = romanji.trim();
+        this.romaji = romaji.trim();
         this.answer = answer.trim();
         this.kana = (kana != null) ? kana.trim() : null;
         this.kanji = (kanji != null) ? kanji.trim() : null;
@@ -24,7 +24,7 @@ public class WordQuestion extends Question
 
     enum QuestionTextType
     {
-        ROMANJI,
+        ROMAJI,
         KANA,
         KANJI
     }
@@ -32,14 +32,14 @@ public class WordQuestion extends Question
     @Override
     String getQuestionText()
     {
-        if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_romanji))
-            return fetchText(QuestionTextType.ROMANJI);
+        if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_romaji))
+            return fetchText(QuestionTextType.ROMAJI);
         else if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_kana))
             return fetchText(QuestionTextType.KANA);
         else if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_kanji))
             return fetchText(QuestionTextType.KANJI);
         else
-            return romanji;
+            return romaji;
     }
 
     @SuppressWarnings("fallthrough")
@@ -53,9 +53,9 @@ public class WordQuestion extends Question
             case KANA:
                 if (kana != null)
                     return kana;
-            case ROMANJI:
+            case ROMAJI:
             default:
-                return romanji;
+                return romaji;
         }
     }
 
@@ -74,7 +74,7 @@ public class WordQuestion extends Question
     @Override
     String getDatabaseKey()
     {
-        return romanji;
+        return romaji;
     }
 
     @Override

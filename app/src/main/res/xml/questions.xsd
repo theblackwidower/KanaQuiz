@@ -21,7 +21,7 @@
         </xs:unique>
         <xs:unique name="WordPrimaryKey">
             <xs:selector xpath="*/kq:WordQuestion"/>
-            <xs:field xpath="@romanji"/>
+            <xs:field xpath="@romaji"/>
         </xs:unique>
         <xs:unique name="SetPrimaryKey">
             <xs:selector xpath="kq:KanaSet"/>
@@ -74,13 +74,13 @@
                 <xs:element ref="AltAnswer" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
-            <xs:attribute name="answer" type="romanji" use="required"/>
+            <xs:attribute name="answer" type="romaji" use="required"/>
         </xs:complexType>
     </xs:element>
 
     <xs:element name="WordQuestion">
         <xs:complexType>
-            <xs:attribute name="romanji" type="romanji" use="required"/>
+            <xs:attribute name="romaji" type="romaji" use="required"/>
             <xs:attribute name="kana" type="kana" use="required"/>
             <xs:attribute name="kanji" type="kanji"/>
             <xs:attribute name="answer" type="text" use="required"/>
@@ -90,7 +90,7 @@
     <xs:element name="AltAnswer">
         <xs:complexType>
             <xs:simpleContent>
-                <xs:extension base="romanji">
+                <xs:extension base="romaji">
                     <xs:attribute name="system" type="system_list" use="required"/>
                 </xs:extension>
             </xs:simpleContent>
@@ -132,7 +132,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="romanji">
+    <xs:simpleType name="romaji">
         <xs:restriction base="text">
             <xs:pattern value="['\-A-Za-z]*"/> <!-- Macrons removed for consistency: ĀāĒēĪīŌōŪū -->
         </xs:restriction>

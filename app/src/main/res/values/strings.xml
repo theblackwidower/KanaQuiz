@@ -14,8 +14,8 @@
     <string name="no_questions">No Questions available</string>
     <string name="correct_answer">Correct</string>
     <string name="incorrect_answer">Incorrect</string>
-    <string name="request_kana_text_input">Enter the Romanji equivalent</string>
-    <string name="request_kana_multiple_choice">Select the Romanji equivalent</string>
+    <string name="request_kana_text_input">Enter the Romaji equivalent</string>
+    <string name="request_kana_multiple_choice">Select the Romaji equivalent</string>
     <string name="request_vocab_text_input">Enter the English translation</string>
     <string name="request_vocab_multiple_choice">Select the English translation</string>
     <string name="try_again">Try again</string>
@@ -103,22 +103,22 @@
 
     <string name="vocab_display_option_title">Preferred Vocabulary Question Format</string>
     <string name="vocab_display_option_summary">Which character set should be used for vocabulary questions</string>
-    <string name="vocab_display_option_romanji" translatable="false">Romanji</string>
+    <string name="vocab_display_option_romaji" translatable="false">Romaji</string>
     <string name="vocab_display_option_kana" translatable="false">Hiragana/Katakana</string>
     <string name="vocab_display_option_kanji" translatable="false">Kanji</string>
 
     <string name="prefid_vocab_display" translatable="false">vocab_display</string>
-    <string name="prefid_vocab_display_romanji" translatable="false">romanji</string>
+    <string name="prefid_vocab_display_romaji" translatable="false">romaji</string>
     <string name="prefid_vocab_display_kana" translatable="false">kana</string>
     <string name="prefid_vocab_display_kanji" translatable="false">kanji</string>
 
     <string-array name="vocab_display_option_item_names">
-        <item>@string/vocab_display_option_romanji</item>
+        <item>@string/vocab_display_option_romaji</item>
         <item>@string/vocab_display_option_kana</item>
         <item>@string/vocab_display_option_kanji</item>
     </string-array>
     <string-array name="prefids_vocab_display">
-        <item>@string/prefid_vocab_display_romanji</item>
+        <item>@string/prefid_vocab_display_romaji</item>
         <item>@string/prefid_vocab_display_kana</item>
         <item>@string/prefid_vocab_display_kanji</item>
     </string-array>

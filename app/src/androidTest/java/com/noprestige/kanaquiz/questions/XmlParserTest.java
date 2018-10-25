@@ -70,8 +70,8 @@ public class XmlParserTest
         assertKanaQuestion(kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][0], "は", "ha");
         assertKanaQuestion(kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][1], "ひ", "hi");
         assertKanaQuestion(kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][2], "ふ", "fu");
-        assertThat(((KanaQuestion) kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][2]).fetchRomanji(NIHON), is("hu"));
-        assertThat(((KanaQuestion) kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][2]).fetchRomanji(KUNREI), is("hu"));
+        assertThat(((KanaQuestion) kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][2]).fetchRomaji(NIHON), is("hu"));
+        assertThat(((KanaQuestion) kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][2]).fetchRomaji(KUNREI), is("hu"));
         assertKanaQuestion(kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][3], "へ", "he");
         assertKanaQuestion(kanaSetList.get(2)[NO_DIACRITIC.ordinal()][0][4], "ほ", "ho");
 
@@ -102,9 +102,9 @@ public class XmlParserTest
         assertKanaQuestion(kanaSetList.get(2)[CONSONANT.ordinal()][0][0], "ん", "n");
     }
 
-    private void assertKanaQuestion(Question question, String expectedKana, String expectedRomanji)
+    private void assertKanaQuestion(Question question, String expectedKana, String expectedRomaji)
     {
         assertThat(question.getQuestionText(), is(expectedKana));
-        assertThat(((KanaQuestion) question).fetchRomanji(null), is(expectedRomanji));
+        assertThat(((KanaQuestion) question).fetchRomaji(null), is(expectedRomaji));
     }
 }
