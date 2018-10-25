@@ -117,6 +117,10 @@ public class LogView extends AppCompatActivity
         logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
         logGraph.getViewport().setXAxisBoundsManual(true);
         logGraph.getViewport().setMinX(0);
+        logGraph.getGridLabelRenderer().setHorizontalAxisTitle(" ");
+        logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
+                        getApplicationContext().getResources().getDisplayMetrics())));
     }
 
     @Override
