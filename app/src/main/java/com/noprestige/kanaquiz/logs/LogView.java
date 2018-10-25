@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.R;
@@ -113,14 +114,17 @@ public class LogView extends AppCompatActivity
         logGraph.getViewport().setYAxisBoundsManual(true);
         logGraph.getViewport().setMinY(0);
         logGraph.getViewport().setMaxY(100);
-        logGraph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
         logGraph.getViewport().setXAxisBoundsManual(true);
         logGraph.getViewport().setMinX(0);
-        logGraph.getGridLabelRenderer().setHorizontalAxisTitle(" ");
         logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
                         getApplicationContext().getResources().getDisplayMetrics())));
+        logGraph.getGridLabelRenderer().setLabelHorizontalHeight(0);
+
+        StaticLabelsFormatter labelFormatter = new StaticLabelsFormatter(logGraph);
+        labelFormatter.setHorizontalLabels(new String[]{" ", " "});
+        logGraph.getGridLabelRenderer().setLabelFormatter(labelFormatter);
     }
 
     @Override
