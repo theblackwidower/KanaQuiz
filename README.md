@@ -30,17 +30,17 @@ Currently available on [Google Play™](https://play.google.com/store/apps/detai
   * Supports both digraphs (ひゃ, みゅ, リュ) and diacritics (が, ぴ)
   * User can select app behaviour on an incorrect answer from three different options: retry until the correct answer is given, show the correct answer and move on, or hide the correct answer and move on
   * Support for the three major romaji systems: Revised Hepburn, Nihon-shiki, and Kunrei-shiki
-  * A daily log will show your progress over time
+  * A daily log and line graph will show your progress over time
   * Dynamic AI chooses the kana you have the most trouble with
+  * Vocabulary support with Kanji option
+  * Enhanced multiple choice answer selection
 
 ## Upcoming features
 
 _NB: The following features have no planned release date, or guarantee of release._
 
-  * Kanji and vocabulary support
   * Multiple fonts
   * Obsolete kana option
-  * Improved multiple choice answer selection
   * Finer question selection feature
   * User-made question lists
   * Furigana option
