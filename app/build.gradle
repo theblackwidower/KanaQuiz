@@ -52,7 +52,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'androidx.appcompat:appcompat:1.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'
@@ -75,6 +75,8 @@ dependencies {
     pureImplementation 'ch.acra:acra-mail:5.2.1'
     pureImplementation 'ch.acra:acra-toast:5.2.1'
     pureImplementation 'ch.acra:acra-limiter:5.2.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.0.0'
 }
 
 coveralls {

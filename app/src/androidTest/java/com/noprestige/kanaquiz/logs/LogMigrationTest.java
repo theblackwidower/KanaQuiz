@@ -14,8 +14,8 @@ import java.io.IOException;
 import androidx.room.testing.MigrationTestHelper;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -32,7 +32,7 @@ public class LogMigrationTest
     {
         helper = new MigrationTestHelper(InstrumentationRegistry.getInstrumentation(),
                 LogDatabase.class.getCanonicalName(), new FrameworkSQLiteOpenHelperFactory());
-        AndroidThreeTen.init(InstrumentationRegistry.getTargetContext());
+        AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().getTargetContext());
     }
 
     @Test

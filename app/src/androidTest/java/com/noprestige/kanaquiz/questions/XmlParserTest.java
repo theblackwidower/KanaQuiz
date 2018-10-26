@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.test.InstrumentationRegistry;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static com.noprestige.kanaquiz.questions.Diacritic.CONSONANT;
 import static com.noprestige.kanaquiz.questions.Diacritic.DAKUTEN;
@@ -28,8 +28,8 @@ public class XmlParserTest
         List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
         XmlParser.parseXmlDocument(com.noprestige.kanaquiz.dev.test.R.xml.test_questions,
-                InstrumentationRegistry.getContext().getResources(), kanaSetList, prefIdList, setTitleList,
-                setNoDiacriticsTitleList);
+                InstrumentationRegistry.getInstrumentation().getContext().getResources(), kanaSetList, prefIdList,
+                setTitleList, setNoDiacriticsTitleList);
 
         assertThat(kanaSetList.size(), is(3));
         assertThat(prefIdList.size(), is(3));
