@@ -81,14 +81,7 @@ public class QuestionManagement
 
     public String getPrefId(int number)
     {
-        try
-        {
-            return prefIds[number - 1];
-        }
-        catch (ArrayIndexOutOfBoundsException ex)
-        {
-            return null;
-        }
+        return prefIds[number - 1];
     }
 
     public CharSequence getSetTitle(int number)
@@ -98,15 +91,8 @@ public class QuestionManagement
 
     private CharSequence getSetTitle(int number, boolean isDiacriticsActive)
     {
-        try
-        {
-            return (isDiacriticsActive || (setNoDiacriticsTitles[number - 1] == null)) ? setTitles[number - 1] :
-                    setNoDiacriticsTitles[number - 1];
-        }
-        catch (ArrayIndexOutOfBoundsException ex)
-        {
-            return null;
-        }
+        return (isDiacriticsActive || (setNoDiacriticsTitles[number - 1] == null)) ? setTitles[number - 1] :
+                setNoDiacriticsTitles[number - 1];
     }
 
     public QuestionManagement(int xmlRefId, Resources resources)
