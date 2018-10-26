@@ -137,6 +137,16 @@
             <AltAnswer>10</AltAnswer>
         </WordQuestion>
     </KanaSet>
+    <KanaSet prefId="vocabulary_set_countries"
+             setTitle="@string/vocab_set_countries_title">
+        <WordQuestion romaji="Amerika" kana="アメリカ" kanji="亜米利加" answer="America"/> <!--Katakana-->
+        <WordQuestion romaji="Osutoraria" kana="オーストラリア" kanji="濠太剌利" answer="Australia"/> <!--Katakana-->
+        <WordQuestion romaji="Kanada" kana="カナダ" kanji="加奈陀" answer="Canada"/> <!--Katakana-->
+        <WordQuestion romaji="Afurika" kana="アフリカ" kanji="阿弗利加" answer="Africa"/> <!--Katakana-->
+        <WordQuestion romaji="Chugoku" kana="ちゅごく" kanji="中国" answer="China"/>
+        <WordQuestion romaji="Ingurando" kana="イングランド" answer="England"/> <!--Katakana-->
+        <WordQuestion romaji="Indo" kana="インド" kanji="印度" answer="India"/> <!--Katakana-->
+    </KanaSet>
     <KanaSet prefId="vocabulary_set_places"
              setTitle="@string/vocab_set_places_title">
         <WordQuestion romaji="Apato" kana="アパート" answer="Apartment"/> <!--Katakana-->
