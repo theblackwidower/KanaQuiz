@@ -71,7 +71,15 @@
     <xs:element name="KanaQuestion">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="AltAnswer" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="romaji">
+                                <xs:attribute name="system" type="system_list" use="required"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romaji" use="required"/>
@@ -80,20 +88,19 @@
 
     <xs:element name="WordQuestion">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="text"/>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
             <xs:attribute name="romaji" type="romaji" use="required"/>
             <xs:attribute name="kana" type="kana" use="required"/>
             <xs:attribute name="kanji" type="kanji"/>
             <xs:attribute name="answer" type="text" use="required"/>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="AltAnswer">
-        <xs:complexType>
-            <xs:simpleContent>
-                <xs:extension base="romaji">
-                    <xs:attribute name="system" type="system_list" use="required"/>
-                </xs:extension>
-            </xs:simpleContent>
         </xs:complexType>
     </xs:element>
 

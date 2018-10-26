@@ -174,13 +174,13 @@ final class XmlParser
         TreeMap<RomanizationSystem, String> thisAltAnswers = null;
 
         if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
-            thisAltAnswers = parseXmlAltAnswers(parser);
+            thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
     }
 
     private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
-            throws ParseException
+            throws ParseException, IOException, XmlPullParserException
     {
         String thisRomaji = null;
         String thisKana = null;
@@ -206,10 +206,15 @@ final class XmlParser
         if ((thisRomaji == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in WordQuestion", 0);
 
-        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji);
+        String[] thisAltAnswers = null;
+
+        if (!((parser.next() == XmlPullParser.END_TAG) && "WordQuestion".equalsIgnoreCase(parser.getName())))
+            thisAltAnswers = parseXmlWordAltAnswers(parser);
+
+        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers);
     }
 
-    private static TreeMap<RomanizationSystem, String> parseXmlAltAnswers(XmlPullParser parser)
+    private static TreeMap<RomanizationSystem, String> parseXmlKanaAltAnswers(XmlPullParser parser)
             throws XmlPullParserException, IOException, ParseException
     {
         int lineNumber = parser.getLineNumber();
@@ -245,6 +250,32 @@ final class XmlParser
         }
 
         return thisAltAnswers;
+    }
+
+    private static String[] parseXmlWordAltAnswers(XmlPullParser parser)
+            throws XmlPullParserException, IOException, ParseException
+    {
+        int lineNumber = parser.getLineNumber();
+
+        List<String> thisAltAnswers = new ArrayList<>();
+
+        for (int eventType = parser.getEventType();
+                !((eventType == XmlPullParser.END_TAG) && "WordQuestion".equalsIgnoreCase(parser.getName()));
+                eventType = parser.next())
+        {
+            if ((eventType == XmlPullParser.START_TAG) && "AltAnswer".equalsIgnoreCase(parser.getName()))
+            {
+                if (parser.next() == XmlPullParser.TEXT)
+                    thisAltAnswers.add(parser.getText());
+                else
+                    throw new ParseException("Empty AltAnswer tag", parser.getLineNumber());
+            }
+
+            else if (eventType == XmlPullParser.END_DOCUMENT)
+                throw new ParseException("Missing KanaQuestion closing tag", lineNumber);
+        }
+
+        return thisAltAnswers.toArray(new String[0]);
     }
 
     private static RomanizationSystem[] parseRomanizationSystemList(String attributeString)

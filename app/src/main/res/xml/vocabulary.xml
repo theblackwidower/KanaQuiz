@@ -40,7 +40,9 @@
         <WordQuestion romaji="Hikouki" kana="ひこうき" kanji="飛行機" answer="Airplane"/> <!-- Hikōki -->
         <WordQuestion romaji="Basu" kana="バス" answer="Bus"/> <!--Katakana-->
         <WordQuestion romaji="Fune" kana="ふね" kanji="船" answer="Boat"/>
-        <WordQuestion romaji="Eki" kana="えき" kanji="駅" answer="Rail Station"/>
+        <WordQuestion romaji="Eki" kana="えき" kanji="駅" answer="Station">
+            <AltAnswer>Rail Station</AltAnswer>
+        </WordQuestion>
         <WordQuestion romaji="Kuukou" kana="くうこう" kanji="空港" answer="Airport"/> <!-- Kūkō -->
         <WordQuestion romaji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
         <WordQuestion romaji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
@@ -53,10 +55,20 @@
         <WordQuestion romaji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
         <WordQuestion romaji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/> <!-- Otōsan -->
         <WordQuestion romaji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
-        <WordQuestion romaji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
-        <WordQuestion romaji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/> <!-- Otōto -->
-        <WordQuestion romaji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
-        <WordQuestion romaji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/> <!-- Imōto -->
+        <WordQuestion romaji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Older Brother">
+            <AltAnswer>Big Brother</AltAnswer>
+            <AltAnswer>Elder Brother</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"> <!-- Otōto -->
+            <AltAnswer>Little Brother</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Older Sister">
+            <AltAnswer>Big Sister</AltAnswer>
+            <AltAnswer>Elder Sister</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"> <!-- Imōto -->
+            <AltAnswer>Little Sister</AltAnswer>
+        </WordQuestion>
     </KanaSet>
     <KanaSet prefId="vocabulary_set_food"
              setTitle="@string/vocab_set_food_title">
@@ -82,24 +94,48 @@
         <WordQuestion romaji="Mado" kana="まど" kanji="窓" answer="Window"/>
         <WordQuestion romaji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
         <WordQuestion romaji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
-        <WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
+        <WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Telephone">
+            <AltAnswer>Phone</AltAnswer>
+        </WordQuestion>
     </KanaSet>
     <KanaSet prefId="vocabulary_set_numbers"
              setTitle="@string/vocab_set_numbers_title">
-        <WordQuestion romaji="Rei" kana="れい" kanji="零" answer="Zero"/> <!-- 〇 (maru) is valid -->
+        <WordQuestion romaji="Rei" kana="れい" kanji="零" answer="Zero"> <!-- 〇 (maru) is valid -->
+            <AltAnswer>0</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Zero" kana="ゼロ" kanji="零" answer="Zero"/>-->
-        <WordQuestion romaji="Ichi" kana="いち" kanji="一" answer="One"/>
-        <WordQuestion romaji="Ni" kana="に" kanji="二" answer="Two"/>
-        <WordQuestion romaji="San" kana="さん" kanji="三" answer="Three"/>
-        <WordQuestion romaji="Yon" kana="よん" kanji="四" answer="Four"/>
+        <WordQuestion romaji="Ichi" kana="いち" kanji="一" answer="One">
+            <AltAnswer>1</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Ni" kana="に" kanji="二" answer="Two">
+            <AltAnswer>2</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="San" kana="さん" kanji="三" answer="Three">
+            <AltAnswer>3</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Yon" kana="よん" kanji="四" answer="Four">
+            <AltAnswer>4</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Shi" kana="し" kanji="四" answer="Four"/>-->
-        <WordQuestion romaji="Go" kana="ご" kanji="五" answer="Five"/>
-        <WordQuestion romaji="Roku" kana="ろく" kanji="六" answer="Six"/>
-        <WordQuestion romaji="Nana" kana="なな" kanji="七" answer="Seven"/>
+        <WordQuestion romaji="Go" kana="ご" kanji="五" answer="Five">
+            <AltAnswer>5</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Roku" kana="ろく" kanji="六" answer="Six">
+            <AltAnswer>6</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Nana" kana="なな" kanji="七" answer="Seven">
+            <AltAnswer>7</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Shichi" kana="しち" kanji="七" answer="Seven"/>-->
-        <WordQuestion romaji="Hachi" kana="はち" kanji="八" answer="Eight"/>
-        <WordQuestion romaji="Kyuu" kana="きゅう" kanji="九" answer="Nine"/> <!-- Kyū -->
-        <WordQuestion romaji="Juu" kana="じゅう" kanji="十" answer="Ten"/> <!-- Jū -->
+        <WordQuestion romaji="Hachi" kana="はち" kanji="八" answer="Eight">
+            <AltAnswer>8</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Kyuu" kana="きゅう" kanji="九" answer="Nine"> <!-- Kyū -->
+            <AltAnswer>9</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Juu" kana="じゅう" kanji="十" answer="Ten"> <!-- Jū -->
+            <AltAnswer>10</AltAnswer>
+        </WordQuestion>
     </KanaSet>
     <KanaSet prefId="vocabulary_set_places"
              setTitle="@string/vocab_set_places_title">

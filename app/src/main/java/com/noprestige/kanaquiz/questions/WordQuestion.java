@@ -13,13 +13,15 @@ public class WordQuestion extends Question
     private final String kana;
     private final String kanji;
     private final String answer;
+    private final String[] altAnswers;
 
-    public WordQuestion(String romaji, String answer, String kana, String kanji)
+    public WordQuestion(String romaji, String answer, String kana, String kanji, String[] altAnswers)
     {
         this.romaji = romaji.trim();
         this.answer = answer.trim();
         this.kana = (kana != null) ? kana.trim() : null;
         this.kanji = (kanji != null) ? kanji.trim() : null;
+        this.altAnswers = altAnswers;
     }
 
     enum QuestionTextType
@@ -62,7 +64,13 @@ public class WordQuestion extends Question
     @Override
     boolean checkAnswer(String response)
     {
-        return answer.trim().equalsIgnoreCase(response.trim());
+        if (answer.trim().equalsIgnoreCase(response.trim()))
+            return true;
+        else if (altAnswers != null)
+            for (String answer : altAnswers)
+                if (answer.trim().equalsIgnoreCase(response.trim()))
+                    return true;
+        return false;
     }
 
     @Override
