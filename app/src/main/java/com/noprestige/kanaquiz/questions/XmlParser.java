@@ -12,14 +12,16 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 final class XmlParser
 {
     private XmlParser() {}
 
-    static void parseXmlDocument(int xmlRefId, Resources resources, List<Question[][][]> kanaSetList,
-            List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+    static void parseXmlDocument(int xmlRefId, Resources resources,
+            Map<QuestionManagement.SetCode, Question[]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
+            List<String> setNoDiacriticsTitleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -42,9 +44,9 @@ final class XmlParser
         }
     }
 
-    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources, List<Question[][][]> kanaSetList,
-            List<String> prefIdList, List<String> setTitleList, List<String> setNoDiacriticsTitleList)
-            throws XmlPullParserException, IOException, ParseException
+    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
+            Map<QuestionManagement.SetCode, Question[]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
+            List<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -72,9 +74,7 @@ final class XmlParser
         setTitleList.add(setTitle);
         setNoDiacriticsTitleList.add(setNoDiacriticsTitle);
 
-        int indexPoint = kanaSetList.size();
-
-        kanaSetList.add(new Question[Diacritic.values().length][2][]);
+        int indexPoint = prefIdList.size();
 
         List<Question> currentSet = new ArrayList<>();
 
@@ -99,11 +99,14 @@ final class XmlParser
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing KanaSet closing tag", lineNumber);
         }
-        parseXmlStoreSet(currentSet, kanaSetList, indexPoint, Diacritic.NO_DIACRITIC, false);
+
+        kanaSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, false),
+                currentSet.toArray(new Question[0]));
     }
 
     private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            List<Question[][][]> kanaSetList, int indexPoint) throws XmlPullParserException, IOException, ParseException
+            Map<QuestionManagement.SetCode, Question[]> kanaSetList, int indexPoint)
+            throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
         boolean isDigraphs = false;
@@ -139,15 +142,9 @@ final class XmlParser
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing Section closing tag", lineNumber);
         }
-        parseXmlStoreSet(currentSet, kanaSetList, indexPoint, diacritics, isDigraphs);
-    }
 
-    private static void parseXmlStoreSet(List<Question> currentSet, List<Question[][][]> kanaSetList, int indexPoint,
-            Diacritic diacritics, boolean isDigraphs)
-    {
-        Question[][][] pulledArray = kanaSetList.get(indexPoint);
-        pulledArray[diacritics.ordinal()][isDigraphs ? 1 : 0] = currentSet.toArray(new Question[0]);
-        kanaSetList.set(indexPoint, pulledArray);
+        kanaSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, isDigraphs),
+                currentSet.toArray(new Question[0]));
     }
 
     private static KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)

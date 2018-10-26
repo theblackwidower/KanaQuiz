@@ -18,6 +18,8 @@ import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class QuestionManagement
 {
@@ -27,7 +29,7 @@ public class QuestionManagement
 
     private final int categoryCount;
 
-    private final Question[][][][] kanaSets;
+    private final Map<SetCode, Question[]> kanaSets;
 
     private final String[] prefIds;
 
@@ -40,16 +42,41 @@ public class QuestionManagement
         return categoryCount;
     }
 
+    static class SetCode implements Comparable<SetCode>
+    {
+        final int number;
+        final Diacritic diacritic;
+        final boolean isDigraphs;
+
+        SetCode(int number, Diacritic diacritic, boolean isDigraphs)
+        {
+            this.number = number;
+            this.diacritic = diacritic;
+            this.isDigraphs = isDigraphs;
+        }
+
+        @Override
+        public int compareTo(SetCode o)
+        {
+            int returnValue = number - o.number;
+            if (returnValue == 0)
+            {
+                returnValue = diacritic.ordinal() - o.diacritic.ordinal();
+                if (returnValue == 0)
+                {
+                    if (isDigraphs && !o.isDigraphs)
+                        returnValue = 1;
+                    else if (!isDigraphs && o.isDigraphs)
+                        returnValue = -1;
+                }
+            }
+            return returnValue;
+        }
+    }
+
     private Question[] getKanaSet(int number, Diacritic diacritic, boolean isDigraphs)
     {
-        try
-        {
-            return kanaSets[number - 1][diacritic.ordinal()][isDigraphs ? 1 : 0];
-        }
-        catch (ArrayIndexOutOfBoundsException ex)
-        {
-            return null;
-        }
+        return kanaSets.get(new SetCode(number, diacritic, isDigraphs));
     }
 
     public String getPrefId(int number)
@@ -84,7 +111,7 @@ public class QuestionManagement
 
     public QuestionManagement(int xmlRefId, Resources resources)
     {
-        List<Question[][][]> kanaSetList = new ArrayList<>();
+        Map<SetCode, Question[]> kanaSetList = new TreeMap<>();
         List<String> prefIdList = new ArrayList<>();
         List<String> setTitleList = new ArrayList<>();
         List<String> setNoDiacriticsTitleList = new ArrayList<>();
@@ -92,9 +119,9 @@ public class QuestionManagement
         XmlParser
                 .parseXmlDocument(xmlRefId, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
 
-        categoryCount = kanaSetList.size();
+        categoryCount = prefIdList.size();
 
-        kanaSets = kanaSetList.toArray(new Question[0][][][]);
+        kanaSets = kanaSetList;
         prefIds = prefIdList.toArray(new String[0]);
         setTitles = setTitleList.toArray(new String[0]);
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
