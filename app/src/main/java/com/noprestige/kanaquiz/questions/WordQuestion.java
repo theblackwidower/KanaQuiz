@@ -41,7 +41,7 @@ public class WordQuestion extends Question
         else if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_kanji))
             return fetchText(QuestionTextType.KANJI);
         else
-            return romaji;
+            return fetchText(QuestionTextType.KANA);
     }
 
     @SuppressWarnings("fallthrough")
