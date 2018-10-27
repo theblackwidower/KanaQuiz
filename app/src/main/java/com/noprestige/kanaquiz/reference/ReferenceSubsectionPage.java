@@ -17,14 +17,14 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class ReferenceSubsectionPage extends Fragment
 {
-    private static final String ARG_KANA_TYPE = "kanaType";
+    private static final String ARG_QUESTION_TYPE = "questionType";
     private static final String ARG_REF_CATEGORY = "refCategory";
 
-    public static ReferenceSubsectionPage newInstance(String kanaType, String refCategory)
+    public static ReferenceSubsectionPage newInstance(String questionType, String refCategory)
     {
         ReferenceSubsectionPage screen = new ReferenceSubsectionPage();
         Bundle args = new Bundle();
-        args.putString(ARG_KANA_TYPE, kanaType);
+        args.putString(ARG_QUESTION_TYPE, questionType);
         args.putString(ARG_REF_CATEGORY, refCategory);
         screen.setArguments(args);
         return screen;
@@ -33,7 +33,7 @@ public class ReferenceSubsectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        String kanaType = getArguments().getString(ARG_KANA_TYPE, "");
+        String questionType = getArguments().getString(ARG_QUESTION_TYPE, "");
         String refCategory = getArguments().getString(ARG_REF_CATEGORY, "");
 
         View scrollBox = inflater.inflate(R.layout.fragment_reference_subsection_empty, container, false);
@@ -41,7 +41,7 @@ public class ReferenceSubsectionPage extends Fragment
 
         QuestionManagement questions;
 
-        if (kanaType.equals(getContext().getResources().getString(R.string.vocabulary)))
+        if (questionType.equals(getContext().getResources().getString(R.string.vocabulary)))
         {
             for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
                 if (refCategory.equals(VOCABULARY.getSetTitle(i).toString()))
@@ -49,12 +49,12 @@ public class ReferenceSubsectionPage extends Fragment
         }
         else
         {
-            if (kanaType.equals(getContext().getResources().getString(R.string.hiragana)))
+            if (questionType.equals(getContext().getResources().getString(R.string.hiragana)))
                 questions = HIRAGANA;
-            else if (kanaType.equals(getContext().getResources().getString(R.string.katakana)))
+            else if (questionType.equals(getContext().getResources().getString(R.string.katakana)))
                 questions = KATAKANA;
             else
-                throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
+                throw new IllegalArgumentException("questionType '" + questionType + "' is invalid.");
 
             if (refCategory.equals(getContext().getResources().getString(R.string.base_form_title)))
                 layout.addView(questions.getMainReferenceTable(container.getContext()));

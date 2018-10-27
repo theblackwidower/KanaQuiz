@@ -19,17 +19,17 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
-    private String kanaType;
+    private String questionType;
     private List<String> tabList;
 
-    ReferenceSubsectionPager(FragmentManager fm, Context context, String kanaType)
+    ReferenceSubsectionPager(FragmentManager fm, Context context, String questionType)
     {
         super(fm);
-        this.kanaType = kanaType;
+        this.questionType = questionType;
 
         tabList = new ArrayList<>(3);
 
-        if (kanaType.equals(context.getResources().getString(R.string.vocabulary)))
+        if (questionType.equals(context.getResources().getString(R.string.vocabulary)))
         {
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
             for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
@@ -46,12 +46,12 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         {
             QuestionManagement questions;
 
-            if (kanaType.equals(context.getResources().getString(R.string.hiragana)))
+            if (questionType.equals(context.getResources().getString(R.string.hiragana)))
                 questions = HIRAGANA;
-            else if (kanaType.equals(context.getResources().getString(R.string.katakana)))
+            else if (questionType.equals(context.getResources().getString(R.string.katakana)))
                 questions = KATAKANA;
             else
-                throw new IllegalArgumentException("kanaType '" + kanaType + "' is invalid.");
+                throw new IllegalArgumentException("questionType '" + questionType + "' is invalid.");
 
             if (questions.anySelected())
                 tabList.add(context.getResources().getString(R.string.base_form_title));
@@ -65,7 +65,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return ReferenceSubsectionPage.newInstance(kanaType, tabList.get(position));
+        return ReferenceSubsectionPage.newInstance(questionType, tabList.get(position));
     }
 
     @Override
