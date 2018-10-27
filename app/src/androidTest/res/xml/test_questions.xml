@@ -2,14 +2,14 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="set1" setTitle="First Set">
+    <QuestionSet prefId="set1" setTitle="First Set">
         <KanaQuestion question="あ" answer="a"/>
         <KanaQuestion question="い" answer="i"/>
         <KanaQuestion question="う" answer="u"/>
         <KanaQuestion question="え" answer="e"/>
         <KanaQuestion question="お" answer="o"/>
-    </KanaSet>
-    <KanaSet prefId="set2" setTitle="Second Set">
+    </QuestionSet>
+    <QuestionSet prefId="set2" setTitle="Second Set">
         <KanaQuestion question="な" answer="na"/>
         <KanaQuestion question="に" answer="ni"/>
         <KanaQuestion question="ぬ" answer="nu"/>
@@ -20,8 +20,8 @@
             <KanaQuestion question="にゅ" answer="nyu"/>
             <KanaQuestion question="にょ" answer="nyo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="set3" setTitle="Third Set with Diacritics" setNoDiacriticsTitle="Third Set">
+    </QuestionSet>
+    <QuestionSet prefId="set3" setTitle="Third Set with Diacritics" setNoDiacriticsTitle="Third Set">
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
         <KanaQuestion question="ふ" answer="fu">
@@ -62,5 +62,5 @@
         <Section diacritics="CONSONANT" digraphs="false">
             <KanaQuestion question="ん" answer="n"/>
         </Section>
-    </KanaSet>
+    </QuestionSet>
 </Questions>
