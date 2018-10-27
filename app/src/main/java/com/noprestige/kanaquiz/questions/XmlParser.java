@@ -20,8 +20,8 @@ final class XmlParser
     private XmlParser() {}
 
     static void parseXmlDocument(int xmlRefId, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
-            List<String> setNoDiacriticsTitleList)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
+            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -30,9 +30,10 @@ final class XmlParser
             for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
                     eventType = parser.next())
             {
-                if ((eventType == XmlPullParser.START_TAG) && "KanaSet".equalsIgnoreCase(parser.getName()))
+                if ((eventType == XmlPullParser.START_TAG) && "QuestionSet".equalsIgnoreCase(parser.getName()))
                 {
-                    parseXmlKanaSet(parser, resources, kanaSetList, prefIdList, setTitleList, setNoDiacriticsTitleList);
+                    parseXmlQuestionSet(parser, resources, questionSetList, prefIdList, setTitleList,
+                            setNoDiacriticsTitleList);
                 }
             }
         }
@@ -44,9 +45,10 @@ final class XmlParser
         }
     }
 
-    private static void parseXmlKanaSet(XmlResourceParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> kanaSetList, List<String> prefIdList, List<String> setTitleList,
-            List<String> setNoDiacriticsTitleList) throws XmlPullParserException, IOException, ParseException
+    private static void parseXmlQuestionSet(XmlResourceParser parser, Resources resources,
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
+            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
         String setTitle = null;
@@ -68,7 +70,7 @@ final class XmlParser
         }
 
         if ((prefId == null) || (setTitle == null))
-            throw new ParseException("Missing attribute in KanaSet", parser.getLineNumber());
+            throw new ParseException("Missing attribute in QuestionSet", parser.getLineNumber());
 
         prefIdList.add(prefId);
         setTitleList.add(setTitle);
@@ -81,13 +83,13 @@ final class XmlParser
         int lineNumber = parser.getLineNumber();
 
         for (int eventType = parser.getEventType();
-                !((eventType == XmlPullParser.END_TAG) && "KanaSet".equalsIgnoreCase(parser.getName()));
+                !((eventType == XmlPullParser.END_TAG) && "QuestionSet".equalsIgnoreCase(parser.getName()));
                 eventType = parser.next())
         {
             if (eventType == XmlPullParser.START_TAG)
             {
                 if ("Section".equalsIgnoreCase(parser.getName()))
-                    parseXmlKanaSubsection(parser, resources, kanaSetList, indexPoint);
+                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint);
 
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
@@ -97,15 +99,15 @@ final class XmlParser
             }
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
-                throw new ParseException("Missing KanaSet closing tag", lineNumber);
+                throw new ParseException("Missing QuestionSet closing tag", lineNumber);
         }
 
-        kanaSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, false),
+        questionSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, false),
                 currentSet.toArray(new Question[0]));
     }
 
     private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> kanaSetList, int indexPoint)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
@@ -143,7 +145,7 @@ final class XmlParser
                 throw new ParseException("Missing Section closing tag", lineNumber);
         }
 
-        kanaSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, isDigraphs),
+        questionSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, isDigraphs),
                 currentSet.toArray(new Question[0]));
     }
 

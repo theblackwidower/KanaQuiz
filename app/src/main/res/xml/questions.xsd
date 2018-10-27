@@ -9,7 +9,7 @@
     <xs:element name="Questions">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="KanaSet" maxOccurs="unbounded"/>
+                <xs:element ref="QuestionSet" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
         <!-- ref: https://stackoverflow.com/a/5541804/3582371 -->
@@ -24,7 +24,7 @@
             <xs:field xpath="@romaji"/>
         </xs:unique>
         <xs:unique name="SetPrimaryKey">
-            <xs:selector xpath="kq:KanaSet"/>
+            <xs:selector xpath="kq:QuestionSet"/>
             <xs:field xpath="@prefId"/>
         </xs:unique>
         <xs:unique name="WordUniqueKana">
@@ -37,7 +37,7 @@
         </xs:unique>
     </xs:element>
 
-    <xs:element name="KanaSet">
+    <xs:element name="QuestionSet">
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
