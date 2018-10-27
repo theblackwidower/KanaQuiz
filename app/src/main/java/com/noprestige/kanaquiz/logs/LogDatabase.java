@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
-import android.database.Cursor;
 
 import org.threeten.bp.LocalDate;
 
@@ -37,25 +36,9 @@ public abstract class LogDatabase extends RoomDatabase
             database.execSQL("CREATE TABLE IF NOT EXISTS daily_record (date INTEGER, correct_answers REAL NOT NULL, " +
                     "total_answers INTEGER NOT NULL, PRIMARY KEY(date))");
 
-            Cursor cursor = database.query("SELECT * FROM old_daily_record");
-            if (cursor.getCount() > 0)
-            {
-                int dateIndex = cursor.getColumnIndex("date");
-                int correctIndex = cursor.getColumnIndex("correct_answers");
-                int incorrectIndex = cursor.getColumnIndex("incorrect_answers");
+            database.execSQL("INSERT INTO daily_record (date, correct_answers, total_answers) " +
+                    "SELECT date, correct_answers, correct_answers + incorrect_answers FROM old_daily_record");
 
-                while (!cursor.isLast())
-                {
-                    cursor.moveToNext();
-
-                    int dateValue = cursor.getInt(dateIndex);
-                    int correctValue = cursor.getInt(correctIndex);
-                    int incorrectValue = cursor.getInt(incorrectIndex);
-
-                    database.execSQL("INSERT INTO daily_record (date, correct_answers, total_answers) VALUES (?, ?, ?)",
-                            new Integer[]{dateValue, correctValue, (correctValue + incorrectValue)});
-                }
-            }
             database.execSQL("DROP TABLE old_daily_record");
         }
     };
@@ -77,51 +60,13 @@ public abstract class LogDatabase extends RoomDatabase
                     "NULL, incorrect_romanji TEXT NOT NULL, occurrences INTEGER NOT NULL, PRIMARY KEY(date, kana, " +
                     "incorrect_romanji))");
 
-
-            Cursor kanaCursor = database.query("SELECT * FROM old_kana_records");
-            if (kanaCursor.getCount() > 0)
-            {
-                int kanaKanaIndex = kanaCursor.getColumnIndex("kana");
-                int kanaCorrectIndex = kanaCursor.getColumnIndex("correct_answers");
-                int kanaIncorrectIndex = kanaCursor.getColumnIndex("incorrect_answers");
-
-                while (!kanaCursor.isLast())
-                {
-                    kanaCursor.moveToNext();
-
-                    String kanaKanaValue = kanaCursor.getString(kanaKanaIndex);
-                    int kanaCorrectValue = kanaCursor.getInt(kanaCorrectIndex);
-                    int kanaIncorrectValue = kanaCursor.getInt(kanaIncorrectIndex);
-
-                    database.execSQL("INSERT INTO kana_records (date, kana, correct_answers, incorrect_answers) " +
-                                    "VALUES (?, ?, ?, ?)",
-                            new Object[]{currentDate, kanaKanaValue, kanaCorrectValue, kanaIncorrectValue});
-                }
-            }
+            database.execSQL("INSERT INTO kana_records (date, kana, correct_answers, incorrect_answers) " + "SELECT '" +
+                    currentDate + "', kana, correct_answers, incorrect_answers FROM old_kana_records");
             database.execSQL("DROP TABLE old_kana_records");
 
-
-            Cursor incorrectCursor = database.query("SELECT * FROM old_incorrect_answers");
-            if (incorrectCursor.getCount() > 0)
-            {
-                int incorrectKanaIndex = incorrectCursor.getColumnIndex("kana");
-                int incorrectRomanjiIndex = incorrectCursor.getColumnIndex("incorrect_romanji");
-                int incorrectOccurrencesIndex = incorrectCursor.getColumnIndex("occurrences");
-
-                while (!incorrectCursor.isLast())
-                {
-                    incorrectCursor.moveToNext();
-
-                    String incorrectKanaValue = incorrectCursor.getString(incorrectKanaIndex);
-                    String incorrectRomanjiValue = incorrectCursor.getString(incorrectRomanjiIndex);
-                    int incorrectOccurrencesValue = incorrectCursor.getInt(incorrectOccurrencesIndex);
-
-                    database.execSQL("INSERT INTO incorrect_answers (date, kana, incorrect_romanji, occurrences) " +
-                            "VALUES (?, ?, ?, ?)", new Object[]{
-                            currentDate, incorrectKanaValue, incorrectRomanjiValue, incorrectOccurrencesValue
-                    });
-                }
-            }
+            database.execSQL(
+                    "INSERT INTO incorrect_answers (date, kana, incorrect_romanji, occurrences) " + "SELECT '" +
+                            currentDate + "', kana, incorrect_romanji, occurrences FROM old_incorrect_answers");
             database.execSQL("DROP TABLE old_incorrect_answers");
         }
     };
