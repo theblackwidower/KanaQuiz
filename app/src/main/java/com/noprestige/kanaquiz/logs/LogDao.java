@@ -14,7 +14,7 @@ import androidx.room.Update;
 @Dao
 public abstract class LogDao
 {
-    static class GetKanaPercentage extends AsyncTask<String, Void, Float>
+    static class GetQuestionPercentage extends AsyncTask<String, Void, Float>
     {
         @Override
         protected Float doInBackground(String... data)
@@ -140,11 +140,11 @@ public abstract class LogDao
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public static Float getKanaPercentage(String question)
+    public static Float getQuestionPercentage(String question)
     {
         try
         {
-            return new GetKanaPercentage().execute(question).get();
+            return new GetQuestionPercentage().execute(question).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {

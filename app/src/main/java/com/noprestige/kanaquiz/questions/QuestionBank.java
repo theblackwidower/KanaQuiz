@@ -75,15 +75,15 @@ public class QuestionBank extends WeightedList<Question>
             boolean returnValue = true;
             for (Question question : questions)
             {
-                // Fetches the percentage of times the user got a kana right,
-                Float percentage = LogDao.getKanaPercentage(question.getDatabaseKey());
+                // Fetches the percentage of times the user got a question right,
+                Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
                 if (percentage == null)
                     percentage = 0.1f;
                 // The 1f is to invert the value so we get the number of times they got it wrong,
                 // Times 100f to get the percentage.
                 int weight = (int) Math.ceil((1f - percentage) * 100f);
                 // Setting weight to never get lower than 2,
-                // so any kana the user got perfect will still appear in the quiz.
+                // so any question the user got perfect will still appear in the quiz.
                 if (weight < 2)
                     weight = 2;
                 // if any one of the additions fail, the method returns false
