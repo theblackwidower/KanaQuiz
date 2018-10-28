@@ -188,16 +188,16 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDao.reportCorrectAnswer(lblQuestion.getText().toString());
+                    LogDao.reportCorrectAnswer(questionBank.getCurrentQuestionKey());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
-                    LogDao.reportRetriedCorrectAnswer(lblQuestion.getText().toString(), score);
+                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), score);
                 }
                 else
-                    LogDao.reportRetriedCorrectAnswer(lblQuestion.getText().toString(), 0);
+                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), 0);
             }
             else
             {
@@ -221,7 +221,7 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
-                    LogDao.reportIncorrectRetry(lblQuestion.getText().toString(), answer);
+                    LogDao.reportIncorrectRetry(questionBank.getCurrentQuestionKey(), answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -231,7 +231,7 @@ public class MainQuiz extends AppCompatActivity
                 }
 
                 if (isGetNewQuestion)
-                    LogDao.reportIncorrectAnswer(lblQuestion.getText().toString(), answer);
+                    LogDao.reportIncorrectAnswer(questionBank.getCurrentQuestionKey(), answer);
             }
 
             if (isGetNewQuestion)

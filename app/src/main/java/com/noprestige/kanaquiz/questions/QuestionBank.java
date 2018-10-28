@@ -54,6 +54,11 @@ public class QuestionBank extends WeightedList<Question>
         return currentQuestion.getQuestionText();
     }
 
+    public String getCurrentQuestionKey()
+    {
+        return currentQuestion.getDatabaseKey();
+    }
+
     public boolean checkCurrentAnswer(String response)
     {
         return currentQuestion.checkAnswer(response);
