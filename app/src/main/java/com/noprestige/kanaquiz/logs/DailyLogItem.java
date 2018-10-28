@@ -215,9 +215,9 @@ public class DailyLogItem extends View
 
     public void setFromRecord(DailyRecord record)
     {
-        setDate(record.date);
-        setCorrectAnswers(record.correctAnswers);
-        setTotalAnswers(record.totalAnswers);
+        setDate(record.getDate());
+        setCorrectAnswers(record.getCorrectAnswers());
+        setTotalAnswers(record.getTotalAnswers());
     }
 
     public LocalDate getDate()

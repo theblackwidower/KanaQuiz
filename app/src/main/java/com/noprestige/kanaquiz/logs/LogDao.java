@@ -29,8 +29,8 @@ public abstract class LogDao
                 int totalIncorrect = 0;
                 for (QuestionRecord record : records)
                 {
-                    totalCorrect += record.correctAnswers;
-                    totalIncorrect += record.incorrectAnswers;
+                    totalCorrect += record.getCorrectAnswers();
+                    totalIncorrect += record.getIncorrectAnswers();
                 }
                 return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
             }
@@ -51,7 +51,7 @@ public abstract class LogDao
             {
                 int totalOccurrences = 0;
                 for (IncorrectAnswerRecord record : records)
-                    totalOccurrences += record.occurrences;
+                    totalOccurrences += record.getOccurrences();
                 return totalOccurrences;
             }
         }
@@ -177,9 +177,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertDailyRecord(record);
         }
         if (score > 0)
-            record.correctAnswers += score;
+            record.addToCorrectAnswers(score);
 
-        record.totalAnswers++;
+        record.incrementTotalAnswers();
 
         LogDatabase.DAO.updateDailyRecord(record);
     }
@@ -193,9 +193,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertQuestionRecord(record);
         }
         if (isCorrect)
-            record.correctAnswers++;
+            record.incrementCorrectAnswers();
         else
-            record.incorrectAnswers++;
+            record.incrementIncorrectAnswers();
         LogDatabase.DAO.updateQuestionRecord(record);
     }
 
@@ -209,7 +209,7 @@ public abstract class LogDao
         }
         else
         {
-            record.occurrences++;
+            record.incrementOccurrences();
             LogDatabase.DAO.updateIncorrectAnswer(record);
         }
     }

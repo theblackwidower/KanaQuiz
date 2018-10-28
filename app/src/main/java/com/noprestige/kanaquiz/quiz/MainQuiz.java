@@ -77,8 +77,8 @@ public class MainQuiz extends AppCompatActivity
         {
             if (record != null)
             {
-                totalQuestions += record.totalAnswers;
-                totalCorrect += record.correctAnswers;
+                totalQuestions += record.getTotalAnswers();
+                totalCorrect += record.getCorrectAnswers();
             }
             frmAnswer.updateScore(totalCorrect, totalQuestions);
         }

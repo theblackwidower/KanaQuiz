@@ -53,15 +53,15 @@ public class LogView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
-            startDate = records[0].date;
+            startDate = records[0].getDate();
 
             for (DailyRecord record : records)
             {
                 DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
                 output.setFromRecord(record);
 
-                graphSeries.appendData(new DataPoint(startDate.until(record.date, DAYS),
-                        (record.correctAnswers / record.totalAnswers) * 100f), true, 1000, true);
+                graphSeries.appendData(new DataPoint(startDate.until(record.getDate(), DAYS),
+                        (record.getCorrectAnswers() / record.getTotalAnswers()) * 100f), true, 1000, true);
 
                 if (isCancelled())
                     return null;
