@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -117,6 +118,14 @@ public class DailyLogItem extends View
 
         internalVerticalPadding = Math.round(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
+
+        setOnClickListener(view ->
+        {
+            //ref: https://stackoverflow.com/a/3913735/3582371
+            Intent intent = new Intent(getContext(), LogDetailView.class);
+            intent.putExtra("date", getDate());
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override
