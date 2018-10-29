@@ -44,7 +44,7 @@ public class LogView extends AppCompatActivity
         @Override
         protected Integer doInBackground(LogView... activity)
         {
-            layout = activity[0].findViewById(R.id.log_view_layout);
+            layout = activity[0].findViewById(R.id.logViewLayout);
             lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
             logGraph = activity[0].findViewById(R.id.logGraph);
 
