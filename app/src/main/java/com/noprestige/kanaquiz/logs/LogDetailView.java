@@ -65,7 +65,7 @@ public class LogDetailView extends AppCompatActivity
                         return super.formatLabel(value, isValueX);
                     else
                     {
-                        int key = (int) Math.round(value);
+                        int key = (int) Math.floor(value);
                         return ((key >= 0) && (key < staticLabels.size())) ? staticLabels.get(key) : null;
                     }
                 }
@@ -74,6 +74,8 @@ public class LogDetailView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
+            graphSeries.setSpacing(10);
+            graphSeries.setDataWidth(1.0);
 
             for (QuestionRecord record : records)
             {
@@ -84,7 +86,7 @@ public class LogDetailView extends AppCompatActivity
                 output.setText(record.getQuestion() + "     " + record.getCorrectAnswers() + '/' +
                         (record.getCorrectAnswers() + record.getIncorrectAnswers()));
 
-                graphSeries.appendData(new DataPoint(staticLabels.size(), (record.getCorrectAnswers() * 100) /
+                graphSeries.appendData(new DataPoint(staticLabels.size() + 0.5, (record.getCorrectAnswers() * 100) /
                         (record.getCorrectAnswers() + record.getIncorrectAnswers())), true, 1000, true);
 
                 staticLabels.add(record.getQuestion());
@@ -102,6 +104,7 @@ public class LogDetailView extends AppCompatActivity
         {
             layout.addView(item[0], layout.getChildCount() - 1);
             logGraph.getViewport().setMaxX(staticLabels.size());
+            logGraph.removeAllSeries();
             logGraph.addSeries(graphSeries);
 
             if (staticLabels.size() >= 2)
