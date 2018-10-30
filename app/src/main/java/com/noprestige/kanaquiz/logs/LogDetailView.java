@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.noprestige.kanaquiz.R;
@@ -36,7 +35,6 @@ public class LogDetailView extends AppCompatActivity
         GraphView logGraph;
         BarGraphSeries<DataPoint> graphSeries;
         List<String> staticLabels;
-        StaticLabelsFormatter labelFormatter;
 
         @Override
         protected void onPreExecute()
@@ -52,8 +50,6 @@ public class LogDetailView extends AppCompatActivity
             lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
             logGraph = activity[0].findViewById(R.id.logGraph);
 
-            labelFormatter = new StaticLabelsFormatter(logGraph);
-
             QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity[0].date);
 
             logGraph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter()
@@ -62,12 +58,12 @@ public class LogDetailView extends AppCompatActivity
                 public String formatLabel(double value, boolean isValueX)
                 {
                     if (isValueX)
-                        return super.formatLabel(value, isValueX);
-                    else
                     {
                         int key = (int) Math.floor(value);
                         return ((key >= 0) && (key < staticLabels.size())) ? staticLabels.get(key) : null;
                     }
+                    else
+                        return super.formatLabel(value, isValueX);
                 }
             });
 
@@ -106,12 +102,6 @@ public class LogDetailView extends AppCompatActivity
             logGraph.getViewport().setMaxX(staticLabels.size());
             logGraph.removeAllSeries();
             logGraph.addSeries(graphSeries);
-
-            if (staticLabels.size() >= 2)
-            {
-                labelFormatter.setHorizontalLabels(staticLabels.toArray(new String[0]));
-                logGraph.getGridLabelRenderer().setLabelFormatter(labelFormatter);
-            }
         }
 
         @Override
