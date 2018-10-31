@@ -61,7 +61,13 @@ public class LogDetailView extends AppCompatActivity
                     if (isValueX)
                     {
                         int key = (int) Math.floor(value);
-                        return ((key >= 0) && (key < staticLabels.size())) ? staticLabels.get(key) : null;
+                        if ((key >= 0) && (key < staticLabels.size()))
+                        {
+                            double diff = value - key;
+                            if ((diff >= 0.4) && (diff <= 0.6))
+                                return staticLabels.get(key);
+                        }
+                        return null;
                     }
                     else
                         return super.formatLabel(value, isValueX);
@@ -103,6 +109,7 @@ public class LogDetailView extends AppCompatActivity
             logGraph.getViewport().setMaxX(staticLabels.size());
             logGraph.removeAllSeries();
             logGraph.addSeries(graphSeries);
+            logGraph.getGridLabelRenderer().setNumHorizontalLabels(staticLabels.size() * 2);
         }
 
         @Override
