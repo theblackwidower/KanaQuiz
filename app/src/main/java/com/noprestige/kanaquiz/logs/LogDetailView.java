@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
@@ -23,10 +24,11 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class LogDetailView extends AppCompatActivity
 {
-    static class FetchLogDetails extends AsyncTask<LogDetailView, TextView, Integer>
+    static class FetchLogDetails extends AsyncTask<LogDetailView, RelativeLayout, Integer>
     {
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
@@ -80,14 +82,30 @@ public class LogDetailView extends AppCompatActivity
             graphSeries.setSpacing(10);
             graphSeries.setDataWidth(1.0);
 
+            float textSize = TypedValue
+                    .applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, activity[0].getResources().getDisplayMetrics());
+            RelativeLayout.LayoutParams questionLayout = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            RelativeLayout.LayoutParams scoreLayout = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            questionLayout.addRule(RelativeLayout.ALIGN_PARENT_START);
+            scoreLayout.addRule(RelativeLayout.ALIGN_PARENT_END);
+
             for (QuestionRecord record : records)
             {
-                TextView output = new TextView(activity[0].getBaseContext());
+                RelativeLayout output = new RelativeLayout(activity[0].getBaseContext());
 
-                output.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14,
-                        activity[0].getResources().getDisplayMetrics()));
-                output.setText(record.getQuestion() + "     " + record.getCorrectAnswers() + '/' +
-                        (record.getCorrectAnswers() + record.getIncorrectAnswers()));
+                TextView question = new TextView(activity[0].getBaseContext());
+                TextView score = new TextView(activity[0].getBaseContext());
+
+                question.setTextSize(textSize);
+                score.setTextSize(textSize);
+                question.setLayoutParams(questionLayout);
+                score.setLayoutParams(scoreLayout);
+                question.setText(record.getQuestion());
+                score.setText(Integer.toString(record.getCorrectAnswers()) + '/' +
+                        Integer.toString(record.getCorrectAnswers() + record.getIncorrectAnswers()));
+
+                output.addView(question);
+                output.addView(score);
 
                 graphSeries.appendData(new DataPoint(staticLabels.size() + 0.5, (record.getCorrectAnswers() * 100) /
                         (record.getCorrectAnswers() + record.getIncorrectAnswers())), true, 1000, true);
@@ -103,7 +121,7 @@ public class LogDetailView extends AppCompatActivity
         }
 
         @Override
-        protected void onProgressUpdate(TextView... item)
+        protected void onProgressUpdate(RelativeLayout... item)
         {
             layout.addView(item[0], layout.getChildCount() - 1);
             logGraph.getViewport().setMaxX(staticLabels.size());
