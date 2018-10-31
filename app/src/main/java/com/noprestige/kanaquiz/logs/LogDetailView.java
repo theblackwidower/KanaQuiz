@@ -72,6 +72,7 @@ public class LogDetailView extends AppCompatActivity
 
             graphSeries.setSpacing(10);
             graphSeries.setDataWidth(1.0);
+            graphSeries.appendData(new DataPoint(0, 0), true, 1000, true);
 
             for (QuestionRecord record : records)
             {
@@ -116,7 +117,13 @@ public class LogDetailView extends AppCompatActivity
         protected void onPostExecute(Integer count)
         {
             if (count > 0)
+            {
                 layout.removeView(lblLogMessage);
+
+                graphSeries.appendData(new DataPoint(staticLabels.size(), 0), true, 1000, true);
+                logGraph.removeAllSeries();
+                logGraph.addSeries(graphSeries);
+            }
             else
                 lblLogMessage.setText(R.string.no_logs);
         }
