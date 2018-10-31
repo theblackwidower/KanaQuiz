@@ -84,10 +84,6 @@ public class LogDetailView extends AppCompatActivity
 
             float textSize = TypedValue
                     .applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, activity[0].getResources().getDisplayMetrics());
-            RelativeLayout.LayoutParams questionLayout = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            RelativeLayout.LayoutParams scoreLayout = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            questionLayout.addRule(RelativeLayout.ALIGN_PARENT_START);
-            scoreLayout.addRule(RelativeLayout.ALIGN_PARENT_END);
 
             for (QuestionRecord record : records)
             {
@@ -95,6 +91,12 @@ public class LogDetailView extends AppCompatActivity
 
                 TextView question = new TextView(activity[0].getBaseContext());
                 TextView score = new TextView(activity[0].getBaseContext());
+
+                RelativeLayout.LayoutParams questionLayout =
+                        new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                RelativeLayout.LayoutParams scoreLayout = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+                questionLayout.addRule(RelativeLayout.ALIGN_PARENT_START);
+                scoreLayout.addRule(RelativeLayout.ALIGN_PARENT_END);
 
                 question.setTextSize(textSize);
                 score.setTextSize(textSize);
