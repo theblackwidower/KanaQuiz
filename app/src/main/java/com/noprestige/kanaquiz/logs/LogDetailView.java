@@ -12,6 +12,7 @@ import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.PointsGraphSeries;
 import com.noprestige.kanaquiz.R;
 
 import org.threeten.bp.LocalDate;
@@ -72,7 +73,6 @@ public class LogDetailView extends AppCompatActivity
 
             graphSeries.setSpacing(10);
             graphSeries.setDataWidth(1.0);
-            graphSeries.appendData(new DataPoint(0, 0), true, 1000, true);
 
             for (QuestionRecord record : records)
             {
@@ -120,9 +120,11 @@ public class LogDetailView extends AppCompatActivity
             {
                 layout.removeView(lblLogMessage);
 
-                graphSeries.appendData(new DataPoint(staticLabels.size(), 0), true, 1000, true);
-                logGraph.removeAllSeries();
-                logGraph.addSeries(graphSeries);
+                PointsGraphSeries<DataPoint> graphPadding = new PointsGraphSeries<>();
+                graphPadding.setSize(0);
+                graphPadding.appendData(new DataPoint(0, 0), true, 1000, true);
+                graphPadding.appendData(new DataPoint(staticLabels.size(), 0), true, 1000, true);
+                logGraph.addSeries(graphPadding);
             }
             else
                 lblLogMessage.setText(R.string.no_logs);
