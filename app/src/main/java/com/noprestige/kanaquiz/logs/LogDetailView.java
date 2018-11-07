@@ -64,7 +64,7 @@ public class LogDetailView extends AppCompatActivity
                         if ((key >= 0) && (key < staticLabels.size()))
                         {
                             double diff = value - key;
-                            if ((diff >= 0.4) && (diff <= 0.6))
+                            if ((diff >= 0.499) && (diff <= 0.501))
                                 return staticLabels.get(key);
                         }
                         return null;
