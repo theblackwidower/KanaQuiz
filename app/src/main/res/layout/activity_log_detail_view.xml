@@ -13,24 +13,24 @@
     tools:context="com.noprestige.kanaquiz.logs.LogDetailView">
 
     <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/logGraph"
+        android:id="@+id/logDetailChart"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>
 
     <ScrollView
-        android:id="@+id/logViewScroll"
+        android:id="@+id/logDetailViewScroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/logViewLayout"
+            android:id="@+id/logDetailViewLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/lblLogMessage"
+                android:id="@+id/lblDetailMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/loading"

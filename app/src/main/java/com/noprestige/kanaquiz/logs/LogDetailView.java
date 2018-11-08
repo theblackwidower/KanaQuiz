@@ -31,29 +31,29 @@ public class LogDetailView extends AppCompatActivity
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
         @SuppressLint("StaticFieldLeak")
-        TextView lblLogMessage;
+        TextView lblDetailMessage;
         @SuppressLint("StaticFieldLeak")
-        BarChart logGraph;
-        List<BarEntry> graphSeries;
+        BarChart logDetailChart;
+        List<BarEntry> chartSeries;
         List<String> staticLabels;
 
         @Override
         protected void onPreExecute()
         {
-            graphSeries = new ArrayList<>();
+            chartSeries = new ArrayList<>();
             staticLabels = new ArrayList<>();
         }
 
         @Override
         protected Integer doInBackground(LogDetailView... activity)
         {
-            layout = activity[0].findViewById(R.id.logViewLayout);
-            lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
-            logGraph = activity[0].findViewById(R.id.logGraph);
+            layout = activity[0].findViewById(R.id.logDetailViewLayout);
+            lblDetailMessage = activity[0].findViewById(R.id.lblDetailMessage);
+            logDetailChart = activity[0].findViewById(R.id.logDetailChart);
 
             QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity[0].date);
 
-            logGraph.getXAxis().setValueFormatter((value, axis) ->
+            logDetailChart.getXAxis().setValueFormatter((value, axis) ->
             {
                 int key = Math.round(value);
                 if ((key >= 0) && (key < staticLabels.size()))
@@ -64,22 +64,22 @@ public class LogDetailView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
-            logGraph.getAxisLeft().setAxisMaximum(100);
-            logGraph.getAxisLeft().setAxisMinimum(0);
-            logGraph.getAxisRight().setEnabled(false);
-            logGraph.getXAxis().setGranularity(1);
-            logGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-            logGraph.getXAxis().setDrawGridLines(false);
-            logGraph.getLegend().setEnabled(false);
-            logGraph.getDescription().setText("");
-            logGraph.setScaleYEnabled(false);
+            logDetailChart.getAxisLeft().setAxisMaximum(100);
+            logDetailChart.getAxisLeft().setAxisMinimum(0);
+            logDetailChart.getAxisRight().setEnabled(false);
+            logDetailChart.getXAxis().setGranularity(1);
+            logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+            logDetailChart.getXAxis().setDrawGridLines(false);
+            logDetailChart.getLegend().setEnabled(false);
+            logDetailChart.getDescription().setText("");
+            logDetailChart.setScaleYEnabled(false);
 
             for (QuestionRecord record : records)
             {
                 LogDetailItem output = new LogDetailItem(activity[0].getBaseContext());
                 output.setFromRecord(record);
 
-                graphSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
+                chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
                         (record.getCorrectAnswers() + record.getIncorrectAnswers())));
 
                 staticLabels.add(record.getQuestion());
@@ -90,13 +90,13 @@ public class LogDetailView extends AppCompatActivity
                     publishProgress(output);
             }
 
-            BarData data = new BarData(new BarDataSet(graphSeries, null));
-            logGraph.setData(data);
+            BarData data = new BarData(new BarDataSet(chartSeries, null));
+            logDetailChart.setData(data);
 
             data.setBarWidth(0.8f);
             data.setDrawValues(false);
 
-            logGraph.invalidate();
+            logDetailChart.invalidate();
 
             return records.length;
         }
@@ -111,17 +111,17 @@ public class LogDetailView extends AppCompatActivity
         protected void onCancelled()
         {
             layout = null;
-            lblLogMessage = null;
-            logGraph = null;
+            lblDetailMessage = null;
+            logDetailChart = null;
         }
 
         @Override
         protected void onPostExecute(Integer count)
         {
             if (count > 0)
-                layout.removeView(lblLogMessage);
+                layout.removeView(lblDetailMessage);
             else
-                lblLogMessage.setText(R.string.no_logs);
+                lblDetailMessage.setText(R.string.no_logs);
         }
     }
 
@@ -152,8 +152,8 @@ public class LogDetailView extends AppCompatActivity
 
         int viewOrientation;
 
-        int graphWidth;
-        int graphHeight;
+        int chartWidth;
+        int chartHeight;
 
         int listWidth;
         int listHeight;
@@ -162,9 +162,9 @@ public class LogDetailView extends AppCompatActivity
         {
             viewOrientation = LinearLayout.HORIZONTAL;
 
-            graphWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
+            chartWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
                     getApplicationContext().getResources().getDisplayMetrics()));
-            graphHeight = MATCH_PARENT;
+            chartHeight = MATCH_PARENT;
 
             listWidth = 0;
             listHeight = MATCH_PARENT;
@@ -173,16 +173,16 @@ public class LogDetailView extends AppCompatActivity
         {
             viewOrientation = LinearLayout.VERTICAL;
 
-            graphWidth = MATCH_PARENT;
-            graphHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
+            chartWidth = MATCH_PARENT;
+            chartHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
                     getApplicationContext().getResources().getDisplayMetrics()));
 
             listWidth = MATCH_PARENT;
             listHeight = 0;
         }
         ((LinearLayout) findViewById(R.id.activity_log_detail_view)).setOrientation(viewOrientation);
-        findViewById(R.id.logGraph).setLayoutParams(new LinearLayout.LayoutParams(graphWidth, graphHeight));
-        findViewById(R.id.logViewScroll).setLayoutParams(new LinearLayout.LayoutParams(listWidth, listHeight, 1));
+        findViewById(R.id.logDetailChart).setLayoutParams(new LinearLayout.LayoutParams(chartWidth, chartHeight));
+        findViewById(R.id.logDetailViewScroll).setLayoutParams(new LinearLayout.LayoutParams(listWidth, listHeight, 1));
     }
 
     @Override
