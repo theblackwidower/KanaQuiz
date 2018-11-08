@@ -69,6 +69,7 @@ public class LogDetailView extends AppCompatActivity
             logGraph.getAxisRight().setEnabled(false);
             logGraph.getXAxis().setGranularity(1);
             logGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+            logGraph.getXAxis().setDrawGridLines(false);
             logGraph.getLegend().setEnabled(false);
             logGraph.getDescription().setText("");
             logGraph.setScaleYEnabled(false);
@@ -92,7 +93,7 @@ public class LogDetailView extends AppCompatActivity
             BarData data = new BarData(new BarDataSet(graphSeries, null));
             logGraph.setData(data);
 
-            data.setBarWidth(0.9f);
+            data.setBarWidth(0.8f);
             data.setDrawValues(false);
 
             logGraph.invalidate();
