@@ -71,6 +71,7 @@ public class LogDetailView extends AppCompatActivity
             logGraph.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
             logGraph.getLegend().setEnabled(false);
             logGraph.getDescription().setText("");
+            logGraph.setScaleYEnabled(false);
 
             for (QuestionRecord record : records)
             {
