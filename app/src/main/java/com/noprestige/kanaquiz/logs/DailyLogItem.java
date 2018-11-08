@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -89,12 +90,14 @@ public class DailyLogItem extends View
         init(attrs, defStyle);
     }
 
+    @SuppressLint("ResourceType")
     private void init(AttributeSet attrs, int defStyle)
     {
         Context context = getContext();
 
         if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
+            defaultAttributes = context.getTheme().obtainStyledAttributes(
+                    new int[]{android.R.attr.textColorTertiary, android.R.attr.selectableItemBackground});
 
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
@@ -118,6 +121,8 @@ public class DailyLogItem extends View
 
         internalVerticalPadding = Math.round(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
+
+        setBackground(defaultAttributes.getDrawable(1));
 
         setOnClickListener(view ->
         {
