@@ -64,16 +64,6 @@ public class LogDetailView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
-            logDetailChart.getAxisLeft().setAxisMaximum(100);
-            logDetailChart.getAxisLeft().setAxisMinimum(0);
-            logDetailChart.getAxisRight().setEnabled(false);
-            logDetailChart.getXAxis().setGranularity(1);
-            logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-            logDetailChart.getXAxis().setDrawGridLines(false);
-            logDetailChart.getLegend().setEnabled(false);
-            logDetailChart.getDescription().setText("");
-            logDetailChart.setScaleYEnabled(false);
-
             for (QuestionRecord record : records)
             {
                 LogDetailItem output = new LogDetailItem(activity[0].getBaseContext());
@@ -143,6 +133,18 @@ public class LogDetailView extends AppCompatActivity
 
         fetchThread = new FetchLogDetails();
         fetchThread.execute(this);
+
+        BarChart logDetailChart = findViewById(R.id.logDetailChart);
+
+        logDetailChart.getAxisLeft().setAxisMaximum(100);
+        logDetailChart.getAxisLeft().setAxisMinimum(0);
+        logDetailChart.getAxisRight().setEnabled(false);
+        logDetailChart.getXAxis().setGranularity(1);
+        logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        logDetailChart.getXAxis().setDrawGridLines(false);
+        logDetailChart.getLegend().setEnabled(false);
+        logDetailChart.getDescription().setText("");
+        logDetailChart.setScaleYEnabled(false);
     }
 
     @Override
