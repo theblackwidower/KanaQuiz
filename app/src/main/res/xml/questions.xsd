@@ -19,6 +19,10 @@
             <xs:selector xpath="*/kq:KanaQuestion|*/*/kq:KanaQuestion"/>
             <xs:field xpath="@question"/>
         </xs:unique>
+        <xs:unique name="KanjiPrimaryKey">
+            <xs:selector xpath="*/kq:KanjiQuestion"/>
+            <xs:field xpath="@question"/>
+        </xs:unique>
         <xs:unique name="WordPrimaryKey">
             <xs:selector xpath="*/kq:WordQuestion"/>
             <xs:field xpath="@romaji"/>
@@ -42,6 +46,7 @@
             <xs:sequence>
                 <xs:choice>
                     <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
+                    <xs:element ref="KanjiQuestion" maxOccurs="unbounded"/>
                     <xs:element ref="WordQuestion" maxOccurs="unbounded"/>
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
@@ -83,6 +88,15 @@
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romaji" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="KanjiQuestion">
+        <xs:complexType>
+            <xs:attribute name="question" type="kanji" use="required"/>
+            <xs:attribute name="meaning" type="text" use="required"/>
+            <xs:attribute name="kunyomi" type="romaji" use="required"/>
+            <xs:attribute name="onyomi" type="romaji" use="required"/>
         </xs:complexType>
     </xs:element>
 

@@ -173,6 +173,12 @@
     <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
     <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
 
+    <string name="kanji_set_elements_title">Wu Xing Elements</string>
+    <string name="kanji_set_day_night_title">Day &amp; Night</string>
+    <string name="kanji_set_numbers_1_title">Numbers 1–5</string>
+    <string name="kanji_set_numbers_2_title">Numbers 6–10</string>
+    <string name="kanji_set_direction_title">Think about direction</string>
+
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
     <string name="vocab_set_animals_title">Animals</string>
