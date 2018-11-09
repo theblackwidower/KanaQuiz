@@ -10,14 +10,13 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 
 import java.text.DecimalFormat;
 
 public class LogDetailItem extends View
 {
-    private float correctAnswers = -1;
+    private int correctAnswers = -1;
     private int totalAnswers = -1;
     private String question = "";
     private boolean isDynamicSize = true;
@@ -193,7 +192,7 @@ public class LogDetailItem extends View
         return question;
     }
 
-    public float getCorrectAnswers()
+    public int getCorrectAnswers()
     {
         return correctAnswers;
     }
@@ -224,7 +223,7 @@ public class LogDetailItem extends View
         updateAnswers();
     }
 
-    public void setCorrectAnswers(float correctAnswers)
+    public void setCorrectAnswers(int correctAnswers)
     {
         this.correctAnswers = correctAnswers;
         updateAnswers();
@@ -258,11 +257,6 @@ public class LogDetailItem extends View
     public void setIsDynamicSize(boolean isDynamicSize)
     {
         this.isDynamicSize = isDynamicSize;
-    }
-
-    private static String parseCount(float count)
-    {
-        return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
     private static String parseCount(int count)
