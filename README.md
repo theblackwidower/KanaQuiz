@@ -48,6 +48,7 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Pronunciation Guide
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
+  * Proper kanji support with kanji questions
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
