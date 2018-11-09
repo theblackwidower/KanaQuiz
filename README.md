@@ -72,7 +72,7 @@ _NB: The following features have no planned release date, or guarantee of releas
 
 ## Branching Model
 
-I'm using the `develop` branch for main development and experimentation, and the `master` branch for releases, as well as readme and privacy policy updates.
+I'm using the `develop` branch for main development and experimentation, as well as readme and privacy policy updates; and the `master` branch for releases.
 
 Mainly, the branching model I'm currently experimenting with is inspired by [this blog post](https://nvie.com/posts/a-successful-git-branching-model/). But I am altering it for my own purposes.
 
