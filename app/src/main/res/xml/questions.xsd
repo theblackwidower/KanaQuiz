@@ -99,7 +99,7 @@
             </xs:sequence>
             <xs:attribute name="romaji" type="romaji" use="required"/>
             <xs:attribute name="kana" type="kana" use="required"/>
-            <xs:attribute name="kanji" type="kanji"/>
+            <xs:attribute name="kanji" type="kanji-kana"/>
             <xs:attribute name="answer" type="text" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -162,6 +162,13 @@
             <!-- with this name until the entire IDE is restarted. Which is a pretty glaring error. -->
             <!-- So I had to convert them to proper unicode characters. -->
             <!-- ref: http://unicode.scarfboy.com/ -->
+            <xs:pattern value="[㐀-䶵一-鿋豈-頻]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="kanji-kana">
+        <xs:restriction base="text">
+            <!-- Hiragana and Kanji in any combination, but there must be at least one kanji character. -->
             <xs:pattern value="[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*"/>
         </xs:restriction>
     </xs:simpleType>
