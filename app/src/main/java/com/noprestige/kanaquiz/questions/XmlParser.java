@@ -94,6 +94,9 @@ final class XmlParser
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
 
+                else if ("KanjiQuestion".equalsIgnoreCase(parser.getName()))
+                    currentSet.add(parseXmlKanjiQuestion(parser, resources));
+
                 else if ("WordQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlWordQuestion(parser, resources));
             }
@@ -176,6 +179,30 @@ final class XmlParser
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
+    }
+
+    private static KanjiQuestion parseXmlKanjiQuestion(XmlResourceParser parser, Resources resources)
+            throws ParseException
+    {
+        String thisQuestion = null;
+        String thisMeaning = null;
+
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "question":
+                    thisQuestion = parseXmlValue(parser, i, resources);
+                    break;
+                case "meaning":
+                    thisMeaning = parseXmlValue(parser, i, resources);
+            }
+        }
+
+        if ((thisQuestion == null) || (thisMeaning == null))
+            throw new ParseException("Missing attribute in KanjiQuestion", parser.getLineNumber());
+
+        return new KanjiQuestion(thisQuestion, thisMeaning);
     }
 
     private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
