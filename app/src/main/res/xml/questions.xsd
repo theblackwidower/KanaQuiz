@@ -93,10 +93,24 @@
 
     <xs:element name="KanjiQuestion">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element name="KunYomi" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="romaji"/>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OnYomi" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="romaji"/>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
             <xs:attribute name="question" type="kanji" use="required"/>
             <xs:attribute name="meaning" type="text" use="required"/>
-            <xs:attribute name="kunyomi" type="romaji"/>
-            <xs:attribute name="onyomi" type="romaji"/>
         </xs:complexType>
     </xs:element>
 

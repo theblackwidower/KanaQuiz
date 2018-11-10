@@ -3,39 +3,134 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
     <QuestionSet prefId="kanji_set_elements" setTitle="@string/kanji_set_elements_title">
-        <KanjiQuestion question="水" meaning="water" kunyomi="mizu" onyomi="sui"/>
-        <KanjiQuestion question="火" meaning="fire" kunyomi="hi" onyomi="ka"/>
-        <KanjiQuestion question="木" meaning="tree/wood" kunyomi="ki/ko" onyomi="boku/moku"/>
-        <KanjiQuestion question="石" meaning="stone" kunyomi="ishi" onyomi="seki/shaku/koku"/>
-        <KanjiQuestion question="金" meaning="gold/money" kunyomi="kane/kana" onyomi="kin/kon"/>
+        <KanjiQuestion question="水" meaning="water">
+            <KunYomi>mizu</KunYomi>
+            <OnYomi>sui</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="火" meaning="fire">
+            <KunYomi>hi</KunYomi>
+            <OnYomi>ka</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="木" meaning="tree/wood">
+            <KunYomi>ki</KunYomi>
+            <KunYomi>ko</KunYomi>
+            <OnYomi>boku</OnYomi>
+            <OnYomi>moku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="石" meaning="stone">
+            <KunYomi>ishi</KunYomi>
+            <OnYomi>seki</OnYomi>
+            <OnYomi>shaku</OnYomi>
+            <OnYomi>koku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="金" meaning="gold/money">
+            <KunYomi>kane</KunYomi>
+            <KunYomi>kana</KunYomi>
+            <OnYomi>kin</OnYomi>
+            <OnYomi>kon</OnYomi>
+        </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="kanji_set_day_night" setTitle="@string/kanji_set_day_night_title">
-        <KanjiQuestion question="日" meaning="day/sun" kunyomi="hi/bi" onyomi="nichi/jitsu"/>
-        <KanjiQuestion question="月" meaning="month/moon" kunyomi="tsuki" onyomi="getsu/gatsu"/>
-        <KanjiQuestion question="年" meaning="year" kunyomi="toshi" onyomi="nen"/>
-        <KanjiQuestion question="早" meaning="early/fast" kunyomi="haya" onyomi="sou/sa"/>
-        <KanjiQuestion question="夕" meaning="evening" kunyomi="yuu" onyomi="seki"/>
+        <KanjiQuestion question="日" meaning="day/sun">
+            <KunYomi>hi</KunYomi>
+            <KunYomi>bi</KunYomi>
+            <OnYomi>nichi</OnYomi>
+            <OnYomi>jitsu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="月" meaning="month/moon">
+            <KunYomi>tsuki</KunYomi>
+            <OnYomi>getsu</OnYomi>
+            <OnYomi>gatsu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="年" meaning="year">
+            <KunYomi>toshi</KunYomi>
+            <OnYomi>nen</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="早" meaning="early/fast">
+            <KunYomi>haya</KunYomi>
+            <OnYomi>sou</OnYomi>
+            <OnYomi>sa</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="夕" meaning="evening">
+            <KunYomi>yuu</KunYomi>
+            <OnYomi>seki</OnYomi>
+        </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="kanji_set_numbers_1" setTitle="@string/kanji_set_numbers_1_title">
-        <KanjiQuestion question="一" meaning="one" kunyomi="hito" onyomi="ichi/itsu"/>
-        <KanjiQuestion question="二" meaning="two" kunyomi="futa" onyomi="ni"/>
-        <KanjiQuestion question="三" meaning="three" kunyomi="mi" onyomi="san"/>
-        <KanjiQuestion question="四" meaning="four" kunyomi="yo/yan" onyomi="shi"/>
-        <KanjiQuestion question="五" meaning="five" kunyomi="itsu" onyomi="go"/>
+        <KanjiQuestion question="一" meaning="one">
+            <KunYomi>hito</KunYomi>
+            <OnYomi>ichi</OnYomi>
+            <OnYomi>itsu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="二" meaning="two">
+            <KunYomi>futa</KunYomi>
+            <OnYomi>ni</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="三" meaning="three">
+            <KunYomi>mi</KunYomi>
+            <OnYomi>san</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="四" meaning="four">
+            <KunYomi>yo</KunYomi>
+            <KunYomi>yan</KunYomi>
+            <OnYomi>shi</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="五" meaning="five">
+            <KunYomi>itsu</KunYomi>
+            <OnYomi>go</OnYomi>
+        </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="kanji_set_numbers_2" setTitle="@string/kanji_set_numbers_2_title">
-        <KanjiQuestion question="六" meaning="six" kunyomi="mu" onyomi="roku"/>
-        <KanjiQuestion question="七" meaning="seven" kunyomi="nana" onyomi="shichi"/>
-        <KanjiQuestion question="八" meaning="eight" kunyomi="ya" onyomi="hachi"/>
-        <KanjiQuestion question="九" meaning="nine" kunyomi="kokono" onyomi="ku/kyuu"/>
-        <KanjiQuestion question="十" meaning="ten" kunyomi="tou" onyomi="juu/ji"/>
+        <KanjiQuestion question="六" meaning="six">
+            <KunYomi>mu</KunYomi>
+            <OnYomi>roku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="七" meaning="seven">
+            <KunYomi>nana</KunYomi>
+            <OnYomi>shichi</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="八" meaning="eight">
+            <KunYomi>ya</KunYomi>
+            <OnYomi>hachi</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="九" meaning="nine">
+            <KunYomi>kokono</KunYomi>
+            <OnYomi>ku</OnYomi>
+            <OnYomi>kyuu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="十" meaning="ten">
+            <KunYomi>tou</KunYomi>
+            <OnYomi>juu</OnYomi>
+            <OnYomi>ji</OnYomi>
+        </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="kanji_set_direction" setTitle="@string/kanji_set_direction_title">
-        <KanjiQuestion question="上" meaning="above/up" kunyomi="ue/kami" onyomi="jo/sho"/>
-        <KanjiQuestion question="下" meaning="below/down" kunyomi="shita/shimo" onyomi="ka/ge"/>
-        <KanjiQuestion question="左" meaning="left" kunyomi="hidari" onyomi="sa"/>
-        <KanjiQuestion question="右" meaning="right" kunyomi="migi" onyomi="u/yu"/>
-        <KanjiQuestion question="中" meaning="inside/middle" kunyomi="naka/uchi" onyomi="chuu"/>
+        <KanjiQuestion question="上" meaning="above/up">
+            <KunYomi>ue</KunYomi>
+            <KunYomi>kami</KunYomi>
+            <OnYomi>jo</OnYomi>
+            <OnYomi>sho</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="下" meaning="below/down">
+            <KunYomi>shita</KunYomi>
+            <KunYomi>shimo</KunYomi>
+            <OnYomi>ka</OnYomi>
+            <OnYomi>ge</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="左" meaning="left">
+            <KunYomi>hidari</KunYomi>
+            <OnYomi>sa</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="右" meaning="right">
+            <KunYomi>migi</KunYomi>
+            <OnYomi>u</OnYomi>
+            <OnYomi>yu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="中" meaning="inside/middle">
+            <KunYomi>naka</KunYomi>
+            <KunYomi>uchi</KunYomi>
+            <OnYomi>chuu</OnYomi>
+        </KanjiQuestion>
     </QuestionSet>
     <!--
     Sources:
