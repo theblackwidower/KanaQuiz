@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class ReferenceCell extends View
 {
@@ -220,9 +221,9 @@ public class ReferenceCell extends View
     private void measureDescription()
     {
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
-        if (description.contains("/"))
+        if (description.contains(MEANING_DELIMITER))
         {
-            multiLineDescription = description.replace("/", "/\u0000").split("\u0000");
+            multiLineDescription = description.replace(MEANING_DELIMITER, MEANING_DELIMITER + "\u0000").split("\u0000");
             descriptionWidth = 0;
             List<String> tempMultiLine = new ArrayList<>();
             for (String part : multiLineDescription)

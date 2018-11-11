@@ -7,6 +7,8 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public class KanjiQuestion extends Question
 {
+    public static final String MEANING_DELIMITER = "/";
+
     private final String kanji;
     private final String meaning;
 
@@ -27,8 +29,8 @@ public class KanjiQuestion extends Question
     {
         if (meaning.trim().equalsIgnoreCase(response.trim()))
             return true;
-        if (meaning.contains("/"))
-            for (String subAnswer : meaning.split("/"))
+        if (meaning.contains(MEANING_DELIMITER))
+            for (String subAnswer : meaning.split(MEANING_DELIMITER))
                 if (subAnswer.trim().equalsIgnoreCase(response.trim()))
                     return true;
 

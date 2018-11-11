@@ -13,6 +13,8 @@ import org.apmem.tools.layouts.FlowLayout;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
+
 public class MultipleChoicePad extends FlowLayout
 {
     Collection<Button> btnChoices = new ArrayList<>();
@@ -71,7 +73,7 @@ public class MultipleChoicePad extends FlowLayout
         Button btnNewButton = new Button(getContext());
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
         btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator"))
-                .replace("/", "/" + System.getProperty("line.separator")));
+                .replace(MEANING_DELIMITER, MEANING_DELIMITER + System.getProperty("line.separator")));
         addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
