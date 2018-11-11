@@ -146,7 +146,20 @@ public class ReferenceCell extends View
         super.onDraw(canvas);
 
         canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
-        canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
+        if (description.contains("/"))
+        {
+            String[] parts = description.split("/");
+            float descriptionLineHeight = descriptionHeight / parts.length;
+            int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+            for (int i = 0; i < parts.length; i++)
+            {
+                canvas.drawText(parts[i],
+                        getPaddingLeft() + ((contentWidth - descriptionPaint.measureText(parts[i])) / 2),
+                        descriptionYPoint - ((parts.length - i - 1) * descriptionLineHeight), descriptionPaint);
+            }
+        }
+        else
+            canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
     }
 
     public String getSubject()
@@ -191,14 +204,32 @@ public class ReferenceCell extends View
     public void setDescription(String description)
     {
         this.description = (description == null) ? "" : description;
-        descriptionWidth = descriptionPaint.measureText(this.description);
+        measureDescription();
     }
 
     public void setDescriptionSize(float descriptionSize)
     {
         descriptionPaint.setTextSize(descriptionSize);
+        measureDescription();
+    }
+
+    private void measureDescription()
+    {
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
-        descriptionWidth = descriptionPaint.measureText(description);
+        if (description.contains("/"))
+        {
+            String[] parts = description.split("/");
+            descriptionHeight *= parts.length;
+            descriptionWidth = 0;
+            for (String part : parts)
+            {
+                float partWidth = descriptionPaint.measureText(part);
+                if (partWidth > descriptionWidth)
+                    descriptionWidth = partWidth;
+            }
+        }
+        else
+            descriptionWidth = descriptionPaint.measureText(description);
     }
 
     public void setColour(int colour)

@@ -12,6 +12,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -47,6 +48,8 @@ public class ReferenceSubsectionPage extends Fragment
                 if (refCategory.equals(VOCABULARY.getSetTitle(i).toString()))
                     layout.addView(VOCABULARY.getVocabReferenceTable(container.getContext(), i));
         }
+        else if (questionType.equals(getContext().getResources().getString(R.string.kanji)))
+            layout.addView(KANJI.getKanjiReferenceTable(container.getContext()));
         else
         {
             if (questionType.equals(getContext().getResources().getString(R.string.hiragana)))

@@ -327,6 +327,19 @@ public class QuestionManagement
         return table;
     }
 
+    public ReferenceTable getKanjiReferenceTable(Context context)
+    {
+        ReferenceTable table = new ReferenceTable(context);
+
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
+        for (int i = 1; i <= getCategoryCount(); i++)
+            if (isFullReference || getPref(i))
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, false)));
+
+        return table;
+    }
+
     public View getVocabReferenceTable(Context context, int setNumber)
     {
         FlowLayout layout = new FlowLayout(context);

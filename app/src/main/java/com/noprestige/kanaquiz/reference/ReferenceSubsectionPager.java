@@ -36,6 +36,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 if (isFullReference || VOCABULARY.getPref(i))
                     tabList.add(VOCABULARY.getSetTitle(i).toString());
         }
+        else if (questionType.equals(context.getResources().getString(R.string.kanji)))
+            tabList.add(context.getResources().getString(R.string.base_form_title));
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
             tabList.add(context.getResources().getString(R.string.base_form_title));
