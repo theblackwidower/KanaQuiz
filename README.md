@@ -49,6 +49,8 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
   * Proper kanji support with kanji questions
+  * Support for kun'yomi and on'yomi-based kanji questions
+  * Limitation alerts, either by time, or number of questions
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
