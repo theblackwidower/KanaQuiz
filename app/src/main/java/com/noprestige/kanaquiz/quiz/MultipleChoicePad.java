@@ -70,7 +70,8 @@ public class MultipleChoicePad extends FlowLayout
     {
         Button btnNewButton = new Button(getContext());
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
-        btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator")));
+        btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator"))
+                .replace("/", "/" + System.getProperty("line.separator")));
         addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
