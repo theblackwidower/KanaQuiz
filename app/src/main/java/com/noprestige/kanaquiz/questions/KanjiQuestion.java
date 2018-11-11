@@ -20,7 +20,14 @@ public class KanjiQuestion extends Question
     @Override
     boolean checkAnswer(String response)
     {
-        return meaning.trim().equalsIgnoreCase(response.trim());
+        if (meaning.trim().equalsIgnoreCase(response.trim()))
+            return true;
+        if (meaning.contains("/"))
+            for (String subAnswer : meaning.split("/"))
+                if (subAnswer.trim().equalsIgnoreCase(response.trim()))
+                    return true;
+
+        return false;
     }
 
     @Override
