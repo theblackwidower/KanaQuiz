@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -41,6 +42,9 @@ public class QuestionSelectionPage extends Fragment
                 screen = KATAKANA.getSelectionScreen(getContext());
                 break;
             case 2:
+                screen = KANJI.getSelectionScreen(getContext());
+                break;
+            case 3:
                 screen = VOCABULARY.getSelectionScreen(getContext());
                 break;
             default:

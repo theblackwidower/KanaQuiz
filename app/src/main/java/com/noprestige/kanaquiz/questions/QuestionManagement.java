@@ -25,6 +25,7 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
+    public static QuestionManagement KANJI;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -121,6 +122,9 @@ public class QuestionManagement
         if (KATAKANA == null)
             KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
 
+        if (KANJI == null)
+            KANJI = new QuestionManagement(R.xml.kanji, context.getApplicationContext().getResources());
+
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
     }
@@ -130,6 +134,7 @@ public class QuestionManagement
         QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
+        KANJI.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }
@@ -221,7 +226,7 @@ public class QuestionManagement
         Question[] questionSet = getQuestionSet(setNumber, diacritic, false);
         if (questionSet != null)
             for (Question question : questionSet)
-                if (question.getClass().equals(KanaQuestion.class))
+                if (question.getClass().equals(KanaQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
                     returnValue.append(' ');

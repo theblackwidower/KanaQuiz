@@ -155,6 +155,7 @@
     <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>
+    <string name="kanji" translatable="false">Kanji</string>
     <string name="vocabulary">Vocabulary</string>
     <string name="set">set</string>
     <string name="set_1_title">Base %1$s</string>

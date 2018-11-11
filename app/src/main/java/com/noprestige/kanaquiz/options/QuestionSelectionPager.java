@@ -27,7 +27,7 @@ class QuestionSelectionPager extends FragmentPagerAdapter
     @Override
     public int getCount()
     {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -40,6 +40,8 @@ class QuestionSelectionPager extends FragmentPagerAdapter
             case 1:
                 return context.getResources().getString(R.string.katakana);
             case 2:
+                return context.getResources().getString(R.string.kanji);
+            case 3:
                 return context.getResources().getString(R.string.vocabulary);
             default:
                 return "";
