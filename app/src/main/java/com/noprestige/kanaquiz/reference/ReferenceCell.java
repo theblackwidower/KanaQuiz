@@ -24,6 +24,7 @@ public class ReferenceCell extends View
 {
     private String subject;
     private String description;
+    private String[] multiLineDescription;
 
     private TextPaint subjectPaint = new TextPaint();
     private TextPaint descriptionPaint = new TextPaint();
@@ -146,16 +147,16 @@ public class ReferenceCell extends View
         super.onDraw(canvas);
 
         canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
-        if (description.contains("/"))
+        if (multiLineDescription != null)
         {
-            String[] parts = description.split("/");
-            float descriptionLineHeight = descriptionHeight / parts.length;
+            float descriptionLineHeight = descriptionHeight / multiLineDescription.length;
             int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
-            for (int i = 0; i < parts.length; i++)
+            for (int i = 0; i < multiLineDescription.length; i++)
             {
-                canvas.drawText(parts[i],
-                        getPaddingLeft() + ((contentWidth - descriptionPaint.measureText(parts[i])) / 2),
-                        descriptionYPoint - ((parts.length - i - 1) * descriptionLineHeight), descriptionPaint);
+                canvas.drawText(multiLineDescription[i],
+                        getPaddingLeft() + ((contentWidth - descriptionPaint.measureText(multiLineDescription[i])) / 2),
+                        descriptionYPoint - ((multiLineDescription.length - i - 1) * descriptionLineHeight),
+                        descriptionPaint);
             }
         }
         else
@@ -218,18 +219,21 @@ public class ReferenceCell extends View
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
         if (description.contains("/"))
         {
-            String[] parts = description.split("/");
-            descriptionHeight *= parts.length;
+            multiLineDescription = description.split("/");
             descriptionWidth = 0;
-            for (String part : parts)
+            for (String part : multiLineDescription)
             {
                 float partWidth = descriptionPaint.measureText(part);
                 if (partWidth > descriptionWidth)
                     descriptionWidth = partWidth;
             }
+            descriptionHeight *= multiLineDescription.length;
         }
         else
+        {
+            multiLineDescription = null;
             descriptionWidth = descriptionPaint.measureText(description);
+        }
     }
 
     public void setColour(int colour)
