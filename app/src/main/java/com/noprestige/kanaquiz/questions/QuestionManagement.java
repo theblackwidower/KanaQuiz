@@ -327,17 +327,33 @@ public class QuestionManagement
         return table;
     }
 
-    public ReferenceTable getKanjiReferenceTable(Context context)
+    public View getKanjiReferenceTable(Context context)
     {
-        ReferenceTable table = new ReferenceTable(context);
+        LinearLayout masterLayout = new LinearLayout(context);
+        masterLayout.setOrientation(LinearLayout.VERTICAL);
+        masterLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+
+        ReferenceTable currentTable = null;
+        int currentSize = 0;
 
         boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
 
         for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, false)));
+            {
+                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, false);
+                if (questionSet.length != currentSize)
+                {
+                    currentSize = questionSet.length;
+                    if (currentTable != null)
+                        masterLayout.addView(currentTable);
+                    currentTable = new ReferenceTable(context);
+                }
+                currentTable.addView(ReferenceCell.buildRow(context, questionSet));
+            }
+        masterLayout.addView(currentTable);
 
-        return table;
+        return masterLayout;
     }
 
     public View getVocabReferenceTable(Context context, int setNumber)
