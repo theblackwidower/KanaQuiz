@@ -18,6 +18,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class ReferenceCell extends View
@@ -219,14 +222,34 @@ public class ReferenceCell extends View
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
         if (description.contains("/"))
         {
-            multiLineDescription = description.split("/");
+            multiLineDescription = description.replace("/", "/\u0000").split("\u0000");
             descriptionWidth = 0;
+            List<String> tempMultiLine = new ArrayList<>();
             for (String part : multiLineDescription)
             {
                 float partWidth = descriptionPaint.measureText(part);
-                if (partWidth > descriptionWidth)
+                if ((partWidth > (subjectWidth * 1.1f)) && part.contains(" "))
+                {
+                    String[] subParts = part.split(" ");
+
+                    for (String subPart : subParts)
+                    {
+                        float subPartWidth = descriptionPaint.measureText(subPart);
+                        if (subPartWidth > descriptionWidth)
+                            descriptionWidth = subPartWidth;
+                        tempMultiLine.add(subPart);
+                    }
+                }
+                else if (partWidth > descriptionWidth)
+                {
                     descriptionWidth = partWidth;
+                    tempMultiLine.add(part);
+                }
+                else
+                    tempMultiLine.add(part);
             }
+            if (tempMultiLine.size() != multiLineDescription.length)
+                multiLineDescription = tempMultiLine.toArray(new String[0]);
             descriptionHeight *= multiLineDescription.length;
         }
         else
