@@ -132,6 +132,253 @@
             <OnYomi>chuu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
+    <QuestionSet prefId="kanji_set_6" setTitle="Kanji Set 6">
+        <KanjiQuestion question="百" meaning="hundred">
+            <!--<KunYomi>momo</KunYomi> &lt;!&ndash;ARCHAIC&ndash;&gt;-->
+            <OnYomi>hyaku</OnYomi>
+            <OnYomi>byaku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="千" meaning="thousand">
+            <KunYomi>chi</KunYomi>
+            <OnYomi>sen</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="本" meaning="book/true/main">
+            <KunYomi>moto</KunYomi>
+            <OnYomi>hon</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="文" meaning="text/writing">
+            <KunYomi>fumi</KunYomi>
+            <KunYomi>ayu</KunYomi>
+            <OnYomi>bun</OnYomi>
+            <OnYomi>mon</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="字" meaning="letter/village section">
+            <KunYomi>aza</KunYomi>
+            <OnYomi>ji</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_7" setTitle="Kanji Set 7">
+        <KanjiQuestion question="力" meaning="power/strength">
+            <KunYomi>chikara</KunYomi>
+            <OnYomi>riki</OnYomi>
+            <OnYomi>ryoku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="気" meaning="spirit/mind/air">
+            <KunYomi>iki</KunYomi>
+            <OnYomi>ki</OnYomi>
+            <OnYomi>ke</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="生" meaning="life/birth">
+            <KunYomi>i</KunYomi>
+            <KunYomi>u</KunYomi>
+            <KunYomi>nama</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>shou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="休" meaning="rest/day off">
+            <KunYomi>yasu</KunYomi>
+            <OnYomi>kyu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="立" meaning="stand/rise">
+            <KunYomi>ta</KunYomi>
+            <OnYomi>ritsu</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_8" setTitle="Kanji Set 8">
+        <KanjiQuestion question="校" meaning="school/exam">
+            <OnYomi>kou</OnYomi>
+            <OnYomi>kyou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="学" meaning="study/learn">
+            <KunYomi>mana</KunYomi>
+            <OnYomi>gaku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="正" meaning="correct">
+            <KunYomi>tada</KunYomi>
+            <KunYomi>masa</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>shou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="入" meaning="enter/insert">
+            <KunYomi>i</KunYomi>
+            <KunYomi>hai</KunYomi>
+            <OnYomi>nyuu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="出" meaning="exit/leave">
+            <KunYomi>de</KunYomi>
+            <KunYomi>da</KunYomi>
+            <OnYomi>shutsu</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_9" setTitle="Kanji Set 9">
+        <KanjiQuestion question="花" meaning="flower">
+            <KunYomi>hana</KunYomi>
+            <OnYomi>ka</OnYomi>
+            <OnYomi>ke</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="草" meaning="grass">
+            <KunYomi>kusa</KunYomi>
+            <OnYomi>sou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="田" meaning="rice field/paddy">
+            <KunYomi>ta</KunYomi>
+            <OnYomi>den</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="雨" meaning="rain">
+            <KunYomi>ame</KunYomi>
+            <KunYomi>ama</KunYomi>
+            <OnYomi>u</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="空" meaning="sky/empty">
+            <KunYomi>sora</KunYomi>
+            <KunYomi>kara</KunYomi>
+            <KunYomi>a</KunYomi>
+            <OnYomi>kuu</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_10" setTitle="Kanji Set 10">
+        <KanjiQuestion question="王" meaning="king/ruler">
+            <OnYomi>oo</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="玉" meaning="jewel/ball">
+            <KunYomi>tama</KunYomi>
+            <OnYomi>gyoku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="円" meaning="yen/circle">
+            <KunYomi>maru</KunYomi>
+            <KunYomi>mado</KunYomi>
+            <OnYomi>en</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="大" meaning="large/big">
+            <KunYomi>oo</KunYomi>
+            <OnYomi>dai</OnYomi>
+            <OnYomi>tai</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="小" meaning="little/small">
+            <KunYomi>chii</KunYomi>
+            <KunYomi>ko</KunYomi>
+            <OnYomi>shoo</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_11" setTitle="Kanji Set 11">
+        <KanjiQuestion question="人" meaning="person">
+            <KunYomi>hito</KunYomi>
+            <OnYomi>jin</OnYomi>
+            <OnYomi>nin</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="名" meaning="name/reputation">
+            <KunYomi>na</KunYomi>
+            <OnYomi>mei</OnYomi>
+            <OnYomi>myo</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="女" meaning="woman/female">
+            <KunYomi>onna</KunYomi>
+            <KunYomi>me</KunYomi>
+            <OnYomi>jo</OnYomi>
+            <OnYomi>nyo</OnYomi>
+            <OnYomi>nyoo</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="男" meaning="man/male">
+            <KunYomi>otoko</KunYomi>
+            <KunYomi>o</KunYomi>
+            <OnYomi>dan</OnYomi>
+            <OnYomi>nan</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="子" meaning="child">
+            <KunYomi>ko</KunYomi>
+            <OnYomi>shi</OnYomi>
+            <OnYomi>su</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="犬" meaning="dog">
+            <KunYomi>inu</KunYomi>
+            <OnYomi>ken</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_12" setTitle="Kanji Set 12">
+        <KanjiQuestion question="目" meaning="eye/look/class">
+            <KunYomi>me</KunYomi>
+            <OnYomi>moku</OnYomi>
+            <OnYomi>boku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="耳" meaning="ear">
+            <KunYomi>mimi</KunYomi>
+            <OnYomi>ji</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="口" meaning="mouth">
+            <KunYomi>kuchi</KunYomi>
+            <OnYomi>kou</OnYomi>
+            <OnYomi>ku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="手" meaning="hand">
+            <KunYomi>te</KunYomi>
+            <OnYomi>shu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="足" meaning="leg/foot/suffice">
+            <KunYomi>asha</KunYomi>
+            <KunYomi>ta</KunYomi>
+            <OnYomi>soku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="見" meaning="see/look/view">
+            <KunYomi>mi</KunYomi>
+            <OnYomi>ken</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_13" setTitle="Kanji Set 13">
+        <KanjiQuestion question="林" meaning="woods">
+            <KunYomi>hiyashi</KunYomi>
+            <OnYomi>rin</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="森" meaning="forest">
+            <KunYomi>mori</KunYomi>
+            <OnYomi>shin</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="山" meaning="mountain">
+            <KunYomi>yama</KunYomi>
+            <OnYomi>san</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="川" meaning="river/stream">
+            <KunYomi>kawa</KunYomi>
+            <OnYomi>sen</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="土" meaning="earth/soil">
+            <KunYomi>tsuchi</KunYomi>
+            <OnYomi>dotto</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="天" meaning="heaven/sky">
+            <KunYomi>ame</KunYomi>
+            <KunYomi>ama</KunYomi>
+            <OnYomi>ten</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_14" setTitle="Kanji Set 14">
+        <KanjiQuestion question="村" meaning="village/town">
+            <KunYomi>mura</KunYomi>
+            <OnYomi>son</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="町" meaning="town/city/street">
+            <KunYomi>machi</KunYomi>
+            <OnYomi>chou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="赤" meaning="red">
+            <KunYomi>aka</KunYomi>
+            <OnYomi>seki</OnYomi>
+            <OnYomi>shaku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="青" meaning="blue/green">
+            <KunYomi>ao</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>shou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="白" meaning="white">
+            <KunYomi>shiro</KunYomi>
+            <OnYomi>haku</OnYomi>
+            <OnYomi>byaku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="先" meaning="previous/before/ahead">
+            <KunYomi>saki</KunYomi>
+            <OnYomi>sen</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Kanji Combat
