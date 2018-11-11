@@ -1,5 +1,10 @@
 package com.noprestige.kanaquiz.questions;
 
+import android.content.Context;
+import android.util.TypedValue;
+
+import com.noprestige.kanaquiz.reference.ReferenceCell;
+
 public class KanjiQuestion extends Question
 {
     private final String kanji;
@@ -40,5 +45,16 @@ public class KanjiQuestion extends Question
     String getDatabaseKey()
     {
         return kanji;
+    }
+
+    @Override
+    public ReferenceCell generateReference(Context context)
+    {
+        ReferenceCell cell = super.generateReference(context);
+        cell.setSubjectSize(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 48, context.getResources().getDisplayMetrics()));
+        cell.setDescriptionSize(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
+        return cell;
     }
 }
