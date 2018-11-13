@@ -379,6 +379,48 @@
             <OnYomi>sen</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
+    <QuestionSet prefId="kanji_set_bonus_1" setTitle="Kanji Set Bonus 1">
+        <!--Duck Bonus 1-->
+        <KanjiQuestion question="車" meaning="vehicle/car">
+            <KunYomi>kuruma</KunYomi>
+            <OnYomi>sha</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="虫" meaning="insect/worm">
+            <KunYomi>mushi</KunYomi>
+            <OnYomi>chuu</OnYomi>
+            <OnYomi>ki</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 2-->
+        <KanjiQuestion question="糸" meaning="thread">
+            <KunYomi>ito</KunYomi>
+            <OnYomi>shi</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="貝" meaning="shell/shellfish">
+            <KunYomi>kai</KunYomi>
+            <OnYomi>bai</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 3-->
+        <KanjiQuestion question="竹" meaning="bamboo">
+            <KunYomi>take</KunYomi>
+            <OnYomi>chitu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="音" meaning="sound/noise">
+            <KunYomi>oto</KunYomi>
+            <KunYomi>ne</KunYomi>
+            <OnYomi>on</OnYomi>
+            <OnYomi>in</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 4-->
+        <KanjiQuestion question="交" meaning="mix/intersect">
+            <KunYomi>maji</KunYomi>
+            <KunYomi>ka</KunYomi>
+            <OnYomi>kou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="計" meaning="measure/plan">
+            <KunYomi>haka</KunYomi>
+            <OnYomi>kei</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Kanji Combat
