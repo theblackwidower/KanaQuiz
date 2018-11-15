@@ -16,19 +16,19 @@
         <KanaQuestion question="ク" answer="ku"/>
         <KanaQuestion question="ケ" answer="ke"/>
         <KanaQuestion question="コ" answer="ko"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ガ" answer="ga"/>
             <KanaQuestion question="ギ" answer="gi"/>
             <KanaQuestion question="グ" answer="gu"/>
             <KanaQuestion question="ゲ" answer="ge"/>
             <KanaQuestion question="ゴ" answer="go"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="キャ" answer="kya"/>
             <KanaQuestion question="キュ" answer="kyu"/>
             <KanaQuestion question="キョ" answer="kyo"/>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="katakana_set_9">
             <KanaQuestion question="ギャ" answer="gya"/>
             <KanaQuestion question="ギュ" answer="gyu"/>
             <KanaQuestion question="ギョ" answer="gyo"/>
@@ -43,7 +43,7 @@
         <KanaQuestion question="ス" answer="su"/>
         <KanaQuestion question="セ" answer="se"/>
         <KanaQuestion question="ソ" answer="so"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ザ" answer="za"/>
             <KanaQuestion question="ジ" answer="ji">
                 <AltAnswer system="NIHON KUNREI">zi</AltAnswer>
@@ -52,7 +52,7 @@
             <KanaQuestion question="ゼ" answer="ze"/>
             <KanaQuestion question="ゾ" answer="zo"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="シャ" answer="sha">
                 <AltAnswer system="NIHON KUNREI">sya</AltAnswer>
             </KanaQuestion>
@@ -63,7 +63,7 @@
                 <AltAnswer system="NIHON KUNREI">syo</AltAnswer>
             </KanaQuestion>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="katakana_set_9">
             <KanaQuestion question="ジャ" answer="ja">
                 <AltAnswer system="UNKNOWN">jya</AltAnswer><!--TextFugu-->
                 <AltAnswer system="NIHON KUNREI">zya</AltAnswer>
@@ -89,7 +89,7 @@
         </KanaQuestion>
         <KanaQuestion question="テ" answer="te"/>
         <KanaQuestion question="ト" answer="to"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ダ" answer="da"/>
             <KanaQuestion question="ヂ" answer="ji">
                 <AltAnswer system="NIHON">di</AltAnswer>
@@ -101,7 +101,7 @@
             <KanaQuestion question="デ" answer="de"/>
             <KanaQuestion question="ド" answer="do"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="チャ" answer="cha">
                 <AltAnswer system="NIHON KUNREI">tya</AltAnswer>
             </KanaQuestion>
@@ -112,7 +112,7 @@
                 <AltAnswer system="NIHON KUNREI">tyo</AltAnswer>
             </KanaQuestion>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="katakana_set_9">
             <KanaQuestion question="ヂャ" answer="ja">
                 <AltAnswer system="UNKNOWN">dzya</AltAnswer><!--TextFugu-->
                 <AltAnswer system="NIHON">dya</AltAnswer>
@@ -136,7 +136,7 @@
         <KanaQuestion question="ヌ" answer="nu"/>
         <KanaQuestion question="ネ" answer="ne"/>
         <KanaQuestion question="ノ" answer="no"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="ニャ" answer="nya"/>
             <KanaQuestion question="ニュ" answer="nyu"/>
             <KanaQuestion question="ニョ" answer="nyo"/>
@@ -151,31 +151,31 @@
         </KanaQuestion>
         <KanaQuestion question="ヘ" answer="he"/>
         <KanaQuestion question="ホ" answer="ho"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="バ" answer="ba"/>
             <KanaQuestion question="ビ" answer="bi"/>
             <KanaQuestion question="ブ" answer="bu"/>
             <KanaQuestion question="ベ" answer="be"/>
             <KanaQuestion question="ボ" answer="bo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="false">
+        <Section diacritics="HANDAKUTEN">
             <KanaQuestion question="パ" answer="pa"/>
             <KanaQuestion question="ピ" answer="pi"/>
             <KanaQuestion question="プ" answer="pu"/>
             <KanaQuestion question="ペ" answer="pe"/>
             <KanaQuestion question="ポ" answer="po"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="ヒャ" answer="hya"/>
             <KanaQuestion question="ヒュ" answer="hyu"/>
             <KanaQuestion question="ヒョ" answer="hyo"/>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="katakana_set_9">
             <KanaQuestion question="ビャ" answer="bya"/>
             <KanaQuestion question="ビュ" answer="byu"/>
             <KanaQuestion question="ビョ" answer="byo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="true">
+        <Section diacritics="HANDAKUTEN" digraphs="katakana_set_9">
             <KanaQuestion question="ピャ" answer="pya"/>
             <KanaQuestion question="ピュ" answer="pyu"/>
             <KanaQuestion question="ピョ" answer="pyo"/>
@@ -187,7 +187,7 @@
         <KanaQuestion question="ム" answer="mu"/>
         <KanaQuestion question="メ" answer="me"/>
         <KanaQuestion question="モ" answer="mo"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="ミャ" answer="mya"/>
             <KanaQuestion question="ミュ" answer="myu"/>
             <KanaQuestion question="ミョ" answer="myo"/>
@@ -199,7 +199,7 @@
         <KanaQuestion question="ル" answer="ru"/>
         <KanaQuestion question="レ" answer="re"/>
         <KanaQuestion question="ロ" answer="ro"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="katakana_set_9">
             <KanaQuestion question="リャ" answer="rya"/>
             <KanaQuestion question="リュ" answer="ryu"/>
             <KanaQuestion question="リョ" answer="ryo"/>
@@ -221,7 +221,7 @@
         <KanaQuestion question="ヲ" answer="wo">
             <AltAnswer system="HEPBURN KUNREI">o</AltAnswer>
         </KanaQuestion>
-        <Section diacritics="CONSONANT" digraphs="false">
+        <Section diacritics="CONSONANT">
             <KanaQuestion question="ン" answer="n"/>
         </Section>
     </QuestionSet>

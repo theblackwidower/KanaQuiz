@@ -35,6 +35,10 @@
             <xs:selector xpath="*/kq:WordQuestion"/>
             <xs:field xpath="@kanji"/>
         </xs:unique>
+        <xs:keyref name="DigraphsReference" refer="SetPrimaryKey">
+            <xs:selector xpath="*/kq:Section"/>
+            <xs:field xpath="@digraphs"/>
+        </xs:keyref>
     </xs:element>
 
     <xs:element name="QuestionSet">
@@ -64,7 +68,7 @@
             </xs:sequence>
             <!-- TODO: Set diacritics="NO_DIACRITIC" digraphs="false" as an invalid combination of attributes -->
             <xs:attribute name="diacritics" type="diacritic" use="required"/>
-            <xs:attribute name="digraphs" type="xs:boolean" use="required"/>
+            <xs:attribute name="digraphs" type="text"/>
         </xs:complexType>
     </xs:element>
 

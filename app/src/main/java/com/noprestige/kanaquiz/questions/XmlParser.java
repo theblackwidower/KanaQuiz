@@ -102,7 +102,7 @@ final class XmlParser
                 throw new ParseException("Missing QuestionSet closing tag", lineNumber);
         }
 
-        questionSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, false),
+        questionSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, null),
                 currentSet.toArray(new Question[0]));
     }
 
@@ -111,8 +111,7 @@ final class XmlParser
             throws XmlPullParserException, IOException, ParseException
     {
         Diacritic diacritics = null;
-        boolean isDigraphs = false;
-        boolean isDigraphsSet = false;
+        String digraphs = null;
 
         for (int i = 0; i < parser.getAttributeCount(); i++)
         {
@@ -122,13 +121,12 @@ final class XmlParser
                     diacritics = Diacritic.valueOf(parser.getAttributeValue(i));
                     break;
                 case "digraphs":
-                    isDigraphs = parser.getAttributeBooleanValue(i, false);
-                    isDigraphsSet = true;
+                    digraphs = parser.getAttributeValue(i);
             }
         }
 
-        if ((diacritics == null) || !isDigraphsSet)
-            throw new ParseException("Missing attribute in Section tag", parser.getLineNumber());
+        if (diacritics == null)
+            throw new ParseException("Missing diacritics attribute in Section tag", parser.getLineNumber());
 
         int lineNumber = parser.getLineNumber();
 
@@ -145,7 +143,7 @@ final class XmlParser
                 throw new ParseException("Missing Section closing tag", lineNumber);
         }
 
-        questionSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, isDigraphs),
+        questionSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, digraphs),
                 currentSet.toArray(new Question[0]));
     }
 
