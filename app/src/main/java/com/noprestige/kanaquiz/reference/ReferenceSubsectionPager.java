@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_1;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_2;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -37,7 +39,20 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                     tabList.add(VOCABULARY.getSetTitle(i).toString());
         }
         else if (questionType.equals(context.getResources().getString(R.string.kanji)))
-            tabList.add(context.getResources().getString(R.string.base_form_title));
+        {
+            if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+            {
+                tabList.add(context.getResources().getString(R.string.kanji_phase_1));
+                tabList.add(context.getResources().getString(R.string.kanji_phase_2));
+            }
+            else
+            {
+                if (KANJI_1.anySelected())
+                    tabList.add(context.getResources().getString(R.string.kanji_phase_1));
+                if (KANJI_2.anySelected())
+                    tabList.add(context.getResources().getString(R.string.kanji_phase_2));
+            }
+        }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
             tabList.add(context.getResources().getString(R.string.base_form_title));

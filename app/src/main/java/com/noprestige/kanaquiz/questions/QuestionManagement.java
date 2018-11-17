@@ -25,7 +25,8 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
-    public static QuestionManagement KANJI;
+    public static QuestionManagement KANJI_1;
+    public static QuestionManagement KANJI_2;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -122,8 +123,11 @@ public class QuestionManagement
         if (KATAKANA == null)
             KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
 
-        if (KANJI == null)
-            KANJI = new QuestionManagement(R.xml.kanji, context.getApplicationContext().getResources());
+        if (KANJI_1 == null)
+            KANJI_1 = new QuestionManagement(R.xml.kanji_1, context.getApplicationContext().getResources());
+
+        if (KANJI_2 == null)
+            KANJI_2 = new QuestionManagement(R.xml.kanji_2, context.getApplicationContext().getResources());
 
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
@@ -134,7 +138,8 @@ public class QuestionManagement
         QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
-        KANJI.buildQuestionBank(bank);
+        KANJI_1.buildQuestionBank(bank);
+        KANJI_2.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }
@@ -379,19 +384,23 @@ public class QuestionManagement
     public LinearLayout getSelectionScreen(Context context)
     {
         LinearLayout layout = new LinearLayout(context);
-        layout.setLayoutParams(
-                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
+        populateSelectionScreen(layout);
+
+        return layout;
+    }
+
+    public void populateSelectionScreen(LinearLayout layout)
+    {
         for (int i = 1; i <= getCategoryCount(); i++)
         {
-            QuestionSelectionItem item = new QuestionSelectionItem(context);
+            QuestionSelectionItem item = new QuestionSelectionItem(layout.getContext());
             item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             layout.addView(item);
         }
-
-        return layout;
     }
 }

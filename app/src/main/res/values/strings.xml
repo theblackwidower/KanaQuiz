@@ -147,6 +147,8 @@
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
+    <string name="kanji_phase_1">Phase One</string>
+    <string name="kanji_phase_2">Phase Two</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>

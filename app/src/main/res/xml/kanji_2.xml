@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions xmlns="https://www.noprestige.com"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+    <QuestionSet prefId="kanji_set_15" setTitle="Kanji Set 15">
+        <KanjiQuestion question="語" meaning="language/talk">
+            <KunYomi>kata</KunYomi>
+            <OnYomi>go</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="話" meaning="speak/tale">
+            <KunYomi>hanashi</KunYomi>
+            <KunYomi>hana</KunYomi>
+            <OnYomi>wa</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="言" meaning="word/say">
+            <KunYomi>koto</KunYomi>
+            <KunYomi>i</KunYomi>
+            <OnYomi>gen</OnYomi>
+            <OnYomi>gon</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="声" meaning="voice">
+            <KunYomi>koe</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>shou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="答" meaning="answer/solution">
+            <KunYomi>kota</KunYomi>
+            <OnYomi>tou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="聞" meaning="hear/listen/ask">
+            <KunYomi>ki</KunYomi>
+            <OnYomi>bun</OnYomi>
+            <OnYomi>mon</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_bonus_2" setTitle="Kanji Set Bonus 2">
+        <!--Duck Bonus 5-->
+        <KanjiQuestion question="直" meaning="direct/honest">
+            <KunYomi>tada</KunYomi>
+            <KunYomi>nao</KunYomi>
+            <KunYomi>su</KunYomi>
+            <OnYomi>choku</OnYomi>
+            <OnYomi>jiki</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="理" meaning="reason/logic">
+            <OnYomi>ri</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="算" meaning="calculate/count">
+            <OnYomi>san</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 6-->
+        <KanjiQuestion question="切" meaning="cut">
+            <KunYomi>ki</KunYomi>
+            <OnYomi>setsu</OnYomi>
+            <OnYomi>sai</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="活" meaning="active/lively">
+            <OnYomi>katsu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="店" meaning="store/shop">
+            <KunYomi>mise</KunYomi>
+            <KunYomi>tana</KunYomi>
+            <OnYomi>ten</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 7-->
+        <KanjiQuestion question="買" meaning="buy">
+            <KunYomi>ka</KunYomi>
+            <OnYomi>bai</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="売" meaning="sell">
+            <KunYomi>u</KunYomi>
+            <OnYomi>bai</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="科" meaning="section/department">
+            <OnYomi>ka</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 8-->
+        <KanjiQuestion question="岩" meaning="rock/cliff">
+            <KunYomi>iwa</KunYomi>
+            <OnYomi>gan</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="星" meaning="star">
+            <KunYomi>hoshi</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>shou</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <!--
+    Sources:
+    Learn Japanese to Survive: Kanji Combat
+    Jisho (to look up Kanji characters): https://jisho.org
+    -->
+</Questions>
