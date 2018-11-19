@@ -15,6 +15,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class ReferenceScreen extends AppCompatActivity
 {
+    private static final int MAX_TABS = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,6 +39,12 @@ public class ReferenceScreen extends AppCompatActivity
             layout.addView(lblEmpty);
         }
         else
-            ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
+        {
+            TabLayout tabLayout = findViewById(R.id.tabLayout);
+            //TODO: Make this check more dynamic, accounting for screen width and actual tab width
+            if (pagerAdapter.getCount() > MAX_TABS)
+                tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            tabLayout.setupWithViewPager(viewPager);
+        }
     }
 }
