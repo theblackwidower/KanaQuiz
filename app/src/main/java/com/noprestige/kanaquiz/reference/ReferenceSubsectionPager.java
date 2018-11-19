@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_1;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_2;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_3;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -44,6 +45,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             {
                 tabList.add(context.getResources().getString(R.string.kanji_phase_1));
                 tabList.add(context.getResources().getString(R.string.kanji_phase_2));
+                tabList.add(context.getResources().getString(R.string.kanji_phase_3));
             }
             else
             {
@@ -51,6 +53,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                     tabList.add(context.getResources().getString(R.string.kanji_phase_1));
                 if (KANJI_2.anySelected())
                     tabList.add(context.getResources().getString(R.string.kanji_phase_2));
+                if (KANJI_3.anySelected())
+                    tabList.add(context.getResources().getString(R.string.kanji_phase_3));
             }
         }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))

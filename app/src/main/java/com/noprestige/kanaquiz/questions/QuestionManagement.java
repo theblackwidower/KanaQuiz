@@ -27,6 +27,7 @@ public class QuestionManagement
     public static QuestionManagement KATAKANA;
     public static QuestionManagement KANJI_1;
     public static QuestionManagement KANJI_2;
+    public static QuestionManagement KANJI_3;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -129,6 +130,9 @@ public class QuestionManagement
         if (KANJI_2 == null)
             KANJI_2 = new QuestionManagement(R.xml.kanji_2, context.getApplicationContext().getResources());
 
+        if (KANJI_3 == null)
+            KANJI_3 = new QuestionManagement(R.xml.kanji_3, context.getApplicationContext().getResources());
+
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
     }
@@ -140,6 +144,7 @@ public class QuestionManagement
         KATAKANA.buildQuestionBank(bank);
         KANJI_1.buildQuestionBank(bank);
         KANJI_2.buildQuestionBank(bank);
+        KANJI_3.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }

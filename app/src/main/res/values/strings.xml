@@ -149,6 +149,7 @@
     <string name="digraphs_title">Digraphs</string>
     <string name="kanji_phase_1">Phase One</string>
     <string name="kanji_phase_2">Phase Two</string>
+    <string name="kanji_phase_3">Phase Three</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>
