@@ -104,6 +104,15 @@ public class XmlParserTest
         assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, "y_set"))[2], "ぴょ", "pyo");
 
         assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, CONSONANT, null))[0], "ん", "n");
+
+
+        assertThat(prefIdList.get(3), is("y_set"));
+        assertThat(setTitleList.get(3), is("Y Set"));
+        assertThat(setNoDiacriticsTitleList.get(3), is(nullValue()));
+
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[0], "や", "ya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[1], "ゆ", "yu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[2], "よ", "yo");
     }
 
     private void assertKanaQuestion(Question question, String expectedKana, String expectedRomaji)
