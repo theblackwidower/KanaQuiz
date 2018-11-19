@@ -151,7 +151,7 @@ public class ReferenceCell extends View
         super.onDraw(canvas);
 
         canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
-        if (multiLineDescription != null)
+        if ((multiLineDescription != null) && (multiLineDescription.length > 1))
         {
             float descriptionLineHeight = descriptionHeight / multiLineDescription.length;
             int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
@@ -221,7 +221,7 @@ public class ReferenceCell extends View
     private void measureDescription()
     {
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
-        if (description.contains(MEANING_DELIMITER))
+        if (description.contains(MEANING_DELIMITER) || description.contains(" "))
         {
             multiLineDescription = description.replace(MEANING_DELIMITER, MEANING_DELIMITER + "\u0000").split("\u0000");
             descriptionWidth = 0;
