@@ -245,6 +245,71 @@
             <OnYomi>ken</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
+    <QuestionSet prefId="kanji_set_35" setTitle="Kanji Set 35">
+        <KanjiQuestion question="方" meaning="direction/person">
+            <KunYomi>kata</KunYomi>
+            <OnYomi>hou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="北" meaning="north">
+            <KunYomi>kita</KunYomi>
+            <OnYomi>hoku</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="南" meaning="south">
+            <KunYomi>minami</KunYomi>
+            <OnYomi>nan</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="東" meaning="east">
+            <KunYomi>higashi</KunYomi>
+            <OnYomi>tou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="西" meaning="west">
+            <KunYomi>nishi</KunYomi>
+            <OnYomi>sei</OnYomi>
+            <OnYomi>sai</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="近" meaning="near">
+            <KunYomi>chika</KunYomi>
+            <OnYomi>kin</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="遠" meaning="far">
+            <KunYomi>tou</KunYomi>
+            <OnYomi>en</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_36" setTitle="Kanji Set 36">
+        <KanjiQuestion question="光" meaning="light/shine">
+            <KunYomi>hikari</KunYomi>
+            <KunYomi>hika</KunYomi>
+            <OnYomi>kou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="明" meaning="bright/light">
+            <KunYomi>aka</KunYomi>
+            <KunYomi>a</KunYomi>
+            <OnYomi>mei</OnYomi>
+            <OnYomi>myou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="電" meaning="electricity">
+            <OnYomi>den</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="社" meaning="company/shrine">
+            <KunYomi>yashiro</KunYomi>
+            <OnYomi>sha</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="会" meaning="meet">
+            <KunYomi>a</KunYomi>
+            <OnYomi>kai</OnYomi>
+            <OnYomi>e</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="風" meaning="wind/style">
+            <KunYomi>kaze</KunYomi>
+            <OnYomi>fuu</OnYomi>
+            <OnYomi>fu</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="回" meaning="turn/rotate">
+            <KunYomi>mawa</KunYomi>
+            <OnYomi>kai</OnYomi>
+        </KanjiQuestion>
+    </QuestionSet>
     <QuestionSet prefId="kanji_set_bonus_3" setTitle="Kanji Set Bonus 3">
         <!--Duck Bonus 9-->
         <KanjiQuestion question="晴" meaning="clear">
@@ -272,6 +337,20 @@
             <KunYomi>kumi</KunYomi>
             <KunYomi>ku</KunYomi>
             <OnYomi>so</OnYomi>
+        </KanjiQuestion>
+        <!--Duck Bonus 12-->
+        <KanjiQuestion question="船" meaning="ship/boat">
+            <KunYomi>fune</KunYomi>
+            <KunYomi>funa</KunYomi>
+            <OnYomi>sen</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="合" meaning="fit/join">
+            <KunYomi>a</KunYomi>
+            <OnYomi>gou</OnYomi>
+        </KanjiQuestion>
+        <KanjiQuestion question="公" meaning="public/governmental">
+            <KunYomi>ouyake</KunYomi>
+            <OnYomi>ko</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
     <!--
