@@ -2,7 +2,7 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <QuestionSet prefId="kanji_set_15" setTitle="Kanji Set 15">
+    <QuestionSet prefId="ljts_kanji_set_15" setTitle="@string/ljts_kanji_set_15_title">
         <KanjiQuestion question="語" meaning="language/talk">
             <KunYomi>kata</KunYomi>
             <OnYomi>go</OnYomi>
@@ -33,7 +33,7 @@
             <OnYomi>mon</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_16" setTitle="Kanji Set 16">
+    <QuestionSet prefId="ljts_kanji_set_16" setTitle="@string/ljts_kanji_set_16_title">
         <KanjiQuestion question="夏" meaning="summer">
             <KunYomi>natsu</KunYomi>
             <OnYomi>ka</OnYomi>
@@ -60,7 +60,7 @@
             <OnYomi>un</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_17" setTitle="Kanji Set 17">
+    <QuestionSet prefId="ljts_kanji_set_17" setTitle="@string/ljts_kanji_set_17_title">
         <KanjiQuestion question="国" meaning="country">
             <KunYomi>kuni</KunYomi>
             <OnYomi>koku</OnYomi>
@@ -86,7 +86,7 @@
             <OnYomi>ji</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_18" setTitle="Kanji Set 18">
+    <QuestionSet prefId="ljts_kanji_set_18" setTitle="@string/ljts_kanji_set_18_title">
         <KanjiQuestion question="体" meaning="body">
             <KunYomi>karada</KunYomi>
             <OnYomi>tai</OnYomi>
@@ -115,7 +115,7 @@
             <OnYomi>shin</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_19" setTitle="Kanji Set 19">
+    <QuestionSet prefId="ljts_kanji_set_19" setTitle="@string/ljts_kanji_set_19_title">
         <KanjiQuestion question="食" meaning="eat/food">
             <KunYomi>ta</KunYomi>
             <KunYomi>ku</KunYomi>
@@ -143,7 +143,7 @@
             <OnYomi>sa</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_20" setTitle="Kanji Set 20">
+    <QuestionSet prefId="ljts_kanji_set_20" setTitle="@string/ljts_kanji_set_20_title">
         <KanjiQuestion question="教" meaning="teach">
             <KunYomi>oshi</KunYomi>
             <OnYomi>kyou</OnYomi>
@@ -170,7 +170,7 @@
             <OnYomi>gan</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_21" setTitle="Kanji Set 21">
+    <QuestionSet prefId="ljts_kanji_set_21" setTitle="@string/ljts_kanji_set_21_title">
         <KanjiQuestion question="馬" meaning="horse">
             <KunYomi>uma</KunYomi>
             <KunYomi>mu</KunYomi>
@@ -199,7 +199,7 @@
             <OnYomi>kai</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_22" setTitle="Kanji Set 22">
+    <QuestionSet prefId="ljts_kanji_set_22" setTitle="@string/ljts_kanji_set_22_title">
         <KanjiQuestion question="場" meaning="place/location">
             <KunYomi>ba</KunYomi>
             <OnYomi>jou</OnYomi>
@@ -228,7 +228,7 @@
             <OnYomi>ge</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_23" setTitle="Kanji Set 23">
+    <QuestionSet prefId="ljts_kanji_set_23" setTitle="@string/ljts_kanji_set_23_title">
         <KanjiQuestion question="時" meaning="time/hour">
             <KunYomi>toki</KunYomi>
             <OnYomi>ji</OnYomi>
@@ -260,7 +260,7 @@
             <OnYomi>mai</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_24" setTitle="Kanji Set 24">
+    <QuestionSet prefId="ljts_kanji_set_24" setTitle="@string/ljts_kanji_set_24_title">
         <KanjiQuestion question="朝" meaning="morning">
             <KunYomi>asa</KunYomi>
             <OnYomi>chou</OnYomi>
@@ -284,7 +284,7 @@
             <OnYomi>shuu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_25" setTitle="Kanji Set 25">
+    <QuestionSet prefId="ljts_kanji_set_25" setTitle="@string/ljts_kanji_set_25_title">
         <KanjiQuestion question="親" meaning="parent/intimacy">
             <KunYomi>oya</KunYomi>
             <KunYomi>shita</KunYomi>
@@ -318,7 +318,7 @@
             <OnYomi>de</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_26" setTitle="Kanji Set 26">
+    <QuestionSet prefId="ljts_kanji_set_26" setTitle="@string/ljts_kanji_set_26_title">
         <KanjiQuestion question="形" meaning="shape/form">
             <KunYomi>kata</KunYomi>
             <KunYomi>katachi</KunYomi>
@@ -351,7 +351,7 @@
             <OnYomi>chou</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_5_6" setTitle="Kanji Set Bonus 5 &amp; 6">
+    <QuestionSet prefId="ljts_kanji_bonus_set_5_6" setTitle="@string/ljts_kanji_bonus_set_5_6_title">
         <!--Duck Bonus 5-->
         <KanjiQuestion question="直" meaning="direct/honest">
             <KunYomi>tada</KunYomi>
@@ -381,7 +381,7 @@
             <OnYomi>ten</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_7_8" setTitle="Kanji Set Bonus 7 &amp; 8">
+    <QuestionSet prefId="ljts_kanji_bonus_set_7_8" setTitle="@string/ljts_kanji_bonus_set_7_8_title">
         <!--Duck Bonus 7-->
         <KanjiQuestion question="買" meaning="buy">
             <KunYomi>ka</KunYomi>

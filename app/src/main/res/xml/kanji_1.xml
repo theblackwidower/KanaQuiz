@@ -2,7 +2,7 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <QuestionSet prefId="kanji_set_elements" setTitle="@string/kanji_set_elements_title">
+    <QuestionSet prefId="ljts_kanji_set_1" setTitle="@string/ljts_kanji_set_1_title">
         <KanjiQuestion question="水" meaning="water">
             <KunYomi>mizu</KunYomi>
             <OnYomi>sui</OnYomi>
@@ -30,7 +30,7 @@
             <OnYomi>kon</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_day_night" setTitle="@string/kanji_set_day_night_title">
+    <QuestionSet prefId="ljts_kanji_set_2" setTitle="@string/ljts_kanji_set_2_title">
         <KanjiQuestion question="日" meaning="day/sun">
             <KunYomi>hi</KunYomi>
             <KunYomi>bi</KunYomi>
@@ -56,7 +56,7 @@
             <OnYomi>seki</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_numbers_1" setTitle="@string/kanji_set_numbers_1_title">
+    <QuestionSet prefId="ljts_kanji_set_3" setTitle="@string/ljts_kanji_set_3_title">
         <KanjiQuestion question="一" meaning="one">
             <KunYomi>hito</KunYomi>
             <OnYomi>ichi</OnYomi>
@@ -80,7 +80,7 @@
             <OnYomi>go</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_numbers_2" setTitle="@string/kanji_set_numbers_2_title">
+    <QuestionSet prefId="ljts_kanji_set_4" setTitle="@string/ljts_kanji_set_4_title">
         <KanjiQuestion question="六" meaning="six">
             <KunYomi>mu</KunYomi>
             <OnYomi>roku</OnYomi>
@@ -104,7 +104,7 @@
             <OnYomi>ji</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_direction" setTitle="@string/kanji_set_direction_title">
+    <QuestionSet prefId="ljts_kanji_set_5" setTitle="@string/ljts_kanji_set_5_title">
         <KanjiQuestion question="上" meaning="above/up">
             <KunYomi>ue</KunYomi>
             <KunYomi>kami</KunYomi>
@@ -132,7 +132,7 @@
             <OnYomi>chuu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_6" setTitle="Kanji Set 6">
+    <QuestionSet prefId="ljts_kanji_set_6" setTitle="@string/ljts_kanji_set_6_title">
         <KanjiQuestion question="百" meaning="hundred">
             <!--<KunYomi>momo</KunYomi> &lt;!&ndash;ARCHAIC&ndash;&gt;-->
             <OnYomi>hyaku</OnYomi>
@@ -157,7 +157,7 @@
             <OnYomi>ji</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_7" setTitle="Kanji Set 7">
+    <QuestionSet prefId="ljts_kanji_set_7" setTitle="@string/ljts_kanji_set_7_title">
         <KanjiQuestion question="力" meaning="power/strength">
             <KunYomi>chikara</KunYomi>
             <OnYomi>riki</OnYomi>
@@ -184,7 +184,7 @@
             <OnYomi>ritsu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_8" setTitle="Kanji Set 8">
+    <QuestionSet prefId="ljts_kanji_set_8" setTitle="@string/ljts_kanji_set_8_title">
         <KanjiQuestion question="校" meaning="school/exam">
             <OnYomi>kou</OnYomi>
             <OnYomi>kyou</OnYomi>
@@ -210,7 +210,7 @@
             <OnYomi>shutsu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_9" setTitle="Kanji Set 9">
+    <QuestionSet prefId="ljts_kanji_set_9" setTitle="@string/ljts_kanji_set_9_title">
         <KanjiQuestion question="花" meaning="flower">
             <KunYomi>hana</KunYomi>
             <OnYomi>ka</OnYomi>
@@ -236,7 +236,7 @@
             <OnYomi>kuu</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_10" setTitle="Kanji Set 10">
+    <QuestionSet prefId="ljts_kanji_set_10" setTitle="@string/ljts_kanji_set_10_title">
         <KanjiQuestion question="王" meaning="king/ruler">
             <OnYomi>oo</OnYomi>
         </KanjiQuestion>
@@ -260,7 +260,7 @@
             <OnYomi>shoo</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_11" setTitle="Kanji Set 11">
+    <QuestionSet prefId="ljts_kanji_set_11" setTitle="@string/ljts_kanji_set_11_title">
         <KanjiQuestion question="人" meaning="person">
             <KunYomi>hito</KunYomi>
             <OnYomi>jin</OnYomi>
@@ -294,7 +294,7 @@
             <OnYomi>ken</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_12" setTitle="Kanji Set 12">
+    <QuestionSet prefId="ljts_kanji_set_12" setTitle="@string/ljts_kanji_set_12_title">
         <KanjiQuestion question="目" meaning="eye/look/class">
             <KunYomi>me</KunYomi>
             <OnYomi>moku</OnYomi>
@@ -323,7 +323,7 @@
             <OnYomi>ken</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_13" setTitle="Kanji Set 13">
+    <QuestionSet prefId="ljts_kanji_set_13" setTitle="@string/ljts_kanji_set_13_title">
         <KanjiQuestion question="林" meaning="woods">
             <KunYomi>hiyashi</KunYomi>
             <OnYomi>rin</OnYomi>
@@ -350,7 +350,7 @@
             <OnYomi>ten</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_14" setTitle="Kanji Set 14">
+    <QuestionSet prefId="ljts_kanji_set_14" setTitle="@string/ljts_kanji_set_14_title">
         <KanjiQuestion question="村" meaning="village/town">
             <KunYomi>mura</KunYomi>
             <OnYomi>son</OnYomi>
@@ -379,7 +379,7 @@
             <OnYomi>sen</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_1_2" setTitle="Kanji Set Bonus 1 &amp; 2">
+    <QuestionSet prefId="ljts_kanji_bonus_set_1_2" setTitle="@string/ljts_kanji_bonus_set_1_2_title">
         <!--Duck Bonus 1-->
         <KanjiQuestion question="車" meaning="vehicle/car">
             <KunYomi>kuruma</KunYomi>
@@ -400,7 +400,7 @@
             <OnYomi>bai</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_3_4" setTitle="Kanji Set Bonus 3 &amp; 4">
+    <QuestionSet prefId="ljts_kanji_bonus_set_3_4" setTitle="@string/ljts_kanji_bonus_set_3_4_title">
         <!--Duck Bonus 3-->
         <KanjiQuestion question="竹" meaning="bamboo">
             <KunYomi>take</KunYomi>

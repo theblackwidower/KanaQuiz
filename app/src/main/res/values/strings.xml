@@ -177,11 +177,50 @@
     <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
     <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
 
-    <string name="kanji_set_elements_title">Wu Xing Elements</string>
-    <string name="kanji_set_day_night_title">Day &amp; Night</string>
-    <string name="kanji_set_numbers_1_title">Numbers 1–5</string>
-    <string name="kanji_set_numbers_2_title">Numbers 6–10</string>
-    <string name="kanji_set_direction_title">Think about direction</string>
+    <string name="ljts_kanji_set_1_title">Wu Xing Elements</string>
+    <string name="ljts_kanji_set_2_title">Day &amp; Night</string>
+    <string name="ljts_kanji_set_3_title">Numbers 1–5</string>
+    <string name="ljts_kanji_set_4_title">Numbers 6–10</string>
+    <string name="ljts_kanji_set_5_title">Think about direction</string>
+    <string name="ljts_kanji_set_6_title">Kanji Set 6</string>
+    <string name="ljts_kanji_set_7_title">Kanji Set 7</string>
+    <string name="ljts_kanji_set_8_title">Kanji Set 8</string>
+    <string name="ljts_kanji_set_9_title">Kanji Set 9</string>
+    <string name="ljts_kanji_set_10_title">Kanji Set 10</string>
+    <string name="ljts_kanji_set_11_title">Kanji Set 11</string>
+    <string name="ljts_kanji_set_12_title">Kanji Set 12</string>
+    <string name="ljts_kanji_set_13_title">Kanji Set 13</string>
+    <string name="ljts_kanji_set_14_title">Kanji Set 14</string>
+    <string name="ljts_kanji_bonus_set_1_2_title">Kanji Bonus Set 1 &amp; 2</string>
+    <string name="ljts_kanji_bonus_set_3_4_title">Kanji Bonus Set 3 &amp; 4</string>
+
+    <string name="ljts_kanji_set_15_title">Kanji Set 15</string>
+    <string name="ljts_kanji_set_16_title">Kanji Set 16</string>
+    <string name="ljts_kanji_set_17_title">Kanji Set 17</string>
+    <string name="ljts_kanji_set_18_title">Kanji Set 18</string>
+    <string name="ljts_kanji_set_19_title">Kanji Set 19</string>
+    <string name="ljts_kanji_set_20_title">Kanji Set 20</string>
+    <string name="ljts_kanji_set_21_title">Kanji Set 21</string>
+    <string name="ljts_kanji_set_22_title">Kanji Set 22</string>
+    <string name="ljts_kanji_set_23_title">Kanji Set 23</string>
+    <string name="ljts_kanji_set_24_title">Kanji Set 24</string>
+    <string name="ljts_kanji_set_25_title">Kanji Set 25</string>
+    <string name="ljts_kanji_set_26_title">Kanji Set 26</string>
+    <string name="ljts_kanji_bonus_set_5_6_title">Kanji Bonus Set 5 &amp; 6</string>
+    <string name="ljts_kanji_bonus_set_7_8_title">Kanji Bonus Set 7 &amp; 8</string>
+
+    <string name="ljts_kanji_set_27_title">Kanji Set 27</string>
+    <string name="ljts_kanji_set_28_title">Kanji Set 28</string>
+    <string name="ljts_kanji_set_29_title">Kanji Set 29</string>
+    <string name="ljts_kanji_set_30_title">Kanji Set 30</string>
+    <string name="ljts_kanji_set_31_title">Kanji Set 31</string>
+    <string name="ljts_kanji_set_32_title">Kanji Set 32</string>
+    <string name="ljts_kanji_set_33_title">Kanji Set 33</string>
+    <string name="ljts_kanji_set_34_title">Kanji Set 34</string>
+    <string name="ljts_kanji_set_35_title">Kanji Set 35</string>
+    <string name="ljts_kanji_set_36_title">Kanji Set 36</string>
+    <string name="ljts_kanji_bonus_set_9_10_title">Kanji Bonus Set 9 &amp; 10</string>
+    <string name="ljts_kanji_bonus_set_11_12_title">Kanji Bonus Set 11 &amp; 12</string>
 
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
