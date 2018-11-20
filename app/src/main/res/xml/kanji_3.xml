@@ -310,7 +310,7 @@
             <OnYomi>kai</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_3" setTitle="Kanji Set Bonus 3">
+    <QuestionSet prefId="kanji_set_bonus_9_10" setTitle="Kanji Set Bonus 9 &amp; 10">
         <!--Duck Bonus 9-->
         <KanjiQuestion question="晴" meaning="clear">
             <KunYomi>ha</KunYomi>
@@ -329,6 +329,8 @@
             <KunYomi>na</KunYomi>
             <OnYomi>mei</OnYomi>
         </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_bonus_11_12" setTitle="Kanji Set Bonus 11 &amp; 12">
         <!--Duck Bonus 11-->
         <KanjiQuestion question="汽" meaning="steam/vapor">
             <OnYomi>ki</OnYomi>

@@ -379,7 +379,7 @@
             <OnYomi>sen</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_1" setTitle="Kanji Set Bonus 1">
+    <QuestionSet prefId="kanji_set_bonus_1_2" setTitle="Kanji Set Bonus 1 &amp; 2">
         <!--Duck Bonus 1-->
         <KanjiQuestion question="車" meaning="vehicle/car">
             <KunYomi>kuruma</KunYomi>
@@ -399,6 +399,8 @@
             <KunYomi>kai</KunYomi>
             <OnYomi>bai</OnYomi>
         </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_bonus_3_4" setTitle="Kanji Set Bonus 3 &amp; 4">
         <!--Duck Bonus 3-->
         <KanjiQuestion question="竹" meaning="bamboo">
             <KunYomi>take</KunYomi>

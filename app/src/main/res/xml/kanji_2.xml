@@ -351,7 +351,7 @@
             <OnYomi>chou</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
-    <QuestionSet prefId="kanji_set_bonus_2" setTitle="Kanji Set Bonus 2">
+    <QuestionSet prefId="kanji_set_bonus_5_6" setTitle="Kanji Set Bonus 5 &amp; 6">
         <!--Duck Bonus 5-->
         <KanjiQuestion question="直" meaning="direct/honest">
             <KunYomi>tada</KunYomi>
@@ -380,6 +380,8 @@
             <KunYomi>tana</KunYomi>
             <OnYomi>ten</OnYomi>
         </KanjiQuestion>
+    </QuestionSet>
+    <QuestionSet prefId="kanji_set_bonus_7_8" setTitle="Kanji Set Bonus 7 &amp; 8">
         <!--Duck Bonus 7-->
         <KanjiQuestion question="買" meaning="buy">
             <KunYomi>ka</KunYomi>
