@@ -855,15 +855,12 @@ public final class RomajiConversion
                             ((romaji.charAt(i + 1) == 'p') || (romaji.charAt(i + 1) == 't') ||
                                     (romaji.charAt(i + 1) == 'k') || (romaji.charAt(i + 1) == 's')))
                         romaji.setCharAt(i, romaji.charAt(i + 1));
-                    break;
-                case 'ー':
-                    if ((i > 0) && ((romaji.charAt(i - 1) == 'a') || (romaji.charAt(i - 1) == 'i') ||
-                            (romaji.charAt(i - 1) == 'u') || (romaji.charAt(i - 1) == 'e') ||
-                            (romaji.charAt(i - 1) == 'o')))
-                        romaji.setCharAt(i, romaji.charAt(i - 1));
             }
         }
 
-        return romaji.toString();
+        //ref: https://en.wikipedia.org/wiki/Ch%C5%8Donpu
+        return romaji.toString().replace("aー", "ā").replace("iー", "ī").replace("uー", "ū").replace("eー", "ē")
+                .replace("oー", "ō").replace("aa", "ā").replace("ii", "ī").replace("uu", "ū").replace("ei", "ē")
+                .replace("oo", "ō").replace("ou", "ō");
     }
 }
