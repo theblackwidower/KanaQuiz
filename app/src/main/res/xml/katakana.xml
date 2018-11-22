@@ -225,11 +225,77 @@
             <KanaQuestion question="ン" answer="n"/>
         </Section>
     </QuestionSet>
+    <QuestionSet prefId="katakana_set_11" setTitle="Extended Katakana">
+        <!--ref: LJTS: Katakana War-->
+        <KanaQuestion question="ティ" answer="ti"/>
+        <KanaQuestion question="トゥ" answer="to"/>
+        <KanaQuestion question="ヂィ" answer="di"/>
+        <KanaQuestion question="ドゥ" answer="do"/>
+        <KanaQuestion question="チェ" answer="che"/>
+        <KanaQuestion question="ファ" answer="fa"/>
+        <KanaQuestion question="フィ" answer="fi"/>
+        <KanaQuestion question="フェ" answer="fe"/>
+        <KanaQuestion question="フォ" answer="fo"/>
+        <KanaQuestion question="シェ" answer="she"/>
+        <KanaQuestion question="ジェ" answer="je"/>
+        <KanaQuestion question="ヴァ" answer="va"/>
+        <KanaQuestion question="ヴィ" answer="vi"/>
+        <KanaQuestion question="ヴ" answer="vu"/>
+        <KanaQuestion question="ヴェ" answer="ve"/>
+        <KanaQuestion question="ヴォ" answer="vo"/>
+        <KanaQuestion question="ウィ" answer="wi"/>
+        <KanaQuestion question="ウェ" answer="we"/>
+        <KanaQuestion question="ウォ" answer="wo"/>
+
+        <!--ref: Living Language: Ultimate Japanese p. 171-->
+        <KanaQuestion question="テュ" answer="tu"/>
+        <KanaQuestion question="ツァ" answer="tsa"/>
+        <KanaQuestion question="ツェ" answer="tse"/>
+        <KanaQuestion question="ディ" answer="di"/>
+        <KanaQuestion question="デュ" answer="du"/>
+
+        <!--ref: https://nihongoichiban.com/home/katakana/-->
+        <KanaQuestion question="イィ" answer="yi"/>
+        <KanaQuestion question="イェ" answer="ye"/>
+        <KanaQuestion question="ウァ" answer="wa"/>
+        <KanaQuestion question="ウゥ" answer="wu"/>
+        <KanaQuestion question="ヴィェ" answer="vye"/>
+        <KanaQuestion question="キェ" answer="kye"/>
+        <KanaQuestion question="ギェ" answer="gye"/>
+        <KanaQuestion question="クァ" answer="kwa"/>
+        <KanaQuestion question="クィ" answer="kwi"/>
+        <KanaQuestion question="クェ" answer="kwe"/>
+        <KanaQuestion question="クォ" answer="kwo"/>
+        <KanaQuestion question="グァ" answer="gwa"/>
+        <KanaQuestion question="グィ" answer="gwi"/>
+        <KanaQuestion question="グェ" answer="gwe"/>
+        <KanaQuestion question="グォ" answer="gwo"/>
+        <KanaQuestion question="スィ" answer="si"/>
+        <KanaQuestion question="ズィ" answer="zi"/>
+        <KanaQuestion question="ツィ" answer="tsi"/>
+        <KanaQuestion question="ツォ" answer="tso"/>
+        <KanaQuestion question="テゥ" answer="tu"/>
+        <KanaQuestion question="デゥ" answer="du"/>
+        <KanaQuestion question="ニェ" answer="nye"/>
+        <KanaQuestion question="ヒェ" answer="hye"/>
+        <KanaQuestion question="ビェ" answer="bye"/>
+        <KanaQuestion question="ピェ" answer="pye"/>
+        <KanaQuestion question="フィェ" answer="fye"/>
+        <KanaQuestion question="ホゥ" answer="hu"/>
+        <KanaQuestion question="ミェ" answer="mye"/>
+        <KanaQuestion question="リェ" answer="rye"/>
+        <KanaQuestion question="ラ゚" answer="la"/>
+        <KanaQuestion question="リ゚" answer="li"/>
+        <KanaQuestion question="ル゚" answer="lu"/>
+        <KanaQuestion question="レ゚" answer="le"/>
+        <KanaQuestion question="ロ゚" answer="lo"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Katakana War
     Wikipedia: https://en.wikipedia.org/wiki/Katakana#Table_of_katakana
                https://en.wikipedia.org/wiki/Romanization_of_Japanese#Differences_among_romanizations
+    Living Language: Ultimate Japanese Beginner-Intermediate (1-4000-2112-X)
     TextFugu: http://www.textfugu.com/cheat-sheets/katakana-chart/
     -->
 </Questions>
