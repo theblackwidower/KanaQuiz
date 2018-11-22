@@ -849,6 +849,10 @@ public final class RomajiConversion
                             (kana.charAt(i + 1) == 'ユ') || (kana.charAt(i + 1) == 'ヨ'))
                         romaji.append('\'');
                     break;
+                default:
+                    romaji.append('(');
+                    romaji.append(kana.charAt(i));
+                    romaji.append(')');
             }
 
         for (int i = 0; i < romaji.length(); i++)
@@ -876,6 +880,6 @@ public final class RomajiConversion
         //ref: https://en.wikipedia.org/wiki/Ch%C5%8Donpu
         return romaji.toString().replace("aー", "ā").replace("iー", "ī").replace("uー", "ū").replace("eー", "ē")
                 .replace("oー", "ō").replace("aa", "ā").replace("ii", "ī").replace("uu", "ū").replace("ei", "ē")
-                .replace("oo", "ō").replace("ou", "ō");
+                .replace("oo", "ō").replace("ou", "ō").replace(")(", "");
     }
 }
