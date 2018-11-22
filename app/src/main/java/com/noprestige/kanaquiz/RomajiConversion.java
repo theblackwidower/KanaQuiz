@@ -866,6 +866,10 @@ public final class RomajiConversion
                             ((romaji.charAt(i + 1) == 'p') || (romaji.charAt(i + 1) == 't') ||
                                     (romaji.charAt(i + 1) == 'k') || (romaji.charAt(i + 1) == 's')))
                         romaji.setCharAt(i, romaji.charAt(i + 1));
+                        //ref: https://en.wikipedia.org/wiki/Sokuon#Use_in_Japanese
+                    else if (((i + 2) < romaji.length()) &&
+                            ((romaji.charAt(i + 1) == 'c') && (romaji.charAt(i + 2) == 'h')))
+                        romaji.setCharAt(i, 't');
             }
         }
 
