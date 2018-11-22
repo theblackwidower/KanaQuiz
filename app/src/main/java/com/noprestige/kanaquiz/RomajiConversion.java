@@ -834,9 +834,20 @@ public final class RomajiConversion
                 case 'ヲ':
                     romaji.append("wo");
                     break;
+                //ref: https://en.wikipedia.org/wiki/Romanization_of_Japanese#Hepburn
                 case 'ん':
+                    romaji.append("n");
+                    if ((kana.charAt(i + 1) == 'あ') || (kana.charAt(i + 1) == 'い') || (kana.charAt(i + 1) == 'う') ||
+                            (kana.charAt(i + 1) == 'え') || (kana.charAt(i + 1) == 'お') || (kana.charAt(i + 1) == 'や') ||
+                            (kana.charAt(i + 1) == 'ゆ') || (kana.charAt(i + 1) == 'よ'))
+                        romaji.append('\'');
+                    break;
                 case 'ン':
                     romaji.append("n");
+                    if ((kana.charAt(i + 1) == 'ア') || (kana.charAt(i + 1) == 'イ') || (kana.charAt(i + 1) == 'ウ') ||
+                            (kana.charAt(i + 1) == 'エ') || (kana.charAt(i + 1) == 'オ') || (kana.charAt(i + 1) == 'ヤ') ||
+                            (kana.charAt(i + 1) == 'ユ') || (kana.charAt(i + 1) == 'ヨ'))
+                        romaji.append('\'');
                     break;
             }
 
