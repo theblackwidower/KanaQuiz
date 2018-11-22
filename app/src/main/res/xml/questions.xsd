@@ -152,7 +152,7 @@
     <xs:simpleType name="kana">
         <xs:restriction base="text">
             <!-- ref: https://gist.github.com/terrancesnyder/1345094 -->
-            <xs:pattern value="[ぁ-ゖ゙-ゟァ-ヿ]*"/>
+            <xs:pattern value="[ぁ-ゖ゙゚ゝ-ゟァ-ヿ]*"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -173,7 +173,7 @@
     <xs:simpleType name="kanji-kana">
         <xs:restriction base="text">
             <!-- Hiragana and Kanji in any combination, but there must be at least one kanji character. -->
-            <xs:pattern value="[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*"/>
+            <xs:pattern value="[ぁ-ゖ゙゚ゝ-ゟ㐀-䶵一-鿋豈-頻]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙゚ゝ-ゟ㐀-䶵一-鿋豈-頻]*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
