@@ -286,5 +286,17 @@ public class RomajiConversionTest
         assertThat(RomajiConversion.convertKana("ル゚"), is("lu"));
         assertThat(RomajiConversion.convertKana("レ゚"), is("le"));
         assertThat(RomajiConversion.convertKana("ロ゚"), is("lo"));
+
+        assertThat(RomajiConversion.convertKana("ローマじ"), is("rōmaji"));
+        assertThat(RomajiConversion.convertKana("ふじさん"), is("fujisan"));
+        assertThat(RomajiConversion.convertKana("おちゃ"), is("ocha"));
+        assertThat(RomajiConversion.convertKana("ちじ"), is("chiji"));
+        assertThat(RomajiConversion.convertKana("ちぢむ"), is("chijimu"));
+        assertThat(RomajiConversion.convertKana("つづく"), is("tsuzuku"));
+
+        assertThat(RomajiConversion.convertKana("ちょうおんぷ"), is("chōonpu"));
+        assertThat(RomajiConversion.convertKana("ポッキー"), is("pokkī"));
+        assertThat(RomajiConversion.convertKana("まって"), is("matte"));
+        assertThat(RomajiConversion.convertKana("こっち"), is("kotchi"));
     }
 }
