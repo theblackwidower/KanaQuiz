@@ -21,6 +21,13 @@ public final class RomajiConversion
                 case 'ッ':
                 case 'っ':
                 case 'ー':
+                case '♪':
+                case '!':
+                case '?':
+                case ':':
+                case ' ':
+                case '…':
+                case ',':
                     romaji.append(kana.charAt(i));
                     break;
                 case 'あ':
@@ -848,6 +855,40 @@ public final class RomajiConversion
                             (kana.charAt(i + 1) == 'エ') || (kana.charAt(i + 1) == 'オ') || (kana.charAt(i + 1) == 'ヤ') ||
                             (kana.charAt(i + 1) == 'ユ') || (kana.charAt(i + 1) == 'ヨ'))
                         romaji.append('\'');
+                    break;
+                case '「':
+                case '」':
+                    romaji.append('"');
+                    break;
+                case '『':
+                case '〝':
+                case '』':
+                case '〟':
+                    romaji.append('\'');
+                    break;
+                case '。':
+                    romaji.append('.');
+                    break;
+                case '！':
+                    romaji.append('!');
+                    break;
+                case '？':
+                    romaji.append('?');
+                    break;
+                case '：':
+                    romaji.append(':');
+                    break;
+                case '　':
+                case '・':
+                    romaji.append(' ');
+                    break;
+                case '‥':
+                case '⋯':
+                    romaji.append('…');
+                    break;
+                case '、':
+                case '，':
+                    romaji.append(',');
                     break;
                 default:
                     romaji.append('(');
