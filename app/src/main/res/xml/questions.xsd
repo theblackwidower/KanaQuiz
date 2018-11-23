@@ -111,7 +111,7 @@
                 </xs:element>
             </xs:choice>
             <xs:attribute name="question" type="kanji" use="required"/>
-            <xs:attribute name="meaning" type="text" use="required"/>
+            <xs:attribute name="meaning" type="meanings" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -121,7 +121,7 @@
                 <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:simpleContent>
-                            <xs:extension base="text"/>
+                            <xs:extension base="meanings"/>
                         </xs:simpleContent>
                     </xs:complexType>
                 </xs:element>
@@ -129,7 +129,7 @@
             <xs:attribute name="romaji" type="romaji" use="required"/>
             <xs:attribute name="kana" type="kana" use="required"/>
             <xs:attribute name="kanji" type="kanji-kana"/>
-            <xs:attribute name="answer" type="text" use="required"/>
+            <xs:attribute name="answer" type="meanings" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -165,6 +165,12 @@
     <xs:simpleType name="text">
         <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="meanings">
+        <xs:restriction base="text">
+            <xs:pattern value="[ ()/0-9A-Za-z]*"/>
         </xs:restriction>
     </xs:simpleType>
 
