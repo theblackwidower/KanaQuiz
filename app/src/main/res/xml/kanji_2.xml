@@ -21,11 +21,11 @@
         <KanjiQuestion question="声" meaning="voice">
             <KunYomi>koe</KunYomi>
             <OnYomi>sei</OnYomi>
-            <OnYomi>shou</OnYomi>
+            <OnYomi>shō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="答" meaning="answer/solution">
             <KunYomi>kota</KunYomi>
-            <OnYomi>tou</OnYomi>
+            <OnYomi>tō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="聞" meaning="hear/listen/ask">
             <KunYomi>ki</KunYomi>
@@ -41,11 +41,11 @@
         </KanjiQuestion>
         <KanjiQuestion question="秋" meaning="autumn">
             <KunYomi>aki</KunYomi>
-            <OnYomi>shuu</OnYomi>
+            <OnYomi>shū</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="冬" meaning="winter">
             <KunYomi>fuyu</KunYomi>
-            <OnYomi>tou</OnYomi>
+            <OnYomi>tō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="春" meaning="spring">
             <KunYomi>haru</KunYomi>
@@ -95,7 +95,7 @@
         <KanjiQuestion question="頭" meaning="head">
             <KunYomi>atama</KunYomi>
             <KunYomi>kashira</KunYomi>
-            <OnYomi>tou</OnYomi>
+            <OnYomi>tō</OnYomi>
             <OnYomi>zu</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="顔" meaning="face/expression">
@@ -104,7 +104,7 @@
         </KanjiQuestion>
         <KanjiQuestion question="毛" meaning="hair/fur">
             <KunYomi>ke</KunYomi>
-            <OnYomi>mou</OnYomi>
+            <OnYomi>mō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="首" meaning="neck">
             <KunYomi>kubi</KunYomi>
@@ -146,7 +146,7 @@
     <QuestionSet prefId="ljts_kanji_set_20" setTitle="@string/ljts_kanji_set_20_title">
         <KanjiQuestion question="教" meaning="teach">
             <KunYomi>oshi</KunYomi>
-            <OnYomi>kyou</OnYomi>
+            <OnYomi>kyō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="知" meaning="know/wisdom">
             <KunYomi>shi</KunYomi>
@@ -161,7 +161,7 @@
             <OnYomi>sa</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="工" meaning="work/craft">
-            <OnYomi>kou</OnYomi>
+            <OnYomi>kō</OnYomi>
             <OnYomi>ku</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="元" meaning="origin/source">
@@ -178,11 +178,11 @@
         </KanjiQuestion>
         <KanjiQuestion question="牛" meaning="cow">
             <KunYomi>ushi</KunYomi>
-            <OnYomi>gyuu</OnYomi>
+            <OnYomi>gyū</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="鳥" meaning="bird/chicken">
             <KunYomi>tori</KunYomi>
-            <OnYomi>chou</OnYomi>
+            <OnYomi>chō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="羽" meaning="feather/wing">
             <KunYomi>ha</KunYomi>
@@ -202,14 +202,14 @@
     <QuestionSet prefId="ljts_kanji_set_22" setTitle="@string/ljts_kanji_set_22_title">
         <KanjiQuestion question="場" meaning="place/location">
             <KunYomi>ba</KunYomi>
-            <OnYomi>jou</OnYomi>
+            <OnYomi>jō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="市" meaning="market/city">
             <KunYomi>ichi</KunYomi>
             <OnYomi>shi</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="京" meaning="capital">
-            <OnYomi>kyou</OnYomi>
+            <OnYomi>kyō</OnYomi>
             <OnYomi>kei</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="里" meaning="village/hometown">
@@ -253,7 +253,7 @@
             <KunYomi>ushi</KunYomi>
             <KunYomi>ato</KunYomi>
             <OnYomi>go</OnYomi>
-            <OnYomi>kou</OnYomi>
+            <OnYomi>kō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="毎" meaning="every/each">
             <KunYomi>goto</KunYomi>
@@ -263,11 +263,11 @@
     <QuestionSet prefId="ljts_kanji_set_24" setTitle="@string/ljts_kanji_set_24_title">
         <KanjiQuestion question="朝" meaning="morning">
             <KunYomi>asa</KunYomi>
-            <OnYomi>chou</OnYomi>
+            <OnYomi>chō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="昼" meaning="daytime/noon">
             <KunYomi>hiru</KunYomi>
-            <OnYomi>chuu</OnYomi>
+            <OnYomi>chū</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="午" meaning="noon">
             <OnYomi>go</OnYomi>
@@ -281,7 +281,7 @@
             <OnYomi>yo</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="週" meaning="week">
-            <OnYomi>shuu</OnYomi>
+            <OnYomi>shū</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_25" setTitle="@string/ljts_kanji_set_25_title">
@@ -303,16 +303,16 @@
             <OnYomi>shi</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="妹" meaning="younger sister">
-            <KunYomi>imouto</KunYomi>
+            <KunYomi>imōto</KunYomi>
             <OnYomi>mai</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="兄" meaning="elder brother">
             <KunYomi>ani</KunYomi>
             <OnYomi>kei</OnYomi>
-            <OnYomi>kyou</OnYomi>
+            <OnYomi>kyō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="弟" meaning="younger brother">
-            <KunYomi>otouto</KunYomi>
+            <KunYomi>otōto</KunYomi>
             <OnYomi>tei</OnYomi>
             <OnYomi>dai</OnYomi>
             <OnYomi>de</OnYomi>
@@ -323,7 +323,7 @@
             <KunYomi>kata</KunYomi>
             <KunYomi>katachi</KunYomi>
             <OnYomi>kei</OnYomi>
-            <OnYomi>gyou</OnYomi>
+            <OnYomi>gyō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="丸" meaning="circle/round/sphere">
             <KunYomi>maru</KunYomi>
@@ -341,14 +341,14 @@
         </KanjiQuestion>
         <KanjiQuestion question="広" meaning="wide/spacious">
             <KunYomi>hiro</KunYomi>
-            <OnYomi>kou</OnYomi>
+            <OnYomi>kō</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="点" meaning="point/mark/dot">
             <OnYomi>ten</OnYomi>
         </KanjiQuestion>
         <KanjiQuestion question="長" meaning="long/leader">
             <KunYomi>naga</KunYomi>
-            <OnYomi>chou</OnYomi>
+            <OnYomi>chō</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_bonus_set_5_6" setTitle="@string/ljts_kanji_bonus_set_5_6_title">
@@ -402,7 +402,7 @@
         <KanjiQuestion question="星" meaning="star">
             <KunYomi>hoshi</KunYomi>
             <OnYomi>sei</OnYomi>
-            <OnYomi>shou</OnYomi>
+            <OnYomi>shō</OnYomi>
         </KanjiQuestion>
     </QuestionSet>
     <!--
