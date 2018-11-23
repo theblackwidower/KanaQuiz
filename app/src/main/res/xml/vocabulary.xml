@@ -145,10 +145,10 @@
         <WordQuestion romaji="Hoteru" kana="ホテル" answer="Hotel"/> <!--Katakana-->
         <WordQuestion romaji="Resutoran" kana="レストラン" answer="Restaurant"/> <!--Katakana-->
         <WordQuestion romaji="Mise" kana="みせ" kanji="店" answer="Shop"/>
-        <WordQuestion romaji="Kouen" kana="こうえん" kanji="公園" answer="Park"/>
-        <WordQuestion romaji="Ginkou" kana="ぎんこう" kanji="銀行" answer="Bank"/>
-        <WordQuestion romaji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/>
-        <WordQuestion romaji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Post Office"/>
+        <WordQuestion romaji="Kouen" kana="こうえん" kanji="公園" answer="Park"/> <!-- Kōen -->
+        <WordQuestion romaji="Ginkou" kana="ぎんこう" kanji="銀行" answer="Bank"/> <!-- Ginkō -->
+        <WordQuestion romaji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/> <!-- Byōin -->
+        <WordQuestion romaji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Post Office"/> <!-- Yūbinkyoku -->
     </QuestionSet>
     <QuestionSet prefId="vocabulary_set_clothing" setTitle="@string/vocab_set_clothing_title">
         <WordQuestion romaji="Shatsu" kana="シャツ" answer="Shirt"/> <!--Katakana-->
@@ -163,12 +163,12 @@
         <WordQuestion romaji="Kimono" kana="きもの" kanji="着物" answer="Kimono"/>
     </QuestionSet>
     <QuestionSet prefId="vocabulary_set_home_2" setTitle="@string/vocab_set_home_2_title">
-        <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Computer"/> <!--Katakana-->
+        <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Computer"/> <!--Katakana--> <!-- Konpyūta -->
         <WordQuestion romaji="Terebi" kana="テレビ" answer="Television"/> <!--Katakana-->
         <WordQuestion romaji="Toire" kana="トイレ" answer="Toilet"/> <!--Katakana-->
         <!--<WordQuestion romaji="Beddo" kana="ベッド" answer="Bed"/> &lt;!&ndash;Katakana&ndash;&gt;-->
         <WordQuestion romaji="Sofaa" kana="ソファー" answer="Sofa"/> <!--Katakana-->
-        <WordQuestion romaji="Houki" kana="ほうき" kanji="箒" answer="Broom"/>
+        <WordQuestion romaji="Houki" kana="ほうき" kanji="箒" answer="Broom"/> <!-- Hōki -->
         <WordQuestion romaji="Hashi" kana="はし" kanji="箸" answer="Chopsticks"/>
         <WordQuestion romaji="Kagu" kana="かぐ" kanji="家具" answer="Furniture"/>
         <WordQuestion romaji="Kagi" kana="かぎ" kanji="鍵" answer="Key"/>
