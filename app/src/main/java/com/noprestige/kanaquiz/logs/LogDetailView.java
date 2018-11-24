@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.noprestige.kanaquiz.R;
 
 import org.threeten.bp.LocalDate;
+import org.threeten.bp.ZoneId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,7 +130,12 @@ public class LogDetailView extends AppCompatActivity
         Bundle extras = getIntent().getExtras();
         date = (LocalDate) extras.get("date");
 
-        setTitle("Log Details: " + date);
+        //ref: https://stackoverflow.com/a/22992578/3582371
+        //Only needed because the threeten backport has a different package name than java.time, which would require
+        // no modification. I blame anyone not Oreo or newer.
+        //ref: https://developer.android.com/reference/java/util/Formatter#ddt
+        setTitle(getString(R.string.log_detail_title,
+                date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L));
 
         fetchThread = new FetchLogDetails();
         fetchThread.execute(this);
