@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
+import java.util.Locale;
+
 public class QuestionSelectionItem extends LinearLayout implements Checkable
 {
     private String prefId;
@@ -61,6 +63,8 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
         chkCheckBox.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));
+
+        lblText.setTextLocale(Locale.JAPANESE);
 
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.QuestionSelectionItem, defStyle, 0);

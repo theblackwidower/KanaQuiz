@@ -27,6 +27,8 @@ import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
 import org.threeten.bp.LocalDate;
 
+import java.util.Locale;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
@@ -115,6 +117,8 @@ public class MainQuiz extends AppCompatActivity
         lblResponse = findViewById(R.id.lblResponse);
         lblQuestion = findViewById(R.id.lblQuestion);
         frmAnswer = findViewById(R.id.frmAnswer);
+
+        lblQuestion.setTextLocale(Locale.JAPANESE);
 
         if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
                 (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES))

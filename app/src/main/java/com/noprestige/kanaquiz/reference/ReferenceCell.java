@@ -20,6 +20,7 @@ import com.noprestige.kanaquiz.questions.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
@@ -87,6 +88,8 @@ public class ReferenceCell extends View
 
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
+
+        subjectPaint.setTextLocale(Locale.JAPANESE);
     }
 
     private boolean copyItem()
