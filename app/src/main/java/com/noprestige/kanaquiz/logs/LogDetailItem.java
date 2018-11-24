@@ -13,6 +13,7 @@ import android.view.View;
 import com.noprestige.kanaquiz.R;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class LogDetailItem extends View
 {
@@ -87,6 +88,8 @@ public class LogDetailItem extends View
 
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
+
+        mainPaint.setTextLocale(Locale.JAPANESE);
 
         linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
