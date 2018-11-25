@@ -45,6 +45,14 @@ public class LogDetailView extends AppCompatActivity
             staticLabels = new ArrayList<>();
         }
 
+        public String formatXLabel(float value)
+        {
+            int key = Math.round(value);
+            if ((key >= 0) && (key < staticLabels.size()))
+                return staticLabels.get(key);
+            return "";
+        }
+
         @Override
         protected Integer doInBackground(LogDetailView... activity)
         {
@@ -54,13 +62,7 @@ public class LogDetailView extends AppCompatActivity
 
             QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity[0].date);
 
-            logDetailChart.getXAxis().setValueFormatter((value, axis) ->
-            {
-                int key = Math.round(value);
-                if ((key >= 0) && (key < staticLabels.size()))
-                    return staticLabels.get(key);
-                return "";
-            });
+            logDetailChart.getXAxis().setValueFormatter((value, axis) -> formatXLabel(value));
 
             if (records.length == 0)
                 return 0;
