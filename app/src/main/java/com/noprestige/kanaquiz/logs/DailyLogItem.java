@@ -342,12 +342,12 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    private static String parseCount(float count)
+    public static String parseCount(float count)
     {
         return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
-    private static String parseCount(int count)
+    public static String parseCount(int count)
     {
         if (count < 1000)
             return Integer.toString(count);
@@ -374,7 +374,7 @@ public class DailyLogItem extends View
         }
     }
 
-    private static int getPercentageColour(float percentage, Resources resources)
+    public static int getPercentageColour(float percentage, Resources resources)
     {
         int tenth = Math.round(percentage * 100) / 10;
         if (tenth <= 4)

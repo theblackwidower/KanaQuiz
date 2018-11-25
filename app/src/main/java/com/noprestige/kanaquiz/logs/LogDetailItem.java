@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -262,25 +261,15 @@ public class LogDetailItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    private static String parseCount(int count)
-    {
-        if (count < 1000)
-            return Integer.toString(count);
-        else if (count < 10000)
-            return Float.toString(Math.round((float) count / 100f) / 10f) + "k";
-        else //if (count < 100000)
-            return Integer.toString(Math.round((float) count / 1000f)) + "k";
-    }
-
     private void updateAnswers()
     {
         if ((correctAnswers >= 0) && (totalAnswers >= 0))
         {
-            correctString = parseCount(correctAnswers);
-            totalString = parseCount(totalAnswers);
+            correctString = DailyLogItem.parseCount(correctAnswers);
+            totalString = DailyLogItem.parseCount(totalAnswers);
             float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
-            percentagePaint.setColor(getPercentageColour(percentage, getResources()));
+            percentagePaint.setColor(DailyLogItem.getPercentageColour(percentage, getResources()));
 
             questionWidth = mainPaint.measureText(question);
             correctWidth = mainPaint.measureText(correctString);
@@ -288,22 +277,5 @@ public class LogDetailItem extends View
             totalWidth = mainPaint.measureText(totalString);
             percentageWidth = percentagePaint.measureText(percentageString);
         }
-    }
-
-    private static int getPercentageColour(float percentage, Resources resources)
-    {
-        int tenth = Math.round(percentage * 100) / 10;
-        if (tenth <= 4)
-            return resources.getColor(R.color.below_fifty);
-        else if (tenth == 5)
-            return resources.getColor(R.color.fifty_to_sixty);
-        else if (tenth == 6)
-            return resources.getColor(R.color.sixty_to_seventy);
-        else if (tenth == 7)
-            return resources.getColor(R.color.seventy_to_eighty);
-        else if (tenth == 8)
-            return resources.getColor(R.color.eighty_to_ninety);
-        else //if (tenth >= 9)
-            return resources.getColor(R.color.above_ninety);
     }
 }
