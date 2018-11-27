@@ -19,7 +19,12 @@ Open source and ad free.
 
 This application is in a state of constant development. Any additional feature requests can be sent via email, or submitted as an issue here, on GitHub. If they are appropriate, they will likely be added to the next release.
 
-Currently available on [Google Play™](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz).
+[<img src="https://f-droid.org/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.noprestige.kanaquiz/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz)
 
 ## Feature set
 
