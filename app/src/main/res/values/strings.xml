@@ -187,6 +187,7 @@
     <string name="vocab_set_clothing_title">Clothing</string>
     <string name="vocab_set_home_2_title">House &amp; Home 2</string>
     <string name="vocab_set_school_title">School</string>
+    <string name="vocab_set_jobs_title">Jobs</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under

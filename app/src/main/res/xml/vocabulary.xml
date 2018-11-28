@@ -188,6 +188,21 @@
         <WordQuestion romaji="Kouchousensei" kana="こうちょうせんせい" kanji="校長先生" answer="Principal"/>
         <WordQuestion romaji="Shukudai" kana="しゅくだい" kanji="宿題" answer="Homework"/>
     </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_jobs" setTitle="@string/vocab_set_jobs_title">
+        <WordQuestion romaji="Enjinia" kana="エンジニア" answer="Engineer"/> <!--Katakana-->
+        <WordQuestion romaji="Shefu" kana="シェフ" answer="Chef"/> <!--Katakana-->
+        <WordQuestion romaji="Pairotto" kana="パイロット" answer="Pilot"/> <!--Katakana-->
+        <WordQuestion romaji="Sarariman" kana="サラリーマン" answer="Salaryman"> <!--Katakana-->
+            <AltAnswer>Businessman</AltAnswer>
+            <AltAnswer>Office Worker</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Konsarutanto" kana="コンサルタント" answer="Consultant"/> <!--Katakana-->
+        <WordQuestion romaji="Keisatsukan" kana="けいさつかん" kanji="警察官" answer="Police Officer"/>
+        <WordQuestion romaji="Isha" kana="いしゃ" kanji="医者" answer="Doctor"/>
+        <WordQuestion romaji="Kangoshi" kana="かんごし" kanji="看護師" answer="Nurse"/>
+        <WordQuestion romaji="Bengoshi" kana="べんごし" kanji="弁護士" answer="Lawyer"/>
+        <WordQuestion romaji="Kashu" kana="かしゅ" kanji="歌手" answer="Singer"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
