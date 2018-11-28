@@ -40,6 +40,9 @@
             android:name=".logs.LogView"
             android:label="@string/view_logs"
             android:parentActivityName=".quiz.MainQuiz"/>
+        <activity
+            android:name=".logs.LogDetailView"
+            android:parentActivityName=".logs.LogView"/>
     </application>
 
 </manifest>
