@@ -31,6 +31,13 @@ public final class RomajiConversion
                     romaji.append(kana.charAt(i));
                     break;
                 case 'あ':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#A_+_A
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'a'))//for modified Hepburn
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'ア':
                     romaji.append('a');
                     break;
@@ -50,7 +57,14 @@ public final class RomajiConversion
                     }
                     break;
                 case 'う':
-                    romaji.append('u');
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#U_+_U
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#O_+_U
+                    //TODO: detect 'terminal part of verb' and disable
+                    if ((romaji.length() > 0) && ((romaji.charAt(romaji.length() - 1) == 'u') ||
+                            (romaji.charAt(romaji.length() - 1) == 'o')))
+                        romaji.append('ー');
+                    else
+                        romaji.append('u');
                     break;
                 case 'ウ':
                     i++;
@@ -93,10 +107,24 @@ public final class RomajiConversion
                     }
                     break;
                 case 'え':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#E_+_E
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'e'))//for modified Hepburn
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'エ':
                     romaji.append('e');
                     break;
                 case 'お':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#O_+_O
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'o'))
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'オ':
                     romaji.append('o');
                     break;
@@ -919,8 +947,8 @@ public final class RomajiConversion
         }
 
         //ref: https://en.wikipedia.org/wiki/Ch%C5%8Donpu
+        //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#Loanwords
         return romaji.toString().replace("aー", "ā").replace("iー", "ī").replace("uー", "ū").replace("eー", "ē")
-                .replace("oー", "ō").replace("aa", "ā").replace("ii", "ī").replace("uu", "ū").replace("ei", "ē")
-                .replace("oo", "ō").replace("ou", "ō").replace(")(", "");
+                .replace("oー", "ō").replace(")(", "");
     }
 }
