@@ -35,7 +35,7 @@
     <string name="vocab_set_numbers_title">Nombres</string>
     <string name="vocab_set_countries_title">Països</string>
     <string name="vocab_set_places_title">Llocs</string>
-    <string name="vocab_set_clothing_title">Roba</string>
+    <string name="vocab_set_clothing_title">Vestimenta</string>
     <string name="vocab_set_home_2_title">Casa i llar 2</string>
     <string name="privacy_policy"><u>Política de privacitat</u></string>
     <string name="acra_details">En cas d\'un error d\'execució, es pot enviar instantàniament un informe al desenvolupador a través del correu electrònic</string>
@@ -68,14 +68,14 @@
     <string name="base_form_title">Principal</string>
     <string name="diacritics_title">Diacrítics</string>
     <string name="digraphs_title">Dígrafs</string>
-    <string name="view_logs">Veure registres</string>
-    <string name="clear_logs">Buidar registres</string>
+    <string name="view_logs">Veure traces</string>
+    <string name="clear_logs">Buidar traces</string>
     <string name="clipboard_message">Copiar al porta-retalls</string>
     <string name="acra_alert">Lamentablement, The Kana Quiz s\'ha aturat. Si us plau, enviï un informe sobre l\'error d\'execució.</string>
     <string name="vocabulary">Vocabulari</string>
     <string name="set">Conjunt</string>
     <string name="vocab_set_basic_title">Vocabulari clàssic</string>
-    <string name="vocab_set_study_title">Recursos d\'estudi</string>
+    <string name="vocab_set_study_title">Material d\'estudi</string>
     <string name="set_1_title">%1$s bàsic</string>
     <string name="set_2_title">%1$s K/G</string>
     <string name="set_3_title">%1$s S/Z</string>
