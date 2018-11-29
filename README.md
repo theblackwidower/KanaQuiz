@@ -3,8 +3,8 @@
 [![GitHub release](https://img.shields.io/github/release/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/releases/)
 [![GitHub license](https://img.shields.io/github/license/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/blob/master/LICENSE)
 
-[![GitHub commits](https://img.shields.io/github/commits-since/theblackwidower/KanaQuiz/latest.svg)](https://github.com/theblackwidower/KanaQuiz/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/issues/)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/pulls/)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/4w/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/graphs/commit-activity)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0af5712d54745ada2893d82c55a680b)](https://www.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=theblackwidower/KanaQuiz&amp;utm_campaign=Badge_Grade)
