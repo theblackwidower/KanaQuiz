@@ -78,6 +78,8 @@ public final class RomajiConversion
                         romaji.append("we");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("wo");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("wyu");
                     else
                     {
                         i--;
@@ -100,6 +102,12 @@ public final class RomajiConversion
                         romaji.append("ve");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("vo");
+                    else if (kana.charAt(i) == 'ャ')
+                        romaji.append("vya");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("vyu");
+                    else if (kana.charAt(i) == 'ョ')
+                        romaji.append("vyo");
                     else
                     {
                         i--;
@@ -209,6 +217,8 @@ public final class RomajiConversion
                         romaji.append("gwe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("gwo");
+                    else if (kana.charAt(i) == 'ヮ')
+                        romaji.append("gwa");
                     else
                     {
                         i--;
@@ -228,6 +238,8 @@ public final class RomajiConversion
                         romaji.append("kwe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("kwo");
+                    else if (kana.charAt(i) == 'ヮ')
+                        romaji.append("kwa");
                     else
                     {
                         i--;
@@ -441,6 +453,8 @@ public final class RomajiConversion
                         romaji.append("tse");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("tso");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("tsyu");
                     else
                     {
                         i--;
@@ -668,6 +682,12 @@ public final class RomajiConversion
                         romaji.append("fe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("fo");
+                    else if (kana.charAt(i) == 'ャ')
+                        romaji.append("fya");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("fyu");
+                    else if (kana.charAt(i) == 'ョ')
+                        romaji.append("fyo");
                     else
                     {
                         i--;
@@ -785,7 +805,22 @@ public final class RomajiConversion
                 case 'リ':
                     i++;
                     if (kana.charAt(i) == '゚')
-                        romaji.append("li");
+                    {
+                        i++;
+                        if (kana.charAt(i) == 'ャ')
+                            romaji.append("lya");
+                        else if (kana.charAt(i) == 'ュ')
+                            romaji.append("lyu");
+                        else if (kana.charAt(i) == 'ェ')
+                            romaji.append("lye");
+                        else if (kana.charAt(i) == 'ョ')
+                            romaji.append("lyo");
+                        else
+                        {
+                            i--;
+                            romaji.append("li");
+                        }
+                    }
                     else if (kana.charAt(i) == 'ェ')
                         romaji.append("rye");
                     else if (kana.charAt(i) == 'ャ')
@@ -883,6 +918,18 @@ public final class RomajiConversion
                             (kana.charAt(i + 1) == 'エ') || (kana.charAt(i + 1) == 'オ') || (kana.charAt(i + 1) == 'ヤ') ||
                             (kana.charAt(i + 1) == 'ユ') || (kana.charAt(i + 1) == 'ヨ'))
                         romaji.append('\'');
+                    break;
+                case 'ヷ':
+                    romaji.append("va");
+                    break;
+                case 'ヸ':
+                    romaji.append("vi");
+                    break;
+                case 'ヹ':
+                    romaji.append("ve");
+                    break;
+                case 'ヺ':
+                    romaji.append("vo");
                     break;
                 case '「':
                 case '」':

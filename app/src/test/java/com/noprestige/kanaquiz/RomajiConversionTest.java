@@ -287,6 +287,30 @@ public class RomajiConversionTest
         assertThat(RomajiConversion.convertKana("レ゚"), is("le"));
         assertThat(RomajiConversion.convertKana("ロ゚"), is("lo"));
 
+
+        assertThat(RomajiConversion.convertKana("ウュ"), is("wyu"));
+        assertThat(RomajiConversion.convertKana("ヴャ"), is("vya"));
+        assertThat(RomajiConversion.convertKana("ヴュ"), is("vyu"));
+        assertThat(RomajiConversion.convertKana("ヴョ"), is("vyo"));
+        assertThat(RomajiConversion.convertKana("クヮ"), is("kwa"));
+        assertThat(RomajiConversion.convertKana("グヮ"), is("gwa"));
+        assertThat(RomajiConversion.convertKana("ツュ"), is("tsyu"));
+//        assertThat(RomajiConversion.convertKana("トゥ"), is("tu"));
+//        assertThat(RomajiConversion.convertKana("テュ"), is("tyu"));
+//        assertThat(RomajiConversion.convertKana("ドゥ"), is("du"));
+//        assertThat(RomajiConversion.convertKana("デュ"), is("dyu"));
+        assertThat(RomajiConversion.convertKana("フャ"), is("fya"));
+        assertThat(RomajiConversion.convertKana("フュ"), is("fyu"));
+        assertThat(RomajiConversion.convertKana("フョ"), is("fyo"));
+        assertThat(RomajiConversion.convertKana("リ゚ャ"), is("lya"));
+        assertThat(RomajiConversion.convertKana("リ゚ュ"), is("lyu"));
+        assertThat(RomajiConversion.convertKana("リ゚ェ"), is("lye"));
+        assertThat(RomajiConversion.convertKana("リ゚ョ"), is("lyo"));
+        assertThat(RomajiConversion.convertKana("ヷ"), is("va"));
+        assertThat(RomajiConversion.convertKana("ヸ"), is("vi"));
+        assertThat(RomajiConversion.convertKana("ヹ"), is("ve"));
+        assertThat(RomajiConversion.convertKana("ヺ"), is("vo"));
+
         assertThat(RomajiConversion.convertKana("ローマじ"), is("rōmaji"));
         assertThat(RomajiConversion.convertKana("ふじさん"), is("fujisan"));
         assertThat(RomajiConversion.convertKana("おちゃ"), is("ocha"));
