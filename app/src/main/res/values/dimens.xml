@@ -6,10 +6,11 @@
 
     <dimen name="dividingLine">1dp</dimen>
 
-    <dimen name="defaultReferenceSubjectSize">64sp</dimen>
+    <!-- for smaller screens -->
+    <dimen name="defaultReferenceSubjectSize">52sp</dimen>
     <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
-    <dimen name="diacriticReferenceSubjectSize">52sp</dimen>
-    <dimen name="vocabReferenceSubjectSize">52sp</dimen>
+    <dimen name="diacriticReferenceSubjectSize">46sp</dimen>
+    <dimen name="vocabReferenceSubjectSize">46sp</dimen>
 
     <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>
 
