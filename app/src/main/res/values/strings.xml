@@ -159,20 +159,20 @@
     <string name="vocabulary">Vocabulary</string>
     <string name="set">set</string>
     <string name="set_1_title">Base %1$s</string>
-    <string name="set_2_title" translatable="false">K/G %1$s</string>
-    <string name="set_3_title" translatable="false">S/Z %1$s</string>
-    <string name="set_4_title" translatable="false">T/D %1$s</string>
-    <string name="set_5_title" translatable="false">N %1$s</string>
-    <string name="set_6_title" translatable="false">H/B/P %1$s</string>
-    <string name="set_7_title" translatable="false">M %1$s</string>
-    <string name="set_8_title" translatable="false">R %1$s</string>
-    <string name="set_9_title" translatable="false">Y %1$s</string>
-    <string name="set_10_title" translatable="false">W %1$s + N</string>
+    <string name="set_2_title">K/G %1$s</string>
+    <string name="set_3_title">S/Z %1$s</string>
+    <string name="set_4_title">T/D %1$s</string>
+    <string name="set_5_title">N %1$s</string>
+    <string name="set_6_title">H/B/P %1$s</string>
+    <string name="set_7_title">M %1$s</string>
+    <string name="set_8_title">R %1$s</string>
+    <string name="set_9_title">Y %1$s</string>
+    <string name="set_10_title">W %1$s + N</string>
 
-    <string name="set_2_no_diacritics_title" translatable="false">K %1$s</string>
-    <string name="set_3_no_diacritics_title" translatable="false">S %1$s</string>
-    <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
-    <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
+    <string name="set_2_no_diacritics_title">K %1$s</string>
+    <string name="set_3_no_diacritics_title">S %1$s</string>
+    <string name="set_4_no_diacritics_title">T %1$s</string>
+    <string name="set_6_no_diacritics_title">H %1$s</string>
 
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
