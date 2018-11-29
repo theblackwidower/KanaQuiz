@@ -86,7 +86,7 @@ Mainly, the branching model I'm currently experimenting with is inspired by [thi
 
 ## Translations
 
-This application is currently only available for English language speakers.
+This application is currently only available in English, Spanish, and Catalan.
 
 If you are multi-lingual, and wish to assist this project by volunteering translation services, you can submit the changes in a pull request, or via email.
 
