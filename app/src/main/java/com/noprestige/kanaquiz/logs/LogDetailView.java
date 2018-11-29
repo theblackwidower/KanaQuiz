@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -172,8 +171,7 @@ public class LogDetailView extends AppCompatActivity
         {
             viewOrientation = LinearLayout.HORIZONTAL;
 
-            chartWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            chartWidth = getResources().getDimensionPixelSize(R.dimen.landscapeChartWidth);
             chartHeight = MATCH_PARENT;
 
             listWidth = 0;
@@ -184,8 +182,7 @@ public class LogDetailView extends AppCompatActivity
             viewOrientation = LinearLayout.VERTICAL;
 
             chartWidth = MATCH_PARENT;
-            chartHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            chartHeight = getResources().getDimensionPixelSize(R.dimen.portraitChartHeight);
 
             listWidth = MATCH_PARENT;
             listHeight = 0;

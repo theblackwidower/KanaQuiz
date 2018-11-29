@@ -119,8 +119,7 @@ public class DailyLogItem extends View
         linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
-        internalVerticalPadding = Math.round(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
+        internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
 
         setBackground(defaultAttributes.getDrawable(1));
 

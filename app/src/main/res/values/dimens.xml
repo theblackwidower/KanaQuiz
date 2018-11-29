@@ -5,4 +5,22 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="dividingLine">1dp</dimen>
+
+    <dimen name="defaultReferenceSubjectSize">64sp</dimen>
+    <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
+    <dimen name="diacriticReferenceSubjectSize">52sp</dimen>
+    <dimen name="vocabReferenceSubjectSize">52sp</dimen>
+
+    <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>
+
+    <dimen name="landscapeChartWidth">300dp</dimen>
+    <dimen name="portraitChartHeight">200dp</dimen>
+
+    <dimen name="logItemInternalVerticalPadding">3dp</dimen>
+
+    <dimen name="embeddedAlertMessageSize">24sp</dimen>
+
+    <dimen name="headerTextSize">14sp</dimen>
+    <dimen name="headerTopPadding">28sp</dimen>
+    <dimen name="headerBottomPadding">14sp</dimen>
 </resources>

@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -331,8 +330,7 @@ public class QuestionManagement
 
         Question[] questionSet = getQuestionSet(setNumber, Diacritic.NO_DIACRITIC, null);
 
-        int padding = (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.vocabReferenceCellHorizontalPadding);
 
         for (Question question : questionSet)
         {
