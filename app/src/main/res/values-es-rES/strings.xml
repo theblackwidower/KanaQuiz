@@ -39,7 +39,7 @@
     <string name="vocab_set_home_2_title">Casa y hogar 2</string>
     <string name="privacy_policy"><u>Política de privacidad</u></string>
     <string name="acra_details">En caso de un error de ejecución, se puede enviar instantáneamente un informe al desarrollador a través de su correo electrónico</string>
-    <string name="no_logs">No se han encontrado trazas.</string>
+    <string name="no_logs">No se han encontrado datos.</string>
     <string name="incorrect_option_title">En caso de una respuesta incorrecta&#8230;</string>
     <string name="incorrect_option_move_on">procede a la siguiente pregunta</string>
     <string name="incorrect_option_show_answer">muestra la respuesta correcta</string>
@@ -57,7 +57,7 @@
     <string name="vocab_display_option_summary">Qué conjunto de carácteres deberían usarse para las preguntas de vocabulario</string>
     <string name="repetition_option_title">Control de repetición</string>
     <string name="repetition_option_summary">Número de preguntas consecutivas sin repeticiones</string>
-    <string name="digraphs_option_title">Permite dígrafos</string>
+    <string name="digraphs_option_title">Permite diptongos</string>
     <string name="digraphs_option_summary">Aparecerán kana de dos partes en el cuestionario</string>
     <string name="diacritics_option_title">Permite diacríticos</string>
     <string name="diacritics_option_summary">Kana con diacríticos aparecerán en el cuestionario</string>
@@ -67,9 +67,9 @@
     <string name="multiple_choice_option_summary">Las preguntas serán de respuestas múltiples</string>
     <string name="base_form_title">Principal</string>
     <string name="diacritics_title">Diacríticos</string>
-    <string name="digraphs_title">Dígrafos</string>
-    <string name="view_logs">Ver trazas</string>
-    <string name="clear_logs">Vacíar trazas</string>
+    <string name="digraphs_title">Diptongo</string>
+    <string name="view_logs">Ver progreso</string>
+    <string name="clear_logs">Reiniciar progreso</string>
     <string name="clipboard_message">Copiar al portapapeles</string>
     <string name="acra_alert">Lamentablemente, The Kana Quiz se ha cerrado inesperadamente. Por favor, envie un informe con el error de ejecución.</string>
     <string name="vocabulary">Vocabulario</string>
@@ -90,4 +90,7 @@
     <string name="set_3_no_diacritics_title">%1$s S</string>
     <string name="set_4_no_diacritics_title">%1$s T</string>
     <string name="set_6_no_diacritics_title">%1$s H</string>
+    <string name="vocab_set_school_title">Escuela</string>
+    <string name="vocab_set_jobs_title">Oficios</string>
+    <string name="log_detail_title">Detalles del progreso: %1$tF</string>
 </resources>

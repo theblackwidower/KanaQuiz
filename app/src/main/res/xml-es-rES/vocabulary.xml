@@ -156,7 +156,9 @@
     </QuestionSet>
     <QuestionSet prefId="vocabulary_set_home_2" setTitle="@string/vocab_set_home_2_title">
         <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Ordenador"/> <!--Katakana--> <!-- Konpyūta -->
-        <WordQuestion romaji="Terebi" kana="テレビ" answer="Televisor"/> <!--Katakana-->
+        <WordQuestion romaji="Terebi" kana="テレビ" answer="Televisor"> <!--Katakana-->
+            <AltAnswer>TV</AltAnswer>
+        </WordQuestion>
         <WordQuestion romaji="Toire" kana="トイレ" answer="Baño"/> <!--Katakana-->
         <!--<WordQuestion romaji="Beddo" kana="ベッド" answer="Bed"/> &lt;!&ndash;Katakana&ndash;&gt;-->
         <WordQuestion romaji="Sofaa" kana="ソファー" answer="Sofá"/> <!--Katakana-->
@@ -165,6 +167,46 @@
         <WordQuestion romaji="Kagu" kana="かぐ" kanji="家具" answer="Muebles"/>
         <WordQuestion romaji="Kagi" kana="かぎ" kanji="鍵" answer="Llave"/>
         <WordQuestion romaji="Osara" kana="おさら" kanji="お皿" answer="Plato"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 4: School -->
+    <QuestionSet prefId="vocabulary_set_school" setTitle="@string/vocab_set_school_title">
+        <WordQuestion romaji="Sukuru" kana="スクール" answer="Escuela"/> <!--Katakana-->
+        <!--<WordQuestion romaji="Gakkou" kana="がっこう" kanji="学校" answer="School"/>-->
+        <WordQuestion romaji="Tesuto" kana="テスト" answer="Test"> <!--Katakana-->
+            <AltAnswer>Examen</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Tekisutobukku" kana="テキストブック" answer="Libro de texto"/> <!--Katakana--> <!-- tekisuto -->
+        <!--<WordQuestion romaji="Tekisuto" kana="テキスト" answer="Textbook"/> &lt;!&ndash;Katakana&ndash;&gt;-->
+        <!--<WordQuestion romaji="Noto" kana="ノート" answer="Notebook"/> &lt;!&ndash;Katakana&ndash;&gt;-->
+        <WordQuestion romaji="Chokku" kana="チョック" answer="Tiza"/> <!--Katakana-->
+        <WordQuestion romaji="Gakusei" kana="がくせい" kanji="学生" answer="Estudiante"/>
+        <WordQuestion romaji="Kyoushitsu" kana="きょうしつ" kanji="教室" answer="Clase">
+            <AltAnswer>Aula</AltAnswer>
+        </WordQuestion>
+        <!--<WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>-->
+        <WordQuestion romaji="Kouchousensei" kana="こうちょうせんせい" kanji="校長先生" answer="Director"/>
+        <WordQuestion romaji="Shukudai" kana="しゅくだい" kanji="宿題" answer="Deberes"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 5: Jobs -->
+    <QuestionSet prefId="vocabulary_set_jobs" setTitle="@string/vocab_set_jobs_title">
+        <WordQuestion romaji="Enjinia" kana="エンジニア" answer="Ingeniero"/> <!--Katakana-->
+        <WordQuestion romaji="Shefu" kana="シェフ" answer="Chef"/> <!--Katakana-->
+        <WordQuestion romaji="Pairotto" kana="パイロット" answer="Piloto"/> <!--Katakana-->
+        <WordQuestion romaji="Sarariman" kana="サラリーマン" answer="Asalariado"> <!--Katakana-->
+            <AltAnswer>Trabajador</AltAnswer>
+            <AltAnswer>Trabajador de oficina</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Konsarutanto" kana="コンサルタント" answer="Consultor"/> <!--Katakana-->
+        <WordQuestion romaji="Keisatsukan" kana="けいさつかん" kanji="警察官" answer="Policía">
+            <AltAnswer>Agente de policía</AltAnswer>
+        </WordQuestion>
+
+        <WordQuestion romaji="Isha" kana="いしゃ" kanji="医者" answer="Doctor">
+            <AltAnswer>Médico</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Kangoshi" kana="かんごし" kanji="看護師" answer="Enfermero"/>
+        <WordQuestion romaji="Bengoshi" kana="べんごし" kanji="弁護士" answer="Abogado"/>
+        <WordQuestion romaji="Kashu" kana="かしゅ" kanji="歌手" answer="Cantante"/>
     </QuestionSet>
     <!--
     Sources:

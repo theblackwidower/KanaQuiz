@@ -39,7 +39,7 @@
     <string name="vocab_set_home_2_title">Casa i llar 2</string>
     <string name="privacy_policy"><u>Política de privacitat</u></string>
     <string name="acra_details">En cas d\'un error d\'execució, es pot enviar instantàniament un informe al desenvolupador a través del correu electrònic</string>
-    <string name="no_logs">No s\'han trobat traces.</string>
+    <string name="no_logs">No s\'han trobat dades.</string>
     <string name="incorrect_option_title">En cas d\'una resposta incorrecta&#8230;</string>
     <string name="incorrect_option_move_on">vés a la següent pregunta</string>
     <string name="incorrect_option_show_answer">mostra la resposta correcta</string>
@@ -57,19 +57,19 @@
     <string name="vocab_display_option_summary">Quin conjunt de caràcters s\'haurien d\'usar per a les preguntes de vocabulari</string>
     <string name="repetition_option_title">Control de repetició</string>
     <string name="repetition_option_summary">Número de preguntes consecutives sense repeticions</string>
-    <string name="digraphs_option_title">Permet dígrafs</string>
-    <string name="digraphs_option_summary">Apareixeran kana  de 2 parts al qüestionari</string>
+    <string name="digraphs_option_title">Permet diftongs</string>
+    <string name="digraphs_option_summary">Apareixeran al qüestionari kana de 2 parts</string>
     <string name="diacritics_option_title">Permet diacrítics</string>
-    <string name="diacritics_option_summary">Kana amb diacrítics apareixeran al qüestionari</string>
+    <string name="diacritics_option_summary">Apareixar al qüestionari kana amb diacrítics</string>
     <string name="full_reference_option_title">Mostra la referència completa</string>
     <string name="full_reference_option_summary">La pantalla de referència ho mostrarà tot</string>
     <string name="multiple_choice_option_title">Preguntes de múltiple resposta</string>
     <string name="multiple_choice_option_summary">Les preguntes seran de múltiple resposta</string>
     <string name="base_form_title">Principal</string>
     <string name="diacritics_title">Diacrítics</string>
-    <string name="digraphs_title">Dígrafs</string>
-    <string name="view_logs">Veure traces</string>
-    <string name="clear_logs">Buidar traces</string>
+    <string name="digraphs_title">Diftong</string>
+    <string name="view_logs">Veure progrés</string>
+    <string name="clear_logs">Reiniciar progrés</string>
     <string name="clipboard_message">Copiar al porta-retalls</string>
     <string name="acra_alert">Lamentablement, The Kana Quiz s\'ha aturat. Si us plau, enviï un informe sobre l\'error d\'execució.</string>
     <string name="vocabulary">Vocabulari</string>
@@ -90,4 +90,7 @@
     <string name="set_3_no_diacritics_title">%1$s S</string>
     <string name="set_4_no_diacritics_title">%1$s T</string>
     <string name="set_6_no_diacritics_title">%1$s H</string>
+    <string name="vocab_set_school_title">Escola</string>
+    <string name="vocab_set_jobs_title">Oficis</string>
+    <string name="log_detail_title">Detalls del progrés: %1$tF</string>
 </resources>
