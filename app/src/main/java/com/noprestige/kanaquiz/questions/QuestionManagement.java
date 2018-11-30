@@ -1,6 +1,9 @@
 package com.noprestige.kanaquiz.questions;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.View;
@@ -124,6 +127,16 @@ public class QuestionManagement
 
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+
+        //ref: https://stackoverflow.com/a/43584678/3582371
+        context.registerReceiver(new BroadcastReceiver()
+        {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+            }
+        }, new IntentFilter(Intent.ACTION_LOCALE_CHANGED));
     }
 
     public static QuestionBank getFullQuestionBank()
