@@ -88,6 +88,13 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_quiz);
+
+        lblResponse = findViewById(R.id.lblResponse);
+        lblQuestion = findViewById(R.id.lblQuestion);
+        frmAnswer = findViewById(R.id.frmAnswer);
+
+        //TODO: Preserve current question through screen rotation
 
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -104,17 +111,6 @@ public class MainQuiz extends AppCompatActivity
     public void onConfigurationChanged(Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
-
-        //TODO: Preserve current question through configuration change
-
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            setContentView(R.layout.activity_horizontal_quiz);
-        else
-            setContentView(R.layout.activity_main_quiz);
-
-        lblResponse = findViewById(R.id.lblResponse);
-        lblQuestion = findViewById(R.id.lblQuestion);
-        frmAnswer = findViewById(R.id.frmAnswer);
 
         if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
                 (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES))
