@@ -34,7 +34,7 @@ public class QuestionBank extends WeightedList<Question>
         return (currentQuestion.getClass().equals(WordQuestion.class));
     }
 
-    public void newQuestion() throws NoQuestionsException
+    public void newQuestion()
     {
         if (count() > 0)
         {
@@ -45,8 +45,6 @@ public class QuestionBank extends WeightedList<Question>
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
         }
-        else
-            throw new NoQuestionsException();
     }
 
     public String getCurrentQuestionText()

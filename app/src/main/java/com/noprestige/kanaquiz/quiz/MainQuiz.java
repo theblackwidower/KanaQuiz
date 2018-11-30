@@ -20,7 +20,6 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
-import com.noprestige.kanaquiz.questions.NoQuestionsException;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
@@ -91,8 +90,6 @@ public class MainQuiz extends AppCompatActivity
         lblQuestion = findViewById(R.id.lblQuestion);
         frmAnswer = findViewById(R.id.frmAnswer);
 
-        //TODO: Preserve current question through screen rotation
-
         onConfigurationChanged(getResources().getConfiguration());
 
         if (SDK_INT < Build.VERSION_CODES.O)
@@ -101,7 +98,6 @@ public class MainQuiz extends AppCompatActivity
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
         resetQuiz();
-        nextQuestion();
     }
 
     @Override
@@ -137,22 +133,30 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        QuestionManagement.refreshStaticQuestionBank();
+        if (QuestionManagement.refreshStaticQuestionBank())
+            nextQuestion();
+        else
+            refreshDisplay();
 
         frmAnswer.resetQuiz();
     }
 
     private void nextQuestion()
     {
-        try
+        QuestionManagement.getStaticQuestionBank().newQuestion();
+        refreshDisplay();
+    }
+
+    private void refreshDisplay()
+    {
+        if (QuestionManagement.getStaticQuestionBank().count() > 0)
         {
-            QuestionManagement.getStaticQuestionBank().newQuestion();
             lblQuestion.setText(QuestionManagement.getStaticQuestionBank().getCurrentQuestionText());
             retryCount = 0;
             frmAnswer.setMultipleChoices(QuestionManagement.getStaticQuestionBank());
             readyForAnswer();
         }
-        catch (NoQuestionsException ex)
+        else
         {
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
@@ -310,7 +314,6 @@ public class MainQuiz extends AppCompatActivity
         if (requestCode == 1)
         {
             resetQuiz();
-            nextQuestion();
         }
     }
 }
