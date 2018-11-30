@@ -48,6 +48,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
+    lintOptions {
+        disable 'MissingTranslation'
+    }
 }
 
 dependencies {
