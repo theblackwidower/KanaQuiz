@@ -287,6 +287,30 @@ public class RomajiConversionTest
         assertThat(RomajiConversion.convertKana("レ゚"), is("le"));
         assertThat(RomajiConversion.convertKana("ロ゚"), is("lo"));
 
+
+        assertThat(RomajiConversion.convertKana("ウュ"), is("wyu"));
+        assertThat(RomajiConversion.convertKana("ヴャ"), is("vya"));
+        assertThat(RomajiConversion.convertKana("ヴュ"), is("vyu"));
+        assertThat(RomajiConversion.convertKana("ヴョ"), is("vyo"));
+        assertThat(RomajiConversion.convertKana("クヮ"), is("kwa"));
+        assertThat(RomajiConversion.convertKana("グヮ"), is("gwa"));
+        assertThat(RomajiConversion.convertKana("ツュ"), is("tsyu"));
+//        assertThat(RomajiConversion.convertKana("トゥ"), is("tu"));
+//        assertThat(RomajiConversion.convertKana("テュ"), is("tyu"));
+//        assertThat(RomajiConversion.convertKana("ドゥ"), is("du"));
+//        assertThat(RomajiConversion.convertKana("デュ"), is("dyu"));
+        assertThat(RomajiConversion.convertKana("フャ"), is("fya"));
+        assertThat(RomajiConversion.convertKana("フュ"), is("fyu"));
+        assertThat(RomajiConversion.convertKana("フョ"), is("fyo"));
+        assertThat(RomajiConversion.convertKana("リ゚ャ"), is("lya"));
+        assertThat(RomajiConversion.convertKana("リ゚ュ"), is("lyu"));
+        assertThat(RomajiConversion.convertKana("リ゚ェ"), is("lye"));
+        assertThat(RomajiConversion.convertKana("リ゚ョ"), is("lyo"));
+        assertThat(RomajiConversion.convertKana("ヷ"), is("va"));
+        assertThat(RomajiConversion.convertKana("ヸ"), is("vi"));
+        assertThat(RomajiConversion.convertKana("ヹ"), is("ve"));
+        assertThat(RomajiConversion.convertKana("ヺ"), is("vo"));
+
         assertThat(RomajiConversion.convertKana("ローマじ"), is("rōmaji"));
         assertThat(RomajiConversion.convertKana("ふじさん"), is("fujisan"));
         assertThat(RomajiConversion.convertKana("おちゃ"), is("ocha"));
@@ -298,5 +322,44 @@ public class RomajiConversionTest
         assertThat(RomajiConversion.convertKana("ポッキー"), is("pokkī"));
         assertThat(RomajiConversion.convertKana("まって"), is("matte"));
         assertThat(RomajiConversion.convertKana("こっち"), is("kotchi"));
+
+        assertThat(RomajiConversion.convertKana("おばあさん"), is("obāsan"));
+        assertThat(RomajiConversion.convertKana("おにいさん"), is("oniisan"));
+        assertThat(RomajiConversion.convertKana("おじいさん"), is("ojiisan"));
+        assertThat(RomajiConversion.convertKana("おいしい"), is("oishii"));
+        assertThat(RomajiConversion.convertKana("にいがた"), is("niigata"));
+        assertThat(RomajiConversion.convertKana("はいいろ"), is("haiiro"));
+        assertThat(RomajiConversion.convertKana("すうがく"), is("sūgaku"));
+        assertThat(RomajiConversion.convertKana("ちゅうい"), is("chūi"));
+        assertThat(RomajiConversion.convertKana("ぐうたら"), is("gūtara"));
+        assertThat(RomajiConversion.convertKana("ゆううつ"), is("yūutsu"));
+        assertThat(RomajiConversion.convertKana("おねえさん"), is("onēsan"));
+        assertThat(RomajiConversion.convertKana("こおり"), is("kōri"));
+        assertThat(RomajiConversion.convertKana("とおまわり"), is("tōmawari"));
+        assertThat(RomajiConversion.convertKana("おおさか"), is("ōsaka"));
+        assertThat(RomajiConversion.convertKana("がっこう"), is("gakkō"));
+        assertThat(RomajiConversion.convertKana("とうきょう"), is("tōkyō"));
+        assertThat(RomajiConversion.convertKana("べんきょう"), is("benkyō"));
+        assertThat(RomajiConversion.convertKana("でんぽう"), is("denpō"));
+        assertThat(RomajiConversion.convertKana("きんようび"), is("kin'yōbi"));
+        assertThat(RomajiConversion.convertKana("こうし"), is("kōshi"));
+        assertThat(RomajiConversion.convertKana("がくせい"), is("gakusei"));
+        assertThat(RomajiConversion.convertKana("けいけん"), is("keiken"));
+        assertThat(RomajiConversion.convertKana("せいふく"), is("seifuku"));
+        assertThat(RomajiConversion.convertKana("めい"), is("mei"));
+        assertThat(RomajiConversion.convertKana("まねいて"), is("maneite"));
+        assertThat(RomajiConversion.convertKana("かるい"), is("karui"));
+        assertThat(RomajiConversion.convertKana("うぐいす"), is("uguisu"));
+        assertThat(RomajiConversion.convertKana("おい"), is("oi"));
+        assertThat(RomajiConversion.convertKana("セーラー"), is("sērā"));
+        assertThat(RomajiConversion.convertKana("パーティー"), is("pātī"));
+        assertThat(RomajiConversion.convertKana("ヒーター"), is("hītā"));
+        assertThat(RomajiConversion.convertKana("タクシー"), is("takushī"));
+        assertThat(RomajiConversion.convertKana("スーパーマン"), is("sūpāman"));
+        assertThat(RomajiConversion.convertKana("バレーボール"), is("barēbōru"));
+        assertThat(RomajiConversion.convertKana("ソール"), is("sōru"));
+        assertThat(RomajiConversion.convertKana("バレエ"), is("baree"));
+        assertThat(RomajiConversion.convertKana("ソウル"), is("souru"));
+        assertThat(RomajiConversion.convertKana("ミイラ"), is("miira"));
     }
 }

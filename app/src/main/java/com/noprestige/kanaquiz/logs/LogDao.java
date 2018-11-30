@@ -137,6 +137,9 @@ public abstract class LogDao
     @Query("SELECT * FROM kana_records")
     abstract QuestionRecord[] getAllQuestionRecords();
 
+    @Query("SELECT * FROM kana_records WHERE date = :date")
+    abstract QuestionRecord[] getDatesQuestionRecords(LocalDate date);
+
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 

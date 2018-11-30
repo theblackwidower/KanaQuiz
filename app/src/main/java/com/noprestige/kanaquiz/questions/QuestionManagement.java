@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,6 +124,69 @@ public class QuestionManagement
 
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+    }
+
+    private static QuestionBank questionBank;
+    private static boolean[] prefRecord;
+
+    public static boolean refreshStaticQuestionBank()
+    {
+        if ((prefRecord == null) || (questionBank == null))
+        {
+            prefRecord = getCurrentPrefRecord();
+            questionBank = getFullQuestionBank();
+            return true;
+        }
+        else
+        {
+            boolean[] currentPrefRecord = getCurrentPrefRecord();
+            boolean isChanged = prefRecord.length != currentPrefRecord.length;
+
+            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
+                if (prefRecord[i] != currentPrefRecord[i])
+                    isChanged = true;
+
+            if (isChanged)
+            {
+                prefRecord = currentPrefRecord;
+                questionBank = getFullQuestionBank();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean[] getCurrentPrefRecord()
+    {
+        boolean[] currentPrefRecord =
+                new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
+                        2];
+
+        currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
+        currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
+
+        int i = 2;
+        for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = HIRAGANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KATAKANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KATAKANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = VOCABULARY.getPref(j);
+            i++;
+        }
+        return currentPrefRecord;
+    }
+
+    public static QuestionBank getStaticQuestionBank()
+    {
+        return questionBank;
     }
 
     public static QuestionBank getFullQuestionBank()
@@ -331,8 +393,7 @@ public class QuestionManagement
 
         Question[] questionSet = getQuestionSet(setNumber, Diacritic.NO_DIACRITIC, null);
 
-        int padding = (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.vocabReferenceCellHorizontalPadding);
 
         for (Question question : questionSet)
         {

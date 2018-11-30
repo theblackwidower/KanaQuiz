@@ -31,6 +31,13 @@ public final class RomajiConversion
                     romaji.append(kana.charAt(i));
                     break;
                 case 'あ':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#A_+_A
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'a'))//for modified Hepburn
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'ア':
                     romaji.append('a');
                     break;
@@ -50,7 +57,14 @@ public final class RomajiConversion
                     }
                     break;
                 case 'う':
-                    romaji.append('u');
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#U_+_U
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#O_+_U
+                    //TODO: detect 'terminal part of verb' and disable
+                    if ((romaji.length() > 0) && ((romaji.charAt(romaji.length() - 1) == 'u') ||
+                            (romaji.charAt(romaji.length() - 1) == 'o')))
+                        romaji.append('ー');
+                    else
+                        romaji.append('u');
                     break;
                 case 'ウ':
                     i++;
@@ -64,6 +78,8 @@ public final class RomajiConversion
                         romaji.append("we");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("wo");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("wyu");
                     else
                     {
                         i--;
@@ -86,6 +102,12 @@ public final class RomajiConversion
                         romaji.append("ve");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("vo");
+                    else if (kana.charAt(i) == 'ャ')
+                        romaji.append("vya");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("vyu");
+                    else if (kana.charAt(i) == 'ョ')
+                        romaji.append("vyo");
                     else
                     {
                         i--;
@@ -93,10 +115,24 @@ public final class RomajiConversion
                     }
                     break;
                 case 'え':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#E_+_E
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'e'))//for modified Hepburn
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'エ':
                     romaji.append('e');
                     break;
                 case 'お':
+                    //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#O_+_O
+                    if ((romaji.length() > 0) && (romaji.charAt(romaji.length() - 1) == 'o'))
+                    {
+                        romaji.append('ー');
+                        break;
+                    }
+                    //fallthrough intentional to prevent repeating code
                 case 'オ':
                     romaji.append('o');
                     break;
@@ -181,6 +217,8 @@ public final class RomajiConversion
                         romaji.append("gwe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("gwo");
+                    else if (kana.charAt(i) == 'ヮ')
+                        romaji.append("gwa");
                     else
                     {
                         i--;
@@ -200,6 +238,8 @@ public final class RomajiConversion
                         romaji.append("kwe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("kwo");
+                    else if (kana.charAt(i) == 'ヮ')
+                        romaji.append("kwa");
                     else
                     {
                         i--;
@@ -413,6 +453,8 @@ public final class RomajiConversion
                         romaji.append("tse");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("tso");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("tsyu");
                     else
                     {
                         i--;
@@ -640,6 +682,12 @@ public final class RomajiConversion
                         romaji.append("fe");
                     else if (kana.charAt(i) == 'ォ')
                         romaji.append("fo");
+                    else if (kana.charAt(i) == 'ャ')
+                        romaji.append("fya");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("fyu");
+                    else if (kana.charAt(i) == 'ョ')
+                        romaji.append("fyo");
                     else
                     {
                         i--;
@@ -757,7 +805,22 @@ public final class RomajiConversion
                 case 'リ':
                     i++;
                     if (kana.charAt(i) == '゚')
-                        romaji.append("li");
+                    {
+                        i++;
+                        if (kana.charAt(i) == 'ャ')
+                            romaji.append("lya");
+                        else if (kana.charAt(i) == 'ュ')
+                            romaji.append("lyu");
+                        else if (kana.charAt(i) == 'ェ')
+                            romaji.append("lye");
+                        else if (kana.charAt(i) == 'ョ')
+                            romaji.append("lyo");
+                        else
+                        {
+                            i--;
+                            romaji.append("li");
+                        }
+                    }
                     else if (kana.charAt(i) == 'ェ')
                         romaji.append("rye");
                     else if (kana.charAt(i) == 'ャ')
@@ -856,6 +919,18 @@ public final class RomajiConversion
                             (kana.charAt(i + 1) == 'ユ') || (kana.charAt(i + 1) == 'ヨ'))
                         romaji.append('\'');
                     break;
+                case 'ヷ':
+                    romaji.append("va");
+                    break;
+                case 'ヸ':
+                    romaji.append("vi");
+                    break;
+                case 'ヹ':
+                    romaji.append("ve");
+                    break;
+                case 'ヺ':
+                    romaji.append("vo");
+                    break;
                 case '「':
                 case '」':
                     romaji.append('"');
@@ -919,8 +994,8 @@ public final class RomajiConversion
         }
 
         //ref: https://en.wikipedia.org/wiki/Ch%C5%8Donpu
+        //ref: https://en.wikipedia.org/wiki/Hepburn_romanization#Loanwords
         return romaji.toString().replace("aー", "ā").replace("iー", "ī").replace("uー", "ū").replace("eー", "ē")
-                .replace("oー", "ō").replace("aa", "ā").replace("ii", "ī").replace("uu", "ū").replace("ei", "ē")
-                .replace("oo", "ō").replace("ou", "ō").replace(")(", "");
+                .replace("oー", "ō").replace(")(", "");
     }
 }

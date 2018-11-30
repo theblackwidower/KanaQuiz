@@ -87,7 +87,7 @@ class WeightedList<E> implements Cloneable
         }
     }
 
-    int count()
+    public int count()
     {
         return map.size();
     }

@@ -21,6 +21,8 @@ public class QuestionBank extends WeightedList<Question>
     private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
     private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
 
+    private String[] currentPossibleAnswers;
+
     private Set<String> wordAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
@@ -34,7 +36,7 @@ public class QuestionBank extends WeightedList<Question>
         return (currentQuestion.getClass().equals(WordQuestion.class));
     }
 
-    public void newQuestion() throws NoQuestionsException
+    public void newQuestion()
     {
         if (count() > 0)
         {
@@ -44,9 +46,8 @@ public class QuestionBank extends WeightedList<Question>
             do
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
+            currentPossibleAnswers = null;
         }
-        else
-            throw new NoQuestionsException();
     }
 
     public String getCurrentQuestionText()
@@ -160,8 +161,10 @@ public class QuestionBank extends WeightedList<Question>
 
     public String[] getPossibleAnswers()
     {
-        return (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
-                getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        if (currentPossibleAnswers == null)
+            currentPossibleAnswers = (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
+                    getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        return currentPossibleAnswers;
     }
 
 
