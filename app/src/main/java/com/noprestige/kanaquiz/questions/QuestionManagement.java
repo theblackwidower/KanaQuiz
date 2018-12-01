@@ -139,6 +139,69 @@ public class QuestionManagement
         }, new IntentFilter(Intent.ACTION_LOCALE_CHANGED));
     }
 
+    private static QuestionBank questionBank;
+    private static boolean[] prefRecord;
+
+    public static boolean refreshStaticQuestionBank()
+    {
+        if ((prefRecord == null) || (questionBank == null))
+        {
+            prefRecord = getCurrentPrefRecord();
+            questionBank = getFullQuestionBank();
+            return true;
+        }
+        else
+        {
+            boolean[] currentPrefRecord = getCurrentPrefRecord();
+            boolean isChanged = prefRecord.length != currentPrefRecord.length;
+
+            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
+                if (prefRecord[i] != currentPrefRecord[i])
+                    isChanged = true;
+
+            if (isChanged)
+            {
+                prefRecord = currentPrefRecord;
+                questionBank = getFullQuestionBank();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean[] getCurrentPrefRecord()
+    {
+        boolean[] currentPrefRecord =
+                new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
+                        2];
+
+        currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
+        currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
+
+        int i = 2;
+        for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = HIRAGANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KATAKANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KATAKANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = VOCABULARY.getPref(j);
+            i++;
+        }
+        return currentPrefRecord;
+    }
+
+    public static QuestionBank getStaticQuestionBank()
+    {
+        return questionBank;
+    }
+
     public static QuestionBank getFullQuestionBank()
     {
         QuestionBank bank = new QuestionBank();
