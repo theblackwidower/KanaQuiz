@@ -133,18 +133,10 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        if (QuestionManagement.refreshStaticQuestionBank())
-            nextQuestion();
-        else
-            refreshDisplay();
+        QuestionManagement.refreshStaticQuestionBank();
+        refreshDisplay();
 
         frmAnswer.resetQuiz();
-    }
-
-    private void nextQuestion()
-    {
-        QuestionManagement.getStaticQuestionBank().newQuestion();
-        refreshDisplay();
     }
 
     private void refreshDisplay()
@@ -240,7 +232,8 @@ public class MainQuiz extends AppCompatActivity
                 totalQuestions++;
                 //TODO: Find a way to disable a textbox without closing the touch keyboard
                 //txtAnswer.setEnabled(false);
-                delayHandler.postDelayed(this::nextQuestion, 1000);
+                QuestionManagement.getStaticQuestionBank().newQuestion();
+                delayHandler.postDelayed(this::refreshDisplay, 1000);
             }
         }
     }

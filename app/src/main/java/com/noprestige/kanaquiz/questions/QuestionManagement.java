@@ -130,13 +130,13 @@ public class QuestionManagement
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
 
-    public static boolean refreshStaticQuestionBank()
+    public static void refreshStaticQuestionBank()
     {
         if ((prefRecord == null) || (questionBank == null))
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            return true;
+            questionBank.newQuestion();
         }
         else
         {
@@ -146,10 +146,9 @@ public class QuestionManagement
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
-                return true;
+                questionBank.newQuestion();
             }
         }
-        return false;
     }
 
     private static boolean[] getCurrentPrefRecord()
