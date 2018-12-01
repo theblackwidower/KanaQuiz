@@ -467,7 +467,8 @@ public class QuestionManagement
     public LinearLayout getSelectionScreen(Context context)
     {
         LinearLayout layout = new LinearLayout(context);
-        layout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        layout.setLayoutParams(
+                new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
         populateSelectionScreen(layout);
