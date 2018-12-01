@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import com.noprestige.kanaquiz.R;
 
 import androidx.fragment.app.Fragment;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_1;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_2;
@@ -109,11 +107,9 @@ public class QuestionSelectionPage extends Fragment
         header.setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header.setGravity(Gravity.CENTER);
-        header.setTextSize(COMPLEX_UNIT_SP, 14);
-        header.setPadding(0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 20, context.getResources().getDisplayMetrics())),
-                0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setTextSize(context.getResources().getDimension(R.dimen.headerTextSize));
+        header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPaddingQuestionSelection), 0,
+                context.getResources().getDimensionPixelSize(R.dimen.headerBottomPadding));
         header.setTypeface(header.getTypeface(), Typeface.BOLD);
         header.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         header.setAllCaps(true);

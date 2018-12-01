@@ -172,7 +172,7 @@ public class QuestionManagement
     {
         boolean[] currentPrefRecord =
                 new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
-                        2];
+                        KANJI_1.getCategoryCount() + KANJI_2.getCategoryCount() + KANJI_3.getCategoryCount() + 2];
 
         currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
         currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
@@ -191,6 +191,21 @@ public class QuestionManagement
         for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
         {
             currentPrefRecord[i] = VOCABULARY.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KANJI_1.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KANJI_1.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KANJI_2.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KANJI_2.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KANJI_3.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KANJI_3.getPref(j);
             i++;
         }
         return currentPrefRecord;
@@ -415,7 +430,7 @@ public class QuestionManagement
         for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
             {
-                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, false);
+                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, null);
                 if (questionSet.length != currentSize)
                 {
                     currentSize = questionSet.length;

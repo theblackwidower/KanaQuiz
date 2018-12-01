@@ -1,8 +1,8 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
-import android.util.TypedValue;
 
+import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public class KanjiQuestion extends Question
@@ -53,10 +53,8 @@ public class KanjiQuestion extends Question
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = super.generateReference(context);
-        cell.setSubjectSize(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 48, context.getResources().getDisplayMetrics()));
-        cell.setDescriptionSize(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, context.getResources().getDisplayMetrics()));
+        cell.setSubjectSize(context.getResources().getDimension(R.dimen.kanjiReferenceSubjectSize));
+        cell.setDescriptionSize(context.getResources().getDimension(R.dimen.kanjiReferenceDescriptionSize));
         return cell;
     }
 }
