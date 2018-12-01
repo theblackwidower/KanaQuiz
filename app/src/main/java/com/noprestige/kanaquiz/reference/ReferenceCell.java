@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class ReferenceCell extends View
@@ -77,9 +75,9 @@ public class ReferenceCell extends View
         setSubject(a.getString(R.styleable.ReferenceCell_subject));
         setDescription(a.getString(R.styleable.ReferenceCell_description));
         setSubjectSize(a.getDimension(R.styleable.ReferenceCell_subjectSize,
-                TypedValue.applyDimension(COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
+                getResources().getDimension(R.dimen.defaultReferenceSubjectSize)));
         setDescriptionSize(a.getDimension(R.styleable.ReferenceCell_descriptionSize,
-                TypedValue.applyDimension(COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
+                getResources().getDimension(R.dimen.defaultReferenceDescriptionSize)));
         setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
 
         a.recycle();
@@ -334,11 +332,9 @@ public class ReferenceCell extends View
         header.setText(title);
         header.setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        header.setTextSize(COMPLEX_UNIT_SP, 14);
-        header.setPadding(0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
-                0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.headerTextSize));
+        header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPadding), 0,
+                context.getResources().getDimensionPixelSize(R.dimen.headerBottomPadding));
         header.setTypeface(header.getTypeface(), Typeface.BOLD);
         header.setAllCaps(true);
         return header;

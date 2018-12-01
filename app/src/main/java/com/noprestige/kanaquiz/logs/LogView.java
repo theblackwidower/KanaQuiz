@@ -144,8 +144,7 @@ public class LogView extends AppCompatActivity
         {
             viewOrientation = LinearLayout.HORIZONTAL;
 
-            graphWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            graphWidth = getResources().getDimensionPixelSize(R.dimen.landscapeChartWidth);
             graphHeight = MATCH_PARENT;
 
             listWidth = 0;
@@ -156,8 +155,7 @@ public class LogView extends AppCompatActivity
             viewOrientation = LinearLayout.VERTICAL;
 
             graphWidth = MATCH_PARENT;
-            graphHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            graphHeight = getResources().getDimensionPixelSize(R.dimen.portraitChartHeight);
 
             listWidth = MATCH_PARENT;
             listHeight = 0;

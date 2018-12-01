@@ -34,76 +34,85 @@ public class XmlParserTest
                 setTitleList, setNoDiacriticsTitleList);
 
 //        assertThat(kanaSetList.size(), is(3));
-        assertThat(prefIdList.size(), is(3));
-        assertThat(setTitleList.size(), is(3));
-        assertThat(setNoDiacriticsTitleList.size(), is(3));
+        assertThat(prefIdList.size(), is(4));
+        assertThat(setTitleList.size(), is(4));
+        assertThat(setNoDiacriticsTitleList.size(), is(4));
 
 
         assertThat(prefIdList.get(0), is("set1"));
         assertThat(setTitleList.get(0), is("First Set"));
         assertThat(setNoDiacriticsTitleList.get(0), is(nullValue()));
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, false))[0], "あ", "a");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, false))[1], "い", "i");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, false))[2], "う", "u");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, false))[3], "え", "e");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, false))[4], "お", "o");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, null))[0], "あ", "a");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, null))[1], "い", "i");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, null))[2], "う", "u");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, null))[3], "え", "e");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(1, NO_DIACRITIC, null))[4], "お", "o");
 
 
         assertThat(prefIdList.get(1), is("set2"));
         assertThat(setTitleList.get(1), is("Second Set"));
         assertThat(setNoDiacriticsTitleList.get(1), is(nullValue()));
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, false))[0], "な", "na");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, false))[1], "に", "ni");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, false))[2], "ぬ", "nu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, false))[3], "ね", "ne");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, false))[4], "の", "no");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, null))[0], "な", "na");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, null))[1], "に", "ni");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, null))[2], "ぬ", "nu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, null))[3], "ね", "ne");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, null))[4], "の", "no");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, true))[0], "にゃ", "nya");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, true))[1], "にゅ", "nyu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, true))[2], "にょ", "nyo");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, "y_set"))[0], "にゃ", "nya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, "y_set"))[1], "にゅ", "nyu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(2, NO_DIACRITIC, "y_set"))[2], "にょ", "nyo");
 
 
         assertThat(prefIdList.get(2), is("set3"));
         assertThat(setTitleList.get(2), is("Third Set with Diacritics"));
         assertThat(setNoDiacriticsTitleList.get(2), is("Third Set"));
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[0], "は", "ha");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[1], "ひ", "hi");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[2], "ふ", "fu");
-        assertThat(((KanaQuestion) kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[2])
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[0], "は", "ha");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[1], "ひ", "hi");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[2], "ふ", "fu");
+        assertThat(((KanaQuestion) kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[2])
                 .fetchRomaji(NIHON), is("hu"));
-        assertThat(((KanaQuestion) kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[2])
+        assertThat(((KanaQuestion) kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[2])
                 .fetchRomaji(KUNREI), is("hu"));
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[3], "へ", "he");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, false))[4], "ほ", "ho");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[3], "へ", "he");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, null))[4], "ほ", "ho");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, false))[0], "ば", "ba");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, false))[1], "び", "bi");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, false))[2], "ぶ", "bu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, false))[3], "べ", "be");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, false))[4], "ぼ", "bo");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, null))[0], "ば", "ba");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, null))[1], "び", "bi");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, null))[2], "ぶ", "bu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, null))[3], "べ", "be");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, null))[4], "ぼ", "bo");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, false))[0], "ぱ", "pa");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, false))[1], "ぴ", "pi");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, false))[2], "ぷ", "pu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, false))[3], "ぺ", "pe");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, false))[4], "ぽ", "po");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, null))[0], "ぱ", "pa");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, null))[1], "ぴ", "pi");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, null))[2], "ぷ", "pu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, null))[3], "ぺ", "pe");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, null))[4], "ぽ", "po");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, true))[0], "ひゃ", "hya");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, true))[1], "ひゅ", "hyu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, true))[2], "ひょ", "hyo");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, "y_set"))[0], "ひゃ", "hya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, "y_set"))[1], "ひゅ", "hyu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, NO_DIACRITIC, "y_set"))[2], "ひょ", "hyo");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, true))[0], "びゃ", "bya");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, true))[1], "びゅ", "byu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, true))[2], "びょ", "byo");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, "y_set"))[0], "びゃ", "bya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, "y_set"))[1], "びゅ", "byu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, DAKUTEN, "y_set"))[2], "びょ", "byo");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, true))[0], "ぴゃ", "pya");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, true))[1], "ぴゅ", "pyu");
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, true))[2], "ぴょ", "pyo");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, "y_set"))[0], "ぴゃ", "pya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, "y_set"))[1], "ぴゅ", "pyu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, HANDAKUTEN, "y_set"))[2], "ぴょ", "pyo");
 
-        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, CONSONANT, false))[0], "ん", "n");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(3, CONSONANT, null))[0], "ん", "n");
+
+
+        assertThat(prefIdList.get(3), is("y_set"));
+        assertThat(setTitleList.get(3), is("Y Set"));
+        assertThat(setNoDiacriticsTitleList.get(3), is(nullValue()));
+
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[0], "や", "ya");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[1], "ゆ", "yu");
+        assertKanaQuestion(kanaSetList.get(new QuestionManagement.SetCode(4, NO_DIACRITIC, null))[2], "よ", "yo");
     }
 
     private void assertKanaQuestion(Question question, String expectedKana, String expectedRomaji)

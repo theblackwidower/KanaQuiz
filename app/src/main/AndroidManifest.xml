@@ -38,8 +38,13 @@
             android:parentActivityName=".quiz.MainQuiz"/>
         <activity
             android:name=".logs.LogView"
+            android:configChanges="orientation|screenSize"
             android:label="@string/view_logs"
             android:parentActivityName=".quiz.MainQuiz"/>
+        <activity
+            android:name=".logs.LogDetailView"
+            android:configChanges="orientation|screenSize"
+            android:parentActivityName=".logs.LogView"/>
     </application>
 
 </manifest>

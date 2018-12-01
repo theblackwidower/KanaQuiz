@@ -3,8 +3,8 @@
 [![GitHub release](https://img.shields.io/github/release/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/releases/)
 [![GitHub license](https://img.shields.io/github/license/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/blob/master/LICENSE)
 
-[![GitHub commits](https://img.shields.io/github/commits-since/theblackwidower/KanaQuiz/latest.svg)](https://github.com/theblackwidower/KanaQuiz/commits/master)
 [![GitHub issues](https://img.shields.io/github/issues/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/issues/)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/pulls/)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/4w/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/graphs/commit-activity)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0af5712d54745ada2893d82c55a680b)](https://www.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=theblackwidower/KanaQuiz&amp;utm_campaign=Badge_Grade)
@@ -19,7 +19,12 @@ Open source and ad free.
 
 This application is in a state of constant development. Any additional feature requests can be sent via email, or submitted as an issue here, on GitHub. If they are appropriate, they will likely be added to the next release.
 
-Currently available on [Google Play™](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz).
+[<img src="https://f-droid.org/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/com.noprestige.kanaquiz/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=com.noprestige.kanaquiz)
 
 ## Feature set
 
@@ -49,6 +54,8 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
   * Proper kanji support with kanji questions
+  * Support for kun'yomi and on'yomi-based kanji questions
+  * Limitation alerts, either by time, or number of questions
 
 ## Code Analysis, Continuous Integration and Test Coverage
 

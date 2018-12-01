@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
-import android.util.TypedValue;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
@@ -81,8 +80,7 @@ public class KanaQuestion extends Question
     {
         ReferenceCell cell = super.generateReference(context);
         if (isDigraph())
-            cell.setSubjectSize(TypedValue
-                    .applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
+            cell.setSubjectSize(context.getResources().getDimension(R.dimen.diacriticReferenceSubjectSize));
         return cell;
     }
 

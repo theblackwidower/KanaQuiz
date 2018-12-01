@@ -2,7 +2,6 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,13 +48,13 @@ public class QuestionManagement
     {
         final int number;
         final Diacritic diacritic;
-        final boolean isDigraphs;
+        final String digraphs;
 
-        SetCode(int number, Diacritic diacritic, boolean isDigraphs)
+        SetCode(int number, Diacritic diacritic, String digraphs)
         {
             this.number = number;
             this.diacritic = diacritic;
-            this.isDigraphs = isDigraphs;
+            this.digraphs = digraphs;
         }
 
         @Override
@@ -67,19 +66,21 @@ public class QuestionManagement
                 returnValue = diacritic.ordinal() - o.diacritic.ordinal();
                 if (returnValue == 0)
                 {
-                    if (isDigraphs && !o.isDigraphs)
+                    if ((digraphs == null) && (o.digraphs != null))
                         returnValue = 1;
-                    else if (!isDigraphs && o.isDigraphs)
+                    else if ((digraphs != null) && (o.digraphs == null))
                         returnValue = -1;
+                    else if ((digraphs != null) && (o.digraphs != null))
+                        returnValue = digraphs.compareTo(o.digraphs);
                 }
             }
             return returnValue;
         }
     }
 
-    private Question[] getQuestionSet(int number, Diacritic diacritic, boolean isDigraphs)
+    private Question[] getQuestionSet(int number, Diacritic diacritic, String digraphs)
     {
-        return questionSets.get(new SetCode(number, diacritic, isDigraphs));
+        return questionSets.get(new SetCode(number, diacritic, digraphs));
     }
 
     public String getPrefId(int number)
@@ -137,6 +138,69 @@ public class QuestionManagement
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
     }
 
+    private static QuestionBank questionBank;
+    private static boolean[] prefRecord;
+
+    public static boolean refreshStaticQuestionBank()
+    {
+        if ((prefRecord == null) || (questionBank == null))
+        {
+            prefRecord = getCurrentPrefRecord();
+            questionBank = getFullQuestionBank();
+            return true;
+        }
+        else
+        {
+            boolean[] currentPrefRecord = getCurrentPrefRecord();
+            boolean isChanged = prefRecord.length != currentPrefRecord.length;
+
+            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
+                if (prefRecord[i] != currentPrefRecord[i])
+                    isChanged = true;
+
+            if (isChanged)
+            {
+                prefRecord = currentPrefRecord;
+                questionBank = getFullQuestionBank();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean[] getCurrentPrefRecord()
+    {
+        boolean[] currentPrefRecord =
+                new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
+                        2];
+
+        currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
+        currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
+
+        int i = 2;
+        for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = HIRAGANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= KATAKANA.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = KATAKANA.getPref(j);
+            i++;
+        }
+        for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
+        {
+            currentPrefRecord[i] = VOCABULARY.getPref(j);
+            i++;
+        }
+        return currentPrefRecord;
+    }
+
+    public static QuestionBank getStaticQuestionBank()
+    {
+        return questionBank;
+    }
+
     public static QuestionBank getFullQuestionBank()
     {
         QuestionBank bank = new QuestionBank();
@@ -169,22 +233,22 @@ public class QuestionManagement
         for (int i = 1; i <= getCategoryCount(); i++)
             if (getPref(i))
             {
-                questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, false));
+                questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, null));
                 if (isDiacritics)
                 {
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, false));
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, false));
+                    questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, null));
+                    questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, null));
                 }
                 if (isDigraphs)
                 {
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, true));
+                    questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9)));
                     if (isDiacritics)
                     {
-                        questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, true));
-                        questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, true));
+                        questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9)));
+                        questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9)));
                     }
                 }
-                questionBank.addQuestions(getQuestionSet(i, Diacritic.CONSONANT, false));
+                questionBank.addQuestions(getQuestionSet(i, Diacritic.CONSONANT, null));
             }
     }
 
@@ -201,8 +265,8 @@ public class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, false) != null) ||
-                        (getQuestionSet(i, Diacritic.HANDAKUTEN, false) != null)))
+                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, null) != null) ||
+                        (getQuestionSet(i, Diacritic.HANDAKUTEN, null) != null)))
                     return true;
 
         return false;
@@ -212,7 +276,7 @@ public class QuestionManagement
     {
         if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && (getQuestionSet(i, Diacritic.NO_DIACRITIC, true) != null))
+                if (getPref(i) && (getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9)) != null))
                     return true;
 
         return false;
@@ -223,8 +287,8 @@ public class QuestionManagement
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
                 OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, true) != null) ||
-                        (getQuestionSet(i, Diacritic.HANDAKUTEN, true) != null)))
+                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9)) != null) ||
+                        (getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9)) != null)))
                     return true;
 
         return false;
@@ -233,7 +297,7 @@ public class QuestionManagement
     private String getQuestionSetDisplay(int setNumber, Diacritic diacritic)
     {
         StringBuilder returnValue = new StringBuilder();
-        Question[] questionSet = getQuestionSet(setNumber, diacritic, false);
+        Question[] questionSet = getQuestionSet(setNumber, diacritic, null);
         if (questionSet != null)
             for (Question question : questionSet)
                 if (question.getClass().equals(KanaQuestion.class) || question.getClass().equals(KanjiQuestion.class))
@@ -277,16 +341,16 @@ public class QuestionManagement
 
         for (int i = 1; i <= 7; i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, false)));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, null)));
 
         if (isFullReference || getPref(9))
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(9, Diacritic.NO_DIACRITIC, false)));
+            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(9, Diacritic.NO_DIACRITIC, null)));
         if (isFullReference || getPref(8)) //fits gojūon ordering
-            table.addView(ReferenceCell.buildRow(context, getQuestionSet(8, Diacritic.NO_DIACRITIC, false)));
+            table.addView(ReferenceCell.buildRow(context, getQuestionSet(8, Diacritic.NO_DIACRITIC, null)));
         if (isFullReference || getPref(10))
         {
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.NO_DIACRITIC, false)));
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.CONSONANT, false)));
+            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.NO_DIACRITIC, null)));
+            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.CONSONANT, null)));
         }
 
         return table;
@@ -301,8 +365,8 @@ public class QuestionManagement
         for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
             {
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, false)));
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, false)));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, null)));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, null)));
             }
 
         return table;
@@ -316,7 +380,7 @@ public class QuestionManagement
 
         for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, true)));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9))));
 
         return table;
     }
@@ -330,8 +394,8 @@ public class QuestionManagement
         for (int i = 1; i <= getCategoryCount(); i++)
             if (isFullReference || getPref(i))
             {
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, true)));
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, true)));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9))));
+                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9))));
             }
 
         return table;
@@ -371,10 +435,9 @@ public class QuestionManagement
         FlowLayout layout = new FlowLayout(context);
         layout.setGravity(Gravity.FILL);
 
-        Question[] questionSet = getQuestionSet(setNumber, Diacritic.NO_DIACRITIC, false);
+        Question[] questionSet = getQuestionSet(setNumber, Diacritic.NO_DIACRITIC, null);
 
-        int padding = (int) TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12, context.getResources().getDisplayMetrics());
+        int padding = context.getResources().getDimensionPixelSize(R.dimen.vocabReferenceCellHorizontalPadding);
 
         for (Question question : questionSet)
         {

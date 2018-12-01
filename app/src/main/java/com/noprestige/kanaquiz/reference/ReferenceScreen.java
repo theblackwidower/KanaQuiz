@@ -11,8 +11,6 @@ import com.noprestige.kanaquiz.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 public class ReferenceScreen extends AppCompatActivity
 {
     private static final int MAX_TABS = 3;
@@ -30,7 +28,7 @@ public class ReferenceScreen extends AppCompatActivity
         {
             TextView lblEmpty = new TextView(this);
             lblEmpty.setText(R.string.no_reference);
-            lblEmpty.setTextSize(COMPLEX_UNIT_SP, 24);
+            lblEmpty.setTextSize(getResources().getDimensionPixelSize(R.dimen.embeddedAlertMessageSize));
             lblEmpty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             lblEmpty.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));

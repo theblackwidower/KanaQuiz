@@ -1,6 +1,8 @@
 package com.noprestige.kanaquiz.logs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -88,12 +90,14 @@ public class DailyLogItem extends View
         init(attrs, defStyle);
     }
 
+    @SuppressLint("ResourceType")
     private void init(AttributeSet attrs, int defStyle)
     {
         Context context = getContext();
 
         if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
+            defaultAttributes = context.getTheme().obtainStyledAttributes(
+                    new int[]{android.R.attr.textColorTertiary, android.R.attr.selectableItemBackground});
 
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
@@ -115,8 +119,17 @@ public class DailyLogItem extends View
         linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
-        internalVerticalPadding = Math.round(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, context.getResources().getDisplayMetrics()));
+        internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
+
+        setBackground(defaultAttributes.getDrawable(1));
+
+        setOnClickListener(view ->
+        {
+            //ref: https://stackoverflow.com/a/3913735/3582371
+            Intent intent = new Intent(getContext(), LogDetailView.class);
+            intent.putExtra("date", getDate());
+            view.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -328,12 +341,12 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    private static String parseCount(float count)
+    public static String parseCount(float count)
     {
         return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
     }
 
-    private static String parseCount(int count)
+    public static String parseCount(int count)
     {
         if (count < 1000)
             return Integer.toString(count);
@@ -360,7 +373,7 @@ public class DailyLogItem extends View
         }
     }
 
-    private static int getPercentageColour(float percentage, Resources resources)
+    public static int getPercentageColour(float percentage, Resources resources)
     {
         int tenth = Math.round(percentage * 100) / 10;
         if (tenth <= 4)

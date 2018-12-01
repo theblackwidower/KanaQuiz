@@ -20,8 +20,6 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
-import com.noprestige.kanaquiz.questions.NoQuestionsException;
-import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 
@@ -43,8 +41,6 @@ public class MainQuiz extends AppCompatActivity
     int totalQuestions;
     float totalCorrect;
     private boolean canSubmit;
-
-    private QuestionBank questionBank;
 
     private TextView lblResponse;
     private TextView lblQuestion;
@@ -90,6 +86,13 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_quiz);
+
+        lblResponse = findViewById(R.id.lblResponse);
+        lblQuestion = findViewById(R.id.lblQuestion);
+        frmAnswer = findViewById(R.id.frmAnswer);
+
+        lblQuestion.setTextLocale(Locale.JAPANESE);
 
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -99,26 +102,12 @@ public class MainQuiz extends AppCompatActivity
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
         resetQuiz();
-        nextQuestion();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
-
-        //TODO: Preserve current question through configuration change
-
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            setContentView(R.layout.activity_horizontal_quiz);
-        else
-            setContentView(R.layout.activity_main_quiz);
-
-        lblResponse = findViewById(R.id.lblResponse);
-        lblQuestion = findViewById(R.id.lblQuestion);
-        frmAnswer = findViewById(R.id.frmAnswer);
-
-        lblQuestion.setTextLocale(Locale.JAPANESE);
 
         if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
                 (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES))
@@ -148,22 +137,30 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        questionBank = QuestionManagement.getFullQuestionBank();
+        if (QuestionManagement.refreshStaticQuestionBank())
+            nextQuestion();
+        else
+            refreshDisplay();
 
         frmAnswer.resetQuiz();
     }
 
     private void nextQuestion()
     {
-        try
+        QuestionManagement.getStaticQuestionBank().newQuestion();
+        refreshDisplay();
+    }
+
+    private void refreshDisplay()
+    {
+        if (QuestionManagement.getStaticQuestionBank().count() > 0)
         {
-            questionBank.newQuestion();
-            lblQuestion.setText(questionBank.getCurrentQuestionText());
+            lblQuestion.setText(QuestionManagement.getStaticQuestionBank().getCurrentQuestionText());
             retryCount = 0;
-            frmAnswer.setMultipleChoices(questionBank);
+            frmAnswer.setMultipleChoices(QuestionManagement.getStaticQuestionBank());
             readyForAnswer();
         }
-        catch (NoQuestionsException ex)
+        else
         {
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
@@ -184,7 +181,7 @@ public class MainQuiz extends AppCompatActivity
             canSubmit = false;
             boolean isGetNewQuestion = true;
 
-            if (questionBank.checkCurrentAnswer(answer))
+            if (QuestionManagement.getStaticQuestionBank().checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
                 lblResponse.setTypeface(null, BOLD);
@@ -192,16 +189,18 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDao.reportCorrectAnswer(questionBank.getCurrentQuestionKey());
+                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
-                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), score);
+                    LogDao.reportRetriedCorrectAnswer(
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
                 }
                 else
-                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), 0);
+                    LogDao.reportRetriedCorrectAnswer(
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), 0);
             }
             else
             {
@@ -215,7 +214,7 @@ public class MainQuiz extends AppCompatActivity
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.show_correct_answer));
                     lblResponse.append(": ");
-                    lblResponse.append(questionBank.fetchCorrectAnswer());
+                    lblResponse.append(QuestionManagement.getStaticQuestionBank().fetchCorrectAnswer());
                 }
                 else if (OptionsControl
                         .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
@@ -225,7 +224,8 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
-                    LogDao.reportIncorrectRetry(questionBank.getCurrentQuestionKey(), answer);
+                    LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -235,7 +235,8 @@ public class MainQuiz extends AppCompatActivity
                 }
 
                 if (isGetNewQuestion)
-                    LogDao.reportIncorrectAnswer(questionBank.getCurrentQuestionKey(), answer);
+                    LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            answer);
             }
 
             if (isGetNewQuestion)
@@ -251,13 +252,13 @@ public class MainQuiz extends AppCompatActivity
     private void readyForAnswer()
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            if (questionBank.isCurrentQuestionVocab())
+            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
                 lblResponse.setText(R.string.request_vocab_multiple_choice);
             else
                 lblResponse.setText(R.string.request_kana_multiple_choice);
         else
         {
-            if (questionBank.isCurrentQuestionVocab())
+            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
                 lblResponse.setText(R.string.request_vocab_text_input);
             else
                 lblResponse.setText(R.string.request_kana_text_input);
@@ -317,7 +318,6 @@ public class MainQuiz extends AppCompatActivity
         if (requestCode == 1)
         {
             resetQuiz();
-            nextQuestion();
         }
     }
 }
