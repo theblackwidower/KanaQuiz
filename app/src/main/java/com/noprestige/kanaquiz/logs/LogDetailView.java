@@ -68,7 +68,7 @@ public class LogDetailView extends AppCompatActivity
 
             for (QuestionRecord record : records)
             {
-                LogDetailItem output = new LogDetailItem(activity[0].getBaseContext());
+                LogDetailItem output = new LogDetailItem(activity[0]);
                 output.setFromRecord(record);
 
                 chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /

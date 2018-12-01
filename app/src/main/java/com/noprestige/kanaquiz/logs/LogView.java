@@ -57,7 +57,7 @@ public class LogView extends AppCompatActivity
 
             for (DailyRecord record : records)
             {
-                DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
+                DailyLogItem output = new DailyLogItem(activity[0]);
                 output.setFromRecord(record);
 
                 graphSeries.appendData(new DataPoint(startDate.until(record.getDate(), DAYS),
@@ -117,9 +117,8 @@ public class LogView extends AppCompatActivity
         logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
         logGraph.getViewport().setXAxisBoundsManual(true);
         logGraph.getViewport().setMinX(0);
-        logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
-                        getApplicationContext().getResources().getDisplayMetrics())));
+        logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics())));
         logGraph.getGridLabelRenderer().setLabelHorizontalHeight(0);
 
         StaticLabelsFormatter labelFormatter = new StaticLabelsFormatter(logGraph);
