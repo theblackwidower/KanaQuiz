@@ -16,6 +16,7 @@ import com.noprestige.kanaquiz.reference.ReferenceTable;
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -140,13 +141,8 @@ public class QuestionManagement
         else
         {
             boolean[] currentPrefRecord = getCurrentPrefRecord();
-            boolean isChanged = prefRecord.length != currentPrefRecord.length;
 
-            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
-                if (prefRecord[i] != currentPrefRecord[i])
-                    isChanged = true;
-
-            if (isChanged)
+            if (!Arrays.equals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
