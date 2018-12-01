@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -115,16 +116,16 @@ public class QuestionManagement
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
     }
 
-    public static void initialize(Context context)
+    public static void initialize(Application context)
     {
         if (HIRAGANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getApplicationContext().getResources());
+            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
 
         if (KATAKANA == null)
-            KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
+            KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
 
         if (VOCABULARY == null)
-            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
     }
 
     private static QuestionBank questionBank;
