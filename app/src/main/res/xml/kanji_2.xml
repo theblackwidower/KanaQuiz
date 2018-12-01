@@ -3,407 +3,121 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
     <QuestionSet prefId="ljts_kanji_set_15" setTitle="@string/ljts_kanji_set_15_title">
-        <KanjiQuestion question="語" meaning="language/talk">
-            <KunYomi>kata</KunYomi>
-            <OnYomi>go</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="話" meaning="speak/tale">
-            <KunYomi>hanashi</KunYomi>
-            <KunYomi>hana</KunYomi>
-            <OnYomi>wa</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="言" meaning="word/say">
-            <KunYomi>koto</KunYomi>
-            <KunYomi>i</KunYomi>
-            <OnYomi>gen</OnYomi>
-            <OnYomi>gon</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="声" meaning="voice">
-            <KunYomi>koe</KunYomi>
-            <OnYomi>sei</OnYomi>
-            <OnYomi>shō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="答" meaning="answer/solution">
-            <KunYomi>kota</KunYomi>
-            <OnYomi>tō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="聞" meaning="hear/listen/ask">
-            <KunYomi>ki</KunYomi>
-            <OnYomi>bun</OnYomi>
-            <OnYomi>mon</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="語" meaning="language/talk" kunYomi="kata" onYomi="go"/>
+        <KanjiQuestion question="話" meaning="speak/tale" kunYomi="hanashi/hana" onYomi="wa"/>
+        <KanjiQuestion question="言" meaning="word/say" kunYomi="koto/i" onYomi="gen/gon"/>
+        <KanjiQuestion question="声" meaning="voice" kunYomi="koe" onYomi="sei/shō"/>
+        <KanjiQuestion question="答" meaning="answer/solution" kunYomi="kota" onYomi="tō"/>
+        <KanjiQuestion question="聞" meaning="hear/listen/ask" kunYomi="ki" onYomi="bun/mon"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_16" setTitle="@string/ljts_kanji_set_16_title">
-        <KanjiQuestion question="夏" meaning="summer">
-            <KunYomi>natsu</KunYomi>
-            <OnYomi>ka</OnYomi>
-            <OnYomi>ge</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="秋" meaning="autumn">
-            <KunYomi>aki</KunYomi>
-            <OnYomi>shū</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="冬" meaning="winter">
-            <KunYomi>fuyu</KunYomi>
-            <OnYomi>tō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="春" meaning="spring">
-            <KunYomi>haru</KunYomi>
-            <OnYomi>shun</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="雪" meaning="snow">
-            <KunYomi>yuki</KunYomi>
-            <OnYomi>setsu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="雲" meaning="cloud">
-            <KunYomi>kumo</KunYomi>
-            <OnYomi>un</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="夏" meaning="summer" kunYomi="natsu" onYomi="ka/ge"/>
+        <KanjiQuestion question="秋" meaning="autumn" kunYomi="aki" onYomi="shū"/>
+        <KanjiQuestion question="冬" meaning="winter" kunYomi="fuyu" onYomi="tō"/>
+        <KanjiQuestion question="春" meaning="spring" kunYomi="haru" onYomi="shun"/>
+        <KanjiQuestion question="雪" meaning="snow" kunYomi="yuki" onYomi="setsu"/>
+        <KanjiQuestion question="雲" meaning="cloud" kunYomi="kumo" onYomi="un"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_17" setTitle="@string/ljts_kanji_set_17_title">
-        <KanjiQuestion question="国" meaning="country">
-            <KunYomi>kuni</KunYomi>
-            <OnYomi>koku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="園" meaning="park/garden">
-            <KunYomi>sono</KunYomi>
-            <OnYomi>en</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="原" meaning="meadow/plain/origin">
-            <KunYomi>hara</KunYomi>
-            <OnYomi>gen</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="野" meaning="field/wild">
-            <KunYomi>no</KunYomi>
-            <OnYomi>ya</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="谷" meaning="valley">
-            <KunYomi>tani</KunYomi>
-            <OnYomi>koku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="地" meaning="ground">
-            <OnYomi>chi</OnYomi>
-            <OnYomi>ji</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="国" meaning="country" kunYomi="kuni" onYomi="koku"/>
+        <KanjiQuestion question="園" meaning="park/garden" kunYomi="sono" onYomi="en"/>
+        <KanjiQuestion question="原" meaning="meadow/plain/origin" kunYomi="hara" onYomi="gen"/>
+        <KanjiQuestion question="野" meaning="field/wild" kunYomi="no" onYomi="ya"/>
+        <KanjiQuestion question="谷" meaning="valley" kunYomi="tani" onYomi="koku"/>
+        <KanjiQuestion question="地" meaning="ground" onYomi="chi/ji"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_18" setTitle="@string/ljts_kanji_set_18_title">
-        <KanjiQuestion question="体" meaning="body">
-            <KunYomi>karada</KunYomi>
-            <OnYomi>tai</OnYomi>
-            <OnYomi>tei</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="頭" meaning="head">
-            <KunYomi>atama</KunYomi>
-            <KunYomi>kashira</KunYomi>
-            <OnYomi>tō</OnYomi>
-            <OnYomi>zu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="顔" meaning="face/expression">
-            <KunYomi>kao</KunYomi>
-            <OnYomi>gan</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="毛" meaning="hair/fur">
-            <KunYomi>ke</KunYomi>
-            <OnYomi>mō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="首" meaning="neck">
-            <KunYomi>kubi</KunYomi>
-            <OnYomi>shu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="心" meaning="heart/mind">
-            <KunYomi>kokoro</KunYomi>
-            <OnYomi>shin</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="体" meaning="body" kunYomi="karada" onYomi="tai/tei"/>
+        <KanjiQuestion question="頭" meaning="head" kunYomi="atama/kashira" onYomi="tō/zu"/>
+        <KanjiQuestion question="顔" meaning="face/expression" kunYomi="kao" onYomi="gan"/>
+        <KanjiQuestion question="毛" meaning="hair/fur" kunYomi="ke" onYomi="mō"/>
+        <KanjiQuestion question="首" meaning="neck" kunYomi="kubi" onYomi="shu"/>
+        <KanjiQuestion question="心" meaning="heart/mind" kunYomi="kokoro" onYomi="shin"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_19" setTitle="@string/ljts_kanji_set_19_title">
-        <KanjiQuestion question="食" meaning="eat/food">
-            <KunYomi>ta</KunYomi>
-            <KunYomi>ku</KunYomi>
-            <OnYomi>shoku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="米" meaning="rice">
-            <KunYomi>kome</KunYomi>
-            <OnYomi>bei</OnYomi>
-            <OnYomi>mai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="麦" meaning="wheat/barley">
-            <KunYomi>mugi</KunYomi>
-            <OnYomi>baku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="肉" meaning="meat">
-            <OnYomi>niku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="魚" meaning="fish">
-            <KunYomi>sakana</KunYomi>
-            <KunYomi>uo</KunYomi>
-            <OnYomi>gyo</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="茶" meaning="tea">
-            <OnYomi>cha</OnYomi>
-            <OnYomi>sa</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="食" meaning="eat/food" kunYomi="ta/ku" onYomi="shoku"/>
+        <KanjiQuestion question="米" meaning="rice" kunYomi="kome" onYomi="bei/mai"/>
+        <KanjiQuestion question="麦" meaning="wheat/barley" kunYomi="mugi" onYomi="baku"/>
+        <KanjiQuestion question="肉" meaning="meat" onYomi="niku"/>
+        <KanjiQuestion question="魚" meaning="fish" kunYomi="sakana/uo" onYomi="gyo"/>
+        <KanjiQuestion question="茶" meaning="tea" onYomi="cha/sa"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_20" setTitle="@string/ljts_kanji_set_20_title">
-        <KanjiQuestion question="教" meaning="teach">
-            <KunYomi>oshi</KunYomi>
-            <OnYomi>kyō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="知" meaning="know/wisdom">
-            <KunYomi>shi</KunYomi>
-            <OnYomi>chi</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="才" meaning="age/talent">
-            <OnYomi>sai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="作" meaning="make">
-            <KunYomi>tsuku</KunYomi>
-            <OnYomi>saku</OnYomi>
-            <OnYomi>sa</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="工" meaning="work/craft">
-            <OnYomi>kō</OnYomi>
-            <OnYomi>ku</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="元" meaning="origin/source">
-            <KunYomi>moto</KunYomi>
-            <OnYomi>gen</OnYomi>
-            <OnYomi>gan</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="教" meaning="teach" kunYomi="oshi" onYomi="kyō"/>
+        <KanjiQuestion question="知" meaning="know/wisdom" kunYomi="shi" onYomi="chi"/>
+        <KanjiQuestion question="才" meaning="age/talent" onYomi="sai"/>
+        <KanjiQuestion question="作" meaning="make" kunYomi="tsuku" onYomi="saku/sa"/>
+        <KanjiQuestion question="工" meaning="work/craft" onYomi="kō/ku"/>
+        <KanjiQuestion question="元" meaning="origin/source" kunYomi="moto" onYomi="gen/gan"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_21" setTitle="@string/ljts_kanji_set_21_title">
-        <KanjiQuestion question="馬" meaning="horse">
-            <KunYomi>uma</KunYomi>
-            <KunYomi>mu</KunYomi>
-            <OnYomi>ba</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="牛" meaning="cow">
-            <KunYomi>ushi</KunYomi>
-            <OnYomi>gyū</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="鳥" meaning="bird/chicken">
-            <KunYomi>tori</KunYomi>
-            <OnYomi>chō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="羽" meaning="feather/wing">
-            <KunYomi>ha</KunYomi>
-            <KunYomi>wa</KunYomi>
-            <KunYomi>hane</KunYomi>
-            <OnYomi>u</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="池" meaning="pond">
-            <KunYomi>ike</KunYomi>
-            <OnYomi>chi</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="海" meaning="sea">
-            <KunYomi>umi</KunYomi>
-            <OnYomi>kai</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="馬" meaning="horse" kunYomi="uma/mu" onYomi="ba"/>
+        <KanjiQuestion question="牛" meaning="cow" kunYomi="ushi" onYomi="gyū"/>
+        <KanjiQuestion question="鳥" meaning="bird/chicken" kunYomi="tori" onYomi="chō"/>
+        <KanjiQuestion question="羽" meaning="feather/wing" kunYomi="ha/wa/hane" onYomi="u"/>
+        <KanjiQuestion question="池" meaning="pond" kunYomi="ike" onYomi="chi"/>
+        <KanjiQuestion question="海" meaning="sea" kunYomi="umi" onYomi="kai"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_22" setTitle="@string/ljts_kanji_set_22_title">
-        <KanjiQuestion question="場" meaning="place/location">
-            <KunYomi>ba</KunYomi>
-            <OnYomi>jō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="市" meaning="market/city">
-            <KunYomi>ichi</KunYomi>
-            <OnYomi>shi</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="京" meaning="capital">
-            <OnYomi>kyō</OnYomi>
-            <OnYomi>kei</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="里" meaning="village/hometown">
-            <KunYomi>sato</KunYomi>
-            <OnYomi>ri</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="内" meaning="inside/within">
-            <KunYomi>uchi</KunYomi>
-            <OnYomi>nai</OnYomi>
-            <OnYomi>dai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="外" meaning="outside">
-            <KunYomi>soto</KunYomi>
-            <KunYomi>hazu</KunYomi>
-            <OnYomi>gai</OnYomi>
-            <OnYomi>ge</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="場" meaning="place/location" kunYomi="ba" onYomi="jō"/>
+        <KanjiQuestion question="市" meaning="market/city" kunYomi="ichi" onYomi="shi"/>
+        <KanjiQuestion question="京" meaning="capital" onYomi="kyō/kei"/>
+        <KanjiQuestion question="里" meaning="village/hometown" kunYomi="sato" onYomi="ri"/>
+        <KanjiQuestion question="内" meaning="inside/within" kunYomi="uchi" onYomi="nai/dai"/>
+        <KanjiQuestion question="外" meaning="outside" kunYomi="soto/hazu" onYomi="gai/ge"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_23" setTitle="@string/ljts_kanji_set_23_title">
-        <KanjiQuestion question="時" meaning="time/hour">
-            <KunYomi>toki</KunYomi>
-            <OnYomi>ji</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="分" meaning="minute/understand/divide">
-            <KunYomi>wa</KunYomi>
-            <OnYomi>fun</OnYomi>
-            <OnYomi>bun</OnYomi>
-            <OnYomi>bu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="今" meaning="now">
-            <KunYomi>ima</KunYomi>
-            <OnYomi>kon</OnYomi>
-            <OnYomi>kin</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="前" meaning="before/in front">
-            <KunYomi>mae</KunYomi>
-            <OnYomi>zen</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="後" meaning="after/behind">
-            <KunYomi>nochi</KunYomi>
-            <KunYomi>ushi</KunYomi>
-            <KunYomi>ato</KunYomi>
-            <OnYomi>go</OnYomi>
-            <OnYomi>kō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="毎" meaning="every/each">
-            <KunYomi>goto</KunYomi>
-            <OnYomi>mai</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="時" meaning="time/hour" kunYomi="toki" onYomi="ji"/>
+        <KanjiQuestion question="分" meaning="minute/understand/divide" kunYomi="wa" onYomi="fun/bun/bu"/>
+        <KanjiQuestion question="今" meaning="now" kunYomi="ima" onYomi="kon/kin"/>
+        <KanjiQuestion question="前" meaning="before/in front" kunYomi="mae" onYomi="zen"/>
+        <KanjiQuestion question="後" meaning="after/behind" kunYomi="nochi/ushi/ato" onYomi="go/kō"/>
+        <KanjiQuestion question="毎" meaning="every/each" kunYomi="goto" onYomi="mai"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_24" setTitle="@string/ljts_kanji_set_24_title">
-        <KanjiQuestion question="朝" meaning="morning">
-            <KunYomi>asa</KunYomi>
-            <OnYomi>chō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="昼" meaning="daytime/noon">
-            <KunYomi>hiru</KunYomi>
-            <OnYomi>chū</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="午" meaning="noon">
-            <OnYomi>go</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="夜" meaning="night">
-            <KunYomi>yoru</KunYomi>
-            <KunYomi>yo</KunYomi>
-            <OnYomi>ya</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="曜" meaning="weekday">
-            <OnYomi>yo</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="週" meaning="week">
-            <OnYomi>shū</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="朝" meaning="morning" kunYomi="asa" onYomi="chō"/>
+        <KanjiQuestion question="昼" meaning="daytime/noon" kunYomi="hiru" onYomi="chū"/>
+        <KanjiQuestion question="午" meaning="noon" onYomi="go"/>
+        <KanjiQuestion question="夜" meaning="night" kunYomi="yoru/yo" onYomi="ya"/>
+        <KanjiQuestion question="曜" meaning="weekday" onYomi="yo"/>
+        <KanjiQuestion question="週" meaning="week" onYomi="shū"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_25" setTitle="@string/ljts_kanji_set_25_title">
-        <KanjiQuestion question="親" meaning="parent/intimacy">
-            <KunYomi>oya</KunYomi>
-            <KunYomi>shita</KunYomi>
-            <OnYomi>shin</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="母" meaning="mother">
-            <KunYomi>haha</KunYomi>
-            <OnYomi>bo</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="父" meaning="father">
-            <KunYomi>chichi</KunYomi>
-            <OnYomi>fu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="姉" meaning="elder sister">
-            <KunYomi>ane</KunYomi>
-            <OnYomi>shi</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="妹" meaning="younger sister">
-            <KunYomi>imōto</KunYomi>
-            <OnYomi>mai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="兄" meaning="elder brother">
-            <KunYomi>ani</KunYomi>
-            <OnYomi>kei</OnYomi>
-            <OnYomi>kyō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="弟" meaning="younger brother">
-            <KunYomi>otōto</KunYomi>
-            <OnYomi>tei</OnYomi>
-            <OnYomi>dai</OnYomi>
-            <OnYomi>de</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="親" meaning="parent/intimacy" kunYomi="oya/shita" onYomi="shin"/>
+        <KanjiQuestion question="母" meaning="mother" kunYomi="haha" onYomi="bo"/>
+        <KanjiQuestion question="父" meaning="father" kunYomi="chichi" onYomi="fu"/>
+        <KanjiQuestion question="姉" meaning="elder sister" kunYomi="ane" onYomi="shi"/>
+        <KanjiQuestion question="妹" meaning="younger sister" kunYomi="imōto" onYomi="mai"/>
+        <KanjiQuestion question="兄" meaning="elder brother" kunYomi="ani" onYomi="kei/kyō"/>
+        <KanjiQuestion question="弟" meaning="younger brother" kunYomi="otōto" onYomi="tei/dai/de"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_26" setTitle="@string/ljts_kanji_set_26_title">
-        <KanjiQuestion question="形" meaning="shape/form">
-            <KunYomi>kata</KunYomi>
-            <KunYomi>katachi</KunYomi>
-            <OnYomi>kei</OnYomi>
-            <OnYomi>gyō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="丸" meaning="circle/round/sphere">
-            <KunYomi>maru</KunYomi>
-            <OnYomi>gan</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="太" meaning="plump/thick">
-            <KunYomi>futo</KunYomi>
-            <OnYomi>tai</OnYomi>
-            <OnYomi>ta</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="細" meaning="slender/thin">
-            <KunYomi>hoso</KunYomi>
-            <KunYomi>koma</KunYomi>
-            <OnYomi>sai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="広" meaning="wide/spacious">
-            <KunYomi>hiro</KunYomi>
-            <OnYomi>kō</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="点" meaning="point/mark/dot">
-            <OnYomi>ten</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="長" meaning="long/leader">
-            <KunYomi>naga</KunYomi>
-            <OnYomi>chō</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="形" meaning="shape/form" kunYomi="kata/katachi" onYomi="kei/gyō"/>
+        <KanjiQuestion question="丸" meaning="circle/round/sphere" kunYomi="maru" onYomi="gan"/>
+        <KanjiQuestion question="太" meaning="plump/thick" kunYomi="futo" onYomi="tai/ta"/>
+        <KanjiQuestion question="細" meaning="slender/thin" kunYomi="hoso/koma" onYomi="sai"/>
+        <KanjiQuestion question="広" meaning="wide/spacious" kunYomi="hiro" onYomi="kō"/>
+        <KanjiQuestion question="点" meaning="point/mark/dot" onYomi="ten"/>
+        <KanjiQuestion question="長" meaning="long/leader" kunYomi="naga" onYomi="chō"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_bonus_set_5_6" setTitle="@string/ljts_kanji_bonus_set_5_6_title">
         <!--Duck Bonus 5-->
-        <KanjiQuestion question="直" meaning="direct/honest">
-            <KunYomi>tada</KunYomi>
-            <KunYomi>nao</KunYomi>
-            <KunYomi>su</KunYomi>
-            <OnYomi>choku</OnYomi>
-            <OnYomi>jiki</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="理" meaning="reason/logic">
-            <OnYomi>ri</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="算" meaning="calculate/count">
-            <OnYomi>san</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="直" meaning="direct/honest" kunYomi="tada/nao/su" onYomi="choku/jiki"/>
+        <KanjiQuestion question="理" meaning="reason/logic" onYomi="ri"/>
+        <KanjiQuestion question="算" meaning="calculate/count" onYomi="san"/>
         <!--Duck Bonus 6-->
-        <KanjiQuestion question="切" meaning="cut">
-            <KunYomi>ki</KunYomi>
-            <OnYomi>setsu</OnYomi>
-            <OnYomi>sai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="活" meaning="active/lively">
-            <OnYomi>katsu</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="店" meaning="store/shop">
-            <KunYomi>mise</KunYomi>
-            <KunYomi>tana</KunYomi>
-            <OnYomi>ten</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="切" meaning="cut" kunYomi="ki" onYomi="setsu/sai"/>
+        <KanjiQuestion question="活" meaning="active/lively" onYomi="katsu"/>
+        <KanjiQuestion question="店" meaning="store/shop" kunYomi="mise/tana" onYomi="ten"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_bonus_set_7_8" setTitle="@string/ljts_kanji_bonus_set_7_8_title">
         <!--Duck Bonus 7-->
-        <KanjiQuestion question="買" meaning="buy">
-            <KunYomi>ka</KunYomi>
-            <OnYomi>bai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="売" meaning="sell">
-            <KunYomi>u</KunYomi>
-            <OnYomi>bai</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="科" meaning="section/department">
-            <OnYomi>ka</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="買" meaning="buy" kunYomi="ka" onYomi="bai"/>
+        <KanjiQuestion question="売" meaning="sell" kunYomi="u" onYomi="bai"/>
+        <KanjiQuestion question="科" meaning="section/department" onYomi="ka"/>
         <!--Duck Bonus 8-->
-        <KanjiQuestion question="岩" meaning="rock/cliff">
-            <KunYomi>iwa</KunYomi>
-            <OnYomi>gan</OnYomi>
-        </KanjiQuestion>
-        <KanjiQuestion question="星" meaning="star">
-            <KunYomi>hoshi</KunYomi>
-            <OnYomi>sei</OnYomi>
-            <OnYomi>shō</OnYomi>
-        </KanjiQuestion>
+        <KanjiQuestion question="岩" meaning="rock/cliff" kunYomi="iwa" onYomi="gan"/>
+        <KanjiQuestion question="星" meaning="star" kunYomi="hoshi" onYomi="sei/shō"/>
     </QuestionSet>
     <!--
     Sources:

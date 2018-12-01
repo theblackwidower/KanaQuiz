@@ -97,25 +97,10 @@
 
     <xs:element name="KanjiQuestion">
         <xs:complexType>
-            <!-- ref: https://stackoverflow.com/a/100589/3582371 -->
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="KunYomi" maxOccurs="unbounded">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="romaji"/>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="OnYomi" maxOccurs="unbounded">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="romaji"/>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-            </xs:choice>
             <xs:attribute name="question" type="kanji" use="required"/>
             <xs:attribute name="meaning" type="meanings" use="required"/>
+            <xs:attribute name="kunYomi" type="romaji"/>
+            <xs:attribute name="onYomi" type="romaji" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -180,7 +165,7 @@
 
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="['\-A-Za-zĀāĒēĪīŌōŪū]*"/>
+            <xs:pattern value="['\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
         </xs:restriction>
     </xs:simpleType>
 
