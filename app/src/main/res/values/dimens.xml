@@ -10,7 +10,7 @@
     <dimen name="defaultReferenceSubjectSize">52sp</dimen>
     <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
     <dimen name="diacriticReferenceSubjectSize">46sp</dimen>
-    <dimen name="vocabReferenceSubjectSize">46sp</dimen>
+    <dimen name="vocabReferenceSubjectSize">40sp</dimen>
 
     <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>
 

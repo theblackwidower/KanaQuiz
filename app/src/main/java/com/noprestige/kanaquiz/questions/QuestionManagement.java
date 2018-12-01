@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.noprestige.kanaquiz.reference.ReferenceTable;
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -117,16 +119,16 @@ public class QuestionManagement
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
     }
 
-    public static void initialize(Context context)
+    public static void initialize(Application context)
     {
         if (HIRAGANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getApplicationContext().getResources());
+            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
 
         if (KATAKANA == null)
-            KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
+            KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
 
         if (VOCABULARY == null)
-            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
         //ref: https://stackoverflow.com/a/43584678/3582371
         context.registerReceiver(new BroadcastReceiver()
@@ -142,31 +144,25 @@ public class QuestionManagement
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
 
-    public static boolean refreshStaticQuestionBank()
+    public static void refreshStaticQuestionBank()
     {
         if ((prefRecord == null) || (questionBank == null))
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            return true;
+            questionBank.newQuestion();
         }
         else
         {
             boolean[] currentPrefRecord = getCurrentPrefRecord();
-            boolean isChanged = prefRecord.length != currentPrefRecord.length;
 
-            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
-                if (prefRecord[i] != currentPrefRecord[i])
-                    isChanged = true;
-
-            if (isChanged)
+            if (!Arrays.equals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
-                return true;
+                questionBank.newQuestion();
             }
         }
-        return false;
     }
 
     private static boolean[] getCurrentPrefRecord()

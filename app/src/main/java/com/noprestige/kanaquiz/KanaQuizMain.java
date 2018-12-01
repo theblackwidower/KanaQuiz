@@ -16,10 +16,10 @@ public abstract class KanaQuizMain extends Application
     {
         super.onCreate();
 
-        AndroidThreeTen.init(getApplicationContext());
-        OptionsControl.initialize(getApplicationContext());
-        QuestionManagement.initialize(getApplicationContext());
-        LogDatabase.initialize(getApplicationContext());
+        AndroidThreeTen.init(this);
+        OptionsControl.initialize(this);
+        QuestionManagement.initialize(this);
+        LogDatabase.initialize(this);
     }
 
     public static boolean isFirebaseInstalled()

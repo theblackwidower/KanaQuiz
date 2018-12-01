@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.options;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -19,11 +20,11 @@ public final class OptionsControl
     private OptionsControl() {}
 
     @SuppressLint("CommitPrefEdits")
-    public static void initialize(Context context)
+    public static void initialize(Application context)
     {
         if (sharedPreferences == null)
         {
-            Context appContext = context.getApplicationContext();
+            Context appContext = context;
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             editor = sharedPreferences.edit();
             resources = appContext.getResources();
