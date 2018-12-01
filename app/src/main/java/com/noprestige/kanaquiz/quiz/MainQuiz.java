@@ -97,6 +97,11 @@ public class MainQuiz extends AppCompatActivity
 
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
+        if (fetchScoreThread != null)
+            fetchScoreThread.cancel(true);
+        fetchScoreThread = new FetchTodaysLog();
+        fetchScoreThread.execute(LocalDate.now());
+
         resetQuiz();
     }
 
@@ -122,11 +127,6 @@ public class MainQuiz extends AppCompatActivity
 
     private void resetQuiz()
     {
-        if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
-        fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(LocalDate.now());
-
         lblQuestion.setText("");
         lblResponse.setText("");
 
