@@ -284,13 +284,18 @@ public class QuestionManagement
                 if (question.getClass().equals(KanaQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
-                    returnValue.append(' ');
+                    if (questionSet.length <= 10)
+                        returnValue.append('\u00A0');
+                    else
+                        returnValue.append(' ');
                 }
                 else if (question.getClass().equals(WordQuestion.class))
                 {
                     returnValue.append(question.fetchCorrectAnswer().replace(' ', '\u00A0'));
                     returnValue.append(", ");
                 }
+        if (returnValue.length() > 1)
+            returnValue.setCharAt(returnValue.length() - 1, ' ');
         return returnValue.toString();
     }
 
