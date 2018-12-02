@@ -120,6 +120,7 @@ public class QuestionManagement
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
+        //TODO: Try to preserve current question (don't worry about the multiple choice screen) through locale change
         prefRecord = null;
         questionBank = null;
     }
