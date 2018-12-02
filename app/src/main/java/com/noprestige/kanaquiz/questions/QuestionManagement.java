@@ -143,6 +143,8 @@ public class QuestionManagement
         {
             boolean[] currentPrefRecord = getCurrentPrefRecord();
 
+            //TODO: Add something to handle repetition control changes so we can update the previousQuestion record
+
             if (!Arrays.equals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
