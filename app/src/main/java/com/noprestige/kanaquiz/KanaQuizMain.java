@@ -25,6 +25,11 @@ public abstract class KanaQuizMain extends Application
         QuestionManagement.initialize(this);
         LogDatabase.initialize(this);
 
+        //TODO: Find way to fix incorrect language resolution
+        // For instance, if a user's system language settings are ranked as #1: Dutch and #2: Spanish,
+        // since there is no Dutch translation for this app the Spanish locale should be loaded.
+        // Currently the English locale is loaded, which is incorrect. This needs to be fixed at some point.
+
         //ref: https://stackoverflow.com/a/43584678/3582371
         registerReceiver(new BroadcastReceiver()
         {
