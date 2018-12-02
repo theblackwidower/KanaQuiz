@@ -82,14 +82,6 @@ public class LogDetailView extends AppCompatActivity
                     publishProgress(output);
             }
 
-            BarData data = new BarData(new BarDataSet(chartSeries, null));
-            logDetailChart.setData(data);
-
-            data.setBarWidth(0.8f);
-            data.setDrawValues(false);
-
-            logDetailChart.invalidate();
-
             return records.length;
         }
 
@@ -111,7 +103,17 @@ public class LogDetailView extends AppCompatActivity
         protected void onPostExecute(Integer count)
         {
             if (count > 0)
+            {
+                BarData data = new BarData(new BarDataSet(chartSeries, null));
+                logDetailChart.setData(data);
+
+                data.setBarWidth(0.8f);
+                data.setDrawValues(false);
+
+                logDetailChart.invalidate();
+
                 layout.removeView(lblDetailMessage);
+            }
             else
                 lblDetailMessage.setText(R.string.no_logs);
         }
