@@ -136,6 +136,8 @@ public class QuestionManagement
             @Override
             public void onReceive(Context context, Intent intent)
             {
+                HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
+                KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
                 VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
             }
         }, new IntentFilter(Intent.ACTION_LOCALE_CHANGED));
