@@ -1,10 +1,6 @@
 package com.noprestige.kanaquiz.questions;
 
-import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.View;
@@ -119,7 +115,7 @@ public class QuestionManagement
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
     }
 
-    public static void initialize(Application context)
+    public static void initialize(Context context)
     {
         if (HIRAGANA == null)
             HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
@@ -129,18 +125,6 @@ public class QuestionManagement
 
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
-
-        //ref: https://stackoverflow.com/a/43584678/3582371
-        context.registerReceiver(new BroadcastReceiver()
-        {
-            @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
-                KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
-                VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
-            }
-        }, new IntentFilter(Intent.ACTION_LOCALE_CHANGED));
     }
 
     private static QuestionBank questionBank;
