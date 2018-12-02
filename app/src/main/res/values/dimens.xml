@@ -21,7 +21,7 @@
 
     <dimen name="embeddedAlertMessageSize">24sp</dimen>
 
-    <dimen name="headerTextSize">14sp</dimen>
+    <dimen name="headerTextSize">10sp</dimen>
     <dimen name="headerTopPadding">28sp</dimen>
     <dimen name="headerBottomPadding">14sp</dimen>
 </resources>
