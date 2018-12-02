@@ -64,7 +64,7 @@ dependencies {
 
     releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     releaseImplementation 'com.google.firebase:firebase-core:16.0.5'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.2.0'
+    releaseImplementation 'com.google.firebase:firebase-perf:16.2.1'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
