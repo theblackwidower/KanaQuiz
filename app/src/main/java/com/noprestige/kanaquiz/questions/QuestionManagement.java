@@ -120,13 +120,17 @@ public class QuestionManagement
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
-        //TODO: Try to preserve current question (don't worry about the multiple choice screen) through locale change
+
+        if (questionBank != null)
+            currentQuestionBackup = questionBank.getCurrentQuestionKey();
+
         prefRecord = null;
         questionBank = null;
     }
 
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
+    private static String currentQuestionBackup;
 
     public static void refreshStaticQuestionBank()
     {
@@ -134,7 +138,9 @@ public class QuestionManagement
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            questionBank.newQuestion();
+            if ((currentQuestionBackup == null) || !questionBank.loadQuestion(currentQuestionBackup))
+                questionBank.newQuestion();
+            currentQuestionBackup = null;
         }
         else
         {
