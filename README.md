@@ -56,6 +56,7 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Proper kanji support with kanji questions
   * Support for kun'yomi and on'yomi-based kanji questions
   * Limitation alerts, either by time, or number of questions
+  * Interface themes of various colours and tones (including a dark theme)
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
