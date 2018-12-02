@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+           xsi:schemaLocation="https://www.noprestige.com ../xml/questions.xsd">
     <QuestionSet prefId="vocabulary_set_basic" setTitle="@string/vocab_set_basic_title">
         <WordQuestion romaji="Hai" kana="はい" answer="Sí"/>
         <WordQuestion romaji="Iie" kana="いいえ" answer="No"/> <!-- 否 (not normally used) -->
