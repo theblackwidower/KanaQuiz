@@ -120,6 +120,8 @@ public class QuestionManagement
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
+        prefRecord = null;
+        questionBank = null;
     }
 
     private static QuestionBank questionBank;
