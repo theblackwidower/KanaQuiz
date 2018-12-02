@@ -117,14 +117,9 @@ public class QuestionManagement
 
     public static void initialize(Context context)
     {
-        if (HIRAGANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
-
-        if (KATAKANA == null)
-            KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
-
-        if (VOCABULARY == null)
-            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
+        HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
+        KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
+        VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
     }
 
     private static QuestionBank questionBank;
