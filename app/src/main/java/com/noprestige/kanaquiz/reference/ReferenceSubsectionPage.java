@@ -12,9 +12,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_1;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_2;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_3;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -53,11 +51,11 @@ public class ReferenceSubsectionPage extends Fragment
         else if (questionType.equals(getContext().getResources().getString(R.string.kanji)))
         {
             if (refCategory.equals(getContext().getResources().getString(R.string.kanji_phase_1)))
-                layout.addView(KANJI_1.getKanjiReferenceTable(container.getContext()));
+                layout.addView(KANJI[1].getKanjiReferenceTable(container.getContext()));
             else if (refCategory.equals(getContext().getResources().getString(R.string.kanji_phase_2)))
-                layout.addView(KANJI_2.getKanjiReferenceTable(container.getContext()));
+                layout.addView(KANJI[2].getKanjiReferenceTable(container.getContext()));
             else if (refCategory.equals(getContext().getResources().getString(R.string.kanji_phase_3)))
-                layout.addView(KANJI_3.getKanjiReferenceTable(container.getContext()));
+                layout.addView(KANJI[3].getKanjiReferenceTable(container.getContext()));
         }
         else
         {

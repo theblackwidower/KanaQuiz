@@ -18,9 +18,7 @@ import com.noprestige.kanaquiz.R;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_1;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_2;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_3;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -51,12 +49,12 @@ public class QuestionSelectionPage extends Fragment
                 screen = KATAKANA.getSelectionScreen(getContext());
                 break;
             case 2:
-                screen = KANJI_1.getSelectionScreen(getContext());
+                screen = KANJI[1].getSelectionScreen(getContext());
                 screen.addView(buildHeader(getContext(), R.string.kanji_phase_1), 0);
                 screen.addView(buildHeader(getContext(), R.string.kanji_phase_2));
-                KANJI_2.populateSelectionScreen(screen);
+                KANJI[2].populateSelectionScreen(screen);
                 screen.addView(buildHeader(getContext(), R.string.kanji_phase_3));
-                KANJI_3.populateSelectionScreen(screen);
+                KANJI[3].populateSelectionScreen(screen);
                 break;
             case 3:
                 screen = VOCABULARY.getSelectionScreen(getContext());

@@ -24,9 +24,7 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
-    public static QuestionManagement KANJI_1;
-    public static QuestionManagement KANJI_2;
-    public static QuestionManagement KANJI_3;
+    public static QuestionManagement[] KANJI = new QuestionManagement[4];
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -125,14 +123,14 @@ public class QuestionManagement
         if (KATAKANA == null)
             KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
 
-        if (KANJI_1 == null)
-            KANJI_1 = new QuestionManagement(R.xml.kanji_1, context.getApplicationContext().getResources());
+        if (KANJI[1] == null)
+            KANJI[1] = new QuestionManagement(R.xml.kanji_1, context.getApplicationContext().getResources());
 
-        if (KANJI_2 == null)
-            KANJI_2 = new QuestionManagement(R.xml.kanji_2, context.getApplicationContext().getResources());
+        if (KANJI[2] == null)
+            KANJI[2] = new QuestionManagement(R.xml.kanji_2, context.getApplicationContext().getResources());
 
-        if (KANJI_3 == null)
-            KANJI_3 = new QuestionManagement(R.xml.kanji_3, context.getApplicationContext().getResources());
+        if (KANJI[3] == null)
+            KANJI[3] = new QuestionManagement(R.xml.kanji_3, context.getApplicationContext().getResources());
 
         if (VOCABULARY == null)
             VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
@@ -172,7 +170,7 @@ public class QuestionManagement
     {
         boolean[] currentPrefRecord =
                 new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
-                        KANJI_1.getCategoryCount() + KANJI_2.getCategoryCount() + KANJI_3.getCategoryCount() + 2];
+                        KANJI[1].getCategoryCount() + KANJI[2].getCategoryCount() + KANJI[3].getCategoryCount() + 2];
 
         currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
         currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
@@ -193,19 +191,19 @@ public class QuestionManagement
             currentPrefRecord[i] = VOCABULARY.getPref(j);
             i++;
         }
-        for (int j = 1; j <= KANJI_1.getCategoryCount(); j++)
+        for (int j = 1; j <= KANJI[1].getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = KANJI_1.getPref(j);
+            currentPrefRecord[i] = KANJI[1].getPref(j);
             i++;
         }
-        for (int j = 1; j <= KANJI_2.getCategoryCount(); j++)
+        for (int j = 1; j <= KANJI[2].getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = KANJI_2.getPref(j);
+            currentPrefRecord[i] = KANJI[2].getPref(j);
             i++;
         }
-        for (int j = 1; j <= KANJI_3.getCategoryCount(); j++)
+        for (int j = 1; j <= KANJI[3].getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = KANJI_3.getPref(j);
+            currentPrefRecord[i] = KANJI[3].getPref(j);
             i++;
         }
         return currentPrefRecord;
@@ -221,9 +219,9 @@ public class QuestionManagement
         QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
-        KANJI_1.buildQuestionBank(bank);
-        KANJI_2.buildQuestionBank(bank);
-        KANJI_3.buildQuestionBank(bank);
+        KANJI[1].buildQuestionBank(bank);
+        KANJI[2].buildQuestionBank(bank);
+        KANJI[3].buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }
