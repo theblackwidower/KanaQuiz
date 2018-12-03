@@ -1,6 +1,5 @@
 package com.noprestige.kanaquiz.questions;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.Gravity;
@@ -116,20 +115,23 @@ public class QuestionManagement
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
     }
 
-    public static void initialize(Application context)
+    public static void initialize(Context context)
     {
-        if (HIRAGANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
+        HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
+        KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
+        VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
-        if (KATAKANA == null)
-            KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
+        //TODO: Find way to preserve previous questions record
+        if (questionBank != null)
+            currentQuestionBackup = questionBank.getCurrentQuestionKey();
 
-        if (VOCABULARY == null)
-            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
+        prefRecord = null;
+        questionBank = null;
     }
 
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
+    private static String currentQuestionBackup;
 
     public static void refreshStaticQuestionBank()
     {
@@ -137,7 +139,9 @@ public class QuestionManagement
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            questionBank.newQuestion();
+            if ((currentQuestionBackup == null) || !questionBank.loadQuestion(currentQuestionBackup))
+                questionBank.newQuestion();
+            currentQuestionBackup = null;
         }
         else
         {
