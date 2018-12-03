@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme generated from: https://material.io/color/ -->
-    <color name="primaryColor">#3f51b5</color>
-    <color name="primaryLightColor">#757de8</color>
-    <color name="primaryDarkColor">#002984</color>
-    <color name="secondaryColor">#ff4081</color>
-    <color name="secondaryLightColor">#ff79b0</color>
-    <color name="secondaryDarkColor">#c60055</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
+    <color name="primaryColor">#f48fb1</color>
+    <color name="primaryLightColor">#ffc1e3</color>
+    <color name="primaryDarkColor">#bf5f82</color>
+    <color name="secondaryColor">#00695c</color>
+    <color name="secondaryLightColor">#439889</color>
+    <color name="secondaryDarkColor">#003d33</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#ffffff</color>
 
     <color name="dividingLine">#212121</color>
 
