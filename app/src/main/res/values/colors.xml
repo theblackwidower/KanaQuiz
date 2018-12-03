@@ -10,15 +10,15 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
 
-    <color name="dividingLine">#212121</color>
+    <color name="dividingLine">@color/grey_900</color>
 
-    <color name="correct">#00c853</color>
-    <color name="incorrect">#d50000</color>
+    <color name="correct">@color/green_A700</color>
+    <color name="incorrect">@color/red_A700</color>
 
-    <color name="below_fifty">#3e2723</color>
-    <color name="fifty_to_sixty">#d50000</color>
-    <color name="sixty_to_seventy">#ef6c00</color><!-- got illegible warning-->
-    <color name="seventy_to_eighty">#ffc400</color><!-- got illegible warning-->
-    <color name="eighty_to_ninety">#64dd17</color><!-- got illegible warning-->
-    <color name="above_ninety">#00e676</color><!-- got illegible warning-->
+    <color name="below_fifty">@color/brown_900</color>
+    <color name="fifty_to_sixty">@color/red_A700</color>
+    <color name="sixty_to_seventy">@color/orange_800</color><!-- got illegible warning-->
+    <color name="seventy_to_eighty">@color/amber_A400</color><!-- got illegible warning-->
+    <color name="eighty_to_ninety">@color/light_green_A700</color><!-- got illegible warning-->
+    <color name="above_ninety">@color/green_A400</color><!-- got illegible warning-->
 </resources>
