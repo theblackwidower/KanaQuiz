@@ -121,6 +121,7 @@ public class QuestionManagement
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
+        //TODO: Find way to preserve previous questions record
         if (questionBank != null)
             currentQuestionBackup = questionBank.getCurrentQuestionKey();
 
