@@ -135,8 +135,13 @@ public class LogDetailView extends AppCompatActivity
         //Only needed because the threeten backport has a different package name than java.time, which would require
         // no modification. I blame anyone not Oreo or newer.
         //ref: https://developer.android.com/reference/java/util/Formatter#ddt
-        setTitle(getString(R.string.log_detail_title,
-                date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L));
+        String titleText =
+                getString(R.string.log_detail_title, date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L);
+
+        String[] splitTitle = titleText.split(":");
+
+        getSupportActionBar().setTitle(splitTitle[0].trim() + ':');
+        getSupportActionBar().setSubtitle(splitTitle[1].trim());
 
         fetchThread = new FetchLogDetails();
         fetchThread.execute(this);
