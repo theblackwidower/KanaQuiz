@@ -7,8 +7,12 @@
     <color name="cherrySecondaryColor">#00695c</color>
     <color name="cherrySecondaryLightColor">#439889</color>
     <color name="cherrySecondaryDarkColor">#003d33</color>
+    <color name="cherryTertiaryColor">#b2ebf2</color>
+    <color name="cherryTertiaryLightColor">#e5ffff</color>
+    <color name="cherryTertiaryDarkColor">#81b9bf</color>
     <color name="cherryPrimaryTextColor">#000000</color>
     <color name="cherrySecondaryTextColor">#ffffff</color>
+    <color name="cherryTertiaryTextColor">#000000</color>
 
     <color name="nightPrimaryColor">#ff1744</color>
     <color name="nightPrimaryLightColor">#ff616f</color>

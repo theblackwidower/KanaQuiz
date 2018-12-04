@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/cherryPrimaryDarkColor</item>
         <item name="colorAccent">@color/cherrySecondaryColor</item>
         <item name="android:navigationBarColor">@color/cherryPrimaryLightColor</item>
+        <item name="android:colorBackground">@color/cherryTertiaryLightColor</item>
         <item name="android:colorForeground">@color/grey_900</item>
     </style>
 
