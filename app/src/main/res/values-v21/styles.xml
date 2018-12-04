@@ -15,6 +15,5 @@
         <item name="colorPrimaryDark">@color/nightPrimaryDarkColor</item>
         <item name="colorAccent">@color/nightSecondaryColor</item>
         <item name="android:navigationBarColor">@color/nightPrimaryLightColor</item>
-        <item name="android:colorForeground">@color/grey_300</item>
     </style>
 </resources>
