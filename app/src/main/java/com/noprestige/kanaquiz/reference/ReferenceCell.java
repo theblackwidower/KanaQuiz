@@ -36,8 +36,6 @@ public class ReferenceCell extends View
     private float subjectHeight;
     private float descriptionHeight;
 
-    private static TypedArray defaultAttributes;
-
     public ReferenceCell(Context context)
     {
         super(context);
@@ -60,9 +58,6 @@ public class ReferenceCell extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
-
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
         setSubject(a.getString(R.styleable.ReferenceCell_subject));
@@ -71,7 +66,8 @@ public class ReferenceCell extends View
                 getResources().getDimension(R.dimen.defaultReferenceSubjectSize)));
         setDescriptionSize(a.getDimension(R.styleable.ReferenceCell_descriptionSize,
                 getResources().getDimension(R.dimen.defaultReferenceDescriptionSize)));
-        setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
+        setColour(a.getColor(R.styleable.ReferenceCell_colour,
+                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0)));
 
         a.recycle();
 

@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.text.TextPaint;
@@ -50,8 +49,6 @@ public class LogDetailItem extends View
 
     private int internalVerticalPadding;
 
-    private static TypedArray defaultAttributes;
-
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final String SLASH = "/";
 
@@ -77,13 +74,10 @@ public class LogDetailItem extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
-
         setFontSize(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 42, context.getResources().getDisplayMetrics()));
-        setMainColour(defaultAttributes.getColor(0, 0));
-
+        setMainColour(
+                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
 
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);

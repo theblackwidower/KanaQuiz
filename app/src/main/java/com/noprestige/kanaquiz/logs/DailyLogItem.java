@@ -67,8 +67,6 @@ public class DailyLogItem extends View
 
     private int internalVerticalPadding;
 
-    private static TypedArray defaultAttributes;
-
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final String SLASH = "/";
 
@@ -95,10 +93,6 @@ public class DailyLogItem extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(
-                    new int[]{android.R.attr.textColorTertiary, android.R.attr.selectableItemBackground});
-
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
@@ -107,7 +101,8 @@ public class DailyLogItem extends View
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
-        setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour, defaultAttributes.getColor(0, 0)));
+        setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour,
+                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0)));
         setIsDynamicSize(a.getBoolean(R.styleable.DailyLogItem_isDynamicSize, true));
 
         a.recycle();
@@ -121,7 +116,8 @@ public class DailyLogItem extends View
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
 
-        setBackground(defaultAttributes.getDrawable(1));
+        setBackground(context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackground})
+                .getDrawable(0));
 
         setOnClickListener(view ->
         {
