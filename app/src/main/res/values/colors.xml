@@ -19,8 +19,6 @@
     <color name="nightPrimaryTextColor">#000000</color>
     <color name="nightSecondaryTextColor">#000000</color>
 
-    <color name="dividingLine">@color/grey_900</color>
-
     <color name="correct">@color/green_A700</color>
     <color name="incorrect">@color/red_A700</color>
 

@@ -84,7 +84,8 @@ public class LogDetailItem extends View
 
         mainPaint.setTextLocale(Locale.JAPANESE);
 
-        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        linePaint.setColor(
+                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary}).getColor(0, 0));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
