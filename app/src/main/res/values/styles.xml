@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/secondaryColor</item>
         <item name="android:colorForeground">@color/grey_900</item>
     </style>
+
+    <style name="ShibuyaNight" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/nightPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/nightPrimaryDarkColor</item>
+        <item name="colorAccent">@color/nightSecondaryColor</item>
+        <item name="android:colorForeground">@color/grey_300</item>
+    </style>
 </resources>

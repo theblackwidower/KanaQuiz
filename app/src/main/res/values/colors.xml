@@ -10,6 +10,15 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
 
+    <color name="nightPrimaryColor">#ff1744</color>
+    <color name="nightPrimaryLightColor">#ff616f</color>
+    <color name="nightPrimaryDarkColor">#c4001d</color>
+    <color name="nightSecondaryColor">#b2ff59</color>
+    <color name="nightSecondaryLightColor">#e7ff8c</color>
+    <color name="nightSecondaryDarkColor">#7ecb20</color>
+    <color name="nightPrimaryTextColor">#000000</color>
+    <color name="nightSecondaryTextColor">#000000</color>
+
     <color name="dividingLine">@color/grey_900</color>
 
     <color name="correct">@color/green_A700</color>
