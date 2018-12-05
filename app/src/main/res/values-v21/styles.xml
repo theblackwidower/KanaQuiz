@@ -9,7 +9,7 @@
         <item name="android:navigationBarColor">@color/cherryPrimaryLightColor</item>
         <item name="android:colorBackground">@color/cherryTertiaryLightColor</item>
         <item name="android:colorForeground">@color/grey_900</item>
-        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
     </style>
 
     <style name="ShibuyaNight" parent="Theme.AppCompat">
