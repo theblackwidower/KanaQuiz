@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -32,7 +33,8 @@ class ReferencePager extends FragmentPagerAdapter
         {
             tabList.add(context.getResources().getString(R.string.hiragana));
             tabList.add(context.getResources().getString(R.string.katakana));
-            tabList.add(context.getResources().getString(R.string.kanji));
+            if (KANJI_TITLES.length > 0)
+                tabList.add(context.getResources().getString(R.string.kanji));
             tabList.add(context.getResources().getString(R.string.vocabulary));
         }
         else

@@ -25,15 +25,15 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class QuestionSelectionPage extends Fragment
 {
-    private static final String ARG_PAGE_NUMBER = "position";
+    private static final String ARG_QUESTION_TYPE = "questionType";
     private static final String ARG_ITEM_STATES = "states";
     LinearLayout screen;
 
-    public static QuestionSelectionPage newInstance(int id)
+    public static QuestionSelectionPage newInstance(String questionType)
     {
         QuestionSelectionPage screen = new QuestionSelectionPage();
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE_NUMBER, id);
+        args.putString(ARG_QUESTION_TYPE, questionType);
         screen.setArguments(args);
         return screen;
     }
@@ -41,31 +41,27 @@ public class QuestionSelectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        switch (getArguments().getInt(ARG_PAGE_NUMBER, -1))
+        String questionType = getArguments().getString(ARG_QUESTION_TYPE, "");
+
+        if (questionType.equals(getResources().getString(R.string.hiragana)))
+            screen = HIRAGANA.getSelectionScreen(getContext());
+        else if (questionType.equals(getResources().getString(R.string.katakana)))
+            screen = KATAKANA.getSelectionScreen(getContext());
+        else if (questionType.equals(getResources().getString(R.string.kanji)))
         {
-            case 0:
-                screen = HIRAGANA.getSelectionScreen(getContext());
-                break;
-            case 1:
-                screen = KATAKANA.getSelectionScreen(getContext());
-                break;
-            case 2:
-                screen = new LinearLayout(getContext());
-                screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT));
-                screen.setOrientation(LinearLayout.VERTICAL);
-                for (int i = 0; i < KANJI_TITLES.length; i++)
-                {
-                    screen.addView(buildHeader(getContext(), KANJI_TITLES[i]));
-                    KANJI_FILES[i].populateSelectionScreen(screen);
-                }
-                break;
-            case 3:
-                screen = VOCABULARY.getSelectionScreen(getContext());
-                break;
-            default:
-                screen = null;
+            screen = new LinearLayout(getContext());
+            screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT));
+            screen.setOrientation(LinearLayout.VERTICAL);
+            for (int i = 0; i < KANJI_TITLES.length; i++)
+            {
+                screen.addView(buildHeader(getContext(), KANJI_TITLES[i]));
+                KANJI_FILES[i].populateSelectionScreen(screen);
+            }
         }
+        else if (questionType.equals(getResources().getString(R.string.vocabulary)))
+            screen = VOCABULARY.getSelectionScreen(getContext());
+
         ScrollView scrollView = new ScrollView(getContext());
         scrollView.addView(screen);
         return scrollView;

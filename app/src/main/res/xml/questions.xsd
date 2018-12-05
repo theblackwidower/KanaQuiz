@@ -9,7 +9,7 @@
     <xs:element name="QuestionFileSet">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="QuestionFile" maxOccurs="unbounded">
+                <xs:element name="QuestionFile" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:attribute name="resId" type="text" use="required"/>
                         <xs:attribute name="title" type="text" use="required"/>
