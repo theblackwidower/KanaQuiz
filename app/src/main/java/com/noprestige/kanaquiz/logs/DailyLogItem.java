@@ -7,10 +7,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
@@ -110,6 +112,14 @@ public class DailyLogItem extends View
         datePaint.setAntiAlias(true);
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
+
+//        Typeface font = context.getTheme().obtainStyledAttributes(new int[]{R.attr.font}).getFont(0);
+        //TODO: Fix default font kludge
+        Typeface font = new TextView(context).getTypeface();
+
+        datePaint.setTypeface(font);
+        ratioPaint.setTypeface(font);
+        percentagePaint.setTypeface(font);
 
         linePaint.setColor(
                 context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary}).getColor(0, 0));

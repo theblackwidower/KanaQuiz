@@ -3,10 +3,12 @@ package com.noprestige.kanaquiz.logs;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
@@ -81,6 +83,13 @@ public class LogDetailItem extends View
 
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
+
+//        Typeface font = context.getTheme().obtainStyledAttributes(new int[]{R.attr.font}).getFont(0);
+        //TODO: Fix default font kludge
+        Typeface font = new TextView(context).getTypeface();
+
+        mainPaint.setTypeface(font);
+        percentagePaint.setTypeface(font);
 
         mainPaint.setTextLocale(Locale.JAPANESE);
 
