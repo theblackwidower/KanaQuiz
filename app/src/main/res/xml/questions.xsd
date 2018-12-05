@@ -6,6 +6,18 @@
     xmlns:kq="https://www.noprestige.com"
     elementFormDefault="qualified">
 
+    <xs:element name="QuestionFileSet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QuestionFile" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="resId" type="text" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Questions">
         <xs:complexType>
             <xs:sequence>

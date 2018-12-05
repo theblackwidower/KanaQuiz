@@ -25,7 +25,7 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
-    public static QuestionManagement[] KANJI = new QuestionManagement[4];
+    public static QuestionManagement[] KANJI;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -120,9 +120,7 @@ public class QuestionManagement
     {
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
-        KANJI[1] = new QuestionManagement(R.xml.kanji_1, context.getResources());
-        KANJI[2] = new QuestionManagement(R.xml.kanji_2, context.getResources());
-        KANJI[3] = new QuestionManagement(R.xml.kanji_3, context.getResources());
+        KANJI = XmlParser.parseXmlFileSetDocument(R.xml.kanji, context.getResources());
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
         //TODO: Find way to preserve previous questions record
