@@ -18,5 +18,7 @@
         <item name="colorPrimaryDark">@color/nightPrimaryDarkColor</item>
         <item name="colorAccent">@color/nightSecondaryColor</item>
         <item name="android:navigationBarColor">@color/nightPrimaryLightColor</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
     </style>
 </resources>
