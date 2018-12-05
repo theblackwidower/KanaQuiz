@@ -8,7 +8,6 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
@@ -84,9 +83,8 @@ public class LogDetailItem extends View
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-//        Typeface font = context.getTheme().obtainStyledAttributes(new int[]{R.attr.font}).getFont(0);
-        //TODO: Fix default font kludge
-        Typeface font = new TextView(context).getTypeface();
+        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
+        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
 
         mainPaint.setTypeface(font);
         percentagePaint.setTypeface(font);

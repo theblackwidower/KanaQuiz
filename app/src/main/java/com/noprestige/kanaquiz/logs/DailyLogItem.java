@@ -12,7 +12,6 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.TextView;
 
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
@@ -113,9 +112,8 @@ public class DailyLogItem extends View
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-//        Typeface font = context.getTheme().obtainStyledAttributes(new int[]{R.attr.font}).getFont(0);
-        //TODO: Fix default font kludge
-        Typeface font = new TextView(context).getTypeface();
+        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
+        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
 
         datePaint.setTypeface(font);
         ratioPaint.setTypeface(font);

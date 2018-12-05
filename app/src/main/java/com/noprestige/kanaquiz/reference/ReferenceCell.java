@@ -76,9 +76,8 @@ public class ReferenceCell extends View
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
 
-//        Typeface font = context.getTheme().obtainStyledAttributes(new int[]{R.attr.font}).getFont(0);
-        //TODO: Fix default font kludge
-        Typeface font = new TextView(context).getTypeface();
+        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
+        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
 
         subjectPaint.setTypeface(font);
         descriptionPaint.setTypeface(font);
