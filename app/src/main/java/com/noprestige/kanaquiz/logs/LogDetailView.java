@@ -68,7 +68,7 @@ public class LogDetailView extends AppCompatActivity
 
             for (QuestionRecord record : records)
             {
-                LogDetailItem output = new LogDetailItem(activity[0].getBaseContext());
+                LogDetailItem output = new LogDetailItem(activity[0]);
                 output.setFromRecord(record);
 
                 chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
@@ -81,14 +81,6 @@ public class LogDetailView extends AppCompatActivity
                 else
                     publishProgress(output);
             }
-
-            BarData data = new BarData(new BarDataSet(chartSeries, null));
-            logDetailChart.setData(data);
-
-            data.setBarWidth(0.8f);
-            data.setDrawValues(false);
-
-            logDetailChart.invalidate();
 
             return records.length;
         }
@@ -111,7 +103,17 @@ public class LogDetailView extends AppCompatActivity
         protected void onPostExecute(Integer count)
         {
             if (count > 0)
+            {
+                BarData data = new BarData(new BarDataSet(chartSeries, null));
+                logDetailChart.setData(data);
+
+                data.setBarWidth(0.8f);
+                data.setDrawValues(false);
+
+                logDetailChart.invalidate();
+
                 layout.removeView(lblDetailMessage);
+            }
             else
                 lblDetailMessage.setText(R.string.no_logs);
         }
@@ -135,8 +137,13 @@ public class LogDetailView extends AppCompatActivity
         //Only needed because the threeten backport has a different package name than java.time, which would require
         // no modification. I blame anyone not Oreo or newer.
         //ref: https://developer.android.com/reference/java/util/Formatter#ddt
-        setTitle(getString(R.string.log_detail_title,
-                date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L));
+        String titleText =
+                getString(R.string.log_detail_title, date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L);
+
+        String[] splitTitle = titleText.split(":");
+
+        getSupportActionBar().setTitle(splitTitle[0].trim() + ':');
+        getSupportActionBar().setSubtitle(splitTitle[1].trim());
 
         fetchThread = new FetchLogDetails();
         fetchThread.execute(this);

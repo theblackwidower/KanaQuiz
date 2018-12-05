@@ -101,6 +101,11 @@ public class MainQuiz extends AppCompatActivity
 
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
+        if (fetchScoreThread != null)
+            fetchScoreThread.cancel(true);
+        fetchScoreThread = new FetchTodaysLog();
+        fetchScoreThread.execute(LocalDate.now());
+
         resetQuiz();
     }
 
@@ -126,29 +131,16 @@ public class MainQuiz extends AppCompatActivity
 
     private void resetQuiz()
     {
-        if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
-        fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(LocalDate.now());
-
         lblQuestion.setText("");
         lblResponse.setText("");
 
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        if (QuestionManagement.refreshStaticQuestionBank())
-            nextQuestion();
-        else
-            refreshDisplay();
+        QuestionManagement.refreshStaticQuestionBank();
+        refreshDisplay();
 
         frmAnswer.resetQuiz();
-    }
-
-    private void nextQuestion()
-    {
-        QuestionManagement.getStaticQuestionBank().newQuestion();
-        refreshDisplay();
     }
 
     private void refreshDisplay()
@@ -166,9 +158,8 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
             lblResponse.setTypeface(null, NORMAL);
-            lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
-                    android.R.attr.textColorTertiary
-            }).getColor(0, 0));
+            lblResponse.setTextColor(
+                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
             frmAnswer.onNoQuestions();
         }
         frmAnswer.updateScore(totalCorrect, totalQuestions);
@@ -244,7 +235,8 @@ public class MainQuiz extends AppCompatActivity
                 totalQuestions++;
                 //TODO: Find a way to disable a textbox without closing the touch keyboard
                 //txtAnswer.setEnabled(false);
-                delayHandler.postDelayed(this::nextQuestion, 1000);
+                QuestionManagement.getStaticQuestionBank().newQuestion();
+                delayHandler.postDelayed(this::refreshDisplay, 1000);
             }
         }
     }
@@ -267,9 +259,8 @@ public class MainQuiz extends AppCompatActivity
         }
         canSubmit = true;
         lblResponse.setTypeface(null, NORMAL);
-        lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
-                android.R.attr.textColorTertiary
-        }).getColor(0, 0));
+        lblResponse.setTextColor(
+                getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
     }
 
     @Override

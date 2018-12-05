@@ -1,6 +1,6 @@
 package com.noprestige.kanaquiz.logs;
 
-import android.content.Context;
+import android.app.Application;
 
 import org.threeten.bp.LocalDate;
 
@@ -19,10 +19,10 @@ public abstract class LogDatabase extends RoomDatabase
 
     protected abstract LogDao logDao();
 
-    public static void initialize(Context context)
+    public static void initialize(Application context)
     {
         if (DAO == null)
-            DAO = Room.databaseBuilder(context.getApplicationContext(), LogDatabase.class, "user-logs")
+            DAO = Room.databaseBuilder(context, LogDatabase.class, "user-logs")
                     .addMigrations(MIGRATION_1_2, MIGRATION_2_3).build().logDao();
     }
 

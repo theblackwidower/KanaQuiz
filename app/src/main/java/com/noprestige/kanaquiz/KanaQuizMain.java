@@ -1,6 +1,10 @@
 package com.noprestige.kanaquiz;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.noprestige.kanaquiz.logs.LogDatabase;
@@ -16,10 +20,20 @@ public abstract class KanaQuizMain extends Application
     {
         super.onCreate();
 
-        AndroidThreeTen.init(getApplicationContext());
-        OptionsControl.initialize(getApplicationContext());
-        QuestionManagement.initialize(getApplicationContext());
-        LogDatabase.initialize(getApplicationContext());
+        AndroidThreeTen.init(this);
+        OptionsControl.initialize(this);
+        QuestionManagement.initialize(this);
+        LogDatabase.initialize(this);
+
+        //ref: https://stackoverflow.com/a/43584678/3582371
+        registerReceiver(new BroadcastReceiver()
+        {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                QuestionManagement.initialize(context);
+            }
+        }, new IntentFilter(Intent.ACTION_LOCALE_CHANGED));
     }
 
     public static boolean isFirebaseInstalled()

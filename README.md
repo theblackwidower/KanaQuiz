@@ -56,6 +56,7 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Proper kanji support with kanji questions
   * Support for kun'yomi and on'yomi-based kanji questions
   * Limitation alerts, either by time, or number of questions
+  * Interface themes of various colours and tones (including a dark theme)
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
@@ -86,7 +87,7 @@ Mainly, the branching model I'm currently experimenting with is inspired by [thi
 
 ## Translations
 
-This application is currently only available for English language speakers.
+This application is currently only available in English, Spanish, and Catalan.
 
 If you are multi-lingual, and wish to assist this project by volunteering translation services, you can submit the changes in a pull request, or via email.
 

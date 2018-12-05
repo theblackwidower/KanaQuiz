@@ -225,7 +225,7 @@
             <KanaQuestion question="ン" answer="n"/>
         </Section>
     </QuestionSet>
-    <QuestionSet prefId="katakana_set_11" setTitle="Extended Katakana">
+    <QuestionSet prefId="katakana_set_11" setTitle="@string/set_11_title">
         <!--ref: LJTS: Katakana War-->
         <KanaQuestion question="ティ" answer="ti"/>
         <KanaQuestion question="トゥ" answer="to"/> <!-- Possible Conflict! -->

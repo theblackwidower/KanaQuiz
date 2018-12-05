@@ -5,6 +5,7 @@ import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -69,6 +70,27 @@ public class QuestionBank extends WeightedList<Question>
     public String fetchCorrectAnswer()
     {
         return currentQuestion.fetchCorrectAnswer();
+    }
+
+    public boolean loadQuestion(String questionKey)
+    {
+        if (previousQuestions == null)
+            previousQuestions =
+                    new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+
+        Collection<Question> questions = values();
+
+        for (Question thisQuestion : questions)
+        {
+            if (thisQuestion.getDatabaseKey().equals(questionKey))
+            {
+                currentQuestion = thisQuestion;
+                previousQuestions.add(thisQuestion);
+                currentPossibleAnswers = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean addQuestions(Question[] questions)

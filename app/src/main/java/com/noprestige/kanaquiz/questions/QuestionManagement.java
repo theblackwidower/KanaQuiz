@@ -16,6 +16,7 @@ import com.noprestige.kanaquiz.reference.ReferenceTable;
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -117,53 +118,48 @@ public class QuestionManagement
 
     public static void initialize(Context context)
     {
-        if (HIRAGANA == null)
-            HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getApplicationContext().getResources());
+        HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
+        KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
+        KANJI[1] = new QuestionManagement(R.xml.kanji_1, context.getResources());
+        KANJI[2] = new QuestionManagement(R.xml.kanji_2, context.getResources());
+        KANJI[3] = new QuestionManagement(R.xml.kanji_3, context.getResources());
+        VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
-        if (KATAKANA == null)
-            KATAKANA = new QuestionManagement(R.xml.katakana, context.getApplicationContext().getResources());
+        //TODO: Find way to preserve previous questions record
+        if (questionBank != null)
+            currentQuestionBackup = questionBank.getCurrentQuestionKey();
 
-        if (KANJI[1] == null)
-            KANJI[1] = new QuestionManagement(R.xml.kanji_1, context.getApplicationContext().getResources());
-
-        if (KANJI[2] == null)
-            KANJI[2] = new QuestionManagement(R.xml.kanji_2, context.getApplicationContext().getResources());
-
-        if (KANJI[3] == null)
-            KANJI[3] = new QuestionManagement(R.xml.kanji_3, context.getApplicationContext().getResources());
-
-        if (VOCABULARY == null)
-            VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getApplicationContext().getResources());
+        prefRecord = null;
+        questionBank = null;
     }
 
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
+    private static String currentQuestionBackup;
 
-    public static boolean refreshStaticQuestionBank()
+    public static void refreshStaticQuestionBank()
     {
         if ((prefRecord == null) || (questionBank == null))
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            return true;
+            if ((currentQuestionBackup == null) || !questionBank.loadQuestion(currentQuestionBackup))
+                questionBank.newQuestion();
+            currentQuestionBackup = null;
         }
         else
         {
             boolean[] currentPrefRecord = getCurrentPrefRecord();
-            boolean isChanged = prefRecord.length != currentPrefRecord.length;
 
-            for (int i = 0; (i < prefRecord.length) && !isChanged; i++)
-                if (prefRecord[i] != currentPrefRecord[i])
-                    isChanged = true;
+            //TODO: Add something to handle repetition control changes so we can update the previousQuestion record
 
-            if (isChanged)
+            if (!Arrays.equals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
-                return true;
+                questionBank.newQuestion();
             }
         }
-        return false;
     }
 
     private static boolean[] getCurrentPrefRecord()
@@ -316,13 +312,18 @@ public class QuestionManagement
                 if (question.getClass().equals(KanaQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
-                    returnValue.append(' ');
+                    if (questionSet.length <= 10)
+                        returnValue.append('\u00A0');
+                    else
+                        returnValue.append(' ');
                 }
                 else if (question.getClass().equals(WordQuestion.class))
                 {
                     returnValue.append(question.fetchCorrectAnswer().replace(' ', '\u00A0'));
                     returnValue.append(", ");
                 }
+        if (returnValue.length() > 1)
+            returnValue.setCharAt(returnValue.length() - 1, ' ');
         return returnValue.toString();
     }
 
