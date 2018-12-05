@@ -25,7 +25,8 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
-    public static QuestionManagement[] KANJI;
+    public static QuestionManagement[] KANJI_FILES;
+    public static String[] KANJI_TITLES;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -120,7 +121,15 @@ public class QuestionManagement
     {
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
-        KANJI = XmlParser.parseXmlFileSetDocument(R.xml.kanji, context.getResources());
+
+        List<QuestionManagement> fileSetList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
+
+        XmlParser.parseXmlFileSetDocument(R.xml.kanji, context.getResources(), fileSetList, titleList);
+
+        KANJI_FILES = fileSetList.toArray(new QuestionManagement[0]);
+        KANJI_TITLES = titleList.toArray(new String[0]);
+
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
         //TODO: Find way to preserve previous questions record
@@ -162,9 +171,10 @@ public class QuestionManagement
 
     private static boolean[] getCurrentPrefRecord()
     {
-        boolean[] currentPrefRecord =
-                new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
-                        KANJI[1].getCategoryCount() + KANJI[2].getCategoryCount() + KANJI[3].getCategoryCount() + 2];
+        int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 2;
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            prefCount += kanjiFile.getCategoryCount();
+        boolean[] currentPrefRecord = new boolean[prefCount];
 
         currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
         currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
@@ -185,21 +195,12 @@ public class QuestionManagement
             currentPrefRecord[i] = VOCABULARY.getPref(j);
             i++;
         }
-        for (int j = 1; j <= KANJI[1].getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = KANJI[1].getPref(j);
-            i++;
-        }
-        for (int j = 1; j <= KANJI[2].getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = KANJI[2].getPref(j);
-            i++;
-        }
-        for (int j = 1; j <= KANJI[3].getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = KANJI[3].getPref(j);
-            i++;
-        }
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            for (int j = 1; j <= kanjiFile.getCategoryCount(); j++)
+            {
+                currentPrefRecord[i] = kanjiFile.getPref(j);
+                i++;
+            }
         return currentPrefRecord;
     }
 
@@ -213,9 +214,8 @@ public class QuestionManagement
         QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
-        KANJI[1].buildQuestionBank(bank);
-        KANJI[2].buildQuestionBank(bank);
-        KANJI[3].buildQuestionBank(bank);
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            kanjiFile.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }

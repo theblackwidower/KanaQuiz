@@ -19,11 +19,9 @@ final class XmlParser
 {
     private XmlParser() {}
 
-    public static QuestionManagement[] parseXmlFileSetDocument(int xmlRefId, Resources resources)
+    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources, List<QuestionManagement> fileSetList,
+            List<String> titleList)
     {
-        List<QuestionManagement> fileSetList = new ArrayList<>();
-        fileSetList.add(null);
-
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
         try
@@ -34,6 +32,7 @@ final class XmlParser
                 if ((eventType == XmlPullParser.START_TAG) && "QuestionFile".equalsIgnoreCase(parser.getName()))
                 {
                     int resourceFileId = 0;
+                    String title = null;
 
                     for (int i = 0; i < parser.getAttributeCount(); i++)
                     {
@@ -41,17 +40,19 @@ final class XmlParser
                         {
                             case "resId":
                                 resourceFileId = parser.getAttributeResourceValue(i, 0);
+                                break;
+                            case "title":
+                                title = parseXmlValue(parser, i, resources);
                         }
                     }
 
-                    if (resourceFileId == 0)
+                    if (resourceFileId == 0 || title == null)
                         throw new ParseException("Missing attribute in QuestionFile", 0);
 
                     fileSetList.add(new QuestionManagement(resourceFileId, resources));
+                    titleList.add(title);
                 }
             }
-
-            return fileSetList.toArray(new QuestionManagement[0]);
         }
         catch (XmlPullParserException | IOException | ParseException ex)
         {

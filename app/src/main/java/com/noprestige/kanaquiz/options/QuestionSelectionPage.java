@@ -18,7 +18,8 @@ import com.noprestige.kanaquiz.R;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -49,12 +50,15 @@ public class QuestionSelectionPage extends Fragment
                 screen = KATAKANA.getSelectionScreen(getContext());
                 break;
             case 2:
-                screen = KANJI[1].getSelectionScreen(getContext());
-                screen.addView(buildHeader(getContext(), R.string.kanji_phase_1), 0);
-                screen.addView(buildHeader(getContext(), R.string.kanji_phase_2));
-                KANJI[2].populateSelectionScreen(screen);
-                screen.addView(buildHeader(getContext(), R.string.kanji_phase_3));
-                KANJI[3].populateSelectionScreen(screen);
+                screen = new LinearLayout(getContext());
+                screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                screen.setOrientation(LinearLayout.VERTICAL);
+                for (int i = 0; i < KANJI_TITLES.length; i++)
+                {
+                    screen.addView(buildHeader(getContext(), KANJI_TITLES[i]));
+                    KANJI_FILES[i].populateSelectionScreen(screen);
+                }
                 break;
             case 3:
                 screen = VOCABULARY.getSelectionScreen(getContext());
@@ -98,7 +102,7 @@ public class QuestionSelectionPage extends Fragment
         getArguments().putBooleanArray(ARG_ITEM_STATES, record);
     }
 
-    public static TextView buildHeader(Context context, int title)
+    public static TextView buildHeader(Context context, String title)
     {
         TextView header = new TextView(context);
         header.setText(title);
