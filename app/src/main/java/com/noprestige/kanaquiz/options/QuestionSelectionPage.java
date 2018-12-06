@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
@@ -26,6 +29,7 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 public class QuestionSelectionPage extends Fragment
 {
     private static final String ARG_QUESTION_TYPE = "questionType";
+    private static final String ARG_ITEM_IDS = "prefIds";
     private static final String ARG_ITEM_STATES = "states";
     LinearLayout screen;
 
@@ -73,13 +77,23 @@ public class QuestionSelectionPage extends Fragment
         super.onStart();
         //This block of code could also work in the onResume method
         boolean[] record = getArguments().getBooleanArray(ARG_ITEM_STATES);
+        String[] prefIds = getArguments().getStringArray(ARG_ITEM_IDS);
         if (record != null)
         {
-            int count = Math.min(screen.getChildCount(), record.length);
+            Map<String, QuestionSelectionItem> itemList = new TreeMap<>();
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < screen.getChildCount(); i++)
                 if (screen.getChildAt(i) instanceof Checkable)
-                    ((Checkable) screen.getChildAt(i)).setChecked(record[i]);
+                {
+                    QuestionSelectionItem item = (QuestionSelectionItem) screen.getChildAt(i);
+                    itemList.put(item.getPrefId(), item);
+                }
+            for (int i = 0; i < record.length; i++)
+            {
+                QuestionSelectionItem item = itemList.get(prefIds[i]);
+                if (item != null)
+                    item.setChecked(record[i]);
+            }
         }
     }
 
@@ -90,12 +104,18 @@ public class QuestionSelectionPage extends Fragment
         //This block of code could also work in the onPause and onStop methods
         int count = screen.getChildCount();
         boolean[] record = new boolean[count];
+        String[] prefIds = new String[count];
 
         for (int i = 0; i < count; i++)
             if (screen.getChildAt(i) instanceof Checkable)
-                record[i] = ((Checkable) screen.getChildAt(i)).isChecked();
+            {
+                QuestionSelectionItem item = (QuestionSelectionItem) screen.getChildAt(i);
+                prefIds[i] = item.getPrefId();
+                record[i] = item.isChecked();
+            }
 
         getArguments().putBooleanArray(ARG_ITEM_STATES, record);
+        getArguments().putStringArray(ARG_ITEM_IDS, prefIds);
     }
 
     public static TextView buildHeader(Context context, String title)

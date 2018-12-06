@@ -21,22 +21,26 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
-    private String questionType;
-    private List<String> tabList;
+    private int questionTypeRef;
+    private List<Integer> tabList;
+    Context context;
 
-    ReferenceSubsectionPager(FragmentManager fm, Context context, String questionType)
+    private static List<String> pageIds;
+
+    ReferenceSubsectionPager(FragmentManager fm, Context context, int questionTypeRef)
     {
         super(fm);
-        this.questionType = questionType;
+        this.questionTypeRef = questionTypeRef;
+        this.context = context;
 
         tabList = new ArrayList<>(3);
 
-        if (questionType.equals(context.getResources().getString(R.string.vocabulary)))
+        if (questionTypeRef == R.string.vocabulary)
         {
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
             for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
                 if (isFullReference || VOCABULARY.getPref(i))
-                    tabList.add(VOCABULARY.getSetTitle(i).toString());
+                    tabList.add(i);
         }
         else if (questionType.equals(context.getResources().getString(R.string.kanji)))
         {
@@ -54,34 +58,53 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
-            tabList.add(context.getResources().getString(R.string.base_form_title));
-            tabList.add(context.getResources().getString(R.string.diacritics_title));
-            tabList.add(context.getResources().getString(R.string.digraphs_title));
+            tabList.add(R.string.base_form_title);
+            tabList.add(R.string.diacritics_title);
+            tabList.add(R.string.digraphs_title);
         }
         else
         {
             QuestionManagement questions;
 
-            if (questionType.equals(context.getResources().getString(R.string.hiragana)))
+            if (questionTypeRef == R.string.hiragana)
                 questions = HIRAGANA;
-            else if (questionType.equals(context.getResources().getString(R.string.katakana)))
+            else if (questionTypeRef == R.string.katakana)
                 questions = KATAKANA;
             else
-                throw new IllegalArgumentException("questionType '" + questionType + "' is invalid.");
+                throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
             if (questions.anySelected())
-                tabList.add(context.getResources().getString(R.string.base_form_title));
+                tabList.add(R.string.base_form_title);
             if (questions.diacriticsSelected())
-                tabList.add(context.getResources().getString(R.string.diacritics_title));
+                tabList.add(R.string.diacritics_title);
             if (questions.digraphsSelected())
-                tabList.add(context.getResources().getString(R.string.digraphs_title));
+                tabList.add(R.string.digraphs_title);
         }
     }
 
     @Override
     public Fragment getItem(int position)
     {
-        return ReferenceSubsectionPage.newInstance(questionType, tabList.get(position));
+        if (questionTypeRef == R.string.vocabulary)
+            return ReferenceSubsectionVocab.newInstance(VOCABULARY.getPrefId(tabList.get(position)));
+        else
+            return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        if (questionTypeRef == R.string.vocabulary)
+        {
+            if (pageIds == null)
+                pageIds = new ArrayList<>();
+            String prefId = VOCABULARY.getPrefId(tabList.get(position));
+            if (!pageIds.contains(prefId))
+                pageIds.add(prefId);
+            return pageIds.indexOf(prefId);
+        }
+        else
+            return tabList.get(position);
     }
 
     @Override
@@ -93,6 +116,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return tabList.get(position);
+        if (questionTypeRef == R.string.vocabulary)
+            return VOCABULARY.getSetTitle(tabList.get(position)).toString();
+        else
+            return context.getResources().getString(tabList.get(position));
     }
 }

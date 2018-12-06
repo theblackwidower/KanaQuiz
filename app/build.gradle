@@ -67,9 +67,9 @@ dependencies {
 
     androidTestImplementation 'androidx.room:room-testing:2.0.0'
 
-    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
-    releaseImplementation 'com.google.firebase:firebase-core:16.0.5'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.2.1'
+    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
+    releaseImplementation 'com.google.firebase:firebase-core:16.0.6'
+    releaseImplementation 'com.google.firebase:firebase-perf:16.2.2'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
