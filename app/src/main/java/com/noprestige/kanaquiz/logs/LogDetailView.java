@@ -29,6 +29,8 @@ public class LogDetailView extends AppCompatActivity
     static class FetchLogDetails extends AsyncTask<LogDetailView, LogDetailItem, Integer>
     {
         @SuppressLint("StaticFieldLeak")
+        LogDetailView activity;
+        @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
         @SuppressLint("StaticFieldLeak")
         TextView lblDetailMessage;
@@ -53,13 +55,14 @@ public class LogDetailView extends AppCompatActivity
         }
 
         @Override
-        protected Integer doInBackground(LogDetailView... activity)
+        protected Integer doInBackground(LogDetailView... activities)
         {
-            layout = activity[0].findViewById(R.id.logDetailViewLayout);
-            lblDetailMessage = activity[0].findViewById(R.id.lblDetailMessage);
-            logDetailChart = activity[0].findViewById(R.id.logDetailChart);
+            activity = activities[0];
+            layout = activity.findViewById(R.id.logDetailViewLayout);
+            lblDetailMessage = activity.findViewById(R.id.lblDetailMessage);
+            logDetailChart = activity.findViewById(R.id.logDetailChart);
 
-            QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity[0].date);
+            QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity.date);
 
             logDetailChart.getXAxis().setValueFormatter((value, axis) -> formatXLabel(value));
 
@@ -68,7 +71,7 @@ public class LogDetailView extends AppCompatActivity
 
             for (QuestionRecord record : records)
             {
-                LogDetailItem output = new LogDetailItem(activity[0]);
+                LogDetailItem output = new LogDetailItem(activity);
                 output.setFromRecord(record);
 
                 chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
@@ -104,7 +107,10 @@ public class LogDetailView extends AppCompatActivity
         {
             if (count > 0)
             {
-                BarData data = new BarData(new BarDataSet(chartSeries, null));
+                BarDataSet dataSet = new BarDataSet(chartSeries, null);
+                dataSet.setColor(
+                        activity.getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent}).getColor(0, 0));
+                BarData data = new BarData(dataSet);
                 logDetailChart.setData(data);
 
                 data.setBarWidth(0.8f);

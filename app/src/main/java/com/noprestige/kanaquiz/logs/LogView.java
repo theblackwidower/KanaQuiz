@@ -53,6 +53,8 @@ public class LogView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
+            graphSeries.setColor(
+                    activity[0].getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent}).getColor(0, 0));
             startDate = records[0].getDate();
 
             for (DailyRecord record : records)
