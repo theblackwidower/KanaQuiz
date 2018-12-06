@@ -63,7 +63,7 @@
             <xs:sequence>
                 <xs:choice>
                     <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
-                    <xs:element ref="KanjiQuestion" maxOccurs="unbounded"/>
+                    <xs:element ref="KanjiQuestion" maxOccurs="7"/>
                     <xs:element ref="WordQuestion" maxOccurs="unbounded"/>
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>

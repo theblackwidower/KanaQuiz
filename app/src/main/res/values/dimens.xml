@@ -10,8 +10,8 @@
     <dimen name="defaultReferenceSubjectSize">52sp</dimen>
     <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
     <dimen name="diacriticReferenceSubjectSize">46sp</dimen>
-    <dimen name="kanjiReferenceSubjectSize">48sp</dimen>
-    <dimen name="kanjiReferenceDescriptionSize">12sp</dimen>
+    <dimen name="kanjiReferenceSubjectSize">40sp</dimen>
+    <dimen name="kanjiReferenceDescriptionSize">8sp</dimen>
     <dimen name="vocabReferenceSubjectSize">40sp</dimen>
 
     <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>

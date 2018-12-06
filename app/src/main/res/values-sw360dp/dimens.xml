@@ -2,5 +2,7 @@
 <resources>
     <dimen name="defaultReferenceSubjectSize">64sp</dimen>
     <dimen name="diacriticReferenceSubjectSize">52sp</dimen>
+    <dimen name="kanjiReferenceSubjectSize">48sp</dimen>
+    <dimen name="kanjiReferenceDescriptionSize">12sp</dimen>
     <dimen name="vocabReferenceSubjectSize">52sp</dimen>
 </resources>
