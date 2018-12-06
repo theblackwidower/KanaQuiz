@@ -52,6 +52,12 @@ class ReferencePager extends FragmentPagerAdapter
     }
 
     @Override
+    public long getItemId(int position)
+    {
+        return tabList.get(position);
+    }
+
+    @Override
     public int getCount()
     {
         return tabList.size();

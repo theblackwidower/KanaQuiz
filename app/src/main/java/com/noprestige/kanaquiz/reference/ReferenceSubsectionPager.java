@@ -88,7 +88,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             return pageIds.indexOf(prefId);
         }
         else
-            return position;
+            return tabList.get(position);
     }
 
     @Override
