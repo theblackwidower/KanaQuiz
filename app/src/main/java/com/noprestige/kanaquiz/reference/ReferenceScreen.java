@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.options.OptionsControl;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -17,6 +18,7 @@ public class ReferenceScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTheme(OptionsControl.getCurrentTheme());
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);

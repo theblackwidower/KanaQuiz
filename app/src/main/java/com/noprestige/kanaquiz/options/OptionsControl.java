@@ -105,4 +105,14 @@ public final class OptionsControl
     {
         return sharedPreferences.getString(prefId, "").equals(comparator);
     }
+
+    public static int getCurrentTheme()
+    {
+        if (compareStrings(R.string.prefid_selected_theme, R.string.themeid_cherry_blossom_tree))
+            return R.style.CherryBlossomTree;
+        else if (compareStrings(R.string.prefid_selected_theme, R.string.themeid_shibuya_night))
+            return R.style.ShibuyaNight;
+        else
+            return R.style.CherryBlossomTree;
+    }
 }

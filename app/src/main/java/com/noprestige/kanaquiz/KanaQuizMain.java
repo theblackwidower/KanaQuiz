@@ -25,6 +25,9 @@ public abstract class KanaQuizMain extends Application
         QuestionManagement.initialize(this);
         LogDatabase.initialize(this);
 
+        //TODO: Set user's theme app-wide for multitasker and app startup
+//        setTheme(OptionsControl.getCurrentTheme());
+
         //ref: https://stackoverflow.com/a/43584678/3582371
         registerReceiver(new BroadcastReceiver()
         {

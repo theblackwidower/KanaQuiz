@@ -153,6 +153,25 @@
     <string name="clipboard_message">Copied to clipboard</string>
     <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
+    <!-- Theme Selection -->
+    <string name="prefid_selected_theme" translatable="false">selected_theme</string>
+    <string name="selected_theme_title">UI Themes</string>
+    <array name="theme_name_list">
+        <item>@string/theme_cherry_blossom_tree</item>
+        <item>@string/theme_shibuya_night</item>
+    </array>
+    <array name="prefids_available_themes">
+        <item>@string/themeid_cherry_blossom_tree</item>
+        <item>@string/themeid_shibuya_night</item>
+    </array>
+
+    <!-- THEMES! -->
+    <string name="theme_cherry_blossom_tree">Cherry Blossom Tree</string>
+    <string name="theme_shibuya_night">Shibuya Night</string>
+
+    <string name="themeid_cherry_blossom_tree" translatable="false">cherry_blossom_tree</string>
+    <string name="themeid_shibuya_night" translatable="false">shibuya_night</string>
+
     <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>

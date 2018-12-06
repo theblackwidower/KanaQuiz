@@ -10,6 +10,7 @@ public class OptionsScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTheme(OptionsControl.getCurrentTheme());
         getFragmentManager().beginTransaction().replace(android.R.id.content, new OptionsFragment()).commit();
     }
 }
