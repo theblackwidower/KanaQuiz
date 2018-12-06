@@ -89,11 +89,12 @@ public class QuestionSelectionPage extends Fragment
                     itemList.put(item.getPrefId(), item);
                 }
             for (int i = 0; i < record.length; i++)
-            {
-                QuestionSelectionItem item = itemList.get(prefIds[i]);
-                if (item != null)
-                    item.setChecked(record[i]);
-            }
+                if (prefIds[i] != null)
+                {
+                    QuestionSelectionItem item = itemList.get(prefIds[i]);
+                    if (item != null)
+                        item.setChecked(record[i]);
+                }
         }
     }
 
