@@ -47,7 +47,8 @@ public class ReferenceSubsectionPage extends Fragment
             questions = KATAKANA;
         else if (questionTypeRef == R.string.kanji)
         {
-            layout.addView(KANJI_FILES[refCategoryId].getKanjiReferenceTable(container.getContext()));
+            if (refCategoryId < KANJI_FILES.length)
+                layout.addView(KANJI_FILES[refCategoryId].getKanjiReferenceTable(container.getContext()));
             return scrollBox;
         }
         else
