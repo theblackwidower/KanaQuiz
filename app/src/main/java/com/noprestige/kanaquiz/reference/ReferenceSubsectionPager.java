@@ -23,6 +23,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     private List<Integer> tabList;
     Context context;
 
+    private static List<String> pageIds;
+
     ReferenceSubsectionPager(FragmentManager fm, Context context, int questionTypeRef)
     {
         super(fm);
@@ -71,6 +73,22 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             return ReferenceSubsectionVocab.newInstance(VOCABULARY.getPrefId(tabList.get(position)));
         else
             return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        if (questionTypeRef == R.string.vocabulary)
+        {
+            if (pageIds == null)
+                pageIds = new ArrayList<>();
+            String prefId = VOCABULARY.getPrefId(tabList.get(position));
+            if (!pageIds.contains(prefId))
+                pageIds.add(prefId);
+            return pageIds.indexOf(prefId);
+        }
+        else
+            return position;
     }
 
     @Override
