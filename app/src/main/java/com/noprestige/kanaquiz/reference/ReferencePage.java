@@ -14,14 +14,14 @@ import androidx.viewpager.widget.ViewPager;
 
 public class ReferencePage extends Fragment
 {
-    private static final String ARG_QUESTION_TYPE = "questionType";
+    private static final String ARG_QUESTION_TYPE_REF = "questionTypeRef";
     private static final int MAX_TABS = 4;
 
-    public static ReferencePage newInstance(String questionType)
+    public static ReferencePage newInstance(int questionTypeRef)
     {
         ReferencePage screen = new ReferencePage();
         Bundle args = new Bundle();
-        args.putString(ARG_QUESTION_TYPE, questionType);
+        args.putInt(ARG_QUESTION_TYPE_REF, questionTypeRef);
         screen.setArguments(args);
         return screen;
     }
@@ -29,18 +29,18 @@ public class ReferencePage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        String questionType = getArguments().getString(ARG_QUESTION_TYPE, "");
+        int questionType = getArguments().getInt(ARG_QUESTION_TYPE_REF, 0);
 
         LinearLayout subScreen = (LinearLayout) inflater.inflate(R.layout.activity_tabbed_screen, container, false);
         subScreen.setPadding(0, 0, 0, 0);
 
         ViewPager viewPager = subScreen.findViewById(R.id.viewPager);
 
-        if (questionType.equals(getResources().getString(R.string.hiragana)))
+        if (questionType == R.string.hiragana)
             viewPager.setId(R.id.hiraganaReferenceViewPager);
-        else if (questionType.equals(getResources().getString(R.string.katakana)))
+        else if (questionType == R.string.katakana)
             viewPager.setId(R.id.katakanaReferenceViewPager);
-        else if (questionType.equals(getResources().getString(R.string.vocabulary)))
+        else if (questionType == R.string.vocabulary)
             viewPager.setId(R.id.vocabularyReferenceViewPager);
 
         //ref: https://stackoverflow.com/a/40829361/3582371

@@ -18,28 +18,30 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 class ReferencePager extends FragmentPagerAdapter
 {
-    private List<String> tabList;
+    private List<Integer> tabList;
+    private Context context;
 
     ReferencePager(FragmentManager fm, Context context)
     {
         super(fm);
 
         tabList = new ArrayList<>(3);
+        this.context = context;
 
         if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
-            tabList.add(context.getResources().getString(R.string.hiragana));
-            tabList.add(context.getResources().getString(R.string.katakana));
-            tabList.add(context.getResources().getString(R.string.vocabulary));
+            tabList.add(R.string.hiragana);
+            tabList.add(R.string.katakana);
+            tabList.add(R.string.vocabulary);
         }
         else
         {
             if (HIRAGANA.anySelected())
-                tabList.add(context.getResources().getString(R.string.hiragana));
+                tabList.add(R.string.hiragana);
             if (KATAKANA.anySelected())
-                tabList.add(context.getResources().getString(R.string.katakana));
+                tabList.add(R.string.katakana);
             if (VOCABULARY.anySelected())
-                tabList.add(context.getResources().getString(R.string.vocabulary));
+                tabList.add(R.string.vocabulary);
         }
     }
 
@@ -58,6 +60,6 @@ class ReferencePager extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return tabList.get(position);
+        return context.getResources().getString(tabList.get(position));
     }
 }
