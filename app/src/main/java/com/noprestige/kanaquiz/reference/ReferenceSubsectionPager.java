@@ -20,12 +20,14 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
     private int questionTypeRef;
-    private List<String> tabList;
+    private List<Integer> tabList;
+    Context context;
 
     ReferenceSubsectionPager(FragmentManager fm, Context context, int questionTypeRef)
     {
         super(fm);
         this.questionTypeRef = questionTypeRef;
+        this.context = context;
 
         tabList = new ArrayList<>(3);
 
@@ -34,13 +36,13 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
             for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
                 if (isFullReference || VOCABULARY.getPref(i))
-                    tabList.add(VOCABULARY.getSetTitle(i).toString());
+                    tabList.add(i);
         }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
         {
-            tabList.add(context.getResources().getString(R.string.base_form_title));
-            tabList.add(context.getResources().getString(R.string.diacritics_title));
-            tabList.add(context.getResources().getString(R.string.digraphs_title));
+            tabList.add(R.string.base_form_title);
+            tabList.add(R.string.diacritics_title);
+            tabList.add(R.string.digraphs_title);
         }
         else
         {
@@ -54,11 +56,11 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
             if (questions.anySelected())
-                tabList.add(context.getResources().getString(R.string.base_form_title));
+                tabList.add(R.string.base_form_title);
             if (questions.diacriticsSelected())
-                tabList.add(context.getResources().getString(R.string.diacritics_title));
+                tabList.add(R.string.diacritics_title);
             if (questions.digraphsSelected())
-                tabList.add(context.getResources().getString(R.string.digraphs_title));
+                tabList.add(R.string.digraphs_title);
         }
     }
 
@@ -77,6 +79,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return tabList.get(position);
+        if (questionTypeRef == R.string.vocabulary)
+            return VOCABULARY.getSetTitle(tabList.get(position)).toString();
+        else
+            return context.getResources().getString(tabList.get(position));
     }
 }
