@@ -67,7 +67,10 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     @Override
     public Fragment getItem(int position)
     {
-        return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
+        if (questionTypeRef == R.string.vocabulary)
+            return ReferenceSubsectionVocab.newInstance(VOCABULARY.getPrefId(tabList.get(position)));
+        else
+            return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
     }
 
     @Override

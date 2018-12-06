@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class ReferenceSubsectionPage extends Fragment
 {
@@ -41,29 +40,24 @@ public class ReferenceSubsectionPage extends Fragment
 
         QuestionManagement questions;
 
-        if (questionTypeRef == R.string.vocabulary)
-            layout.addView(VOCABULARY.getVocabReferenceTable(container.getContext(), refCategoryId));
+        if (questionTypeRef == R.string.hiragana)
+            questions = HIRAGANA;
+        else if (questionTypeRef == R.string.katakana)
+            questions = KATAKANA;
         else
-        {
-            if (questionTypeRef == R.string.hiragana)
-                questions = HIRAGANA;
-            else if (questionTypeRef == R.string.katakana)
-                questions = KATAKANA;
-            else
-                throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
+            throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
-            if (refCategoryId == R.string.base_form_title)
-                layout.addView(questions.getMainReferenceTable(container.getContext()));
-            else if (refCategoryId == R.string.diacritics_title)
-                layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
-            else if (refCategoryId == R.string.digraphs_title)
+        if (refCategoryId == R.string.base_form_title)
+            layout.addView(questions.getMainReferenceTable(container.getContext()));
+        else if (refCategoryId == R.string.diacritics_title)
+            layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
+        else if (refCategoryId == R.string.digraphs_title)
+        {
+            layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
+            if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
             {
-                layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
-                if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
-                {
-                    layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
-                    layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
-                }
+                layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
+                layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
             }
         }
 
