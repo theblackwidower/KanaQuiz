@@ -28,16 +28,16 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class QuestionSelectionPage extends Fragment
 {
-    private static final String ARG_QUESTION_TYPE = "questionType";
+    private static final String ARG_QUESTION_TYPE_REF = "questionTypeRef";
     private static final String ARG_ITEM_IDS = "prefIds";
     private static final String ARG_ITEM_STATES = "states";
     LinearLayout screen;
 
-    public static QuestionSelectionPage newInstance(String questionType)
+    public static QuestionSelectionPage newInstance(int questionTypeRef)
     {
         QuestionSelectionPage screen = new QuestionSelectionPage();
         Bundle args = new Bundle();
-        args.putString(ARG_QUESTION_TYPE, questionType);
+        args.putInt(ARG_QUESTION_TYPE_REF, questionTypeRef);
         screen.setArguments(args);
         return screen;
     }
@@ -45,13 +45,13 @@ public class QuestionSelectionPage extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        String questionType = getArguments().getString(ARG_QUESTION_TYPE, "");
+        int questionTypeRef = getArguments().getInt(ARG_QUESTION_TYPE_REF, 0);
 
-        if (questionType.equals(getResources().getString(R.string.hiragana)))
+        if (questionTypeRef == R.string.hiragana)
             screen = HIRAGANA.getSelectionScreen(getContext());
-        else if (questionType.equals(getResources().getString(R.string.katakana)))
+        else if (questionTypeRef == R.string.katakana)
             screen = KATAKANA.getSelectionScreen(getContext());
-        else if (questionType.equals(getResources().getString(R.string.kanji)))
+        else if (questionTypeRef == R.string.kanji)
         {
             screen = new LinearLayout(getContext());
             screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -63,7 +63,7 @@ public class QuestionSelectionPage extends Fragment
                 KANJI_FILES[i].populateSelectionScreen(screen);
             }
         }
-        else if (questionType.equals(getResources().getString(R.string.vocabulary)))
+        else if (questionTypeRef == R.string.vocabulary)
             screen = VOCABULARY.getSelectionScreen(getContext());
 
         ScrollView scrollView = new ScrollView(getContext());

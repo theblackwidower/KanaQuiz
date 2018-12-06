@@ -15,25 +15,33 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 
 class QuestionSelectionPager extends FragmentPagerAdapter
 {
-    private List<String> tabList;
+    private List<Integer> tabList;
+    Context context;
 
     QuestionSelectionPager(FragmentManager fm, Context context)
     {
         super(fm);
 
         tabList = new ArrayList<>(3);
+        this.context = context;
 
-        tabList.add(context.getResources().getString(R.string.hiragana));
-        tabList.add(context.getResources().getString(R.string.katakana));
+        tabList.add(R.string.hiragana);
+        tabList.add(R.string.katakana);
         if (KANJI_TITLES.length > 0)
-            tabList.add(context.getResources().getString(R.string.kanji));
-        tabList.add(context.getResources().getString(R.string.vocabulary));
+            tabList.add(R.string.kanji);
+        tabList.add(R.string.vocabulary);
     }
 
     @Override
     public Fragment getItem(int position)
     {
         return QuestionSelectionPage.newInstance(tabList.get(position));
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        return tabList.get(position);
     }
 
     @Override
@@ -45,6 +53,6 @@ class QuestionSelectionPager extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return tabList.get(position);
+        return context.getResources().getString(tabList.get(position));
     }
 }
