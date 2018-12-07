@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewManager;
 import android.widget.TextView;
 
-import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +19,7 @@ public class AboutScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(OptionsControl.getCurrentTheme());
+        setTheme(ThemeManager.getCurrentThemeId());
         setContentView(R.layout.activity_about_screen);
 
         ((TextView) findViewById(R.id.lblVersionDisplay)).setText(BuildConfig.VERSION_NAME);

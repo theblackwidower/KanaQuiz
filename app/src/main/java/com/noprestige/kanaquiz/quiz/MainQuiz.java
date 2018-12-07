@@ -22,6 +22,7 @@ import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
@@ -84,7 +85,7 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(OptionsControl.getCurrentTheme());
+        setTheme(ThemeManager.getCurrentThemeId());
         setContentView(R.layout.activity_main_quiz);
 
         lblResponse = findViewById(R.id.lblResponse);

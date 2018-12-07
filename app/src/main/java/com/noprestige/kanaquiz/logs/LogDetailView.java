@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
@@ -133,7 +133,7 @@ public class LogDetailView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(OptionsControl.getCurrentTheme());
+        setTheme(ThemeManager.getCurrentThemeId());
         setContentView(R.layout.activity_log_detail_view);
         onConfigurationChanged(getResources().getConfiguration());
 

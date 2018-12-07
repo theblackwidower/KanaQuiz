@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -14,7 +15,7 @@ public class QuestionSelection extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(OptionsControl.getCurrentTheme());
+        setTheme(ThemeManager.getCurrentThemeId());
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
