@@ -2,6 +2,7 @@ package com.noprestige.kanaquiz.themes;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,12 @@ public final class ThemeManager
 
     public static int getThemeColour(Context context, int attr)
     {
-        TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        return getThemeColour(context.getTheme(), attr);
+    }
+
+    public static int getThemeColour(Resources.Theme theme, int attr)
+    {
+        TypedArray array = theme.obtainStyledAttributes(new int[]{attr});
         int returnValue = array.getColor(0, 0);
         array.recycle();
         return returnValue;
@@ -33,7 +39,12 @@ public final class ThemeManager
 
     public static Typeface getThemeFont(Context context, int attr, int fontStyle)
     {
-        TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        return getThemeFont(context.getTheme(), attr, fontStyle);
+    }
+
+    public static Typeface getThemeFont(Resources.Theme theme, int attr, int fontStyle)
+    {
+        TypedArray array = theme.obtainStyledAttributes(new int[]{attr});
         String fontFamily = array.getString(0);
         array.recycle();
         return Typeface.create(fontFamily, fontStyle);
@@ -41,7 +52,12 @@ public final class ThemeManager
 
     public static Drawable getThemeDrawable(Context context, int attr)
     {
-        TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        return getThemeDrawable(context.getTheme(), attr);
+    }
+
+    public static Drawable getThemeDrawable(Resources.Theme theme, int attr)
+    {
+        TypedArray array = theme.obtainStyledAttributes(new int[]{attr});
         Drawable returnValue = array.getDrawable(0);
         array.recycle();
         return returnValue;
