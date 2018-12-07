@@ -155,7 +155,7 @@ public class MainQuiz extends AppCompatActivity
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
-            lblResponse.setTypeface(lblResponse.getTypeface(), NORMAL);
+            lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, NORMAL));
             lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
             frmAnswer.onNoQuestions();
         }
@@ -172,7 +172,7 @@ public class MainQuiz extends AppCompatActivity
             if (QuestionManagement.getStaticQuestionBank().checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
-                lblResponse.setTypeface(lblResponse.getTypeface(), BOLD);
+                lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
                 if (retryCount == 0)
                 {
@@ -193,7 +193,7 @@ public class MainQuiz extends AppCompatActivity
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
-                lblResponse.setTypeface(lblResponse.getTypeface(), BOLD);
+                lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
                 lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
 
                 if (OptionsControl
@@ -255,7 +255,7 @@ public class MainQuiz extends AppCompatActivity
             frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
-        lblResponse.setTypeface(lblResponse.getTypeface(), NORMAL);
+        lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, NORMAL));
         lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
     }
 
