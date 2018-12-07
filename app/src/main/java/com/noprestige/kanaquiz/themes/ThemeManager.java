@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
+import moe.shizuku.fontprovider.FontProviderClient;
+
 public final class ThemeManager
 {
     private ThemeManager() {}
@@ -47,8 +49,25 @@ public final class ThemeManager
         return returnValue;
     }
 
+    private static boolean isFontInitialized;
+
     public static void setTheme(Activity activity)
     {
+        if (!isFontInitialized)
+        {
+            FontProviderClient client = FontProviderClient.create(activity);
+            if (client != null)
+            {
+                client.setNextRequestReplaceFallbackFonts(true);
+
+                client.replace("Noto Serif CJK", "serif", "serif-thin", "serif-light", "serif-medium", "serif-black");
+//                client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
+//                        "sans-serif-medium", "sans-serif-black");
+
+                isFontInitialized = true;
+            }
+        }
+
         activity.setTheme(getCurrentThemeId());
     }
 }

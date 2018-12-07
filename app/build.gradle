@@ -10,7 +10,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 16
         versionName '0.13.1'
@@ -84,6 +84,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.0.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
+    implementation 'moe.shizuku.fontprovider:api:10'
 }
 
 coveralls {
