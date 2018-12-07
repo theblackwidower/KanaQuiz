@@ -85,7 +85,7 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(ThemeManager.getCurrentThemeId());
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_main_quiz);
 
         lblResponse = findViewById(R.id.lblResponse);

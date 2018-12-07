@@ -1,5 +1,6 @@
 package com.noprestige.kanaquiz.themes;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
@@ -46,4 +47,8 @@ public final class ThemeManager
         return returnValue;
     }
 
+    public static void setTheme(Activity activity)
+    {
+        activity.setTheme(getCurrentThemeId());
+    }
 }

@@ -105,7 +105,7 @@ public class LogView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(ThemeManager.getCurrentThemeId());
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_log_view);
         onConfigurationChanged(getResources().getConfiguration());
 

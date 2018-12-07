@@ -132,7 +132,7 @@ public class LogDetailView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setTheme(ThemeManager.getCurrentThemeId());
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_log_detail_view);
         onConfigurationChanged(getResources().getConfiguration());
 
