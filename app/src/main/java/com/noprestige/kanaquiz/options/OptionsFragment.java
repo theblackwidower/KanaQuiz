@@ -1,8 +1,6 @@
 package com.noprestige.kanaquiz.options;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -50,9 +48,7 @@ public class OptionsFragment extends PreferenceFragment
         findPreference(getResources().getString(R.string.prefid_selected_theme))
                 .setOnPreferenceChangeListener((preference, newValue) ->
                 {
-                    //TODO: Get to work on pre-Marshmallow
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                        ((Activity) getContext()).recreate();
+                    getActivity().recreate();
                     return true;
                 });
     }
