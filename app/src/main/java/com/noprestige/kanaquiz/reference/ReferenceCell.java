@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 public class ReferenceCell extends View
 {
@@ -67,7 +68,7 @@ public class ReferenceCell extends View
         setDescriptionSize(a.getDimension(R.styleable.ReferenceCell_descriptionSize,
                 getResources().getDimension(R.dimen.defaultReferenceDescriptionSize)));
         setColour(a.getColor(R.styleable.ReferenceCell_colour,
-                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0)));
+                ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary)));
 
         a.recycle();
 
@@ -76,8 +77,7 @@ public class ReferenceCell extends View
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
 
-        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
-        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
 
         subjectPaint.setTypeface(font);
         descriptionPaint.setTypeface(font);

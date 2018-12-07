@@ -109,8 +109,7 @@ public class LogDetailView extends AppCompatActivity
             if (count > 0)
             {
                 BarDataSet dataSet = new BarDataSet(chartSeries, null);
-                dataSet.setColor(
-                        activity.getTheme().obtainStyledAttributes(new int[]{R.attr.colorAccent}).getColor(0, 0));
+                dataSet.setColor(ThemeManager.getThemeColour(activity, R.attr.colorAccent));
                 BarData data = new BarData(dataSet);
                 logDetailChart.setData(data);
 

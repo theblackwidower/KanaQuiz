@@ -156,8 +156,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
             lblResponse.setTypeface(lblResponse.getTypeface(), NORMAL);
-            lblResponse.setTextColor(
-                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+            lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
             frmAnswer.onNoQuestions();
         }
         frmAnswer.updateScore(totalCorrect, totalQuestions);
@@ -257,8 +256,7 @@ public class MainQuiz extends AppCompatActivity
         }
         canSubmit = true;
         lblResponse.setTypeface(lblResponse.getTypeface(), NORMAL);
-        lblResponse.setTextColor(
-                getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+        lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.TextStyle;
@@ -103,7 +104,7 @@ public class DailyLogItem extends View
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
         setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour,
-                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0)));
+                ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary)));
         setIsDynamicSize(a.getBoolean(R.styleable.DailyLogItem_isDynamicSize, true));
 
         a.recycle();
@@ -112,21 +113,18 @@ public class DailyLogItem extends View
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
-        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
 
         datePaint.setTypeface(font);
         ratioPaint.setTypeface(font);
         percentagePaint.setTypeface(font);
 
-        linePaint.setColor(
-                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary}).getColor(0, 0));
+        linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
 
-        setBackground(context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.selectableItemBackground})
-                .getDrawable(0));
+        setBackground(ThemeManager.getThemeDrawable(context, android.R.attr.selectableItemBackground));
 
         setOnClickListener(view ->
         {

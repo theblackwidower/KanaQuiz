@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -77,22 +78,19 @@ public class LogDetailItem extends View
 
         setFontSize(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 42, context.getResources().getDisplayMetrics()));
-        setMainColour(
-                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+        setMainColour(ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary));
 
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        String fontFamily = context.getTheme().obtainStyledAttributes(new int[]{R.attr.fontFamily}).getString(0);
-        Typeface font = Typeface.create(fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
 
         mainPaint.setTypeface(font);
         percentagePaint.setTypeface(font);
 
         mainPaint.setTextLocale(Locale.JAPANESE);
 
-        linePaint.setColor(
-                context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary}).getColor(0, 0));
+        linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);

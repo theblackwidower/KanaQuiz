@@ -43,8 +43,7 @@ public class AboutScreen extends AppCompatActivity
         TextView translatorCredit = findViewById(R.id.lblTranslatorCredit);
 
         if (translatorCreditUrl.isEmpty())
-            translatorCredit.setTextColor(
-                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+            translatorCredit.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
         else
         {
             //ref: https://stackoverflow.com/questions/8033316/to-draw-an-underline-below-the-textview-in-android
