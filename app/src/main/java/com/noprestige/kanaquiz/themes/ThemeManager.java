@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.themes;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -12,13 +13,25 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 
 public final class ThemeManager
 {
+    private static Resources resources;
+
     private ThemeManager() {}
+
+    public static void initialize(Application context)
+    {
+        resources = context.getResources();
+    }
 
     public static int getCurrentThemeId()
     {
-        if (OptionsControl.compareStrings(R.string.prefid_selected_theme, R.string.themeid_cherry_blossom_tree))
+        return getThemeId(OptionsControl.getString(R.string.prefid_selected_theme));
+    }
+
+    public static int getThemeId(String prefId)
+    {
+        if (prefId.equals(resources.getString(R.string.themeid_cherry_blossom_tree)))
             return R.style.CherryBlossomTree;
-        else if (OptionsControl.compareStrings(R.string.prefid_selected_theme, R.string.themeid_shibuya_night))
+        else if (prefId.equals(resources.getString(R.string.themeid_shibuya_night)))
             return R.style.ShibuyaNight;
         else
             return R.style.CherryBlossomTree;

@@ -10,6 +10,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -24,6 +25,7 @@ public abstract class KanaQuizMain extends Application
         OptionsControl.initialize(this);
         QuestionManagement.initialize(this);
         LogDatabase.initialize(this);
+        ThemeManager.initialize(this);
 
         //ref: https://stackoverflow.com/a/43584678/3582371
         registerReceiver(new BroadcastReceiver()
