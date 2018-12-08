@@ -1,26 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/theme_chooser_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical|center_horizontal"
-    android:orientation="vertical"
     android:paddingTop="16dp"
     tools:context="com.noprestige.kanaquiz.themes.ThemeChooser">
 
-    <com.noprestige.kanaquiz.themes.ThemeSelectionItem
+    <LinearLayout
+        android:id="@+id/themeChooserLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:themeName="@string/theme_cherry_blossom_tree"
-        app:themePrefId="@string/themeid_cherry_blossom_tree"/>
+        android:orientation="vertical">
 
-    <com.noprestige.kanaquiz.themes.ThemeSelectionItem
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:themeName="@string/theme_shibuya_night"
-        app:themePrefId="@string/themeid_shibuya_night"/>
+        <com.noprestige.kanaquiz.themes.ThemeSelectionItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:themeName="@string/theme_cherry_blossom_tree"
+            app:themePrefId="@string/themeid_cherry_blossom_tree"/>
 
-</LinearLayout>
+        <com.noprestige.kanaquiz.themes.ThemeSelectionItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:themeName="@string/theme_shibuya_night"
+            app:themePrefId="@string/themeid_shibuya_night"/>
+
+    </LinearLayout>
+</ScrollView>

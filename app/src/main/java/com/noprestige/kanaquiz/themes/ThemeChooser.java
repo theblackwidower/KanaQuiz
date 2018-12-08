@@ -30,7 +30,7 @@ class ThemeChooser extends DialogPreference
     {
         super.showDialog(state);
 
-        layout = getDialog().findViewById(R.id.theme_chooser_dialog);
+        layout = getDialog().findViewById(R.id.themeChooserLayout);
 
         for (int i = 0; i < layout.getChildCount(); i++)
             if (layout.getChildAt(i).getClass().equals(ThemeSelectionItem.class))
