@@ -10,6 +10,7 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import moe.shizuku.fontprovider.FontProviderClient;
+import moe.shizuku.fontprovider.FontRequest;
 
 public final class ThemeManager
 {
@@ -58,11 +59,13 @@ public final class ThemeManager
             FontProviderClient client = FontProviderClient.create(activity);
             if (client != null)
             {
+                client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif", "serif-thin",
+                        "serif-light", "serif-medium", "serif-black");
+
                 client.setNextRequestReplaceFallbackFonts(true);
 
-                client.replace("Noto Serif CJK", "serif", "serif-thin", "serif-light", "serif-medium", "serif-black");
-//                client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
-//                        "sans-serif-medium", "sans-serif-black");
+                client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
+                        "sans-serif-medium", "sans-serif-black");
 
                 isFontInitialized = true;
             }
