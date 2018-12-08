@@ -216,10 +216,42 @@
         <WordQuestion romaji="Bengoshi" kana="べんごし" kanji="弁護士" answer="Lawyer"/>
         <WordQuestion romaji="Kashu" kana="かしゅ" kanji="歌手" answer="Singer"/>
     </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 1 -->
+    <QuestionSet prefId="vocabulary_set_kanji_combat_1" setTitle="Kanji Combat 1">
+        <WordQuestion romaji="Gakkō" kana="がっこう" kanji="学校" answer="School"/>
+        <WordQuestion romaji="Daigaku" kana="だいがく" kanji="大学" answer="University"/>
+        <WordQuestion romaji="Ōkii" kana="おおきい" kanji="大きい" answer="Big"/>
+        <WordQuestion romaji="Chiisai" kana="ちいさい" kanji="小さい" answer="Small"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 2 -->
+    <QuestionSet prefId="vocabulary_set_kanji_combat_2" setTitle="Kanji Combat 2">
+        <WordQuestion romaji="Otona" kana="おとな" kanji="大人" answer="Adult"/>
+        <WordQuestion romaji="Otoko no hito" kana="おとこのひと" kanji="男の人" answer="Man"/>
+        <WordQuestion romaji="Otoko no ko" kana="おとこのこ" kanji="男の子" answer="Boy"/>
+        <WordQuestion romaji="Onna no hito" kana="おんなのひと" kanji="女の人" answer="Woman"/>
+        <WordQuestion romaji="Onna no ko" kana="おんなのこ" kanji="女の子" answer="Girl"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 3 -->
+    <QuestionSet prefId="vocabulary_set_kanji_combat_3" setTitle="Kanji Combat 3">
+        <!--<WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>-->
+        <WordQuestion romaji="Akachan" kana="あかちゃん" kanji="赤ちゃん" answer="Baby"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 4 -->
+    <QuestionSet prefId="vocabulary_set_kanji_combat_4" setTitle="Kanji Combat 4">
+        <WordQuestion romaji="Natsuyasumi" kana="なつやすみ" kanji="夏休み" answer="Summer Vacation"/>
+        <WordQuestion romaji="Iu" kana="いう" kanji="言う" answer="Say"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 5 -->
+    <QuestionSet prefId="vocabulary_set_kanji_combat_5" setTitle="Kanji Combat 5">
+        <WordQuestion romaji="Namae" kana="なまえ" kanji="名前" answer="Name"/>
+        <WordQuestion romaji="Mainichi" kana="まいにち" kanji="毎日" answer="Every Day"/>
+        <WordQuestion romaji="Kyō" kana="きょう" kanji="今日" answer="Today"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
     Learn Japanese to Survive: Katakana War
+    Learn Japanese to Survive: Kanji Combat
     Jisho (looks up Kanji from kana): https://jisho.org
     Wikipedia: https://en.wikipedia.org/wiki/Japanese_numerals
     -->

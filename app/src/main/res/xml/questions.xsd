@@ -178,7 +178,7 @@
 
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="['\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
+            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
         </xs:restriction>
     </xs:simpleType>
 
