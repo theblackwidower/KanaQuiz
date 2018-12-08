@@ -46,11 +46,9 @@
         android:entries="@array/romanize_system_option_item_names"
         android:entryValues="@array/prefids_romanize_system"
         android:defaultValue="@string/prefid_romanize_system_default"/>
-    <ListPreference
+    <com.noprestige.kanaquiz.themes.ThemeChooser
         android:key="@string/prefid_selected_theme"
         android:title="@string/selected_theme_title"
-        android:entries="@array/theme_name_list"
-        android:entryValues="@array/prefids_available_themes"
         android:defaultValue="@string/themeid_cherry_blossom_tree"/>
     <Preference
         android:key="clear_logs"

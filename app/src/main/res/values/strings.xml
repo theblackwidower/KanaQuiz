@@ -156,14 +156,7 @@
     <!-- Theme Selection -->
     <string name="prefid_selected_theme" translatable="false">selected_theme</string>
     <string name="selected_theme_title">UI Themes</string>
-    <array name="theme_name_list">
-        <item>@string/theme_cherry_blossom_tree</item>
-        <item>@string/theme_shibuya_night</item>
-    </array>
-    <array name="prefids_available_themes">
-        <item>@string/themeid_cherry_blossom_tree</item>
-        <item>@string/themeid_shibuya_night</item>
-    </array>
+    <string name="save">Save</string>
 
     <!-- THEMES! -->
     <string name="theme_cherry_blossom_tree">Cherry Blossom Tree</string>
