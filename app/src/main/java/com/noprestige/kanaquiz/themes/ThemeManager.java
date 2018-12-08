@@ -34,7 +34,7 @@ public final class ThemeManager
         else if (prefId.equals(resources.getString(R.string.themeid_shibuya_night)))
             return R.style.ShibuyaNight;
         else
-            return R.style.CherryBlossomTree;
+            return R.style.Theme_AppCompat;
     }
 
     public static int getThemeColour(Context context, int attr)
