@@ -5,6 +5,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.noprestige.kanaquiz.logs.LogDatabase;
@@ -12,13 +14,18 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public abstract class KanaQuizMain extends Application
 {
+    static KanaQuizMain app;
+
     @Override
     public void onCreate()
     {
         super.onCreate();
+
+        app = this;
 
         AndroidThreeTen.init(this);
         OptionsControl.initialize(this);
@@ -59,6 +66,19 @@ public abstract class KanaQuizMain extends Application
         catch (NoSuchMethodException ignored) { }
         catch (IllegalAccessException ignored) { }
         catch (InvocationTargetException ignored) { }
+        return false;
+    }
+
+    public static boolean isGooglePlayStoreOnDevice()
+    {
+        //ref: http://jymden.com/android-check-if-google-play-store-is-installed-on-device/
+        PackageManager packageManager = app.getPackageManager();
+        List<PackageInfo> packages = packageManager.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
+
+        for (PackageInfo packageInfo : packages)
+            if ("com.android.vending".equals(packageInfo.packageName))
+                return true;
+
         return false;
     }
 }
