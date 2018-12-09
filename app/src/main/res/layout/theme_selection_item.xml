@@ -7,12 +7,38 @@
     android:orientation="horizontal"
     tools:context="com.noprestige.kanaquiz.options.QuestionSelectionItem">
 
-    <TextView
-        android:id="@+id/lblThemeName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="16sp"
-        android:textSize="16sp"/>
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16sp">
+
+        <TextView
+            android:id="@+id/lblThemeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/lblThemeSample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12sp"
+            android:text="@string/theme_preview_sample"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <com.noprestige.kanaquiz.themes.ThemePreview
+        android:id="@+id/imgPreview"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:paddingBottom="4sp"
+        android:paddingEnd="16sp"
+        android:paddingStart="16sp"
+        android:paddingTop="4sp"/>
 
 </LinearLayout>

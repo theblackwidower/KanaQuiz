@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
+import static android.graphics.Typeface.NORMAL;
+
 public class ThemeSelectionItem extends LinearLayout
 {
     private String prefId;
@@ -21,6 +23,8 @@ public class ThemeSelectionItem extends LinearLayout
     private int themeResId;
 
     private TextView lblThemeName;
+    private TextView lblThemeSample;
+    private ThemePreview imgPreview;
 
     private Paint linePaint = new Paint();
 
@@ -56,6 +60,8 @@ public class ThemeSelectionItem extends LinearLayout
         LayoutInflater.from(context).inflate(R.layout.theme_selection_item, this);
 
         lblThemeName = findViewById(R.id.lblThemeName);
+        lblThemeSample = findViewById(R.id.lblThemeSample);
+        imgPreview = findViewById(R.id.imgPreview);
 
         setOnClickListener(view -> select());
 
@@ -133,6 +139,8 @@ public class ThemeSelectionItem extends LinearLayout
         {
             this.prefId = prefId;
             themeResId = ThemeManager.getThemeId(prefId);
+            imgPreview.setPrefId(prefId);
+            lblThemeSample.setTypeface(ThemeManager.getThemeFont(getTheme(), R.attr.fontFamily, NORMAL));
         }
     }
 

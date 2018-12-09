@@ -156,6 +156,7 @@
     <!-- Theme Selection -->
     <string name="prefid_selected_theme" translatable="false">selected_theme</string>
     <string name="selected_theme_title">UI Themes</string>
+    <string name="theme_preview_sample" translatable="false">Fonts 雪の中で話す</string>
     <string name="save">Save</string>
 
     <!-- THEMES! -->
