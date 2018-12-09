@@ -60,6 +60,8 @@ public final class ThemeManager
 
     public static void setTheme(Activity activity)
     {
+        activity.setTheme(getCurrentThemeId());
+
         int code = FontProviderClient.checkAvailability(activity);
         if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
         {
@@ -122,7 +124,5 @@ public final class ThemeManager
                 isFontInitialized = true;
             }
         }
-
-        activity.setTheme(getCurrentThemeId());
     }
 }
