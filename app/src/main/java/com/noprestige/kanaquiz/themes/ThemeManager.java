@@ -113,15 +113,35 @@ public final class ThemeManager
             FontProviderClient client = FontProviderClient.create(activity);
             if (client != null)
             {
-                client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif", "serif-thin",
-                        "serif-light", "serif-medium", "serif-black", "serif-demilight", "serif-bold");
+                Typeface[] serifFonts =
+                        client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif",
+                                "serif-thin", "serif-light", "serif-medium", "serif-black", "serif-demilight",
+                                "serif-bold");
 
                 client.setNextRequestReplaceFallbackFonts(true);
 
                 client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
                         "sans-serif-medium", "sans-serif-black", "sans-serif-demilight", "sans-serif-bold");
 
-                isFontInitialized = true;
+                if ((serifFonts == null) || (serifFonts.length < 7))
+                {
+                    LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_download_alert_date);
+                    if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                    {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                        dialogBuilder.setMessage(R.string.font_provider_font_request);
+                        //ref: https://forums.xamarin.com/discussion/55897/
+                        // launch-an-application-from-another-application-on-android
+                        dialogBuilder.setPositiveButton(R.string.open_font_provider, (dialog, which) -> activity
+                                .startActivity(activity.getPackageManager()
+                                        .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
+                        dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
+                                .setString(R.string.prefid_font_download_alert_date, LocalDate.now().toString()));
+                        dialogBuilder.show();
+                    }
+                }
+                else
+                    isFontInitialized = true;
             }
         }
     }
