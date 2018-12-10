@@ -40,7 +40,7 @@
         <KanjiQuestion question="何" meaning="what/how many" kunYomi="nani/nan" onYomi="ka"/>
         <KanjiQuestion question="用" meaning="use" kunYomi="mochi" onYomi="yō"/>
         <KanjiQuestion question="楽" meaning="music/pleasure" kunYomi="tano" onYomi="gaku/raku"/>
-        <KanjiQuestion question="歌" meaning="song/sing" kunYomi="ata" onYomi="ka"/>
+        <KanjiQuestion question="歌" meaning="song/sing" kunYomi="uta" onYomi="ka"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_32" setTitle="@string/ljts_kanji_set_32_title">
         <KanjiQuestion question="線" meaning="line" onYomi="sen"/>
@@ -55,7 +55,7 @@
         <KanjiQuestion question="書" meaning="write" kunYomi="ka" onYomi="sho"/>
         <KanjiQuestion question="記" meaning="record/chronicle" kunYomi="shiru" onYomi="ki"/>
         <KanjiQuestion question="紙" meaning="paper" kunYomi="kami" onYomi="shi"/>
-        <KanjiQuestion question="画" meaning="brush stroke/picture" onYomi="ya/kaku"/>
+        <KanjiQuestion question="画" meaning="brush stroke/picture" onYomi="ga/kaku"/>
         <KanjiQuestion question="絵" meaning="picture/painting" onYomi="kai/e"/>
         <KanjiQuestion question="図" meaning="plan/diagram" kunYomi="haka" onYomi="zu/to"/>
     </QuestionSet>
@@ -101,7 +101,7 @@
         <!--Duck Bonus 12-->
         <KanjiQuestion question="船" meaning="ship/boat" kunYomi="fune/funa" onYomi="sen"/>
         <KanjiQuestion question="合" meaning="fit/join" kunYomi="a" onYomi="gō"/>
-        <KanjiQuestion question="公" meaning="public/governmental" kunYomi="ōyake" onYomi="ko"/>
+        <KanjiQuestion question="公" meaning="public/governmental" kunYomi="ōyake" onYomi="kō"/>
     </QuestionSet>
     <!--
     Sources:

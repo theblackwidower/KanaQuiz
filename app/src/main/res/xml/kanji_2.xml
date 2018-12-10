@@ -79,7 +79,7 @@
         <KanjiQuestion question="昼" meaning="daytime/noon" kunYomi="hiru" onYomi="chū"/>
         <KanjiQuestion question="午" meaning="noon" onYomi="go"/>
         <KanjiQuestion question="夜" meaning="night" kunYomi="yoru/yo" onYomi="ya"/>
-        <KanjiQuestion question="曜" meaning="weekday" onYomi="yo"/>
+        <KanjiQuestion question="曜" meaning="weekday" onYomi="yō"/>
         <KanjiQuestion question="週" meaning="week" onYomi="shū"/>
     </QuestionSet>
     <QuestionSet prefId="ljts_kanji_set_25" setTitle="@string/ljts_kanji_set_25_title">
