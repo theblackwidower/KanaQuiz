@@ -100,3 +100,15 @@ If you don't wish to bother with pull requests, using the template listed above 
 I'll also ask, if possible, for any translators to also update the [vocabulary.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/vocabulary.xml) file by replacing the English answers with answers in their own language, and insert it into a language-specific directory (`app/src/main/res/xml-[language code]/`), so it'll be automatically included as part of the translation package.
 
 If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
+
+## Themes
+
+I'm open to people offering to design new themes. If you wish to do so, there are several key files to be aware of.
+
+The themes themselves need to be designed in the styles.xml files (`app/src/main/res/values-v21/styles.xml` and `app/src/main/res/values/styles.xml`). Be sure to add any new colours you use to the colors.xml file. (`app/src/main/res/values/colors.xml`)
+
+Add an appropriate title, and related prefId to the appropriate section in `app/src/main/res/values/strings.xml`, and link to those string resources when you add the theme to the chooser in `app/src/main/res/layout/theme_chooser_dialog.xml`.
+
+Finally, to make the whole thing work, be sure to add your theme to the if-else chain in the getThemeId method in `app/src/main/java/com/noprestige/kanaquiz/themes/ThemeManager.java`.
+
+You can submit the finished product via pull request.
