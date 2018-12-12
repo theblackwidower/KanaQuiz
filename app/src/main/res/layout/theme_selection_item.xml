@@ -35,10 +35,9 @@
     <com.noprestige.kanaquiz.themes.ThemePreview
         android:id="@+id/imgPreview"
         android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:paddingBottom="4sp"
+        android:layout_height="62dp"
+        android:layout_gravity="center_vertical"
         android:paddingEnd="16sp"
-        android:paddingStart="16sp"
-        android:paddingTop="4sp"/>
+        android:paddingStart="16sp"/>
 
 </LinearLayout>
