@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 
+import java.util.Locale;
+
 import static android.graphics.Typeface.NORMAL;
 
 public class ThemeSelectionItem extends LinearLayout
@@ -72,6 +74,8 @@ public class ThemeSelectionItem extends LinearLayout
         setPrefId(a.getString(R.styleable.ThemeSelectionItem_themePrefId));
 
         a.recycle();
+
+        lblThemeSample.setTextLocale(Locale.JAPANESE);
 
         linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
