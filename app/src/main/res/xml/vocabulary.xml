@@ -241,6 +241,43 @@
         <WordQuestion romaji="Mainichi" kana="まいにち" kanji="毎日" answer="Every Day"/>
         <WordQuestion romaji="Kyō" kana="きょう" kanji="今日" answer="Today"/>
     </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_kanji_combat_6" setTitle="Kanji Combat 6">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 6 -->
+        <WordQuestion romaji="Nichiyōbi" kana="にちようび" kanji="日曜日" answer="Sunday"/>
+        <WordQuestion romaji="Getsuyōbi" kana="げつようび" kanji="月曜日" answer="Monday"/>
+        <WordQuestion romaji="Kayōbi" kana="かようび" kanji="火曜日" answer="Tuesday"/>
+        <WordQuestion romaji="Suiyōbi" kana="すいようび" kanji="水曜日" answer="Wednesday"/>
+        <WordQuestion romaji="Mokuyōbi" kana="もくようび" kanji="木曜日" answer="Thursday"/>
+        <WordQuestion romaji="Kinyōbi" kana="きんようび" kanji="金曜日" answer="Friday"/>
+        <WordQuestion romaji="Doyōbi" kana="どようび" kanji="土曜日" answer="Saturday"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_kanji_combat_7_8" setTitle="Kanji Combat 7 &amp; 8">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 7 -->
+        <!--<WordQuestion romaji="Kyōshitsu" kana="きょうしつ" kanji="教室" answer="Classroom"/>-->
+        <WordQuestion romaji="Tokei" kana="とけい" kanji="時計" answer="Watch/Clock"/>
+        <WordQuestion romaji="Hashiru" kana="はしる" kanji="走る" answer="Run"/>
+        <WordQuestion romaji="Dekiru" kana="できる" kanji="出来る" answer="Be Able To">
+            <AltAnswer>To Be Able To</AltAnswer>
+        </WordQuestion>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 8 -->
+        <WordQuestion romaji="Ongaku" kana="おんがく" kanji="音楽" answer="Music"/>
+        <WordQuestion romaji="Atarashii" kana="あたらしい" kanji="新しい" answer="New"/>
+        <WordQuestion romaji="Furui" kana="ふるい" kanji="古い" answer="Old"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_kanji_combat_9_10" setTitle="Kanji Combat 9 &amp; 10">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 9 -->
+        <WordQuestion romaji="Tegami" kana="てがみ" kanji="手紙" answer="Letter"/>
+        <WordQuestion romaji="Jikan" kana="じかん" kanji="時間" answer="Time"/>
+        <WordQuestion romaji="Shinbun" kana="しんぶん" kanji="新聞" answer="Newspaper"/>
+        <WordQuestion romaji="Ningen" kana="にんげん" kanji="人間" answer="Human"/>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 10 -->
+        <!--<WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Telephone"/>-->
+        <WordQuestion romaji="Kaisha" kana="かいしゃ" kanji="会社" answer="Company"/>
+        <!--<WordQuestion romaji="Kōen" kana="こうえん" kanji="公園" answer="Public Park"/>-->
+        <!--<WordQuestion romaji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>-->
+        <WordQuestion romaji="Denki" kana="でんき" kanji="電気" answer="Electricity"/>
+        <WordQuestion romaji="Ashita" kana="あした" kanji="明日" answer="Tomorrow"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
