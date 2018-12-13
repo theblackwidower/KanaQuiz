@@ -21,10 +21,15 @@ class ThemePreview extends View
     private int backColour;
     private int textColour;
 
-    int xPointLeft;
-    int xPointRight;
-    int yPointTop;
-    int yPointBottom;
+    int xPointBorderLeft;
+    int xPointBorderRight;
+    int yPointBorderTop;
+    int yPointBorderBottom;
+
+    float xPointLeft;
+    float xPointRight;
+    float yPointTop;
+    float yPointBottom;
 
     float yPointHeader;
 
@@ -64,10 +69,17 @@ class ThemePreview extends View
         int contentWidth = width - getPaddingLeft() - getPaddingRight();
         int contentHeight = height - getPaddingTop() - getPaddingBottom();
 
-        xPointLeft = getPaddingLeft();
-        xPointRight = width - getPaddingRight();
-        yPointTop = getPaddingTop();
-        yPointBottom = height - getPaddingBottom();
+        xPointBorderLeft = getPaddingLeft();
+        xPointBorderRight = width - getPaddingRight();
+        yPointBorderTop = getPaddingTop();
+        yPointBorderBottom = height - getPaddingBottom();
+
+        float borderWidth = getResources().getDimension(R.dimen.dividingLine);
+
+        xPointLeft = xPointBorderLeft + borderWidth;
+        xPointRight = xPointBorderRight - borderWidth;
+        yPointTop = yPointBorderTop + borderWidth;
+        yPointBottom = yPointBorderBottom - borderWidth;
 
         yPointHeader = yPointTop + (contentHeight / 4f);
         yPointText1 = yPointHeader + ((contentHeight * 2f) / 8f);
@@ -89,10 +101,8 @@ class ThemePreview extends View
         super.dispatchDraw(canvas);
         painter.setStrokeWidth(0);
 
-        float borderWidth = getResources().getDimension(R.dimen.dividingLine);
         painter.setColor(ThemeManager.getThemeColour(getContext(), android.R.attr.textColorPrimary));
-        canvas.drawRect(xPointLeft - borderWidth, yPointTop - borderWidth, xPointRight + borderWidth,
-                yPointBottom + borderWidth, painter);
+        canvas.drawRect(xPointBorderLeft, yPointBorderTop, xPointBorderRight, yPointBorderBottom, painter);
 
         painter.setColor(topColour);
         canvas.drawRect(xPointLeft, yPointTop, xPointRight, yPointHeader, painter);
