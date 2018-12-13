@@ -80,6 +80,19 @@ public final class ThemeManager
         return returnValue;
     }
 
+    public static boolean isLightTheme(Context context)
+    {
+        return isLightTheme(context.getTheme());
+    }
+
+    public static boolean isLightTheme(Resources.Theme theme)
+    {
+        TypedArray array = theme.obtainStyledAttributes(new int[]{R.attr.isLightTheme});
+        boolean returnValue = array.getBoolean(0, false);
+        array.recycle();
+        return returnValue;
+    }
+
     public static void setTheme(Activity activity)
     {
         activity.setTheme(getCurrentThemeId());

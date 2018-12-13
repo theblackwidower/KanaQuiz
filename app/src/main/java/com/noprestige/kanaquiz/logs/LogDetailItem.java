@@ -268,7 +268,7 @@ public class LogDetailItem extends View
             totalString = DailyLogItem.parseCount(totalAnswers);
             float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
-            percentagePaint.setColor(DailyLogItem.getPercentageColour(percentage, getResources()));
+            percentagePaint.setColor(DailyLogItem.getPercentageColour(percentage, getContext()));
 
             questionWidth = mainPaint.measureText(question);
             correctWidth = mainPaint.measureText(correctString);

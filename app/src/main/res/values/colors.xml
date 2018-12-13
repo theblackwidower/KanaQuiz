@@ -45,13 +45,22 @@
     <color name="chrysanthPrimaryTextColor">#ffffff</color>
     <color name="chrysanthSecondaryTextColor">#000000</color>
 
-    <color name="correct">@color/green_A700</color>
-    <color name="incorrect">@color/red_A700</color>
+    <color name="lightCorrect">@color/light_green_800</color>
+    <color name="darkCorrect">@color/green_A700</color>
+    <color name="lightIncorrect">@color/red_A700</color>
+    <color name="darkIncorrect">@color/red_A400</color>
 
-    <color name="below_fifty">@color/brown_900</color>
-    <color name="fifty_to_sixty">@color/red_A700</color>
-    <color name="sixty_to_seventy">@color/orange_800</color><!-- got illegible warning-->
-    <color name="seventy_to_eighty">@color/amber_A400</color><!-- got illegible warning-->
-    <color name="eighty_to_ninety">@color/light_green_A700</color><!-- got illegible warning-->
-    <color name="above_ninety">@color/green_A400</color><!-- got illegible warning-->
+    <color name="lightBelowFifty">@color/brown_900</color>
+    <color name="lightFiftyToSixty">@color/red_A700</color>
+    <color name="lightSixtyToSeventy">@color/deep_orange_500</color>
+    <color name="lightSeventyToEighty">@color/amber_A400</color><!-- got illegible warning-->
+    <color name="lightEightyToNinety">@color/light_green_700</color>
+    <color name="lightAboveNinety">@color/light_blue_A700</color>
+
+    <color name="darkBelowFifty">@color/brown_300</color>
+    <color name="darkFiftyToSixty">@color/red_A400</color>
+    <color name="darkSixtyToSeventy">@color/orange_800</color>
+    <color name="darkSeventyToEighty">@color/amber_A400</color>
+    <color name="darkEightyToNinety">@color/light_green_A700</color>
+    <color name="darkAboveNinety">@color/cyan_A700</color>
 </resources>

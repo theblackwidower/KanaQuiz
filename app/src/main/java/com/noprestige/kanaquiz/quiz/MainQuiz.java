@@ -173,7 +173,10 @@ public class MainQuiz extends AppCompatActivity
             {
                 lblResponse.setText(R.string.correct_answer);
                 lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightCorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkCorrect));
                 if (retryCount == 0)
                 {
                     totalCorrect++;
@@ -194,7 +197,10 @@ public class MainQuiz extends AppCompatActivity
             {
                 lblResponse.setText(R.string.incorrect_answer);
                 lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightIncorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkIncorrect));
 
                 if (OptionsControl
                         .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))

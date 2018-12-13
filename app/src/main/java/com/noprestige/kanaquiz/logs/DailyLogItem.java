@@ -367,7 +367,7 @@ public class DailyLogItem extends View
             totalString = parseCount(totalAnswers);
             float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
-            percentagePaint.setColor(getPercentageColour(percentage, getResources()));
+            percentagePaint.setColor(getPercentageColour(percentage, getContext()));
 
             correctWidth = ratioPaint.measureText(correctString);
             slashWidth = ratioPaint.measureText(SLASH);
@@ -376,20 +376,39 @@ public class DailyLogItem extends View
         }
     }
 
-    public static int getPercentageColour(float percentage, Resources resources)
+    public static int getPercentageColour(float percentage, Context context)
     {
+        Resources resources = context.getResources();
         int tenth = Math.round(percentage * 100) / 10;
-        if (tenth <= 4)
-            return resources.getColor(R.color.below_fifty);
-        else if (tenth == 5)
-            return resources.getColor(R.color.fifty_to_sixty);
-        else if (tenth == 6)
-            return resources.getColor(R.color.sixty_to_seventy);
-        else if (tenth == 7)
-            return resources.getColor(R.color.seventy_to_eighty);
-        else if (tenth == 8)
-            return resources.getColor(R.color.eighty_to_ninety);
-        else //if (tenth >= 9)
-            return resources.getColor(R.color.above_ninety);
+        if (ThemeManager.isLightTheme(context))
+        {
+            if (tenth <= 4)
+                return resources.getColor(R.color.lightBelowFifty);
+            else if (tenth == 5)
+                return resources.getColor(R.color.lightFiftyToSixty);
+            else if (tenth == 6)
+                return resources.getColor(R.color.lightSixtyToSeventy);
+            else if (tenth == 7)
+                return resources.getColor(R.color.lightSeventyToEighty);
+            else if (tenth == 8)
+                return resources.getColor(R.color.lightEightyToNinety);
+            else //if (tenth >= 9)
+                return resources.getColor(R.color.lightAboveNinety);
+        }
+        else
+        {
+            if (tenth <= 4)
+                return resources.getColor(R.color.darkBelowFifty);
+            else if (tenth == 5)
+                return resources.getColor(R.color.darkFiftyToSixty);
+            else if (tenth == 6)
+                return resources.getColor(R.color.darkSixtyToSeventy);
+            else if (tenth == 7)
+                return resources.getColor(R.color.darkSeventyToEighty);
+            else if (tenth == 8)
+                return resources.getColor(R.color.darkEightyToNinety);
+            else //if (tenth >= 9)
+                return resources.getColor(R.color.darkAboveNinety);
+        }
     }
 }
