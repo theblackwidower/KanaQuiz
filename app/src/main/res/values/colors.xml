@@ -23,6 +23,28 @@
     <color name="nightPrimaryTextColor">#000000</color>
     <color name="nightSecondaryTextColor">#000000</color>
 
+    <color name="onsenPrimaryColor">#ffb74d</color>
+    <color name="onsenPrimaryLightColor">#ffe97d</color>
+    <color name="onsenPrimaryDarkColor">#c88719</color>
+    <color name="onsenSecondaryColor">#424242</color>
+    <color name="onsenSecondaryLightColor">#6d6d6d</color>
+    <color name="onsenSecondaryDarkColor">#1b1b1b</color>
+    <color name="onsenTertiaryColor">#a7ffeb</color>
+    <color name="onsenTertiaryLightColor">#dbffff</color>
+    <color name="onsenTertiaryDarkColor">#75ccb9</color>
+    <color name="onsenPrimaryTextColor">#000000</color>
+    <color name="onsenSecondaryTextColor">#ffffff</color>
+    <color name="onsenTertiaryTextColor">#000000</color>
+
+    <color name="chrysanthPrimaryColor">#7e57c2</color>
+    <color name="chrysanthPrimaryLightColor">#b085f5</color>
+    <color name="chrysanthPrimaryDarkColor">#4d2c91</color>
+    <color name="chrysanthSecondaryColor">#fdd835</color>
+    <color name="chrysanthSecondaryLightColor">#ffff6b</color>
+    <color name="chrysanthSecondaryDarkColor">#c6a700</color>
+    <color name="chrysanthPrimaryTextColor">#ffffff</color>
+    <color name="chrysanthSecondaryTextColor">#000000</color>
+
     <color name="correct">@color/green_A700</color>
     <color name="incorrect">@color/red_A700</color>
 

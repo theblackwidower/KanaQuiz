@@ -162,9 +162,13 @@
     <!-- THEMES! -->
     <string name="theme_cherry_blossom_tree">Cherry Blossom Tree</string>
     <string name="theme_shibuya_night">Shibuya Night</string>
+    <string name="theme_hot_spring">Hot Spring Serenity</string>
+    <string name="theme_chrysanthemum">Chrysanthemum Twilight</string>
 
     <string name="themeid_cherry_blossom_tree" translatable="false">cherry_blossom_tree</string>
     <string name="themeid_shibuya_night" translatable="false">shibuya_night</string>
+    <string name="themeid_hot_spring" translatable="false">hot_spring</string>
+    <string name="themeid_chrysanthemum" translatable="false">chrysanthemum</string>
 
     <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>

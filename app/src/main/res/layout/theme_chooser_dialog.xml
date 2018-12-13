@@ -27,5 +27,17 @@
             app:themeName="@string/theme_shibuya_night"
             app:themePrefId="@string/themeid_shibuya_night"/>
 
+        <com.noprestige.kanaquiz.themes.ThemeSelectionItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:themeName="@string/theme_hot_spring"
+            app:themePrefId="@string/themeid_hot_spring"/>
+
+        <com.noprestige.kanaquiz.themes.ThemeSelectionItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:themeName="@string/theme_chrysanthemum"
+            app:themePrefId="@string/themeid_chrysanthemum"/>
+
     </LinearLayout>
 </ScrollView>

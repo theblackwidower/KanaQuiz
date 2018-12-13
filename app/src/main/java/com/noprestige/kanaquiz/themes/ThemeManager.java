@@ -33,6 +33,10 @@ public final class ThemeManager
             return R.style.CherryBlossomTree;
         else if (prefId.equals(resources.getString(R.string.themeid_shibuya_night)))
             return R.style.ShibuyaNight;
+        else if (prefId.equals(resources.getString(R.string.themeid_hot_spring)))
+            return R.style.HotSpringSerenity;
+        else if (prefId.equals(resources.getString(R.string.themeid_chrysanthemum)))
+            return R.style.ChrysanthemumTwilight;
         else
             return R.style.Theme_AppCompat;
     }
