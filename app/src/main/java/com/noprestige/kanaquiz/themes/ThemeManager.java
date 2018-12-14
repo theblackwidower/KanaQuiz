@@ -1,13 +1,16 @@
 package com.noprestige.kanaquiz.themes;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 
 import com.noprestige.kanaquiz.KanaQuiz;
 import com.noprestige.kanaquiz.R;
@@ -110,38 +113,53 @@ public final class ThemeManager
         }
         else if ((code == FontProviderClient.FontProviderAvailability.OK) && !isFontInitialized)
         {
-            FontProviderClient client = FontProviderClient.create(activity);
-            if (client != null)
+            if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.M) &&
+                    (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                            PackageManager.PERMISSION_GRANTED))
             {
-                Typeface[] serifFonts =
-                        client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif",
-                                "serif-thin", "serif-light", "serif-medium", "serif-black", "serif-demilight",
-                                "serif-bold");
-
-                client.setNextRequestReplaceFallbackFonts(true);
-
-                client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
-                        "sans-serif-medium", "sans-serif-black", "sans-serif-demilight", "sans-serif-bold");
-
-                if ((serifFonts == null) || (serifFonts.length < 7))
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                dialogBuilder.setOnDismissListener(dialog -> activity
+                        .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                dialogBuilder.show();
+                //TODO: Find way to get activity to restart once font permission is granted.
+            }
+            else
+            {
+                FontProviderClient client = FontProviderClient.create(activity);
+                if (client != null)
                 {
-                    LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_download_alert_date);
-                    if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                    Typeface[] serifFonts =
+                            client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif",
+                                    "serif-thin", "serif-light", "serif-medium", "serif-black", "serif-demilight",
+                                    "serif-bold");
+
+                    client.setNextRequestReplaceFallbackFonts(true);
+
+                    client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
+                            "sans-serif-medium", "sans-serif-black", "sans-serif-demilight", "sans-serif-bold");
+
+                    if ((serifFonts == null) || (serifFonts.length < 7))
                     {
-                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                        dialogBuilder.setMessage(R.string.font_provider_font_request);
-                        //ref: https://forums.xamarin.com/discussion/55897/
-                        // launch-an-application-from-another-application-on-android
-                        dialogBuilder.setPositiveButton(R.string.open_font_provider, (dialog, which) -> activity
-                                .startActivity(activity.getPackageManager()
-                                        .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
-                        dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
-                                .setString(R.string.prefid_font_download_alert_date, LocalDate.now().toString()));
-                        dialogBuilder.show();
+                        LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_download_alert_date);
+                        if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                        {
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                            dialogBuilder.setMessage(R.string.font_provider_font_request);
+                            //ref: https://forums.xamarin.com/discussion/55897/
+                            // launch-an-application-from-another-application-on-android
+                            dialogBuilder.setPositiveButton(R.string.open_font_provider, (dialog, which) -> activity
+                                    .startActivity(activity.getPackageManager()
+                                            .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
+                            dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
+                                    .setString(R.string.prefid_font_download_alert_date, LocalDate.now().toString()));
+                            dialogBuilder.show();
+                        }
                     }
+                    else
+                        isFontInitialized = true;
                 }
-                else
-                    isFontInitialized = true;
             }
         }
     }
