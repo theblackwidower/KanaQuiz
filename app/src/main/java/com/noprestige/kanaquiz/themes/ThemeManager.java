@@ -1,6 +1,7 @@
 package com.noprestige.kanaquiz.themes;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,6 +62,7 @@ public final class ThemeManager
 
     private static boolean isFontInitialized;
 
+    @SuppressLint("NewApi")
     public static void setTheme(Activity activity)
     {
         activity.setTheme(getCurrentThemeId());
