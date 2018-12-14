@@ -166,6 +166,7 @@
     <string name="prefid_font_download_alert_date" translatable="false">font_download_alert_date</string>
     <string name="font_provider_font_request">Cannot find serif fonts.</string>
 
+    <string name="download_font_provider">Get Font Provider for Prettier Fonts</string>
     <string name="get_on_google_play">Get it on Google Play</string>
     <string name="update_on_google_play">Update on Google Play</string>
     <string name="download_github">Download from GitHub</string>
