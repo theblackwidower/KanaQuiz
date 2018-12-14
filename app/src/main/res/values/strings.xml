@@ -238,6 +238,13 @@
     <string name="vocab_set_home_2_title">House &amp; Home 2</string>
     <string name="vocab_set_school_title">School</string>
     <string name="vocab_set_jobs_title">Jobs</string>
+    <string name="vocab_set_schools_size_title">Schools &amp; Sizes</string>
+    <string name="vocab_set_people_2_title">People Around You</string>
+    <string name="vocab_set_random_1_title">Random Words</string>
+    <string name="vocab_set_weekdays_title">Days of the Week</string>
+    <string name="vocab_set_time_music_title">Time &amp; Music</string>
+    <string name="vocab_set_news_title">The News</string>
+    <string name="vocab_set_power_community_title">Power &amp; Community</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
