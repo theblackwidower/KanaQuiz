@@ -6,6 +6,8 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
+
 public class WordQuestion extends Question
 {
     private final String romaji;
@@ -68,6 +70,10 @@ public class WordQuestion extends Question
         else if (altAnswers != null)
             for (String answer : altAnswers)
                 if (answer.trim().equalsIgnoreCase(response.trim()))
+                    return true;
+        if (answer.contains(MEANING_DELIMITER))
+            for (String subAnswer : answer.split(MEANING_DELIMITER))
+                if (subAnswer.trim().equalsIgnoreCase(response.trim()))
                     return true;
         return false;
     }
