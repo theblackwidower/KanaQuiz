@@ -48,6 +48,14 @@ public class KanaQuestion extends Question
         return fetchRomaji();
     }
 
+    enum RomanizationSystem
+    {
+        HEPBURN,
+        NIHON,
+        KUNREI,
+        UNKNOWN
+    }
+
     String fetchRomaji()
     {
         if (OptionsControl.compareStrings(R.string.prefid_romanize_system, R.string.prefid_romanize_system_default))

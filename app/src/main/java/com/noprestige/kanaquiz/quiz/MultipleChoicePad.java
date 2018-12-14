@@ -16,7 +16,7 @@ import java.util.Collection;
 public class MultipleChoicePad extends FlowLayout
 {
     Collection<Button> btnChoices = new ArrayList<>();
-    private OnAnswerListener answerListener;
+    private AnswerFrame.OnAnswerListener answerListener;
 
     public MultipleChoicePad(Context context)
     {
@@ -33,7 +33,7 @@ public class MultipleChoicePad extends FlowLayout
         super(context, attrs, defStyle);
     }
 
-    public void setOnAnswerListener(OnAnswerListener listener)
+    public void setOnAnswerListener(AnswerFrame.OnAnswerListener listener)
     {
         answerListener = listener;
     }

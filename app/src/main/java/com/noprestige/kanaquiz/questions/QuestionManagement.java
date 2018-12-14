@@ -42,6 +42,14 @@ public class QuestionManagement
         return categoryCount;
     }
 
+    enum Diacritic
+    {
+        NO_DIACRITIC,
+        DAKUTEN,
+        HANDAKUTEN,
+        CONSONANT
+    }
+
     static class SetCode implements Comparable<SetCode>
     {
         final int number;

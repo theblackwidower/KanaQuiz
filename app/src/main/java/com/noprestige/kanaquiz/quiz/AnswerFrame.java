@@ -69,6 +69,11 @@ public class AnswerFrame extends LinearLayout
         btnMultipleChoice.setOnAnswerListener(this::checkAnswer);
     }
 
+    public interface OnAnswerListener
+    {
+        void onAnswer(String answer);
+    }
+
     public void setOnAnswerListener(OnAnswerListener listener)
     {
         answerListener = listener;

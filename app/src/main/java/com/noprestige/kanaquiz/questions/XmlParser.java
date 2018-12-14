@@ -102,7 +102,7 @@ final class XmlParser
                 throw new ParseException("Missing QuestionSet closing tag", lineNumber);
         }
 
-        questionSetList.put(new QuestionManagement.SetCode(indexPoint, Diacritic.NO_DIACRITIC, null),
+        questionSetList.put(new QuestionManagement.SetCode(indexPoint, QuestionManagement.Diacritic.NO_DIACRITIC, null),
                 currentSet.toArray(new Question[0]));
     }
 
@@ -110,7 +110,7 @@ final class XmlParser
             Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
-        Diacritic diacritics = null;
+        QuestionManagement.Diacritic diacritics = null;
         String digraphs = null;
 
         for (int i = 0; i < parser.getAttributeCount(); i++)
@@ -118,7 +118,7 @@ final class XmlParser
             switch (parser.getAttributeName(i))
             {
                 case "diacritics":
-                    diacritics = Diacritic.valueOf(parser.getAttributeValue(i));
+                    diacritics = QuestionManagement.Diacritic.valueOf(parser.getAttributeValue(i));
                     break;
                 case "digraphs":
                     digraphs = parser.getAttributeValue(i);
@@ -168,7 +168,7 @@ final class XmlParser
         if ((thisQuestion == null) || (thisAnswer == null))
             throw new ParseException("Missing attribute in KanaQuestion", parser.getLineNumber());
 
-        TreeMap<RomanizationSystem, String> thisAltAnswers = null;
+        TreeMap<KanaQuestion.RomanizationSystem, String> thisAltAnswers = null;
 
         if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
@@ -211,12 +211,12 @@ final class XmlParser
         return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers);
     }
 
-    private static TreeMap<RomanizationSystem, String> parseXmlKanaAltAnswers(XmlPullParser parser)
+    private static TreeMap<KanaQuestion.RomanizationSystem, String> parseXmlKanaAltAnswers(XmlPullParser parser)
             throws XmlPullParserException, IOException, ParseException
     {
         int lineNumber = parser.getLineNumber();
 
-        TreeMap<RomanizationSystem, String> thisAltAnswers = new TreeMap<>();
+        TreeMap<KanaQuestion.RomanizationSystem, String> thisAltAnswers = new TreeMap<>();
 
         for (int eventType = parser.getEventType();
                 !((eventType == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()));
@@ -224,7 +224,7 @@ final class XmlParser
         {
             if ((eventType == XmlPullParser.START_TAG) && "AltAnswer".equalsIgnoreCase(parser.getName()))
             {
-                RomanizationSystem[] systemsList = null;
+                KanaQuestion.RomanizationSystem[] systemsList = null;
 
                 for (int i = 0; i < parser.getAttributeCount(); i++)
                 {
@@ -236,7 +236,7 @@ final class XmlParser
                 }
 
                 if (parser.next() == XmlPullParser.TEXT)
-                    for (RomanizationSystem system : systemsList)
+                    for (KanaQuestion.RomanizationSystem system : systemsList)
                         thisAltAnswers.put(system, parser.getText());
                 else
                     throw new ParseException("Empty AltAnswer tag", parser.getLineNumber());
@@ -275,13 +275,13 @@ final class XmlParser
         return thisAltAnswers.toArray(new String[0]);
     }
 
-    private static RomanizationSystem[] parseRomanizationSystemList(String attributeString)
+    private static KanaQuestion.RomanizationSystem[] parseRomanizationSystemList(String attributeString)
     {
         String[] stringList = attributeString.trim().split("\\s+");
-        RomanizationSystem[] systemList = new RomanizationSystem[stringList.length];
+        KanaQuestion.RomanizationSystem[] systemList = new KanaQuestion.RomanizationSystem[stringList.length];
 
         for (int i = 0; i < stringList.length; i++)
-            systemList[i] = RomanizationSystem.valueOf(stringList[i]);
+            systemList[i] = KanaQuestion.RomanizationSystem.valueOf(stringList[i]);
 
         return systemList;
     }

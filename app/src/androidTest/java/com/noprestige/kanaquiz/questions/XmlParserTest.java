@@ -9,12 +9,12 @@ import java.util.TreeMap;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import static com.noprestige.kanaquiz.questions.Diacritic.CONSONANT;
-import static com.noprestige.kanaquiz.questions.Diacritic.DAKUTEN;
-import static com.noprestige.kanaquiz.questions.Diacritic.HANDAKUTEN;
-import static com.noprestige.kanaquiz.questions.Diacritic.NO_DIACRITIC;
-import static com.noprestige.kanaquiz.questions.RomanizationSystem.KUNREI;
-import static com.noprestige.kanaquiz.questions.RomanizationSystem.NIHON;
+import static com.noprestige.kanaquiz.questions.KanaQuestion.RomanizationSystem.KUNREI;
+import static com.noprestige.kanaquiz.questions.KanaQuestion.RomanizationSystem.NIHON;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.Diacritic.CONSONANT;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.Diacritic.DAKUTEN;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.Diacritic.HANDAKUTEN;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.Diacritic.NO_DIACRITIC;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;

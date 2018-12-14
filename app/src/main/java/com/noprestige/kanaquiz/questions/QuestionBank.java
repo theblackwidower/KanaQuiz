@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class QuestionBank extends WeightedList<Question>
 {
@@ -48,6 +49,27 @@ public class QuestionBank extends WeightedList<Question>
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
             currentPossibleAnswers = null;
+        }
+    }
+
+    static class QuestionRecord extends ArrayBlockingQueue<String>
+    {
+        QuestionRecord(int capacity)
+        {
+            super(capacity);
+        }
+
+        public boolean add(Question question)
+        {
+            if (contains(question.getDatabaseKey()))
+                return false;
+            else
+            {
+                add(question.getDatabaseKey());
+                if (remainingCapacity() == 0)
+                    remove();
+                return true;
+            }
         }
     }
 

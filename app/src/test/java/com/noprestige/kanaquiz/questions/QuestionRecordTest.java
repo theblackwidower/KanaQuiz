@@ -10,7 +10,7 @@ public class QuestionRecordTest
     @Test
     public void testRecord()
     {
-        QuestionRecord recordToTest = new QuestionRecord(6);
+        QuestionBank.QuestionRecord recordToTest = new QuestionBank.QuestionRecord(6);
 
         KanaQuestion question1 = new KanaQuestion("T", "test");
         KanaQuestion question2 = new KanaQuestion("L", "run");
