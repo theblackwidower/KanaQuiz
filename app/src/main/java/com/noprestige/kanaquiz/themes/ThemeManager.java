@@ -67,70 +67,75 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        int code = FontProviderClient.checkAvailability(activity);
-        if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
+        if (!isFontInitialized)
         {
-            if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
+            int code = FontProviderClient.checkAvailability(activity);
+            if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
             {
-                LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
-                if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
-                    getDownloadDialog(activity, true);
-            }
-        }
-        else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
-        {
-            LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_update_alert_date);
-            if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
-                getDownloadDialog(activity, false);
-        }
-        else if ((code == FontProviderClient.FontProviderAvailability.OK) && !isFontInitialized)
-        {
-            if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.M) &&
-                    (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                            PackageManager.PERMISSION_GRANTED))
-            {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
-                dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                dialogBuilder.setOnDismissListener(dialog -> activity
-                        .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
-                dialogBuilder.show();
-                //TODO: Find way to get activity to restart once font permission is granted.
-            }
-            else
-            {
-                FontProviderClient client = FontProviderClient.create(activity);
-                if (client != null)
+                if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
                 {
-                    Typeface[] serifFonts =
-                            client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif",
-                                    "serif-thin", "serif-light", "serif-medium", "serif-black", "serif-demilight",
-                                    "serif-bold");
-
-                    client.setNextRequestReplaceFallbackFonts(true);
-
-                    client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
-                            "sans-serif-medium", "sans-serif-black", "sans-serif-demilight", "sans-serif-bold");
-
-                    if ((serifFonts == null) || (serifFonts.length < 7))
+                    LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
+                    if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                        getDownloadDialog(activity, true);
+                }
+            }
+            else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
+            {
+                LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_update_alert_date);
+                if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                    getDownloadDialog(activity, false);
+            }
+            else if (code == FontProviderClient.FontProviderAvailability.OK)
+            {
+                if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.M) &&
+                        (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                                PackageManager.PERMISSION_GRANTED))
+                {
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                    dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                    dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                    dialogBuilder.setOnDismissListener(dialog -> activity
+                            .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                    dialogBuilder.show();
+                    //TODO: Find way to get activity to restart once font permission is granted.
+                }
+                else
+                {
+                    FontProviderClient client = FontProviderClient.create(activity);
+                    if (client != null)
                     {
-                        LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_download_alert_date);
-                        if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                        Typeface[] serifFonts =
+                                client.replace(new FontRequest[]{FontRequest.NOTO_SERIF}, "Noto Serif CJK", "serif",
+                                        "serif-thin", "serif-light", "serif-medium", "serif-black", "serif-demilight",
+                                        "serif-bold");
+
+                        client.setNextRequestReplaceFallbackFonts(true);
+
+                        client.replace("Noto Sans CJK", "sans-serif", "sans-serif-thin", "sans-serif-light",
+                                "sans-serif-medium", "sans-serif-black", "sans-serif-demilight", "sans-serif-bold");
+
+                        if ((serifFonts == null) || (serifFonts.length < 7))
                         {
-                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                            dialogBuilder.setMessage(R.string.font_provider_font_request);
-                            //ref: https://forums.xamarin.com/discussion/55897/
-                            // launch-an-application-from-another-application-on-android
-                            dialogBuilder.setPositiveButton(R.string.open_font_provider, (dialog, which) -> activity
-                                    .startActivity(activity.getPackageManager()
-                                            .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
-                            dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
-                                    .setString(R.string.prefid_font_download_alert_date, LocalDate.now().toString()));
-                            dialogBuilder.show();
+                            LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_download_alert_date);
+                            if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
+                            {
+                                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                                dialogBuilder.setMessage(R.string.font_provider_font_request);
+                                //ref: https://forums.xamarin.com/discussion/55897/
+                                // launch-an-application-from-another-application-on-android
+                                dialogBuilder.setPositiveButton(R.string.open_font_provider, (dialog, which) -> activity
+                                        .startActivity(activity.getPackageManager()
+                                                .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
+                                dialogBuilder.setNegativeButton(R.string.remind_tomorrow,
+                                        (dialog, which) -> OptionsControl
+                                                .setString(R.string.prefid_font_download_alert_date,
+                                                        LocalDate.now().toString()));
+                                dialogBuilder.show();
+                            }
                         }
+                        else
+                            isFontInitialized = true;
                     }
-                    else
-                        isFontInitialized = true;
                 }
             }
         }
