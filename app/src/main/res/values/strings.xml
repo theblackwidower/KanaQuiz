@@ -159,7 +159,6 @@
     <string name="font_provider_install_request">This application uses the RikkaApps\' Font Provider for prettier
         Japanese characters. Please download the support app to enable it.</string>
 
-    <string name="prefid_font_update_alert_date" translatable="false">font_update_alert_date</string>
     <string name="font_provider_update_request">Your version of the RikkaApps\' Font Provider is out of date. You may
         notice some font issues. To resolve, please update to the latest version.</string>
 

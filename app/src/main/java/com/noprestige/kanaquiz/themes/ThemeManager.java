@@ -81,7 +81,7 @@ public final class ThemeManager
             }
             else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
             {
-                LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_update_alert_date);
+                LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
                 if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
                     getDownloadDialog(activity, false);
             }
@@ -158,14 +158,13 @@ public final class ThemeManager
 
         int messageRefId =
                 isNewInstall ? R.string.font_provider_install_request : R.string.font_provider_update_request;
-        int delayPrefIdRefId = isNewInstall ? R.string.prefid_font_remind_date : R.string.prefid_font_update_alert_date;
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setMessage(messageRefId);
         dialogBuilder.setPositiveButton(downloadMessageRefId,
                 (dialog, which) -> activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadLink))));
-        dialogBuilder.setNegativeButton(R.string.remind_tomorrow,
-                (dialog, which) -> OptionsControl.setString(delayPrefIdRefId, LocalDate.now().toString()));
+        dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
+                .setString(R.string.prefid_font_remind_date, LocalDate.now().toString()));
 
         if (isNewInstall)
             dialogBuilder.setNeutralButton(R.string.ignore,
