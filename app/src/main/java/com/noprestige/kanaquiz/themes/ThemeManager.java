@@ -74,58 +74,14 @@ public final class ThemeManager
             {
                 LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
                 if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
-                {
-                    int downloadMessageRefId;
-                    String downloadLink;
-                    if (KanaQuizMain.isGooglePlayStoreOnDevice())
-                    {
-                        downloadMessageRefId = R.string.get_on_google_play;
-                        downloadLink = "https://play.google.com/store/apps/details?id=moe.shizuku.fontprovider";
-                    }
-                    else
-                    {
-                        downloadMessageRefId = R.string.download_github;
-                        downloadLink = "https://github.com/RikkaApps/FontProvider/releases/";
-                    }
-
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                    dialogBuilder.setMessage(R.string.font_provider_install_request);
-                    dialogBuilder.setPositiveButton(downloadMessageRefId, (dialog, which) -> activity
-                            .startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadLink))));
-                    dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
-                            .setString(R.string.prefid_font_remind_date, LocalDate.now().toString()));
-                    dialogBuilder.setNeutralButton(R.string.ignore,
-                            (dialog, which) -> OptionsControl.setBoolean(R.string.prefid_ignore_font_provider, true));
-                    dialogBuilder.show();
-                }
+                    getDownloadDialog(activity, true);
             }
         }
         else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
         {
             LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_update_alert_date);
             if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
-            {
-                int downloadMessageRefId;
-                String downloadLink;
-                if (KanaQuizMain.isGooglePlayStoreOnDevice())
-                {
-                    downloadMessageRefId = R.string.update_on_google_play;
-                    downloadLink = "https://play.google.com/store/apps/details?id=moe.shizuku.fontprovider";
-                }
-                else
-                {
-                    downloadMessageRefId = R.string.download_github;
-                    downloadLink = "https://github.com/RikkaApps/FontProvider/releases/";
-                }
-
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                dialogBuilder.setMessage(R.string.font_provider_update_request);
-                dialogBuilder.setPositiveButton(downloadMessageRefId, (dialog, which) -> activity
-                        .startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadLink))));
-                dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
-                        .setString(R.string.prefid_font_update_alert_date, LocalDate.now().toString()));
-                dialogBuilder.show();
-            }
+                getDownloadDialog(activity, false);
         }
         else if ((code == FontProviderClient.FontProviderAvailability.OK) && !isFontInitialized)
         {
@@ -178,5 +134,38 @@ public final class ThemeManager
                 }
             }
         }
+    }
+
+    public static void getDownloadDialog(Activity activity, boolean isNewInstall)
+    {
+        int downloadMessageRefId;
+        String downloadLink;
+        if (KanaQuizMain.isGooglePlayStoreOnDevice())
+        {
+            downloadMessageRefId = isNewInstall ? R.string.get_on_google_play : R.string.update_on_google_play;
+            downloadLink = "https://play.google.com/store/apps/details?id=moe.shizuku.fontprovider";
+        }
+        else
+        {
+            downloadMessageRefId = R.string.download_github;
+            downloadLink = "https://github.com/RikkaApps/FontProvider/releases/";
+        }
+
+        int messageRefId =
+                isNewInstall ? R.string.font_provider_install_request : R.string.font_provider_update_request;
+        int delayPrefIdRefId = isNewInstall ? R.string.prefid_font_remind_date : R.string.prefid_font_update_alert_date;
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        dialogBuilder.setMessage(messageRefId);
+        dialogBuilder.setPositiveButton(downloadMessageRefId,
+                (dialog, which) -> activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadLink))));
+        dialogBuilder.setNegativeButton(R.string.remind_tomorrow,
+                (dialog, which) -> OptionsControl.setString(delayPrefIdRefId, LocalDate.now().toString()));
+
+        if (isNewInstall)
+            dialogBuilder.setNeutralButton(R.string.ignore,
+                    (dialog, which) -> OptionsControl.setBoolean(R.string.prefid_ignore_font_provider, true));
+
+        dialogBuilder.show();
     }
 }
