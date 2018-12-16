@@ -133,7 +133,7 @@ public final class ThemeManager
         }
     }
 
-    public static void getDownloadDialog(Activity activity, boolean isNewInstall)
+    private static void getDownloadDialog(Activity activity, boolean isNewInstall)
     {
         LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
         if ((remindDate == null) || remindDate.isBefore(LocalDate.now()))
