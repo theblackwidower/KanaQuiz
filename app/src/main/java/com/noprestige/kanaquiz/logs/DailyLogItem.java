@@ -113,7 +113,7 @@ public class DailyLogItem extends View
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
 
         datePaint.setTypeface(font);
         ratioPaint.setTypeface(font);

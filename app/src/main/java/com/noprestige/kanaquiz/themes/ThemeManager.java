@@ -44,11 +44,36 @@ public final class ThemeManager
         return returnValue;
     }
 
+    public static Typeface getDefaultThemeFont(Context context, int fontStyle)
+    {
+        int attr;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
+            attr = android.R.attr.typeface;
+        else
+            attr = R.attr.fontFamily;
+        return getThemeFont(context, attr, fontStyle);
+    }
+
     public static Typeface getThemeFont(Context context, int attr, int fontStyle)
     {
         TypedArray array = context.getTheme().obtainStyledAttributes(new int[]{attr});
         String fontFamily = array.getString(0);
         array.recycle();
+        //ref: https://developer.android.com/reference/android/widget/TextView.html#attr_android:typeface
+        switch (fontFamily)
+        {
+            case "0":
+                fontFamily = "normal";
+                break;
+            case "1":
+                fontFamily = "sans";
+                break;
+            case "2":
+                fontFamily = "serif";
+                break;
+            case "3":
+                fontFamily = "monospace";
+        }
         return Typeface.create(fontFamily, fontStyle);
     }
 
