@@ -49,6 +49,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             tabList.add(R.string.base_form_title);
             tabList.add(R.string.diacritics_title);
             tabList.add(R.string.digraphs_title);
+            if (questionTypeRef == R.string.katakana)
+                tabList.add(R.string.extended_katakana_title);
         }
         else
         {
@@ -61,12 +63,14 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             else
                 throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
-            if (questions.anySelected())
+            if (questions.anyMainKanaSelected())
                 tabList.add(R.string.base_form_title);
             if (questions.diacriticsSelected())
                 tabList.add(R.string.diacritics_title);
             if (questions.digraphsSelected())
                 tabList.add(R.string.digraphs_title);
+            if (questions.extendedKatakanaSelected())
+                tabList.add(R.string.extended_katakana_title);
         }
     }
 

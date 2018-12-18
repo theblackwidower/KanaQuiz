@@ -306,6 +306,15 @@ public class QuestionManagement
         return false;
     }
 
+    public boolean anyMainKanaSelected()
+    {
+        for (int i = 1; i <= 10; i++)
+            if (getPref(i))
+                return true;
+
+        return false;
+    }
+
     public boolean diacriticsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
@@ -335,6 +344,15 @@ public class QuestionManagement
                 if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9)) != null) ||
                         (getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9)) != null)))
                     return true;
+
+        return false;
+    }
+
+    public boolean extendedKatakanaSelected()
+    {
+        for (int i = 11; i <= getCategoryCount(); i++)
+            if (getPref(i))
+                return true;
 
         return false;
     }
@@ -449,6 +467,35 @@ public class QuestionManagement
             }
 
         return table;
+    }
+
+    public View getExtendedKatakanaReferenceTable(Context context)
+    {
+        LinearLayout fullLayout = new LinearLayout(context);
+        fullLayout.setOrientation(LinearLayout.VERTICAL);
+        fullLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
+        for (int i = 11; i <= getCategoryCount(); i++)
+            if (isFullReference || getPref(i))
+            {
+                fullLayout.addView(
+                        ReferenceCell.buildHeader(context, getSetTitle(i).toString().split("\\s*[()]\\s*")[1]));
+                FlowLayout sectionLayout = new FlowLayout(context);
+                sectionLayout.setGravity(Gravity.FILL);
+                sectionLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+
+                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, null);
+
+                for (Question question : questionSet)
+                    sectionLayout.addView(question.generateReference(context));
+
+                fullLayout.addView(sectionLayout);
+            }
+
+        return fullLayout;
     }
 
     public View getKanjiReferenceTable(Context context)

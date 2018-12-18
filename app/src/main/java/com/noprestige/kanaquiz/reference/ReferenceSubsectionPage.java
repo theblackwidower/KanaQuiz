@@ -64,6 +64,8 @@ public class ReferenceSubsectionPage extends Fragment
                 layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
             }
         }
+        else if (refCategoryId == R.string.extended_katakana_title)
+            layout.addView(questions.getExtendedKatakanaReferenceTable(container.getContext()));
 
         return scrollBox;
     }
