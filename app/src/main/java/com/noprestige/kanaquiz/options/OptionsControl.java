@@ -8,8 +8,7 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 
 import com.noprestige.kanaquiz.R;
-
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 public final class OptionsControl
 {
@@ -40,7 +39,7 @@ public final class OptionsControl
     public static boolean getBoolean(String prefId)
     {
         //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, HIRAGANA.getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
     }
 
     public static void setBoolean(int resId, boolean setting)

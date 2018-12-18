@@ -3,6 +3,7 @@ package com.noprestige.kanaquiz.options;
 import android.content.Context;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,6 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 
 class QuestionSelectionPager extends FragmentPagerAdapter
 {
@@ -27,7 +26,7 @@ class QuestionSelectionPager extends FragmentPagerAdapter
 
         tabList.add(R.string.hiragana);
         tabList.add(R.string.katakana);
-        if (KANJI_TITLES.length > 0)
+        if (QuestionManagement.getKanjiFileCount() > 0)
             tabList.add(R.string.kanji);
         tabList.add(R.string.vocabulary);
     }

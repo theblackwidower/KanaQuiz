@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import androidx.fragment.app.Fragment;
-
-import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class ReferenceSubsectionVocab extends Fragment
 {
@@ -32,9 +31,9 @@ public class ReferenceSubsectionVocab extends Fragment
         View scrollBox = inflater.inflate(R.layout.fragment_reference_subsection_empty, container, false);
         ViewGroup layout = scrollBox.findViewById(R.id.secReference);
 
-        for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
-            if (vocabSetId.equals(VOCABULARY.getPrefId(i)))
-                layout.addView(VOCABULARY.getVocabReferenceTable(container.getContext(), i));
+        for (int i = 1; i <= QuestionManagement.getVocabulary().getCategoryCount(); i++)
+            if (vocabSetId.equals(QuestionManagement.getVocabulary().getPrefId(i)))
+                layout.addView(QuestionManagement.getVocabulary().getVocabReferenceTable(container.getContext(), i));
 
         return scrollBox;
     }

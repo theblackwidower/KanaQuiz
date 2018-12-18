@@ -14,17 +14,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 import androidx.fragment.app.Fragment;
-
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
 public class QuestionSelectionPage extends Fragment
 {
@@ -48,23 +43,23 @@ public class QuestionSelectionPage extends Fragment
         int questionTypeRef = getArguments().getInt(ARG_QUESTION_TYPE_REF, 0);
 
         if (questionTypeRef == R.string.hiragana)
-            screen = HIRAGANA.getSelectionScreen(getContext());
+            screen = QuestionManagement.getHiragana().getSelectionScreen(getContext());
         else if (questionTypeRef == R.string.katakana)
-            screen = KATAKANA.getSelectionScreen(getContext());
+            screen = QuestionManagement.getKatakana().getSelectionScreen(getContext());
         else if (questionTypeRef == R.string.kanji)
         {
             screen = new LinearLayout(getContext());
             screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
             screen.setOrientation(LinearLayout.VERTICAL);
-            for (int i = 0; i < KANJI_TITLES.length; i++)
+            for (int i = 0; i < QuestionManagement.getKanjiFileCount(); i++)
             {
-                screen.addView(buildHeader(getContext(), KANJI_TITLES[i]));
-                KANJI_FILES[i].populateSelectionScreen(screen);
+                screen.addView(buildHeader(getContext(), QuestionManagement.getKanjiTitle(i)));
+                QuestionManagement.getKanji(i).populateSelectionScreen(screen);
             }
         }
         else if (questionTypeRef == R.string.vocabulary)
-            screen = VOCABULARY.getSelectionScreen(getContext());
+            screen = QuestionManagement.getVocabulary().getSelectionScreen(getContext());
 
         ScrollView scrollView = new ScrollView(getContext());
         scrollView.addView(screen);

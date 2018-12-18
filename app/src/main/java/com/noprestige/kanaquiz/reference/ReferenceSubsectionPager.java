@@ -14,12 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
-
 class ReferenceSubsectionPager extends FragmentPagerAdapter
 {
     private int questionTypeRef;
@@ -39,15 +33,15 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         if (questionTypeRef == R.string.vocabulary)
         {
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-            for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
-                if (isFullReference || VOCABULARY.getPref(i))
+            for (int i = 1; i <= QuestionManagement.getVocabulary().getCategoryCount(); i++)
+                if (isFullReference || QuestionManagement.getVocabulary().getPref(i))
                     tabList.add(i);
         }
         else if (questionTypeRef == R.string.kanji)
         {
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-            for (int i = 0; i < KANJI_TITLES.length; i++)
-                if (isFullReference || KANJI_FILES[i].anySelected())
+            for (int i = 0; i < QuestionManagement.getKanjiFileCount(); i++)
+                if (isFullReference || QuestionManagement.getKanji(i).anySelected())
                     tabList.add(i);
         }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
@@ -61,9 +55,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             QuestionManagement questions;
 
             if (questionTypeRef == R.string.hiragana)
-                questions = HIRAGANA;
+                questions = QuestionManagement.getHiragana();
             else if (questionTypeRef == R.string.katakana)
-                questions = KATAKANA;
+                questions = QuestionManagement.getKatakana();
             else
                 throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
@@ -80,7 +74,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     public Fragment getItem(int position)
     {
         if (questionTypeRef == R.string.vocabulary)
-            return ReferenceSubsectionVocab.newInstance(VOCABULARY.getPrefId(tabList.get(position)));
+            return ReferenceSubsectionVocab
+                    .newInstance(QuestionManagement.getVocabulary().getPrefId(tabList.get(position)));
         else
             return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
     }
@@ -92,7 +87,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         {
             if (pageIds == null)
                 pageIds = new ArrayList<>();
-            String prefId = VOCABULARY.getPrefId(tabList.get(position));
+            String prefId = QuestionManagement.getVocabulary().getPrefId(tabList.get(position));
             if (!pageIds.contains(prefId))
                 pageIds.add(prefId);
             return pageIds.indexOf(prefId);
@@ -115,9 +110,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     public CharSequence getPageTitle(int position)
     {
         if (questionTypeRef == R.string.vocabulary)
-            return VOCABULARY.getSetTitle(tabList.get(position)).toString();
+            return QuestionManagement.getVocabulary().getSetTitle(tabList.get(position)).toString();
         else if (questionTypeRef == R.string.kanji)
-            return KANJI_TITLES[tabList.get(position)];
+            return QuestionManagement.getKanjiTitle(tabList.get(position));
         else
             return context.getResources().getString(tabList.get(position));
     }

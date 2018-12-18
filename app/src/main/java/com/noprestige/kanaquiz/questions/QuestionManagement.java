@@ -23,11 +23,11 @@ import java.util.TreeMap;
 
 public class QuestionManagement
 {
-    public static QuestionManagement HIRAGANA;
-    public static QuestionManagement KATAKANA;
-    public static QuestionManagement[] KANJI_FILES;
-    public static String[] KANJI_TITLES;
-    public static QuestionManagement VOCABULARY;
+    private static QuestionManagement HIRAGANA;
+    private static QuestionManagement KATAKANA;
+    private static QuestionManagement[] KANJI_FILES;
+    private static String[] KANJI_TITLES;
+    private static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
 
@@ -86,6 +86,36 @@ public class QuestionManagement
         }
     }
 
+    public static QuestionManagement getHiragana()
+    {
+        return HIRAGANA;
+    }
+
+    public static QuestionManagement getKatakana()
+    {
+        return KATAKANA;
+    }
+
+    public static int getKanjiFileCount()
+    {
+        return KANJI_FILES.length;
+    }
+
+    public static QuestionManagement getKanji(int index)
+    {
+        return KANJI_FILES[index];
+    }
+
+    public static String getKanjiTitle(int index)
+    {
+        return KANJI_TITLES[index];
+    }
+
+    public static QuestionManagement getVocabulary()
+    {
+        return VOCABULARY;
+    }
+
     private Question[] getQuestionSet(int number, Diacritic diacritic, String digraphs)
     {
         return questionSets.get(new SetCode(number, diacritic, digraphs));
@@ -107,7 +137,7 @@ public class QuestionManagement
                 setNoDiacriticsTitles[number - 1];
     }
 
-    public QuestionManagement(int xmlRefId, Resources resources)
+    QuestionManagement(int xmlRefId, Resources resources)
     {
         Map<SetCode, Question[]> questionSetList = new TreeMap<>();
         List<String> prefIdList = new ArrayList<>();

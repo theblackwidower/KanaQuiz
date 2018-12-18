@@ -11,10 +11,6 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import androidx.fragment.app.Fragment;
 
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
-
 public class ReferenceSubsectionPage extends Fragment
 {
     private static final String ARG_QUESTION_TYPE_REF = "questionTypeRef";
@@ -42,13 +38,14 @@ public class ReferenceSubsectionPage extends Fragment
         QuestionManagement questions;
 
         if (questionTypeRef == R.string.hiragana)
-            questions = HIRAGANA;
+            questions = QuestionManagement.getHiragana();
         else if (questionTypeRef == R.string.katakana)
-            questions = KATAKANA;
+            questions = QuestionManagement.getKatakana();
         else if (questionTypeRef == R.string.kanji)
         {
-            if (refCategoryId < KANJI_FILES.length)
-                layout.addView(KANJI_FILES[refCategoryId].getKanjiReferenceTable(container.getContext()));
+            if (refCategoryId < QuestionManagement.getKanjiFileCount())
+                layout.addView(
+                        QuestionManagement.getKanji(refCategoryId).getKanjiReferenceTable(container.getContext()));
             return scrollBox;
         }
         else

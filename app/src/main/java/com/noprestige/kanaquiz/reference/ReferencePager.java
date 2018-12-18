@@ -13,12 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
-import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
-
 class ReferencePager extends FragmentPagerAdapter
 {
     private List<Integer> tabList;
@@ -35,23 +29,23 @@ class ReferencePager extends FragmentPagerAdapter
         {
             tabList.add(R.string.hiragana);
             tabList.add(R.string.katakana);
-            if (KANJI_TITLES.length > 0)
+            if (QuestionManagement.getKanjiFileCount() > 0)
                 tabList.add(R.string.kanji);
             tabList.add(R.string.vocabulary);
         }
         else
         {
-            if (HIRAGANA.anySelected())
+            if (QuestionManagement.getHiragana().anySelected())
                 tabList.add(R.string.hiragana);
-            if (KATAKANA.anySelected())
+            if (QuestionManagement.getKatakana().anySelected())
                 tabList.add(R.string.katakana);
-            for (QuestionManagement kanjiFile : KANJI_FILES)
-                if (kanjiFile.anySelected())
+            for (int i = 0; i < QuestionManagement.getKanjiFileCount(); i++)
+                if (QuestionManagement.getKanji(i).anySelected())
                 {
                     tabList.add(R.string.kanji);
                     break;
                 }
-            if (VOCABULARY.anySelected())
+            if (QuestionManagement.getVocabulary().anySelected())
                 tabList.add(R.string.vocabulary);
         }
     }
