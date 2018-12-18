@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QuestionFileSet xmlns="https://www.noprestige.com"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+    <QuestionFile resId="@xml/kanji_1" title="@string/kanji_phase_1"/>
+    <QuestionFile resId="@xml/kanji_2" title="@string/kanji_phase_2"/>
+    <QuestionFile resId="@xml/kanji_3" title="@string/kanji_phase_3"/>
+</QuestionFileSet>

@@ -12,6 +12,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import androidx.fragment.app.Fragment;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 
 public class ReferenceSubsectionPage extends Fragment
@@ -44,6 +45,12 @@ public class ReferenceSubsectionPage extends Fragment
             questions = HIRAGANA;
         else if (questionTypeRef == R.string.katakana)
             questions = KATAKANA;
+        else if (questionTypeRef == R.string.kanji)
+        {
+            if (refCategoryId < KANJI_FILES.length)
+                layout.addView(KANJI_FILES[refCategoryId].getKanjiReferenceTable(container.getContext()));
+            return scrollBox;
+        }
         else
             throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 

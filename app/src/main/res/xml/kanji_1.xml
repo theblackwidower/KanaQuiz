@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions xmlns="https://www.noprestige.com"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+    <QuestionSet prefId="ljts_kanji_set_1" setTitle="@string/ljts_kanji_set_1_title">
+        <KanjiQuestion question="水" meaning="water" kunYomi="mizu" onYomi="sui"/>
+        <KanjiQuestion question="火" meaning="fire" kunYomi="hi" onYomi="ka"/>
+        <KanjiQuestion question="木" meaning="tree/wood" kunYomi="ki/ko" onYomi="boku/moku"/>
+        <KanjiQuestion question="石" meaning="stone" kunYomi="ishi" onYomi="seki/shaku/koku"/>
+        <KanjiQuestion question="金" meaning="gold/money" kunYomi="kane/kana" onYomi="kin/kon"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_2" setTitle="@string/ljts_kanji_set_2_title">
+        <KanjiQuestion question="日" meaning="day/sun" kunYomi="hi/bi" onYomi="nichi/jitsu"/>
+        <KanjiQuestion question="月" meaning="month/moon" kunYomi="tsuki" onYomi="getsu/gatsu"/>
+        <KanjiQuestion question="年" meaning="year" kunYomi="toshi" onYomi="nen"/>
+        <KanjiQuestion question="早" meaning="early/fast" kunYomi="haya" onYomi="sō/sa"/>
+        <KanjiQuestion question="夕" meaning="evening" kunYomi="yū" onYomi="seki"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_3" setTitle="@string/ljts_kanji_set_3_title">
+        <KanjiQuestion question="一" meaning="one" kunYomi="hito" onYomi="ichi/itsu"/>
+        <KanjiQuestion question="二" meaning="two" kunYomi="futa" onYomi="ni"/>
+        <KanjiQuestion question="三" meaning="three" kunYomi="mi" onYomi="san"/>
+        <KanjiQuestion question="四" meaning="four" kunYomi="yo/yon" onYomi="shi"/>
+        <KanjiQuestion question="五" meaning="five" kunYomi="itsu" onYomi="go"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_4" setTitle="@string/ljts_kanji_set_4_title">
+        <KanjiQuestion question="六" meaning="six" kunYomi="mu" onYomi="roku"/>
+        <KanjiQuestion question="七" meaning="seven" kunYomi="nana" onYomi="shichi"/>
+        <KanjiQuestion question="八" meaning="eight" kunYomi="ya" onYomi="hachi"/>
+        <KanjiQuestion question="九" meaning="nine" kunYomi="kokono" onYomi="ku/kyū"/>
+        <KanjiQuestion question="十" meaning="ten" kunYomi="tō" onYomi="jū/ji"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_5" setTitle="@string/ljts_kanji_set_5_title">
+        <KanjiQuestion question="上" meaning="above/up" kunYomi="ue/kami" onYomi="jō/shō"/>
+        <KanjiQuestion question="下" meaning="below/down" kunYomi="shita/shimo" onYomi="ka/ge"/>
+        <KanjiQuestion question="左" meaning="left" kunYomi="hidari" onYomi="sa"/>
+        <KanjiQuestion question="右" meaning="right" kunYomi="migi" onYomi="u/yū"/>
+        <KanjiQuestion question="中" meaning="inside/middle" kunYomi="naka/uchi" onYomi="chū"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_6" setTitle="@string/ljts_kanji_set_6_title">
+        <KanjiQuestion question="百" meaning="hundred" onYomi="hyaku/byaku"/> <!--kunYomi="momo" ARCHAIC-->
+        <KanjiQuestion question="千" meaning="thousand" kunYomi="chi" onYomi="sen"/>
+        <KanjiQuestion question="本" meaning="book/true/main" kunYomi="moto" onYomi="hon"/>
+        <KanjiQuestion question="文" meaning="text/writing" kunYomi="fumi/aya" onYomi="bun/mon"/>
+        <KanjiQuestion question="字" meaning="letter/village section" kunYomi="aza" onYomi="ji"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_7" setTitle="@string/ljts_kanji_set_7_title">
+        <KanjiQuestion question="力" meaning="power/strength" kunYomi="chikara" onYomi="riki/ryoku"/>
+        <KanjiQuestion question="気" meaning="spirit/mind/air" kunYomi="iki" onYomi="ki/ke"/>
+        <KanjiQuestion question="生" meaning="life/birth" kunYomi="i/u/nama" onYomi="sei/shō"/>
+        <KanjiQuestion question="休" meaning="rest/day off" kunYomi="yasu" onYomi="kyū"/>
+        <KanjiQuestion question="立" meaning="stand/rise" kunYomi="ta" onYomi="ritsu"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_8" setTitle="@string/ljts_kanji_set_8_title">
+        <KanjiQuestion question="校" meaning="school/exam" onYomi="kō/kyō"/>
+        <KanjiQuestion question="学" meaning="study/learn" kunYomi="mana" onYomi="gaku"/>
+        <KanjiQuestion question="正" meaning="correct" kunYomi="tada/masa" onYomi="sei/shō"/>
+        <KanjiQuestion question="入" meaning="enter/insert" kunYomi="i/hai" onYomi="nyū"/>
+        <KanjiQuestion question="出" meaning="exit/leave" kunYomi="de/da" onYomi="shutsu"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_9" setTitle="@string/ljts_kanji_set_9_title">
+        <KanjiQuestion question="花" meaning="flower" kunYomi="hana" onYomi="ka/ke"/>
+        <KanjiQuestion question="草" meaning="grass/plant" kunYomi="kusa" onYomi="sō"/>
+        <KanjiQuestion question="田" meaning="rice field/paddy" kunYomi="ta" onYomi="den"/>
+        <KanjiQuestion question="雨" meaning="rain" kunYomi="ame/ama" onYomi="u"/>
+        <KanjiQuestion question="空" meaning="sky/empty" kunYomi="sora/kara/a" onYomi="kū"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_10" setTitle="@string/ljts_kanji_set_10_title">
+        <KanjiQuestion question="王" meaning="king/ruler" onYomi="ō"/>
+        <KanjiQuestion question="玉" meaning="jewel/ball" kunYomi="tama" onYomi="gyoku"/>
+        <KanjiQuestion question="円" meaning="yen/circle" kunYomi="maru/mado" onYomi="en"/>
+        <KanjiQuestion question="大" meaning="large/big" kunYomi="ō" onYomi="dai/tai"/>
+        <KanjiQuestion question="小" meaning="little/small" kunYomi="chii/ko" onYomi="shō"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_11" setTitle="@string/ljts_kanji_set_11_title">
+        <KanjiQuestion question="人" meaning="person" kunYomi="hito" onYomi="jin/nin"/>
+        <KanjiQuestion question="名" meaning="name/reputation" kunYomi="na" onYomi="mei/myō"/>
+        <KanjiQuestion question="女" meaning="woman/female" kunYomi="onna/me" onYomi="jo/nyo/nyō"/>
+        <KanjiQuestion question="男" meaning="man/male" kunYomi="otoko/o" onYomi="dan/nan"/>
+        <KanjiQuestion question="子" meaning="child" kunYomi="ko" onYomi="shi/su"/>
+        <KanjiQuestion question="犬" meaning="dog" kunYomi="inu" onYomi="ken"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_12" setTitle="@string/ljts_kanji_set_12_title">
+        <KanjiQuestion question="目" meaning="eye/look/class" kunYomi="me" onYomi="moku/boku"/>
+        <KanjiQuestion question="耳" meaning="ear" kunYomi="mimi" onYomi="ji"/>
+        <KanjiQuestion question="口" meaning="mouth" kunYomi="kuchi" onYomi="kō/ku"/>
+        <KanjiQuestion question="手" meaning="hand" kunYomi="te" onYomi="shu"/>
+        <KanjiQuestion question="足" meaning="leg/foot/suffice" kunYomi="asha/ta" onYomi="soku"/>
+        <KanjiQuestion question="見" meaning="see/look/view" kunYomi="mi" onYomi="ken"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_13" setTitle="@string/ljts_kanji_set_13_title">
+        <KanjiQuestion question="林" meaning="woods" kunYomi="hiyashi" onYomi="rin"/>
+        <KanjiQuestion question="森" meaning="forest" kunYomi="mori" onYomi="shin"/>
+        <KanjiQuestion question="山" meaning="mountain" kunYomi="yama" onYomi="san"/>
+        <KanjiQuestion question="川" meaning="river/stream" kunYomi="kawa" onYomi="sen"/>
+        <KanjiQuestion question="土" meaning="earth/soil" kunYomi="tsuchi" onYomi="do/to"/>
+        <KanjiQuestion question="天" meaning="heaven/sky" kunYomi="ame/ama" onYomi="ten"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_set_14" setTitle="@string/ljts_kanji_set_14_title">
+        <KanjiQuestion question="村" meaning="village/town" kunYomi="mura" onYomi="son"/>
+        <KanjiQuestion question="町" meaning="town/city/street" kunYomi="machi" onYomi="chō"/>
+        <KanjiQuestion question="赤" meaning="red" kunYomi="aka" onYomi="seki/shaku"/>
+        <KanjiQuestion question="青" meaning="blue/green" kunYomi="ao" onYomi="sei/shō"/> <!-- normally just 'blue' -->
+        <KanjiQuestion question="白" meaning="white" kunYomi="shiro" onYomi="haku/byaku"/>
+        <KanjiQuestion question="先" meaning="previous/before/ahead" kunYomi="saki" onYomi="sen"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_bonus_set_1_2" setTitle="@string/ljts_kanji_bonus_set_1_2_title">
+        <!--Duck Bonus 1-->
+        <KanjiQuestion question="車" meaning="vehicle/car" kunYomi="kuruma" onYomi="sha"/>
+        <KanjiQuestion question="虫" meaning="insect/worm" kunYomi="mushi" onYomi="chū/ki"/>
+        <!--Duck Bonus 2-->
+        <KanjiQuestion question="糸" meaning="thread" kunYomi="ito" onYomi="shi"/>
+        <KanjiQuestion question="貝" meaning="shell/shellfish" kunYomi="kai" onYomi="bai"/>
+    </QuestionSet>
+    <QuestionSet prefId="ljts_kanji_bonus_set_3_4" setTitle="@string/ljts_kanji_bonus_set_3_4_title">
+        <!--Duck Bonus 3-->
+        <KanjiQuestion question="竹" meaning="bamboo" kunYomi="take" onYomi="chiku"/>
+        <KanjiQuestion question="音" meaning="sound/noise" kunYomi="oto/ne" onYomi="on/in"/>
+        <!--Duck Bonus 4-->
+        <KanjiQuestion question="交" meaning="mix/intersect" kunYomi="maji/ka" onYomi="kō"/>
+        <KanjiQuestion question="計" meaning="measure/plan" kunYomi="haka" onYomi="kei"/>
+    </QuestionSet>
+    <!--
+    Sources:
+    Learn Japanese to Survive: Kanji Combat
+    Jisho (to look up Kanji characters): https://jisho.org
+    -->
+</Questions>

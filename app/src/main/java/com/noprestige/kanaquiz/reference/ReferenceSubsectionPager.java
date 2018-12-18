@@ -8,12 +8,15 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -38,6 +41,13 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
             for (int i = 1; i <= VOCABULARY.getCategoryCount(); i++)
                 if (isFullReference || VOCABULARY.getPref(i))
+                    tabList.add(i);
+        }
+        else if (questionTypeRef == R.string.kanji)
+        {
+            boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+            for (int i = 0; i < KANJI_TITLES.length; i++)
+                if (isFullReference || KANJI_FILES[i].anySelected())
                     tabList.add(i);
         }
         else if (OptionsControl.getBoolean(R.string.prefid_full_reference))
@@ -87,6 +97,10 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 pageIds.add(prefId);
             return pageIds.indexOf(prefId);
         }
+        if (questionTypeRef == R.string.kanji)
+            //should clear out all pages if locale changes
+            //no more than 16 kanji files, or this'll need to be modified
+            return (Locale.getDefault().hashCode() << 4) + tabList.get(position);
         else
             return tabList.get(position);
     }
@@ -102,6 +116,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     {
         if (questionTypeRef == R.string.vocabulary)
             return VOCABULARY.getSetTitle(tabList.get(position)).toString();
+        else if (questionTypeRef == R.string.kanji)
+            return KANJI_TITLES[tabList.get(position)];
         else
             return context.getResources().getString(tabList.get(position));
     }

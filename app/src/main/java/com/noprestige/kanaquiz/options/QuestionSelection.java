@@ -18,6 +18,10 @@ public class QuestionSelection extends AppCompatActivity
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new QuestionSelectionPager(getSupportFragmentManager(), this));
-        ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        //TODO: Make this check more dynamic, accounting for screen width and actual tab width
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

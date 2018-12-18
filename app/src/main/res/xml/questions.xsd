@@ -6,6 +6,19 @@
     xmlns:kq="https://www.noprestige.com"
     elementFormDefault="qualified">
 
+    <xs:element name="QuestionFileSet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QuestionFile" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="resId" type="text" use="required"/>
+                        <xs:attribute name="title" type="text" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Questions">
         <xs:complexType>
             <xs:sequence>
@@ -17,6 +30,10 @@
         <!-- ref: https://msdn.microsoft.com/en-us/library/ms256086(v=vs.110).aspx#Anchor_0 -->
         <xs:unique name="KanaPrimaryKey">
             <xs:selector xpath="*/kq:KanaQuestion|*/*/kq:KanaQuestion"/>
+            <xs:field xpath="@question"/>
+        </xs:unique>
+        <xs:unique name="KanjiPrimaryKey">
+            <xs:selector xpath="*/kq:KanjiQuestion"/>
             <xs:field xpath="@question"/>
         </xs:unique>
         <xs:unique name="WordPrimaryKey">
@@ -46,6 +63,7 @@
             <xs:sequence>
                 <xs:choice>
                     <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
+                    <xs:element ref="KanjiQuestion" maxOccurs="7"/>
                     <xs:element ref="WordQuestion" maxOccurs="unbounded"/>
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
@@ -90,13 +108,22 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="KanjiQuestion">
+        <xs:complexType>
+            <xs:attribute name="question" type="kanji" use="required"/>
+            <xs:attribute name="meaning" type="meanings" use="required"/>
+            <xs:attribute name="kunYomi" type="romaji"/>
+            <xs:attribute name="onYomi" type="romaji" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="WordQuestion">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:simpleContent>
-                            <xs:extension base="text"/>
+                            <xs:extension base="meanings"/>
                         </xs:simpleContent>
                     </xs:complexType>
                 </xs:element>
@@ -104,7 +131,7 @@
             <xs:attribute name="romaji" type="romaji" use="required"/>
             <xs:attribute name="kana" type="kana" use="required"/>
             <xs:attribute name="kanji" type="kanji-kana"/>
-            <xs:attribute name="answer" type="text" use="required"/>
+            <xs:attribute name="answer" type="meanings" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -143,9 +170,15 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="meanings">
+        <xs:restriction base="text">
+            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="['\-A-Za-z]*"/> <!-- Macrons removed for consistency: ĀāĒēĪīŌōŪū -->
+            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
         </xs:restriction>
     </xs:simpleType>
 

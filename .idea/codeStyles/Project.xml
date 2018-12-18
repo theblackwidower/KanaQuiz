@@ -348,6 +348,36 @@
             <rule>
               <match>
                 <AND>
+                  <NAME>meaning</NAME>
+                  <XML_ATTRIBUTE />
+                </AND>
+              </match>
+            </rule>
+          </section>
+          <section>
+            <rule>
+              <match>
+                <AND>
+                  <NAME>kunYomi</NAME>
+                  <XML_ATTRIBUTE />
+                </AND>
+              </match>
+            </rule>
+          </section>
+          <section>
+            <rule>
+              <match>
+                <AND>
+                  <NAME>onYomi</NAME>
+                  <XML_ATTRIBUTE />
+                </AND>
+              </match>
+            </rule>
+          </section>
+          <section>
+            <rule>
+              <match>
+                <AND>
                   <NAME>answer</NAME>
                   <XML_ATTRIBUTE />
                 </AND>

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_FILES;
+import static com.noprestige.kanaquiz.questions.QuestionManagement.KANJI_TITLES;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.KATAKANA;
 import static com.noprestige.kanaquiz.questions.QuestionManagement.VOCABULARY;
 
@@ -32,6 +35,8 @@ class ReferencePager extends FragmentPagerAdapter
         {
             tabList.add(R.string.hiragana);
             tabList.add(R.string.katakana);
+            if (KANJI_TITLES.length > 0)
+                tabList.add(R.string.kanji);
             tabList.add(R.string.vocabulary);
         }
         else
@@ -40,6 +45,12 @@ class ReferencePager extends FragmentPagerAdapter
                 tabList.add(R.string.hiragana);
             if (KATAKANA.anySelected())
                 tabList.add(R.string.katakana);
+            for (QuestionManagement kanjiFile : KANJI_FILES)
+                if (kanjiFile.anySelected())
+                {
+                    tabList.add(R.string.kanji);
+                    break;
+                }
             if (VOCABULARY.anySelected())
                 tabList.add(R.string.vocabulary);
         }

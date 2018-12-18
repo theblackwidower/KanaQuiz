@@ -35,7 +35,8 @@ public class QuestionBank extends WeightedList<Question>
 
     public boolean isCurrentQuestionVocab()
     {
-        return (currentQuestion.getClass().equals(WordQuestion.class));
+        return (currentQuestion.getClass().equals(WordQuestion.class) ||
+                currentQuestion.getClass().equals(KanjiQuestion.class));
     }
 
     public void newQuestion()
@@ -138,7 +139,7 @@ public class QuestionBank extends WeightedList<Question>
                     weight = 2;
                 // if any one of the additions fail, the method returns false
                 returnValue = add(weight, question) && returnValue;
-                if (question.getClass().equals(WordQuestion.class))
+                if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                     returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
                 else if (question.getClass().equals(KanaQuestion.class))
                 {

@@ -97,6 +97,10 @@ If you don't wish to go through the hassle of installing Android Studio, you can
 
 If you don't wish to bother with pull requests, using the template listed above you can also submit your translation through email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com?subject=KanaQuiz%20Translation), with the subject "KanaQuiz Translation".
 
-I'll also ask, if possible, for any translators to also update the [vocabulary.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/vocabulary.xml) file by replacing the English answers with answers in their own language, and insert it into a language-specific directory (`app/src/main/res/xml-[language code]/`), so it'll be automatically included as part of the translation package.
+I'll also ask, if possible, for any translators to also translate the vocabulary and kanji files, and insert them into a language-specific directory (`app/src/main/res/xml-[language code]/`), so they'll be automatically included as part of the translation package.
+
+The vocabulary file ([vocabulary.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/vocabulary.xml)) just needs to have it's English answers replaced.
+
+The kanji files however, are a bit more complex. There are many more kanji to tranlate, and all three can just be translated and copied over. However, if you do not wish to translate all three files ([kanji_1.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_1.xml), [kanji_2.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_2.xml), [kanji_3.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_3.xml)), just take the base kanji file ([kanji.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji.xml)) and remove the QuestionFile elements of the files you do not wish to translate. All together, these files should be copied into the new folder.
 
 If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.

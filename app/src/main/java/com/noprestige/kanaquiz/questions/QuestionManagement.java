@@ -25,6 +25,8 @@ public class QuestionManagement
 {
     public static QuestionManagement HIRAGANA;
     public static QuestionManagement KATAKANA;
+    public static QuestionManagement[] KANJI_FILES;
+    public static String[] KANJI_TITLES;
     public static QuestionManagement VOCABULARY;
 
     private final int categoryCount;
@@ -127,6 +129,15 @@ public class QuestionManagement
     {
         HIRAGANA = new QuestionManagement(R.xml.hiragana, context.getResources());
         KATAKANA = new QuestionManagement(R.xml.katakana, context.getResources());
+
+        List<QuestionManagement> fileSetList = new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
+
+        XmlParser.parseXmlFileSetDocument(R.xml.kanji, context.getResources(), fileSetList, titleList);
+
+        KANJI_FILES = fileSetList.toArray(new QuestionManagement[0]);
+        KANJI_TITLES = titleList.toArray(new String[0]);
+
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
         //TODO: Find way to preserve previous questions record
@@ -168,9 +179,10 @@ public class QuestionManagement
 
     private static boolean[] getCurrentPrefRecord()
     {
-        boolean[] currentPrefRecord =
-                new boolean[HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() +
-                        2];
+        int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 2;
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            prefCount += kanjiFile.getCategoryCount();
+        boolean[] currentPrefRecord = new boolean[prefCount];
 
         currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
         currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
@@ -191,6 +203,12 @@ public class QuestionManagement
             currentPrefRecord[i] = VOCABULARY.getPref(j);
             i++;
         }
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            for (int j = 1; j <= kanjiFile.getCategoryCount(); j++)
+            {
+                currentPrefRecord[i] = kanjiFile.getPref(j);
+                i++;
+            }
         return currentPrefRecord;
     }
 
@@ -204,6 +222,8 @@ public class QuestionManagement
         QuestionBank bank = new QuestionBank();
         HIRAGANA.buildQuestionBank(bank);
         KATAKANA.buildQuestionBank(bank);
+        for (QuestionManagement kanjiFile : KANJI_FILES)
+            kanjiFile.buildQuestionBank(bank);
         VOCABULARY.buildQuestionBank(bank);
         return bank;
     }
@@ -295,7 +315,7 @@ public class QuestionManagement
         Question[] questionSet = getQuestionSet(setNumber, diacritic, null);
         if (questionSet != null)
             for (Question question : questionSet)
-                if (question.getClass().equals(KanaQuestion.class))
+                if (question.getClass().equals(KanaQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
                     if (questionSet.length <= 10)
@@ -401,6 +421,35 @@ public class QuestionManagement
         return table;
     }
 
+    public View getKanjiReferenceTable(Context context)
+    {
+        LinearLayout masterLayout = new LinearLayout(context);
+        masterLayout.setOrientation(LinearLayout.VERTICAL);
+        masterLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+
+        ReferenceTable currentTable = null;
+        int currentSize = 0;
+
+        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
+
+        for (int i = 1; i <= getCategoryCount(); i++)
+            if (isFullReference || getPref(i))
+            {
+                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, null);
+                if (questionSet.length != currentSize)
+                {
+                    currentSize = questionSet.length;
+                    if (currentTable != null)
+                        masterLayout.addView(currentTable);
+                    currentTable = new ReferenceTable(context);
+                }
+                currentTable.addView(ReferenceCell.buildRow(context, questionSet));
+            }
+        masterLayout.addView(currentTable);
+
+        return masterLayout;
+    }
+
     public View getVocabReferenceTable(Context context, int setNumber)
     {
         FlowLayout layout = new FlowLayout(context);
@@ -427,15 +476,20 @@ public class QuestionManagement
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
 
+        populateSelectionScreen(layout);
+
+        return layout;
+    }
+
+    public void populateSelectionScreen(LinearLayout layout)
+    {
         for (int i = 1; i <= getCategoryCount(); i++)
         {
-            QuestionSelectionItem item = new QuestionSelectionItem(context);
+            QuestionSelectionItem item = new QuestionSelectionItem(layout.getContext());
             item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             layout.addView(item);
         }
-
-        return layout;
     }
 }

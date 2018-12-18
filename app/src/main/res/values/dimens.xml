@@ -10,6 +10,8 @@
     <dimen name="defaultReferenceSubjectSize">52sp</dimen>
     <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
     <dimen name="diacriticReferenceSubjectSize">46sp</dimen>
+    <dimen name="kanjiReferenceSubjectSize">40sp</dimen>
+    <dimen name="kanjiReferenceDescriptionSize">8sp</dimen>
     <dimen name="vocabReferenceSubjectSize">40sp</dimen>
 
     <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>
@@ -22,6 +24,7 @@
     <dimen name="embeddedAlertMessageSize">24sp</dimen>
 
     <dimen name="headerTextSize">10sp</dimen>
-    <dimen name="headerTopPadding">28sp</dimen>
+    <dimen name="headerTopPaddingReference">28sp</dimen>
+    <dimen name="headerTopPaddingQuestionSelection">20sp</dimen>
     <dimen name="headerBottomPadding">14sp</dimen>
 </resources>

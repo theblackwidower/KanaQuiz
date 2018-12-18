@@ -19,6 +19,49 @@ final class XmlParser
 {
     private XmlParser() {}
 
+    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources, List<QuestionManagement> fileSetList,
+            List<String> titleList)
+    {
+        XmlResourceParser parser = resources.getXml(xmlRefId);
+
+        try
+        {
+            for (int eventType = parser.getEventType(); eventType != XmlPullParser.END_DOCUMENT;
+                    eventType = parser.next())
+            {
+                if ((eventType == XmlPullParser.START_TAG) && "QuestionFile".equalsIgnoreCase(parser.getName()))
+                {
+                    int resourceFileId = 0;
+                    String title = null;
+
+                    for (int i = 0; i < parser.getAttributeCount(); i++)
+                    {
+                        switch (parser.getAttributeName(i))
+                        {
+                            case "resId":
+                                resourceFileId = parser.getAttributeResourceValue(i, 0);
+                                break;
+                            case "title":
+                                title = parseXmlValue(parser, i, resources);
+                        }
+                    }
+
+                    if (resourceFileId == 0 || title == null)
+                        throw new ParseException("Missing attribute in QuestionFile", 0);
+
+                    fileSetList.add(new QuestionManagement(resourceFileId, resources));
+                    titleList.add(title);
+                }
+            }
+        }
+        catch (XmlPullParserException | IOException | ParseException ex)
+        {
+            //if this happens, we have bigger problems
+            //noinspection ProhibitedExceptionThrown
+            throw new RuntimeException(ex);
+        }
+    }
+
     static void parseXmlDocument(int xmlRefId, Resources resources,
             Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
             List<String> setTitleList, List<String> setNoDiacriticsTitleList)
@@ -94,6 +137,9 @@ final class XmlParser
 
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlKanaQuestion(parser, resources));
+
+                else if ("KanjiQuestion".equalsIgnoreCase(parser.getName()))
+                    currentSet.add(parseXmlKanjiQuestion(parser, resources));
 
                 else if ("WordQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlWordQuestion(parser, resources));
@@ -175,6 +221,30 @@ final class XmlParser
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
+    }
+
+    private static KanjiQuestion parseXmlKanjiQuestion(XmlResourceParser parser, Resources resources)
+            throws ParseException
+    {
+        String thisQuestion = null;
+        String thisMeaning = null;
+
+        for (int i = 0; i < parser.getAttributeCount(); i++)
+        {
+            switch (parser.getAttributeName(i))
+            {
+                case "question":
+                    thisQuestion = parseXmlValue(parser, i, resources);
+                    break;
+                case "meaning":
+                    thisMeaning = parseXmlValue(parser, i, resources);
+            }
+        }
+
+        if ((thisQuestion == null) || (thisMeaning == null))
+            throw new ParseException("Missing attribute in KanjiQuestion", parser.getLineNumber());
+
+        return new KanjiQuestion(thisQuestion, thisMeaning);
     }
 
     private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)

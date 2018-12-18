@@ -40,6 +40,8 @@ public class ReferencePage extends Fragment
             viewPager.setId(R.id.hiraganaReferenceViewPager);
         else if (questionType == R.string.katakana)
             viewPager.setId(R.id.katakanaReferenceViewPager);
+        else if (questionType == R.string.kanji)
+            viewPager.setId(R.id.kanjiReferenceViewPager);
         else if (questionType == R.string.vocabulary)
             viewPager.setId(R.id.vocabularyReferenceViewPager);
 

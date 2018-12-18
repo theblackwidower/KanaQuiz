@@ -216,10 +216,77 @@
         <WordQuestion romaji="Bengoshi" kana="べんごし" kanji="弁護士" answer="Lawyer"/>
         <WordQuestion romaji="Kashu" kana="かしゅ" kanji="歌手" answer="Singer"/>
     </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 1 -->
+    <QuestionSet prefId="vocabulary_set_schools_size" setTitle="@string/vocab_set_schools_size_title">
+        <WordQuestion romaji="Gakkō" kana="がっこう" kanji="学校" answer="School"/>
+        <WordQuestion romaji="Daigaku" kana="だいがく" kanji="大学" answer="University"/>
+        <WordQuestion romaji="Ōkii" kana="おおきい" kanji="大きい" answer="Big"/>
+        <WordQuestion romaji="Chiisai" kana="ちいさい" kanji="小さい" answer="Small"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 2 -->
+    <QuestionSet prefId="vocabulary_set_people_2" setTitle="@string/vocab_set_people_2_title">
+        <WordQuestion romaji="Otona" kana="おとな" kanji="大人" answer="Adult"/>
+        <WordQuestion romaji="Otoko no hito" kana="おとこのひと" kanji="男の人" answer="Man"/>
+        <WordQuestion romaji="Otoko no ko" kana="おとこのこ" kanji="男の子" answer="Boy"/>
+        <WordQuestion romaji="Onna no hito" kana="おんなのひと" kanji="女の人" answer="Woman"/>
+        <WordQuestion romaji="Onna no ko" kana="おんなのこ" kanji="女の子" answer="Girl"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_random_1" setTitle="@string/vocab_set_random_1_title">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 3 -->
+        <!--<WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>-->
+        <WordQuestion romaji="Akachan" kana="あかちゃん" kanji="赤ちゃん" answer="Baby"/>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 4 -->
+        <WordQuestion romaji="Natsuyasumi" kana="なつやすみ" kanji="夏休み" answer="Summer Vacation"/>
+        <WordQuestion romaji="Iu" kana="いう" kanji="言う" answer="Say"/>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 5 -->
+        <WordQuestion romaji="Namae" kana="なまえ" kanji="名前" answer="Name"/>
+        <WordQuestion romaji="Mainichi" kana="まいにち" kanji="毎日" answer="Every Day"/>
+        <WordQuestion romaji="Kyō" kana="きょう" kanji="今日" answer="Today"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 6 -->
+    <QuestionSet prefId="vocabulary_set_weekdays" setTitle="@string/vocab_set_weekdays_title">
+        <WordQuestion romaji="Nichiyōbi" kana="にちようび" kanji="日曜日" answer="Sunday"/>
+        <WordQuestion romaji="Getsuyōbi" kana="げつようび" kanji="月曜日" answer="Monday"/>
+        <WordQuestion romaji="Kayōbi" kana="かようび" kanji="火曜日" answer="Tuesday"/>
+        <WordQuestion romaji="Suiyōbi" kana="すいようび" kanji="水曜日" answer="Wednesday"/>
+        <WordQuestion romaji="Mokuyōbi" kana="もくようび" kanji="木曜日" answer="Thursday"/>
+        <WordQuestion romaji="Kinyōbi" kana="きんようび" kanji="金曜日" answer="Friday"/>
+        <WordQuestion romaji="Doyōbi" kana="どようび" kanji="土曜日" answer="Saturday"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_time_music" setTitle="@string/vocab_set_time_music_title">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 7 -->
+        <!--<WordQuestion romaji="Kyōshitsu" kana="きょうしつ" kanji="教室" answer="Classroom"/>-->
+        <WordQuestion romaji="Tokei" kana="とけい" kanji="時計" answer="Watch/Clock"/>
+        <WordQuestion romaji="Hashiru" kana="はしる" kanji="走る" answer="Run"/>
+        <WordQuestion romaji="Dekiru" kana="できる" kanji="出来る" answer="Be Able To">
+            <AltAnswer>To Be Able To</AltAnswer>
+        </WordQuestion>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 8 -->
+        <WordQuestion romaji="Ongaku" kana="おんがく" kanji="音楽" answer="Music"/>
+        <WordQuestion romaji="Atarashii" kana="あたらしい" kanji="新しい" answer="New"/>
+        <WordQuestion romaji="Furui" kana="ふるい" kanji="古い" answer="Old"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 9 -->
+    <QuestionSet prefId="vocabulary_set_news" setTitle="@string/vocab_set_news_title">
+        <WordQuestion romaji="Tegami" kana="てがみ" kanji="手紙" answer="Letter"/>
+        <WordQuestion romaji="Jikan" kana="じかん" kanji="時間" answer="Time"/>
+        <WordQuestion romaji="Shinbun" kana="しんぶん" kanji="新聞" answer="Newspaper"/>
+        <WordQuestion romaji="Ningen" kana="にんげん" kanji="人間" answer="Human"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 10 -->
+    <QuestionSet prefId="vocabulary_set_power_community" setTitle="@string/vocab_set_power_community_title">
+        <!--<WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Telephone"/>-->
+        <WordQuestion romaji="Kaisha" kana="かいしゃ" kanji="会社" answer="Company"/>
+        <!--<WordQuestion romaji="Kōen" kana="こうえん" kanji="公園" answer="Public Park"/>-->
+        <!--<WordQuestion romaji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>-->
+        <WordQuestion romaji="Denki" kana="でんき" kanji="電気" answer="Electricity"/>
+        <WordQuestion romaji="Ashita" kana="あした" kanji="明日" answer="Tomorrow"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
     Learn Japanese to Survive: Katakana War
+    Learn Japanese to Survive: Kanji Combat
     Jisho (looks up Kanji from kana): https://jisho.org
     Wikipedia: https://en.wikipedia.org/wiki/Japanese_numerals
     -->

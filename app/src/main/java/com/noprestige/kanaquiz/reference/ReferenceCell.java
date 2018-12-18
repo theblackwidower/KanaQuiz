@@ -17,10 +17,17 @@ import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
+
 public class ReferenceCell extends View
 {
     private String subject;
     private String description;
+    private String[] multiLineDescription;
 
     private TextPaint subjectPaint = new TextPaint();
     private TextPaint descriptionPaint = new TextPaint();
@@ -79,6 +86,8 @@ public class ReferenceCell extends View
 
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
+
+        subjectPaint.setTextLocale(Locale.JAPANESE);
     }
 
     private boolean copyItem()
@@ -143,7 +152,20 @@ public class ReferenceCell extends View
         super.onDraw(canvas);
 
         canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
-        canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
+        if ((multiLineDescription != null) && (multiLineDescription.length > 1))
+        {
+            float descriptionLineHeight = descriptionHeight / multiLineDescription.length;
+            int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+            for (int i = 0; i < multiLineDescription.length; i++)
+            {
+                canvas.drawText(multiLineDescription[i],
+                        getPaddingLeft() + ((contentWidth - descriptionPaint.measureText(multiLineDescription[i])) / 2),
+                        descriptionYPoint - ((multiLineDescription.length - i - 1) * descriptionLineHeight),
+                        descriptionPaint);
+            }
+        }
+        else
+            canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
     }
 
     public String getSubject()
@@ -188,14 +210,55 @@ public class ReferenceCell extends View
     public void setDescription(String description)
     {
         this.description = (description == null) ? "" : description;
-        descriptionWidth = descriptionPaint.measureText(this.description);
+        measureDescription();
     }
 
     public void setDescriptionSize(float descriptionSize)
     {
         descriptionPaint.setTextSize(descriptionSize);
+        measureDescription();
+    }
+
+    private void measureDescription()
+    {
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
-        descriptionWidth = descriptionPaint.measureText(description);
+        if (description.contains(MEANING_DELIMITER) || description.contains(" "))
+        {
+            multiLineDescription = description.replace(MEANING_DELIMITER, MEANING_DELIMITER + "\u0000").split("\u0000");
+            descriptionWidth = 0;
+            List<String> tempMultiLine = new ArrayList<>();
+            for (String part : multiLineDescription)
+            {
+                float partWidth = descriptionPaint.measureText(part);
+                if ((partWidth > (subjectWidth * 1.1f)) && part.contains(" "))
+                {
+                    String[] subParts = part.split(" ");
+
+                    for (String subPart : subParts)
+                    {
+                        float subPartWidth = descriptionPaint.measureText(subPart);
+                        if (subPartWidth > descriptionWidth)
+                            descriptionWidth = subPartWidth;
+                        tempMultiLine.add(subPart);
+                    }
+                }
+                else if (partWidth > descriptionWidth)
+                {
+                    descriptionWidth = partWidth;
+                    tempMultiLine.add(part);
+                }
+                else
+                    tempMultiLine.add(part);
+            }
+            if (tempMultiLine.size() != multiLineDescription.length)
+                multiLineDescription = tempMultiLine.toArray(new String[0]);
+            descriptionHeight *= multiLineDescription.length;
+        }
+        else
+        {
+            multiLineDescription = null;
+            descriptionWidth = descriptionPaint.measureText(description);
+        }
     }
 
     public void setColour(int colour)
@@ -270,7 +333,7 @@ public class ReferenceCell extends View
         header.setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         header.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.headerTextSize));
-        header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPadding), 0,
+        header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPaddingReference), 0,
                 context.getResources().getDimensionPixelSize(R.dimen.headerBottomPadding));
         header.setTypeface(header.getTypeface(), Typeface.BOLD);
         header.setAllCaps(true);
