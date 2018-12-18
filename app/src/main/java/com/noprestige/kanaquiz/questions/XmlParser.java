@@ -62,10 +62,11 @@ final class XmlParser
                     prefId = parseXmlValue(parser, i, resources);
                     break;
                 case "setTitle":
-                    setTitle = parseXmlValue(parser, i, resources, R.string.set);
+                    setTitle = parseXmlValue(parser, i, resources, R.string.set, R.string.extended_katakana_title);
                     break;
                 case "setNoDiacriticsTitle":
-                    setNoDiacriticsTitle = parseXmlValue(parser, i, resources, R.string.set);
+                    setNoDiacriticsTitle =
+                            parseXmlValue(parser, i, resources, R.string.set, R.string.extended_katakana_title);
             }
         }
 
@@ -288,18 +289,20 @@ final class XmlParser
 
     private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
     {
-        return parseXmlValue(parser, index, resources, 0);
+        return parseXmlValue(parser, index, resources, 0, 0);
     }
 
-    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource)
+    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource1,
+            int stringResource2)
     {
         int refId = parser.getAttributeResourceValue(index, 0);
 
         if (refId == 0)
             return parser.getAttributeValue(index);
-        else if (stringResource == 0)
+        else if ((stringResource1 == 0) && (stringResource2 == 0))
             return resources.getString(refId);
         else
-            return resources.getString(refId, resources.getString(stringResource));
+            return resources
+                    .getString(refId, resources.getString(stringResource1), resources.getString(stringResource2));
     }
 }

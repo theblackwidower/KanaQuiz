@@ -86,7 +86,7 @@
     <string name="set_9_title">%1$s Y</string>
     <string name="set_8_title">%1$s R</string>
     <string name="set_10_title">%1$s W + N</string>
-    <string name="set_11_title">Katakana extès</string>
+    <string name="extended_katakana_title">Katakana extès</string>
     <string name="set_2_no_diacritics_title">%1$s K</string>
     <string name="set_3_no_diacritics_title">%1$s S</string>
     <string name="set_4_no_diacritics_title">%1$s T</string>

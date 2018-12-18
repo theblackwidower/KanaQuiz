@@ -168,12 +168,18 @@
     <string name="set_8_title">R %1$s</string>
     <string name="set_9_title">Y %1$s</string>
     <string name="set_10_title">W %1$s + N</string>
-    <string name="set_11_title">Extended Katakana</string>
 
     <string name="set_2_no_diacritics_title">K %1$s</string>
     <string name="set_3_no_diacritics_title">S %1$s</string>
     <string name="set_4_no_diacritics_title">T %1$s</string>
     <string name="set_6_no_diacritics_title">H %1$s</string>
+
+    <string name="extended_katakana_title">Extended Katakana</string>
+    <!--MEXT refers to the Japanese Ministry of Education, Culture, Sports, Science and Technology-->
+    <string name="extended_katakana_set_1_title">%2$s (MEXT general list for loanwords and foreign names)</string>
+    <string name="extended_katakana_set_2_title">%2$s (MEXT expanded list for accurate transliteration)</string>
+    <string name="extended_katakana_set_3_title">%2$s (ANSI/BSI suggestions)</string>
+    <string name="extended_katakana_set_4_title">%2$s (Hyōjun-shiki)</string>
 
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
