@@ -326,11 +326,6 @@ public class ReferenceCell extends View
         }
     }
 
-    public static TextView buildHeader(Context context, int title)
-    {
-        return buildHeader(context, context.getResources().getString(title));
-    }
-
     public static TextView buildHeader(Context context, CharSequence title)
     {
         TextView header = new TextView(context);

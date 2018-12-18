@@ -60,7 +60,8 @@ public class ReferenceSubsectionPage extends Fragment
             layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
             if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
             {
-                layout.addView(ReferenceCell.buildHeader(getContext(), R.string.diacritics_title));
+                layout.addView(
+                        ReferenceCell.buildHeader(getContext(), getResources().getString(R.string.diacritics_title)));
                 layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
             }
         }
