@@ -472,8 +472,10 @@ public final class RomajiConversion
                     i++;
                     if (kana.charAt(i) == 'ィ')
                         romaji.append("di");
-                    else if ((kana.charAt(i) == 'ゥ') || (kana.charAt(i) == 'ュ'))
+                    else if (kana.charAt(i) == 'ゥ')
                         romaji.append("du");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("dyu");
                     else
                     {
                         i--;
@@ -487,8 +489,10 @@ public final class RomajiConversion
                     i++;
                     if (kana.charAt(i) == 'ィ')
                         romaji.append("ti");
-                    else if ((kana.charAt(i) == 'ゥ') || (kana.charAt(i) == 'ュ'))
+                    else if (kana.charAt(i) == 'ゥ')
                         romaji.append("tu");
+                    else if (kana.charAt(i) == 'ュ')
+                        romaji.append("tyu");
                     else
                     {
                         i--;
@@ -500,16 +504,24 @@ public final class RomajiConversion
                     break;
                 case 'ド':
                     if (kana.charAt(i + 1) == 'ゥ')
+                    {
                         i++;
-                    romaji.append("do");
+                        romaji.append("du");
+                    }
+                    else
+                        romaji.append("do");
                     break;
                 case 'と':
                     romaji.append("to");
                     break;
                 case 'ト':
                     if (kana.charAt(i + 1) == 'ゥ')
+                    {
                         i++;
-                    romaji.append("to");
+                        romaji.append("tu");
+                    }
+                    else
+                        romaji.append("to");
                     break;
                 case 'な':
                 case 'ナ':
