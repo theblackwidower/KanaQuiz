@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
@@ -12,6 +13,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.view.Gravity;
+import android.view.ViewParent;
+import android.widget.LinearLayout;
 
 import com.noprestige.kanaquiz.KanaQuizMain;
 import com.noprestige.kanaquiz.R;
@@ -190,7 +194,18 @@ public final class ThemeManager
                 dialogBuilder.setNeutralButton(R.string.ignore,
                         (dialog, which) -> OptionsControl.setBoolean(R.string.prefid_ignore_font_provider, true));
 
-            dialogBuilder.show();
+            AlertDialog alertDialog = dialogBuilder.show();
+
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
+            {
+                //ref: https://stackoverflow.com/a/31350049/3582371
+                ViewParent buttonLayout = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).getParent();
+                if (buttonLayout.getClass().equals(LinearLayout.class))
+                {
+                    ((LinearLayout) buttonLayout).setOrientation(LinearLayout.VERTICAL);
+                    ((LinearLayout) buttonLayout).setGravity(Gravity.RIGHT);
+                }
+            }
         }
     }
 }
