@@ -1,7 +1,6 @@
 package com.noprestige.kanaquiz.themes;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -91,7 +90,6 @@ public final class ThemeManager
 
     private static boolean isFontInitialized;
 
-    @SuppressLint("NewApi")
     public static void setTheme(Activity activity)
     {
         activity.setTheme(getCurrentThemeId());
@@ -108,18 +106,20 @@ public final class ThemeManager
                 getDownloadDialog(activity, false);
             else if (code == FontProviderClient.FontProviderAvailability.OK)
             {
-                if ((Build.VERSION.SDK_INT == Build.VERSION_CODES.M) &&
-                        (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                                PackageManager.PERMISSION_GRANTED))
-                {
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                    dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
-                    dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                    dialogBuilder.setOnDismissListener(dialog -> activity
-                            .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
-                    dialogBuilder.show();
-                    //TODO: Find way to get activity to restart once font permission is granted.
-                }
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                    if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                            PackageManager.PERMISSION_GRANTED)
+                    {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                        dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                        dialogBuilder.setOnDismissListener(dialog -> activity
+                                .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                        dialogBuilder.show();
+                        //TODO: Find way to get activity to restart once font permission is granted.
+                    }
+                    else
+                        initializeFonts(activity);
                 else
                     initializeFonts(activity);
             }
