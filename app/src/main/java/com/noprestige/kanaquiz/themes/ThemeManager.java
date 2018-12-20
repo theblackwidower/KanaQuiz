@@ -126,6 +126,15 @@ public final class ThemeManager
         }
     }
 
+    public static void permissionRequestReturn(Activity activity, String[] permissions, int[] grantResults)
+    {
+        int length = Math.min(permissions.length, grantResults.length);
+        for (int i = 0; i < length; i++)
+            if (permissions[i].equals(Manifest.permission.READ_EXTERNAL_STORAGE) &&
+                    (grantResults[i] == PackageManager.PERMISSION_GRANTED))
+                activity.recreate();
+    }
+
     private static void initializeFonts(Activity activity)
     {
         FontProviderClient client = FontProviderClient.create(activity);
