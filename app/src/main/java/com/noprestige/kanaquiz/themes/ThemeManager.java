@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
@@ -96,5 +97,10 @@ public final class ThemeManager
     public static void setTheme(Activity activity)
     {
         activity.setTheme(getCurrentThemeId());
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT)
+            //ref: https://stackoverflow.com/a/13866702/3582371
+            activity.getWindow().getDecorView()
+                    .setBackgroundColor(getThemeColour(activity, android.R.attr.colorBackground));
     }
 }
