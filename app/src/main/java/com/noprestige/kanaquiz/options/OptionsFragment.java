@@ -1,12 +1,18 @@
 package com.noprestige.kanaquiz.options;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
+import com.noprestige.kanaquiz.KanaQuiz;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
+
+import moe.shizuku.fontprovider.FontProviderClient;
 
 public class OptionsFragment extends PreferenceFragment
 {
@@ -51,6 +57,32 @@ public class OptionsFragment extends PreferenceFragment
                     getActivity().recreate();
                     return true;
                 });
+
+        Preference fontProviderLink = findPreference("font_provider_link");
+
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) &&
+                (FontProviderClient.checkAvailability(getActivity()) ==
+                        FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
+        {
+            String downloadLink;
+            if (KanaQuiz.isGooglePlayStoreOnDevice())
+            {
+                fontProviderLink.setSummary(R.string.get_on_google_play);
+                downloadLink = "https://play.google.com/store/apps/details?id=moe.shizuku.fontprovider";
+            }
+            else
+            {
+                fontProviderLink.setSummary(R.string.download_github);
+                downloadLink = "https://github.com/RikkaApps/FontProvider/releases/";
+            }
+            fontProviderLink.setOnPreferenceClickListener(preference ->
+            {
+                getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(downloadLink)));
+                return true;
+            });
+        }
+        else
+            getPreferenceScreen().removePreference(fontProviderLink);
     }
 
     private boolean setSummary(Preference preference, Object newValue)

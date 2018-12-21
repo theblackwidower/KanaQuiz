@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    Notes:
+    Use fontFamily and android:typeface for font types
+    -->
 
     <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/cherryPrimaryColor</item>
         <item name="colorPrimaryDark">@color/cherryPrimaryDarkColor</item>
         <item name="colorAccent">@color/cherrySecondaryColor</item>
         <item name="android:navigationBarColor">@color/cherryPrimaryDarkColor</item>
         <item name="android:colorBackground">@color/cherryTertiaryLightColor</item>
         <item name="android:colorForeground">@color/grey_900</item>
-        <item name="android:fontFamily">serif</item>
         <item name="fontFamily">serif</item>
+        <item name="android:typeface">serif</item>
     </style>
 
     <style name="ShibuyaNight" parent="Theme.AppCompat">
@@ -28,8 +31,8 @@
         <item name="colorAccent">@color/onsenSecondaryColor</item>
         <item name="android:navigationBarColor">@color/onsenPrimaryDarkColor</item>
         <item name="android:colorBackground">@color/onsenTertiaryLightColor</item>
-        <item name="android:fontFamily">sans-serif</item>
         <item name="fontFamily">sans-serif</item>
+        <item name="android:typeface">sans</item>
     </style>
 
     <style name="ChrysanthemumTwilight" parent="Theme.AppCompat">

@@ -83,7 +83,7 @@ public class LogDetailItem extends View
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
 
         mainPaint.setTypeface(font);
         percentagePaint.setTypeface(font);

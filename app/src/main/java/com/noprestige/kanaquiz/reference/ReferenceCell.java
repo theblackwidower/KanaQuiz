@@ -77,7 +77,7 @@ public class ReferenceCell extends View
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
 
-        Typeface font = ThemeManager.getThemeFont(context, R.attr.fontFamily, Typeface.NORMAL);
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
 
         subjectPaint.setTypeface(font);
         descriptionPaint.setTypeface(font);

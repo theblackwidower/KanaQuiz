@@ -51,6 +51,9 @@
         android:title="@string/selected_theme_title"
         android:defaultValue="@string/themeid_cherry_blossom_tree"/>
     <Preference
+        android:key="font_provider_link"
+        android:title="@string/download_font_provider"/>
+    <Preference
         android:key="clear_logs"
         android:title="@string/clear_logs"/>
 </PreferenceScreen>

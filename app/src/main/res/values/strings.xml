@@ -153,6 +153,28 @@
     <string name="clipboard_message">Copied to clipboard</string>
     <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
+    <!-- Font Interface -->
+    <string name="prefid_ignore_font_provider" translatable="false">ignore_font_provider</string>
+    <string name="prefid_font_remind_date" translatable="false">font_remind_date</string>
+    <string name="font_provider_install_request">This application uses the RikkaApps\' Font Provider for prettier
+        Japanese characters. Please download the support app to enable it.</string>
+
+    <string name="font_provider_update_request">Your version of the RikkaApps\' Font Provider is out of date. You may
+        notice some font issues. To resolve, please update to the latest version.</string>
+
+    <string name="prefid_font_download_alert_date" translatable="false">font_download_alert_date</string>
+    <string name="font_provider_font_request">Cannot find serif fonts.</string>
+
+    <string name="marshmallow_font_permission_request">The Kana Quiz needs permission to access the fonts from Font Provider.</string>
+
+    <string name="download_font_provider">Get Font Provider for Prettier Fonts</string>
+    <string name="get_on_google_play">Get it on Google Play</string>
+    <string name="update_on_google_play">Update on Google Play</string>
+    <string name="download_github">Download from GitHub</string>
+    <string name="open_font_provider">Open Font Provider</string>
+    <string name="remind_tomorrow">Remind me tomorrow</string>
+    <string name="ignore">Ignore</string>
+
     <!-- Theme Selection -->
     <string name="prefid_selected_theme" translatable="false">selected_theme</string>
     <string name="selected_theme_title">UI Themes</string>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    Notes:
+    Use android:fontFamily and fontFamily for font types
+    -->
+
+    <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/cherryPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/cherryPrimaryDarkColor</item>
+        <item name="colorAccent">@color/cherrySecondaryColor</item>
+        <item name="android:navigationBarColor">@color/cherryPrimaryLightColor</item>
+        <item name="android:colorBackground">@color/cherryTertiaryLightColor</item>
+        <item name="android:colorForeground">@color/grey_900</item>
+        <item name="android:fontFamily">serif</item>
+        <item name="fontFamily">serif</item>
+    </style>
+
+    <style name="ShibuyaNight" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/nightPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/nightPrimaryDarkColor</item>
+        <item name="colorAccent">@color/nightSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/nightPrimaryLightColor</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+</resources>

@@ -26,6 +26,7 @@ import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
@@ -155,7 +156,7 @@ public class MainQuiz extends AppCompatActivity
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
-            lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, NORMAL));
+            lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
             lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
             frmAnswer.onNoQuestions();
         }
@@ -172,7 +173,7 @@ public class MainQuiz extends AppCompatActivity
             if (QuestionManagement.getStaticQuestionBank().checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
-                lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
                 if (ThemeManager.isLightTheme(this))
                     lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightCorrect));
                 else
@@ -196,7 +197,7 @@ public class MainQuiz extends AppCompatActivity
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
-                lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, BOLD));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
                 if (ThemeManager.isLightTheme(this))
                     lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightIncorrect));
                 else
@@ -261,7 +262,7 @@ public class MainQuiz extends AppCompatActivity
             frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
-        lblResponse.setTypeface(ThemeManager.getThemeFont(this, R.attr.fontFamily, NORMAL));
+        lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
         lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
     }
 
@@ -308,7 +309,13 @@ public class MainQuiz extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == 1)
-            recreate();
+        recreate();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }

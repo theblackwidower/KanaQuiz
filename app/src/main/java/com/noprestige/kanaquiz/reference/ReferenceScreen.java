@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -38,5 +39,12 @@ public class ReferenceScreen extends AppCompatActivity
         }
         else
             ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }
