@@ -22,6 +22,7 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 
 import org.threeten.bp.LocalDate;
 
+import androidx.annotation.RequiresApi;
 import moe.shizuku.fontprovider.FontProviderClient;
 import moe.shizuku.fontprovider.FontRequest;
 
@@ -94,36 +95,37 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if (!isFontInitialized)
-        {
-            int code = FontProviderClient.checkAvailability(activity);
-            if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            if (!isFontInitialized)
             {
-                if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
-                    getDownloadDialog(activity, true);
-            }
-            else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
-                getDownloadDialog(activity, false);
-            else if (code == FontProviderClient.FontProviderAvailability.OK)
-            {
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-                    if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                            PackageManager.PERMISSION_GRANTED)
-                    {
-                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                        dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
-                        dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                        dialogBuilder.setOnDismissListener(dialog -> activity
-                                .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
-                        dialogBuilder.show();
-                        //TODO: Find way to get activity to restart once font permission is granted.
-                    }
+                int code = FontProviderClient.checkAvailability(activity);
+                if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
+                {
+                    if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
+                        getDownloadDialog(activity, true);
+                }
+                else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
+                    getDownloadDialog(activity, false);
+                else if (code == FontProviderClient.FontProviderAvailability.OK)
+                {
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                        if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                                PackageManager.PERMISSION_GRANTED)
+                        {
+                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                            dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                            dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                            dialogBuilder.setOnDismissListener(dialog -> activity
+                                    .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                            dialogBuilder.show();
+                            //TODO: Find way to get activity to restart once font permission is granted.
+                        }
+                        else
+                            initializeFonts(activity);
                     else
                         initializeFonts(activity);
-                else
-                    initializeFonts(activity);
+                }
             }
-        }
     }
 
     public static void permissionRequestReturn(Activity activity, String[] permissions, int[] grantResults)
@@ -135,6 +137,7 @@ public final class ThemeManager
                 activity.recreate();
     }
 
+    @RequiresApi(21)
     private static void initializeFonts(Activity activity)
     {
         FontProviderClient client = FontProviderClient.create(activity);
@@ -183,6 +186,7 @@ public final class ThemeManager
         }
     }
 
+    @RequiresApi(21)
     private static void getDownloadDialog(Activity activity, boolean isNewInstall)
     {
         LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);

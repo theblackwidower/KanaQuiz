@@ -3,6 +3,7 @@ package com.noprestige.kanaquiz.options;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -59,8 +60,9 @@ public class OptionsFragment extends PreferenceFragment
 
         Preference fontProviderLink = findPreference("font_provider_link");
 
-        if (FontProviderClient.checkAvailability(getActivity()) ==
-                FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) &&
+                (FontProviderClient.checkAvailability(getActivity()) ==
+                        FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
         {
             String downloadLink;
             if (KanaQuiz.isGooglePlayStoreOnDevice())
