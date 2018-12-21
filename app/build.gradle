@@ -57,7 +57,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'
@@ -69,7 +69,7 @@ dependencies {
 
     releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.7'
     releaseImplementation 'com.google.firebase:firebase-core:16.0.6'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.2.2'
+    releaseImplementation 'com.google.firebase:firebase-perf:16.2.3'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
@@ -81,9 +81,9 @@ dependencies {
     pureImplementation 'ch.acra:acra-toast:5.2.1'
     pureImplementation 'ch.acra:acra-limiter:5.2.1'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.0.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:3.0.3'
 }
 
 coveralls {
