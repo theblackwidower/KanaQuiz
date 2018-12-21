@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -44,6 +45,20 @@ public class OptionsFragment extends PreferenceFragmentCompat
             new DeleteAll().execute(btnClearLogs);
             return true;
         });
+    }
+
+    @Override
+    public void onDisplayPreferenceDialog(Preference preference)
+    {
+        //ref: https://stackoverflow.com/a/53290775/3582371
+        if (preference.getClass().equals(NumberPreference.class))
+        {
+            DialogFragment dialog = NumberPreferenceDialog.newInstance(preference.getKey());
+            dialog.setTargetFragment(this, 0);
+            dialog.show(getFragmentManager(), null);
+        }
+        else
+            super.onDisplayPreferenceDialog(preference);
     }
 
     private boolean setSummary(Preference preference, Object newValue)
