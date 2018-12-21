@@ -84,6 +84,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:3.0.3'
+
+    implementation 'androidx.preference:preference:1.0.0'
 }
 
 coveralls {

@@ -2,13 +2,14 @@ package com.noprestige.kanaquiz.options;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
 
-public class OptionsFragment extends PreferenceFragment
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
+public class OptionsFragment extends PreferenceFragmentCompat
 {
     static class DeleteAll extends AsyncTask<Preference, Void, Preference>
     {
@@ -27,9 +28,8 @@ public class OptionsFragment extends PreferenceFragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey)
     {
-        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
         Preference onIncorrect = findPreference(getResources().getString(R.string.prefid_on_incorrect));
