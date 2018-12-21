@@ -163,7 +163,19 @@ public final class ThemeManager
                                     .getLaunchIntentForPackage("moe.shizuku.fontprovider")));
                     dialogBuilder.setNegativeButton(R.string.remind_tomorrow, (dialog, which) -> OptionsControl
                             .setString(R.string.prefid_font_download_alert_date, LocalDate.now().toString()));
-                    dialogBuilder.show();
+
+                    AlertDialog alertDialog = dialogBuilder.show();
+
+                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
+                    {
+                        //ref: https://stackoverflow.com/a/31350049/3582371
+                        ViewParent buttonLayout = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).getParent();
+                        if (buttonLayout.getClass().equals(LinearLayout.class))
+                        {
+                            ((LinearLayout) buttonLayout).setOrientation(LinearLayout.VERTICAL);
+                            ((LinearLayout) buttonLayout).setGravity(Gravity.RIGHT);
+                        }
+                    }
                 }
             }
             else
