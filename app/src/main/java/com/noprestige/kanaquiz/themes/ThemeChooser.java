@@ -19,7 +19,7 @@ class ThemeChooser extends DialogPreference
         super(context, attrs);
         setDialogLayoutResource(R.layout.theme_chooser_dialog);
 
-        setPositiveButtonText(R.string.save);
+        setPositiveButtonText(R.string.select_theme);
         setNegativeButtonText(android.R.string.cancel);
 
         setDialogIcon(null);

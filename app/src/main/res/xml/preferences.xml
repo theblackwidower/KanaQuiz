@@ -49,6 +49,7 @@
     <com.noprestige.kanaquiz.themes.ThemeChooser
         android:key="@string/prefid_selected_theme"
         android:title="@string/selected_theme_title"
+        android:summary="@string/selected_theme_summary"
         android:defaultValue="@string/themeid_cherry_blossom_tree"/>
     <Preference
         android:key="font_provider_link"
