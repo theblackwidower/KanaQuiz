@@ -335,7 +335,7 @@ public class ReferenceCell extends View
         header.setText(title);
         header.setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        header.setTextSize(context.getResources().getDimensionPixelSize(R.dimen.headerTextSize));
+        header.setTextSize(context.getResources().getDimension(R.dimen.headerTextSize));
         header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPaddingReference), 0,
                 context.getResources().getDimensionPixelSize(R.dimen.headerBottomPadding));
         header.setTypeface(header.getTypeface(), Typeface.BOLD);
