@@ -163,7 +163,8 @@
         notice some font issues. To resolve, please update to the latest version.</string>
 
     <string name="prefid_font_download_alert_date" translatable="false">font_download_alert_date</string>
-    <string name="font_provider_font_request">Cannot find serif fonts.</string>
+    <string name="font_provider_font_request">Cannot find serif fonts. Please download \‘Noto Serif\’ and \‘Noto
+        Serif CJK\’ through the Font Provider app.</string>
 
     <string name="marshmallow_font_permission_request">The Kana Quiz needs permission to access the fonts from Font Provider.</string>
 
