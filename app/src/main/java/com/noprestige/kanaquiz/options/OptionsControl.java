@@ -5,12 +5,13 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import org.threeten.bp.LocalDate;
+
+import androidx.preference.PreferenceManager;
 
 public final class OptionsControl
 {

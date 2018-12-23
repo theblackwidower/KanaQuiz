@@ -22,6 +22,13 @@ public class ThemeChooser extends DialogPreference
     }
 
     @Override
+    protected void onSetInitialValue(Object defaultValue)
+    {
+        if (defaultValue != null)
+            persistString((String) defaultValue);
+    }
+
+    @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
         return a.getString(index);

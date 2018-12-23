@@ -22,6 +22,13 @@ class NumberPreference extends DialogPreference
     }
 
     @Override
+    protected void onSetInitialValue(Object defaultValue)
+    {
+        if (defaultValue != null)
+            persistInt((Integer) defaultValue);
+    }
+
+    @Override
     protected Object onGetDefaultValue(TypedArray a, int index)
     {
         return a.getInteger(index, 0);
