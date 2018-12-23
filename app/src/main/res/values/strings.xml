@@ -156,6 +156,47 @@
     <string name="clipboard_message">Copied to clipboard</string>
     <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
+    <!-- Font Interface -->
+    <string name="prefid_ignore_font_provider" translatable="false">ignore_font_provider</string>
+    <string name="prefid_font_remind_date" translatable="false">font_remind_date</string>
+    <string name="font_provider_install_request">This application uses the RikkaApps\' Font Provider for prettier
+        Japanese characters. Please download the support app to enable it.</string>
+
+    <string name="font_provider_update_request">Your version of the RikkaApps\' Font Provider is out of date. You may
+        notice some font issues. To resolve, please update to the latest version.</string>
+
+    <string name="prefid_font_download_alert_date" translatable="false">font_download_alert_date</string>
+    <string name="font_provider_font_request">Cannot find serif fonts. Please download \‘Noto Serif\’ and \‘Noto
+        Serif CJK\’ through the Font Provider app.</string>
+
+    <string name="marshmallow_font_permission_request">The Kana Quiz needs permission to access the fonts from Font Provider.</string>
+
+    <string name="download_font_provider">Get Font Provider for Prettier Fonts</string>
+    <string name="get_on_google_play">Get it on Google Play</string>
+    <string name="update_on_google_play">Update on Google Play</string>
+    <string name="download_github">Download from GitHub</string>
+    <string name="open_font_provider">Open Font Provider</string>
+    <string name="remind_tomorrow">Remind me tomorrow</string>
+    <string name="ignore">Ignore</string>
+
+    <!-- Theme Selection -->
+    <string name="prefid_selected_theme" translatable="false">selected_theme</string>
+    <string name="selected_theme_title">Themes</string>
+    <string name="selected_theme_summary">Choose how you want the quiz to look</string>
+    <string name="theme_preview_sample" translatable="false">Fonts 雪の中で話す</string>
+    <string name="select_theme">Select</string>
+
+    <!-- THEMES! -->
+    <string name="theme_cherry_blossom_tree">Cherry Blossom Tree</string>
+    <string name="theme_shibuya_night">Shibuya Night</string>
+    <string name="theme_hot_spring">Hot Spring Serenity</string>
+    <string name="theme_chrysanthemum">Chrysanthemum Twilight</string>
+
+    <string name="themeid_cherry_blossom_tree" translatable="false">cherry_blossom_tree</string>
+    <string name="themeid_shibuya_night" translatable="false">shibuya_night</string>
+    <string name="themeid_hot_spring" translatable="false">hot_spring</string>
+    <string name="themeid_chrysanthemum" translatable="false">chrysanthemum</string>
+
     <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>

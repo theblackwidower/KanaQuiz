@@ -10,6 +10,8 @@ import android.preference.PreferenceManager;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
+import org.threeten.bp.LocalDate;
+
 public final class OptionsControl
 {
     private static SharedPreferences sharedPreferences;
@@ -93,6 +95,21 @@ public final class OptionsControl
     {
         editor.putString(prefId, setting);
         editor.apply();
+    }
+
+    public static LocalDate getDate(int resId)
+    {
+        return getDate(resources.getString(resId));
+    }
+
+    public static LocalDate getDate(String prefId)
+    {
+        String record = sharedPreferences.getString(prefId, "");
+
+        if ((record == null) || "".equals(record))
+            return null;
+        else
+            return LocalDate.parse(record);
     }
 
     public static boolean compareStrings(int prefId, int comparator)

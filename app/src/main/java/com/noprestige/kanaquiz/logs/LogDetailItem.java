@@ -1,15 +1,16 @@
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.text.DecimalFormat;
 import java.util.Locale;
@@ -50,8 +51,6 @@ public class LogDetailItem extends View
 
     private int internalVerticalPadding;
 
-    private static TypedArray defaultAttributes;
-
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final String SLASH = "/";
 
@@ -77,20 +76,21 @@ public class LogDetailItem extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
-
         setFontSize(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 42, context.getResources().getDisplayMetrics()));
-        setMainColour(defaultAttributes.getColor(0, 0));
-
+        setMainColour(ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary));
 
         mainPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
+
+        mainPaint.setTypeface(font);
+        percentagePaint.setTypeface(font);
+
         mainPaint.setTextLocale(Locale.JAPANESE);
 
-        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
@@ -268,7 +268,7 @@ public class LogDetailItem extends View
             totalString = DailyLogItem.parseCount(totalAnswers);
             float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
-            percentagePaint.setColor(DailyLogItem.getPercentageColour(percentage, getResources()));
+            percentagePaint.setColor(DailyLogItem.getPercentageColour(percentage, getContext()));
 
             questionWidth = mainPaint.measureText(question);
             correctWidth = mainPaint.measureText(correctString);

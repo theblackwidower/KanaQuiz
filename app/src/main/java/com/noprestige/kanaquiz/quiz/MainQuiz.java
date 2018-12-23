@@ -22,11 +22,13 @@ import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
@@ -86,6 +88,7 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_main_quiz);
 
         lblResponse = findViewById(R.id.lblResponse);
@@ -157,9 +160,8 @@ public class MainQuiz extends AppCompatActivity
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
-            lblResponse.setTypeface(null, NORMAL);
-            lblResponse.setTextColor(
-                    getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+            lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
+            lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
             frmAnswer.onNoQuestions();
         }
         frmAnswer.updateScore(totalCorrect, totalQuestions);
@@ -175,8 +177,11 @@ public class MainQuiz extends AppCompatActivity
             if (QuestionManagement.getStaticQuestionBank().checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
-                lblResponse.setTypeface(null, BOLD);
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightCorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkCorrect));
                 if (retryCount == 0)
                 {
                     totalCorrect++;
@@ -196,8 +201,11 @@ public class MainQuiz extends AppCompatActivity
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
-                lblResponse.setTypeface(null, BOLD);
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightIncorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkIncorrect));
 
                 if (OptionsControl
                         .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
@@ -258,9 +266,8 @@ public class MainQuiz extends AppCompatActivity
             frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
-        lblResponse.setTypeface(null, NORMAL);
-        lblResponse.setTextColor(
-                getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary}).getColor(0, 0));
+        lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
+        lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
     }
 
     @Override
@@ -306,9 +313,13 @@ public class MainQuiz extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == 1)
-        {
-            resetQuiz();
-        }
+        recreate();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }

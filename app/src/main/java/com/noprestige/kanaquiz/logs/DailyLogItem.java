@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -14,6 +15,7 @@ import android.view.View;
 
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.format.TextStyle;
@@ -67,8 +69,6 @@ public class DailyLogItem extends View
 
     private int internalVerticalPadding;
 
-    private static TypedArray defaultAttributes;
-
     private static final DecimalFormat PERCENT_FORMATTER = new DecimalFormat("#0%");
     private static final String SLASH = "/";
 
@@ -95,10 +95,6 @@ public class DailyLogItem extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(
-                    new int[]{android.R.attr.textColorTertiary, android.R.attr.selectableItemBackground});
-
         // Load attributes
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
@@ -107,7 +103,8 @@ public class DailyLogItem extends View
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
-        setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour, defaultAttributes.getColor(0, 0)));
+        setMainColour(a.getColor(R.styleable.DailyLogItem_mainColour,
+                ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary)));
         setIsDynamicSize(a.getBoolean(R.styleable.DailyLogItem_isDynamicSize, true));
 
         a.recycle();
@@ -116,12 +113,18 @@ public class DailyLogItem extends View
         ratioPaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
-        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
+
+        datePaint.setTypeface(font);
+        ratioPaint.setTypeface(font);
+        percentagePaint.setTypeface(font);
+
+        linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
 
-        setBackground(defaultAttributes.getDrawable(1));
+        setBackground(ThemeManager.getThemeDrawable(context, android.R.attr.selectableItemBackground));
 
         setOnClickListener(view ->
         {
@@ -364,7 +367,7 @@ public class DailyLogItem extends View
             totalString = parseCount(totalAnswers);
             float percentage = correctAnswers / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
-            percentagePaint.setColor(getPercentageColour(percentage, getResources()));
+            percentagePaint.setColor(getPercentageColour(percentage, getContext()));
 
             correctWidth = ratioPaint.measureText(correctString);
             slashWidth = ratioPaint.measureText(SLASH);
@@ -373,20 +376,39 @@ public class DailyLogItem extends View
         }
     }
 
-    public static int getPercentageColour(float percentage, Resources resources)
+    public static int getPercentageColour(float percentage, Context context)
     {
+        Resources resources = context.getResources();
         int tenth = Math.round(percentage * 100) / 10;
-        if (tenth <= 4)
-            return resources.getColor(R.color.below_fifty);
-        else if (tenth == 5)
-            return resources.getColor(R.color.fifty_to_sixty);
-        else if (tenth == 6)
-            return resources.getColor(R.color.sixty_to_seventy);
-        else if (tenth == 7)
-            return resources.getColor(R.color.seventy_to_eighty);
-        else if (tenth == 8)
-            return resources.getColor(R.color.eighty_to_ninety);
-        else //if (tenth >= 9)
-            return resources.getColor(R.color.above_ninety);
+        if (ThemeManager.isLightTheme(context))
+        {
+            if (tenth <= 4)
+                return resources.getColor(R.color.lightBelowFifty);
+            else if (tenth == 5)
+                return resources.getColor(R.color.lightFiftyToSixty);
+            else if (tenth == 6)
+                return resources.getColor(R.color.lightSixtyToSeventy);
+            else if (tenth == 7)
+                return resources.getColor(R.color.lightSeventyToEighty);
+            else if (tenth == 8)
+                return resources.getColor(R.color.lightEightyToNinety);
+            else //if (tenth >= 9)
+                return resources.getColor(R.color.lightAboveNinety);
+        }
+        else
+        {
+            if (tenth <= 4)
+                return resources.getColor(R.color.darkBelowFifty);
+            else if (tenth == 5)
+                return resources.getColor(R.color.darkFiftyToSixty);
+            else if (tenth == 6)
+                return resources.getColor(R.color.darkSixtyToSeventy);
+            else if (tenth == 7)
+                return resources.getColor(R.color.darkSeventyToEighty);
+            else if (tenth == 8)
+                return resources.getColor(R.color.darkEightyToNinety);
+            else //if (tenth >= 9)
+                return resources.getColor(R.color.darkAboveNinety);
+        }
     }
 }

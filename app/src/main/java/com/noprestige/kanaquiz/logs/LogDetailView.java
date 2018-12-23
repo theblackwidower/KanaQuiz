@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.ZoneId;
@@ -20,6 +21,7 @@ import org.threeten.bp.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -28,6 +30,8 @@ public class LogDetailView extends AppCompatActivity
 {
     static class FetchLogDetails extends AsyncTask<LogDetailView, LogDetailItem, Integer>
     {
+        @SuppressLint("StaticFieldLeak")
+        LogDetailView activity;
         @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
         @SuppressLint("StaticFieldLeak")
@@ -53,13 +57,14 @@ public class LogDetailView extends AppCompatActivity
         }
 
         @Override
-        protected Integer doInBackground(LogDetailView... activity)
+        protected Integer doInBackground(LogDetailView... activities)
         {
-            layout = activity[0].findViewById(R.id.logDetailViewLayout);
-            lblDetailMessage = activity[0].findViewById(R.id.lblDetailMessage);
-            logDetailChart = activity[0].findViewById(R.id.logDetailChart);
+            activity = activities[0];
+            layout = activity.findViewById(R.id.logDetailViewLayout);
+            lblDetailMessage = activity.findViewById(R.id.lblDetailMessage);
+            logDetailChart = activity.findViewById(R.id.logDetailChart);
 
-            QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity[0].date);
+            QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity.date);
 
             logDetailChart.getXAxis().setValueFormatter((value, axis) -> formatXLabel(value));
 
@@ -68,7 +73,7 @@ public class LogDetailView extends AppCompatActivity
 
             for (QuestionRecord record : records)
             {
-                LogDetailItem output = new LogDetailItem(activity[0]);
+                LogDetailItem output = new LogDetailItem(activity);
                 output.setFromRecord(record);
 
                 chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
@@ -104,7 +109,9 @@ public class LogDetailView extends AppCompatActivity
         {
             if (count > 0)
             {
-                BarData data = new BarData(new BarDataSet(chartSeries, null));
+                BarDataSet dataSet = new BarDataSet(chartSeries, null);
+                dataSet.setColor(ThemeManager.getThemeColour(activity, R.attr.colorAccent));
+                BarData data = new BarData(dataSet);
                 logDetailChart.setData(data);
 
                 data.setBarWidth(0.8f);
@@ -126,6 +133,7 @@ public class LogDetailView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_log_detail_view);
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -205,5 +213,12 @@ public class LogDetailView extends AppCompatActivity
         if (fetchThread != null)
             fetchThread.cancel(true);
         super.onDestroy();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.util.Locale;
 
@@ -75,7 +76,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
         a.recycle();
 
-        linePaint.setColor(context.getResources().getColor(R.color.dividingLine));
+        linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
     }
 

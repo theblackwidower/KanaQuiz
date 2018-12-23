@@ -13,6 +13,7 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
@@ -53,6 +54,7 @@ public class LogView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
+            graphSeries.setColor(ThemeManager.getThemeColour(activity[0], R.attr.colorAccent));
             startDate = records[0].getDate();
 
             for (DailyRecord record : records)
@@ -103,6 +105,7 @@ public class LogView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_log_view);
         onConfigurationChanged(getResources().getConfiguration());
 

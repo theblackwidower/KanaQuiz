@@ -46,6 +46,14 @@
         android:entries="@array/romanize_system_option_item_names"
         android:entryValues="@array/prefids_romanize_system"
         android:defaultValue="@string/prefid_romanize_system_default"/>
+    <com.noprestige.kanaquiz.themes.ThemeChooser
+        android:key="@string/prefid_selected_theme"
+        android:title="@string/selected_theme_title"
+        android:summary="@string/selected_theme_summary"
+        android:defaultValue="@string/themeid_cherry_blossom_tree"/>
+    <Preference
+        android:key="font_provider_link"
+        android:title="@string/download_font_provider"/>
     <Preference
         android:key="clear_logs"
         android:title="@string/clear_logs"/>
