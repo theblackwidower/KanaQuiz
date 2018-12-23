@@ -9,6 +9,8 @@ import android.os.Bundle;
 import com.noprestige.kanaquiz.KanaQuiz;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
+import com.noprestige.kanaquiz.themes.ThemeChooser;
+import com.noprestige.kanaquiz.themes.ThemeChooserDialog;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
@@ -88,10 +90,16 @@ public class OptionsFragment extends PreferenceFragmentCompat
     @Override
     public void onDisplayPreferenceDialog(Preference preference)
     {
+        DialogFragment dialog = null;
+
         //ref: https://stackoverflow.com/a/53290775/3582371
         if (preference.getClass().equals(NumberPreference.class))
+            dialog = NumberPreferenceDialog.newInstance(preference.getKey());
+        else if (preference.getClass().equals(ThemeChooser.class))
+            dialog = ThemeChooserDialog.newInstance(preference.getKey());
+
+        if (dialog != null)
         {
-            DialogFragment dialog = NumberPreferenceDialog.newInstance(preference.getKey());
             dialog.setTargetFragment(this, 0);
             dialog.show(getFragmentManager(), null);
         }
