@@ -12,6 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 
 public class QuestionSelection extends AppCompatActivity
 {
+    private static final int MAX_TABS = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -20,11 +22,13 @@ public class QuestionSelection extends AppCompatActivity
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new QuestionSelectionPager(getSupportFragmentManager(), this));
+        QuestionSelectionPager pagerAdapter = new QuestionSelectionPager(getSupportFragmentManager(), this);
+        viewPager.setAdapter(pagerAdapter);
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         //TODO: Make this check more dynamic, accounting for screen width and actual tab width
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        if (pagerAdapter.getCount() > MAX_TABS)
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setupWithViewPager(viewPager);
     }
 
