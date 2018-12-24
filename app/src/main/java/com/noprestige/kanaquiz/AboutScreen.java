@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.themes.ThemeManager;
@@ -51,6 +52,9 @@ public class AboutScreen extends AppCompatActivity
 
             translatorCredit.setOnClickListener(view -> toSite(translatorCreditUrl));
         }
+
+        if (!ThemeManager.isLightTheme(this))
+            ((ImageView) findViewById(R.id.imgGitHubLogo)).setImageResource(R.drawable.ic_github_logo_white);
     }
 
     private void toSite(String url)
