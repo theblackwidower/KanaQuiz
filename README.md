@@ -39,6 +39,10 @@ This application is in a state of constant development. Any additional feature r
   * Dynamic AI chooses the kana you have the most trouble with
   * Vocabulary support with Kanji option
   * Enhanced multiple choice answer selection
+  * Includes the extended katakana set, recommended by the Japanese government for more accurate pronunciation of foreign words
+  * Proper kanji support with kanji questions
+  * Selectable themes of various colours and tones
+  * Utilizes the RikkaApps' Font Provider for prettier text
 
 ## Upcoming features
 
@@ -53,10 +57,8 @@ _NB: The following features have no planned release date, or guarantee of releas
   * Pronunciation Guide
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
-  * Proper kanji support with kanji questions
   * Support for kun'yomi and on'yomi-based kanji questions
   * Limitation alerts, either by time, or number of questions
-  * Interface themes of various colours and tones (including a dark theme)
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
