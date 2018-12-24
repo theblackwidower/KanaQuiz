@@ -40,7 +40,7 @@ This application is in a state of constant development. Any additional feature r
   * Vocabulary support with Kanji option
   * Enhanced multiple choice answer selection
   * Includes the extended katakana set, recommended by the Japanese government for more accurate pronunciation of foreign words
-  * Proper kanji support with kanji questions
+  * Kanji support with all Kyōiku Kanji taught to first and second grade Japanese students
   * Selectable themes of various colours and tones
   * Utilizes the RikkaApps' Font Provider for prettier text
 
