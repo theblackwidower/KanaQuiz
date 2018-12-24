@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Questions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="https://www.noprestige.com"
+           xsi:schemaLocation="https://www.noprestige.com questions.xsd">
+    <QuestionSet prefId="kyoiku_kanji_grade_4" setTitle="Grade Four">
+        <KanjiQuestion question="不" meaning="not" onYomi="fu/bu"/>
+        <KanjiQuestion question="争" meaning="conflict" kunYomi="araso-u" onYomi="sō"/>
+        <KanjiQuestion question="付" meaning="attach" kunYomi="tsu-ku" onYomi="fu"/>
+        <KanjiQuestion question="令" meaning="orders" onYomi="rei"/>
+        <KanjiQuestion question="以" meaning="since" onYomi="i"/>
+        <KanjiQuestion question="仲" meaning="go-between" kunYomi="naka" onYomi="chū"/>
+        <KanjiQuestion question="伝" meaning="transmit" kunYomi="tsuta-eru" onYomi="den"/>
+        <KanjiQuestion question="位" meaning="rank" kunYomi="kurai" onYomi="i"/>
+        <KanjiQuestion question="低" meaning="low" kunYomi="hiku-i" onYomi="tei"/>
+        <KanjiQuestion question="例" meaning="example" kunYomi="tato-eru" onYomi="rei"/>
+        <KanjiQuestion question="便" meaning="convenience/letter" kunYomi="tayo-ri" onYomi="ben/bin"/>
+        <KanjiQuestion question="信" meaning="trust" onYomi="shin"/>
+        <KanjiQuestion question="倉" meaning="storage" kunYomi="kura" onYomi="sō"/>
+        <KanjiQuestion question="候" meaning="climate" onYomi="kō"/>
+        <KanjiQuestion question="借" meaning="borrow" kunYomi="ka-riru" onYomi="shaku"/>
+        <KanjiQuestion question="停" meaning="halt" kunYomi="to-maru/to-meru" onYomi="tei"/>
+        <KanjiQuestion question="健" meaning="healthy" kunYomi="suko-yaka" onYomi="ken"/>
+        <KanjiQuestion question="側" meaning="side" kunYomi="kawa" onYomi="soku"/>
+        <KanjiQuestion question="働" meaning="work" kunYomi="hatara-ku" onYomi="dō"/>
+        <KanjiQuestion question="億" meaning="hundred million" onYomi="oku"/>
+        <KanjiQuestion question="兆" meaning="portent or trillion" kunYomi="kiza-shi" onYomi="chō"/>
+        <KanjiQuestion question="児" meaning="offspring" kunYomi="ko" onYomi="ji/ni"/>
+        <KanjiQuestion question="共" meaning="together" kunYomi="tomo" onYomi="kyō"/>
+        <KanjiQuestion question="兵" meaning="soldier" kunYomi="tsuwamono" onYomi="hei/hyō"/>
+        <KanjiQuestion question="典" meaning="code" onYomi="ten"/>
+        <KanjiQuestion question="冷" meaning="cool" kunYomi="tsume-tai/hi-eru/sa-meru" onYomi="rei"/>
+        <KanjiQuestion question="初" meaning="first" kunYomi="hatsu/haji-me" onYomi="sho"/>
+        <KanjiQuestion question="別" meaning="separate" kunYomi="waka-reru" onYomi="betsu"/>
+        <KanjiQuestion question="利" meaning="profit" onYomi="ri"/>
+        <KanjiQuestion question="刷" meaning="printing" kunYomi="su-ru" onYomi="satsu"/>
+        <KanjiQuestion question="副" meaning="vice-" onYomi="fuku"/>
+        <KanjiQuestion question="功" meaning="achievement" onYomi="kō"/>
+        <KanjiQuestion question="加" meaning="add" kunYomi="kuwa-eru" onYomi="ka"/>
+        <KanjiQuestion question="努" meaning="toil" kunYomi="tsuto-meru" onYomi="do"/>
+        <KanjiQuestion question="労" meaning="labor" kunYomi="negira-u" onYomi="rō"/>
+        <KanjiQuestion question="勇" meaning="courage" kunYomi="isa-mu" onYomi="yū"/>
+        <KanjiQuestion question="包" meaning="wrap" kunYomi="tsutsu-mu" onYomi="hō"/>
+        <KanjiQuestion question="卒" meaning="graduate" onYomi="sotsu"/>
+        <KanjiQuestion question="協" meaning="cooperation" onYomi="kyō"/>
+        <KanjiQuestion question="単" meaning="simple" onYomi="tan"/>
+        <KanjiQuestion question="博" meaning="wide knowledge/Dr." onYomi="haku"/>
+        <KanjiQuestion question="印" meaning="mark" kunYomi="shirushi" onYomi="in"/>
+        <KanjiQuestion question="参" meaning="participate" kunYomi="mai-ru" onYomi="san"/>
+        <KanjiQuestion question="史" meaning="history" onYomi="shi"/>
+        <KanjiQuestion question="司" meaning="director" onYomi="shi"/>
+        <KanjiQuestion question="各" meaning="each" kunYomi="ono-ono" onYomi="kaku"/>
+        <KanjiQuestion question="告" meaning="tell" kunYomi="tsu-geru" onYomi="koku"/>
+        <KanjiQuestion question="周" meaning="circumference" kunYomi="mawa-ri" onYomi="shū"/>
+        <KanjiQuestion question="唱" meaning="chant" kunYomi="tona-eru" onYomi="shō"/>
+        <KanjiQuestion question="喜" meaning="rejoice" kunYomi="yoroko-bu" onYomi="ki"/>
+        <KanjiQuestion question="器" meaning="container" kunYomi="utsuwa" onYomi="ki"/>
+        <KanjiQuestion question="囲" meaning="surround" kunYomi="kako-u" onYomi="i"/>
+        <KanjiQuestion question="固" meaning="harden" kunYomi="kata-maru" onYomi="ko"/>
+        <KanjiQuestion question="型" meaning="model" kunYomi="kata" onYomi="kei"/>
+        <KanjiQuestion question="堂" meaning="public chamber" onYomi="dō"/>
+        <KanjiQuestion question="塩" meaning="salt" kunYomi="shio" onYomi="en"/>
+        <KanjiQuestion question="士" meaning="gentleman" onYomi="shi"/>
+        <KanjiQuestion question="変" meaning="change/strange" kunYomi="ka-waru" onYomi="hen"/>
+        <KanjiQuestion question="夫" meaning="husband" kunYomi="otto" onYomi="fu fuu bu"/>
+        <KanjiQuestion question="失" meaning="lose" kunYomi="ushina-u" onYomi="shitsu"/>
+        <KanjiQuestion question="好" meaning="like" kunYomi="su-ku/kono-mu" onYomi="kō"/>
+        <KanjiQuestion question="季" meaning="seasons" onYomi="ki"/>
+        <KanjiQuestion question="孫" meaning="grandchild" kunYomi="mago" onYomi="son"/>
+        <KanjiQuestion question="完" meaning="perfect" onYomi="kan"/>
+        <KanjiQuestion question="官" meaning="government official" onYomi="kan"/>
+        <KanjiQuestion question="害" meaning="harm" onYomi="gai"/>
+        <KanjiQuestion question="察" meaning="guess" onYomi="satsu"/>
+        <KanjiQuestion question="巣" meaning="nest" kunYomi="su" onYomi="sō"/>
+        <KanjiQuestion question="差" meaning="distinction" onYomi="sa"/>
+        <KanjiQuestion question="希" meaning="hope" kunYomi="mare" onYomi="ki"/>
+        <KanjiQuestion question="席" meaning="seat" onYomi="seki"/>
+        <KanjiQuestion question="帯" meaning="sash" kunYomi="obi" onYomi="tai"/>
+        <KanjiQuestion question="底" meaning="bottom" kunYomi="soko" onYomi="tei"/>
+        <KanjiQuestion question="府" meaning="urban prefecture" onYomi="fu"/>
+        <KanjiQuestion question="康" meaning="ease" onYomi="kō"/>
+        <KanjiQuestion question="建" meaning="build" kunYomi="ta-teru" onYomi="ken"/>
+        <KanjiQuestion question="径" meaning="diameter" onYomi="kei"/>
+        <KanjiQuestion question="徒" meaning="junior" onYomi="to"/>
+        <KanjiQuestion question="得" meaning="acquire" kunYomi="e-ru" onYomi="toku"/>
+        <KanjiQuestion question="必" meaning="inevitable" kunYomi="kanara-zu" onYomi="hitsu"/>
+        <KanjiQuestion question="念" meaning="thought" onYomi="nen"/>
+        <KanjiQuestion question="愛" meaning="love" onYomi="ai"/>
+        <KanjiQuestion question="成" meaning="become" kunYomi="na-ru" onYomi="sei"/>
+        <KanjiQuestion question="戦" meaning="war" kunYomi="ikusa/tataka-u" onYomi="sen"/>
+        <KanjiQuestion question="折" meaning="fold" kunYomi="o-ru" onYomi="setsu"/>
+        <KanjiQuestion question="挙" meaning="raise" kunYomi="a-geru" onYomi="kyo"/>
+        <KanjiQuestion question="改" meaning="reformation" kunYomi="arata-meru" onYomi="kai"/>
+        <KanjiQuestion question="救" meaning="salvation" kunYomi="suku-u" onYomi="kyū"/>
+        <KanjiQuestion question="敗" meaning="failure" kunYomi="yabu-reru" onYomi="hai"/>
+        <KanjiQuestion question="散" meaning="scatter" kunYomi="chi-ru" onYomi="san"/>
+        <KanjiQuestion question="料" meaning="fee" onYomi="ryō"/>
+        <KanjiQuestion question="旗" meaning="flag" kunYomi="hata" onYomi="ki"/>
+        <KanjiQuestion question="昨" meaning="yesterday" onYomi="saku"/>
+        <KanjiQuestion question="景" meaning="scenery" onYomi="kei"/>
+        <KanjiQuestion question="最" meaning="superlative" kunYomi="mo/motto-mo" onYomi="sai"/>
+        <KanjiQuestion question="望" meaning="hope" kunYomi="nozo-mu" onYomi="bō"/>
+        <KanjiQuestion question="未" meaning="un-" kunYomi="ima-da" onYomi="mi"/>
+        <KanjiQuestion question="末" meaning="end" kunYomi="sue" onYomi="matsu"/>
+        <KanjiQuestion question="札" meaning="tag" kunYomi="fuda" onYomi="satsu"/>
+        <KanjiQuestion question="材" meaning="lumber/material" onYomi="zai"/>
+        <KanjiQuestion question="束" meaning="bundle" kunYomi="taba/tsuka" onYomi="soku"/>
+        <KanjiQuestion question="松" meaning="pine" kunYomi="matsu" onYomi="shō"/>
+        <KanjiQuestion question="果" meaning="accomplish/fruit" kunYomi="ha-tasu" onYomi="ka"/>
+        <KanjiQuestion question="栄" meaning="prosperity" kunYomi="saka-eru" onYomi="ei"/>
+        <KanjiQuestion question="案" meaning="plan" onYomi="an"/>
+        <KanjiQuestion question="梅" meaning="plum" kunYomi="ume" onYomi="bai"/>
+        <KanjiQuestion question="械" meaning="contraption" onYomi="kai"/>
+        <KanjiQuestion question="極" meaning="poles" kunYomi="kiwa-meru" onYomi="kyoku"/>
+        <KanjiQuestion question="標" meaning="signpost" onYomi="hyō"/>
+        <KanjiQuestion question="機" meaning="machine" kunYomi="hata" onYomi="ki"/>
+        <KanjiQuestion question="欠" meaning="lack" kunYomi="ka-keru" onYomi="ketsu"/>
+        <KanjiQuestion question="歴" meaning="curriculum" onYomi="reki"/>
+        <KanjiQuestion question="残" meaning="remainder" kunYomi="noko-ru" onYomi="zan"/>
+        <KanjiQuestion question="殺" meaning="kill" kunYomi="koro-su" onYomi="satsu"/>
+        <KanjiQuestion question="毒" meaning="poison" onYomi="doku"/>
+        <KanjiQuestion question="氏" meaning="surname" kunYomi="uji" onYomi="shi"/>
+        <KanjiQuestion question="民" meaning="people" kunYomi="tami" onYomi="min"/>
+        <KanjiQuestion question="求" meaning="request" kunYomi="moto-mu" onYomi="kyū"/>
+        <KanjiQuestion question="治" meaning="govern" kunYomi="osa-meru/nao-ru" onYomi="chi/ji"/>
+        <KanjiQuestion question="法" meaning="method" onYomi="hō"/>
+        <KanjiQuestion question="泣" meaning="cry" kunYomi="na-ku" onYomi="kyū"/>
+        <KanjiQuestion question="浅" meaning="shallow" kunYomi="asa-i" onYomi="sen"/>
+        <KanjiQuestion question="浴" meaning="bathe/bask" kunYomi="a-biru" onYomi="yoku"/>
+        <KanjiQuestion question="清" meaning="pure" kunYomi="kiyo-raka" onYomi="sei/shō"/>
+        <KanjiQuestion question="満" meaning="full" kunYomi="mi-chiru" onYomi="man"/>
+        <KanjiQuestion question="漁" meaning="fishing" kunYomi="asa-ru" onYomi="ryō/gyo"/>
+        <KanjiQuestion question="灯" meaning="lamp" kunYomi="hi" onYomi="tō"/>
+        <KanjiQuestion question="無" meaning="nothing" kunYomi="na-i" onYomi="mu/bu"/>
+        <KanjiQuestion question="然" meaning="so" kunYomi="shika-shi" onYomi="zen/nen"/>
+        <KanjiQuestion question="焼" meaning="bake" kunYomi="ya-ku" onYomi="shō"/>
+        <KanjiQuestion question="照" meaning="illuminate" kunYomi="te-rasu" onYomi="shō"/>
+        <KanjiQuestion question="熱" meaning="heat" kunYomi="atsu-i" onYomi="netsu"/>
+        <KanjiQuestion question="牧" meaning="pasture/breed" kunYomi="maki" onYomi="boku"/>
+        <KanjiQuestion question="特" meaning="special" onYomi="toku"/>
+        <KanjiQuestion question="産" meaning="give birth" kunYomi="u-mu" onYomi="san"/>
+        <KanjiQuestion question="的" meaning="target" kunYomi="mato" onYomi="teki"/>
+        <KanjiQuestion question="省" meaning="government ministry/omit/look back" kunYomi="habu-ku" onYomi="shō/sei"/>
+        <KanjiQuestion question="祝" meaning="celebrate" kunYomi="iwa-u" onYomi="shuku"/>
+        <KanjiQuestion question="票" meaning="ballot" onYomi="hyō"/>
+        <KanjiQuestion question="種" meaning="species/seed" kunYomi="tane" onYomi="shu"/>
+        <KanjiQuestion question="積" meaning="accumulate/pile" kunYomi="tsu-mu" onYomi="seki"/>
+        <KanjiQuestion question="競" meaning="emulate" kunYomi="kiso-u" onYomi="kyō"/>
+        <KanjiQuestion question="笑" meaning="laugh" kunYomi="wara-u" onYomi="shō"/>
+        <KanjiQuestion question="管" meaning="pipe" kunYomi="kuda" onYomi="kan"/>
+        <KanjiQuestion question="節" meaning="node" kunYomi="fushi" onYomi="setsu"/>
+        <KanjiQuestion question="粉" meaning="flour" kunYomi="ko/kona" onYomi="fun"/>
+        <KanjiQuestion question="紀" meaning="chronicle" onYomi="ki"/>
+        <KanjiQuestion question="約" meaning="promise" onYomi="yaku"/>
+        <KanjiQuestion question="結" meaning="tie" kunYomi="musu-bu/yu-u" onYomi="ketsu"/>
+        <KanjiQuestion question="給" meaning="salary" kunYomi="tama-u" onYomi="kyū"/>
+        <KanjiQuestion question="続" meaning="continue" kunYomi="tsuzu-ku" onYomi="zoku"/>
+        <KanjiQuestion question="置" meaning="put" kunYomi="o-ku" onYomi="chi"/>
+        <KanjiQuestion question="老" meaning="old man" kunYomi="o-iru" onYomi="rō"/>
+        <KanjiQuestion question="胃" meaning="stomach" onYomi="i"/>
+        <KanjiQuestion question="脈" meaning="vein" onYomi="myaku"/>
+        <KanjiQuestion question="腸" meaning="intestines" kunYomi="harawata" onYomi="chō"/>
+        <KanjiQuestion question="臣" meaning="retainer" onYomi="shin"/>
+        <KanjiQuestion question="航" meaning="cruise" onYomi="kō"/>
+        <KanjiQuestion question="良" meaning="good" kunYomi="yo-i" onYomi="ryō"/>
+        <KanjiQuestion question="芸" meaning="art" onYomi="gei"/>
+        <KanjiQuestion question="芽" meaning="bud" kunYomi="me" onYomi="ga"/>
+        <KanjiQuestion question="英" meaning="England" onYomi="ei"/>
+        <KanjiQuestion question="菜" meaning="vegetable" kunYomi="na" onYomi="sai"/>
+        <KanjiQuestion question="街" meaning="street/city" kunYomi="machi" onYomi="gai"/>
+        <KanjiQuestion question="衣" meaning="garment" kunYomi="koromo" onYomi="i"/>
+        <KanjiQuestion question="要" meaning="need" kunYomi="i-ru" onYomi="yō"/>
+        <KanjiQuestion question="覚" meaning="memorize" kunYomi="obo-eru/sa-meru" onYomi="kaku"/>
+        <KanjiQuestion question="観" meaning="observe" kunYomi="mi-ru" onYomi="kan"/>
+        <KanjiQuestion question="訓" meaning="instruction" onYomi="kun"/>
+        <KanjiQuestion question="試" meaning="test" kunYomi="kokoro-miru/tame-su" onYomi="shi"/>
+        <KanjiQuestion question="説" meaning="theory" kunYomi="to-ku" onYomi="setsu"/>
+        <KanjiQuestion question="課" meaning="section" onYomi="ka"/>
+        <KanjiQuestion question="議" meaning="deliberation" onYomi="gi"/>
+        <KanjiQuestion question="象" meaning="elephant/figure" onYomi="zō/shō"/>
+        <KanjiQuestion question="貨" meaning="freight" onYomi="ka"/>
+        <KanjiQuestion question="貯" meaning="savings" kunYomi="ta-meru" onYomi="cho"/>
+        <KanjiQuestion question="費" meaning="expense" kunYomi="tsui-yasu" onYomi="hi"/>
+        <KanjiQuestion question="賞" meaning="prize" onYomi="shō"/>
+        <KanjiQuestion question="軍" meaning="army" onYomi="gun"/>
+        <KanjiQuestion question="輪" meaning="wheel" kunYomi="wa" onYomi="rin"/>
+        <KanjiQuestion question="辞" meaning="resign/speech/encyclopedia" kunYomi="kotoba/ya-meru" onYomi="ji"/>
+        <KanjiQuestion question="辺" meaning="environs" kunYomi="ata-ri" onYomi="hen"/>
+        <KanjiQuestion question="連" meaning="take along" kunYomi="tsu-reru/tsura-neru" onYomi="ren"/>
+        <KanjiQuestion question="達" meaning="attain" kunYomi="tachi"/>
+        <KanjiQuestion question="選" meaning="choose" kunYomi="era-bu" onYomi="sen"/>
+        <KanjiQuestion question="郡" meaning="county" onYomi="gun"/>
+        <KanjiQuestion question="量" meaning="quantity" onYomi="ryō"/>
+        <KanjiQuestion question="録" meaning="transcript" onYomi="roku"/>
+        <KanjiQuestion question="鏡" meaning="mirror" kunYomi="kagami" onYomi="kyō"/>
+        <KanjiQuestion question="関" meaning="related" kunYomi="seki" onYomi="kan"/>
+        <KanjiQuestion question="陸" meaning="land" onYomi="riku"/>
+        <KanjiQuestion question="隊" meaning="squad" onYomi="tai"/>
+        <KanjiQuestion question="静" meaning="quiet" kunYomi="shizu-ka" onYomi="sei"/>
+        <KanjiQuestion question="順" meaning="obey" onYomi="jun"/>
+        <KanjiQuestion question="願" meaning="request" kunYomi="nega-u" onYomi="gan"/>
+        <KanjiQuestion question="類" meaning="sort" onYomi="rui"/>
+        <KanjiQuestion question="飛" meaning="fly" kunYomi="to-bu" onYomi="hi"/>
+        <KanjiQuestion question="飯" meaning="meal" kunYomi="meshi" onYomi="han"/>
+        <KanjiQuestion question="養" meaning="foster" kunYomi="yashina-u" onYomi="yō"/>
+        <KanjiQuestion question="験" meaning="verify" onYomi="ken"/>
+    </QuestionSet>
+    <!--
+    Sources:
+    Wkikpedia: https://en.wikipedia.org/wiki/Kyōiku_kanji
+    -->
+</Questions>
