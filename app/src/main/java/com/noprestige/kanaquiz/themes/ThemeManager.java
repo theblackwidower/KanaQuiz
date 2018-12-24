@@ -164,7 +164,6 @@ public final class ThemeManager
                             dialogBuilder.setOnDismissListener(dialog -> activity
                                     .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
                             dialogBuilder.show();
-                            //TODO: Find way to get activity to restart once font permission is granted.
                         }
                         else
                             initializeFonts(activity);
