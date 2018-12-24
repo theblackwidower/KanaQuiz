@@ -224,7 +224,7 @@
     <string name="extended_katakana_set_1_title">%2$s (MEXT general list for loanwords and foreign names)</string>
     <string name="extended_katakana_set_2_title">%2$s (MEXT expanded list for accurate transliteration)</string>
     <string name="extended_katakana_set_3_title">%2$s (ANSI/BSI suggestions)</string>
-    <string name="extended_katakana_set_4_title">%2$s (Hyōjun-shiki)</string>
+    <string name="extended_katakana_set_4_title">%2$s (Sourced from the 1974 Hyōjun-shiki format)</string>
 
     <string name="ljts_kanji_set_1_title">Wu Xing Elements</string>
     <string name="ljts_kanji_set_2_title">Day &amp; Night</string>
