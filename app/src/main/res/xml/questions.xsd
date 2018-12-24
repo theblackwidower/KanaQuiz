@@ -112,8 +112,9 @@
         <xs:complexType>
             <xs:attribute name="question" type="kanji" use="required"/>
             <xs:attribute name="meaning" type="meanings" use="required"/>
+            <!--TODO: At least one of these is required-->
             <xs:attribute name="kunYomi" type="romaji"/>
-            <xs:attribute name="onYomi" type="romaji" use="required"/>
+            <xs:attribute name="onYomi" type="romaji"/>
         </xs:complexType>
     </xs:element>
 
@@ -172,7 +173,7 @@
 
     <xs:simpleType name="meanings">
         <xs:restriction base="text">
-            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
+            <xs:pattern value="[ '()-/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
         </xs:restriction>
     </xs:simpleType>
 
