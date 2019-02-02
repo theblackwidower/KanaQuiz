@@ -160,10 +160,12 @@ public class LogDetailView extends AppCompatActivity
 
         logDetailChart.getAxisLeft().setAxisMaximum(100);
         logDetailChart.getAxisLeft().setAxisMinimum(0);
+        logDetailChart.getAxisLeft().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
         logDetailChart.getAxisRight().setEnabled(false);
         logDetailChart.getXAxis().setGranularity(1);
         logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         logDetailChart.getXAxis().setDrawGridLines(false);
+        logDetailChart.getXAxis().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
         logDetailChart.getLegend().setEnabled(false);
         logDetailChart.getDescription().setText("");
         logDetailChart.setScaleYEnabled(false);
