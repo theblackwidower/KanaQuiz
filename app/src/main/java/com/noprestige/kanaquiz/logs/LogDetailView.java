@@ -2,8 +2,10 @@ package com.noprestige.kanaquiz.logs;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -158,14 +160,23 @@ public class LogDetailView extends AppCompatActivity
 
         BarChart logDetailChart = findViewById(R.id.logDetailChart);
 
+        float labelFontSize =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 4, getResources().getDisplayMetrics());
+
         logDetailChart.getAxisLeft().setAxisMaximum(100);
         logDetailChart.getAxisLeft().setAxisMinimum(0);
         logDetailChart.getAxisLeft().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
+        logDetailChart.getAxisLeft().setTypeface(ThemeManager.getDefaultThemeFont(this, Typeface.BOLD));
+        logDetailChart.getAxisLeft().setTextSize(labelFontSize);
         logDetailChart.getAxisRight().setEnabled(false);
         logDetailChart.getXAxis().setGranularity(1);
         logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         logDetailChart.getXAxis().setDrawGridLines(false);
         logDetailChart.getXAxis().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
+        logDetailChart.getXAxis().setTypeface(ThemeManager.getDefaultThemeFont(this, Typeface.BOLD));
+        logDetailChart.getXAxis().setTextSize(labelFontSize);
+        logDetailChart.setExtraBottomOffset(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
         logDetailChart.getLegend().setEnabled(false);
         logDetailChart.getDescription().setText("");
         logDetailChart.setScaleYEnabled(false);
