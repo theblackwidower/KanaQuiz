@@ -3,6 +3,7 @@
     <!--
     Notes:
     Use fontFamily and android:typeface for font types
+    TODO: Problem with fonts on action bar, tabs, and font preview in theme chooser
     -->
 
     <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">
