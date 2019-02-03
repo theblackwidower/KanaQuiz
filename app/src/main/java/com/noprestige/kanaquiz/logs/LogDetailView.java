@@ -160,8 +160,7 @@ public class LogDetailView extends AppCompatActivity
 
         BarChart logDetailChart = findViewById(R.id.logDetailChart);
 
-        float labelFontSize =
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 4, getResources().getDisplayMetrics());
+        float labelFontSize = getResources().getDimensionPixelSize(R.dimen.chartLabelTextSize);
 
         logDetailChart.getAxisLeft().setAxisMaximum(100);
         logDetailChart.getAxisLeft().setAxisMinimum(0);
@@ -176,7 +175,7 @@ public class LogDetailView extends AppCompatActivity
         logDetailChart.getXAxis().setTypeface(ThemeManager.getDefaultThemeFont(this, Typeface.BOLD));
         logDetailChart.getXAxis().setTextSize(labelFontSize);
         logDetailChart.setExtraBottomOffset(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
         logDetailChart.getLegend().setEnabled(false);
         logDetailChart.getDescription().setText("");
         logDetailChart.setScaleYEnabled(false);
