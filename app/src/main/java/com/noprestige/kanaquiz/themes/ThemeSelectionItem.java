@@ -144,7 +144,7 @@ public class ThemeSelectionItem extends LinearLayout
             this.prefId = prefId;
             themeResId = ThemeManager.getThemeId(prefId);
             imgPreview.setPrefId(prefId);
-            lblThemeSample.setTypeface(ThemeManager.getThemeFont(getTheme(), R.attr.fontFamily, NORMAL));
+            lblThemeSample.setTypeface(ThemeManager.getDefaultThemeFont(getTheme(), NORMAL));
         }
     }
 
