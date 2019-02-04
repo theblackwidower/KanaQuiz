@@ -139,8 +139,9 @@ public class LogDetailItem extends View
 
     private int desiredWidth()
     {
-        return Math.round((Math.max(questionWidth + correctWidth, totalWidth + percentageWidth) * 2) + slashWidth) +
-                getPaddingLeft() + getPaddingRight();
+        return Math.round((Math.max(questionWidth + correctWidth +
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()),
+                totalWidth + percentageWidth) * 2) + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
     private static int calculateSize(int measureSpec, int desired)
