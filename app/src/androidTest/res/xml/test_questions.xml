@@ -2,26 +2,26 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="set1" setTitle="First Set">
+    <QuestionSet prefId="set1" setTitle="First Set">
         <KanaQuestion question="あ" answer="a"/>
         <KanaQuestion question="い" answer="i"/>
         <KanaQuestion question="う" answer="u"/>
         <KanaQuestion question="え" answer="e"/>
         <KanaQuestion question="お" answer="o"/>
-    </KanaSet>
-    <KanaSet prefId="set2" setTitle="Second Set">
+    </QuestionSet>
+    <QuestionSet prefId="set2" setTitle="Second Set">
         <KanaQuestion question="な" answer="na"/>
         <KanaQuestion question="に" answer="ni"/>
         <KanaQuestion question="ぬ" answer="nu"/>
         <KanaQuestion question="ね" answer="ne"/>
         <KanaQuestion question="の" answer="no"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="y_set">
             <KanaQuestion question="にゃ" answer="nya"/>
             <KanaQuestion question="にゅ" answer="nyu"/>
             <KanaQuestion question="にょ" answer="nyo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="set3" setTitle="Third Set with Diacritics" setNoDiacriticsTitle="Third Set">
+    </QuestionSet>
+    <QuestionSet prefId="set3" setTitle="Third Set with Diacritics" setNoDiacriticsTitle="Third Set">
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
         <KanaQuestion question="ふ" answer="fu">
@@ -30,37 +30,42 @@
         </KanaQuestion>
         <KanaQuestion question="へ" answer="he"/>
         <KanaQuestion question="ほ" answer="ho"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ば" answer="ba"/>
             <KanaQuestion question="び" answer="bi"/>
             <KanaQuestion question="ぶ" answer="bu"/>
             <KanaQuestion question="べ" answer="be"/>
             <KanaQuestion question="ぼ" answer="bo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="false">
+        <Section diacritics="HANDAKUTEN">
             <KanaQuestion question="ぱ" answer="pa"/>
             <KanaQuestion question="ぴ" answer="pi"/>
             <KanaQuestion question="ぷ" answer="pu"/>
             <KanaQuestion question="ぺ" answer="pe"/>
             <KanaQuestion question="ぽ" answer="po"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="y_set">
             <KanaQuestion question="ひゃ" answer="hya"/>
             <KanaQuestion question="ひゅ" answer="hyu"/>
             <KanaQuestion question="ひょ" answer="hyo"/>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="y_set">
             <KanaQuestion question="びゃ" answer="bya"/>
             <KanaQuestion question="びゅ" answer="byu"/>
             <KanaQuestion question="びょ" answer="byo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="true">
+        <Section diacritics="HANDAKUTEN" digraphs="y_set">
             <KanaQuestion question="ぴゃ" answer="pya"/>
             <KanaQuestion question="ぴゅ" answer="pyu"/>
             <KanaQuestion question="ぴょ" answer="pyo"/>
         </Section>
-        <Section diacritics="CONSONANT" digraphs="false">
+        <Section diacritics="CONSONANT">
             <KanaQuestion question="ん" answer="n"/>
         </Section>
-    </KanaSet>
+    </QuestionSet>
+    <QuestionSet prefId="y_set" setTitle="Y Set">
+        <KanaQuestion question="や" answer="ya"/>
+        <KanaQuestion question="ゆ" answer="yu"/>
+        <KanaQuestion question="よ" answer="yo"/>
+    </QuestionSet>
 </Questions>

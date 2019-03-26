@@ -1,14 +1,17 @@
 package com.noprestige.kanaquiz.options;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.QuestionManagement;
 
-import static com.noprestige.kanaquiz.questions.QuestionManagement.HIRAGANA;
+import org.threeten.bp.LocalDate;
+
+import androidx.preference.PreferenceManager;
 
 public final class OptionsControl
 {
@@ -19,11 +22,11 @@ public final class OptionsControl
     private OptionsControl() {}
 
     @SuppressLint("CommitPrefEdits")
-    public static void initialize(Context context)
+    public static void initialize(Application context)
     {
         if (sharedPreferences == null)
         {
-            Context appContext = context.getApplicationContext();
+            Context appContext = context;
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             editor = sharedPreferences.edit();
             resources = appContext.getResources();
@@ -39,7 +42,7 @@ public final class OptionsControl
     public static boolean getBoolean(String prefId)
     {
         //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, HIRAGANA.getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
     }
 
     public static void setBoolean(int resId, boolean setting)
@@ -93,6 +96,21 @@ public final class OptionsControl
     {
         editor.putString(prefId, setting);
         editor.apply();
+    }
+
+    public static LocalDate getDate(int resId)
+    {
+        return getDate(resources.getString(resId));
+    }
+
+    public static LocalDate getDate(String prefId)
+    {
+        String record = sharedPreferences.getString(prefId, "");
+
+        if ((record == null) || "".equals(record))
+            return null;
+        else
+            return LocalDate.parse(record);
     }
 
     public static boolean compareStrings(int prefId, int comparator)

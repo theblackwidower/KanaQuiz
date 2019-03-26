@@ -20,13 +20,15 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
-import com.noprestige.kanaquiz.questions.NoQuestionsException;
-import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
+import java.util.Locale;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.TextViewCompat;
@@ -41,8 +43,6 @@ public class MainQuiz extends AppCompatActivity
     int totalQuestions;
     float totalCorrect;
     private boolean canSubmit;
-
-    private QuestionBank questionBank;
 
     private TextView lblResponse;
     private TextView lblQuestion;
@@ -77,8 +77,8 @@ public class MainQuiz extends AppCompatActivity
         {
             if (record != null)
             {
-                totalQuestions += record.totalAnswers;
-                totalCorrect += record.correctAnswers;
+                totalQuestions += record.getTotalAnswers();
+                totalCorrect += record.getCorrectAnswers();
             }
             frmAnswer.updateScore(totalCorrect, totalQuestions);
         }
@@ -88,6 +88,14 @@ public class MainQuiz extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
+        setContentView(R.layout.activity_main_quiz);
+
+        lblResponse = findViewById(R.id.lblResponse);
+        lblQuestion = findViewById(R.id.lblQuestion);
+        frmAnswer = findViewById(R.id.frmAnswer);
+
+        lblQuestion.setTextLocale(Locale.JAPANESE);
 
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -96,25 +104,18 @@ public class MainQuiz extends AppCompatActivity
 
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
+        if (fetchScoreThread != null)
+            fetchScoreThread.cancel(true);
+        fetchScoreThread = new FetchTodaysLog();
+        fetchScoreThread.execute(LocalDate.now());
+
         resetQuiz();
-        nextQuestion();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
-
-        //TODO: Preserve current question through configuration change
-
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            setContentView(R.layout.activity_horizontal_quiz);
-        else
-            setContentView(R.layout.activity_main_quiz);
-
-        lblResponse = findViewById(R.id.lblResponse);
-        lblQuestion = findViewById(R.id.lblQuestion);
-        frmAnswer = findViewById(R.id.frmAnswer);
 
         if ((newConfig.keyboard == Configuration.KEYBOARD_NOKEYS) &&
                 (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES))
@@ -133,41 +134,34 @@ public class MainQuiz extends AppCompatActivity
 
     private void resetQuiz()
     {
-        if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
-        fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(LocalDate.now());
-
         lblQuestion.setText("");
         lblResponse.setText("");
 
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        questionBank = QuestionManagement.getFullQuestionBank();
+        QuestionManagement.refreshStaticQuestionBank();
+        refreshDisplay();
 
         frmAnswer.resetQuiz();
     }
 
-    private void nextQuestion()
+    private void refreshDisplay()
     {
-        try
+        if (QuestionManagement.getStaticQuestionBank().count() > 0)
         {
-            questionBank.newQuestion();
-            lblQuestion.setText(questionBank.getCurrentQuestionText());
+            lblQuestion.setText(QuestionManagement.getStaticQuestionBank().getCurrentQuestionText());
             retryCount = 0;
-            frmAnswer.setMultipleChoices(questionBank);
+            frmAnswer.setMultipleChoices(QuestionManagement.getStaticQuestionBank());
             readyForAnswer();
         }
-        catch (NoQuestionsException ex)
+        else
         {
             lblQuestion.setText("");
             lblResponse.setText(R.string.no_questions);
             canSubmit = false;
-            lblResponse.setTypeface(null, NORMAL);
-            lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
-                    android.R.attr.textColorTertiary
-            }).getColor(0, 0));
+            lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
+            lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
             frmAnswer.onNoQuestions();
         }
         frmAnswer.updateScore(totalCorrect, totalQuestions);
@@ -180,30 +174,38 @@ public class MainQuiz extends AppCompatActivity
             canSubmit = false;
             boolean isGetNewQuestion = true;
 
-            if (questionBank.checkCurrentAnswer(answer))
+            if (QuestionManagement.getStaticQuestionBank().checkCurrentAnswer(answer))
             {
                 lblResponse.setText(R.string.correct_answer);
-                lblResponse.setTypeface(null, BOLD);
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.correct));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightCorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkCorrect));
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDao.reportCorrectAnswer(questionBank.getCurrentQuestionKey());
+                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
-                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), score);
+                    LogDao.reportRetriedCorrectAnswer(
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
                 }
                 else
-                    LogDao.reportRetriedCorrectAnswer(questionBank.getCurrentQuestionKey(), 0);
+                    LogDao.reportRetriedCorrectAnswer(
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), 0);
             }
             else
             {
                 lblResponse.setText(R.string.incorrect_answer);
-                lblResponse.setTypeface(null, BOLD);
-                lblResponse.setTextColor(ContextCompat.getColor(this, R.color.incorrect));
+                lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, BOLD));
+                if (ThemeManager.isLightTheme(this))
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.lightIncorrect));
+                else
+                    lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkIncorrect));
 
                 if (OptionsControl
                         .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_show_answer))
@@ -211,7 +213,7 @@ public class MainQuiz extends AppCompatActivity
                     lblResponse.append(System.getProperty("line.separator"));
                     lblResponse.append(getResources().getText(R.string.show_correct_answer));
                     lblResponse.append(": ");
-                    lblResponse.append(questionBank.fetchCorrectAnswer());
+                    lblResponse.append(QuestionManagement.getStaticQuestionBank().fetchCorrectAnswer());
                 }
                 else if (OptionsControl
                         .compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_retry))
@@ -221,7 +223,8 @@ public class MainQuiz extends AppCompatActivity
                     retryCount++;
                     isGetNewQuestion = false;
 
-                    LogDao.reportIncorrectRetry(questionBank.getCurrentQuestionKey(), answer);
+                    LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -231,7 +234,8 @@ public class MainQuiz extends AppCompatActivity
                 }
 
                 if (isGetNewQuestion)
-                    LogDao.reportIncorrectAnswer(questionBank.getCurrentQuestionKey(), answer);
+                    LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            answer);
             }
 
             if (isGetNewQuestion)
@@ -239,7 +243,8 @@ public class MainQuiz extends AppCompatActivity
                 totalQuestions++;
                 //TODO: Find a way to disable a textbox without closing the touch keyboard
                 //txtAnswer.setEnabled(false);
-                delayHandler.postDelayed(this::nextQuestion, 1000);
+                QuestionManagement.getStaticQuestionBank().newQuestion();
+                delayHandler.postDelayed(this::refreshDisplay, 1000);
             }
         }
     }
@@ -247,13 +252,13 @@ public class MainQuiz extends AppCompatActivity
     private void readyForAnswer()
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            if (questionBank.isCurrentQuestionVocab())
+            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
                 lblResponse.setText(R.string.request_vocab_multiple_choice);
             else
                 lblResponse.setText(R.string.request_kana_multiple_choice);
         else
         {
-            if (questionBank.isCurrentQuestionVocab())
+            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
                 lblResponse.setText(R.string.request_vocab_text_input);
             else
                 lblResponse.setText(R.string.request_kana_text_input);
@@ -261,10 +266,8 @@ public class MainQuiz extends AppCompatActivity
             frmAnswer.readyForTextAnswer();
         }
         canSubmit = true;
-        lblResponse.setTypeface(null, NORMAL);
-        lblResponse.setTextColor(getApplicationContext().getTheme().obtainStyledAttributes(new int[]{
-                android.R.attr.textColorTertiary
-        }).getColor(0, 0));
+        lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
+        lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
     }
 
     @Override
@@ -310,10 +313,13 @@ public class MainQuiz extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == 1)
-        {
-            resetQuiz();
-            nextQuestion();
-        }
+        recreate();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }

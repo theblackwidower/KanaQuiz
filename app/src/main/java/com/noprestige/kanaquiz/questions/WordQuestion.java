@@ -1,11 +1,12 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
-import android.util.TypedValue;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
+
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class WordQuestion extends Question
 {
@@ -13,13 +14,15 @@ public class WordQuestion extends Question
     private final String kana;
     private final String kanji;
     private final String answer;
+    private final String[] altAnswers;
 
-    public WordQuestion(String romaji, String answer, String kana, String kanji)
+    public WordQuestion(String romaji, String answer, String kana, String kanji, String[] altAnswers)
     {
         this.romaji = romaji.trim();
         this.answer = answer.trim();
         this.kana = (kana != null) ? kana.trim() : null;
         this.kanji = (kanji != null) ? kanji.trim() : null;
+        this.altAnswers = altAnswers;
     }
 
     enum QuestionTextType
@@ -39,7 +42,7 @@ public class WordQuestion extends Question
         else if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_kanji))
             return fetchText(QuestionTextType.KANJI);
         else
-            return romaji;
+            return fetchText(QuestionTextType.KANA);
     }
 
     @SuppressWarnings("fallthrough")
@@ -62,7 +65,17 @@ public class WordQuestion extends Question
     @Override
     boolean checkAnswer(String response)
     {
-        return answer.trim().equalsIgnoreCase(response.trim());
+        if (answer.trim().equalsIgnoreCase(response.trim()))
+            return true;
+        else if (altAnswers != null)
+            for (String answer : altAnswers)
+                if (answer.trim().equalsIgnoreCase(response.trim()))
+                    return true;
+        if (answer.contains(MEANING_DELIMITER))
+            for (String subAnswer : answer.split(MEANING_DELIMITER))
+                if (subAnswer.trim().equalsIgnoreCase(response.trim()))
+                    return true;
+        return false;
     }
 
     @Override
@@ -81,8 +94,7 @@ public class WordQuestion extends Question
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = super.generateReference(context);
-        cell.setSubjectSize(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 52, context.getResources().getDisplayMetrics()));
+        cell.setSubjectSize(context.getResources().getDimension(R.dimen.vocabReferenceSubjectSize));
         return cell;
     }
 }

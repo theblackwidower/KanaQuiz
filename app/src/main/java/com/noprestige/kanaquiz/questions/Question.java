@@ -80,4 +80,48 @@ public abstract class Question
         else
             return KanaSystem.NO_KANA; //possibly a reserved character in the block
     }
+
+    public static KanaSystem whatKanaSystem(String kana)
+    {
+        int hiraganaCount = 0;
+        int katakanaCount = 0;
+        int diacriticMarkCount = 0;
+        int bothKanaCount = 0;
+        int noKanaCount = 0;
+
+        for (int i = 0; i < kana.length(); i++)
+            switch (whatKanaSystem(kana.charAt(i)))
+            {
+                case HIRAGANA:
+                    hiraganaCount++;
+                    break;
+                case KATAKANA:
+                    katakanaCount++;
+                    break;
+                case DIACRITIC_MARK:
+                    diacriticMarkCount++;
+                    break;
+                case BOTH_KANA:
+                    bothKanaCount++;
+                    break;
+                case NO_KANA:
+                    noKanaCount++;
+            }
+
+        if (noKanaCount > 0)
+            return KanaSystem.NO_KANA;
+        else if ((hiraganaCount > 0) || (katakanaCount > 0))
+            if (hiraganaCount <= 0)
+                return KanaSystem.KATAKANA;
+            else if (katakanaCount <= 0)
+                return KanaSystem.HIRAGANA;
+            else
+                return KanaSystem.BOTH_KANA;
+        else if (diacriticMarkCount > 0)
+            return KanaSystem.DIACRITIC_MARK;
+        else if (bothKanaCount > 0)
+            return KanaSystem.BOTH_KANA;
+        else
+            return null;
+    }
 }

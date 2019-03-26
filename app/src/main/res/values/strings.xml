@@ -51,6 +51,7 @@
     <!-- Log View -->
     <string name="loading">Loading&#8230;</string>
     <string name="no_logs">No Logs Found.</string>
+    <string name="log_detail_title">Log Details: %1$tF</string>
 
     <!-- Options Screen -->
     <string name="incorrect_option_title">On an incorrect answer&#8230;</string>
@@ -147,31 +148,128 @@
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
+    <string name="kanji_phase_1">Phase One</string>
+    <string name="kanji_phase_2">Phase Two</string>
+    <string name="kanji_phase_3">Phase Three</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>
     <string name="acra_alert">Unfortunately, The Kana Quiz has crashed. Please send an error report.</string>
 
+    <!-- Font Interface -->
+    <string name="prefid_ignore_font_provider" translatable="false">ignore_font_provider</string>
+    <string name="prefid_font_remind_date" translatable="false">font_remind_date</string>
+    <string name="font_provider_install_request">This application uses the RikkaApps\' Font Provider for prettier
+        Japanese characters. Please download the support app to enable it.</string>
+
+    <string name="font_provider_update_request">Your version of the RikkaApps\' Font Provider is out of date. You may
+        notice some font issues. To resolve, please update to the latest version.</string>
+
+    <string name="prefid_font_download_alert_date" translatable="false">font_download_alert_date</string>
+    <string name="font_provider_font_request">Cannot find serif fonts. Please download \‘Noto Serif\’ and \‘Noto
+        Serif CJK\’ through the Font Provider app.</string>
+
+    <string name="marshmallow_font_permission_request">The Kana Quiz needs permission to access the fonts from Font Provider.</string>
+
+    <string name="download_font_provider">Get Font Provider for Prettier Fonts</string>
+    <string name="get_on_google_play">Get it on Google Play</string>
+    <string name="update_on_google_play">Update on Google Play</string>
+    <string name="download_github">Download from GitHub</string>
+    <string name="open_font_provider">Open Font Provider</string>
+    <string name="remind_tomorrow">Remind me tomorrow</string>
+    <string name="ignore">Ignore</string>
+
+    <!-- Theme Selection -->
+    <string name="prefid_selected_theme" translatable="false">selected_theme</string>
+    <string name="selected_theme_title">Themes</string>
+    <string name="selected_theme_summary">Choose how you want the quiz to look</string>
+    <string name="theme_preview_sample" translatable="false">Fonts 雪の中で話す</string>
+    <string name="select_theme">Select</string>
+
+    <!-- THEMES! -->
+    <string name="theme_cherry_blossom_tree">Cherry Blossom Tree</string>
+    <string name="theme_shibuya_night">Shibuya Night</string>
+    <string name="theme_hot_spring">Hot Spring Serenity</string>
+    <string name="theme_chrysanthemum">Chrysanthemum Twilight</string>
+
+    <string name="themeid_cherry_blossom_tree" translatable="false">cherry_blossom_tree</string>
+    <string name="themeid_shibuya_night" translatable="false">shibuya_night</string>
+    <string name="themeid_hot_spring" translatable="false">hot_spring</string>
+    <string name="themeid_chrysanthemum" translatable="false">chrysanthemum</string>
+
     <!-- Question Selection -->
     <string name="hiragana" translatable="false">Hiragana</string>
     <string name="katakana" translatable="false">Katakana</string>
+    <string name="kanji" translatable="false">Kanji</string>
     <string name="vocabulary">Vocabulary</string>
     <string name="set">set</string>
     <string name="set_1_title">Base %1$s</string>
-    <string name="set_2_title" translatable="false">K/G %1$s</string>
-    <string name="set_3_title" translatable="false">S/Z %1$s</string>
-    <string name="set_4_title" translatable="false">T/D %1$s</string>
-    <string name="set_5_title" translatable="false">N %1$s</string>
-    <string name="set_6_title" translatable="false">H/B/P %1$s</string>
-    <string name="set_7_title" translatable="false">M %1$s</string>
-    <string name="set_8_title" translatable="false">R %1$s</string>
-    <string name="set_9_title" translatable="false">Y %1$s</string>
-    <string name="set_10_title" translatable="false">W %1$s + N</string>
+    <string name="set_2_title">K/G %1$s</string>
+    <string name="set_3_title">S/Z %1$s</string>
+    <string name="set_4_title">T/D %1$s</string>
+    <string name="set_5_title">N %1$s</string>
+    <string name="set_6_title">H/B/P %1$s</string>
+    <string name="set_7_title">M %1$s</string>
+    <string name="set_8_title">R %1$s</string>
+    <string name="set_9_title">Y %1$s</string>
+    <string name="set_10_title">W %1$s + N</string>
 
-    <string name="set_2_no_diacritics_title" translatable="false">K %1$s</string>
-    <string name="set_3_no_diacritics_title" translatable="false">S %1$s</string>
-    <string name="set_4_no_diacritics_title" translatable="false">T %1$s</string>
-    <string name="set_6_no_diacritics_title" translatable="false">H %1$s</string>
+    <string name="set_2_no_diacritics_title">K %1$s</string>
+    <string name="set_3_no_diacritics_title">S %1$s</string>
+    <string name="set_4_no_diacritics_title">T %1$s</string>
+    <string name="set_6_no_diacritics_title">H %1$s</string>
+
+    <string name="extended_katakana_title">Extended Katakana</string>
+    <!--MEXT refers to the Japanese Ministry of Education, Culture, Sports, Science and Technology-->
+    <string name="extended_katakana_set_1_title">%2$s (MEXT general list for loanwords and foreign names)</string>
+    <string name="extended_katakana_set_2_title">%2$s (MEXT expanded list for accurate transliteration)</string>
+    <string name="extended_katakana_set_3_title">%2$s (ANSI/BSI suggestions)</string>
+    <string name="extended_katakana_set_4_title">%2$s (Sourced from the 1974 Hyōjun-shiki format)</string>
+
+    <string name="ljts_kanji_set_1_title">Wu Xing Elements</string>
+    <string name="ljts_kanji_set_2_title">Day &amp; Night</string>
+    <string name="ljts_kanji_set_3_title">Numbers 1–5</string>
+    <string name="ljts_kanji_set_4_title">Numbers 6–10</string>
+    <string name="ljts_kanji_set_5_title">Think about direction</string>
+    <string name="ljts_kanji_set_6_title">Numbers &amp; Writing</string>
+    <string name="ljts_kanji_set_7_title">Existence</string>
+    <string name="ljts_kanji_set_8_title">School</string>
+    <string name="ljts_kanji_set_9_title">Environment</string>
+    <string name="ljts_kanji_set_10_title">Jewelery &amp; Size</string>
+    <string name="ljts_kanji_set_11_title">People</string>
+    <string name="ljts_kanji_set_12_title">Body Parts</string>
+    <string name="ljts_kanji_set_13_title">Nature</string>
+    <string name="ljts_kanji_set_14_title">Towns, a Few Colours, &amp; Another One</string>
+    <string name="ljts_kanji_bonus_set_1_2_title">Cars, Insects, Thread, &amp; Shellfish</string>
+    <string name="ljts_kanji_bonus_set_3_4_title">Bamboo, Sound, Mix &amp; Measure</string>
+
+    <string name="ljts_kanji_set_15_title">Communication</string>
+    <string name="ljts_kanji_set_16_title">Seasons &amp; Weather</string>
+    <string name="ljts_kanji_set_17_title">Rural Life</string>
+    <string name="ljts_kanji_set_18_title">The Body</string>
+    <string name="ljts_kanji_set_19_title">Food &amp; Drink</string>
+    <string name="ljts_kanji_set_20_title">Knowledge</string>
+    <string name="ljts_kanji_set_21_title">Animals &amp; Water</string>
+    <string name="ljts_kanji_set_22_title">Cities &amp; Locations</string>
+    <string name="ljts_kanji_set_23_title">Time After Time</string>
+    <string name="ljts_kanji_set_24_title">Time of Day</string>
+    <string name="ljts_kanji_set_25_title">Family</string>
+    <string name="ljts_kanji_set_26_title">Shape &amp; Size</string>
+    <string name="ljts_kanji_bonus_set_5_6_title">Honesty, Logic, Calculate, Cut, Active, &amp; Shop</string>
+    <string name="ljts_kanji_bonus_set_7_8_title">Buy, Sell, Section, Cliff &amp; Star</string>
+
+    <string name="ljts_kanji_set_27_title">Weapons &amp; Warriors</string>
+    <string name="ljts_kanji_set_28_title">House &amp; Home</string>
+    <string name="ljts_kanji_set_29_title">Colours, Roads, &amp; Buildings</string>
+    <string name="ljts_kanji_set_30_title">Movement</string>
+    <string name="ljts_kanji_set_31_title">Age, Questions &amp; Music</string>
+    <string name="ljts_kanji_set_32_title">Lines &amp; People</string>
+    <string name="ljts_kanji_set_33_title">Pen to Paper</string>
+    <string name="ljts_kanji_set_34_title">Numbers &amp; Counting</string>
+    <string name="ljts_kanji_set_35_title">Think About Direction 2</string>
+    <string name="ljts_kanji_set_36_title">Power</string>
+    <string name="ljts_kanji_bonus_set_9_10_title">Think Clearly &amp; Consider Barking</string>
+    <string name="ljts_kanji_bonus_set_11_12_title">Steam, Group, Boat, Join &amp; The Government</string>
 
     <string name="vocab_set_basic_title">Basic vocabulary</string>
     <string name="vocab_set_study_title">Study Supplies</string>
@@ -181,9 +279,19 @@
     <string name="vocab_set_food_title">Food &amp; Drink</string>
     <string name="vocab_set_home_title">House &amp; Home</string>
     <string name="vocab_set_numbers_title">Numbers</string>
+    <string name="vocab_set_countries_title">Countries</string>
     <string name="vocab_set_places_title">Places</string>
     <string name="vocab_set_clothing_title">Clothing</string>
     <string name="vocab_set_home_2_title">House &amp; Home 2</string>
+    <string name="vocab_set_school_title">School</string>
+    <string name="vocab_set_jobs_title">Jobs</string>
+    <string name="vocab_set_schools_size_title">Schools &amp; Sizes</string>
+    <string name="vocab_set_people_2_title">People Around You</string>
+    <string name="vocab_set_random_1_title">Random Words</string>
+    <string name="vocab_set_weekdays_title">Days of the Week</string>
+    <string name="vocab_set_time_music_title">Time &amp; Music</string>
+    <string name="vocab_set_news_title">The News</string>
+    <string name="vocab_set_power_community_title">Power &amp; Community</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under

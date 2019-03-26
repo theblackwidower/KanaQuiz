@@ -6,10 +6,23 @@
     xmlns:kq="https://www.noprestige.com"
     elementFormDefault="qualified">
 
+    <xs:element name="QuestionFileSet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QuestionFile" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="resId" type="text" use="required"/>
+                        <xs:attribute name="title" type="text" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="Questions">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="KanaSet" maxOccurs="unbounded"/>
+                <xs:element ref="QuestionSet" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
         <!-- ref: https://stackoverflow.com/a/5541804/3582371 -->
@@ -19,12 +32,16 @@
             <xs:selector xpath="*/kq:KanaQuestion|*/*/kq:KanaQuestion"/>
             <xs:field xpath="@question"/>
         </xs:unique>
+        <xs:unique name="KanjiPrimaryKey">
+            <xs:selector xpath="*/kq:KanjiQuestion"/>
+            <xs:field xpath="@question"/>
+        </xs:unique>
         <xs:unique name="WordPrimaryKey">
             <xs:selector xpath="*/kq:WordQuestion"/>
             <xs:field xpath="@romaji"/>
         </xs:unique>
         <xs:unique name="SetPrimaryKey">
-            <xs:selector xpath="kq:KanaSet"/>
+            <xs:selector xpath="kq:QuestionSet"/>
             <xs:field xpath="@prefId"/>
         </xs:unique>
         <xs:unique name="WordUniqueKana">
@@ -35,13 +52,18 @@
             <xs:selector xpath="*/kq:WordQuestion"/>
             <xs:field xpath="@kanji"/>
         </xs:unique>
+        <xs:keyref name="DigraphsReference" refer="SetPrimaryKey">
+            <xs:selector xpath="*/kq:Section"/>
+            <xs:field xpath="@digraphs"/>
+        </xs:keyref>
     </xs:element>
 
-    <xs:element name="KanaSet">
+    <xs:element name="QuestionSet">
         <xs:complexType>
             <xs:sequence>
                 <xs:choice>
                     <xs:element ref="KanaQuestion" maxOccurs="unbounded"/>
+                    <xs:element ref="KanjiQuestion" maxOccurs="7"/>
                     <xs:element ref="WordQuestion" maxOccurs="unbounded"/>
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
@@ -64,36 +86,52 @@
             </xs:sequence>
             <!-- TODO: Set diacritics="NO_DIACRITIC" digraphs="false" as an invalid combination of attributes -->
             <xs:attribute name="diacritics" type="diacritic" use="required"/>
-            <xs:attribute name="digraphs" type="xs:boolean" use="required"/>
+            <xs:attribute name="digraphs" type="text"/>
         </xs:complexType>
     </xs:element>
 
     <xs:element name="KanaQuestion">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="AltAnswer" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="romaji">
+                                <xs:attribute name="system" type="system_list" use="required"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
             <xs:attribute name="question" type="kana" use="required"/>
             <xs:attribute name="answer" type="romaji" use="required"/>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="WordQuestion">
+    <xs:element name="KanjiQuestion">
         <xs:complexType>
-            <xs:attribute name="romaji" type="romaji" use="required"/>
-            <xs:attribute name="kana" type="kana" use="required"/>
-            <xs:attribute name="kanji" type="kanji"/>
-            <xs:attribute name="answer" type="text" use="required"/>
+            <xs:attribute name="question" type="kanji" use="required"/>
+            <xs:attribute name="meaning" type="meanings" use="required"/>
+            <xs:attribute name="kunYomi" type="romaji"/>
+            <xs:attribute name="onYomi" type="romaji" use="required"/>
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="AltAnswer">
+    <xs:element name="WordQuestion">
         <xs:complexType>
-            <xs:simpleContent>
-                <xs:extension base="romaji">
-                    <xs:attribute name="system" type="system_list" use="required"/>
-                </xs:extension>
-            </xs:simpleContent>
+            <xs:sequence>
+                <xs:element name="AltAnswer" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="meanings"/>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="romaji" type="romaji" use="required"/>
+            <xs:attribute name="kana" type="kana" use="required"/>
+            <xs:attribute name="kanji" type="kanji-kana"/>
+            <xs:attribute name="answer" type="meanings" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -132,16 +170,22 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="meanings">
+        <xs:restriction base="text">
+            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="['\-A-Za-z]*"/> <!-- Macrons removed for consistency: ĀāĒēĪīŌōŪū -->
+            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="kana">
         <xs:restriction base="text">
             <!-- ref: https://gist.github.com/terrancesnyder/1345094 -->
-            <xs:pattern value="[ぁ-ゖ゙-ゟァ-ヿ]*"/>
+            <xs:pattern value="[ぁ-ゖ゙゚ゝ-ゟァ-ヿ]*"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -155,7 +199,14 @@
             <!-- with this name until the entire IDE is restarted. Which is a pretty glaring error. -->
             <!-- So I had to convert them to proper unicode characters. -->
             <!-- ref: http://unicode.scarfboy.com/ -->
-            <xs:pattern value="[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙-ゟ㐀-䶵一-鿋豈-頻]*"/>
+            <xs:pattern value="[㐀-䶵一-鿋豈-頻]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="kanji-kana">
+        <xs:restriction base="text">
+            <!-- Hiragana and Kanji in any combination, but there must be at least one kanji character. -->
+            <xs:pattern value="[ぁ-ゖ゙゚ゝ-ゟ㐀-䶵一-鿋豈-頻]*[㐀-䶵一-鿋豈-頻]+[ぁ-ゖ゙゚ゝ-ゟ㐀-䶵一-鿋豈-頻]*"/>
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

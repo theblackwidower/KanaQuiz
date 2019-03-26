@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:imeOptions="actionGo"
+        android:importantForAutofill="no"
         android:inputType="textNoSuggestions"
         android:maxLines="1"
         android:selectAllOnFocus="true"
         android:text=""
         android:textAlignment="center"
-        android:importantForAutofill="no"
-        tools:targetApi="o"
-        tools:ignore="LabelFor"/>
+        tools:ignore="LabelFor"
+        tools:targetApi="o"/>
 
     <TextView
         android:id="@+id/lblScore"

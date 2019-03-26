@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="defaultReferenceSubjectSize">64sp</dimen>
+    <dimen name="diacriticReferenceSubjectSize">52sp</dimen>
+    <dimen name="kanjiReferenceSubjectSize">46sp</dimen>
+    <dimen name="kanjiReferenceDescriptionSize">10sp</dimen>
+    <dimen name="vocabReferenceSubjectSize">52sp</dimen>
+
+    <dimen name="chartLabelTextSize">4sp</dimen>
+
+    <dimen name="headerTextSize">5sp</dimen>
+</resources>

@@ -2,40 +2,40 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="hiragana_set_1" setTitle="@string/set_1_title">
+    <QuestionSet prefId="hiragana_set_1" setTitle="@string/set_1_title">
         <KanaQuestion question="あ" answer="a"/>
         <KanaQuestion question="い" answer="i"/>
         <KanaQuestion question="う" answer="u"/>
         <KanaQuestion question="え" answer="e"/>
         <KanaQuestion question="お" answer="o"/>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_2" setTitle="@string/set_2_title"
-             setNoDiacriticsTitle="@string/set_2_no_diacritics_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_2" setTitle="@string/set_2_title"
+                 setNoDiacriticsTitle="@string/set_2_no_diacritics_title">
         <KanaQuestion question="か" answer="ka"/>
         <KanaQuestion question="き" answer="ki"/>
         <KanaQuestion question="く" answer="ku"/>
         <KanaQuestion question="け" answer="ke"/>
         <KanaQuestion question="こ" answer="ko"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="が" answer="ga"/>
             <KanaQuestion question="ぎ" answer="gi"/>
             <KanaQuestion question="ぐ" answer="gu"/>
             <KanaQuestion question="げ" answer="ge"/>
             <KanaQuestion question="ご" answer="go"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="きゃ" answer="kya"/>
             <KanaQuestion question="きゅ" answer="kyu"/>
             <KanaQuestion question="きょ" answer="kyo"/>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="hiragana_set_9">
             <KanaQuestion question="ぎゃ" answer="gya"/>
             <KanaQuestion question="ぎゅ" answer="gyu"/>
             <KanaQuestion question="ぎょ" answer="gyo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_3" setTitle="@string/set_3_title"
-             setNoDiacriticsTitle="@string/set_3_no_diacritics_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_3" setTitle="@string/set_3_title"
+                 setNoDiacriticsTitle="@string/set_3_no_diacritics_title">
         <KanaQuestion question="さ" answer="sa"/>
         <KanaQuestion question="し" answer="shi">
             <AltAnswer system="NIHON KUNREI">si</AltAnswer>
@@ -43,7 +43,7 @@
         <KanaQuestion question="す" answer="su"/>
         <KanaQuestion question="せ" answer="se"/>
         <KanaQuestion question="そ" answer="so"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ざ" answer="za"/>
             <KanaQuestion question="じ" answer="ji">
                 <AltAnswer system="NIHON KUNREI">zi</AltAnswer>
@@ -52,7 +52,7 @@
             <KanaQuestion question="ぜ" answer="ze"/>
             <KanaQuestion question="ぞ" answer="zo"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="しゃ" answer="sha">
                 <AltAnswer system="NIHON KUNREI">sya</AltAnswer>
             </KanaQuestion>
@@ -63,7 +63,7 @@
                 <AltAnswer system="NIHON KUNREI">syo</AltAnswer>
             </KanaQuestion>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="hiragana_set_9">
             <KanaQuestion question="じゃ" answer="ja">
                 <AltAnswer system="UNKNOWN">jya</AltAnswer><!--TextFugu-->
                 <AltAnswer system="NIHON KUNREI">zya</AltAnswer>
@@ -77,9 +77,9 @@
                 <AltAnswer system="NIHON KUNREI">zyo</AltAnswer>
             </KanaQuestion>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_4" setTitle="@string/set_4_title"
-             setNoDiacriticsTitle="@string/set_4_no_diacritics_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_4" setTitle="@string/set_4_title"
+                 setNoDiacriticsTitle="@string/set_4_no_diacritics_title">
         <KanaQuestion question="た" answer="ta"/>
         <KanaQuestion question="ち" answer="chi">
             <AltAnswer system="NIHON KUNREI">ti</AltAnswer>
@@ -89,7 +89,7 @@
         </KanaQuestion>
         <KanaQuestion question="て" answer="te"/>
         <KanaQuestion question="と" answer="to"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="だ" answer="da"/>
             <KanaQuestion question="ぢ" answer="ji">
                 <AltAnswer system="NIHON">di</AltAnswer>
@@ -101,7 +101,7 @@
             <KanaQuestion question="で" answer="de"/>
             <KanaQuestion question="ど" answer="do"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="ちゃ" answer="cha">
                 <AltAnswer system="NIHON KUNREI">tya</AltAnswer>
             </KanaQuestion>
@@ -112,7 +112,7 @@
                 <AltAnswer system="NIHON KUNREI">tyo</AltAnswer>
             </KanaQuestion>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="hiragana_set_9">
             <KanaQuestion question="ぢゃ" answer="ja">
                 <AltAnswer system="UNKNOWN">dzya</AltAnswer><!--TextFugu-->
                 <AltAnswer system="NIHON">dya</AltAnswer>
@@ -129,21 +129,21 @@
                 <AltAnswer system="KUNREI">zyo</AltAnswer>
             </KanaQuestion>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_5" setTitle="@string/set_5_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_5" setTitle="@string/set_5_title">
         <KanaQuestion question="な" answer="na"/>
         <KanaQuestion question="に" answer="ni"/>
         <KanaQuestion question="ぬ" answer="nu"/>
         <KanaQuestion question="ね" answer="ne"/>
         <KanaQuestion question="の" answer="no"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="にゃ" answer="nya"/>
             <KanaQuestion question="にゅ" answer="nyu"/>
             <KanaQuestion question="にょ" answer="nyo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_6" setTitle="@string/set_6_title"
-             setNoDiacriticsTitle="@string/set_6_no_diacritics_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_6" setTitle="@string/set_6_title"
+                 setNoDiacriticsTitle="@string/set_6_no_diacritics_title">
         <KanaQuestion question="は" answer="ha"/>
         <KanaQuestion question="ひ" answer="hi"/>
         <KanaQuestion question="ふ" answer="fu">
@@ -151,66 +151,66 @@
         </KanaQuestion>
         <KanaQuestion question="へ" answer="he"/>
         <KanaQuestion question="ほ" answer="ho"/>
-        <Section diacritics="DAKUTEN" digraphs="false">
+        <Section diacritics="DAKUTEN">
             <KanaQuestion question="ば" answer="ba"/>
             <KanaQuestion question="び" answer="bi"/>
             <KanaQuestion question="ぶ" answer="bu"/>
             <KanaQuestion question="べ" answer="be"/>
             <KanaQuestion question="ぼ" answer="bo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="false">
+        <Section diacritics="HANDAKUTEN">
             <KanaQuestion question="ぱ" answer="pa"/>
             <KanaQuestion question="ぴ" answer="pi"/>
             <KanaQuestion question="ぷ" answer="pu"/>
             <KanaQuestion question="ぺ" answer="pe"/>
             <KanaQuestion question="ぽ" answer="po"/>
         </Section>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="ひゃ" answer="hya"/>
             <KanaQuestion question="ひゅ" answer="hyu"/>
             <KanaQuestion question="ひょ" answer="hyo"/>
         </Section>
-        <Section diacritics="DAKUTEN" digraphs="true">
+        <Section diacritics="DAKUTEN" digraphs="hiragana_set_9">
             <KanaQuestion question="びゃ" answer="bya"/>
             <KanaQuestion question="びゅ" answer="byu"/>
             <KanaQuestion question="びょ" answer="byo"/>
         </Section>
-        <Section diacritics="HANDAKUTEN" digraphs="true">
+        <Section diacritics="HANDAKUTEN" digraphs="hiragana_set_9">
             <KanaQuestion question="ぴゃ" answer="pya"/>
             <KanaQuestion question="ぴゅ" answer="pyu"/>
             <KanaQuestion question="ぴょ" answer="pyo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_7" setTitle="@string/set_7_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_7" setTitle="@string/set_7_title">
         <KanaQuestion question="ま" answer="ma"/>
         <KanaQuestion question="み" answer="mi"/>
         <KanaQuestion question="む" answer="mu"/>
         <KanaQuestion question="め" answer="me"/>
         <KanaQuestion question="も" answer="mo"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="みゃ" answer="mya"/>
             <KanaQuestion question="みゅ" answer="myu"/>
             <KanaQuestion question="みょ" answer="myo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_8" setTitle="@string/set_8_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_8" setTitle="@string/set_8_title">
         <KanaQuestion question="ら" answer="ra"/>
         <KanaQuestion question="り" answer="ri"/>
         <KanaQuestion question="る" answer="ru"/>
         <KanaQuestion question="れ" answer="re"/>
         <KanaQuestion question="ろ" answer="ro"/>
-        <Section diacritics="NO_DIACRITIC" digraphs="true">
+        <Section diacritics="NO_DIACRITIC" digraphs="hiragana_set_9">
             <KanaQuestion question="りゃ" answer="rya"/>
             <KanaQuestion question="りゅ" answer="ryu"/>
             <KanaQuestion question="りょ" answer="ryo"/>
         </Section>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_9" setTitle="@string/set_9_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_9" setTitle="@string/set_9_title">
         <KanaQuestion question="や" answer="ya"/>
         <KanaQuestion question="ゆ" answer="yu"/>
         <KanaQuestion question="よ" answer="yo"/>
-    </KanaSet>
-    <KanaSet prefId="hiragana_set_10" setTitle="@string/set_10_title">
+    </QuestionSet>
+    <QuestionSet prefId="hiragana_set_10" setTitle="@string/set_10_title">
         <KanaQuestion question="わ" answer="wa"/>
         <!--<KanaQuestion question="ゐ" answer="wi">-->
         <!--<AltAnswer system="HEPBURN KUNREI">i</AltAnswer>-->
@@ -221,10 +221,10 @@
         <KanaQuestion question="を" answer="wo">
             <AltAnswer system="HEPBURN KUNREI">o</AltAnswer>
         </KanaQuestion>
-        <Section diacritics="CONSONANT" digraphs="false">
+        <Section diacritics="CONSONANT">
             <KanaQuestion question="ん" answer="n"/>
         </Section>
-    </KanaSet>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle

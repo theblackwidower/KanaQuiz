@@ -12,9 +12,10 @@ android {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 16
-        versionName '0.13.1'
+        versionCode 17
+        versionName '0.14'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        resConfigs 'en-rCA', 'es-rES', 'ca-rES' //ref: https://stackoverflow.com/a/47525966/3582371
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
@@ -48,12 +49,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
+    lintOptions {
+        disable 'MissingTranslation'
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.material:material:1.0.0'
 
@@ -62,9 +67,9 @@ dependencies {
 
     androidTestImplementation 'androidx.room:room-testing:2.0.0'
 
-    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
-    releaseImplementation 'com.google.firebase:firebase-core:16.0.4'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.1.2'
+    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
+    releaseImplementation 'com.google.firebase:firebase-core:16.0.6'
+    releaseImplementation 'com.google.firebase:firebase-perf:16.2.3'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
@@ -75,6 +80,14 @@ dependencies {
     pureImplementation 'ch.acra:acra-mail:5.2.1'
     pureImplementation 'ch.acra:acra-toast:5.2.1'
     pureImplementation 'ch.acra:acra-limiter:5.2.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:3.0.3'
+
+    implementation 'androidx.preference:preference:1.0.0'
+
+    implementation 'moe.shizuku.fontprovider:api:10'
 }
 
 coveralls {

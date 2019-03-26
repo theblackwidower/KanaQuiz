@@ -5,10 +5,12 @@ import com.noprestige.kanaquiz.logs.LogDao;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class QuestionBank extends WeightedList<Question>
 {
@@ -21,6 +23,8 @@ public class QuestionBank extends WeightedList<Question>
     private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
     private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
 
+    private String[] currentPossibleAnswers;
+
     private Set<String> wordAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
@@ -31,10 +35,11 @@ public class QuestionBank extends WeightedList<Question>
 
     public boolean isCurrentQuestionVocab()
     {
-        return (currentQuestion.getClass().equals(WordQuestion.class));
+        return (currentQuestion.getClass().equals(WordQuestion.class) ||
+                currentQuestion.getClass().equals(KanjiQuestion.class));
     }
 
-    public void newQuestion() throws NoQuestionsException
+    public void newQuestion()
     {
         if (count() > 0)
         {
@@ -44,9 +49,29 @@ public class QuestionBank extends WeightedList<Question>
             do
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
+            currentPossibleAnswers = null;
         }
-        else
-            throw new NoQuestionsException();
+    }
+
+    static class QuestionRecord extends ArrayBlockingQueue<String>
+    {
+        QuestionRecord(int capacity)
+        {
+            super(capacity);
+        }
+
+        public boolean add(Question question)
+        {
+            if (contains(question.getDatabaseKey()))
+                return false;
+            else
+            {
+                add(question.getDatabaseKey());
+                if (remainingCapacity() == 0)
+                    remove();
+                return true;
+            }
+        }
     }
 
     public String getCurrentQuestionText()
@@ -69,6 +94,27 @@ public class QuestionBank extends WeightedList<Question>
         return currentQuestion.fetchCorrectAnswer();
     }
 
+    public boolean loadQuestion(String questionKey)
+    {
+        if (previousQuestions == null)
+            previousQuestions =
+                    new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+
+        Collection<Question> questions = values();
+
+        for (Question thisQuestion : questions)
+        {
+            if (thisQuestion.getDatabaseKey().equals(questionKey))
+            {
+                currentQuestion = thisQuestion;
+                previousQuestions.add(thisQuestion);
+                currentPossibleAnswers = null;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean addQuestions(Question[] questions)
     {
         weightedAnswerListCache = null;
@@ -80,20 +126,20 @@ public class QuestionBank extends WeightedList<Question>
             boolean returnValue = true;
             for (Question question : questions)
             {
-                // Fetches the percentage of times the user got a kana right,
-                Float percentage = LogDao.getKanaPercentage(question.getDatabaseKey());
+                // Fetches the percentage of times the user got a question right,
+                Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
                 if (percentage == null)
                     percentage = 0.1f;
                 // The 1f is to invert the value so we get the number of times they got it wrong,
                 // Times 100f to get the percentage.
                 int weight = (int) Math.ceil((1f - percentage) * 100f);
                 // Setting weight to never get lower than 2,
-                // so any kana the user got perfect will still appear in the quiz.
+                // so any question the user got perfect will still appear in the quiz.
                 if (weight < 2)
                     weight = 2;
                 // if any one of the additions fail, the method returns false
                 returnValue = add(weight, question) && returnValue;
-                if (question.getClass().equals(WordQuestion.class))
+                if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                     returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
                 else if (question.getClass().equals(KanaQuestion.class))
                 {
@@ -160,8 +206,10 @@ public class QuestionBank extends WeightedList<Question>
 
     public String[] getPossibleAnswers()
     {
-        return (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
-                getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        if (currentPossibleAnswers == null)
+            currentPossibleAnswers = (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
+                    getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        return currentPossibleAnswers;
     }
 
 

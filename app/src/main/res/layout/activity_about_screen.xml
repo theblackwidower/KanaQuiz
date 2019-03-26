@@ -22,24 +22,30 @@
             android:contentDescription="@string/app_name"
             android:src="@mipmap/ic_launcher"/>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <org.apmem.tools.layouts.FlowLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:text="@string/app_name"
-            android:textSize="20sp"
-            android:textStyle="normal|bold"/>
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/lblVersionDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="5dp"
-            android:text=""
-            android:textSize="20sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="5dp"
+                android:text="@string/app_name"
+                android:textSize="20sp"
+                android:textStyle="normal|bold"/>
 
+            <TextView
+                android:id="@+id/lblVersionDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="5dp"
+                android:text=""
+                android:textSize="20sp"/>
+        </org.apmem.tools.layouts.FlowLayout>
     </LinearLayout>
 
     <ScrollView
@@ -158,6 +164,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/imgGitHubLogo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/github_logo"
@@ -179,6 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:text="@string/translator_credit"
+                android:textColor="?attr/colorAccent"
                 android:textSize="14sp"/>
 
         </LinearLayout>

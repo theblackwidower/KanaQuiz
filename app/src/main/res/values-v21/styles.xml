@@ -1,11 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    Notes:
+    Use fontFamily and android:typeface for font types
+    TODO: Problem with fonts on action bar and tabs
+    -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
-        <item name="android:navigationBarColor">@color/primaryLightColor</item>
+    <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/cherryPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/cherryPrimaryDarkColor</item>
+        <item name="colorAccent">@color/cherrySecondaryColor</item>
+        <item name="android:navigationBarColor">@color/cherryPrimaryDarkColor</item>
+        <item name="android:colorBackground">@color/cherryTertiaryLightColor</item>
+        <item name="android:colorForeground">@color/grey_900</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <style name="ShibuyaNight" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/nightPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/nightPrimaryDarkColor</item>
+        <item name="colorAccent">@color/nightSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/nightPrimaryDarkColor</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="HotSpringSerenity" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/onsenPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/onsenPrimaryDarkColor</item>
+        <item name="colorAccent">@color/onsenSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/onsenPrimaryDarkColor</item>
+        <item name="android:colorBackground">@color/onsenTertiaryLightColor</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="ChrysanthemumTwilight" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/chrysanthPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/chrysanthPrimaryDarkColor</item>
+        <item name="colorAccent">@color/chrysanthSecondaryColor</item>
+        <item name="android:navigationBarColor">@color/chrysanthPrimaryDarkColor</item>
+        <item name="fontFamily">serif</item>
+        <item name="android:typeface">serif</item>
     </style>
 </resources>

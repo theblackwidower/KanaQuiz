@@ -1,24 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Theme generated from: https://material.io/color/ -->
-    <color name="primaryColor">#3f51b5</color>
-    <color name="primaryLightColor">#757de8</color>
-    <color name="primaryDarkColor">#002984</color>
-    <color name="secondaryColor">#ff4081</color>
-    <color name="secondaryLightColor">#ff79b0</color>
-    <color name="secondaryDarkColor">#c60055</color>
-    <color name="primaryTextColor">#ffffff</color>
-    <color name="secondaryTextColor">#000000</color>
+    <color name="cherryPrimaryColor">#f48fb1</color>
+    <color name="cherryPrimaryLightColor">#ffc1e3</color>
+    <color name="cherryPrimaryDarkColor">#bf5f82</color>
+    <color name="cherrySecondaryColor">#00695c</color>
+    <color name="cherrySecondaryLightColor">#439889</color>
+    <color name="cherrySecondaryDarkColor">#003d33</color>
+    <color name="cherryTertiaryColor">#b2ebf2</color>
+    <color name="cherryTertiaryLightColor">#e5ffff</color>
+    <color name="cherryTertiaryDarkColor">#81b9bf</color>
+    <color name="cherryPrimaryTextColor">#000000</color>
+    <color name="cherrySecondaryTextColor">#ffffff</color>
+    <color name="cherryTertiaryTextColor">#000000</color>
 
-    <color name="dividingLine">#212121</color>
+    <color name="nightPrimaryColor">#ff1744</color>
+    <color name="nightPrimaryLightColor">#ff616f</color>
+    <color name="nightPrimaryDarkColor">#c4001d</color>
+    <color name="nightSecondaryColor">#b2ff59</color>
+    <color name="nightSecondaryLightColor">#e7ff8c</color>
+    <color name="nightSecondaryDarkColor">#7ecb20</color>
+    <color name="nightPrimaryTextColor">#000000</color>
+    <color name="nightSecondaryTextColor">#000000</color>
 
-    <color name="correct">#00c853</color>
-    <color name="incorrect">#d50000</color>
+    <color name="onsenPrimaryColor">#ffb74d</color>
+    <color name="onsenPrimaryLightColor">#ffe97d</color>
+    <color name="onsenPrimaryDarkColor">#c88719</color>
+    <color name="onsenSecondaryColor">#424242</color>
+    <color name="onsenSecondaryLightColor">#6d6d6d</color>
+    <color name="onsenSecondaryDarkColor">#1b1b1b</color>
+    <color name="onsenTertiaryColor">#a7ffeb</color>
+    <color name="onsenTertiaryLightColor">#dbffff</color>
+    <color name="onsenTertiaryDarkColor">#75ccb9</color>
+    <color name="onsenPrimaryTextColor">#000000</color>
+    <color name="onsenSecondaryTextColor">#ffffff</color>
+    <color name="onsenTertiaryTextColor">#000000</color>
 
-    <color name="below_fifty">#3e2723</color>
-    <color name="fifty_to_sixty">#d50000</color>
-    <color name="sixty_to_seventy">#ef6c00</color><!-- got illegible warning-->
-    <color name="seventy_to_eighty">#ffc400</color><!-- got illegible warning-->
-    <color name="eighty_to_ninety">#64dd17</color><!-- got illegible warning-->
-    <color name="above_ninety">#00e676</color><!-- got illegible warning-->
+    <color name="chrysanthPrimaryColor">#7e57c2</color>
+    <color name="chrysanthPrimaryLightColor">#b085f5</color>
+    <color name="chrysanthPrimaryDarkColor">#4d2c91</color>
+    <color name="chrysanthSecondaryColor">#fdd835</color>
+    <color name="chrysanthSecondaryLightColor">#ffff6b</color>
+    <color name="chrysanthSecondaryDarkColor">#c6a700</color>
+    <color name="chrysanthPrimaryTextColor">#ffffff</color>
+    <color name="chrysanthSecondaryTextColor">#000000</color>
+
+    <color name="lightCorrect">@color/light_green_800</color>
+    <color name="darkCorrect">@color/green_A700</color>
+    <color name="lightIncorrect">@color/red_A700</color>
+    <color name="darkIncorrect">@color/red_A400</color>
+
+    <color name="lightBelowFifty">@color/brown_900</color>
+    <color name="lightFiftyToSixty">@color/red_A700</color>
+    <color name="lightSixtyToSeventy">@color/deep_orange_500</color>
+    <color name="lightSeventyToEighty">@color/amber_A400</color><!-- got illegible warning-->
+    <color name="lightEightyToNinety">@color/light_green_700</color>
+    <color name="lightAboveNinety">@color/light_blue_A700</color>
+
+    <color name="darkBelowFifty">@color/brown_300</color>
+    <color name="darkFiftyToSixty">@color/red_A400</color>
+    <color name="darkSixtyToSeventy">@color/orange_800</color>
+    <color name="darkSeventyToEighty">@color/amber_A400</color>
+    <color name="darkEightyToNinety">@color/light_green_A700</color>
+    <color name="darkAboveNinety">@color/cyan_A700</color>
 </resources>

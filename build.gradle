@@ -13,8 +13,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.2.1'
         if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release') ||
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
-            classpath 'com.google.gms:google-services:4.1.0'
-            classpath 'io.fabric.tools:gradle:1.26.1'
+            classpath 'com.google.gms:google-services:4.2.0'
+            classpath 'io.fabric.tools:gradle:1.27.0'
             classpath 'com.google.firebase:firebase-plugins:1.1.5'
         }
 
@@ -33,6 +33,9 @@ allprojects {
     repositories {
         jcenter()
         google()
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 }
 
@@ -44,7 +47,7 @@ task clean(type: Delete) {
 dependencyUpdates.resolutionStrategy {
     componentSelection { rules ->
         rules.all { ComponentSelection selection ->
-            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview'].any { qualifier ->
+            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'b', 'preview'].any { qualifier ->
                 selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
             }
             if (rejected) {

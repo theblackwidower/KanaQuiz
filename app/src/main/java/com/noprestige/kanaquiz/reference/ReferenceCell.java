@@ -8,7 +8,6 @@ import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableRow;
@@ -17,13 +16,19 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class ReferenceCell extends View
 {
     private String subject;
     private String description;
+    private String[] multiLineDescription;
 
     private TextPaint subjectPaint = new TextPaint();
     private TextPaint descriptionPaint = new TextPaint();
@@ -38,8 +43,6 @@ public class ReferenceCell extends View
 
     private float subjectHeight;
     private float descriptionHeight;
-
-    private static TypedArray defaultAttributes;
 
     public ReferenceCell(Context context)
     {
@@ -63,18 +66,16 @@ public class ReferenceCell extends View
     {
         Context context = getContext();
 
-        if (defaultAttributes == null)
-            defaultAttributes = context.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorTertiary});
-
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ReferenceCell, defStyle, 0);
 
         setSubject(a.getString(R.styleable.ReferenceCell_subject));
         setDescription(a.getString(R.styleable.ReferenceCell_description));
         setSubjectSize(a.getDimension(R.styleable.ReferenceCell_subjectSize,
-                TypedValue.applyDimension(COMPLEX_UNIT_SP, 64, context.getResources().getDisplayMetrics())));
+                getResources().getDimension(R.dimen.defaultReferenceSubjectSize)));
         setDescriptionSize(a.getDimension(R.styleable.ReferenceCell_descriptionSize,
-                TypedValue.applyDimension(COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics())));
-        setColour(a.getColor(R.styleable.ReferenceCell_colour, defaultAttributes.getColor(0, 0)));
+                getResources().getDimension(R.dimen.defaultReferenceDescriptionSize)));
+        setColour(a.getColor(R.styleable.ReferenceCell_colour,
+                ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary)));
 
         a.recycle();
 
@@ -82,6 +83,13 @@ public class ReferenceCell extends View
 
         subjectPaint.setAntiAlias(true);
         descriptionPaint.setAntiAlias(true);
+
+        subjectPaint.setTextLocale(Locale.JAPANESE);
+
+        Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
+
+        subjectPaint.setTypeface(font);
+        descriptionPaint.setTypeface(font);
     }
 
     private boolean copyItem()
@@ -146,7 +154,20 @@ public class ReferenceCell extends View
         super.onDraw(canvas);
 
         canvas.drawText(subject, subjectXPoint, subjectYPoint, subjectPaint);
-        canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
+        if ((multiLineDescription != null) && (multiLineDescription.length > 1))
+        {
+            float descriptionLineHeight = descriptionHeight / multiLineDescription.length;
+            int contentWidth = getWidth() - getPaddingLeft() - getPaddingRight();
+            for (int i = 0; i < multiLineDescription.length; i++)
+            {
+                canvas.drawText(multiLineDescription[i],
+                        getPaddingLeft() + ((contentWidth - descriptionPaint.measureText(multiLineDescription[i])) / 2),
+                        descriptionYPoint - ((multiLineDescription.length - i - 1) * descriptionLineHeight),
+                        descriptionPaint);
+            }
+        }
+        else
+            canvas.drawText(description, descriptionXPoint, descriptionYPoint, descriptionPaint);
     }
 
     public String getSubject()
@@ -191,14 +212,55 @@ public class ReferenceCell extends View
     public void setDescription(String description)
     {
         this.description = (description == null) ? "" : description;
-        descriptionWidth = descriptionPaint.measureText(this.description);
+        measureDescription();
     }
 
     public void setDescriptionSize(float descriptionSize)
     {
         descriptionPaint.setTextSize(descriptionSize);
+        measureDescription();
+    }
+
+    private void measureDescription()
+    {
         descriptionHeight = descriptionPaint.getFontMetrics().descent - descriptionPaint.getFontMetrics().ascent;
-        descriptionWidth = descriptionPaint.measureText(description);
+        if (description.contains(MEANING_DELIMITER) || description.contains(" "))
+        {
+            multiLineDescription = description.replace(MEANING_DELIMITER, MEANING_DELIMITER + "\u0000").split("\u0000");
+            descriptionWidth = 0;
+            List<String> tempMultiLine = new ArrayList<>();
+            for (String part : multiLineDescription)
+            {
+                float partWidth = descriptionPaint.measureText(part);
+                if ((partWidth > (subjectWidth * 1.1f)) && part.contains(" "))
+                {
+                    String[] subParts = part.split(" ");
+
+                    for (String subPart : subParts)
+                    {
+                        float subPartWidth = descriptionPaint.measureText(subPart);
+                        if (subPartWidth > descriptionWidth)
+                            descriptionWidth = subPartWidth;
+                        tempMultiLine.add(subPart);
+                    }
+                }
+                else if (partWidth > descriptionWidth)
+                {
+                    descriptionWidth = partWidth;
+                    tempMultiLine.add(part);
+                }
+                else
+                    tempMultiLine.add(part);
+            }
+            if (tempMultiLine.size() != multiLineDescription.length)
+                multiLineDescription = tempMultiLine.toArray(new String[0]);
+            descriptionHeight *= multiLineDescription.length;
+        }
+        else
+        {
+            multiLineDescription = null;
+            descriptionWidth = descriptionPaint.measureText(description);
+        }
     }
 
     public void setColour(int colour)
@@ -266,17 +328,16 @@ public class ReferenceCell extends View
         }
     }
 
-    static TextView buildHeader(Context context, int title)
+    public static TextView buildHeader(Context context, CharSequence title)
     {
         TextView header = new TextView(context);
+        header.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         header.setText(title);
         header.setLayoutParams(
                 new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        header.setTextSize(COMPLEX_UNIT_SP, 14);
-        header.setPadding(0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 28, context.getResources().getDisplayMetrics())),
-                0,
-                Math.round(TypedValue.applyDimension(COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
+        header.setTextSize(context.getResources().getDimension(R.dimen.headerTextSize));
+        header.setPadding(0, context.getResources().getDimensionPixelSize(R.dimen.headerTopPaddingReference), 0,
+                context.getResources().getDimensionPixelSize(R.dimen.headerBottomPadding));
         header.setTypeface(header.getTypeface(), Typeface.BOLD);
         header.setAllCaps(true);
         return header;

@@ -13,6 +13,7 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.threeten.bp.LocalDate;
 
@@ -44,7 +45,7 @@ public class LogView extends AppCompatActivity
         @Override
         protected Integer doInBackground(LogView... activity)
         {
-            layout = activity[0].findViewById(R.id.log_view_layout);
+            layout = activity[0].findViewById(R.id.logViewLayout);
             lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
             logGraph = activity[0].findViewById(R.id.logGraph);
 
@@ -53,15 +54,16 @@ public class LogView extends AppCompatActivity
             if (records.length == 0)
                 return 0;
 
-            startDate = records[0].date;
+            graphSeries.setColor(ThemeManager.getThemeColour(activity[0], R.attr.colorAccent));
+            startDate = records[0].getDate();
 
             for (DailyRecord record : records)
             {
-                DailyLogItem output = new DailyLogItem(activity[0].getBaseContext());
+                DailyLogItem output = new DailyLogItem(activity[0]);
                 output.setFromRecord(record);
 
-                graphSeries.appendData(new DataPoint(startDate.until(record.date, DAYS),
-                        (record.correctAnswers / record.totalAnswers) * 100f), true, 1000, true);
+                graphSeries.appendData(new DataPoint(startDate.until(record.getDate(), DAYS),
+                        (record.getCorrectAnswers() / record.getTotalAnswers()) * 100f), true, 1000, true);
 
                 if (isCancelled())
                     return null;
@@ -103,6 +105,7 @@ public class LogView extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_log_view);
         onConfigurationChanged(getResources().getConfiguration());
 
@@ -117,9 +120,8 @@ public class LogView extends AppCompatActivity
         logGraph.getViewport().setScalable(true); // X-axis zooming and scrolling
         logGraph.getViewport().setXAxisBoundsManual(true);
         logGraph.getViewport().setMinX(0);
-        logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(TypedValue
-                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
-                        getApplicationContext().getResources().getDisplayMetrics())));
+        logGraph.getGridLabelRenderer().setLabelVerticalWidth(Math.round(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics())));
         logGraph.getGridLabelRenderer().setLabelHorizontalHeight(0);
 
         StaticLabelsFormatter labelFormatter = new StaticLabelsFormatter(logGraph);
@@ -144,8 +146,7 @@ public class LogView extends AppCompatActivity
         {
             viewOrientation = LinearLayout.HORIZONTAL;
 
-            graphWidth = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 300,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            graphWidth = getResources().getDimensionPixelSize(R.dimen.landscapeChartWidth);
             graphHeight = MATCH_PARENT;
 
             listWidth = 0;
@@ -156,8 +157,7 @@ public class LogView extends AppCompatActivity
             viewOrientation = LinearLayout.VERTICAL;
 
             graphWidth = MATCH_PARENT;
-            graphHeight = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200,
-                    getApplicationContext().getResources().getDisplayMetrics()));
+            graphHeight = getResources().getDimensionPixelSize(R.dimen.portraitChartHeight);
 
             listWidth = MATCH_PARENT;
             listHeight = 0;

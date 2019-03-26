@@ -5,4 +5,27 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="dividingLine">1dp</dimen>
+
+    <!-- for smaller screens -->
+    <dimen name="defaultReferenceSubjectSize">52sp</dimen>
+    <dimen name="defaultReferenceDescriptionSize">16sp</dimen>
+    <dimen name="diacriticReferenceSubjectSize">46sp</dimen>
+    <dimen name="kanjiReferenceSubjectSize">40sp</dimen>
+    <dimen name="kanjiReferenceDescriptionSize">8sp</dimen>
+    <dimen name="vocabReferenceSubjectSize">40sp</dimen>
+
+    <dimen name="vocabReferenceCellHorizontalPadding">12dp</dimen>
+
+    <dimen name="landscapeChartWidth">300dp</dimen>
+    <dimen name="portraitChartHeight">200dp</dimen>
+    <dimen name="chartLabelTextSize">8sp</dimen>
+
+    <dimen name="logItemInternalVerticalPadding">3dp</dimen>
+
+    <dimen name="embeddedAlertMessageSize">24sp</dimen>
+
+    <dimen name="headerTextSize">10sp</dimen>
+    <dimen name="headerTopPaddingReference">28sp</dimen>
+    <dimen name="headerTopPaddingQuestionSelection">20sp</dimen>
+    <dimen name="headerBottomPadding">14sp</dimen>
 </resources>

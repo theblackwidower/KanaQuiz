@@ -14,7 +14,7 @@ import androidx.room.Update;
 @Dao
 public abstract class LogDao
 {
-    static class GetKanaPercentage extends AsyncTask<String, Void, Float>
+    static class GetQuestionPercentage extends AsyncTask<String, Void, Float>
     {
         @Override
         protected Float doInBackground(String... data)
@@ -29,8 +29,8 @@ public abstract class LogDao
                 int totalIncorrect = 0;
                 for (QuestionRecord record : records)
                 {
-                    totalCorrect += record.correctAnswers;
-                    totalIncorrect += record.incorrectAnswers;
+                    totalCorrect += record.getCorrectAnswers();
+                    totalIncorrect += record.getIncorrectAnswers();
                 }
                 return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
             }
@@ -51,7 +51,7 @@ public abstract class LogDao
             {
                 int totalOccurrences = 0;
                 for (IncorrectAnswerRecord record : records)
-                    totalOccurrences += record.occurrences;
+                    totalOccurrences += record.getOccurrences();
                 return totalOccurrences;
             }
         }
@@ -137,14 +137,17 @@ public abstract class LogDao
     @Query("SELECT * FROM kana_records")
     abstract QuestionRecord[] getAllQuestionRecords();
 
+    @Query("SELECT * FROM kana_records WHERE date = :date")
+    abstract QuestionRecord[] getDatesQuestionRecords(LocalDate date);
+
     @Query("SELECT * FROM incorrect_answers ORDER BY kana")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public static Float getKanaPercentage(String question)
+    public static Float getQuestionPercentage(String question)
     {
         try
         {
-            return new GetKanaPercentage().execute(question).get();
+            return new GetQuestionPercentage().execute(question).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {
@@ -177,9 +180,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertDailyRecord(record);
         }
         if (score > 0)
-            record.correctAnswers += score;
+            record.addToCorrectAnswers(score);
 
-        record.totalAnswers++;
+        record.incrementTotalAnswers();
 
         LogDatabase.DAO.updateDailyRecord(record);
     }
@@ -193,9 +196,9 @@ public abstract class LogDao
             LogDatabase.DAO.insertQuestionRecord(record);
         }
         if (isCorrect)
-            record.correctAnswers++;
+            record.incrementCorrectAnswers();
         else
-            record.incorrectAnswers++;
+            record.incrementIncorrectAnswers();
         LogDatabase.DAO.updateQuestionRecord(record);
     }
 
@@ -209,7 +212,7 @@ public abstract class LogDao
         }
         else
         {
-            record.occurrences++;
+            record.incrementOccurrences();
             LogDatabase.DAO.updateIncorrectAnswer(record);
         }
     }

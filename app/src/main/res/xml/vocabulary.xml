@@ -2,25 +2,24 @@
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <KanaSet prefId="vocabulary_set_basic"
-             setTitle="@string/vocab_set_basic_title">
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 1: Studying -->
+    <QuestionSet prefId="vocabulary_set_basic" setTitle="@string/vocab_set_basic_title">
         <WordQuestion romaji="Hai" kana="はい" answer="Yes"/>
         <WordQuestion romaji="Iie" kana="いいえ" answer="No"/> <!-- 否 (not normally used) -->
         <WordQuestion romaji="Watashi" kana="わたし" kanji="私" answer="I"/>
         <WordQuestion romaji="Anata" kana="あなた" kanji="貴方" answer="You"/>
         <!-- Re: Anata: The kanji can be gendered: 貴女 refers only to females and 貴男 refers only to males -->
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_study"
-             setTitle="@string/vocab_set_study_title">
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_study" setTitle="@string/vocab_set_study_title">
         <WordQuestion romaji="Pen" kana="ペン" answer="Pen"/> <!--Katakana-->
         <WordQuestion romaji="Enpitsu" kana="えんぴつ" kanji="鉛筆" answer="Pencil"/>
         <WordQuestion romaji="Tsukue" kana="つくえ" kanji="机" answer="Desk"/>
         <WordQuestion romaji="Isu" kana="いす" kanji="椅子" answer="Chair"/>
         <WordQuestion romaji="Hon" kana="ほん" kanji="本" answer="Book"/>
         <WordQuestion romaji="Noto" kana="ノート" answer="Notebook"/> <!--Katakana-->
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_animals"
-             setTitle="@string/vocab_set_animals_title">
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 2: Animals -->
+    <QuestionSet prefId="vocabulary_set_animals" setTitle="@string/vocab_set_animals_title">
         <WordQuestion romaji="Inu" kana="いぬ" kanji="犬" answer="Dog"/>
         <WordQuestion romaji="Neko" kana="ねこ" kanji="猫" answer="Cat"/>
         <WordQuestion romaji="Uma" kana="うま" kanji="馬" answer="Horse"/>
@@ -31,35 +30,47 @@
         <WordQuestion romaji="Sakana" kana="さかな" kanji="魚" answer="Fish"/>
         <WordQuestion romaji="Tori" kana="とり" kanji="鳥" answer="Bird"/>
         <WordQuestion romaji="Kame" kana="かめ" kanji="亀" answer="Turtle"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_transport"
-             setTitle="@string/vocab_set_transport_title">
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 3: Transport -->
+    <QuestionSet prefId="vocabulary_set_transport" setTitle="@string/vocab_set_transport_title">
         <WordQuestion romaji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>
         <WordQuestion romaji="Jitensha" kana="じてんしゃ" kanji="自転車" answer="Bicycle"/>
         <WordQuestion romaji="Jidousha" kana="じどうしゃ" kanji="自動車" answer="Car"/> <!-- Jidōsha -->
         <WordQuestion romaji="Hikouki" kana="ひこうき" kanji="飛行機" answer="Airplane"/> <!-- Hikōki -->
         <WordQuestion romaji="Basu" kana="バス" answer="Bus"/> <!--Katakana-->
         <WordQuestion romaji="Fune" kana="ふね" kanji="船" answer="Boat"/>
-        <WordQuestion romaji="Eki" kana="えき" kanji="駅" answer="Rail Station"/>
+        <WordQuestion romaji="Eki" kana="えき" kanji="駅" answer="Station">
+            <AltAnswer>Rail Station</AltAnswer>
+        </WordQuestion>
         <WordQuestion romaji="Kuukou" kana="くうこう" kanji="空港" answer="Airport"/> <!-- Kūkō -->
         <WordQuestion romaji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Bullet Train"/>
         <WordQuestion romaji="Kippu" kana="きっぷ" kanji="切符" answer="Ticket"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_people"
-             setTitle="@string/vocab_set_people_title">
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 4: People -->
+    <QuestionSet prefId="vocabulary_set_people" setTitle="@string/vocab_set_people_title">
         <!--<WordQuestion romaji="San" kana="さん" answer="Honorific"/>-->
         <WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>
         <WordQuestion romaji="Tomodachi" kana="ともだち" kanji="友達" answer="Friend"/>
         <WordQuestion romaji="Kazoku" kana="かぞく" kanji="家族" answer="Family"/>
         <WordQuestion romaji="Otousan" kana="おとうさん" kanji="お父さん" answer="Father"/> <!-- Otōsan -->
         <WordQuestion romaji="Okaasan" kana="おかあさん" kanji="お母さん" answer="Mother"/>
-        <WordQuestion romaji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Elder Brother"/>
-        <WordQuestion romaji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"/> <!-- Otōto -->
-        <WordQuestion romaji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Elder Sister"/>
-        <WordQuestion romaji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"/> <!-- Imōto -->
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_food"
-             setTitle="@string/vocab_set_food_title">
+        <WordQuestion romaji="Oniisan" kana="おにいさん" kanji="お兄さん" answer="Older Brother">
+            <AltAnswer>Big Brother</AltAnswer>
+            <AltAnswer>Elder Brother</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Otouto" kana="おとうと" kanji="弟" answer="Younger Brother"> <!-- Otōto -->
+            <AltAnswer>Little Brother</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Older Sister">
+            <AltAnswer>Big Sister</AltAnswer>
+            <AltAnswer>Elder Sister</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Imouto" kana="いもうと" kanji="妹" answer="Younger Sister"> <!-- Imōto -->
+            <AltAnswer>Little Sister</AltAnswer>
+        </WordQuestion>
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 5: Food -->
+    <QuestionSet prefId="vocabulary_set_food" setTitle="@string/vocab_set_food_title">
         <WordQuestion romaji="Kudamono" kana="くだもの" kanji="果物" answer="Fruit"/>
         <WordQuestion romaji="Yasai" kana="やさい" kanji="野菜" answer="Vegetable"/>
         <WordQuestion romaji="Mizu" kana="みず" kanji="水" answer="Water"/>
@@ -70,9 +81,9 @@
         <WordQuestion romaji="Asagohan" kana="あさごはん" kanji="朝ご飯" answer="Breakfast"/>
         <WordQuestion romaji="Hirugohan" kana="ひるごはん" kanji="昼ご飯" answer="Lunch"/>
         <WordQuestion romaji="Bangohan" kana="ばんごはん" kanji="晩御飯" answer="Dinner"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_home"
-             setTitle="@string/vocab_set_home_title">
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 6: Home -->
+    <QuestionSet prefId="vocabulary_set_home" setTitle="@string/vocab_set_home_title">
         <WordQuestion romaji="Uchi" kana="うち" kanji="家" answer="House"/>
         <WordQuestion romaji="Heya" kana="へや" kanji="部屋" answer="Room"/>
         <WordQuestion romaji="Beddo" kana="ベッド" answer="Bed"/> <!--Katakana-->
@@ -82,40 +93,74 @@
         <WordQuestion romaji="Mado" kana="まど" kanji="窓" answer="Window"/>
         <WordQuestion romaji="Taoru" kana="タオル" answer="Towel"/> <!--Katakana-->
         <WordQuestion romaji="Kagami" kana="かがみ" kanji="鏡" answer="Mirror"/>
-        <WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Phone"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_numbers"
-             setTitle="@string/vocab_set_numbers_title">
-        <WordQuestion romaji="Rei" kana="れい" kanji="零" answer="Zero"/> <!-- 〇 (maru) is valid -->
+        <WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Telephone">
+            <AltAnswer>Phone</AltAnswer>
+        </WordQuestion>
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Vocab Lesson 7: Numbers -->
+    <QuestionSet prefId="vocabulary_set_numbers" setTitle="@string/vocab_set_numbers_title">
+        <WordQuestion romaji="Rei" kana="れい" kanji="零" answer="Zero"> <!-- 〇 (maru) is valid -->
+            <AltAnswer>0</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Zero" kana="ゼロ" kanji="零" answer="Zero"/>-->
-        <WordQuestion romaji="Ichi" kana="いち" kanji="一" answer="One"/>
-        <WordQuestion romaji="Ni" kana="に" kanji="二" answer="Two"/>
-        <WordQuestion romaji="San" kana="さん" kanji="三" answer="Three"/>
-        <WordQuestion romaji="Yon" kana="よん" kanji="四" answer="Four"/>
+        <WordQuestion romaji="Ichi" kana="いち" kanji="一" answer="One">
+            <AltAnswer>1</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Ni" kana="に" kanji="二" answer="Two">
+            <AltAnswer>2</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="San" kana="さん" kanji="三" answer="Three">
+            <AltAnswer>3</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Yon" kana="よん" kanji="四" answer="Four">
+            <AltAnswer>4</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Shi" kana="し" kanji="四" answer="Four"/>-->
-        <WordQuestion romaji="Go" kana="ご" kanji="五" answer="Five"/>
-        <WordQuestion romaji="Roku" kana="ろく" kanji="六" answer="Six"/>
-        <WordQuestion romaji="Nana" kana="なな" kanji="七" answer="Seven"/>
+        <WordQuestion romaji="Go" kana="ご" kanji="五" answer="Five">
+            <AltAnswer>5</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Roku" kana="ろく" kanji="六" answer="Six">
+            <AltAnswer>6</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Nana" kana="なな" kanji="七" answer="Seven">
+            <AltAnswer>7</AltAnswer>
+        </WordQuestion>
         <!--<WordQuestion romaji="Shichi" kana="しち" kanji="七" answer="Seven"/>-->
-        <WordQuestion romaji="Hachi" kana="はち" kanji="八" answer="Eight"/>
-        <WordQuestion romaji="Kyuu" kana="きゅう" kanji="九" answer="Nine"/> <!-- Kyū -->
-        <WordQuestion romaji="Juu" kana="じゅう" kanji="十" answer="Ten"/> <!-- Jū -->
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_places"
-             setTitle="@string/vocab_set_places_title">
+        <WordQuestion romaji="Hachi" kana="はち" kanji="八" answer="Eight">
+            <AltAnswer>8</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Kyuu" kana="きゅう" kanji="九" answer="Nine"> <!-- Kyū -->
+            <AltAnswer>9</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Juu" kana="じゅう" kanji="十" answer="Ten"> <!-- Jū -->
+            <AltAnswer>10</AltAnswer>
+        </WordQuestion>
+    </QuestionSet>
+    <!-- ref: LJTS: Hiragana Battle Phrase Lesson 2 -->
+    <QuestionSet prefId="vocabulary_set_countries" setTitle="@string/vocab_set_countries_title">
+        <WordQuestion romaji="Amerika" kana="アメリカ" kanji="亜米利加" answer="America"/> <!--Katakana-->
+        <WordQuestion romaji="Osutoraria" kana="オーストラリア" kanji="濠太剌利" answer="Australia"/> <!--Katakana-->
+        <WordQuestion romaji="Kanada" kana="カナダ" kanji="加奈陀" answer="Canada"/> <!--Katakana-->
+        <WordQuestion romaji="Afurika" kana="アフリカ" kanji="阿弗利加" answer="Africa"/> <!--Katakana-->
+        <WordQuestion romaji="Chugoku" kana="ちゅごく" kanji="中国" answer="China"/>
+        <WordQuestion romaji="Ingurando" kana="イングランド" answer="England"/> <!--Katakana-->
+        <WordQuestion romaji="Indo" kana="インド" kanji="印度" answer="India"/> <!--Katakana-->
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 1: Places -->
+    <QuestionSet prefId="vocabulary_set_places" setTitle="@string/vocab_set_places_title">
         <WordQuestion romaji="Apato" kana="アパート" answer="Apartment"/> <!--Katakana-->
         <WordQuestion romaji="Depato" kana="デパート" answer="Department Store"/> <!--Katakana-->
         <WordQuestion romaji="Konbini" kana="コンビニ" answer="Convenience Store"/> <!--Katakana-->
         <WordQuestion romaji="Hoteru" kana="ホテル" answer="Hotel"/> <!--Katakana-->
         <WordQuestion romaji="Resutoran" kana="レストラン" answer="Restaurant"/> <!--Katakana-->
         <WordQuestion romaji="Mise" kana="みせ" kanji="店" answer="Shop"/>
-        <WordQuestion romaji="Kouen" kana="こうえん" kanji="公園" answer="Park"/>
-        <WordQuestion romaji="Ginkou" kana="ぎんこう" kanji="銀行" answer="Bank"/>
-        <WordQuestion romaji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/>
-        <WordQuestion romaji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Post Office"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_clothing"
-             setTitle="@string/vocab_set_clothing_title">
+        <WordQuestion romaji="Kouen" kana="こうえん" kanji="公園" answer="Park"/> <!-- Kōen -->
+        <WordQuestion romaji="Ginkou" kana="ぎんこう" kanji="銀行" answer="Bank"/> <!-- Ginkō -->
+        <WordQuestion romaji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/> <!-- Byōin -->
+        <WordQuestion romaji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Post Office"/> <!-- Yūbinkyoku -->
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 2: Clothing -->
+    <QuestionSet prefId="vocabulary_set_clothing" setTitle="@string/vocab_set_clothing_title">
         <WordQuestion romaji="Shatsu" kana="シャツ" answer="Shirt"/> <!--Katakana-->
         <WordQuestion romaji="Zubon" kana="ズボン" answer="Pants"/> <!--Katakana-->
         <WordQuestion romaji="Sukato" kana="スカート" answer="Skirt"/> <!--Katakana-->
@@ -126,24 +171,122 @@
         <WordQuestion romaji="Kutsu" kana="くつ" kanji="靴" answer="Shoes"/>
         <WordQuestion romaji="Kutsushita" kana="くつした" kanji="靴下" answer="Socks"/>
         <WordQuestion romaji="Kimono" kana="きもの" kanji="着物" answer="Kimono"/>
-    </KanaSet>
-    <KanaSet prefId="vocabulary_set_home_2"
-             setTitle="@string/vocab_set_home_2_title">
-        <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Computer"/> <!--Katakana-->
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 3: Household -->
+    <QuestionSet prefId="vocabulary_set_home_2" setTitle="@string/vocab_set_home_2_title">
+        <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Computer"/> <!--Katakana--> <!-- Konpyūta -->
         <WordQuestion romaji="Terebi" kana="テレビ" answer="Television"/> <!--Katakana-->
         <WordQuestion romaji="Toire" kana="トイレ" answer="Toilet"/> <!--Katakana-->
         <!--<WordQuestion romaji="Beddo" kana="ベッド" answer="Bed"/> &lt;!&ndash;Katakana&ndash;&gt;-->
         <WordQuestion romaji="Sofaa" kana="ソファー" answer="Sofa"/> <!--Katakana-->
-        <WordQuestion romaji="Houki" kana="ほうき" kanji="箒" answer="Broom"/>
+        <WordQuestion romaji="Houki" kana="ほうき" kanji="箒" answer="Broom"/> <!-- Hōki -->
         <WordQuestion romaji="Hashi" kana="はし" kanji="箸" answer="Chopsticks"/>
         <WordQuestion romaji="Kagu" kana="かぐ" kanji="家具" answer="Furniture"/>
         <WordQuestion romaji="Kagi" kana="かぎ" kanji="鍵" answer="Key"/>
         <WordQuestion romaji="Osara" kana="おさら" kanji="お皿" answer="Plate"/>
-    </KanaSet>
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 4: School -->
+    <QuestionSet prefId="vocabulary_set_school" setTitle="@string/vocab_set_school_title">
+        <WordQuestion romaji="Sukuru" kana="スクール" answer="School"/> <!--Katakana-->
+        <!--<WordQuestion romaji="Gakkou" kana="がっこう" kanji="学校" answer="School"/>-->
+        <WordQuestion romaji="Tesuto" kana="テスト" answer="Test"/> <!--Katakana-->
+        <WordQuestion romaji="Tekisutobukku" kana="テキストブック" answer="Textbook"/> <!--Katakana--> <!-- tekisuto -->
+        <!--<WordQuestion romaji="Tekisuto" kana="テキスト" answer="Textbook"/> &lt;!&ndash;Katakana&ndash;&gt;-->
+        <!--<WordQuestion romaji="Noto" kana="ノート" answer="Notebook"/> &lt;!&ndash;Katakana&ndash;&gt;-->
+        <WordQuestion romaji="Chokku" kana="チョック" answer="Chalk"/> <!--Katakana-->
+        <WordQuestion romaji="Gakusei" kana="がくせい" kanji="学生" answer="Student"/>
+        <WordQuestion romaji="Kyoushitsu" kana="きょうしつ" kanji="教室" answer="Classroom"/>
+        <!--<WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>-->
+        <WordQuestion romaji="Kouchousensei" kana="こうちょうせんせい" kanji="校長先生" answer="Principal"/>
+        <WordQuestion romaji="Shukudai" kana="しゅくだい" kanji="宿題" answer="Homework"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Katakana War Vocab Lesson 5: Jobs -->
+    <QuestionSet prefId="vocabulary_set_jobs" setTitle="@string/vocab_set_jobs_title">
+        <WordQuestion romaji="Enjinia" kana="エンジニア" answer="Engineer"/> <!--Katakana-->
+        <WordQuestion romaji="Shefu" kana="シェフ" answer="Chef"/> <!--Katakana-->
+        <WordQuestion romaji="Pairotto" kana="パイロット" answer="Pilot"/> <!--Katakana-->
+        <WordQuestion romaji="Sarariman" kana="サラリーマン" answer="Salaryman"> <!--Katakana-->
+            <AltAnswer>Businessman</AltAnswer>
+            <AltAnswer>Office Worker</AltAnswer>
+        </WordQuestion>
+        <WordQuestion romaji="Konsarutanto" kana="コンサルタント" answer="Consultant"/> <!--Katakana-->
+        <WordQuestion romaji="Keisatsukan" kana="けいさつかん" kanji="警察官" answer="Police Officer"/>
+        <WordQuestion romaji="Isha" kana="いしゃ" kanji="医者" answer="Doctor"/>
+        <WordQuestion romaji="Kangoshi" kana="かんごし" kanji="看護師" answer="Nurse"/>
+        <WordQuestion romaji="Bengoshi" kana="べんごし" kanji="弁護士" answer="Lawyer"/>
+        <WordQuestion romaji="Kashu" kana="かしゅ" kanji="歌手" answer="Singer"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 1 -->
+    <QuestionSet prefId="vocabulary_set_schools_size" setTitle="@string/vocab_set_schools_size_title">
+        <WordQuestion romaji="Gakkō" kana="がっこう" kanji="学校" answer="School"/>
+        <WordQuestion romaji="Daigaku" kana="だいがく" kanji="大学" answer="University"/>
+        <WordQuestion romaji="Ōkii" kana="おおきい" kanji="大きい" answer="Big"/>
+        <WordQuestion romaji="Chiisai" kana="ちいさい" kanji="小さい" answer="Small"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 2 -->
+    <QuestionSet prefId="vocabulary_set_people_2" setTitle="@string/vocab_set_people_2_title">
+        <WordQuestion romaji="Otona" kana="おとな" kanji="大人" answer="Adult"/>
+        <WordQuestion romaji="Otoko no hito" kana="おとこのひと" kanji="男の人" answer="Man"/>
+        <WordQuestion romaji="Otoko no ko" kana="おとこのこ" kanji="男の子" answer="Boy"/>
+        <WordQuestion romaji="Onna no hito" kana="おんなのひと" kanji="女の人" answer="Woman"/>
+        <WordQuestion romaji="Onna no ko" kana="おんなのこ" kanji="女の子" answer="Girl"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_random_1" setTitle="@string/vocab_set_random_1_title">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 3 -->
+        <!--<WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Teacher"/>-->
+        <WordQuestion romaji="Akachan" kana="あかちゃん" kanji="赤ちゃん" answer="Baby"/>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 4 -->
+        <WordQuestion romaji="Natsuyasumi" kana="なつやすみ" kanji="夏休み" answer="Summer Vacation"/>
+        <WordQuestion romaji="Iu" kana="いう" kanji="言う" answer="Say"/>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 5 -->
+        <WordQuestion romaji="Namae" kana="なまえ" kanji="名前" answer="Name"/>
+        <WordQuestion romaji="Mainichi" kana="まいにち" kanji="毎日" answer="Every Day"/>
+        <WordQuestion romaji="Kyō" kana="きょう" kanji="今日" answer="Today"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 6 -->
+    <QuestionSet prefId="vocabulary_set_weekdays" setTitle="@string/vocab_set_weekdays_title">
+        <WordQuestion romaji="Nichiyōbi" kana="にちようび" kanji="日曜日" answer="Sunday"/>
+        <WordQuestion romaji="Getsuyōbi" kana="げつようび" kanji="月曜日" answer="Monday"/>
+        <WordQuestion romaji="Kayōbi" kana="かようび" kanji="火曜日" answer="Tuesday"/>
+        <WordQuestion romaji="Suiyōbi" kana="すいようび" kanji="水曜日" answer="Wednesday"/>
+        <WordQuestion romaji="Mokuyōbi" kana="もくようび" kanji="木曜日" answer="Thursday"/>
+        <WordQuestion romaji="Kinyōbi" kana="きんようび" kanji="金曜日" answer="Friday"/>
+        <WordQuestion romaji="Doyōbi" kana="どようび" kanji="土曜日" answer="Saturday"/>
+    </QuestionSet>
+    <QuestionSet prefId="vocabulary_set_time_music" setTitle="@string/vocab_set_time_music_title">
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 7 -->
+        <!--<WordQuestion romaji="Kyōshitsu" kana="きょうしつ" kanji="教室" answer="Classroom"/>-->
+        <WordQuestion romaji="Tokei" kana="とけい" kanji="時計" answer="Watch/Clock"/>
+        <WordQuestion romaji="Hashiru" kana="はしる" kanji="走る" answer="Run"/>
+        <WordQuestion romaji="Dekiru" kana="できる" kanji="出来る" answer="Be Able To">
+            <AltAnswer>To Be Able To</AltAnswer>
+        </WordQuestion>
+        <!-- ref: LJTS: Kanji Combat Vocab Lesson 8 -->
+        <WordQuestion romaji="Ongaku" kana="おんがく" kanji="音楽" answer="Music"/>
+        <WordQuestion romaji="Atarashii" kana="あたらしい" kanji="新しい" answer="New"/>
+        <WordQuestion romaji="Furui" kana="ふるい" kanji="古い" answer="Old"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 9 -->
+    <QuestionSet prefId="vocabulary_set_news" setTitle="@string/vocab_set_news_title">
+        <WordQuestion romaji="Tegami" kana="てがみ" kanji="手紙" answer="Letter"/>
+        <WordQuestion romaji="Jikan" kana="じかん" kanji="時間" answer="Time"/>
+        <WordQuestion romaji="Shinbun" kana="しんぶん" kanji="新聞" answer="Newspaper"/>
+        <WordQuestion romaji="Ningen" kana="にんげん" kanji="人間" answer="Human"/>
+    </QuestionSet>
+    <!-- ref: LJTS: Kanji Combat Vocab Lesson 10 -->
+    <QuestionSet prefId="vocabulary_set_power_community" setTitle="@string/vocab_set_power_community_title">
+        <!--<WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Telephone"/>-->
+        <WordQuestion romaji="Kaisha" kana="かいしゃ" kanji="会社" answer="Company"/>
+        <!--<WordQuestion romaji="Kōen" kana="こうえん" kanji="公園" answer="Public Park"/>-->
+        <!--<WordQuestion romaji="Densha" kana="でんしゃ" kanji="電車" answer="Train"/>-->
+        <WordQuestion romaji="Denki" kana="でんき" kanji="電気" answer="Electricity"/>
+        <WordQuestion romaji="Ashita" kana="あした" kanji="明日" answer="Tomorrow"/>
+    </QuestionSet>
     <!--
     Sources:
     Learn Japanese to Survive: Hiragana Battle
     Learn Japanese to Survive: Katakana War
+    Learn Japanese to Survive: Kanji Combat
     Jisho (looks up Kanji from kana): https://jisho.org
     Wikipedia: https://en.wikipedia.org/wiki/Japanese_numerals
     -->

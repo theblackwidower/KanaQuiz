@@ -7,18 +7,21 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.themes.ThemeManager;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 public class ReferenceScreen extends AppCompatActivity
 {
+    private static final int MAX_TABS = 3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ThemeManager.setTheme(this);
         setContentView(R.layout.activity_tabbed_screen);
 
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -28,7 +31,7 @@ public class ReferenceScreen extends AppCompatActivity
         {
             TextView lblEmpty = new TextView(this);
             lblEmpty.setText(R.string.no_reference);
-            lblEmpty.setTextSize(COMPLEX_UNIT_SP, 24);
+            lblEmpty.setTextSize(getResources().getDimensionPixelSize(R.dimen.embeddedAlertMessageSize));
             lblEmpty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             lblEmpty.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -37,6 +40,19 @@ public class ReferenceScreen extends AppCompatActivity
             layout.addView(lblEmpty);
         }
         else
-            ((TabLayout) findViewById(R.id.tabLayout)).setupWithViewPager(viewPager);
+        {
+            TabLayout tabLayout = findViewById(R.id.tabLayout);
+            //TODO: Make this check more dynamic, accounting for screen width and actual tab width
+            if (pagerAdapter.getCount() > MAX_TABS)
+                tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+            tabLayout.setupWithViewPager(viewPager);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        ThemeManager.permissionRequestReturn(this, permissions, grantResults);
     }
 }

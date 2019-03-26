@@ -2,6 +2,8 @@ package com.noprestige.kanaquiz.options;
 
 import android.os.Bundle;
 
+import com.noprestige.kanaquiz.themes.ThemeManager;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class OptionsScreen extends AppCompatActivity
@@ -10,6 +12,7 @@ public class OptionsScreen extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new OptionsFragment()).commit();
+        ThemeManager.setTheme(this);
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new OptionsFragment()).commit();
     }
 }
