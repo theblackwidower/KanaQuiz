@@ -14,6 +14,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
@@ -68,7 +69,14 @@ public class LogDetailView extends AppCompatActivity
 
             QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity.date);
 
-            logDetailChart.getXAxis().setValueFormatter((value, axis) -> formatXLabel(value));
+            logDetailChart.getXAxis().setValueFormatter(new ValueFormatter()
+            {
+                @Override
+                public String getFormattedValue(float value)
+                {
+                    return formatXLabel(value);
+                }
+            });
 
             if (records.length == 0)
                 return 0;
