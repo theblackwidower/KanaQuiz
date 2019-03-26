@@ -4,6 +4,7 @@
     Notes:
     Use fontFamily and android:typeface for font types
     Don't use android:navigationBarColor
+    TODO: Problem with setting background colours
     -->
 
     <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">

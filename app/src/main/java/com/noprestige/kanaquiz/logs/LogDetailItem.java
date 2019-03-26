@@ -30,6 +30,9 @@ public class LogDetailItem extends View
     private TextPaint percentagePaint = new TextPaint();
     private Paint linePaint = new Paint();
 
+    private float originalFontSize;
+    private int desiredHeight;
+
     private float questionXPoint;
     private float correctXPoint;
     private float slashXPoint;
@@ -127,8 +130,6 @@ public class LogDetailItem extends View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         int desiredWidth = desiredWidth();
-        int desiredHeight = Math.round(textHeight + linePaint.getStrokeWidth()) + getPaddingTop() + getPaddingBottom() +
-                (internalVerticalPadding * 2);
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
@@ -138,8 +139,9 @@ public class LogDetailItem extends View
 
     private int desiredWidth()
     {
-        return Math.round((Math.max(questionWidth + correctWidth, totalWidth + percentageWidth) * 2) + slashWidth) +
-                getPaddingLeft() + getPaddingRight();
+        return Math.round((Math.max(questionWidth + correctWidth +
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()),
+                totalWidth + percentageWidth) * 2) + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
     private static int calculateSize(int measureSpec, int desired)
@@ -173,10 +175,12 @@ public class LogDetailItem extends View
 
     public void correctFontSize()
     {
+        if (mainPaint.getTextSize() != originalFontSize)
+            forceFontSize(originalFontSize);
         if (isDynamicSize)
         {
             while (desiredWidth() > getWidth())
-                setFontSize(mainPaint.getTextSize() - 1);
+                forceFontSize(mainPaint.getTextSize() - 1);
             repositionItems(getWidth(), getHeight());
         }
     }
@@ -205,7 +209,7 @@ public class LogDetailItem extends View
 
     public float getFontSize()
     {
-        return mainPaint.getTextSize();
+        return originalFontSize;
     }
 
     public int getMainColour()
@@ -237,6 +241,14 @@ public class LogDetailItem extends View
     }
 
     public void setFontSize(float fontSize)
+    {
+        originalFontSize = fontSize;
+        forceFontSize(fontSize);
+        desiredHeight = Math.round(textHeight + linePaint.getStrokeWidth()) + getPaddingTop() + getPaddingBottom() +
+                (internalVerticalPadding * 2);
+    }
+
+    private void forceFontSize(float fontSize)
     {
         mainPaint.setTextSize(fontSize);
         percentagePaint.setTextSize(fontSize);

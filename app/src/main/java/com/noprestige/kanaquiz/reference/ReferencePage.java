@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 public class ReferencePage extends Fragment
 {
     private static final String ARG_QUESTION_TYPE_REF = "questionTypeRef";
-    private static final int MAX_TABS = 4;
+    private static final int MAX_TABS = 3;
 
     public static ReferencePage newInstance(int questionTypeRef)
     {

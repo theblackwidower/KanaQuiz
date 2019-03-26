@@ -221,7 +221,7 @@ public class DailyLogItem extends View
 
     public void correctFontSize()
     {
-        if (isDynamicSize)
+        if (isDynamicSize && (getWidth() > Math.max(dateWidth1, Math.max(dateWidth2, dateWidth3))))
         {
             while (desiredWidth() > getWidth())
                 setDataFontSize(ratioPaint.getTextSize() - 1);

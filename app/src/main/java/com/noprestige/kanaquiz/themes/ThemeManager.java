@@ -73,12 +73,17 @@ public final class ThemeManager
 
     public static Typeface getDefaultThemeFont(Context context, int fontStyle)
     {
+        return getDefaultThemeFont(context.getTheme(), fontStyle);
+    }
+
+    public static Typeface getDefaultThemeFont(Resources.Theme theme, int fontStyle)
+    {
         int attr;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
             attr = android.R.attr.typeface;
         else
             attr = R.attr.fontFamily;
-        return getThemeFont(context, attr, fontStyle);
+        return getThemeFont(theme, attr, fontStyle);
     }
 
     public static Typeface getThemeFont(Context context, int attr, int fontStyle)
@@ -164,7 +169,6 @@ public final class ThemeManager
                             dialogBuilder.setOnDismissListener(dialog -> activity
                                     .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
                             dialogBuilder.show();
-                            //TODO: Find way to get activity to restart once font permission is granted.
                         }
                         else
                             initializeFonts(activity);

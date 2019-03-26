@@ -18,6 +18,7 @@
 
     <dimen name="landscapeChartWidth">300dp</dimen>
     <dimen name="portraitChartHeight">200dp</dimen>
+    <dimen name="chartLabelTextSize">8sp</dimen>
 
     <dimen name="logItemInternalVerticalPadding">3dp</dimen>
 

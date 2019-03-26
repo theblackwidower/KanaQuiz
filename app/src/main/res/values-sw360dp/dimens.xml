@@ -5,4 +5,8 @@
     <dimen name="kanjiReferenceSubjectSize">46sp</dimen>
     <dimen name="kanjiReferenceDescriptionSize">10sp</dimen>
     <dimen name="vocabReferenceSubjectSize">52sp</dimen>
+
+    <dimen name="chartLabelTextSize">4sp</dimen>
+
+    <dimen name="headerTextSize">5sp</dimen>
 </resources>
