@@ -146,7 +146,7 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
             if (!isFontInitialized)
             {
                 int code = FontProviderClient.checkAvailability(activity);
