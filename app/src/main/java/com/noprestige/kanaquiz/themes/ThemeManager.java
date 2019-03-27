@@ -55,7 +55,7 @@ public final class ThemeManager
         else if (prefId.equals(resources.getString(R.string.themeid_chrysanthemum)))
             return R.style.ChrysanthemumTwilight;
         else
-            return R.style.Theme_AppCompat;
+            return R.style.CherryBlossomTree;
     }
 
     public static int getThemeColour(Context context, int attr)
