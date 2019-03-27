@@ -55,7 +55,7 @@ public final class ThemeManager
         else if (prefId.equals(resources.getString(R.string.themeid_chrysanthemum)))
             return R.style.ChrysanthemumTwilight;
         else
-            return R.style.Theme_AppCompat;
+            return R.style.CherryBlossomTree;
     }
 
     public static int getThemeColour(Context context, int attr)
@@ -146,7 +146,7 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
             if (!isFontInitialized)
             {
                 int code = FontProviderClient.checkAvailability(activity);
