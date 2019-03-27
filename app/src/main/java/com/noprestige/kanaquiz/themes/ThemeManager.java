@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2019 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.themes;
 
 import android.Manifest;
@@ -55,7 +71,7 @@ public final class ThemeManager
         else if (prefId.equals(resources.getString(R.string.themeid_chrysanthemum)))
             return R.style.ChrysanthemumTwilight;
         else
-            return R.style.Theme_AppCompat;
+            return R.style.CherryBlossomTree;
     }
 
     public static int getThemeColour(Context context, int attr)
@@ -73,12 +89,17 @@ public final class ThemeManager
 
     public static Typeface getDefaultThemeFont(Context context, int fontStyle)
     {
+        return getDefaultThemeFont(context.getTheme(), fontStyle);
+    }
+
+    public static Typeface getDefaultThemeFont(Resources.Theme theme, int fontStyle)
+    {
         int attr;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O)
             attr = android.R.attr.typeface;
         else
             attr = R.attr.fontFamily;
-        return getThemeFont(context, attr, fontStyle);
+        return getThemeFont(theme, attr, fontStyle);
     }
 
     public static Typeface getThemeFont(Context context, int attr, int fontStyle)
@@ -141,7 +162,7 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
             if (!isFontInitialized)
             {
                 int code = FontProviderClient.checkAvailability(activity);
@@ -164,7 +185,6 @@ public final class ThemeManager
                             dialogBuilder.setOnDismissListener(dialog -> activity
                                     .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
                             dialogBuilder.show();
-                            //TODO: Find way to get activity to restart once font permission is granted.
                         }
                         else
                             initializeFonts(activity);

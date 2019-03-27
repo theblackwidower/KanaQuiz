@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2019 T Duke Perry & Laura C.
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com ../xml/questions.xsd">
-    <QuestionSet prefId="vocabulary_set_basic" setTitle="@string/vocab_set_basic_title">
+    <QuestionSet prefId="vocabulary_set_basic" setTitle="Vocabulario básico">
         <WordQuestion romaji="Hai" kana="はい" answer="Sí"/>
         <WordQuestion romaji="Iie" kana="いいえ" answer="No"/> <!-- 否 (not normally used) -->
         <WordQuestion romaji="Watashi" kana="わたし" kanji="私" answer="Yo"/>
         <WordQuestion romaji="Anata" kana="あなた" kanji="貴方" answer="Tú"/>
         <!-- Re: Anata: The kanji can be gendered: 貴女 refers only to females and 貴男 refers only to males -->
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_study" setTitle="@string/vocab_set_study_title">
+    <QuestionSet prefId="vocabulary_set_study" setTitle="Material de estudio">
         <WordQuestion romaji="Pen" kana="ペン" answer="Bolígrafo"/> <!--Katakana-->
         <WordQuestion romaji="Enpitsu" kana="えんぴつ" kanji="鉛筆" answer="Lápiz"/>
         <WordQuestion romaji="Tsukue" kana="つくえ" kanji="机" answer="Mesa"/>
@@ -17,7 +33,7 @@
         <WordQuestion romaji="Hon" kana="ほん" kanji="本" answer="Libro"/>
         <WordQuestion romaji="Noto" kana="ノート" answer="Libreta"/> <!--Katakana-->
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_animals" setTitle="@string/vocab_set_animals_title">
+    <QuestionSet prefId="vocabulary_set_animals" setTitle="Animales">
         <WordQuestion romaji="Inu" kana="いぬ" kanji="犬" answer="Perro"/>
         <WordQuestion romaji="Neko" kana="ねこ" kanji="猫" answer="Gato"/>
         <WordQuestion romaji="Uma" kana="うま" kanji="馬" answer="Caballo"/>
@@ -29,7 +45,7 @@
         <WordQuestion romaji="Tori" kana="とり" kanji="鳥" answer="Pájaro"/>
         <WordQuestion romaji="Kame" kana="かめ" kanji="亀" answer="Tortuga"/>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_transport" setTitle="@string/vocab_set_transport_title">
+    <QuestionSet prefId="vocabulary_set_transport" setTitle="Transporte">
         <WordQuestion romaji="Densha" kana="でんしゃ" kanji="電車" answer="Tren"/>
         <WordQuestion romaji="Jitensha" kana="じてんしゃ" kanji="自転車" answer="Bicicleta"/>
         <WordQuestion romaji="Jidousha" kana="じどうしゃ" kanji="自動車" answer="Coche"/> <!-- Jidōsha -->
@@ -45,7 +61,7 @@
         <WordQuestion romaji="Shinkansen" kana="しんかんせん" kanji="新幹線" answer="Tren bala"/>
         <WordQuestion romaji="Kippu" kana="きっぷ" kanji="切符" answer="Tíquet"/>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_people" setTitle="@string/vocab_set_people_title">
+    <QuestionSet prefId="vocabulary_set_people" setTitle="Personas y familiares">
         <!--<WordQuestion romaji="San" kana="さん" answer="Honorific"/>-->
         <WordQuestion romaji="Sensei" kana="せんせい" kanji="先生" answer="Maestro"/>
         <WordQuestion romaji="Tomodachi" kana="ともだち" kanji="友達" answer="Amigo"/>
@@ -57,7 +73,7 @@
         <WordQuestion romaji="Oneesan" kana="おねえさん" kanji="お姉さん" answer="Hermana mayor"/>
         <WordQuestion romaji="Imouto" kana="いもうと" kanji="妹" answer="Hermana pequeña"/> <!-- Imōto -->
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_food" setTitle="@string/vocab_set_food_title">
+    <QuestionSet prefId="vocabulary_set_food" setTitle="Comida y bebida">
         <WordQuestion romaji="Kudamono" kana="くだもの" kanji="果物" answer="Fruta"/>
         <WordQuestion romaji="Yasai" kana="やさい" kanji="野菜" answer="Verdura"/>
         <WordQuestion romaji="Mizu" kana="みず" kanji="水" answer="Agua"/>
@@ -69,7 +85,7 @@
         <WordQuestion romaji="Hirugohan" kana="ひるごはん" kanji="昼ご飯" answer="Comida"/>
         <WordQuestion romaji="Bangohan" kana="ばんごはん" kanji="晩御飯" answer="Cena"/>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_home" setTitle="@string/vocab_set_home_title">
+    <QuestionSet prefId="vocabulary_set_home" setTitle="Casa y hogar">
         <WordQuestion romaji="Uchi" kana="うち" kanji="家" answer="Casa"/>
         <WordQuestion romaji="Heya" kana="へや" kanji="部屋" answer="Habitación"/>
         <WordQuestion romaji="Beddo" kana="ベッド" answer="Cama"/> <!--Katakana-->
@@ -81,7 +97,7 @@
         <WordQuestion romaji="Kagami" kana="かがみ" kanji="鏡" answer="Espejo"/>
         <WordQuestion romaji="Denwa" kana="でんわ" kanji="電話" answer="Teléfono"/>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_numbers" setTitle="@string/vocab_set_numbers_title">
+    <QuestionSet prefId="vocabulary_set_numbers" setTitle="Números">
         <WordQuestion romaji="Rei" kana="れい" kanji="零" answer="Cero"> <!-- 〇 (maru) is valid -->
             <AltAnswer>0</AltAnswer>
         </WordQuestion>
@@ -119,7 +135,7 @@
             <AltAnswer>10</AltAnswer>
         </WordQuestion>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_countries" setTitle="@string/vocab_set_countries_title">
+    <QuestionSet prefId="vocabulary_set_countries" setTitle="Países">
         <WordQuestion romaji="Amerika" kana="アメリカ" kanji="亜米利加" answer="América"/> <!--Katakana-->
         <WordQuestion romaji="Osutoraria" kana="オーストラリア" kanji="濠太剌利" answer="Australia"/> <!--Katakana-->
         <WordQuestion romaji="Kanada" kana="カナダ" kanji="加奈陀" answer="Canadá"/> <!--Katakana-->
@@ -128,7 +144,7 @@
         <WordQuestion romaji="Ingurando" kana="イングランド" answer="Inglaterra"/> <!--Katakana-->
         <WordQuestion romaji="Indo" kana="インド" kanji="印度" answer="índia"/> <!--Katakana-->
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_places" setTitle="@string/vocab_set_places_title">
+    <QuestionSet prefId="vocabulary_set_places" setTitle="Lugares">
         <WordQuestion romaji="Apato" kana="アパート" answer="Apartamento"/> <!--Katakana-->
         <WordQuestion romaji="Depato" kana="デパート" answer="Grandes almacenes"/> <!--Katakana-->
         <WordQuestion romaji="Konbini" kana="コンビニ" answer="Tienda de víveres"> <!--Katakana-->
@@ -142,7 +158,7 @@
         <WordQuestion romaji="Byouin" kana="びょういん" kanji="病院" answer="Hospital"/> <!-- Byōin -->
         <WordQuestion romaji="Yuubinkyoku" kana="ゆうびんきょく" kanji="郵便局" answer="Oficina de correos"/> <!-- Yūbinkyoku -->
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_clothing" setTitle="@string/vocab_set_clothing_title">
+    <QuestionSet prefId="vocabulary_set_clothing" setTitle="Vestimenta">
         <WordQuestion romaji="Shatsu" kana="シャツ" answer="Camiseta"/> <!--Katakana-->
         <WordQuestion romaji="Zubon" kana="ズボン" answer="Pantalones"/> <!--Katakana-->
         <WordQuestion romaji="Sukato" kana="スカート" answer="Falda"/> <!--Katakana-->
@@ -154,7 +170,7 @@
         <WordQuestion romaji="Kutsushita" kana="くつした" kanji="靴下" answer="Calcetines"/>
         <WordQuestion romaji="Kimono" kana="きもの" kanji="着物" answer="Kimono"/>
     </QuestionSet>
-    <QuestionSet prefId="vocabulary_set_home_2" setTitle="@string/vocab_set_home_2_title">
+    <QuestionSet prefId="vocabulary_set_home_2" setTitle="Casa y hogar 2">
         <WordQuestion romaji="Konpyuuta" kana="コンピュータ" answer="Ordenador"/> <!--Katakana--> <!-- Konpyūta -->
         <WordQuestion romaji="Terebi" kana="テレビ" answer="Televisor"> <!--Katakana-->
             <AltAnswer>TV</AltAnswer>
@@ -169,7 +185,7 @@
         <WordQuestion romaji="Osara" kana="おさら" kanji="お皿" answer="Plato"/>
     </QuestionSet>
     <!-- ref: LJTS: Katakana War Vocab Lesson 4: School -->
-    <QuestionSet prefId="vocabulary_set_school" setTitle="@string/vocab_set_school_title">
+    <QuestionSet prefId="vocabulary_set_school" setTitle="Escuela">
         <WordQuestion romaji="Sukuru" kana="スクール" answer="Escuela"/> <!--Katakana-->
         <!--<WordQuestion romaji="Gakkou" kana="がっこう" kanji="学校" answer="School"/>-->
         <WordQuestion romaji="Tesuto" kana="テスト" answer="Test"> <!--Katakana-->
@@ -188,7 +204,7 @@
         <WordQuestion romaji="Shukudai" kana="しゅくだい" kanji="宿題" answer="Deberes"/>
     </QuestionSet>
     <!-- ref: LJTS: Katakana War Vocab Lesson 5: Jobs -->
-    <QuestionSet prefId="vocabulary_set_jobs" setTitle="@string/vocab_set_jobs_title">
+    <QuestionSet prefId="vocabulary_set_jobs" setTitle="Oficios">
         <WordQuestion romaji="Enjinia" kana="エンジニア" answer="Ingeniero"/> <!--Katakana-->
         <WordQuestion romaji="Shefu" kana="シェフ" answer="Chef"/> <!--Katakana-->
         <WordQuestion romaji="Pairotto" kana="パイロット" answer="Piloto"/> <!--Katakana-->

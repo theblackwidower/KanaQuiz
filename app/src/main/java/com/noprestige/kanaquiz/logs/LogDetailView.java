@@ -1,9 +1,27 @@
+/*
+ *    Copyright 2019 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,6 +30,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
@@ -66,7 +85,14 @@ public class LogDetailView extends AppCompatActivity
 
             QuestionRecord[] records = LogDatabase.DAO.getDatesQuestionRecords(activity.date);
 
-            logDetailChart.getXAxis().setValueFormatter((value, axis) -> formatXLabel(value));
+            logDetailChart.getXAxis().setValueFormatter(new ValueFormatter()
+            {
+                @Override
+                public String getFormattedValue(float value)
+                {
+                    return formatXLabel(value);
+                }
+            });
 
             if (records.length == 0)
                 return 0;
@@ -158,12 +184,22 @@ public class LogDetailView extends AppCompatActivity
 
         BarChart logDetailChart = findViewById(R.id.logDetailChart);
 
+        float labelFontSize = getResources().getDimensionPixelSize(R.dimen.chartLabelTextSize);
+
         logDetailChart.getAxisLeft().setAxisMaximum(100);
         logDetailChart.getAxisLeft().setAxisMinimum(0);
+        logDetailChart.getAxisLeft().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
+        logDetailChart.getAxisLeft().setTypeface(ThemeManager.getDefaultThemeFont(this, Typeface.BOLD));
+        logDetailChart.getAxisLeft().setTextSize(labelFontSize);
         logDetailChart.getAxisRight().setEnabled(false);
         logDetailChart.getXAxis().setGranularity(1);
         logDetailChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         logDetailChart.getXAxis().setDrawGridLines(false);
+        logDetailChart.getXAxis().setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
+        logDetailChart.getXAxis().setTypeface(ThemeManager.getDefaultThemeFont(this, Typeface.BOLD));
+        logDetailChart.getXAxis().setTextSize(labelFontSize);
+        logDetailChart.setExtraBottomOffset(
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
         logDetailChart.getLegend().setEnabled(false);
         logDetailChart.getDescription().setText("");
         logDetailChart.setScaleYEnabled(false);

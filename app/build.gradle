@@ -12,8 +12,8 @@ android {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 16
-        versionName '0.13.1'
+        versionCode 18
+        versionName '0.14.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         resConfigs 'en-rCA', 'es-rES', 'ca-rES' //ref: https://stackoverflow.com/a/47525966/3582371
         javaCompileOptions {
@@ -67,23 +67,23 @@ dependencies {
 
     androidTestImplementation 'androidx.room:room-testing:2.0.0'
 
-    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
-    releaseImplementation 'com.google.firebase:firebase-core:16.0.6'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.2.3'
+    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
+    releaseImplementation 'com.google.firebase:firebase-core:16.0.8'
+    releaseImplementation 'com.google.firebase:firebase-perf:16.2.4'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation 'ch.acra:acra-mail:5.2.1'
-    pureImplementation 'ch.acra:acra-toast:5.2.1'
-    pureImplementation 'ch.acra:acra-limiter:5.2.1'
+    pureImplementation 'ch.acra:acra-mail:5.3.0'
+    pureImplementation 'ch.acra:acra-toast:5.3.0'
+    pureImplementation 'ch.acra:acra-limiter:5.3.0'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 
     implementation 'androidx.preference:preference:1.0.0'
 

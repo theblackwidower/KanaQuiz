@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2019 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
@@ -29,6 +45,9 @@ public class LogDetailItem extends View
     private TextPaint mainPaint = new TextPaint();
     private TextPaint percentagePaint = new TextPaint();
     private Paint linePaint = new Paint();
+
+    private float originalFontSize;
+    private int desiredHeight;
 
     private float questionXPoint;
     private float correctXPoint;
@@ -127,8 +146,6 @@ public class LogDetailItem extends View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
     {
         int desiredWidth = desiredWidth();
-        int desiredHeight = Math.round(textHeight + linePaint.getStrokeWidth()) + getPaddingTop() + getPaddingBottom() +
-                (internalVerticalPadding * 2);
 
         int width = calculateSize(widthMeasureSpec, desiredWidth);
         int height = calculateSize(heightMeasureSpec, desiredHeight);
@@ -138,8 +155,9 @@ public class LogDetailItem extends View
 
     private int desiredWidth()
     {
-        return Math.round((Math.max(questionWidth + correctWidth, totalWidth + percentageWidth) * 2) + slashWidth) +
-                getPaddingLeft() + getPaddingRight();
+        return Math.round((Math.max(questionWidth + correctWidth +
+                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()),
+                totalWidth + percentageWidth) * 2) + slashWidth) + getPaddingLeft() + getPaddingRight();
     }
 
     private static int calculateSize(int measureSpec, int desired)
@@ -173,10 +191,12 @@ public class LogDetailItem extends View
 
     public void correctFontSize()
     {
+        if (mainPaint.getTextSize() != originalFontSize)
+            forceFontSize(originalFontSize);
         if (isDynamicSize)
         {
             while (desiredWidth() > getWidth())
-                setFontSize(mainPaint.getTextSize() - 1);
+                forceFontSize(mainPaint.getTextSize() - 1);
             repositionItems(getWidth(), getHeight());
         }
     }
@@ -205,7 +225,7 @@ public class LogDetailItem extends View
 
     public float getFontSize()
     {
-        return mainPaint.getTextSize();
+        return originalFontSize;
     }
 
     public int getMainColour()
@@ -237,6 +257,14 @@ public class LogDetailItem extends View
     }
 
     public void setFontSize(float fontSize)
+    {
+        originalFontSize = fontSize;
+        forceFontSize(fontSize);
+        desiredHeight = Math.round(textHeight + linePaint.getStrokeWidth()) + getPaddingTop() + getPaddingBottom() +
+                (internalVerticalPadding * 2);
+    }
+
+    private void forceFontSize(float fontSize)
     {
         mainPaint.setTextSize(fontSize);
         percentagePaint.setTextSize(fontSize);
