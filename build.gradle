@@ -15,7 +15,7 @@ buildscript {
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
             classpath 'com.google.gms:google-services:4.2.0'
             classpath 'io.fabric.tools:gradle:1.28.1'
-            classpath 'com.google.firebase:firebase-plugins:1.1.5'
+            classpath 'com.google.firebase:firebase-plugins:1.2.0'
         }
 
         // NOTE: Do not place your application dependencies here; they belong
