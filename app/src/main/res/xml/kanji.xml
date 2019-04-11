@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2018 T Duke Perry
+  ~    Copyright 2019 T Duke Perry
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 <QuestionFileSet xmlns="https://www.noprestige.com"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <QuestionFile resId="@xml/kanji_1" title="@string/kanji_phase_1"/>
-    <QuestionFile resId="@xml/kanji_2" title="@string/kanji_phase_2"/>
-    <QuestionFile resId="@xml/kanji_3" title="@string/kanji_phase_3"/>
+    <QuestionFile resId="@xml/kanji_1" title="Phase One"/>
+    <QuestionFile resId="@xml/kanji_2" title="Phase Two"/>
+    <QuestionFile resId="@xml/kanji_3" title="Phase Three"/>
 </QuestionFileSet>

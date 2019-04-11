@@ -164,9 +164,6 @@
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
-    <string name="kanji_phase_1">Phase One</string>
-    <string name="kanji_phase_2">Phase Two</string>
-    <string name="kanji_phase_3">Phase Three</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>
@@ -241,51 +238,6 @@
     <string name="extended_katakana_set_2_title">%2$s (MEXT expanded list for accurate transliteration)</string>
     <string name="extended_katakana_set_3_title">%2$s (ANSI/BSI suggestions)</string>
     <string name="extended_katakana_set_4_title">%2$s (Sourced from the 1974 Hyōjun-shiki format)</string>
-
-    <string name="ljts_kanji_set_1_title">Wu Xing Elements</string>
-    <string name="ljts_kanji_set_2_title">Day &amp; Night</string>
-    <string name="ljts_kanji_set_3_title">Numbers 1–5</string>
-    <string name="ljts_kanji_set_4_title">Numbers 6–10</string>
-    <string name="ljts_kanji_set_5_title">Think about direction</string>
-    <string name="ljts_kanji_set_6_title">Numbers &amp; Writing</string>
-    <string name="ljts_kanji_set_7_title">Existence</string>
-    <string name="ljts_kanji_set_8_title">School</string>
-    <string name="ljts_kanji_set_9_title">Environment</string>
-    <string name="ljts_kanji_set_10_title">Jewelery &amp; Size</string>
-    <string name="ljts_kanji_set_11_title">People</string>
-    <string name="ljts_kanji_set_12_title">Body Parts</string>
-    <string name="ljts_kanji_set_13_title">Nature</string>
-    <string name="ljts_kanji_set_14_title">Towns, a Few Colours, &amp; Another One</string>
-    <string name="ljts_kanji_bonus_set_1_2_title">Cars, Insects, Thread, &amp; Shellfish</string>
-    <string name="ljts_kanji_bonus_set_3_4_title">Bamboo, Sound, Mix &amp; Measure</string>
-
-    <string name="ljts_kanji_set_15_title">Communication</string>
-    <string name="ljts_kanji_set_16_title">Seasons &amp; Weather</string>
-    <string name="ljts_kanji_set_17_title">Rural Life</string>
-    <string name="ljts_kanji_set_18_title">The Body</string>
-    <string name="ljts_kanji_set_19_title">Food &amp; Drink</string>
-    <string name="ljts_kanji_set_20_title">Knowledge</string>
-    <string name="ljts_kanji_set_21_title">Animals &amp; Water</string>
-    <string name="ljts_kanji_set_22_title">Cities &amp; Locations</string>
-    <string name="ljts_kanji_set_23_title">Time After Time</string>
-    <string name="ljts_kanji_set_24_title">Time of Day</string>
-    <string name="ljts_kanji_set_25_title">Family</string>
-    <string name="ljts_kanji_set_26_title">Shape &amp; Size</string>
-    <string name="ljts_kanji_bonus_set_5_6_title">Honesty, Logic, Calculate, Cut, Active, &amp; Shop</string>
-    <string name="ljts_kanji_bonus_set_7_8_title">Buy, Sell, Section, Cliff &amp; Star</string>
-
-    <string name="ljts_kanji_set_27_title">Weapons &amp; Warriors</string>
-    <string name="ljts_kanji_set_28_title">House &amp; Home</string>
-    <string name="ljts_kanji_set_29_title">Colours, Roads, &amp; Buildings</string>
-    <string name="ljts_kanji_set_30_title">Movement</string>
-    <string name="ljts_kanji_set_31_title">Age, Questions &amp; Music</string>
-    <string name="ljts_kanji_set_32_title">Lines &amp; People</string>
-    <string name="ljts_kanji_set_33_title">Pen to Paper</string>
-    <string name="ljts_kanji_set_34_title">Numbers &amp; Counting</string>
-    <string name="ljts_kanji_set_35_title">Think About Direction 2</string>
-    <string name="ljts_kanji_set_36_title">Power</string>
-    <string name="ljts_kanji_bonus_set_9_10_title">Think Clearly &amp; Consider Barking</string>
-    <string name="ljts_kanji_bonus_set_11_12_title">Steam, Group, Boat, Join &amp; The Government</string>
 
     <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
     <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
