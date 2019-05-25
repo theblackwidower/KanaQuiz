@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.noprestige.kanaquiz.questions;
 
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.util.AttributeSet;
 
 import com.noprestige.kanaquiz.R;
 
@@ -104,7 +105,7 @@ final class XmlParser
         }
     }
 
-    private static void parseXmlQuestionSet(XmlResourceParser parser, Resources resources,
+    private static void parseXmlQuestionSet(XmlPullParser parser, Resources resources,
             Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
             List<String> setTitleList, List<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
@@ -169,7 +170,7 @@ final class XmlParser
                 currentSet.toArray(new Question[0]));
     }
 
-    private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
+    private static void parseXmlKanaSubsection(XmlPullParser parser, Resources resources,
             Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
             throws XmlPullParserException, IOException, ParseException
     {
@@ -210,7 +211,7 @@ final class XmlParser
                 currentSet.toArray(new Question[0]));
     }
 
-    private static KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
+    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = null;
@@ -239,8 +240,7 @@ final class XmlParser
         return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
     }
 
-    private static KanjiQuestion parseXmlKanjiQuestion(XmlResourceParser parser, Resources resources)
-            throws ParseException
+    private static KanjiQuestion parseXmlKanjiQuestion(XmlPullParser parser, Resources resources) throws ParseException
     {
         String thisQuestion = null;
         String thisMeaning = null;
@@ -263,7 +263,7 @@ final class XmlParser
         return new KanjiQuestion(thisQuestion, thisMeaning);
     }
 
-    private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
+    private static WordQuestion parseXmlWordQuestion(XmlPullParser parser, Resources resources)
             throws ParseException, IOException, XmlPullParserException
     {
         String thisRomaji = null;
@@ -373,15 +373,17 @@ final class XmlParser
         return systemList;
     }
 
-    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
+    private static String parseXmlValue(XmlPullParser parser, int index, Resources resources)
     {
         return parseXmlValue(parser, index, resources, 0, 0);
     }
 
-    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource1,
+    private static String parseXmlValue(XmlPullParser parser, int index, Resources resources, int stringResource1,
             int stringResource2)
     {
-        int refId = parser.getAttributeResourceValue(index, 0);
+        int refId = 0;
+        if (parser instanceof AttributeSet)
+            refId = ((AttributeSet) parser).getAttributeResourceValue(index, 0);
 
         if (refId == 0)
             return parser.getAttributeValue(index);
