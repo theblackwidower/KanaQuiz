@@ -21,6 +21,8 @@ import android.content.Context;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.Map;
+
 public class KanjiQuestion extends Question
 {
     public static final String MEANING_DELIMITER = "/";
@@ -67,6 +69,12 @@ public class KanjiQuestion extends Question
     String getDatabaseKey()
     {
         return kanji;
+    }
+
+    @Override
+    public Map<String, String> getReferenceDetails()
+    {
+        return null;
     }
 
     @Override

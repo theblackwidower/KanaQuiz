@@ -19,10 +19,14 @@ package com.noprestige.kanaquiz.reference;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
+
+import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -30,12 +34,19 @@ import androidx.fragment.app.DialogFragment;
 public class ReferenceDetail extends DialogFragment
 {
     private static final String ARG_SUBJECT = "subject";
+    private static final String ARG_LABELS = "labels";
+    private static final String ARG_DETAILS = "details";
 
     public static ReferenceDetail newInstance(Question question)
     {
         Bundle args = new Bundle();
         ReferenceDetail dialog = new ReferenceDetail();
         args.putString(ARG_SUBJECT, question.getQuestionText());
+
+        Map<String, String> details = question.getReferenceDetails();
+        args.putStringArray(ARG_LABELS, details.keySet().toArray(new String[0]));
+        args.putStringArray(ARG_DETAILS, details.values().toArray(new String[0]));
+
         dialog.setArguments(args);
         return dialog;
     }
@@ -46,7 +57,26 @@ public class ReferenceDetail extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View content = requireActivity().getLayoutInflater().inflate(R.layout.reference_detail_dialog, null);
         ((TextView) (content.findViewById(R.id.lblSubject))).setText(getArguments().getString(ARG_SUBJECT));
+
+        TableLayout detailTable = content.findViewById(R.id.tblReferenceDetail);
+
+        String[] labels = getArguments().getStringArray(ARG_LABELS);
+        String[] details = getArguments().getStringArray(ARG_DETAILS);
+
+        int length = Math.min(labels.length, details.length);
+        for (int i = 0; i < length; i++)
+            detailTable.addView(makeDetailRow(labels[i], details[i]));
+
         builder.setView(content);
         return builder.create();
+    }
+
+    private TableRow makeDetailRow(String label, String text)
+    {
+        TableRow row = (TableRow) requireActivity().getLayoutInflater().inflate(R.layout.reference_detail_row, null);
+        ((TextView) (row.findViewById(R.id.lblItemLabel))).setText(label);
+        ((TextView) (row.findViewById(R.id.lblItemLabel))).append(":");
+        ((TextView) (row.findViewById(R.id.lblItemText))).setText(text);
+        return row;
     }
 }

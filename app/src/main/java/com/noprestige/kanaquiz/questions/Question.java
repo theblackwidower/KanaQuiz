@@ -20,6 +20,8 @@ import android.content.Context;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.Map;
+
 public abstract class Question
 {
     public abstract String getQuestionText();
@@ -29,6 +31,8 @@ public abstract class Question
     abstract String fetchCorrectAnswer();
 
     abstract String getDatabaseKey();
+
+    public abstract Map<String, String> getReferenceDetails();
 
     public ReferenceCell generateReference(Context context)
     {

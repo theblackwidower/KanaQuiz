@@ -22,6 +22,7 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class KanaQuestion extends Question
@@ -97,6 +98,40 @@ public class KanaQuestion extends Question
     String getDatabaseKey()
     {
         return kana;
+    }
+
+    @Override
+    public Map<String, String> getReferenceDetails()
+    {
+        Map<String, String> details = new HashMap<>();
+
+        StringBuffer romaji = new StringBuffer(defaultRomaji);
+        if (altRomaji != null)
+            //ref: https://stackoverflow.com/a/46908/3582371
+            for (Map.Entry<RomanizationSystem, String> entry : altRomaji.entrySet())
+            {
+                romaji.append(System.getProperty("line.separator"));
+                romaji.append(entry.getValue());
+                romaji.append(" (");
+                switch (entry.getKey())
+                {
+                    case HEPBURN:
+                        romaji.append("Hepburn");
+                        break;
+                    case NIHON:
+                        romaji.append("Nihon-shiki");
+                        break;
+                    case KUNREI:
+                        romaji.append("Kunrei-shiki");
+                        break;
+                    case UNKNOWN:
+                        romaji.append("Unknown");
+                        break;
+                }
+                romaji.append(")");
+            }
+        details.put("Romaji", romaji.toString());
+        return details;
     }
 
     @Override

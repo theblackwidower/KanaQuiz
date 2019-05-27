@@ -22,6 +22,8 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.Map;
+
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class WordQuestion extends Question
@@ -104,6 +106,12 @@ public class WordQuestion extends Question
     String getDatabaseKey()
     {
         return romaji;
+    }
+
+    @Override
+    public Map<String, String> getReferenceDetails()
+    {
+        return null;
     }
 
     @Override
