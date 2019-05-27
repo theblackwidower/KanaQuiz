@@ -70,7 +70,24 @@ public class KanaQuestion extends Question
         HEPBURN,
         NIHON,
         KUNREI,
-        UNKNOWN
+        UNKNOWN;
+
+        public String toString()
+        {
+            switch (this)
+            {
+                case HEPBURN:
+                    return "Hepburn";
+                case NIHON:
+                    return "Nihon-shiki";
+                case KUNREI:
+                    return "Kunrei-shiki";
+                case UNKNOWN:
+                    return "Unknown";
+                default:
+                    return null;
+            }
+        }
     }
 
     String fetchRomaji()
@@ -113,21 +130,7 @@ public class KanaQuestion extends Question
                 romaji.append(System.getProperty("line.separator"));
                 romaji.append(entry.getValue());
                 romaji.append(" (");
-                switch (entry.getKey())
-                {
-                    case HEPBURN:
-                        romaji.append("Hepburn");
-                        break;
-                    case NIHON:
-                        romaji.append("Nihon-shiki");
-                        break;
-                    case KUNREI:
-                        romaji.append("Kunrei-shiki");
-                        break;
-                    case UNKNOWN:
-                        romaji.append("Unknown");
-                        break;
-                }
+                romaji.append(entry.getKey());
                 romaji.append(")");
             }
         details.put("Romaji", romaji.toString());
