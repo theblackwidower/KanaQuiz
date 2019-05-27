@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public abstract class Question
 {
-    abstract String getQuestionText();
+    public abstract String getQuestionText();
 
     abstract boolean checkAnswer(String response);
 
@@ -35,6 +35,7 @@ public abstract class Question
         ReferenceCell cell = new ReferenceCell(context);
         cell.setSubject(getQuestionText());
         cell.setDescription(fetchCorrectAnswer());
+        cell.storeQuestionData(this);
         return cell;
     }
 

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -106,6 +106,24 @@ public class ReferenceCell extends View
 
         subjectPaint.setTypeface(font);
         descriptionPaint.setTypeface(font);
+    }
+
+    public void storeQuestionData(Question question)
+    {
+        setOnClickListener(view -> detailView(question));
+    }
+
+    private boolean detailView(Question question)
+    {
+        Context context = getContext();
+        if (context instanceof ReferenceScreen)
+        {
+            ReferenceDetail.newInstance(question)
+                    .show(((ReferenceScreen) context).getSupportFragmentManager(), "detailView");
+            return true;
+        }
+        else
+            return false;
     }
 
     private boolean copyItem()

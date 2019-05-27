@@ -39,7 +39,7 @@ public class KanjiQuestion extends Question
     }
 
     @Override
-    String getQuestionText()
+    public String getQuestionText()
     {
         return kanji;
     }
