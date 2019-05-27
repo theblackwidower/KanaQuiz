@@ -244,6 +244,8 @@ final class XmlParser
     {
         String thisQuestion = null;
         String thisMeaning = null;
+        String thisKunYomi = null;
+        String thisOnYomi = null;
 
         for (int i = 0; i < parser.getAttributeCount(); i++)
         {
@@ -254,13 +256,19 @@ final class XmlParser
                     break;
                 case "meaning":
                     thisMeaning = parseXmlValue(parser, i, resources);
+                    break;
+                case "kunYomi":
+                    thisKunYomi = parseXmlValue(parser, i, resources);
+                    break;
+                case "onYomi":
+                    thisOnYomi = parseXmlValue(parser, i, resources);
             }
         }
 
-        if ((thisQuestion == null) || (thisMeaning == null))
+        if ((thisQuestion == null) || (thisMeaning == null) || ((thisKunYomi == null) && (thisOnYomi == null)))
             throw new ParseException("Missing attribute in KanjiQuestion", parser.getLineNumber());
 
-        return new KanjiQuestion(thisQuestion, thisMeaning);
+        return new KanjiQuestion(thisQuestion, thisMeaning, thisKunYomi, thisOnYomi);
     }
 
     private static WordQuestion parseXmlWordQuestion(XmlPullParser parser, Resources resources)

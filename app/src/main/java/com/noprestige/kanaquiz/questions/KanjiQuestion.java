@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,11 +27,15 @@ public class KanjiQuestion extends Question
 
     private final String kanji;
     private final String meaning;
+    private final String kunYomi;
+    private final String onYomi;
 
-    KanjiQuestion(String kanji, String meaning)
+    KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi)
     {
         this.kanji = kanji;
         this.meaning = meaning;
+        this.kunYomi = kunYomi;
+        this.onYomi = onYomi;
     }
 
     @Override
