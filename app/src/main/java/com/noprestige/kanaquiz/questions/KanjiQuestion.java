@@ -23,6 +23,8 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 import java.util.Map;
 
+import androidx.collection.ArrayMap;
+
 public class KanjiQuestion extends Question
 {
     public static final String MEANING_DELIMITER = "/";
@@ -74,7 +76,16 @@ public class KanjiQuestion extends Question
     @Override
     public Map<String, String> getReferenceDetails()
     {
-        return null;
+        Map<String, String> details = new ArrayMap<>();
+
+        if (meaning != null)
+            details.put("Meaning", meaning);
+        if (kunYomi != null)
+            details.put("Kun'yomi", kunYomi);
+        if (onYomi != null)
+            details.put("On'yomi", onYomi);
+
+        return details;
     }
 
     @Override
