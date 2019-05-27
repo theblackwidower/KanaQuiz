@@ -24,6 +24,7 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class KanaQuestion extends Question
 {
@@ -124,15 +125,28 @@ public class KanaQuestion extends Question
 
         StringBuffer romaji = new StringBuffer(defaultRomaji);
         if (altRomaji != null)
+        {
+            Map<String, String> altDetails = new TreeMap<>();
             //ref: https://stackoverflow.com/a/46908/3582371
             for (Map.Entry<RomanizationSystem, String> entry : altRomaji.entrySet())
+                if (!altDetails.containsKey(entry.getValue()))
+                    altDetails.put(entry.getValue(), entry.getKey().toString());
+                else
+                {
+                    String list = altDetails.remove(entry.getValue());
+                    list += ", ";
+                    list += entry.getKey().toString();
+                    altDetails.put(entry.getValue(), list);
+                }
+            for (Map.Entry<String, String> entry : altDetails.entrySet())
             {
                 romaji.append(System.getProperty("line.separator"));
-                romaji.append(entry.getValue());
-                romaji.append(" (");
                 romaji.append(entry.getKey());
+                romaji.append(" (");
+                romaji.append(entry.getValue());
                 romaji.append(")");
             }
+        }
         details.put("Romaji", romaji.toString());
         return details;
     }
