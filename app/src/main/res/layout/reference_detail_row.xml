@@ -27,5 +27,6 @@
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/lblItemText"/>
+        android:id="@+id/lblItemText"
+        android:layout_weight="1"/>
 </TableRow>
