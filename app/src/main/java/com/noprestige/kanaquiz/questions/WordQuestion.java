@@ -23,6 +23,7 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
@@ -111,7 +112,33 @@ public class WordQuestion extends Question
     @Override
     public Map<String, String> getReferenceDetails()
     {
-        return null;
+        String currentText = getQuestionText();
+
+        Map<String, String> details = new TreeMap<>();
+        if ((romaji != null) && !romaji.equals(currentText))
+            details.put("Romaji", romaji);
+        if ((kana != null) && !kana.equals(currentText))
+            details.put("Kana", kana);
+        if ((kanji != null) && !kanji.equals(currentText))
+            details.put("Kanji", kanji);
+
+        StringBuffer answer = new StringBuffer(this.answer);
+        if (altAnswers != null)
+        {
+            answer.append(System.getProperty("line.separator"));
+            answer.append("(");
+            for (String thisSynonym : altAnswers)
+            {
+                answer.append(thisSynonym);
+                answer.append(", ");
+            }
+            if (answer.length() > 2)
+                answer.delete(answer.length() - 2, answer.length());
+            answer.append(")");
+        }
+        details.put("Translation", answer.toString());
+
+        return details;
     }
 
     @Override
