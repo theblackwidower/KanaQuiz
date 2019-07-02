@@ -13,7 +13,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.4.1'
         if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release') ||
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
-            classpath 'com.google.gms:google-services:4.2.0'
+            classpath 'com.google.gms:google-services:4.3.0'
             classpath 'io.fabric.tools:gradle:1.29.0'
             classpath 'com.google.firebase:firebase-plugins:2.0.0'
         }
