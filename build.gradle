@@ -10,11 +10,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release') ||
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
             classpath 'com.google.gms:google-services:4.3.0'
-            classpath 'io.fabric.tools:gradle:1.29.0'
+            classpath 'io.fabric.tools:gradle:1.31.0'
             classpath 'com.google.firebase:firebase-plugins:2.0.0'
         }
 
@@ -26,7 +26,7 @@ buildscript {
 plugins {
     id 'com.vanniktech.android.junit.jacoco' version '0.15.0'
     id 'com.github.kt3k.coveralls' version '2.8.4'
-    id 'com.github.ben-manes.versions' version '0.21.0'
+    id 'com.github.ben-manes.versions' version '0.22.0'
 }
 
 allprojects {
