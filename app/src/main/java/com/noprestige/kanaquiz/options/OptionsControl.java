@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import org.threeten.bp.LocalDate;
+
+import java.util.Set;
 
 import androidx.preference.PreferenceManager;
 
@@ -111,6 +113,27 @@ public final class OptionsControl
     public static void setString(String prefId, String setting)
     {
         editor.putString(prefId, setting);
+        editor.apply();
+    }
+
+    public static Set<String> getStringSet(int resId)
+    {
+        return getStringSet(resources.getString(resId));
+    }
+
+    public static Set<String> getStringSet(String prefId)
+    {
+        return sharedPreferences.getStringSet(prefId, null);
+    }
+
+    public static void setStringSet(int resId, Set<String> setting)
+    {
+        setStringSet(resources.getString(resId), setting);
+    }
+
+    public static void setStringSet(String prefId, Set<String> setting)
+    {
+        editor.putStringSet(prefId, setting);
         editor.apply();
     }
 
