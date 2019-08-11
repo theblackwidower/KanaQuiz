@@ -41,4 +41,10 @@ public class KunYomiQuestion extends KanjiQuestion
     {
         return kunYomi;
     }
+
+    @Override
+    String getDatabaseKey()
+    {
+        return kanji + "k";
+    }
 }
