@@ -162,8 +162,10 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
-            if (!isFontInitialized)
+        // These two 'if' statements need to be structured like this to deal with a false positive caused by the
+        // 'NewApi' lint inspection.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && !isFontInitialized)
             {
                 int code = FontProviderClient.checkAvailability(activity);
                 if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
