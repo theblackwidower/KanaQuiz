@@ -34,6 +34,10 @@
     <string name="request_kana_multiple_choice">Select the Romaji equivalent</string>
     <string name="request_vocab_text_input">Enter the English translation</string>
     <string name="request_vocab_multiple_choice">Select the English translation</string>
+    <string name="request_kunyomi_text_input">Enter the appropriate Kun\'Yomi</string>
+    <string name="request_kunyomi_multiple_choice">Select the appropriate Kun\'Yomi</string>
+    <string name="request_onyomi_text_input">Enter the appropriate On\'Yomi</string>
+    <string name="request_onyomi_multiple_choice">Select the appropriate On\'Yomi</string>
     <string name="try_again">Try again</string>
     <string name="show_correct_answer">The correct answer is</string>
 

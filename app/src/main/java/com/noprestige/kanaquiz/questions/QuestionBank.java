@@ -51,16 +51,27 @@ public class QuestionBank extends WeightedList<Question>
     private int maxWordAnswerWeight = -1;
     private int maxYomiAnswerWeight = -1;
 
-    public boolean isCurrentQuestionVocab()
+    public enum QuestionType
     {
-        return (currentQuestion.getClass().equals(WordQuestion.class) ||
-                currentQuestion.getClass().equals(KanjiQuestion.class));
+        KANA,
+        VOCAB,
+        KUN_YOMI,
+        ON_YOMI
     }
 
-    public boolean isCurrentQuestionKanjiSound()
+    public QuestionType getCurrentQuestionType()
     {
-        return (currentQuestion.getClass().equals(KunYomiQuestion.class) ||
-                currentQuestion.getClass().equals(OnYomiQuestion.class));
+        if (currentQuestion.getClass().equals(KanaQuestion.class))
+            return QuestionType.KANA;
+        else if (currentQuestion.getClass().equals(WordQuestion.class) ||
+                currentQuestion.getClass().equals(KanjiQuestion.class))
+            return QuestionType.VOCAB;
+        else if (currentQuestion.getClass().equals(KunYomiQuestion.class))
+            return QuestionType.KUN_YOMI;
+        else if (currentQuestion.getClass().equals(OnYomiQuestion.class))
+            return QuestionType.ON_YOMI;
+        else
+            return null;
     }
 
     public void newQuestion()
@@ -263,11 +274,12 @@ public class QuestionBank extends WeightedList<Question>
     {
         if (currentPossibleAnswers == null)
         {
-            if (isCurrentQuestionVocab())
+            QuestionType type = getCurrentQuestionType();
+            if (type == QuestionType.VOCAB)
                 currentPossibleAnswers = getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
-            else if (isCurrentQuestionKanjiSound())
+            else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
                 currentPossibleAnswers = getPossibleYomiAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
-            else
+            else if (type == QuestionType.KANA)
                 currentPossibleAnswers = getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
         }
         return currentPossibleAnswers;

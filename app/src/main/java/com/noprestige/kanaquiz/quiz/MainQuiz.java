@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
+import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 import com.noprestige.kanaquiz.themes.ThemeManager;
@@ -267,16 +268,28 @@ public class MainQuiz extends AppCompatActivity
 
     private void readyForAnswer()
     {
+        QuestionBank.QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
+
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
+        {
+            if (type == QuestionBank.QuestionType.VOCAB)
                 lblResponse.setText(R.string.request_vocab_multiple_choice);
-            else
+            else if (type == QuestionBank.QuestionType.KUN_YOMI)
+                lblResponse.setText(R.string.request_kunyomi_multiple_choice);
+            else if (type == QuestionBank.QuestionType.ON_YOMI)
+                lblResponse.setText(R.string.request_onyomi_multiple_choice);
+            else if (type == QuestionBank.QuestionType.KANA)
                 lblResponse.setText(R.string.request_kana_multiple_choice);
+        }
         else
         {
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
+            if (type == QuestionBank.QuestionType.VOCAB)
                 lblResponse.setText(R.string.request_vocab_text_input);
-            else
+            else if (type == QuestionBank.QuestionType.KUN_YOMI)
+                lblResponse.setText(R.string.request_kunyomi_text_input);
+            else if (type == QuestionBank.QuestionType.ON_YOMI)
+                lblResponse.setText(R.string.request_onyomi_text_input);
+            else if (type == QuestionBank.QuestionType.KANA)
                 lblResponse.setText(R.string.request_kana_text_input);
 
             frmAnswer.readyForTextAnswer();
