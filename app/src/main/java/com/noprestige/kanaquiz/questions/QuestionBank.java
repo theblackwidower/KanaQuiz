@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -285,7 +285,7 @@ public class QuestionBank extends WeightedList<Question>
                     {
                         //fetch all data
                         int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
-                        if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.getDatabaseKey()))
+                        if (getSpecialList((KanaQuestion) currentQuestion).contains(answer))
                             count += 2;
                         answerCounts.put(answer, count);
                     }
