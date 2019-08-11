@@ -43,7 +43,8 @@
         android:title="@string/kanji_question_type_option_title"
         android:summary="@string/kanji_question_type_option_summary"
         android:entries="@array/kanji_question_type_option_item_names"
-        android:entryValues="@array/prefids_kanji_question_type"/>
+        android:entryValues="@array/prefids_kanji_question_type"
+        android:defaultValue="@array/kanji_question_type_default"/>
     <ListPreference
         android:key="@string/prefid_vocab_display"
         android:title="@string/vocab_display_option_title"

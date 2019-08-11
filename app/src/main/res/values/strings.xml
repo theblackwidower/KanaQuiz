@@ -166,6 +166,10 @@
         <item>@string/prefid_kanji_question_type_onyomi</item>
     </string-array>
 
+    <string-array name="kanji_question_type_default">
+        <item>@string/prefid_kanji_question_type_meaning</item>
+    </string-array>
+
     <string name="repetition_option_title">Repetition control</string>
     <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
     <string name="prefid_repetition" translatable="false">repeat_control</string>
