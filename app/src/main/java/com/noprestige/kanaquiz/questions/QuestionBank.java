@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -42,17 +42,25 @@ public class QuestionBank extends WeightedList<Question>
     private String[] currentPossibleAnswers;
 
     private Set<String> wordAnswerList = new TreeSet<>();
+    private Set<String> yomiAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions;
     private int maxKanaAnswerWeight = -1;
     private int maxWordAnswerWeight = -1;
+    private int maxYomiAnswerWeight = -1;
 
     public boolean isCurrentQuestionVocab()
     {
         return (currentQuestion.getClass().equals(WordQuestion.class) ||
                 currentQuestion.getClass().equals(KanjiQuestion.class));
+    }
+
+    public boolean isCurrentQuestionKanjiSound()
+    {
+        return (currentQuestion.getClass().equals(KunYomiQuestion.class) ||
+                currentQuestion.getClass().equals(OnYomiQuestion.class));
     }
 
     public void newQuestion()
@@ -137,6 +145,7 @@ public class QuestionBank extends WeightedList<Question>
         previousQuestions = null;
         maxKanaAnswerWeight = -1;
         maxWordAnswerWeight = -1;
+        maxYomiAnswerWeight = -1;
         if (questions != null)
         {
             boolean returnValue = true;
@@ -157,6 +166,9 @@ public class QuestionBank extends WeightedList<Question>
                 returnValue = add(weight, question) && returnValue;
                 if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                     returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+                else if (question.getClass().equals(KunYomiQuestion.class) ||
+                        question.getClass().equals(OnYomiQuestion.class))
+                    returnValue = yomiAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
                 else if (question.getClass().equals(KanaQuestion.class))
                 {
                     returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
@@ -188,12 +200,14 @@ public class QuestionBank extends WeightedList<Question>
         previousQuestions = null;
         maxKanaAnswerWeight = -1;
         maxWordAnswerWeight = -1;
+        maxYomiAnswerWeight = -1;
         fullKanaAnswerList.addAll(questions.fullKanaAnswerList);
         basicAnswerList.addAll(questions.basicAnswerList);
         diacriticAnswerList.addAll(questions.diacriticAnswerList);
         digraphAnswerList.addAll(questions.digraphAnswerList);
         diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
         wordAnswerList.addAll(questions.wordAnswerList);
+        yomiAnswerList.addAll(questions.yomiAnswerList);
         return merge(questions);
     }
 
@@ -211,6 +225,13 @@ public class QuestionBank extends WeightedList<Question>
         return maxWordAnswerWeight;
     }
 
+    private int getMaxYomiAnswerWeight()
+    {
+        if (maxYomiAnswerWeight < 0)
+            maxYomiAnswerWeight = getMaxAnswerWeight(yomiAnswerList);
+        return maxYomiAnswerWeight;
+    }
+
     private int getMaxAnswerWeight(Set<String> list)
     {
         // Max value is to prevent integer overflow in the weighted answer list. Number is chosen so if every
@@ -223,8 +244,14 @@ public class QuestionBank extends WeightedList<Question>
     public String[] getPossibleAnswers()
     {
         if (currentPossibleAnswers == null)
-            currentPossibleAnswers = (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
-                    getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        {
+            if (isCurrentQuestionVocab())
+                currentPossibleAnswers = getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+            else if (isCurrentQuestionKanjiSound())
+                currentPossibleAnswers = getPossibleYomiAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+            else
+                currentPossibleAnswers = getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        }
         return currentPossibleAnswers;
     }
 
@@ -263,6 +290,45 @@ public class QuestionBank extends WeightedList<Question>
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
 
             Arrays.sort(possibleAnswerStrings);
+
+            return possibleAnswerStrings;
+        }
+    }
+
+    public String[] getPossibleYomiAnswers(int maxChoices)
+    {
+        if (yomiAnswerList.size() <= maxChoices)
+            return yomiAnswerList.toArray(new String[0]);
+        else
+        {
+            if (weightedAnswerListCache == null)
+                weightedAnswerListCache = new TreeMap<>();
+            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+            {
+                Map<String, Integer> answerCounts = new TreeMap<>();
+                for (String answer : yomiAnswerList)
+                {
+                    if (!answer.equals(fetchCorrectAnswer()))
+                    {
+                        //fetch all data
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        answerCounts.put(answer, count);
+                    }
+                }
+
+                WeightedList<String> weightedAnswerList =
+                        generateWeightedAnswerList(answerCounts, getMaxYomiAnswerWeight());
+
+                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+            }
+
+            String[] possibleAnswerStrings =
+                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+
+            possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
+            possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
+
+            GojuonOrder.sort(possibleAnswerStrings);
 
             return possibleAnswerStrings;
         }
