@@ -146,7 +146,7 @@
 
     <string name="kanji_question_type_option_title">Available Kanji Questions</string>
     <string name="kanji_question_type_option_summary">What kind of kanji questions are available</string>
-    <string name="kanji_question_type_option_meaning" translatable="false">Meaning</string>
+    <string name="kanji_question_type_option_meaning">Meaning</string>
     <string name="kanji_question_type_option_kunyomi" translatable="false">Kun\'Yomi</string>
     <string name="kanji_question_type_option_onyomi" translatable="false">On\'Yomi</string>
 
