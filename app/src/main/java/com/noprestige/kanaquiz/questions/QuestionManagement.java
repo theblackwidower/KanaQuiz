@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class QuestionManagement
@@ -225,7 +226,7 @@ public class QuestionManagement
 
     private static boolean[] getCurrentPrefRecord()
     {
-        int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 2;
+        int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 5;
         for (QuestionManagement kanjiFile : KANJI_FILES)
             prefCount += kanjiFile.getCategoryCount();
         boolean[] currentPrefRecord = new boolean[prefCount];
@@ -233,7 +234,13 @@ public class QuestionManagement
         currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
         currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        int i = 2;
+        Set<String> kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
+
+        currentPrefRecord[2] = kanjiQuestionTypePref.contains("meaning");
+        currentPrefRecord[3] = kanjiQuestionTypePref.contains("kunyomi");
+        currentPrefRecord[4] = kanjiQuestionTypePref.contains("onyomi");
+
+        int i = 5;
         for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
         {
             currentPrefRecord[i] = HIRAGANA.getPref(j);
