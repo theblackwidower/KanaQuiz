@@ -35,7 +35,8 @@ android {
         debug {
             testCoverageEnabled true
             applicationIdSuffix '.dev'
-            versionNameSuffix ' (dev)'
+            //ref: https://stackoverflow.com/q/19172565
+            versionNameSuffix '-dev-' + new Date().format('yyyyMMddHHmm')
             debuggable true
         }
         pure {
