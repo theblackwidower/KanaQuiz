@@ -35,8 +35,9 @@ android {
         debug {
             testCoverageEnabled true
             applicationIdSuffix '.dev'
+            def gitBranchName = 'git rev-parse --abbrev-ref HEAD'.execute([], project.rootDir).text.trim().replace('-', '_')
             //ref: https://stackoverflow.com/q/19172565
-            versionNameSuffix '-dev-' + new Date().format('yyyyMMddHHmm')
+            versionNameSuffix '-' + gitBranchName + '-' + new Date().format('yyyyMMddHHmm')
             debuggable true
         }
         pure {
