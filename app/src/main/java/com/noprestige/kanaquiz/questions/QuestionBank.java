@@ -54,7 +54,8 @@ public class QuestionBank extends WeightedList<Question>
     public enum QuestionType
     {
         KANA,
-        VOCAB,
+        VOCABULARY,
+        KANJI,
         KUN_YOMI,
         ON_YOMI
     }
@@ -63,9 +64,10 @@ public class QuestionBank extends WeightedList<Question>
     {
         if (currentQuestion.getClass().equals(KanaQuestion.class))
             return QuestionType.KANA;
-        else if (currentQuestion.getClass().equals(WordQuestion.class) ||
-                currentQuestion.getClass().equals(KanjiQuestion.class))
-            return QuestionType.VOCAB;
+        else if (currentQuestion.getClass().equals(WordQuestion.class))
+            return QuestionType.VOCABULARY;
+        else if (currentQuestion.getClass().equals(KanjiQuestion.class))
+            return QuestionType.KANJI;
         else if (currentQuestion.getClass().equals(KunYomiQuestion.class))
             return QuestionType.KUN_YOMI;
         else if (currentQuestion.getClass().equals(OnYomiQuestion.class))
@@ -275,7 +277,7 @@ public class QuestionBank extends WeightedList<Question>
         if (currentPossibleAnswers == null)
         {
             QuestionType type = getCurrentQuestionType();
-            if (type == QuestionType.VOCAB)
+            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
                 currentPossibleAnswers = getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
             else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
                 currentPossibleAnswers = getPossibleYomiAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);

@@ -272,7 +272,7 @@ public class MainQuiz extends AppCompatActivity
 
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
         {
-            if (type == QuestionBank.QuestionType.VOCAB)
+            if ((type == QuestionBank.QuestionType.VOCABULARY) || (type == QuestionBank.QuestionType.KANJI))
                 lblResponse.setText(R.string.request_vocab_multiple_choice);
             else if (type == QuestionBank.QuestionType.KUN_YOMI)
                 lblResponse.setText(R.string.request_kunyomi_multiple_choice);
@@ -283,7 +283,7 @@ public class MainQuiz extends AppCompatActivity
         }
         else
         {
-            if (type == QuestionBank.QuestionType.VOCAB)
+            if ((type == QuestionBank.QuestionType.VOCABULARY) || (type == QuestionBank.QuestionType.KANJI))
                 lblResponse.setText(R.string.request_vocab_text_input);
             else if (type == QuestionBank.QuestionType.KUN_YOMI)
                 lblResponse.setText(R.string.request_kunyomi_text_input);
