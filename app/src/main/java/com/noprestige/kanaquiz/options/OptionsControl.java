@@ -48,7 +48,7 @@ public final class OptionsControl
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             editor = sharedPreferences.edit();
             resources = appContext.getResources();
-            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, false);
+            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, true);
         }
     }
 
