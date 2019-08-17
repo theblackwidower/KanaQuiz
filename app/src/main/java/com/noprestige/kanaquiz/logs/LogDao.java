@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -135,28 +135,28 @@ public abstract class LogDao
     @Query("SELECT * FROM daily_record WHERE date = :date")
     public abstract DailyRecord getDateRecord(LocalDate date);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :question")
+    @Query("SELECT * FROM question_records WHERE question = :question")
     abstract QuestionRecord[] getQuestionRecord(String question);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer")
+    @Query("SELECT * FROM incorrect_answers WHERE question = :question AND incorrect_answer = :answer")
     abstract IncorrectAnswerRecord[] getAnswerRecord(String question, String answer);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :question AND date = :date")
+    @Query("SELECT * FROM question_records WHERE question = :question AND date = :date")
     abstract QuestionRecord getDaysQuestionRecord(String question, LocalDate date);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer AND date = :date")
+    @Query("SELECT * FROM incorrect_answers WHERE question = :question AND incorrect_answer = :answer AND date = :date")
     abstract IncorrectAnswerRecord getDaysAnswerRecord(String question, String answer, LocalDate date);
 
     @Query("SELECT * FROM daily_record")
     abstract DailyRecord[] getAllDailyRecords();
 
-    @Query("SELECT * FROM kana_records")
+    @Query("SELECT * FROM question_records")
     abstract QuestionRecord[] getAllQuestionRecords();
 
-    @Query("SELECT * FROM kana_records WHERE date = :date")
+    @Query("SELECT * FROM question_records WHERE date = :date")
     abstract QuestionRecord[] getDatesQuestionRecords(LocalDate date);
 
-    @Query("SELECT * FROM incorrect_answers ORDER BY kana")
+    @Query("SELECT * FROM incorrect_answers ORDER BY question")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
     public static Float getQuestionPercentage(String question)
@@ -256,7 +256,7 @@ public abstract class LogDao
     @Query("DELETE FROM daily_record WHERE 1 = 1")
     abstract void deleteAllDailyRecords();
 
-    @Query("DELETE FROM kana_records WHERE 1 = 1")
+    @Query("DELETE FROM question_records WHERE 1 = 1")
     abstract void deleteAllQuestionRecords();
 
     @Query("DELETE FROM incorrect_answers WHERE 1 = 1")

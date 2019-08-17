@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -23,16 +23,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-//TODO: Edit field name 'kana' to 'question' and table name from 'kana_records' to 'question_records' on next major,
-// migration-requiring database change
-@Entity(tableName = "kana_records", primaryKeys = {"date", "kana"})
+@Entity(tableName = "question_records", primaryKeys = {"date", "question"})
 public class QuestionRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
     private final LocalDate date;
 
-    @ColumnInfo(name = "kana")
+    @ColumnInfo(name = "question")
     @NonNull
     private final String question;
 
