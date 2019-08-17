@@ -36,8 +36,8 @@ import com.noprestige.kanaquiz.logs.LogView;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
-import com.noprestige.kanaquiz.questions.QuestionBank;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+import com.noprestige.kanaquiz.questions.QuestionType;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
@@ -268,28 +268,28 @@ public class MainQuiz extends AppCompatActivity
 
     private void readyForAnswer()
     {
-        QuestionBank.QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
+        QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
 
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
         {
-            if ((type == QuestionBank.QuestionType.VOCABULARY) || (type == QuestionBank.QuestionType.KANJI))
+            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
                 lblResponse.setText(R.string.request_vocab_multiple_choice);
-            else if (type == QuestionBank.QuestionType.KUN_YOMI)
+            else if (type == QuestionType.KUN_YOMI)
                 lblResponse.setText(R.string.request_kunyomi_multiple_choice);
-            else if (type == QuestionBank.QuestionType.ON_YOMI)
+            else if (type == QuestionType.ON_YOMI)
                 lblResponse.setText(R.string.request_onyomi_multiple_choice);
-            else if (type == QuestionBank.QuestionType.KANA)
+            else if (type == QuestionType.KANA)
                 lblResponse.setText(R.string.request_kana_multiple_choice);
         }
         else
         {
-            if ((type == QuestionBank.QuestionType.VOCABULARY) || (type == QuestionBank.QuestionType.KANJI))
+            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
                 lblResponse.setText(R.string.request_vocab_text_input);
-            else if (type == QuestionBank.QuestionType.KUN_YOMI)
+            else if (type == QuestionType.KUN_YOMI)
                 lblResponse.setText(R.string.request_kunyomi_text_input);
-            else if (type == QuestionBank.QuestionType.ON_YOMI)
+            else if (type == QuestionType.ON_YOMI)
                 lblResponse.setText(R.string.request_onyomi_text_input);
-            else if (type == QuestionBank.QuestionType.KANA)
+            else if (type == QuestionType.KANA)
                 lblResponse.setText(R.string.request_kana_text_input);
 
             frmAnswer.readyForTextAnswer();

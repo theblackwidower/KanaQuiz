@@ -51,29 +51,9 @@ public class QuestionBank extends WeightedList<Question>
     private int maxWordAnswerWeight = -1;
     private int maxYomiAnswerWeight = -1;
 
-    public enum QuestionType
-    {
-        KANA,
-        VOCABULARY,
-        KANJI,
-        KUN_YOMI,
-        ON_YOMI
-    }
-
     public QuestionType getCurrentQuestionType()
     {
-        if (currentQuestion.getClass().equals(KanaQuestion.class))
-            return QuestionType.KANA;
-        else if (currentQuestion.getClass().equals(WordQuestion.class))
-            return QuestionType.VOCABULARY;
-        else if (currentQuestion.getClass().equals(KanjiQuestion.class))
-            return QuestionType.KANJI;
-        else if (currentQuestion.getClass().equals(KunYomiQuestion.class))
-            return QuestionType.KUN_YOMI;
-        else if (currentQuestion.getClass().equals(OnYomiQuestion.class))
-            return QuestionType.ON_YOMI;
-        else
-            return null;
+        return QuestionType.getQuestionType(currentQuestion.getClass());
     }
 
     public void newQuestion()
@@ -199,11 +179,12 @@ public class QuestionBank extends WeightedList<Question>
             weight = 2;
         // if any one of the additions fail, the method returns false
         returnValue = add(weight, question) && returnValue;
-        if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
+        QuestionType type = QuestionType.getQuestionType(question.getClass());
+        if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
             returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-        else if (question.getClass().equals(KunYomiQuestion.class) || question.getClass().equals(OnYomiQuestion.class))
+        else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
             returnValue = yomiAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-        else if (question.getClass().equals(KanaQuestion.class))
+        else if (type == QuestionType.KANA)
         {
             returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
             // Storing answers in specialized answer lists for more specialized answer selection
