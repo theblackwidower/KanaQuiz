@@ -729,18 +729,22 @@ public class LogMigrationTest
 
         for (Object[] data : questionTestData)
         {
+            int type = LogTypeConversion.toCharFromType((QuestionType) data[1]);
+
             Cursor cursor = db.query(
                     "SELECT * FROM question_records WHERE date = ? AND question = ? AND type = ? AND " +
                             "correct_answers = ? AND incorrect_answers = ?",
-                    new Object[]{data[2], data[0], data[1], data[3], data[4]});
+                    new Object[]{data[2], data[0], type, data[3], data[4]});
             assertThat(cursor.getCount(), is(1));
         }
         for (Object[] data : incorrectTestData)
         {
+            int type = LogTypeConversion.toCharFromType((QuestionType) data[1]);
+
             Cursor cursor = db.query(
                     "SELECT * FROM incorrect_answers WHERE date = ? AND question = ? AND type = ? AND " +
                             "incorrect_answer = ? AND occurrences = ?",
-                    new Object[]{data[2], data[0], data[1], data[3], data[4]});
+                    new Object[]{data[2], data[0], type, data[3], data[4]});
             assertThat(cursor.getCount(), is(1));
         }
 

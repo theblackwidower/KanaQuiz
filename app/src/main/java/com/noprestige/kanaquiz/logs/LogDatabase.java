@@ -159,7 +159,7 @@ public abstract class LogDatabase extends RoomDatabase
 
             database.execSQL(
                     "CREATE TABLE IF NOT EXISTS incorrect_answers (date INTEGER NOT NULL, question TEXT NOT NULL, " +
-                            "type INTEGER NOT NULL, incorrect_answer TEXT NOT NULL, occurances INTEGER NOT NULL, " +
+                            "type INTEGER NOT NULL, incorrect_answer TEXT NOT NULL, occurrences INTEGER NOT NULL, " +
                             "PRIMARY KEY(date, question, type, incorrect_answer))");
 
             Cursor incorrectData = database.query("SELECT * FROM old_incorrect_answers");
