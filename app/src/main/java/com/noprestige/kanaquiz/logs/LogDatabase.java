@@ -144,7 +144,7 @@ public abstract class LogDatabase extends RoomDatabase
                     int correctValue = kanaData.getInt(correctIndex);
                     int incorrectValue = kanaData.getInt(incorrectIndex);
 
-                    char typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
+                    int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
 
                     database.execSQL(
                             "INSERT INTO question_records (date, question, type, correct_answers, incorrect_answers) " +
@@ -180,7 +180,7 @@ public abstract class LogDatabase extends RoomDatabase
                     String answerValue = incorrectData.getString(answerIndex);
                     int occurrencesValue = incorrectData.getInt(occurrencesIndex);
 
-                    char typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
+                    int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
 
                     database.execSQL(
                             "INSERT INTO incorrect_answers (date, question, type, incorrect_answer, occurrences) " +
