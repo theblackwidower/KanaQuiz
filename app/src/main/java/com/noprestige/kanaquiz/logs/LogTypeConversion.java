@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2019 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,9 +16,17 @@
 
 package com.noprestige.kanaquiz.logs;
 
+import com.noprestige.kanaquiz.questions.QuestionType;
+
 import org.threeten.bp.LocalDate;
 
 import androidx.room.TypeConverter;
+
+import static com.noprestige.kanaquiz.questions.QuestionType.KANA;
+import static com.noprestige.kanaquiz.questions.QuestionType.KANJI;
+import static com.noprestige.kanaquiz.questions.QuestionType.KUN_YOMI;
+import static com.noprestige.kanaquiz.questions.QuestionType.ON_YOMI;
+import static com.noprestige.kanaquiz.questions.QuestionType.VOCABULARY;
 
 public final class LogTypeConversion
 {
@@ -34,5 +42,45 @@ public final class LogTypeConversion
     public static Integer dateToTimestamp(LocalDate date)
     {
         return (date == null) ? null : ((date.getYear() * 10000) + (date.getMonthValue() * 100) + date.getDayOfMonth());
+    }
+
+    @TypeConverter
+    public static QuestionType fromCharToType(char type)
+    {
+        switch (type)
+        {
+            case 'a':
+                return KANA;
+            case 'v':
+                return VOCABULARY;
+            case 'j':
+                return KANJI;
+            case 'u':
+                return KUN_YOMI;
+            case 'o':
+                return ON_YOMI;
+            default:
+                return null;
+        }
+    }
+
+    @TypeConverter
+    public static char toCharFromType(QuestionType type)
+    {
+        switch (type)
+        {
+            case KANA:
+                return 'a';
+            case VOCABULARY:
+                return 'v';
+            case KANJI:
+                return 'j';
+            case KUN_YOMI:
+                return 'u';
+            case ON_YOMI:
+                return 'o';
+            default:
+                return 0;
+        }
     }
 }

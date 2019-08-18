@@ -202,18 +202,21 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect++;
-                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
+                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     float score = (float) Math.pow(0.5f, retryCount);
                     totalCorrect += score;
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), score);
                 }
                 else
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), 0);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), 0);
             }
             else
             {
@@ -241,6 +244,7 @@ public class MainQuiz extends AppCompatActivity
                     isGetNewQuestion = false;
 
                     LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
                             answer);
 
                     delayHandler.postDelayed(() ->
@@ -252,6 +256,7 @@ public class MainQuiz extends AppCompatActivity
 
                 if (isGetNewQuestion)
                     LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
                             answer);
             }
 

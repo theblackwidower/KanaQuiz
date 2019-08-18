@@ -167,7 +167,8 @@ public class QuestionBank extends WeightedList<Question>
         boolean returnValue = true;
 
         // Fetches the percentage of times the user got a question right,
-        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
+        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(),
+                QuestionType.getQuestionType(question.getClass()));
         if (percentage == null)
             percentage = 0.1f;
         // The 1f is to invert the value so we get the number of times they got it wrong,
@@ -285,7 +286,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
                         answerCounts.put(answer, count);
                     }
                 }
@@ -324,7 +326,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
                         answerCounts.put(answer, count);
                     }
                 }
@@ -363,7 +366,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
                         if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.getDatabaseKey()))
                             count += 2;
                         answerCounts.put(answer, count);
