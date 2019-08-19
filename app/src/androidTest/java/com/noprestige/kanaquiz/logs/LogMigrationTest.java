@@ -273,19 +273,18 @@ public class LogMigrationTest
                 "Sensei", "Tomodachi", "Kazoku", "Otousan", "Otōsan", "Okaasan", "Oniisan", "Otouto", "Otōto",
                 "Oneesan", "Imouto", "Imōto", "Kudamono", "Yasai", "Mizu", "Ocha", "Gyuunyuu", "Gyūnyū", "Niku", "Pan",
                 "Asagohan", "Hirugohan", "Bangohan", "Uchi", "Heya", "Beddo", "Makura", "Moufu", "Mōfu", "Ofuro",
-                "Mado", "Taoru", "Kagami", "Denwa", "Rei", "Zero", "Ichi", "Ni", "San", "Yon", "Shi", "Go", "Roku",
-                "Nana", "Shichi", "Hachi", "Kyuu", "Kyū", "Juu", "Jū", "Amerika", "Osutoraria", "Kanada", "Afurika",
-                "Chugoku", "Ingurando", "Indo", "Apato", "Depato", "Konbini", "Hoteru", "Resutoran", "Mise", "Kouen",
-                "Kōen", "Ginkou", "Ginkō", "Byouin", "Byōin", "Yuubinkyoku", "Yūbinkyoku", "Shatsu", "Zubon", "Sukato",
+                "Mado", "Taoru", "Kagami", "Denwa", "Rei", "Zero", "Ichi", "Ni", "Yon", "Shi", "Go", "Roku", "Nana",
+                "Shichi", "Hachi", "Kyuu", "Kyū", "Juu", "Jū", "Amerika", "Osutoraria", "Kanada", "Afurika", "Chugoku",
+                "Ingurando", "Indo", "Apato", "Depato", "Konbini", "Hoteru", "Resutoran", "Mise", "Kouen", "Kōen",
+                "Ginkou", "Ginkō", "Byouin", "Byōin", "Yuubinkyoku", "Yūbinkyoku", "Shatsu", "Zubon", "Sukato",
                 "Beruto", "Botan", "Fuku", "Megane", "Kutsu", "Kutsushita", "Kimono", "Konpyuuta", "Konpyūta", "Terebi",
-                "Toire", "Beddo", "Sofaa", "Houki", "Hōki", "Hashi", "Kagu", "Kagi", "Osara", "Sukuru", "Gakkou",
-                "Tesuto", "Tekisutobukku", "tekisuto", "Tekisuto", "Noto", "Chokku", "Gakusei", "Kyoushitsu", "Sensei",
-                "Kouchousensei", "Shukudai", "Enjinia", "Shefu", "Pairotto", "Sarariman", "Konsarutanto", "Keisatsukan",
-                "Isha", "Kangoshi", "Bengoshi", "Kashu", "Gakkō", "Daigaku", "Ōkii", "Chiisai", "Otona",
-                "Otoko no hito", "Otoko no ko", "Onna no hito", "Onna no ko", "Sensei", "Akachan", "Natsuyasumi", "Iu",
-                "Namae", "Mainichi", "Kyō", "Nichiyōbi", "Getsuyōbi", "Kayōbi", "Suiyōbi", "Mokuyōbi", "Kinyōbi",
-                "Doyōbi", "Kyōshitsu", "Tokei", "Hashiru", "Dekiru", "Ongaku", "Atarashii", "Furui", "Tegami", "Jikan",
-                "Shinbun", "Ningen", "Denwa", "Kaisha", "Kōen", "Densha", "Denki", "Ashita"
+                "Toire", "Sofaa", "Houki", "Hōki", "Hashi", "Kagu", "Kagi", "Osara", "Sukuru", "Gakkou", "Tesuto",
+                "Tekisutobukku", "Tekisuto", "Chokku", "Gakusei", "Kyoushitsu", "Kouchousensei", "Shukudai", "Enjinia",
+                "Shefu", "Pairotto", "Sarariman", "Konsarutanto", "Keisatsukan", "Isha", "Kangoshi", "Bengoshi",
+                "Kashu", "Gakkō", "Daigaku", "Ōkii", "Chiisai", "Otona", "Otoko no hito", "Otoko no ko", "Onna no hito",
+                "Onna no ko", "Akachan", "Natsuyasumi", "Iu", "Namae", "Mainichi", "Kyō", "Nichiyōbi", "Getsuyōbi",
+                "Kayōbi", "Suiyōbi", "Mokuyōbi", "Kinyōbi", "Doyōbi", "Kyōshitsu", "Tokei", "Hashiru", "Dekiru",
+                "Ongaku", "Atarashii", "Furui", "Tegami", "Jikan", "Shinbun", "Ningen", "Kaisha", "Denki", "Ashita"
         };
 
         int testDate = 20111105;
