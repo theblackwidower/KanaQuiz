@@ -107,9 +107,9 @@ public abstract class LogDatabase extends RoomDatabase
                 latinCount++;
         }
 
-        if ((kanaCount > 0) && (kanjiCount == 0) && (latinCount == 0))
+        if ((kanaCount > 0) && (kanaCount <= 3) && (kanjiCount == 0) && (latinCount == 0))
             return QuestionType.KANA;
-        else if ((kanaCount == 0) && (kanjiCount > 0) && (latinCount == 0))
+        else if ((kanaCount == 0) && (kanjiCount == 1) && (latinCount == 0))
             return QuestionType.KANJI;
         else
             return QuestionType.VOCABULARY;
