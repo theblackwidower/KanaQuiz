@@ -189,7 +189,10 @@ public class QuestionManagement
 
         //TODO: Find way to preserve previous questions record
         if (questionBank != null)
+        {
             currentQuestionBackup = questionBank.getCurrentQuestionKey();
+            currentQuestionBackupType = questionBank.getCurrentQuestionType();
+        }
 
         prefRecord = null;
         questionBank = null;
@@ -198,6 +201,7 @@ public class QuestionManagement
     private static QuestionBank questionBank;
     private static boolean[] prefRecord;
     private static String currentQuestionBackup;
+    private static QuestionType currentQuestionBackupType;
 
     public static void refreshStaticQuestionBank()
     {
@@ -205,9 +209,11 @@ public class QuestionManagement
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            if ((currentQuestionBackup == null) || !questionBank.loadQuestion(currentQuestionBackup))
+            if ((currentQuestionBackup == null) || (currentQuestionBackupType == null) ||
+                    !questionBank.loadQuestion(currentQuestionBackup, currentQuestionBackupType))
                 questionBank.newQuestion();
             currentQuestionBackup = null;
+            currentQuestionBackupType = null;
         }
         else
         {

@@ -41,10 +41,4 @@ public class OnYomiQuestion extends KanjiQuestion
     {
         return onYomi;
     }
-
-    @Override
-    String getDatabaseKey()
-    {
-        return kanji + "o";
-    }
 }

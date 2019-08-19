@@ -18,6 +18,7 @@ package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
+import com.noprestige.kanaquiz.logs.LogTypeConversion;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.Arrays;
@@ -79,11 +80,12 @@ public class QuestionBank extends WeightedList<Question>
 
         public boolean add(Question question)
         {
-            if (contains(question.getDatabaseKey()))
+            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(question.getClass()));
+            if (contains(prefix + question.getDatabaseKey()))
                 return false;
             else
             {
-                add(question.getDatabaseKey());
+                add(prefix + question.getDatabaseKey());
                 if (remainingCapacity() == 0)
                     remove();
                 return true;
@@ -111,7 +113,7 @@ public class QuestionBank extends WeightedList<Question>
         return currentQuestion.fetchCorrectAnswer();
     }
 
-    public boolean loadQuestion(String questionKey)
+    public boolean loadQuestion(String questionKey, QuestionType type)
     {
         if (previousQuestions == null)
             previousQuestions =
@@ -121,7 +123,8 @@ public class QuestionBank extends WeightedList<Question>
 
         for (Question thisQuestion : questions)
         {
-            if (thisQuestion.getDatabaseKey().equals(questionKey))
+            if (thisQuestion.getDatabaseKey().equals(questionKey) &&
+                    (QuestionType.getQuestionType(thisQuestion.getClass()) == type))
             {
                 currentQuestion = thisQuestion;
                 previousQuestions.add(thisQuestion);
@@ -278,7 +281,8 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : wordAnswerList)
@@ -295,11 +299,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxWordAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
@@ -318,7 +322,8 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : yomiAnswerList)
@@ -335,11 +340,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxYomiAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
@@ -358,7 +363,8 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : fullKanaAnswerList)
@@ -377,11 +383,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxKanaAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
