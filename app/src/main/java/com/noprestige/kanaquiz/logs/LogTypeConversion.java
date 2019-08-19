@@ -60,7 +60,7 @@ public final class LogTypeConversion
             case 'o':
                 return ON_YOMI;
             default:
-                return null;
+                throw new IllegalArgumentException("'" + type + "' is not representative of a valid type.");
         }
     }
 
@@ -80,7 +80,7 @@ public final class LogTypeConversion
             case ON_YOMI:
                 return 'o';
             default:
-                return 0;
+                throw new IllegalArgumentException(type.toString() + " is not a valid type.");
         }
     }
 }

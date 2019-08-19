@@ -37,6 +37,6 @@ public enum QuestionType
         else if (OnYomiQuestion.class.equals(klass))
             return ON_YOMI;
         else
-            return null;
+            throw new IllegalArgumentException(klass.getName() + " is not a valid Question class.");
     }
 }
