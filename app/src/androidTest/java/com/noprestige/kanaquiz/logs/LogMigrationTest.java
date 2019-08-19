@@ -311,6 +311,14 @@ public class LogMigrationTest
                     new Object[]{testDate, kanji, testIncorrectString, testOccurances});
         }
 
+        for (String word : wordTest)
+        {
+            db.execSQL("INSERT INTO kana_records (date, kana, correct_answers, incorrect_answers) VALUES (?, ?, ?, ?)",
+                    new Object[]{testDate, word, testCorrect, testIncorrect});
+            db.execSQL("INSERT INTO incorrect_answers (date, kana, incorrect_romanji, occurrences) VALUES (?, ?, ?, ?)",
+                    new Object[]{testDate, word, testIncorrectString, testOccurances});
+        }
+
         // Prepare for the next version.
         db.close();
         db = helper.runMigrationsAndValidate(TEST_DB, 4, true, LogDatabase.MIGRATION_3_4);
@@ -353,7 +361,27 @@ public class LogMigrationTest
             assertThat(incorrectCursor.getCount(), is(1));
         }
 
-        assertThat(db.query("SELECT * FROM question_records").getCount(), is(kanaTest.length + kanjiTest.length));
-        assertThat(db.query("SELECT * FROM incorrect_answers").getCount(), is(kanaTest.length + kanjiTest.length));
+        testType = LogTypeConversion.toCharFromType(QuestionType.VOCABULARY);
+        for (String word : wordTest)
+        {
+            Cursor questionCursor = db.query(
+                    "SELECT * FROM question_records WHERE date = ? AND question = ? AND type = ? AND " +
+                            "correct_answers = ? AND incorrect_answers = ?",
+                    new Object[]{testDate, word, testType, testCorrect, testIncorrect});
+
+            assertThat(questionCursor.getCount(), is(1));
+
+            Cursor incorrectCursor = db.query(
+                    "SELECT * FROM incorrect_answers WHERE date = ? AND question = ? AND type = ? AND " +
+                            "incorrect_answer = ? AND occurrences = ?",
+                    new Object[]{testDate, word, testType, testIncorrectString, testOccurances});
+
+            assertThat(incorrectCursor.getCount(), is(1));
+        }
+
+        assertThat(db.query("SELECT * FROM question_records").getCount(),
+                is(kanaTest.length + kanjiTest.length + wordTest.length));
+        assertThat(db.query("SELECT * FROM incorrect_answers").getCount(),
+                is(kanaTest.length + kanjiTest.length + wordTest.length));
     }
 }
