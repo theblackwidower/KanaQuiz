@@ -23,6 +23,14 @@
     TODO: Problem with setting background colours
     -->
 
+    <style name="BlackedOut" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/blackPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/blackPrimaryDarkColor</item>
+        <item name="colorAccent">@color/blackSecondaryColor</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
     <style name="CherryBlossomTree" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/cherryPrimaryColor</item>
         <item name="colorPrimaryDark">@color/cherryPrimaryDarkColor</item>

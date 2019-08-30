@@ -17,6 +17,15 @@
 
 <resources>
     <!-- Theme generated from: https://material.io/color/ -->
+    <color name="blackPrimaryColor">#000000</color>
+    <color name="blackPrimaryLightColor">#ffffff</color>
+    <color name="blackPrimaryDarkColor">#000000</color>
+    <color name="blackSecondaryColor">#ffffff</color>
+    <color name="blackSecondaryLightColor">#ffffff</color>
+    <color name="blackSecondaryDarkColor">#000000</color>
+    <color name="blackPrimaryTextColor">#ffffff</color>
+    <color name="blackSecondaryTextColor">#000000</color>
+
     <color name="cherryPrimaryColor">#f48fb1</color>
     <color name="cherryPrimaryLightColor">#ffc1e3</color>
     <color name="cherryPrimaryDarkColor">#bf5f82</color>
