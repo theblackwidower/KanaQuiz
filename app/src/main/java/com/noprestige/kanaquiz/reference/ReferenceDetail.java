@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2020 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
-import com.noprestige.kanaquiz.questions.WordQuestion;
 
 import java.util.Map;
 
@@ -41,7 +40,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class ReferenceDetail extends DialogFragment
 {
     private static final String ARG_SUBJECT = "subject";
-    private static final String ARG_IS_VOCAB = "isVocab";
     private static final String ARG_LABELS = "labels";
     private static final String ARG_DETAILS = "details";
 
@@ -50,7 +48,6 @@ public class ReferenceDetail extends DialogFragment
         Bundle args = new Bundle();
         ReferenceDetail dialog = new ReferenceDetail();
         args.putString(ARG_SUBJECT, question.getQuestionText());
-        args.putBoolean(ARG_IS_VOCAB, question instanceof WordQuestion);
 
         Map<String, String> details = question.getReferenceDetails();
         args.putStringArray(ARG_LABELS, details.keySet().toArray(new String[0]));
@@ -67,9 +64,11 @@ public class ReferenceDetail extends DialogFragment
         View content = requireActivity().getLayoutInflater().inflate(R.layout.reference_detail_dialog, null);
         TextView lblSubject = content.findViewById(R.id.lblSubject);
 
-        lblSubject.setText(getArguments().getString(ARG_SUBJECT));
+        String subject = getArguments().getString(ARG_SUBJECT);
 
-        if (getArguments().getBoolean(ARG_IS_VOCAB))
+        lblSubject.setText(subject);
+
+        if (subject.length() > 1)
             ((LinearLayout) content).setOrientation(LinearLayout.VERTICAL);
 
         if (SDK_INT < Build.VERSION_CODES.O)
