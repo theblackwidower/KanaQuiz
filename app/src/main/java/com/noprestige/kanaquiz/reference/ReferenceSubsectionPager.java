@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-class ReferenceSubsectionPager extends FragmentPagerAdapter
+class ReferenceSubsectionPager extends FragmentStateAdapter
 {
     private int questionTypeRef;
     private List<Integer> tabList;
@@ -38,11 +38,11 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
 
     private static List<String> pageIds;
 
-    ReferenceSubsectionPager(FragmentManager fm, Context context, int questionTypeRef)
+    ReferenceSubsectionPager(FragmentActivity fa, int questionTypeRef)
     {
-        super(fm);
+        super(fa);
         this.questionTypeRef = questionTypeRef;
-        this.context = context;
+        context = fa.getBaseContext();
 
         tabList = new ArrayList<>(3);
 
@@ -91,7 +91,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     }
 
     @Override
-    public Fragment getItem(int position)
+    public Fragment createFragment(int position)
     {
         if (questionTypeRef == R.string.vocabulary)
             return ReferenceSubsectionVocab
@@ -121,12 +121,11 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     }
 
     @Override
-    public int getCount()
+    public int getItemCount()
     {
         return tabList.size();
     }
 
-    @Override
     public CharSequence getPageTitle(int position)
     {
         if (questionTypeRef == R.string.vocabulary)

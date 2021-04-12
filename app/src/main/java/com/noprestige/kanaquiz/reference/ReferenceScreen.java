@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -22,12 +22,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class ReferenceScreen extends AppCompatActivity
 {
@@ -40,10 +41,10 @@ public class ReferenceScreen extends AppCompatActivity
         ThemeManager.setTheme(this);
         setContentView(R.layout.activity_tabbed_screen);
 
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        ReferencePager pagerAdapter = new ReferencePager(getSupportFragmentManager(), this);
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        ReferencePager pagerAdapter = new ReferencePager(this);
         viewPager.setAdapter(pagerAdapter);
-        if (pagerAdapter.getCount() == 0)
+        if (pagerAdapter.getItemCount() == 0)
         {
             TextView lblEmpty = new TextView(this);
             lblEmpty.setText(R.string.no_reference);
@@ -59,9 +60,10 @@ public class ReferenceScreen extends AppCompatActivity
         {
             TabLayout tabLayout = findViewById(R.id.tabLayout);
             //TODO: Make this check more dynamic, accounting for screen width and actual tab width
-            if (pagerAdapter.getCount() > MAX_TABS)
+            if (pagerAdapter.getItemCount() > MAX_TABS)
                 tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-            tabLayout.setupWithViewPager(viewPager);
+            new TabLayoutMediator(tabLayout, viewPager,
+                    (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position))).attach();
         }
     }
 
