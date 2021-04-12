@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -217,7 +217,7 @@ public class QuestionBank extends WeightedList<Question>
         // answer had this count (which is actually impossible because of the range restriction, but better to
         // err on the side of caution) the resultant calculations of 2^count would not add up to an integer
         // overflow.
-        return (int) Math.floor(Math.log(Integer.MAX_VALUE / (list.size() - 1)) / Math.log(2));
+        return (int) Math.floor(Math.log((double) Integer.MAX_VALUE / (list.size() - 1)) / Math.log(2));
     }
 
     public String[] getPossibleAnswers()
@@ -340,7 +340,7 @@ public class QuestionBank extends WeightedList<Question>
 
         if (maxCount > maxAnswerWeight)
         {
-            float controlFactor = maxAnswerWeight / maxCount;
+            float controlFactor = (float) maxAnswerWeight / maxCount;
             for (String answer : newAnswerCount.keySet())
             {
                 float newCount = newAnswerCount.remove(answer) * controlFactor;
