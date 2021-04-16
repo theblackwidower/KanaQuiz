@@ -64,8 +64,11 @@ public class QuestionSelectionDetail extends DialogFragment
             checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             checkBox.setChecked(OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
                     OptionsControl.getBoolean(prefId));
-            checkBox.setOnCheckedChangeListener(
-                    (buttonView, isChecked) -> OptionsControl.setBoolean(prefId, isChecked));
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+            {
+                OptionsControl.delete(prefIdStart);
+                OptionsControl.setBoolean(prefId, isChecked);
+            });
             checkBoxes[i] = checkBox;
             content.addView(checkBox);
         }
@@ -94,8 +97,14 @@ public class QuestionSelectionDetail extends DialogFragment
                 break;
             }
         if (overallPref == null)
+        {
+            parent.nullify();
             OptionsControl.delete(parent.getPrefId());
+        }
         else
+        {
             parent.setChecked(overallPref);
+            OptionsControl.setQuestionSetBool(parent.getPrefId(), overallPref);
+        }
     }
 }

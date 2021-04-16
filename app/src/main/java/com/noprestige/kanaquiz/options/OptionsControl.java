@@ -89,6 +89,9 @@ public final class OptionsControl
 
     public static void setQuestionSetBool(String prefId, boolean setting)
     {
+        for (String key : sharedPreferences.getAll().keySet())
+            if (key.startsWith(prefId + "_"))
+                delete(key);
         editor.putBoolean(prefId, setting);
         editor.apply();
     }

@@ -198,25 +198,40 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
             this.prefId = prefId;
 
             if (!isInEditMode())
-                setChecked(OptionsControl.getQuestionSetBool(getPrefId()));
+                if (OptionsControl.exists(getPrefId()))
+                    setChecked(OptionsControl.getQuestionSetBool(getPrefId()));
+                else
+                    nullify();
         }
+    }
+
+    public void nullify()
+    {
+        chkCheckBox.setVisibility(INVISIBLE);
     }
 
     @Override
     public boolean isChecked()
     {
-        return chkCheckBox.isChecked();
+        return (chkCheckBox.getVisibility() == VISIBLE) && chkCheckBox.isChecked();
     }
 
     @Override
     public void setChecked(boolean checked)
     {
+        chkCheckBox.setVisibility(VISIBLE);
         chkCheckBox.setChecked(checked);
     }
 
     @Override
     public void toggle()
     {
-        chkCheckBox.toggle();
+        if (chkCheckBox.getVisibility() == VISIBLE)
+            chkCheckBox.toggle();
+        else
+        {
+            chkCheckBox.setVisibility(VISIBLE);
+            chkCheckBox.setChecked(true);
+        }
     }
 }
