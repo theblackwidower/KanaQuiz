@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -57,8 +57,7 @@ public final class OptionsControl
 
     public static boolean getBoolean(String prefId)
     {
-        //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, false);
     }
 
     public static void setBoolean(int resId, boolean setting)
@@ -67,6 +66,28 @@ public final class OptionsControl
     }
 
     public static void setBoolean(String prefId, boolean setting)
+    {
+        editor.putBoolean(prefId, setting);
+        editor.apply();
+    }
+
+    public static boolean getQuestionSetBool(int resId)
+    {
+        return getQuestionSetBool(resources.getString(resId));
+    }
+
+    public static boolean getQuestionSetBool(String prefId)
+    {
+        //Boolean preferences to default to true, all others default to false
+        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
+    }
+
+    public static void setQuestionSetBool(int resId, boolean setting)
+    {
+        setQuestionSetBool(resources.getString(resId), setting);
+    }
+
+    public static void setQuestionSetBool(String prefId, boolean setting)
     {
         editor.putBoolean(prefId, setting);
         editor.apply();
@@ -111,6 +132,27 @@ public final class OptionsControl
     public static void setString(String prefId, String setting)
     {
         editor.putString(prefId, setting);
+        editor.apply();
+    }
+
+    public static boolean exists(int resId)
+    {
+        return exists(resources.getString(resId));
+    }
+
+    public static boolean exists(String prefId)
+    {
+        return sharedPreferences.contains(prefId);
+    }
+
+    public static void delete(int resId)
+    {
+        delete(resources.getString(resId));
+    }
+
+    public static void delete(String prefId)
+    {
+        editor.remove(prefId);
         editor.apply();
     }
 

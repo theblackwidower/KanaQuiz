@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         setOnClickListener(view -> toggle());
 
         chkCheckBox.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));
+                (buttonView, isChecked) -> OptionsControl.setQuestionSetBool(getPrefId(), isChecked));
 
         lblText.setTextLocale(Locale.JAPANESE);
 
@@ -175,7 +175,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
             this.prefId = prefId;
 
             if (!isInEditMode())
-                setChecked(OptionsControl.getBoolean(getPrefId()));
+                setChecked(OptionsControl.getQuestionSetBool(getPrefId()));
         }
     }
 
