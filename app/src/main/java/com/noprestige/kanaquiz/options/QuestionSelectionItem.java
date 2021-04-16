@@ -38,6 +38,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
     private String prefId;
     private String title;
     private String contents;
+    private String[] questions;
 
     private TextView lblText;
     private CheckBox chkCheckBox;
@@ -77,6 +78,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
         setOnClickListener(view -> toggle());
+        setOnLongClickListener(view -> detailView());
 
         chkCheckBox.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> OptionsControl.setQuestionSetBool(getPrefId(), isChecked));
@@ -94,6 +96,21 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
         linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
+    }
+
+    private boolean detailView()
+    {
+        if (questions != null)
+        {
+            Context context = getContext();
+            if (context instanceof QuestionSelection)
+            {
+                QuestionSelectionDetail.newInstance(prefId, questions)
+                        .show(((QuestionSelection) context).getSupportFragmentManager(), "detailView");
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
