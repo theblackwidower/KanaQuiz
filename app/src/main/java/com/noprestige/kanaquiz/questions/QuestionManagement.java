@@ -33,6 +33,7 @@ import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -274,9 +275,34 @@ public class QuestionManagement
         return bank;
     }
 
-    public boolean getPref(int number)
+    public Boolean getPref(int number)
     {
-        return OptionsControl.getQuestionSetBool(getPrefId(number));
+        Boolean returnValue = null;
+        Map<String, Boolean> prefs = getAllPrefs(number);
+        for (Boolean currentValue : prefs.values())
+            if (returnValue == null)
+                returnValue = currentValue;
+            else if (!returnValue.equals(currentValue))
+                return null;
+        return returnValue;
+    }
+
+    public Map<String, Boolean> getAllPrefs(int number)
+    {
+        String prefStart = getPrefId(number);
+        Map<String, Boolean> returnValue = new HashMap<>();
+        if (OptionsControl.exists(prefStart))
+            returnValue.put("all", OptionsControl.getQuestionSetBool(prefStart));
+        else
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().number == number) && (set.getKey().digraphs == null))
+                    for (Question question : set.getValue())
+                    {
+                        String key = question.getDatabaseKey();
+                        String fullPrefId = prefStart + "_" + key;
+                        returnValue.put(key, OptionsControl.getQuestionSetBool(fullPrefId));
+                    }
+        return returnValue;
     }
 
     public QuestionBank getQuestionBank()
