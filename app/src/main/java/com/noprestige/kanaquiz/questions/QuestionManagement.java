@@ -608,6 +608,13 @@ public class QuestionManagement
             item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
+            ArrayList<String> questions = new ArrayList();
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().number == i) && (set.getKey().digraphs == null))
+                    for (Question question : set.getValue())
+                        questions.add(question.getDatabaseKey());
+
+            item.setQuestions(questions.toArray(new String[]{}));
             layout.addView(item);
         }
     }

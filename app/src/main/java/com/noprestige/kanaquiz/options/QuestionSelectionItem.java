@@ -105,8 +105,9 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
             Context context = getContext();
             if (context instanceof QuestionSelection)
             {
-                QuestionSelectionDetail.newInstance(prefId, questions)
-                        .show(((QuestionSelection) context).getSupportFragmentManager(), "detailView");
+                QuestionSelectionDetail box = QuestionSelectionDetail.newInstance(prefId, questions);
+                box.recordParentCheckbox(this);
+                box.show(((QuestionSelection) context).getSupportFragmentManager(), "detailView");
                 return true;
             }
         }
@@ -172,6 +173,11 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
             this.contents = contents.toString();
             buildTextBox();
         }
+    }
+
+    public void setQuestions(String[] questions)
+    {
+        this.questions = questions;
     }
 
     private void buildTextBox()
