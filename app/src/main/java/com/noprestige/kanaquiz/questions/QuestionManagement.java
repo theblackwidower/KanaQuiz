@@ -170,6 +170,8 @@ public class QuestionManagement
         prefIds = prefIdList.toArray(new String[0]);
         setTitles = setTitleList.toArray(new String[0]);
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
+
+        OptionsControl.setQuestionSetDefaults(prefIds);
     }
 
     public static void initialize(Context context)

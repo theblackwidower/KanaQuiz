@@ -23,9 +23,10 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import org.threeten.bp.LocalDate;
+
+import java.util.Set;
 
 import androidx.preference.PreferenceManager;
 
@@ -34,6 +35,8 @@ public final class OptionsControl
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static Resources resources;
+
+    final private static String DEFAULT_QUESTION_SET = "hiragana_set_1";
 
     private OptionsControl() {}
 
@@ -78,8 +81,7 @@ public final class OptionsControl
 
     public static boolean getQuestionSetBool(String prefId)
     {
-        //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, false);
     }
 
     public static void setQuestionSetBool(int resId, boolean setting)
@@ -94,6 +96,24 @@ public final class OptionsControl
                 delete(key);
         editor.putBoolean(prefId, setting);
         editor.apply();
+    }
+
+    public static void setQuestionSetDefaults(String[] prefIds)
+    {
+        Set<String> extantPrefs = sharedPreferences.getAll().keySet();
+        for (String prefId : prefIds)
+            if (!extantPrefs.contains(prefId))
+            {
+                boolean setDefault = true;
+                for (String key : extantPrefs)
+                    if (key.startsWith(prefId + "_"))
+                    {
+                        setDefault = false;
+                        break;
+                    }
+                if (setDefault)
+                    setBoolean(prefId, (prefId.equals(DEFAULT_QUESTION_SET)));
+            }
     }
 
     public static int getInt(int resId)
