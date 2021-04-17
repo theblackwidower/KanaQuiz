@@ -317,26 +317,24 @@ public class QuestionManagement
         boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        for (int i = 1; i <= getCategoryCount(); i++)
-            if (getPref(i))
+        for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+        {
+            if ((isDiacritics || (set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
+                    (set.getKey().diacritic == Diacritic.CONSONANT)) && (isDigraphs || (set.getKey().digraphs == null)))
             {
-                questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, null));
-                if (isDiacritics)
+                Boolean pref = getPref(set.getKey().number);
+                if (pref == null)
                 {
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, null));
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, null));
+                    ArrayList<Question> tempBank = new ArrayList<>(set.getValue().length);
+                    for (Question question : set.getValue())
+                        if (OptionsControl.getBoolean(getPrefId(set.getKey().number) + "_" + question.getDatabaseKey()))
+                            questionBank.addQuestion(question);
+                    questionBank.addQuestions(tempBank.toArray(new Question[]{}));
                 }
-                if (isDigraphs)
-                {
-                    questionBank.addQuestions(getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9)));
-                    if (isDiacritics)
-                    {
-                        questionBank.addQuestions(getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9)));
-                        questionBank.addQuestions(getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9)));
-                    }
-                }
-                questionBank.addQuestions(getQuestionSet(i, Diacritic.CONSONANT, null));
+                else if (pref)
+                    questionBank.addQuestions(set.getValue());
             }
+        }
     }
 
     public boolean anySelected()

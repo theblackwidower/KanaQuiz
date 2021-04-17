@@ -133,37 +133,45 @@ public class QuestionBank extends WeightedList<Question>
 
     public boolean addQuestions(Question[] questions)
     {
-        weightedAnswerListCache = null;
-        previousQuestions = null;
-        maxKanaAnswerWeight = -1;
-        maxWordAnswerWeight = -1;
         if (questions != null)
         {
             boolean returnValue = true;
             for (Question question : questions)
-            {
-                // Fetches the percentage of times the user got a question right,
-                Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
-                if (percentage == null)
-                    percentage = 0.1f;
-                // The 1f is to invert the value so we get the number of times they got it wrong,
-                // Times 100f to get the percentage.
-                int weight = (int) Math.ceil((1f - percentage) * 100f);
-                // Setting weight to never get lower than 2,
-                // so any question the user got perfect will still appear in the quiz.
-                if (weight < 2)
-                    weight = 2;
                 // if any one of the additions fail, the method returns false
-                returnValue = add(weight, question) && returnValue;
-                if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
-                    returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                else if (question.getClass().equals(KanaQuestion.class))
-                {
-                    returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                    // Storing answers in specialized answer lists for more specialized answer selection
-                    returnValue =
-                            getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
-                }
+                returnValue = addQuestion(question) && returnValue;
+            return returnValue;
+        }
+        return false;
+    }
+
+    public boolean addQuestion(Question question)
+    {
+        weightedAnswerListCache = null;
+        previousQuestions = null;
+        maxKanaAnswerWeight = -1;
+        maxWordAnswerWeight = -1;
+        if (question != null)
+        {
+            // Fetches the percentage of times the user got a question right,
+            Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
+            if (percentage == null)
+                percentage = 0.1f;
+            // The 1f is to invert the value so we get the number of times they got it wrong,
+            // Times 100f to get the percentage.
+            int weight = (int) Math.ceil((1f - percentage) * 100f);
+            // Setting weight to never get lower than 2,
+            // so any question the user got perfect will still appear in the quiz.
+            if (weight < 2)
+                weight = 2;
+            // if any aspect of the addition fails, the method returns false
+            boolean returnValue = add(weight, question);
+            if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
+                returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+            else if (question.getClass().equals(KanaQuestion.class))
+            {
+                returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+                // Storing answers in specialized answer lists for more specialized answer selection
+                returnValue = getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
             }
             return returnValue;
         }
