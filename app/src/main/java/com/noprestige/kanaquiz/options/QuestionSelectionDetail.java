@@ -64,17 +64,27 @@ public class QuestionSelectionDetail extends DialogFragment
             checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             checkBox.setChecked(OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
                     OptionsControl.getBoolean(prefId));
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) ->
-            {
-                OptionsControl.delete(prefIdStart);
-                OptionsControl.setBoolean(prefId, isChecked);
-            });
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> updatePref(prefIdStart, prefId, isChecked));
             checkBoxes[i] = checkBox;
             content.addView(checkBox);
         }
 
         builder.setView(content);
         return builder.create();
+    }
+
+    private void updatePref(String prefIdStart, String prefId, boolean isChecked)
+    {
+        if (OptionsControl.exists(prefIdStart))
+        {
+            OptionsControl.delete(prefIdStart);
+            parent.nullify();
+            String[] questions = getArguments().getStringArray(ARG_QUESTIONS);
+            for (int i = 0; i < questions.length; i++)
+                OptionsControl.setBoolean(prefIdStart + "_" + questions[i], checkBoxes[i].isChecked());
+        }
+        else
+            OptionsControl.setBoolean(prefId, isChecked);
     }
 
     public void recordParentCheckbox(QuestionSelectionItem checkbox)
@@ -96,15 +106,7 @@ public class QuestionSelectionDetail extends DialogFragment
                 overallPref = null;
                 break;
             }
-        if (overallPref == null)
-        {
-            parent.nullify();
-            OptionsControl.delete(parent.getPrefId());
-        }
-        else
-        {
+        if (overallPref != null)
             parent.setChecked(overallPref);
-            OptionsControl.setQuestionSetBool(parent.getPrefId(), overallPref);
-        }
     }
 }
