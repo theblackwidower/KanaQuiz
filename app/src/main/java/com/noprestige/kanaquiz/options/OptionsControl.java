@@ -37,6 +37,7 @@ public final class OptionsControl
     private static Resources resources;
 
     private static final String DEFAULT_QUESTION_SET = "hiragana_set_1";
+    public static final String SUBPREFERENCE_DELIMITER = "_";
 
     private OptionsControl() {}
 
@@ -92,7 +93,7 @@ public final class OptionsControl
     public static void setQuestionSetBool(String prefId, boolean setting)
     {
         for (String key : sharedPreferences.getAll().keySet())
-            if (key.startsWith(prefId + "_"))
+            if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
                 delete(key);
         editor.putBoolean(prefId, setting);
         editor.apply();
@@ -106,7 +107,7 @@ public final class OptionsControl
             {
                 boolean setDefault = true;
                 for (String key : extantPrefs)
-                    if (key.startsWith(prefId + "_"))
+                    if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
                     {
                         setDefault = false;
                         break;

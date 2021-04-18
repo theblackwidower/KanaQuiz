@@ -321,7 +321,7 @@ public class QuestionManagement
                     for (Question question : set.getValue())
                     {
                         String key = question.getDatabaseKey();
-                        String fullPrefId = prefStart + "_" + key;
+                        String fullPrefId = prefStart + OptionsControl.SUBPREFERENCE_DELIMITER + key;
                         returnValue.put(key, OptionsControl.getQuestionSetBool(fullPrefId));
                     }
         return returnValue;
@@ -349,7 +349,9 @@ public class QuestionManagement
                 {
                     ArrayList<Question> tempBank = new ArrayList<>(set.getValue().length);
                     for (Question question : set.getValue())
-                        if (OptionsControl.getBoolean(getPrefId(set.getKey().number) + "_" + question.getDatabaseKey()))
+                        if (OptionsControl.getBoolean(
+                                getPrefId(set.getKey().number) + OptionsControl.SUBPREFERENCE_DELIMITER +
+                                        question.getDatabaseKey()))
                             questionBank.addQuestion(question);
                     questionBank.addQuestions(tempBank.toArray(new Question[]{}));
                 }

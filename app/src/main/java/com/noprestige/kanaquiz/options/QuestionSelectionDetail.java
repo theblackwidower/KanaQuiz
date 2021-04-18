@@ -58,7 +58,7 @@ public class QuestionSelectionDetail extends DialogFragment
         checkBoxes = new CheckBox[questions.length];
         for (int i = 0; i < questions.length; i++)
         {
-            String prefId = prefIdStart + "_" + questions[i];
+            String prefId = prefIdStart + OptionsControl.SUBPREFERENCE_DELIMITER + questions[i];
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(questions[i]);
             checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -81,7 +81,8 @@ public class QuestionSelectionDetail extends DialogFragment
             parent.nullify();
             String[] questions = getArguments().getStringArray(ARG_QUESTIONS);
             for (int i = 0; i < questions.length; i++)
-                OptionsControl.setBoolean(prefIdStart + "_" + questions[i], checkBoxes[i].isChecked());
+                OptionsControl.setBoolean(prefIdStart + OptionsControl.SUBPREFERENCE_DELIMITER + questions[i],
+                        checkBoxes[i].isChecked());
         }
         else
             OptionsControl.setBoolean(prefId, isChecked);
