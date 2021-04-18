@@ -198,7 +198,7 @@ public class QuestionManagement
     }
 
     private static QuestionBank questionBank;
-    private static boolean[] prefRecord;
+    private static boolean[][] prefRecord;
     private static String currentQuestionBackup;
 
     public static void refreshStaticQuestionBank()
@@ -213,11 +213,11 @@ public class QuestionManagement
         }
         else
         {
-            boolean[] currentPrefRecord = getCurrentPrefRecord();
+            boolean[][] currentPrefRecord = getCurrentPrefRecord();
 
             //TODO: Add something to handle repetition control changes so we can update the previousQuestion record
 
-            if (!Arrays.equals(prefRecord, currentPrefRecord))
+            if (!comparePrefRecord(currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
@@ -226,39 +226,65 @@ public class QuestionManagement
         }
     }
 
-    private static boolean[] getCurrentPrefRecord()
+    private static boolean[][] getCurrentPrefRecord()
     {
         int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 2;
         for (QuestionManagement kanjiFile : KANJI_FILES)
             prefCount += kanjiFile.getCategoryCount();
-        boolean[] currentPrefRecord = new boolean[prefCount];
+        boolean[][] currentPrefRecord = new boolean[prefCount][];
 
-        currentPrefRecord[0] = OptionsControl.getBoolean(R.string.prefid_digraphs);
-        currentPrefRecord[1] = OptionsControl.getBoolean(R.string.prefid_diacritics);
+        currentPrefRecord[0] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_digraphs)};
+        currentPrefRecord[1] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_diacritics)};
 
         int i = 2;
         for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = HIRAGANA.getPref(j);
+            currentPrefRecord[i] = HIRAGANA.getPrefRecord(j);
             i++;
         }
         for (int j = 1; j <= KATAKANA.getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = KATAKANA.getPref(j);
+            currentPrefRecord[i] = KATAKANA.getPrefRecord(j);
             i++;
         }
         for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
         {
-            currentPrefRecord[i] = VOCABULARY.getPref(j);
+            currentPrefRecord[i] = VOCABULARY.getPrefRecord(j);
             i++;
         }
         for (QuestionManagement kanjiFile : KANJI_FILES)
             for (int j = 1; j <= kanjiFile.getCategoryCount(); j++)
             {
-                currentPrefRecord[i] = kanjiFile.getPref(j);
+                currentPrefRecord[i] = kanjiFile.getPrefRecord(j);
                 i++;
             }
         return currentPrefRecord;
+    }
+
+    private boolean[] getPrefRecord(int number)
+    {
+        Boolean currentPref = getPref(number);
+        if (currentPref != null)
+            return new boolean[]{currentPref};
+        else
+        {
+            Boolean[] fetchedPrefRecord = getAllPrefs(number).values().toArray(new Boolean[0]);
+            boolean[] thisPrefRecord = new boolean[fetchedPrefRecord.length];
+            for (int i = 0; i < fetchedPrefRecord.length; i++)
+                thisPrefRecord[i] = fetchedPrefRecord[i];
+            return thisPrefRecord;
+        }
+    }
+
+    static private boolean comparePrefRecord(boolean[][] currentPrefRecord)
+    {
+        if (prefRecord.length != currentPrefRecord.length)
+            return false;
+        else
+            for (int i = 0; i < prefRecord.length; i++)
+                if (!Arrays.equals(prefRecord[i], currentPrefRecord[i]))
+                    return false;
+        return true;
     }
 
     public static QuestionBank getStaticQuestionBank()
