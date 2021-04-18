@@ -263,17 +263,11 @@ public class QuestionManagement
 
     private boolean[] getPrefRecord(int number)
     {
-        Boolean currentPref = getPref(number);
-        if (currentPref != null)
-            return new boolean[]{currentPref};
-        else
-        {
-            Boolean[] fetchedPrefRecord = getAllPrefs(number).values().toArray(new Boolean[0]);
-            boolean[] thisPrefRecord = new boolean[fetchedPrefRecord.length];
-            for (int i = 0; i < fetchedPrefRecord.length; i++)
-                thisPrefRecord[i] = fetchedPrefRecord[i];
-            return thisPrefRecord;
-        }
+        Boolean[] objectArray = getAllPrefs(number).values().toArray(new Boolean[0]);
+        boolean[] returnValue = new boolean[objectArray.length];
+        for (int i = 0; i < objectArray.length; i++)
+            returnValue[i] = objectArray[i];
+        return returnValue;
     }
 
     static private boolean comparePrefRecord(boolean[][] currentPrefRecord)
