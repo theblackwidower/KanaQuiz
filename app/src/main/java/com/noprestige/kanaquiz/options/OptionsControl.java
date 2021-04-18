@@ -36,7 +36,7 @@ public final class OptionsControl
     private static SharedPreferences.Editor editor;
     private static Resources resources;
 
-    final private static String DEFAULT_QUESTION_SET = "hiragana_set_1";
+    private static final String DEFAULT_QUESTION_SET = "hiragana_set_1";
 
     private OptionsControl() {}
 
