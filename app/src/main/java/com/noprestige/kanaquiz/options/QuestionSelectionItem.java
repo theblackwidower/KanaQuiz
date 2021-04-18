@@ -199,7 +199,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
             if (!isInEditMode())
                 if (OptionsControl.exists(getPrefId()))
-                    setChecked(OptionsControl.getQuestionSetBool(getPrefId()));
+                    setChecked(OptionsControl.getBoolean(getPrefId()));
                 else
                     nullify();
         }

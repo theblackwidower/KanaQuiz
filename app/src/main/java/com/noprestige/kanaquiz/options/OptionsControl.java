@@ -26,6 +26,7 @@ import com.noprestige.kanaquiz.R;
 
 import org.threeten.bp.LocalDate;
 
+import java.util.Map;
 import java.util.Set;
 
 import androidx.preference.PreferenceManager;
@@ -75,19 +76,26 @@ public final class OptionsControl
         editor.apply();
     }
 
-    public static boolean getQuestionSetBool(int resId)
+    public static Boolean getQuestionSetBool(String prefId)
     {
-        return getQuestionSetBool(resources.getString(resId));
-    }
+        if (exists(prefId))
+            return getBoolean(prefId);
+        else
+        {
+            boolean hasTrue = false;
+            boolean hasFalse = false;
+            for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet())
+                if (entry.getKey().startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                    if ((Boolean) entry.getValue())
+                        hasTrue = true;
+                    else
+                        hasFalse = true;
 
-    public static boolean getQuestionSetBool(String prefId)
-    {
-        return sharedPreferences.getBoolean(prefId, false);
-    }
-
-    public static void setQuestionSetBool(int resId, boolean setting)
-    {
-        setQuestionSetBool(resources.getString(resId), setting);
+            if (hasTrue && hasFalse)
+                return null;
+            else
+                return hasTrue;
+        }
     }
 
     public static void setQuestionSetBool(String prefId, boolean setting)

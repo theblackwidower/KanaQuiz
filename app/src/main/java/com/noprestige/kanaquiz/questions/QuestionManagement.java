@@ -314,7 +314,7 @@ public class QuestionManagement
         String prefStart = getPrefId(number);
         Map<String, Boolean> returnValue = new HashMap<>();
         if (OptionsControl.exists(prefStart))
-            returnValue.put("all", OptionsControl.getQuestionSetBool(prefStart));
+            returnValue.put("all", OptionsControl.getBoolean(prefStart));
         else
             for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
                 if ((set.getKey().number == number) && (set.getKey().digraphs == null))
@@ -322,7 +322,7 @@ public class QuestionManagement
                     {
                         String key = question.getDatabaseKey();
                         String fullPrefId = prefStart + OptionsControl.SUBPREFERENCE_DELIMITER + key;
-                        returnValue.put(key, OptionsControl.getQuestionSetBool(fullPrefId));
+                        returnValue.put(key, OptionsControl.getBoolean(fullPrefId));
                     }
         return returnValue;
     }
