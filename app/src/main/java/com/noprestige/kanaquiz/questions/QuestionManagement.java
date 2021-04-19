@@ -217,7 +217,7 @@ public class QuestionManagement
 
             //TODO: Add something to handle repetition control changes so we can update the previousQuestion record
 
-            if (!comparePrefRecord(currentPrefRecord))
+            if (!Arrays.deepEquals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
@@ -259,17 +259,6 @@ public class QuestionManagement
         for (int i = 0; i < objectArray.length; i++)
             returnValue[i] = objectArray[i];
         return returnValue;
-    }
-
-    static private boolean comparePrefRecord(boolean[][] currentPrefRecord)
-    {
-        if (prefRecord.length != currentPrefRecord.length)
-            return false;
-        else
-            for (int i = 0; i < prefRecord.length; i++)
-                if (!Arrays.equals(prefRecord[i], currentPrefRecord[i]))
-                    return false;
-        return true;
     }
 
     public static QuestionBank getStaticQuestionBank()
