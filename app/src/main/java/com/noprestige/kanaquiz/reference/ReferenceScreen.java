@@ -64,6 +64,7 @@ public class ReferenceScreen extends AppCompatActivity
                 tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
             new TabLayoutMediator(tabLayout, viewPager,
                     (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position))).attach();
+            viewPager.setUserInputEnabled(false);
         }
     }
 
