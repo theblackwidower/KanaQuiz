@@ -228,34 +228,25 @@ public class QuestionManagement
 
     private static boolean[][] getCurrentPrefRecord()
     {
-        int prefCount = HIRAGANA.getCategoryCount() + KATAKANA.getCategoryCount() + VOCABULARY.getCategoryCount() + 2;
-        for (QuestionManagement kanjiFile : KANJI_FILES)
-            prefCount += kanjiFile.getCategoryCount();
+        QuestionManagement[] questionFiles = new QuestionManagement[KANJI_FILES.length + 3];
+        questionFiles[0] = HIRAGANA;
+        questionFiles[1] = KATAKANA;
+        questionFiles[2] = VOCABULARY;
+        System.arraycopy(KANJI_FILES, 0, questionFiles, 3, KANJI_FILES.length);
+
+        int prefCount = 2;
+        for (QuestionManagement questionFile : questionFiles)
+            prefCount += questionFile.getCategoryCount();
         boolean[][] currentPrefRecord = new boolean[prefCount][];
 
         currentPrefRecord[0] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_digraphs)};
         currentPrefRecord[1] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_diacritics)};
 
         int i = 2;
-        for (int j = 1; j <= HIRAGANA.getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = HIRAGANA.getPrefRecord(j);
-            i++;
-        }
-        for (int j = 1; j <= KATAKANA.getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = KATAKANA.getPrefRecord(j);
-            i++;
-        }
-        for (int j = 1; j <= VOCABULARY.getCategoryCount(); j++)
-        {
-            currentPrefRecord[i] = VOCABULARY.getPrefRecord(j);
-            i++;
-        }
-        for (QuestionManagement kanjiFile : KANJI_FILES)
-            for (int j = 1; j <= kanjiFile.getCategoryCount(); j++)
+        for (QuestionManagement questionFile : questionFiles)
+            for (int j = 1; j <= questionFile.getCategoryCount(); j++)
             {
-                currentPrefRecord[i] = kanjiFile.getPrefRecord(j);
+                currentPrefRecord[i] = questionFile.getPrefRecord(j);
                 i++;
             }
         return currentPrefRecord;
