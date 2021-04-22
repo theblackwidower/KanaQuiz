@@ -246,19 +246,14 @@ public class QuestionManagement
         for (QuestionManagement questionFile : questionFiles)
             for (int j = 1; j <= questionFile.getCategoryCount(); j++)
             {
-                currentPrefRecord[i] = questionFile.getPrefRecord(j);
+                Boolean[] objectArray = questionFile.getAllPrefs(j).values().toArray(new Boolean[0]);
+                boolean[] returnValue = new boolean[objectArray.length];
+                for (int k = 0; k < objectArray.length; k++)
+                    returnValue[k] = objectArray[k];
+                currentPrefRecord[i] = returnValue;
                 i++;
             }
         return currentPrefRecord;
-    }
-
-    private boolean[] getPrefRecord(int number)
-    {
-        Boolean[] objectArray = getAllPrefs(number).values().toArray(new Boolean[0]);
-        boolean[] returnValue = new boolean[objectArray.length];
-        for (int i = 0; i < objectArray.length; i++)
-            returnValue[i] = objectArray[i];
-        return returnValue;
     }
 
     public static QuestionBank getStaticQuestionBank()
