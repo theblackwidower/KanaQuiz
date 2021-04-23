@@ -172,6 +172,11 @@ public class QuestionManagement
         setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
 
         OptionsControl.setQuestionSetDefaults(prefIds);
+
+        prefCountCache = 0;
+        for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+            if (set.getKey().digraphs == null)
+                prefCountCache += set.getValue().length;
     }
 
     public static void initialize(Context context)
@@ -198,7 +203,8 @@ public class QuestionManagement
     }
 
     private static QuestionBank questionBank;
-    private static boolean[][] prefRecord;
+    private int prefCountCache;
+    private static int[] prefRecord;
     private static String currentQuestionBackup;
 
     public static void refreshStaticQuestionBank()
@@ -213,11 +219,11 @@ public class QuestionManagement
         }
         else
         {
-            boolean[][] currentPrefRecord = getCurrentPrefRecord();
+            int[] currentPrefRecord = getCurrentPrefRecord();
 
             //TODO: Add something to handle repetition control changes so we can update the previousQuestion record
 
-            if (!Arrays.deepEquals(prefRecord, currentPrefRecord))
+            if (!Arrays.equals(prefRecord, currentPrefRecord))
             {
                 prefRecord = currentPrefRecord;
                 questionBank = getFullQuestionBank();
@@ -226,7 +232,7 @@ public class QuestionManagement
         }
     }
 
-    private static boolean[][] getCurrentPrefRecord()
+    private static int[] getCurrentPrefRecord()
     {
         QuestionManagement[] questionFiles = new QuestionManagement[KANJI_FILES.length + 3];
         questionFiles[0] = HIRAGANA;
@@ -236,23 +242,52 @@ public class QuestionManagement
 
         int prefCount = 2;
         for (QuestionManagement questionFile : questionFiles)
-            prefCount += questionFile.getCategoryCount();
-        boolean[][] currentPrefRecord = new boolean[prefCount][];
+            prefCount += questionFile.prefCountCache;
+        int[] currentPrefRecord = new int[(prefCount / Integer.SIZE) + 1];
 
-        currentPrefRecord[0] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_digraphs)};
-        currentPrefRecord[1] = new boolean[]{OptionsControl.getBoolean(R.string.prefid_diacritics)};
+        if (OptionsControl.getBoolean(R.string.prefid_digraphs))
+            currentPrefRecord[0] += 0b1;
+        if (OptionsControl.getBoolean(R.string.prefid_diacritics))
+            currentPrefRecord[0] += 0b10;
 
-        int i = 2;
+        int index = 2;
+        int section = 0;
         for (QuestionManagement questionFile : questionFiles)
-            for (int j = 1; j <= questionFile.getCategoryCount(); j++)
-            {
-                Boolean[] objectArray = questionFile.getAllPrefs(j).values().toArray(new Boolean[0]);
-                boolean[] returnValue = new boolean[objectArray.length];
-                for (int k = 0; k < objectArray.length; k++)
-                    returnValue[k] = objectArray[k];
-                currentPrefRecord[i] = returnValue;
-                i++;
-            }
+            for (Map.Entry<SetCode, Question[]> set : questionFile.questionSets.entrySet())
+                if (set.getKey().digraphs == null)
+                    //check if preferences are recorded for individual questions
+                    if (OptionsControl.exists(questionFile.getPrefId(set.getKey().number)))
+                    {
+                        int length = set.getValue().length;
+                        if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number)))
+                            if ((index + length) > Integer.SIZE)
+                            {
+                                currentPrefRecord[section] += ((0b1 << (Integer.SIZE - index)) - 1) << index;
+                                currentPrefRecord[section + 1] += (0b1 << ((index + length) - Integer.SIZE)) - 1;
+                            }
+                            else
+                                currentPrefRecord[section] += ((0b1 << length) - 1) << index;
+                        index += length;
+                        if (index >= Integer.SIZE)
+                        {
+                            index -= Integer.SIZE;
+                            section++;
+                        }
+                    }
+                    else
+                        for (Question question : set.getValue())
+                        {
+                            if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number) +
+                                    OptionsControl.SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
+                                currentPrefRecord[section] += 0b1 << index;
+
+                            index++;
+                            if (index >= Integer.SIZE)
+                            {
+                                index = 0;
+                                section++;
+                            }
+                        }
         return currentPrefRecord;
     }
 
