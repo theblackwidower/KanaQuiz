@@ -339,21 +339,25 @@ public class QuestionBank extends WeightedList<Question>
         if (minCount > 0)
         {
             maxCount -= minCount;
+            Map<String, Float> editedCount = new TreeMap<>();
             for (String answer : newAnswerCount.keySet())
             {
-                float newCount = newAnswerCount.remove(answer) - minCount;
-                newAnswerCount.put(answer, newCount);
+                float newCount = newAnswerCount.get(answer) - minCount;
+                editedCount.put(answer, newCount);
             }
+            newAnswerCount = editedCount;
         }
 
         if (maxCount > maxAnswerWeight)
         {
             float controlFactor = (float) maxAnswerWeight / maxCount;
+            Map<String, Float> editedCount = new TreeMap<>();
             for (String answer : newAnswerCount.keySet())
             {
-                float newCount = newAnswerCount.remove(answer) * controlFactor;
-                newAnswerCount.put(answer, newCount);
+                float newCount = newAnswerCount.get(answer) * controlFactor;
+                editedCount.put(answer, newCount);
             }
+            newAnswerCount = editedCount;
         }
 
         WeightedList<String> weightedAnswerList = new WeightedList<>();
