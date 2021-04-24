@@ -240,23 +240,33 @@ public class QuestionManagement
         questionFiles[2] = VOCABULARY;
         System.arraycopy(KANJI_FILES, 0, questionFiles, 3, KANJI_FILES.length);
 
-        int prefCount = 2;
+        int prefCount = 1;
         for (QuestionManagement questionFile : questionFiles)
             prefCount += questionFile.prefCountCache;
         int[] currentPrefRecord = new int[(prefCount / Integer.SIZE) + 1];
 
         if (OptionsControl.getBoolean(R.string.prefid_digraphs))
             currentPrefRecord[0] += 0b1;
-        if (OptionsControl.getBoolean(R.string.prefid_diacritics))
-            currentPrefRecord[0] += 0b10;
+        boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        int index = 2;
+        int index = 1;
         int section = 0;
         for (QuestionManagement questionFile : questionFiles)
             for (Map.Entry<SetCode, Question[]> set : questionFile.questionSets.entrySet())
                 if (set.getKey().digraphs == null)
+                    //for diacritic sets if diacritics are disabled
+                    if (!isDiacritics && ((set.getKey().diacritic == Diacritic.DAKUTEN) ||
+                            (set.getKey().diacritic == Diacritic.HANDAKUTEN)))
+                    {
+                        index += set.getValue().length;
+                        if (index >= Integer.SIZE)
+                        {
+                            index -= Integer.SIZE;
+                            section++;
+                        }
+                    }
                     //check if preferences are recorded for individual questions
-                    if (OptionsControl.exists(questionFile.getPrefId(set.getKey().number)))
+                    else if (OptionsControl.exists(questionFile.getPrefId(set.getKey().number)))
                     {
                         int length = set.getValue().length;
                         if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number)))
@@ -277,8 +287,7 @@ public class QuestionManagement
                     else
                         for (Question question : set.getValue())
                         {
-                            if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number) +
-                                    OptionsControl.SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
+                            if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number) + OptionsControl.SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
                                 currentPrefRecord[section] += 0b1 << index;
 
                             index++;
