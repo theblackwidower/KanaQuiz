@@ -643,6 +643,7 @@ public class QuestionManagement
 
     public void populateSelectionScreen(LinearLayout layout)
     {
+        boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
         for (int i = 1; i <= getCategoryCount(); i++)
         {
             QuestionSelectionItem item = new QuestionSelectionItem(layout.getContext());
@@ -651,7 +652,9 @@ public class QuestionManagement
             item.setPrefId(getPrefId(i));
             ArrayList<String> questions = new ArrayList();
             for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
-                if ((set.getKey().number == i) && (set.getKey().digraphs == null))
+                if ((set.getKey().number == i) && (set.getKey().digraphs == null) && (isDiacritics ||
+                        ((set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
+                                (set.getKey().diacritic == Diacritic.CONSONANT))))
                     for (Question question : set.getValue())
                         questions.add(question.getDatabaseKey());
 
