@@ -210,6 +210,11 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         chkCheckBox.setVisibility(INVISIBLE);
     }
 
+    public boolean isNeutral()
+    {
+        return (chkCheckBox.getVisibility() == INVISIBLE);
+    }
+
     @Override
     public boolean isChecked()
     {
