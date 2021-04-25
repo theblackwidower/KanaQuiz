@@ -335,14 +335,17 @@ public class QuestionManagement
         if (OptionsControl.exists(prefStart))
             returnValue.put("all", OptionsControl.getBoolean(prefStart));
         else
-            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
-                if ((set.getKey().number == number) && (set.getKey().digraphs == null))
-                    for (Question question : set.getValue())
+            for (Diacritic diacriticSetting : Diacritic.values())
+            {
+                Question[] set = getQuestionSet(number, diacriticSetting, null);
+                if (set != null)
+                    for (Question question : set)
                     {
                         String key = question.getDatabaseKey();
                         String fullPrefId = prefStart + OptionsControl.SUBPREFERENCE_DELIMITER + key;
                         returnValue.put(key, OptionsControl.getBoolean(fullPrefId));
                     }
+            }
         return returnValue;
     }
 
@@ -644,6 +647,11 @@ public class QuestionManagement
     public void populateSelectionScreen(LinearLayout layout)
     {
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
+        Diacritic[] diacriticTypes;
+        if (isDiacritics)
+            diacriticTypes = Diacritic.values();
+        else
+            diacriticTypes = new Diacritic[]{Diacritic.NO_DIACRITIC, Diacritic.CONSONANT};
         for (int i = 1; i <= getCategoryCount(); i++)
         {
             QuestionSelectionItem item = new QuestionSelectionItem(layout.getContext());
@@ -651,13 +659,13 @@ public class QuestionManagement
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
             ArrayList<String> questions = new ArrayList();
-            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
-                if ((set.getKey().number == i) && (set.getKey().digraphs == null) && (isDiacritics ||
-                        ((set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
-                                (set.getKey().diacritic == Diacritic.CONSONANT))))
-                    for (Question question : set.getValue())
+            for (Diacritic diacriticSetting : diacriticTypes)
+            {
+                Question[] set = getQuestionSet(i, diacriticSetting, null);
+                if (set != null)
+                    for (Question question : set)
                         questions.add(question.getDatabaseKey());
-
+            }
             item.setQuestions(questions.toArray(new String[]{}));
             layout.addView(item);
         }
