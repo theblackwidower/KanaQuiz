@@ -362,25 +362,66 @@ public class QuestionManagement
         return questionBank;
     }
 
+    private final char[] LOWERCASE_CONVERTER = {'ゃ', 'ゅ', 'ょ', 'ャ', 'ュ', 'ョ'};
+    private final char[] UPPERCASE_CONVERTER = {'や', 'ゆ', 'よ', 'ヤ', 'ユ', 'ヨ'};
+
     public void buildQuestionBank(QuestionBank questionBank)
     {
-        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9);
+        boolean isDigraphs = OptionsControl.getBoolean(R.string.prefid_digraphs);
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
         for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
         {
-            if ((isDiacritics || (set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
-                    (set.getKey().diacritic == Diacritic.CONSONANT)) && (isDigraphs || (set.getKey().digraphs == null)))
+            if (isDiacritics || (set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
+                    (set.getKey().diacritic == Diacritic.CONSONANT))
             {
-                Boolean pref = getPref(set.getKey().number);
-                if (pref == null)
+                if (set.getKey().digraphs == null)
                 {
-                    for (Question question : set.getValue())
-                        if (getPref(set.getKey().number, question.getDatabaseKey()))
-                            questionBank.addQuestion(question);
+                    Boolean pref = getPref(set.getKey().number);
+                    if (pref == null)
+                    {
+                        for (Question question : set.getValue())
+                            if (getPref(set.getKey().number, question.getDatabaseKey()))
+                                questionBank.addQuestion(question);
+                    }
+                    else if (pref)
+                        questionBank.addQuestions(set.getValue());
                 }
-                else if (pref)
-                    questionBank.addQuestions(set.getValue());
+                else if (isDigraphs)
+                {
+                    Boolean prefOne = getPref(set.getKey().number);
+                    Boolean prefTwo = OptionsControl.getQuestionSetBool(set.getKey().digraphs);
+                    if ((prefOne == null) || (prefTwo == null))
+                    {
+                        for (Question question : set.getValue())
+                        {
+                            char[] key = question.getDatabaseKey().toCharArray();
+                            for (int i = 0; i < key.length; i++)
+                            {
+                                int index = Arrays.binarySearch(LOWERCASE_CONVERTER, key[i]);
+                                if (index >= 0)
+                                    key[i] = UPPERCASE_CONVERTER[index];
+                            }
+                            boolean detailedPrefOne;
+                            if (prefOne == null)
+                                detailedPrefOne = getPref(set.getKey().number, Character.toString(key[0]));
+                            else
+                                detailedPrefOne = prefOne;
+
+                            boolean detailedPrefTwo;
+                            if (prefTwo == null)
+                                detailedPrefTwo = OptionsControl
+                                        .getBoolean(set.getKey().digraphs + SUBPREFERENCE_DELIMITER + key[1]);
+                            else
+                                detailedPrefTwo = prefTwo;
+
+                            if (detailedPrefOne && detailedPrefTwo)
+                                questionBank.addQuestion(question);
+                        }
+                    }
+                    else if (prefOne && prefTwo)
+                        questionBank.addQuestions(set.getValue());
+                }
             }
         }
     }
