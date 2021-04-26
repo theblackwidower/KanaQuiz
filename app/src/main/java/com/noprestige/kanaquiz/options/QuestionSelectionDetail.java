@@ -27,6 +27,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
+
 public class QuestionSelectionDetail extends DialogFragment
 {
     private static final String ARG_PREFID = "prefId";
@@ -58,7 +60,7 @@ public class QuestionSelectionDetail extends DialogFragment
         checkBoxes = new CheckBox[questions.length];
         for (int i = 0; i < questions.length; i++)
         {
-            String prefId = prefIdStart + OptionsControl.SUBPREFERENCE_DELIMITER + questions[i];
+            String prefId = prefIdStart + SUBPREFERENCE_DELIMITER + questions[i];
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(questions[i]);
             checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -81,8 +83,8 @@ public class QuestionSelectionDetail extends DialogFragment
             parent.nullify();
             String[] questions = getArguments().getStringArray(ARG_QUESTIONS);
             for (int i = 0; i < questions.length; i++)
-                OptionsControl.setBoolean(prefIdStart + OptionsControl.SUBPREFERENCE_DELIMITER + questions[i],
-                        checkBoxes[i].isChecked());
+                OptionsControl
+                        .setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questions[i], checkBoxes[i].isChecked());
         }
         else
             OptionsControl.setBoolean(prefId, isChecked);

@@ -31,6 +31,8 @@ import java.util.Set;
 
 import androidx.preference.PreferenceManager;
 
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
+
 public final class OptionsControl
 {
     private static SharedPreferences sharedPreferences;
@@ -38,7 +40,6 @@ public final class OptionsControl
     private static Resources resources;
 
     private static final String DEFAULT_QUESTION_SET = "hiragana_set_1";
-    public static final String SUBPREFERENCE_DELIMITER = "_";
 
     private OptionsControl() {}
 

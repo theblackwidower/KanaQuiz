@@ -56,6 +56,8 @@ public class QuestionManagement
 
     private final String[] setNoDiacriticsTitles;
 
+    public static final String SUBPREFERENCE_DELIMITER = "_";
+
     public int getCategoryCount()
     {
         return categoryCount;
@@ -287,7 +289,7 @@ public class QuestionManagement
                     else
                         for (Question question : set.getValue())
                         {
-                            if (OptionsControl.getBoolean(questionFile.getPrefId(set.getKey().number) + OptionsControl.SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
+                            if (questionFile.getPref(set.getKey().number, question.getDatabaseKey()))
                                 currentPrefRecord[section] += 0b1 << index;
 
                             index++;
@@ -328,6 +330,11 @@ public class QuestionManagement
         return returnValue;
     }
 
+    public boolean getPref(int number, String key)
+    {
+        return OptionsControl.getBoolean(getPrefId(number) + SUBPREFERENCE_DELIMITER + key);
+    }
+
     public Map<String, Boolean> getAllPrefs(int number)
     {
         String prefStart = getPrefId(number);
@@ -342,8 +349,7 @@ public class QuestionManagement
                     for (Question question : set)
                     {
                         String key = question.getDatabaseKey();
-                        String fullPrefId = prefStart + OptionsControl.SUBPREFERENCE_DELIMITER + key;
-                        returnValue.put(key, OptionsControl.getBoolean(fullPrefId));
+                        returnValue.put(key, getPref(number, key));
                     }
             }
         return returnValue;
@@ -371,9 +377,7 @@ public class QuestionManagement
                 {
                     ArrayList<Question> tempBank = new ArrayList<>(set.getValue().length);
                     for (Question question : set.getValue())
-                        if (OptionsControl.getBoolean(
-                                getPrefId(set.getKey().number) + OptionsControl.SUBPREFERENCE_DELIMITER +
-                                        question.getDatabaseKey()))
+                        if (getPref(set.getKey().number, question.getDatabaseKey()))
                             questionBank.addQuestion(question);
                     questionBank.addQuestions(tempBank.toArray(new Question[]{}));
                 }
