@@ -375,11 +375,9 @@ public class QuestionManagement
                 Boolean pref = getPref(set.getKey().number);
                 if (pref == null)
                 {
-                    ArrayList<Question> tempBank = new ArrayList<>(set.getValue().length);
                     for (Question question : set.getValue())
                         if (getPref(set.getKey().number, question.getDatabaseKey()))
                             questionBank.addQuestion(question);
-                    questionBank.addQuestions(tempBank.toArray(new Question[]{}));
                 }
                 else if (pref)
                     questionBank.addQuestions(set.getValue());
