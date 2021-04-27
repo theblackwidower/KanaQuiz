@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.Question;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.util.Locale;
@@ -38,7 +39,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
     private String prefId;
     private String title;
     private String contents;
-    private String[] questions;
+    private Question[] questions;
 
     private TextView lblText;
     private CheckBox chkCheckBox;
@@ -175,7 +176,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         }
     }
 
-    public void setQuestions(String[] questions)
+    public void setQuestions(Question[] questions)
     {
         this.questions = questions;
     }

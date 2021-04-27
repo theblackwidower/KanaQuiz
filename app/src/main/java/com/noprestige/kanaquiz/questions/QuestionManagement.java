@@ -701,15 +701,14 @@ public class QuestionManagement
             item.setTitle(getSetTitle(i));
             item.setContents(displayContents(i));
             item.setPrefId(getPrefId(i));
-            ArrayList<String> questions = new ArrayList();
+            ArrayList<Question> questions = new ArrayList();
             for (Diacritic diacriticSetting : diacriticTypes)
             {
                 Question[] set = getQuestionSet(i, diacriticSetting, null);
                 if (set != null)
-                    for (Question question : set)
-                        questions.add(question.getDatabaseKey());
+                    questions.addAll(Arrays.asList(set));
             }
-            item.setQuestions(questions.toArray(new String[]{}));
+            item.setQuestions(questions.toArray(new Question[]{}));
             layout.addView(item);
         }
     }

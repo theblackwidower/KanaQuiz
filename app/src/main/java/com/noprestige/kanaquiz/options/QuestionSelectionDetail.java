@@ -23,6 +23,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import com.noprestige.kanaquiz.questions.KanaQuestion;
+import com.noprestige.kanaquiz.questions.KanjiQuestion;
+import com.noprestige.kanaquiz.questions.Question;
+import com.noprestige.kanaquiz.questions.WordQuestion;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -32,18 +37,32 @@ import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE
 public class QuestionSelectionDetail extends DialogFragment
 {
     private static final String ARG_PREFID = "prefId";
-    private static final String ARG_QUESTIONS = "questions";
+    private static final String ARG_QUESTION_NAMES = "questionNames";
+    private static final String ARG_QUESTION_PREFIDS = "questionPrefIds";
 
     private CheckBox[] checkBoxes;
 
     private QuestionSelectionItem parent;
 
-    public static QuestionSelectionDetail newInstance(String prefId, String[] questions)
+    public static QuestionSelectionDetail newInstance(String prefId, Question[] questions)
     {
         Bundle args = new Bundle();
         QuestionSelectionDetail dialog = new QuestionSelectionDetail();
         args.putString(ARG_PREFID, prefId);
-        args.putStringArray(ARG_QUESTIONS, questions);
+        String[] questionNames = new String[questions.length];
+        String[] questionPrefIds = new String[questions.length];
+        for (int i = 0; i < questions.length; i++)
+        {
+            if (questions[i].getClass().equals(KanaQuestion.class) ||
+                    questions[i].getClass().equals(KanjiQuestion.class))
+                questionNames[i] = questions[i].getQuestionText();
+            else if (questions[i].getClass().equals(WordQuestion.class))
+                questionNames[i] = questions[i].fetchCorrectAnswer();
+
+            questionPrefIds[i] = questions[i].getDatabaseKey();
+        }
+        args.putStringArray(ARG_QUESTION_NAMES, questionNames);
+        args.putStringArray(ARG_QUESTION_PREFIDS, questionPrefIds);
         dialog.setArguments(args);
         return dialog;
     }
@@ -56,13 +75,14 @@ public class QuestionSelectionDetail extends DialogFragment
         content.setOrientation(LinearLayout.VERTICAL);
         content.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         String prefIdStart = getArguments().getString(ARG_PREFID);
-        String[] questions = getArguments().getStringArray(ARG_QUESTIONS);
-        checkBoxes = new CheckBox[questions.length];
-        for (int i = 0; i < questions.length; i++)
+        String[] questionNames = getArguments().getStringArray(ARG_QUESTION_NAMES);
+        String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
+        checkBoxes = new CheckBox[questionNames.length];
+        for (int i = 0; i < questionNames.length; i++)
         {
-            String prefId = prefIdStart + SUBPREFERENCE_DELIMITER + questions[i];
+            String prefId = prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i];
             CheckBox checkBox = new CheckBox(getContext());
-            checkBox.setText(questions[i]);
+            checkBox.setText(questionNames[i]);
             checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             checkBox.setChecked(OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
                     OptionsControl.getBoolean(prefId));
@@ -81,10 +101,10 @@ public class QuestionSelectionDetail extends DialogFragment
         {
             OptionsControl.delete(prefIdStart);
             parent.nullify();
-            String[] questions = getArguments().getStringArray(ARG_QUESTIONS);
-            for (int i = 0; i < questions.length; i++)
-                OptionsControl
-                        .setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questions[i], checkBoxes[i].isChecked());
+            String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
+            for (int i = 0; i < questionPrefIds.length; i++)
+                OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i],
+                        checkBoxes[i].isChecked());
         }
         else
             OptionsControl.setBoolean(prefId, isChecked);
