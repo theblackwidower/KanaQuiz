@@ -389,56 +389,71 @@ public class QuestionManagement
                 }
                 else if (isDigraphs)
                 {
-                    Boolean prefOne = getPref(set.getKey().number);
-                    Boolean prefTwo = OptionsControl.getQuestionSetBool(set.getKey().digraphs);
-                    if ((prefOne == null) || (prefTwo == null))
-                    {
-                        for (Question question : set.getValue())
-                        {
-                            char[] key = question.getDatabaseKey().toCharArray();
-                            for (int i = 0; i < key.length; i++)
-                            {
-                                int index = Arrays.binarySearch(LOWERCASE_CONVERTER, key[i]);
-                                if (index >= 0)
-                                    key[i] = UPPERCASE_CONVERTER[index];
-                            }
-                            boolean detailedPrefOne;
-                            if (prefOne == null)
-                                detailedPrefOne = getPref(set.getKey().number, Character.toString(key[0]));
-                            else
-                                detailedPrefOne = prefOne;
-
-                            boolean detailedPrefTwo;
-                            if (prefTwo == null)
-                                detailedPrefTwo = OptionsControl
-                                        .getBoolean(set.getKey().digraphs + SUBPREFERENCE_DELIMITER + key[1]);
-                            else
-                                detailedPrefTwo = prefTwo;
-
-                            if (detailedPrefOne && detailedPrefTwo)
-                                questionBank.addQuestion(question);
-                        }
-                    }
-                    else if (prefOne && prefTwo)
-                        questionBank.addQuestions(set.getValue());
+                    Question[] digraphSet = getSelectedDigraphs(set);
+                    questionBank.addQuestions(digraphSet);
                 }
             }
         }
     }
 
+    private Question[] getSelectedDigraphs(Map.Entry<SetCode, Question[]> set)
+    {
+        Boolean prefOne = getPref(set.getKey().number);
+        Boolean prefTwo = OptionsControl.getQuestionSetBool(set.getKey().digraphs);
+        if ((prefOne == null) || (prefTwo == null))
+        {
+            ArrayList<Question> returnValue = new ArrayList<>();
+            for (Question question : set.getValue())
+            {
+                char[] key = question.getDatabaseKey().toCharArray();
+                for (int i = 0; i < key.length; i++)
+                {
+                    int index = Arrays.binarySearch(LOWERCASE_CONVERTER, key[i]);
+                    if (index >= 0)
+                        key[i] = UPPERCASE_CONVERTER[index];
+                }
+                boolean detailedPrefOne;
+                if (prefOne == null)
+                    detailedPrefOne = getPref(set.getKey().number, Character.toString(key[0]));
+                else
+                    detailedPrefOne = prefOne;
+
+                boolean detailedPrefTwo;
+                if (prefTwo == null)
+                    detailedPrefTwo =
+                            OptionsControl.getBoolean(set.getKey().digraphs + SUBPREFERENCE_DELIMITER + key[1]);
+                else
+                    detailedPrefTwo = prefTwo;
+
+                if (detailedPrefOne && detailedPrefTwo)
+                    returnValue.add(question);
+            }
+            if (returnValue.isEmpty())
+                return null;
+            else
+                return returnValue.toArray(new Question[]{});
+        }
+        else if (prefOne && prefTwo)
+            return set.getValue();
+        else
+            return null;
+    }
+
     public boolean anySelected()
     {
         for (int i = 1; i <= getCategoryCount(); i++)
-            if (getPref(i))
-                return true;
+            for (Boolean pref : getAllPrefs(i).values())
+                if (pref)
+                    return true;
 
         return false;
     }
 
     public boolean anyMainKanaSelected()
     {
+        Diacritic[] diacritics = {Diacritic.NO_DIACRITIC, Diacritic.CONSONANT};
         for (int i = 1; i <= 10; i++)
-            if (getPref(i))
+            if (setSelected(i, diacritics))
                 return true;
 
         return false;
@@ -446,21 +461,52 @@ public class QuestionManagement
 
     public boolean diacriticsSelected()
     {
+        Diacritic[] diacritics = {Diacritic.DAKUTEN, Diacritic.HANDAKUTEN};
         if (OptionsControl.getBoolean(R.string.prefid_diacritics))
             for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, null) != null) ||
-                        (getQuestionSet(i, Diacritic.HANDAKUTEN, null) != null)))
+                if (setSelected(i, diacritics))
                     return true;
 
         return false;
     }
 
+    private boolean setSelected(int number, Diacritic[] diacritics)
+    {
+        Question[][] sets = new Question[diacritics.length][];
+        boolean isApplicable = false;
+        for (int i = 0; i < diacritics.length; i++)
+        {
+            sets[i] = getQuestionSet(number, diacritics[i], null);
+            if (sets[i] != null)
+                isApplicable = true;
+        }
+
+        if (isApplicable)
+        {
+            String prefStart = getPrefId(number);
+            if (OptionsControl.exists(prefStart))
+                return getPref(number);
+            else
+                for (Question[] set : sets)
+                    if (set != null)
+                        for (Question question : set)
+                        {
+                            String key = question.getDatabaseKey();
+                            if (getPref(number, key))
+                                return true;
+                        }
+        }
+        return false;
+    }
+
     public boolean digraphsSelected()
     {
-        if (OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-            for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && (getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9)) != null))
-                    return true;
+        if (OptionsControl.getBoolean(R.string.prefid_digraphs))
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().digraphs != null) && ((set.getKey().diacritic == Diacritic.NO_DIACRITIC) ||
+                        (set.getKey().diacritic == Diacritic.CONSONANT)))
+                    if (getSelectedDigraphs(set) != null)
+                        return true;
 
         return false;
     }
@@ -468,11 +514,12 @@ public class QuestionManagement
     public boolean diacriticDigraphsSelected()
     {
         if (OptionsControl.getBoolean(R.string.prefid_diacritics) &&
-                OptionsControl.getBoolean(R.string.prefid_digraphs) && getPref(9))
-            for (int i = 1; i <= getCategoryCount(); i++)
-                if (getPref(i) && ((getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9)) != null) ||
-                        (getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9)) != null)))
-                    return true;
+                OptionsControl.getBoolean(R.string.prefid_digraphs))
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().digraphs != null) && ((set.getKey().diacritic == Diacritic.DAKUTEN) ||
+                        (set.getKey().diacritic == Diacritic.HANDAKUTEN)))
+                    if (getSelectedDigraphs(set) != null)
+                        return true;
 
         return false;
     }
@@ -480,8 +527,11 @@ public class QuestionManagement
     public boolean extendedKatakanaSelected()
     {
         for (int i = 11; i <= getCategoryCount(); i++)
-            if (getPref(i))
+        {
+            Diacritic[] diacritics = {Diacritic.NO_DIACRITIC};
+            if (setSelected(i, diacritics))
                 return true;
+        }
 
         return false;
     }
