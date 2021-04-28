@@ -400,7 +400,9 @@ public class QuestionManagement
     {
         Boolean prefOne = getPref(set.getKey().number);
         Boolean prefTwo = OptionsControl.getQuestionSetBool(set.getKey().digraphs);
-        if ((prefOne == null) || (prefTwo == null))
+        //checking if either are null, and that neither are false
+        if (((prefOne == null) || (prefTwo == null)) && ((prefOne == null) || prefOne) &&
+                ((prefTwo == null) || prefTwo))
         {
             ArrayList<Question> returnValue = new ArrayList<>();
             for (Question question : set.getValue())
@@ -433,7 +435,7 @@ public class QuestionManagement
             else
                 return returnValue.toArray(new Question[]{});
         }
-        else if (prefOne && prefTwo)
+        else if ((prefOne != null) && (prefTwo != null) && prefOne && prefTwo)
             return set.getValue();
         else
             return null;
