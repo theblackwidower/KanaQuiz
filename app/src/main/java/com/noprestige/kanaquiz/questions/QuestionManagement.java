@@ -362,8 +362,8 @@ public class QuestionManagement
         return questionBank;
     }
 
-    private final char[] LOWERCASE_CONVERTER = {'ゃ', 'ゅ', 'ょ', 'ャ', 'ュ', 'ョ'};
-    private final char[] UPPERCASE_CONVERTER = {'や', 'ゆ', 'よ', 'ヤ', 'ユ', 'ヨ'};
+    private static final char[] LOWERCASE_CONVERTER = {'ゃ', 'ゅ', 'ょ', 'ャ', 'ュ', 'ョ'};
+    private static final char[] UPPERCASE_CONVERTER = {'や', 'ゆ', 'よ', 'ヤ', 'ユ', 'ヨ'};
 
     public void buildQuestionBank(QuestionBank questionBank)
     {
