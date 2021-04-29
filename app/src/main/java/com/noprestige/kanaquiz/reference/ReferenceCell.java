@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -285,46 +285,42 @@ public class ReferenceCell extends View
         descriptionPaint.setColor(colour);
     }
 
-    public static TableRow buildSpecialRow(Context context, Question[] questions)
+    private static final char[] VOWELS = {'a', 'i', 'u', 'e', 'o'};
+    private static final char CONSONANT = 'n';
+
+    public static View buildKanaRow(Context context, Question[] questions)
     {
         if (questions == null)
             return null;
         else
         {
-            TableRow row = new TableRow(context);
-
-            switch (questions.length)
+            ReferenceCell[] cells = new ReferenceCell[VOWELS.length];
+            if ((questions.length == 1) && Character.toString(CONSONANT).equals(questions[0].fetchCorrectAnswer()))
+                return questions[0].generateReference(context);
+            for (Question question : questions)
             {
-                case 1:
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(questions[0].generateReference(context));
-                    break;
-                case 2:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(questions[1].generateReference(context));
-                    break;
-                case 3:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[1].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[2].generateReference(context));
-                    break;
-                case 4:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(questions[1].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[2].generateReference(context));
-                    row.addView(questions[3].generateReference(context));
-                    break;
-                default:
-                    for (Question question : questions)
-                        row.addView(question.generateReference(context));
+                String romaji = question.fetchCorrectAnswer();
+                char vowel = romaji.charAt(romaji.length() - 1);
+                for (int i = 0; i < VOWELS.length; i++)
+                    if (vowel == VOWELS[i])
+                        if (cells[i] == null)
+                        {
+                            vowel = 0x0;
+                            cells[i] = question.generateReference(context);
+                            break;
+                        }
+                        else
+                            throw new IllegalArgumentException("Cell already occupied.");
+                if (vowel != 0x0)
+                    throw new IllegalArgumentException("Question failed to get added to reference screen.");
             }
+
+            TableRow row = new TableRow(context);
+            for (int i = 0; i < 5; i++)
+                if (cells[i] == null)
+                    row.addView(new View(context));
+                else
+                    row.addView(cells[i]);
             return row;
         }
     }

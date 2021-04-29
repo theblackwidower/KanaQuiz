@@ -582,25 +582,37 @@ public class QuestionManagement
         return returnValue.toString();
     }
 
+    private Question[] getReferenceSet(int number, Diacritic diacritic)
+    {
+        Question[] questionSet = null;
+        Boolean pref = getPref(number);
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference) || ((pref != null) && pref))
+            questionSet = getQuestionSet(number, diacritic, null);
+        else if (pref == null)
+        {
+            ArrayList<Question> tempList = new ArrayList<>();
+            Question[] fullSet = getQuestionSet(number, diacritic, null);
+            if (fullSet == null)
+                return null;
+            for (Question question : fullSet)
+                if (getPref(number, question.getDatabaseKey()))
+                    tempList.add(question);
+            if (!tempList.isEmpty())
+                questionSet = tempList.toArray(new Question[0]);
+        }
+        return questionSet;
+    }
+
     public ReferenceTable getMainReferenceTable(Context context)
     {
         ReferenceTable table = new ReferenceTable(context);
-
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
         for (int i = 1; i <= 7; i++)
-            if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, null)));
-
-        if (isFullReference || getPref(9))
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(9, Diacritic.NO_DIACRITIC, null)));
-        if (isFullReference || getPref(8)) //fits gojūon ordering
-            table.addView(ReferenceCell.buildRow(context, getQuestionSet(8, Diacritic.NO_DIACRITIC, null)));
-        if (isFullReference || getPref(10))
-        {
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.NO_DIACRITIC, null)));
-            table.addView(ReferenceCell.buildSpecialRow(context, getQuestionSet(10, Diacritic.CONSONANT, null)));
-        }
+            table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(i, Diacritic.NO_DIACRITIC)));
+        //for gojūon ordering
+        table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(9, Diacritic.NO_DIACRITIC)));
+        table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(8, Diacritic.NO_DIACRITIC)));
+        table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(10, Diacritic.NO_DIACRITIC)));
+        table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(10, Diacritic.CONSONANT)));
 
         return table;
     }
@@ -608,15 +620,11 @@ public class QuestionManagement
     public ReferenceTable getDiacriticReferenceTable(Context context)
     {
         ReferenceTable table = new ReferenceTable(context);
-
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
         for (int i = 1; i <= getCategoryCount(); i++)
-            if (isFullReference || getPref(i))
-            {
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, null)));
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, null)));
-            }
+        {
+            table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(i, Diacritic.DAKUTEN)));
+            table.addView(ReferenceCell.buildKanaRow(table.getContext(), getReferenceSet(i, Diacritic.HANDAKUTEN)));
+        }
 
         return table;
     }
@@ -625,11 +633,14 @@ public class QuestionManagement
     {
         ReferenceTable table = new ReferenceTable(context);
 
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
-        for (int i = 1; i <= getCategoryCount(); i++)
-            if (isFullReference || getPref(i))
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9))));
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+            for (int i = 1; i <= getCategoryCount(); i++)
+                table.addView(
+                        ReferenceCell.buildKanaRow(context, getQuestionSet(i, Diacritic.NO_DIACRITIC, getPrefId(9))));
+        else
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().digraphs != null) && (set.getKey().diacritic == Diacritic.NO_DIACRITIC))
+                    table.addView(ReferenceCell.buildKanaRow(context, getSelectedDigraphs(set)));
 
         return table;
     }
@@ -638,14 +649,18 @@ public class QuestionManagement
     {
         ReferenceTable table = new ReferenceTable(context);
 
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
-        for (int i = 1; i <= getCategoryCount(); i++)
-            if (isFullReference || getPref(i))
+        if (OptionsControl.getBoolean(R.string.prefid_full_reference))
+            for (int i = 1; i <= getCategoryCount(); i++)
             {
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9))));
-                table.addView(ReferenceCell.buildRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9))));
+                table.addView(ReferenceCell.buildKanaRow(context, getQuestionSet(i, Diacritic.DAKUTEN, getPrefId(9))));
+                table.addView(
+                        ReferenceCell.buildKanaRow(context, getQuestionSet(i, Diacritic.HANDAKUTEN, getPrefId(9))));
             }
+        else
+            for (Map.Entry<SetCode, Question[]> set : questionSets.entrySet())
+                if ((set.getKey().digraphs != null) && ((set.getKey().diacritic == Diacritic.DAKUTEN) ||
+                        (set.getKey().diacritic == Diacritic.HANDAKUTEN)))
+                    table.addView(ReferenceCell.buildKanaRow(context, getSelectedDigraphs(set)));
 
         return table;
     }
@@ -656,10 +671,10 @@ public class QuestionManagement
         fullLayout.setOrientation(LinearLayout.VERTICAL);
         fullLayout.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
 
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
         for (int i = 11; i <= getCategoryCount(); i++)
-            if (isFullReference || getPref(i))
+        {
+            Question[] questionSet = getReferenceSet(i, Diacritic.NO_DIACRITIC);
+            if (questionSet != null)
             {
                 fullLayout.addView(
                         ReferenceCell.buildHeader(context, getSetTitle(i).toString().split("\\s*[()]\\s*")[1]));
@@ -668,14 +683,12 @@ public class QuestionManagement
                 sectionLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, null);
-
                 for (Question question : questionSet)
                     sectionLayout.addView(question.generateReference(context));
 
                 fullLayout.addView(sectionLayout);
             }
-
+        }
         return fullLayout;
     }
 
@@ -688,12 +701,11 @@ public class QuestionManagement
         ReferenceTable currentTable = null;
         int currentSize = 0;
 
-        boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
-
         for (int i = 1; i <= getCategoryCount(); i++)
-            if (isFullReference || getPref(i))
+        {
+            Question[] questionSet = getReferenceSet(i, Diacritic.NO_DIACRITIC);
+            if (questionSet != null)
             {
-                Question[] questionSet = getQuestionSet(i, Diacritic.NO_DIACRITIC, null);
                 if (questionSet.length != currentSize)
                 {
                     currentSize = questionSet.length;
@@ -703,6 +715,7 @@ public class QuestionManagement
                 }
                 currentTable.addView(ReferenceCell.buildRow(context, questionSet));
             }
+        }
         masterLayout.addView(currentTable);
 
         return masterLayout;
@@ -713,7 +726,7 @@ public class QuestionManagement
         FlowLayout layout = new FlowLayout(context);
         layout.setGravity(Gravity.FILL);
 
-        Question[] questionSet = getQuestionSet(setNumber, Diacritic.NO_DIACRITIC, null);
+        Question[] questionSet = getReferenceSet(setNumber, Diacritic.NO_DIACRITIC);
 
         int padding = context.getResources().getDimensionPixelSize(R.dimen.vocabReferenceCellHorizontalPadding);
 
