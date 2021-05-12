@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class ReferenceScreen extends AppCompatActivity
 {
     private static final int MAX_TABS = 3;
 
+    private ViewPager2 viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -41,7 +44,7 @@ public class ReferenceScreen extends AppCompatActivity
         ThemeManager.setTheme(this);
         setContentView(R.layout.activity_tabbed_screen);
 
-        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager);
         ReferencePager pagerAdapter = new ReferencePager(this);
         viewPager.setAdapter(pagerAdapter);
         if (pagerAdapter.getItemCount() == 0)
@@ -66,6 +69,57 @@ public class ReferenceScreen extends AppCompatActivity
                     (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position))).attach();
             viewPager.setUserInputEnabled(false);
         }
+    }
+
+    private float startX;
+    private ViewPager2 nestedViewPager;
+    private int itemCount;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            startX = event.getX();
+            long nestedType = viewPager.getAdapter().getItemId(viewPager.getCurrentItem());
+
+            if (nestedType == R.string.hiragana)
+                nestedViewPager = findViewById(R.id.hiraganaReferenceViewPager);
+            else if (nestedType == R.string.katakana)
+                nestedViewPager = findViewById(R.id.katakanaReferenceViewPager);
+            else if (nestedType == R.string.kanji)
+                nestedViewPager = findViewById(R.id.kanjiReferenceViewPager);
+            else if (nestedType == R.string.vocabulary)
+                nestedViewPager = findViewById(R.id.vocabularyReferenceViewPager);
+
+            itemCount = nestedViewPager.getAdapter().getItemCount() - 1;
+
+            viewPager.beginFakeDrag();
+            nestedViewPager.beginFakeDrag();
+        }
+        else if (event.getAction() == MotionEvent.ACTION_UP)
+        {
+            viewPager.endFakeDrag();
+            nestedViewPager.endFakeDrag();
+
+            startX = 0;
+            nestedViewPager = null;
+            itemCount = 0;
+        }
+        else
+        {
+            int currentItem = nestedViewPager.getCurrentItem();
+            float deltaX = event.getX() - startX;
+            startX = event.getX();
+
+            if (((currentItem == 0) && (deltaX > 0)) || ((currentItem == itemCount) && (deltaX < 0)))
+                viewPager.fakeDragBy(deltaX);
+            else
+                nestedViewPager.fakeDragBy(deltaX);
+        }
+
+        return super.onTouchEvent(event);
     }
 
     @Override

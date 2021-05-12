@@ -74,6 +74,8 @@ public class ReferencePage extends Fragment
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)))
                 .attach();
 
+        viewPager.setUserInputEnabled(false);
+
         return subScreen;
     }
 }
