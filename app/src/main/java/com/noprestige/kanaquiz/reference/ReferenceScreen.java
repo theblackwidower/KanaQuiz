@@ -72,8 +72,10 @@ public class ReferenceScreen extends AppCompatActivity
     }
 
     private float startX;
+    private float lastX;
     private ViewPager2 nestedViewPager;
-    private int itemCount;
+    private boolean isFirstItem;
+    private boolean isLastItem;
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
@@ -82,6 +84,8 @@ public class ReferenceScreen extends AppCompatActivity
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             startX = event.getX();
+            lastX = startX;
+
             long nestedType = viewPager.getAdapter().getItemId(viewPager.getCurrentItem());
 
             if (nestedType == R.string.hiragana)
@@ -93,7 +97,9 @@ public class ReferenceScreen extends AppCompatActivity
             else if (nestedType == R.string.vocabulary)
                 nestedViewPager = findViewById(R.id.vocabularyReferenceViewPager);
 
-            itemCount = nestedViewPager.getAdapter().getItemCount() - 1;
+            int currentItem = nestedViewPager.getCurrentItem();
+            isFirstItem = currentItem == 0;
+            isLastItem = currentItem == (nestedViewPager.getAdapter().getItemCount() - 1);
 
             viewPager.beginFakeDrag();
             nestedViewPager.beginFakeDrag();
@@ -104,19 +110,22 @@ public class ReferenceScreen extends AppCompatActivity
             nestedViewPager.endFakeDrag();
 
             startX = 0;
+            lastX = 0;
             nestedViewPager = null;
-            itemCount = 0;
+            isFirstItem = false;
+            isLastItem = false;
         }
         else
         {
-            int currentItem = nestedViewPager.getCurrentItem();
-            float deltaX = event.getX() - startX;
-            startX = event.getX();
+            float thisX = event.getX();
+            float deltaX = thisX - lastX;
 
-            if (((currentItem == 0) && (deltaX > 0)) || ((currentItem == itemCount) && (deltaX < 0)))
+            if ((isFirstItem && (thisX > startX)) || (isLastItem && (thisX < startX)))
                 viewPager.fakeDragBy(deltaX);
             else
                 nestedViewPager.fakeDragBy(deltaX);
+
+            lastX = event.getX();
         }
 
         return super.onTouchEvent(event);
