@@ -105,7 +105,7 @@ public class ReferenceScreen extends AppCompatActivity
                 viewPager.beginFakeDrag();
             nestedViewPager.beginFakeDrag();
         }
-        else if (event.getAction() == MotionEvent.ACTION_UP)
+        else if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
         {
             if (isFirstItem || isLastItem)
                 viewPager.endFakeDrag();
