@@ -78,7 +78,7 @@ public class ReferenceScreen extends AppCompatActivity
     private boolean isLastItem;
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
+    public boolean dispatchTouchEvent(MotionEvent event)
     {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN)
@@ -130,7 +130,7 @@ public class ReferenceScreen extends AppCompatActivity
             lastX = event.getX();
         }
 
-        return super.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
