@@ -101,12 +101,14 @@ public class ReferenceScreen extends AppCompatActivity
             isFirstItem = currentItem == 0;
             isLastItem = currentItem == (nestedViewPager.getAdapter().getItemCount() - 1);
 
-            viewPager.beginFakeDrag();
+            if (isFirstItem || isLastItem)
+                viewPager.beginFakeDrag();
             nestedViewPager.beginFakeDrag();
         }
         else if (event.getAction() == MotionEvent.ACTION_UP)
         {
-            viewPager.endFakeDrag();
+            if (isFirstItem || isLastItem)
+                viewPager.endFakeDrag();
             nestedViewPager.endFakeDrag();
 
             startX = 0;
