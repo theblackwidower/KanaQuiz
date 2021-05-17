@@ -73,7 +73,6 @@ public class ReferenceScreen extends AppCompatActivity
 
     private float startX;
     private float lastX;
-    private ViewPager2 nestedViewPager;
     private boolean isFirstItem;
     private boolean isLastItem;
 
@@ -86,7 +85,8 @@ public class ReferenceScreen extends AppCompatActivity
             startX = event.getX();
             lastX = startX;
 
-            nestedViewPager = ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
+            ViewPager2 nestedViewPager =
+                    ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
 
             int currentItem = nestedViewPager.getCurrentItem();
             isFirstItem = currentItem == 0;
@@ -94,17 +94,14 @@ public class ReferenceScreen extends AppCompatActivity
 
             if (isFirstItem || isLastItem)
                 viewPager.beginFakeDrag();
-            nestedViewPager.beginFakeDrag();
         }
         else if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
         {
             if (isFirstItem || isLastItem)
                 viewPager.endFakeDrag();
-            nestedViewPager.endFakeDrag();
 
             startX = 0;
             lastX = 0;
-            nestedViewPager = null;
             isFirstItem = false;
             isLastItem = false;
         }
@@ -115,8 +112,6 @@ public class ReferenceScreen extends AppCompatActivity
 
             if ((isFirstItem && (thisX > startX)) || (isLastItem && (thisX < startX)))
                 viewPager.fakeDragBy(deltaX);
-            else
-                nestedViewPager.fakeDragBy(deltaX);
 
             lastX = event.getX();
         }
