@@ -28,10 +28,12 @@ import java.util.List;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 class ReferencePager extends FragmentStateAdapter
 {
     private List<Integer> tabList;
+    private List<ReferencePage> pageCache;
     private Context context;
 
     ReferencePager(FragmentActivity fa)
@@ -39,6 +41,7 @@ class ReferencePager extends FragmentStateAdapter
         super(fa);
 
         tabList = new ArrayList<>(3);
+        pageCache = new ArrayList<>(3);
         context = fa.getBaseContext();
 
         if (OptionsControl.getBoolean(R.string.prefid_full_reference))
@@ -69,7 +72,9 @@ class ReferencePager extends FragmentStateAdapter
     @Override
     public Fragment createFragment(int position)
     {
-        return ReferencePage.newInstance(tabList.get(position));
+        ReferencePage page = ReferencePage.newInstance(tabList.get(position));
+        pageCache.add(position, page);
+        return page;
     }
 
     @Override
@@ -87,5 +92,10 @@ class ReferencePager extends FragmentStateAdapter
     public CharSequence getPageTitle(int position)
     {
         return context.getResources().getString(tabList.get(position));
+    }
+
+    public ViewPager2 getSubPager(int position)
+    {
+        return pageCache.get(position).getViewPager();
     }
 }

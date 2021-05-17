@@ -86,16 +86,7 @@ public class ReferenceScreen extends AppCompatActivity
             startX = event.getX();
             lastX = startX;
 
-            long nestedType = viewPager.getAdapter().getItemId(viewPager.getCurrentItem());
-
-            if (nestedType == R.string.hiragana)
-                nestedViewPager = findViewById(R.id.hiraganaReferenceViewPager);
-            else if (nestedType == R.string.katakana)
-                nestedViewPager = findViewById(R.id.katakanaReferenceViewPager);
-            else if (nestedType == R.string.kanji)
-                nestedViewPager = findViewById(R.id.kanjiReferenceViewPager);
-            else if (nestedType == R.string.vocabulary)
-                nestedViewPager = findViewById(R.id.vocabularyReferenceViewPager);
+            nestedViewPager = ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
 
             int currentItem = nestedViewPager.getCurrentItem();
             isFirstItem = currentItem == 0;
