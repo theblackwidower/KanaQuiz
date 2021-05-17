@@ -112,9 +112,30 @@ public class ReferenceScreen extends AppCompatActivity
         else if (isFirstItem || isLastItem)
         {
             float thisX = event.getX();
-            float deltaX = thisX - lastX;
+            float deltaX = 0;
 
-            if ((isFirstItem && (thisX > startX)) || (isLastItem && (thisX < startX)))
+            if (isFirstItem && isLastItem)
+                deltaX = thisX - lastX;
+            else if (isFirstItem)
+            {
+                if ((lastX > startX) && (thisX > startX))
+                    deltaX = thisX - lastX;
+                else if (lastX > startX)
+                    deltaX = startX - lastX;
+                else if (thisX > startX)
+                    deltaX = thisX - startX;
+            }
+            else if (isLastItem)
+            {
+                if ((lastX < startX) && (thisX < startX))
+                    deltaX = thisX - lastX;
+                else if (lastX < startX)
+                    deltaX = startX - lastX;
+                else if (thisX < startX)
+                    deltaX = thisX - startX;
+            }
+
+            if (deltaX != 0)
                 viewPager.fakeDragBy(deltaX);
 
             lastX = event.getX();
