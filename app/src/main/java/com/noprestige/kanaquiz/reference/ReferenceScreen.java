@@ -112,9 +112,8 @@ public class ReferenceScreen extends AppCompatActivity
                 }
             }
         }
-        else if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
-        {
-            if (isFirstItem || isLastItem)
+        else if (isFirstItem || isLastItem)
+            if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
             {
                 viewPager.endFakeDrag();
 
@@ -123,24 +122,23 @@ public class ReferenceScreen extends AppCompatActivity
                 isFirstItem = false;
                 isLastItem = false;
             }
-        }
-        else if (isFirstItem || isLastItem)
-        {
-            float thisX = event.getX();
-            float deltaX = 0;
+            else
+            {
+                float thisX = event.getX();
+                float deltaX = 0;
 
-            // if both statements execute the net result is:
-            //    deltaX = thisX - lastX;
-            if (((isFirstItem) && (lastX > startX)) || ((isLastItem) && (lastX < startX)))
-                deltaX += startX - lastX;
-            if (((isFirstItem) && (thisX > startX)) || ((isLastItem) && (thisX < startX)))
-                deltaX += thisX - startX;
+                // if both statements execute the net result is:
+                //    deltaX = thisX - lastX;
+                if (((isFirstItem) && (lastX > startX)) || ((isLastItem) && (lastX < startX)))
+                    deltaX += startX - lastX;
+                if (((isFirstItem) && (thisX > startX)) || ((isLastItem) && (thisX < startX)))
+                    deltaX += thisX - startX;
 
-            if (deltaX != 0)
-                viewPager.fakeDragBy(deltaX);
+                if (deltaX != 0)
+                    viewPager.fakeDragBy(deltaX);
 
-            lastX = thisX;
-        }
+                lastX = thisX;
+            }
 
         return super.dispatchTouchEvent(event);
     }
