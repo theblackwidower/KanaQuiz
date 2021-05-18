@@ -16,6 +16,7 @@
 
 package com.noprestige.kanaquiz.reference;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -71,6 +72,8 @@ public class ReferenceScreen extends AppCompatActivity
         }
     }
 
+    private Rect touchArea;
+
     private float startX;
     private float lastX;
     private boolean isFirstItem;
@@ -82,19 +85,31 @@ public class ReferenceScreen extends AppCompatActivity
 
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
-            ViewPager2 nestedViewPager =
-                    ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
-
-            int currentItem = nestedViewPager.getCurrentItem();
-            isFirstItem = currentItem == 0;
-            isLastItem = currentItem == (nestedViewPager.getAdapter().getItemCount() - 1);
-
-            if (isFirstItem || isLastItem)
+            if (touchArea == null)
             {
-                startX = event.getX();
-                lastX = startX;
+                touchArea = new Rect();
+                ViewPager2 nestedViewPager =
+                        ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
+                nestedViewPager.getGlobalVisibleRect(touchArea);
+            }
 
-                viewPager.beginFakeDrag();
+            // checks if the motion started in the right location
+            if (touchArea.contains(Math.round(event.getX()), Math.round(event.getY())))
+            {
+                ViewPager2 nestedViewPager =
+                        ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
+
+                int currentItem = nestedViewPager.getCurrentItem();
+                isFirstItem = currentItem == 0;
+                isLastItem = currentItem == (nestedViewPager.getAdapter().getItemCount() - 1);
+
+                if (isFirstItem || isLastItem)
+                {
+                    startX = event.getX();
+                    lastX = startX;
+
+                    viewPager.beginFakeDrag();
+                }
             }
         }
         else if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
