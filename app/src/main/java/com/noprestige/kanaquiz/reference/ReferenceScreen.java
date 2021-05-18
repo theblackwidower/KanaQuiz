@@ -138,7 +138,7 @@ public class ReferenceScreen extends AppCompatActivity
             if (deltaX != 0)
                 viewPager.fakeDragBy(deltaX);
 
-            lastX = event.getX();
+            lastX = thisX;
         }
 
         return super.dispatchTouchEvent(event);
