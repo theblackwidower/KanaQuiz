@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 class ReferenceSubsectionPager extends FragmentStateAdapter
@@ -38,11 +37,12 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
 
     private static List<String> pageIds;
 
-    ReferenceSubsectionPager(FragmentActivity fa, int questionTypeRef)
+    ReferenceSubsectionPager(Fragment refPage, int questionTypeRef)
     {
-        super(fa);
+        //ref: https://www.reddit.com/r/androiddev/comments/kqz3sg/error_fragmentmanager_is_already_executing/gi6ipn4
+        super(refPage);
         this.questionTypeRef = questionTypeRef;
-        context = fa.getBaseContext();
+        context = refPage.getContext();
 
         tabList = new ArrayList<>(3);
 

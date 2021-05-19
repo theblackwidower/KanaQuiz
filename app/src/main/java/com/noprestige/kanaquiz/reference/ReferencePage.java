@@ -65,7 +65,7 @@ public class ReferencePage extends Fragment
             viewPager.setId(R.id.vocabularyReferenceViewPager);
 
         //ref: https://stackoverflow.com/a/40829361/3582371
-        ReferenceSubsectionPager pagerAdapter = new ReferenceSubsectionPager(getActivity(), questionType);
+        ReferenceSubsectionPager pagerAdapter = new ReferenceSubsectionPager(this, questionType);
         viewPager.setAdapter(pagerAdapter);
         TabLayout tabLayout = subScreen.findViewById(R.id.tabLayout);
         //TODO: Make this check more dynamic, accounting for screen width and actual tab width
