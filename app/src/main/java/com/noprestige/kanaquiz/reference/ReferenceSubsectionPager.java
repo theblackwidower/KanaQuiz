@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -100,6 +100,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
             return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
     }
 
+    private static final int KANJI_LOCALE_SHIFT = Integer.SIZE; // = Long.SIZE / 2
+
     @Override
     public long getItemId(int position)
     {
@@ -112,10 +114,9 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 pageIds.add(prefId);
             return pageIds.indexOf(prefId);
         }
-        if (questionTypeRef == R.string.kanji)
+        else if (questionTypeRef == R.string.kanji)
             //should clear out all pages if locale changes
-            //no more than 16 kanji files, or this'll need to be modified
-            return (Locale.getDefault().hashCode() << 4) + tabList.get(position);
+            return ((long) Locale.getDefault().hashCode() << KANJI_LOCALE_SHIFT) + tabList.get(position);
         else
             return tabList.get(position);
     }
