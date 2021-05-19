@@ -88,16 +88,14 @@ public class ReferenceScreen extends AppCompatActivity
             if (touchArea == null)
             {
                 touchArea = new Rect();
-                ViewPager2 nestedViewPager =
-                        ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
+                ViewPager2 nestedViewPager = getNestedPager(viewPager.getCurrentItem());
                 nestedViewPager.getGlobalVisibleRect(touchArea);
             }
 
             // checks if the motion started in the right location
             if (touchArea.contains(Math.round(event.getX()), Math.round(event.getY())))
             {
-                ViewPager2 nestedViewPager =
-                        ((ReferencePager) viewPager.getAdapter()).getSubPager(viewPager.getCurrentItem());
+                ViewPager2 nestedViewPager = getNestedPager(viewPager.getCurrentItem());
 
                 int currentItem = nestedViewPager.getCurrentItem();
                 isFirstItem = currentItem == 0;
@@ -141,6 +139,22 @@ public class ReferenceScreen extends AppCompatActivity
             }
 
         return super.dispatchTouchEvent(event);
+    }
+
+    ViewPager2 getNestedPager(int position)
+    {
+        long nestedType = viewPager.getAdapter().getItemId(position);
+
+        if (nestedType == R.string.hiragana)
+            return findViewById(R.id.hiraganaReferenceViewPager);
+        else if (nestedType == R.string.katakana)
+            return findViewById(R.id.katakanaReferenceViewPager);
+        else if (nestedType == R.string.kanji)
+            return findViewById(R.id.kanjiReferenceViewPager);
+        else if (nestedType == R.string.vocabulary)
+            return findViewById(R.id.vocabularyReferenceViewPager);
+
+        return null;
     }
 
     @Override

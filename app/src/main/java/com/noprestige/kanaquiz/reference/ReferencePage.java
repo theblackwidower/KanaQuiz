@@ -34,8 +34,6 @@ public class ReferencePage extends Fragment
     private static final String ARG_QUESTION_TYPE_REF = "questionTypeRef";
     private static final int MAX_TABS = 3;
 
-    ViewPager2 viewPager;
-
     public static ReferencePage newInstance(int questionTypeRef)
     {
         ReferencePage screen = new ReferencePage();
@@ -53,7 +51,7 @@ public class ReferencePage extends Fragment
         LinearLayout subScreen = (LinearLayout) inflater.inflate(R.layout.activity_tabbed_screen, container, false);
         subScreen.setPadding(0, 0, 0, 0);
 
-        viewPager = subScreen.findViewById(R.id.viewPager);
+        ViewPager2 viewPager = subScreen.findViewById(R.id.viewPager);
 
         if (questionType == R.string.hiragana)
             viewPager.setId(R.id.hiraganaReferenceViewPager);
@@ -77,10 +75,5 @@ public class ReferencePage extends Fragment
                 .attach();
 
         return subScreen;
-    }
-
-    public ViewPager2 getViewPager()
-    {
-        return viewPager;
     }
 }
