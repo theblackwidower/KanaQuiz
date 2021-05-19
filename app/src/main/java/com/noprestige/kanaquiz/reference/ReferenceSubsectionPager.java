@@ -100,6 +100,8 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
             return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
     }
 
+    private static final int KANJI_LOCALE_SHIFT = Integer.SIZE; // = Long.SIZE / 2
+
     @Override
     public long getItemId(int position)
     {
@@ -112,10 +114,9 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
                 pageIds.add(prefId);
             return pageIds.indexOf(prefId);
         }
-        if (questionTypeRef == R.string.kanji)
+        else if (questionTypeRef == R.string.kanji)
             //should clear out all pages if locale changes
-            //no more than 16 kanji files, or this'll need to be modified
-            return (Locale.getDefault().hashCode() << 4) + tabList.get(position);
+            return ((long) Locale.getDefault().hashCode() << KANJI_LOCALE_SHIFT) + tabList.get(position);
         else
             return tabList.get(position);
     }
