@@ -121,6 +121,33 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
             return tabList.get(position);
     }
 
+    // should result in a binary value of 32 ones and 32 zeroes
+    private static final long KANJI_LOCALE_MASK = -(1L << KANJI_LOCALE_SHIFT);
+
+    //ref: https://stackoverflow.com/a/57691487/3582371
+    @Override
+    public boolean containsItem(long itemId)
+    {
+        if (questionTypeRef == R.string.vocabulary)
+            if (itemId < pageIds.size())
+            {
+                int setNumber = QuestionManagement.getVocabulary().getSetNumber(pageIds.get((int) itemId));
+                if (setNumber == 0)
+                    return false;
+                else
+                    return tabList.contains(setNumber);
+            }
+            else
+                return false;
+        else if (questionTypeRef == R.string.kanji)
+            if ((itemId & KANJI_LOCALE_MASK) == ((long) Locale.getDefault().hashCode() << KANJI_LOCALE_SHIFT))
+                return tabList.contains((int) (itemId & ~KANJI_LOCALE_MASK));
+            else
+                return false;
+        else
+            return tabList.contains((int) itemId);
+    }
+
     @Override
     public int getItemCount()
     {

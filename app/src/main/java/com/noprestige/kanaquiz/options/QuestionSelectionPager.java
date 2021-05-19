@@ -59,6 +59,13 @@ class QuestionSelectionPager extends FragmentStateAdapter
         return tabList.get(position);
     }
 
+    //ref: https://stackoverflow.com/a/57691487/3582371
+    @Override
+    public boolean containsItem(long itemId)
+    {
+        return tabList.contains((int) itemId);
+    }
+
     @Override
     public int getItemCount()
     {
