@@ -95,11 +95,13 @@ public class ReferenceScreen extends AppCompatActivity
             // checks if the motion started in the right location
             if (touchArea.contains(Math.round(event.getX()), Math.round(event.getY())))
             {
-                ViewPager2 nestedViewPager = getNestedPager(viewPager.getCurrentItem());
-
+                int mainItem = viewPager.getCurrentItem();
+                ViewPager2 nestedViewPager = getNestedPager(mainItem);
                 int currentItem = nestedViewPager.getCurrentItem();
-                isFirstItem = currentItem == 0;
-                isLastItem = currentItem == (nestedViewPager.getAdapter().getItemCount() - 1);
+
+                isFirstItem = (currentItem == 0) && (mainItem > 0);
+                isLastItem = (currentItem == (nestedViewPager.getAdapter().getItemCount() - 1)) &&
+                        (mainItem < (viewPager.getAdapter().getItemCount() - 1));
 
                 if (isFirstItem || isLastItem)
                 {
