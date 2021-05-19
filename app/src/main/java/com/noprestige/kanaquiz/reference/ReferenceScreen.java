@@ -20,6 +20,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class ReferenceScreen extends AppCompatActivity
     private static final int MAX_TABS = 3;
 
     private ViewPager2 viewPager;
+    private int touchSlop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -69,6 +71,7 @@ public class ReferenceScreen extends AppCompatActivity
             new TabLayoutMediator(tabLayout, viewPager,
                     (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position))).attach();
             viewPager.setUserInputEnabled(false);
+            touchSlop = ViewConfiguration.get(getBaseContext()).getScaledTouchSlop();
         }
     }
 
@@ -78,6 +81,7 @@ public class ReferenceScreen extends AppCompatActivity
     private float lastX;
     private boolean isFirstItem;
     private boolean isLastItem;
+    private boolean isSwiping;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event)
@@ -121,6 +125,7 @@ public class ReferenceScreen extends AppCompatActivity
                 lastX = 0;
                 isFirstItem = false;
                 isLastItem = false;
+                isSwiping = false;
             }
             else
             {
@@ -134,10 +139,12 @@ public class ReferenceScreen extends AppCompatActivity
                 if (((isFirstItem) && (thisX > startX)) || ((isLastItem) && (thisX < startX)))
                     deltaX += thisX - startX;
 
-                if (deltaX != 0)
+                if (isSwiping || (Math.abs(deltaX) > touchSlop))
+                {
                     viewPager.fakeDragBy(deltaX);
-
-                lastX = thisX;
+                    lastX = thisX;
+                    isSwiping = true;
+                }
             }
 
         return super.dispatchTouchEvent(event);
