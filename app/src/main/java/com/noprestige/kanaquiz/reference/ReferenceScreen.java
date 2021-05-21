@@ -79,6 +79,7 @@ public class ReferenceScreen extends AppCompatActivity
 
     private float startX;
     private float lastX;
+    ViewPager2 nestedViewPager;
     private boolean isFirstItem;
     private boolean isLastItem;
     private boolean isSwiping;
@@ -100,7 +101,7 @@ public class ReferenceScreen extends AppCompatActivity
             if (touchArea.contains(Math.round(event.getX()), Math.round(event.getY())))
             {
                 int mainItem = viewPager.getCurrentItem();
-                ViewPager2 nestedViewPager = getNestedPager(mainItem);
+                nestedViewPager = getNestedPager(mainItem);
                 int currentItem = nestedViewPager.getCurrentItem();
 
                 isFirstItem = (currentItem == 0) && (mainItem > 0);
@@ -113,6 +114,7 @@ public class ReferenceScreen extends AppCompatActivity
                     lastX = startX;
 
                     viewPager.beginFakeDrag();
+                    nestedViewPager.beginFakeDrag();
                 }
             }
         }
@@ -120,9 +122,11 @@ public class ReferenceScreen extends AppCompatActivity
             if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
             {
                 viewPager.endFakeDrag();
+                nestedViewPager.endFakeDrag();
 
                 startX = 0;
                 lastX = 0;
+                nestedViewPager = null;
                 isFirstItem = false;
                 isLastItem = false;
                 isSwiping = false;
@@ -134,6 +138,7 @@ public class ReferenceScreen extends AppCompatActivity
                 {
                     isSwiping = true;
                     startX = lastX;
+                    event.setAction(MotionEvent.ACTION_CANCEL);
                 }
                 if (isSwiping)
                 {
@@ -147,6 +152,7 @@ public class ReferenceScreen extends AppCompatActivity
                         deltaX += thisX - startX;
 
                     viewPager.fakeDragBy(deltaX);
+                    nestedViewPager.fakeDragBy((thisX - lastX) - deltaX);
                 }
                 lastX = thisX;
             }
