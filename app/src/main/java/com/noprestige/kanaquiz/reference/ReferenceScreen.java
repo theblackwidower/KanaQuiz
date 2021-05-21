@@ -130,21 +130,25 @@ public class ReferenceScreen extends AppCompatActivity
             else
             {
                 float thisX = event.getX();
-                float deltaX = 0;
-
-                // if both statements execute the net result is:
-                //    deltaX = thisX - lastX;
-                if (((isFirstItem) && (lastX > startX)) || ((isLastItem) && (lastX < startX)))
-                    deltaX += startX - lastX;
-                if (((isFirstItem) && (thisX > startX)) || ((isLastItem) && (thisX < startX)))
-                    deltaX += thisX - startX;
-
-                if (isSwiping || (Math.abs(deltaX) > touchSlop))
+                if (!isSwiping && (Math.abs(thisX - startX) > touchSlop))
                 {
-                    viewPager.fakeDragBy(deltaX);
-                    lastX = thisX;
                     isSwiping = true;
+                    startX = lastX;
                 }
+                if (isSwiping)
+                {
+                    float deltaX = 0;
+
+                    // if both statements execute the net result is:
+                    //    deltaX = thisX - lastX;
+                    if (((isFirstItem) && (lastX > startX)) || ((isLastItem) && (lastX < startX)))
+                        deltaX += startX - lastX;
+                    if (((isFirstItem) && (thisX > startX)) || ((isLastItem) && (thisX < startX)))
+                        deltaX += thisX - startX;
+
+                    viewPager.fakeDragBy(deltaX);
+                }
+                lastX = thisX;
             }
 
         return super.dispatchTouchEvent(event);
