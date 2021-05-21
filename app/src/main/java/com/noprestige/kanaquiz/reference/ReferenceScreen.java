@@ -93,8 +93,7 @@ public class ReferenceScreen extends AppCompatActivity
             if (touchArea == null)
             {
                 touchArea = new Rect();
-                ViewPager2 nestedViewPager = getNestedPager(viewPager.getCurrentItem());
-                nestedViewPager.getGlobalVisibleRect(touchArea);
+                getNestedPager(viewPager.getCurrentItem()).getGlobalVisibleRect(touchArea);
             }
 
             // checks if the motion started in the right location
