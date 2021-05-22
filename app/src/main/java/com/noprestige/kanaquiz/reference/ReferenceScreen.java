@@ -79,6 +79,7 @@ public class ReferenceScreen extends AppCompatActivity
 
     private float startX;
     private float lastX;
+    private float startY;
     ViewPager2 nestedViewPager;
     private boolean isFirstItem;
     private boolean isLastItem;
@@ -111,6 +112,7 @@ public class ReferenceScreen extends AppCompatActivity
                 {
                     startX = event.getX();
                     lastX = startX;
+                    startY = event.getY();
 
                     viewPager.beginFakeDrag();
                     nestedViewPager.beginFakeDrag();
@@ -125,6 +127,7 @@ public class ReferenceScreen extends AppCompatActivity
 
                 startX = 0;
                 lastX = 0;
+                startY = 0;
                 nestedViewPager = null;
                 isFirstItem = false;
                 isLastItem = false;
@@ -152,6 +155,20 @@ public class ReferenceScreen extends AppCompatActivity
 
                     viewPager.fakeDragBy(deltaX);
                     nestedViewPager.fakeDragBy((thisX - lastX) - deltaX);
+                }
+                else if (Math.abs(event.getY() - startY) > touchSlop)
+                {
+                    viewPager.endFakeDrag();
+                    nestedViewPager.endFakeDrag();
+
+                    startX = 0;
+                    thisX = 0;
+                    lastX = 0;
+                    startY = 0;
+                    nestedViewPager = null;
+                    isFirstItem = false;
+                    isLastItem = false;
+                    isSwiping = false;
                 }
                 lastX = thisX;
             }
