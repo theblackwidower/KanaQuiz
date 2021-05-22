@@ -113,25 +113,21 @@ public class ReferenceScreen extends AppCompatActivity
                     startX = event.getX();
                     lastX = startX;
                     startY = event.getY();
-
-                    viewPager.beginFakeDrag();
-                    nestedViewPager.beginFakeDrag();
                 }
             }
         }
         else if (isFirstItem || isLastItem)
             if ((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_CANCEL))
             {
-                viewPager.endFakeDrag();
-                nestedViewPager.endFakeDrag();
+                if (isSwiping)
+                {
+                    viewPager.endFakeDrag();
+                    nestedViewPager.endFakeDrag();
+                    isSwiping = false;
+                }
 
-                startX = 0;
-                lastX = 0;
-                startY = 0;
-                nestedViewPager = null;
                 isFirstItem = false;
                 isLastItem = false;
-                isSwiping = false;
             }
             else
             {
@@ -140,6 +136,8 @@ public class ReferenceScreen extends AppCompatActivity
                 {
                     isSwiping = true;
                     startX = lastX;
+                    viewPager.beginFakeDrag();
+                    nestedViewPager.beginFakeDrag();
                     event.setAction(MotionEvent.ACTION_CANCEL);
                 }
                 if (isSwiping)
@@ -158,17 +156,9 @@ public class ReferenceScreen extends AppCompatActivity
                 }
                 else if (Math.abs(event.getY() - startY) > touchSlop)
                 {
-                    viewPager.endFakeDrag();
-                    nestedViewPager.endFakeDrag();
-
-                    startX = 0;
-                    thisX = 0;
-                    lastX = 0;
-                    startY = 0;
-                    nestedViewPager = null;
+                    // this is all we need to do to cancel swiping
                     isFirstItem = false;
                     isLastItem = false;
-                    isSwiping = false;
                 }
                 lastX = thisX;
             }
