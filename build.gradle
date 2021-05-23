@@ -27,13 +27,13 @@ plugins {
 
 allprojects {
     repositories {
-        //noinspection JcenterRepositoryObsolete
-        jcenter() // TODO: find alternate repository for the RikkaApps' FontProvider
         mavenCentral()
         google()
         maven {
             url 'https://jitpack.io'
         }
+        //noinspection JcenterRepositoryObsolete
+        jcenter() // TODO: find alternate repository for the RikkaApps' FontProvider
     }
 }
 
