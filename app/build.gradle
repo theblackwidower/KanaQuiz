@@ -80,9 +80,9 @@ dependencies {
 
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation 'ch.acra:acra-mail:5.7.0'
+    pureImplementation 'ch.acra:acra-mail:5.8.1'
     pureImplementation 'ch.acra:acra-toast:5.8.1'
-    pureImplementation 'ch.acra:acra-limiter:5.7.0'
+    pureImplementation 'ch.acra:acra-limiter:5.8.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
