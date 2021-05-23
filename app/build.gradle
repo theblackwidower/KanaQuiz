@@ -6,12 +6,12 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 17
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 18
         versionName '0.14.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
