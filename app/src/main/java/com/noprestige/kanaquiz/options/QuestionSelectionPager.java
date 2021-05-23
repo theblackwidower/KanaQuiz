@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,20 +25,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-class QuestionSelectionPager extends FragmentPagerAdapter
+class QuestionSelectionPager extends FragmentStateAdapter
 {
     private List<Integer> tabList;
     Context context;
 
-    QuestionSelectionPager(FragmentManager fm, Context context)
+    QuestionSelectionPager(FragmentActivity fa)
     {
-        super(fm);
+        super(fa);
 
         tabList = new ArrayList<>(3);
-        this.context = context;
+        context = fa.getBaseContext();
 
         tabList.add(R.string.hiragana);
         tabList.add(R.string.katakana);
@@ -48,7 +48,7 @@ class QuestionSelectionPager extends FragmentPagerAdapter
     }
 
     @Override
-    public Fragment getItem(int position)
+    public Fragment createFragment(int position)
     {
         return QuestionSelectionPage.newInstance(tabList.get(position));
     }
@@ -59,13 +59,19 @@ class QuestionSelectionPager extends FragmentPagerAdapter
         return tabList.get(position);
     }
 
+    //ref: https://stackoverflow.com/a/57691487/3582371
     @Override
-    public int getCount()
+    public boolean containsItem(long itemId)
+    {
+        return tabList.contains((int) itemId);
+    }
+
+    @Override
+    public int getItemCount()
     {
         return tabList.size();
     }
 
-    @Override
     public CharSequence getPageTitle(int position)
     {
         return context.getResources().getString(tabList.get(position));
