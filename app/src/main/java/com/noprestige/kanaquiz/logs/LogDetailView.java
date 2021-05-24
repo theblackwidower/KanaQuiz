@@ -38,6 +38,7 @@ import com.noprestige.kanaquiz.themes.ThemeManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -177,7 +178,7 @@ public class LogDetailView extends AppCompatActivity
             //Only needed because the desugared java.time API has a different package name than java.time,
             // which would require no modification. I blame anyone not Oreo or newer.
             titleText = getString(R.string.log_detail_title,
-                    date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L);
+                    Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
         String[] splitTitle = titleText.split(":");
 
