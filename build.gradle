@@ -32,7 +32,7 @@ allprojects {
         maven {
             url 'https://jitpack.io'
         }
-        //noinspection JcenterRepositoryObsolete
+        //noinspection JcenterRepositoryObsolete,GrDeprecatedAPIUsage
         jcenter() // TODO: find alternate repository for the RikkaApps' FontProvider
     }
 }
