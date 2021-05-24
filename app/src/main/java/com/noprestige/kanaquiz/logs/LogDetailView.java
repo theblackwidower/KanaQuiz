@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
@@ -35,12 +36,14 @@ import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static android.os.Build.VERSION.SDK_INT;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class LogDetailView extends AppCompatActivity
@@ -166,7 +169,15 @@ public class LogDetailView extends AppCompatActivity
         date = (LocalDate) extras.get("date");
 
         //ref: https://developer.android.com/reference/java/util/Formatter#ddt
-        String titleText = getString(R.string.log_detail_title, date);
+        String titleText;
+        if (SDK_INT >= Build.VERSION_CODES.O)
+            titleText = getString(R.string.log_detail_title, date);
+        else
+            //ref: https://stackoverflow.com/a/22992578/3582371
+            //Only needed because the desugared java.time API has a different package name than java.time,
+            // which would require no modification. I blame anyone not Oreo or newer.
+            titleText = getString(R.string.log_detail_title,
+                    date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L);
 
         String[] splitTitle = titleText.split(":");
 
