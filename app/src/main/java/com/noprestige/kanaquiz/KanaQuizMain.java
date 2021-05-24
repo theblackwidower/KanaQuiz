@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.noprestige.kanaquiz.logs.LogDatabase;
 import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
@@ -44,7 +43,6 @@ public abstract class KanaQuizMain extends Application
 
         app = this;
 
-        AndroidThreeTen.init(this);
         OptionsControl.initialize(this);
         QuestionManagement.initialize(this);
         LogDatabase.initialize(this);

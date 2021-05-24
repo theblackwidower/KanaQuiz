@@ -34,9 +34,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,6 +166,7 @@ public class LogDetailView extends AppCompatActivity
         Bundle extras = getIntent().getExtras();
         date = (LocalDate) extras.get("date");
 
+        //TODO: Rewrite to use java.time, now that desugaring of Java APIs is a thing
         //ref: https://stackoverflow.com/a/22992578/3582371
         //Only needed because the threeten backport has a different package name than java.time, which would require
         // no modification. I blame anyone not Oreo or newer.

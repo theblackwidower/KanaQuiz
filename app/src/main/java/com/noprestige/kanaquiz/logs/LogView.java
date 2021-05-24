@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,12 +31,12 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.threeten.bp.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class LogView extends AppCompatActivity
 {

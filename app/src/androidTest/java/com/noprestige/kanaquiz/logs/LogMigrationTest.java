@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -18,14 +18,12 @@ package com.noprestige.kanaquiz.logs;
 
 import android.database.Cursor;
 
-import com.jakewharton.threetenabp.AndroidThreeTen;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.threeten.bp.LocalDate;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import androidx.room.testing.MigrationTestHelper;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -48,7 +46,6 @@ public class LogMigrationTest
     {
         helper = new MigrationTestHelper(InstrumentationRegistry.getInstrumentation(),
                 LogDatabase.class.getCanonicalName(), new FrameworkSQLiteOpenHelperFactory());
-        AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().getTargetContext());
     }
 
     @Test

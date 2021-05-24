@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,10 +33,9 @@ import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.TextStyle;
-
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class DailyLogItem extends View
