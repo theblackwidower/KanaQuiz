@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2020 T Duke Perry & Zenahr Barzani
+  ~    Copyright 2021 T Duke Perry & Zenahr Barzani
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@
     <string name="acra_alert">Leider ist The Kana Quiz abgestürzt. Bitte übermitteln Sie einen Crash-Report.</string>
     <string name="font_provider_install_request">Diese Anwendung verwendet den RikkaApps\' Font Provider für hübschere japanische Zeichen. Bitte laden Sie die Support-App herunter, um sie zu aktivieren.</string>
     <string name="font_provider_update_request">Ihre Version des RikkaApps\' Font Providers ist veraltet. Möglicherweise stellen Sie einige Probleme in der Text-Darstellung fest. Laden Sie bitte die neuste Version herunter.</string>
-    <string name="font_provider_font_request">Keine Serif-Schriftarten gefunden. Bitte laden Sie \'Noto Serif\' und \'Noto Serif CJK\' über die Font Provider App herunter.</string>
+    <string name="font_provider_font_request">Keine Serif-Schriftarten gefunden. Bitte laden Sie \‘Noto Serif\’ und \‘Noto Serif CJK\’ über die Font Provider App herunter.</string>
     <string name="marshmallow_font_permission_request">The Kana Quiz benötigt Erlaubnis um auf die Schriftarten vom Font Provider zuzugreifen.</string>
     <string name="download_font_provider">Font Provider für hübschere Schriften holen</string>
     <string name="get_on_google_play">Auf Google Play holen</string>
