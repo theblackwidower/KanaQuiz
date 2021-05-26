@@ -15,7 +15,8 @@ android {
         versionCode 18
         versionName '0.14.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        resConfigs 'en-rCA', 'es-rES', 'ca-rES' //ref: https://stackoverflow.com/a/47525966/3582371
+        //ref: https://stackoverflow.com/a/47525966/3582371
+        resConfigs 'en-rCA', 'es-rES', 'ca-rES', 'de-rDE'
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
