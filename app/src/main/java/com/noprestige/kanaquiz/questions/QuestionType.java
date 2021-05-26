@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 
 package com.noprestige.kanaquiz.questions;
+
+import com.noprestige.kanaquiz.R;
 
 public enum QuestionType
 {
@@ -38,5 +40,32 @@ public enum QuestionType
             return ON_YOMI;
         else
             throw new IllegalArgumentException(klass.getName() + " is not a valid Question class.");
+    }
+
+    public int getPrompt(boolean isMultipleChoice)
+    {
+        if (isMultipleChoice)
+        {
+            if ((this == VOCABULARY) || (this == KANJI))
+                return R.string.request_vocab_multiple_choice;
+            else if (this == KUN_YOMI)
+                return R.string.request_kunyomi_multiple_choice;
+            else if (this == ON_YOMI)
+                return R.string.request_onyomi_multiple_choice;
+            else if (this == KANA)
+                return R.string.request_kana_multiple_choice;
+        }
+        else
+        {
+            if ((this == VOCABULARY) || (this == KANJI))
+                return R.string.request_vocab_text_input;
+            else if (this == KUN_YOMI)
+                return R.string.request_kunyomi_text_input;
+            else if (this == ON_YOMI)
+                return R.string.request_onyomi_text_input;
+            else if (this == KANA)
+                return R.string.request_kana_text_input;
+        }
+        return 0;
     }
 }

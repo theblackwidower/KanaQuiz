@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -275,30 +275,13 @@ public class MainQuiz extends AppCompatActivity
     {
         QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
 
-        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-        {
-            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
-                lblResponse.setText(R.string.request_vocab_multiple_choice);
-            else if (type == QuestionType.KUN_YOMI)
-                lblResponse.setText(R.string.request_kunyomi_multiple_choice);
-            else if (type == QuestionType.ON_YOMI)
-                lblResponse.setText(R.string.request_onyomi_multiple_choice);
-            else if (type == QuestionType.KANA)
-                lblResponse.setText(R.string.request_kana_multiple_choice);
-        }
-        else
-        {
-            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
-                lblResponse.setText(R.string.request_vocab_text_input);
-            else if (type == QuestionType.KUN_YOMI)
-                lblResponse.setText(R.string.request_kunyomi_text_input);
-            else if (type == QuestionType.ON_YOMI)
-                lblResponse.setText(R.string.request_onyomi_text_input);
-            else if (type == QuestionType.KANA)
-                lblResponse.setText(R.string.request_kana_text_input);
+        boolean isMultipleChoice = OptionsControl.getBoolean(R.string.prefid_multiple_choice);
 
+        lblResponse.setText(type.getPrompt(isMultipleChoice));
+
+        if (!isMultipleChoice)
             frmAnswer.readyForTextAnswer();
-        }
+
         canSubmit = true;
         lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
         lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
