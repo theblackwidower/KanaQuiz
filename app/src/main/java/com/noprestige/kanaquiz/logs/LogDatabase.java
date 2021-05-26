@@ -132,25 +132,6 @@ public abstract class LogDatabase extends RoomDatabase
                             "date, kana, " + TEMP_TYPE + ", correct_answers, incorrect_answers FROM kana_records");
             database.execSQL("DROP TABLE kana_records");
 
-            Cursor kanaData =
-                    database.query("SELECT DISTINCT question FROM question_records WHERE type = " + TEMP_TYPE);
-
-            if (kanaData.getCount() > 0)
-            {
-                int questionIndex = kanaData.getColumnIndex("question");
-
-                while (!kanaData.isLast())
-                {
-                    kanaData.moveToNext();
-
-                    String questionValue = kanaData.getString(questionIndex);
-                    int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
-
-                    database.execSQL("UPDATE question_records SET type = ? WHERE question = ?",
-                            new Object[]{typeId, questionValue});
-                }
-            }
-
             database.execSQL("ALTER TABLE incorrect_answers RENAME TO old_incorrect_answers");
             database.execSQL(
                     "CREATE TABLE IF NOT EXISTS incorrect_answers (date INTEGER NOT NULL, question TEXT NOT NULL, " +
@@ -161,20 +142,22 @@ public abstract class LogDatabase extends RoomDatabase
                             " kana, " + TEMP_TYPE + ", incorrect_romanji, occurrences FROM old_incorrect_answers");
             database.execSQL("DROP TABLE old_incorrect_answers");
 
-            Cursor incorrectData =
-                    database.query("SELECT DISTINCT question FROM incorrect_answers WHERE type = " + TEMP_TYPE);
+            Cursor data = database.query("SELECT DISTINCT question FROM question_records WHERE type = " + TEMP_TYPE +
+                    " UNION SELECT DISTINCT question FROM incorrect_answers WHERE type = " + TEMP_TYPE);
 
-            if (incorrectData.getCount() > 0)
+            if (data.getCount() > 0)
             {
-                int questionIndex = incorrectData.getColumnIndex("question");
+                int questionIndex = data.getColumnIndex("question");
 
-                while (!incorrectData.isLast())
+                while (!data.isLast())
                 {
-                    incorrectData.moveToNext();
+                    data.moveToNext();
 
-                    String questionValue = incorrectData.getString(questionIndex);
+                    String questionValue = data.getString(questionIndex);
                     int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
 
+                    database.execSQL("UPDATE question_records SET type = ? WHERE question = ?",
+                            new Object[]{typeId, questionValue});
                     database.execSQL("UPDATE incorrect_answers SET type = ? WHERE question = ?",
                             new Object[]{typeId, questionValue});
                 }
