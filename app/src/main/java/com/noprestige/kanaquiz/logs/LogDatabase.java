@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -115,6 +115,8 @@ public abstract class LogDatabase extends RoomDatabase
             return QuestionType.VOCABULARY;
     }
 
+    static final int TEMP_TYPE = 'x';
+
     public static final Migration MIGRATION_3_4 = new Migration(3, 4)
     {
         @Override
@@ -125,70 +127,58 @@ public abstract class LogDatabase extends RoomDatabase
                     "CREATE TABLE IF NOT EXISTS question_records (date INTEGER NOT NULL, question TEXT NOT NULL, type" +
                             " INTEGER NOT NULL, correct_answers INTEGER NOT NULL, incorrect_answers INTEGER NOT NULL," +
                             " PRIMARY KEY(date, question, type))");
+            database.execSQL(
+                    "INSERT INTO question_records (date, question, type, correct_answers, incorrect_answers) SELECT " +
+                            "date, kana, " + TEMP_TYPE + ", correct_answers, incorrect_answers FROM kana_records");
+            database.execSQL("DROP TABLE kana_records");
 
-            Cursor kanaData = database.query("SELECT * FROM kana_records");
+            Cursor kanaData =
+                    database.query("SELECT DISTINCT question FROM question_records WHERE type = " + TEMP_TYPE);
 
             if (kanaData.getCount() > 0)
             {
-                int dateIndex = kanaData.getColumnIndex("date");
-                int questionIndex = kanaData.getColumnIndex("kana");
-                int correctIndex = kanaData.getColumnIndex("correct_answers");
-                int incorrectIndex = kanaData.getColumnIndex("incorrect_answers");
+                int questionIndex = kanaData.getColumnIndex("question");
 
                 while (!kanaData.isLast())
                 {
                     kanaData.moveToNext();
 
-                    int dateValue = kanaData.getInt(dateIndex);
                     String questionValue = kanaData.getString(questionIndex);
-                    int correctValue = kanaData.getInt(correctIndex);
-                    int incorrectValue = kanaData.getInt(incorrectIndex);
-
                     int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
 
-                    database.execSQL(
-                            "INSERT INTO question_records (date, question, type, correct_answers, incorrect_answers) " +
-                                    "VALUES (?, ?, ?, ?, ?)",
-                            new Object[]{dateValue, questionValue, typeId, correctValue, incorrectValue});
+                    database.execSQL("UPDATE question_records SET type = ? WHERE question = ?",
+                            new Object[]{typeId, questionValue});
                 }
             }
-            database.execSQL("DROP TABLE kana_records");
-
 
             database.execSQL("ALTER TABLE incorrect_answers RENAME TO old_incorrect_answers");
-
             database.execSQL(
                     "CREATE TABLE IF NOT EXISTS incorrect_answers (date INTEGER NOT NULL, question TEXT NOT NULL, " +
                             "type INTEGER NOT NULL, incorrect_answer TEXT NOT NULL, occurrences INTEGER NOT NULL, " +
                             "PRIMARY KEY(date, question, type, incorrect_answer))");
+            database.execSQL(
+                    "INSERT INTO incorrect_answers (date, question, type, incorrect_answer, occurrences) SELECT date," +
+                            " kana, " + TEMP_TYPE + ", incorrect_romanji, occurrences FROM old_incorrect_answers");
+            database.execSQL("DROP TABLE old_incorrect_answers");
 
-            Cursor incorrectData = database.query("SELECT * FROM old_incorrect_answers");
+            Cursor incorrectData =
+                    database.query("SELECT DISTINCT question FROM incorrect_answers WHERE type = " + TEMP_TYPE);
 
             if (incorrectData.getCount() > 0)
             {
-                int dateIndex = incorrectData.getColumnIndex("date");
-                int questionIndex = incorrectData.getColumnIndex("kana");
-                int answerIndex = incorrectData.getColumnIndex("incorrect_romanji");
-                int occurrencesIndex = incorrectData.getColumnIndex("occurrences");
+                int questionIndex = incorrectData.getColumnIndex("question");
 
                 while (!incorrectData.isLast())
                 {
                     incorrectData.moveToNext();
 
-                    int dateValue = incorrectData.getInt(dateIndex);
                     String questionValue = incorrectData.getString(questionIndex);
-                    String answerValue = incorrectData.getString(answerIndex);
-                    int occurrencesValue = incorrectData.getInt(occurrencesIndex);
-
                     int typeId = LogTypeConversion.toCharFromType(identifyQuestion(questionValue));
 
-                    database.execSQL(
-                            "INSERT INTO incorrect_answers (date, question, type, incorrect_answer, occurrences) " +
-                                    "VALUES (?, ?, ?, ?, ?)",
-                            new Object[]{dateValue, questionValue, typeId, answerValue, occurrencesValue});
+                    database.execSQL("UPDATE incorrect_answers SET type = ? WHERE question = ?",
+                            new Object[]{typeId, questionValue});
                 }
             }
-            database.execSQL("DROP TABLE old_incorrect_answers");
         }
     };
 }
