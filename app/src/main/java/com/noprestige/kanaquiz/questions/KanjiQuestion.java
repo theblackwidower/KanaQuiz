@@ -38,14 +38,14 @@ public class KanjiQuestion extends Question
         this.onYomi = onYomi;
     }
 
-    KunYomiQuestion getKunYomiQuestion()
+    KanjiSoundQuestion getKunYomiQuestion()
     {
-        return new KunYomiQuestion(this);
+        return new KanjiSoundQuestion(this, QuestionType.KUN_YOMI);
     }
 
-    OnYomiQuestion getOnYomiQuestion()
+    KanjiSoundQuestion getOnYomiQuestion()
     {
-        return new OnYomiQuestion(this);
+        return new KanjiSoundQuestion(this, QuestionType.ON_YOMI);
     }
 
     @Override
