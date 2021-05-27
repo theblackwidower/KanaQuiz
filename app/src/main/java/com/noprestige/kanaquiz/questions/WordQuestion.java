@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -116,7 +116,7 @@ public class WordQuestion extends Question
 
         Map<String, String> details = new TreeMap<>();
         if ((romaji != null) && !romaji.equals(currentText))
-            details.put("Romaji", romaji);
+            details.put('\u0000' + "Romaji", romaji);
         if ((kana != null) && !kana.equals(currentText))
             details.put("Kana", kana);
         if ((kanji != null) && !kanji.equals(currentText))

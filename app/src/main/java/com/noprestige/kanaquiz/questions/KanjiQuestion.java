@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ public class KanjiQuestion extends Question
         if (kunYomi != null)
             details.put("Kun'yomi", kunYomi);
         if (onYomi != null)
-            details.put("On'yomi", onYomi);
+            details.put('\u200D' + "On'yomi", onYomi);
 
         return details;
     }
