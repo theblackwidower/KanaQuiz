@@ -26,22 +26,6 @@ public enum QuestionType
     KUN_YOMI,
     ON_YOMI;
 
-    public static QuestionType getQuestionType(Class klass)
-    {
-        if (KanaQuestion.class.equals(klass))
-            return KANA;
-        else if (WordQuestion.class.equals(klass))
-            return VOCABULARY;
-        else if (KanjiQuestion.class.equals(klass))
-            return KANJI;
-        else if (KunYomiQuestion.class.equals(klass))
-            return KUN_YOMI;
-        else if (OnYomiQuestion.class.equals(klass))
-            return ON_YOMI;
-        else
-            throw new IllegalArgumentException(klass.getName() + " is not a valid Question class.");
-    }
-
     public int getPrompt(boolean isMultipleChoice)
     {
         if (isMultipleChoice)

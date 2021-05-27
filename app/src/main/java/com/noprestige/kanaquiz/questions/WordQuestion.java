@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -112,5 +112,11 @@ public class WordQuestion extends Question
         ReferenceCell cell = super.generateReference(context);
         cell.setSubjectSize(context.getResources().getDimension(R.dimen.vocabReferenceSubjectSize));
         return cell;
+    }
+
+    @Override
+    QuestionType getType()
+    {
+        return QuestionType.VOCABULARY;
     }
 }

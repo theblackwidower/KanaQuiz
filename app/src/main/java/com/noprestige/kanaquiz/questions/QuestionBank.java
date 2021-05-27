@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public class QuestionBank extends WeightedList<Question>
 
     public QuestionType getCurrentQuestionType()
     {
-        return QuestionType.getQuestionType(currentQuestion.getClass());
+        return currentQuestion.getType();
     }
 
     public void newQuestion()
@@ -80,7 +80,7 @@ public class QuestionBank extends WeightedList<Question>
 
         public boolean add(Question question)
         {
-            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(question.getClass()));
+            char prefix = LogTypeConversion.toCharFromType(question.getType());
             if (contains(prefix + question.getDatabaseKey()))
                 return false;
             else
@@ -123,8 +123,7 @@ public class QuestionBank extends WeightedList<Question>
 
         for (Question thisQuestion : questions)
         {
-            if (thisQuestion.getDatabaseKey().equals(questionKey) &&
-                    (QuestionType.getQuestionType(thisQuestion.getClass()) == type))
+            if (thisQuestion.getDatabaseKey().equals(questionKey) && (thisQuestion.getType() == type))
             {
                 currentQuestion = thisQuestion;
                 previousQuestions.add(thisQuestion);
@@ -170,8 +169,7 @@ public class QuestionBank extends WeightedList<Question>
         boolean returnValue = true;
 
         // Fetches the percentage of times the user got a question right,
-        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(),
-                QuestionType.getQuestionType(question.getClass()));
+        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(), question.getType());
         if (percentage == null)
             percentage = 0.1f;
         // The 1f is to invert the value so we get the number of times they got it wrong,
@@ -183,7 +181,7 @@ public class QuestionBank extends WeightedList<Question>
             weight = 2;
         // if any one of the additions fail, the method returns false
         returnValue = add(weight, question) && returnValue;
-        QuestionType type = QuestionType.getQuestionType(question.getClass());
+        QuestionType type = question.getType();
         if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
             returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
         else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
@@ -281,7 +279,7 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
@@ -322,7 +320,7 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
@@ -363,7 +361,7 @@ public class QuestionBank extends WeightedList<Question>
         {
             if (weightedAnswerListCache == null)
                 weightedAnswerListCache = new TreeMap<>();
-            char prefix = LogTypeConversion.toCharFromType(QuestionType.getQuestionType(currentQuestion.getClass()));
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
