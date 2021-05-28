@@ -30,9 +30,12 @@ import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.Question;
+import com.noprestige.kanaquiz.questions.WordQuestion;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.util.Locale;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
 
 public class QuestionSelectionItem extends LinearLayout implements Checkable
 {
@@ -81,8 +84,11 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         setOnClickListener(view -> toggle());
         setOnLongClickListener(view -> detailView());
 
-        chkCheckBox.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> OptionsControl.setQuestionSetBool(getPrefId(), isChecked));
+        chkCheckBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+        {
+            OptionsControl.setQuestionSetBool(getPrefId(), isChecked);
+            buildTextBox();
+        });
 
         lblText.setTextLocale(Locale.JAPANESE);
 
@@ -179,12 +185,48 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
     public void setQuestions(Question[] questions)
     {
         this.questions = questions;
+        buildTextBox();
     }
 
-    private void buildTextBox()
+    public static void setHighlightColour(Context context)
     {
-        if ((title != null) && (contents != null))
-            lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + contents));
+        StringBuilder colourString = new StringBuilder(
+                Integer.toHexString(ThemeManager.getThemeColour(context, R.attr.colorAccent) & 0xffffff));
+        while (colourString.length() < 6)
+            colourString.insert(0, '0');
+
+        highlightColour = colourString.toString();
+    }
+
+    static final String HIGHLIGHT_HTML = "<font color=\"#%1$s\">%2$s</font>";
+    static String highlightColour;
+
+    public void buildTextBox()
+    {
+        if ((title != null) && (contents != null) && (questions != null))
+        {
+            String highlightedContents = contents;
+            if (OptionsControl.exists(prefId))
+            {
+                if (OptionsControl.getBoolean(prefId))
+                    highlightedContents = String.format(HIGHLIGHT_HTML, highlightColour, contents);
+            }
+            else
+                for (Question question : questions)
+                    if (OptionsControl.getBoolean(prefId + SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
+                    {
+                        String questionText;
+                        if (WordQuestion.class.equals(question.getClass()))
+                            questionText = question.fetchCorrectAnswer().replace(' ', '\u00A0');
+                        else
+                            questionText = question.getQuestionText();
+
+                        highlightedContents = highlightedContents
+                                .replace(questionText, String.format(HIGHLIGHT_HTML, highlightColour, questionText));
+                    }
+
+            lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + highlightedContents));
+        }
     }
 
     public void setPrefId(int resId)

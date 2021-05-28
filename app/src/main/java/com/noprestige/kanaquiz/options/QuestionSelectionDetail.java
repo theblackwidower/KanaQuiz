@@ -108,6 +108,7 @@ public class QuestionSelectionDetail extends DialogFragment
         }
         else
             OptionsControl.setBoolean(prefId, isChecked);
+        parent.buildTextBox();
     }
 
     public void recordParentCheckbox(QuestionSelectionItem checkbox)
