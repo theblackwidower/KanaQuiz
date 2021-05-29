@@ -221,8 +221,8 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
                         else
                             questionText = question.getQuestionText();
 
-                        highlightedContents = highlightedContents
-                                .replace(questionText, String.format(HIGHLIGHT_HTML, highlightColour, questionText));
+                        highlightedContents = highlightedContents.replace('\u0000' + questionText + '\u0000',
+                                String.format(HIGHLIGHT_HTML, highlightColour, questionText));
                     }
 
             lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + highlightedContents));

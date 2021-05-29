@@ -544,9 +544,12 @@ public class QuestionManagement
         Question[] questionSet = getQuestionSet(setNumber, diacritic, null);
         if (questionSet != null)
             for (Question question : questionSet)
+            {
+                returnValue.append('\u0000');
                 if (question.getClass().equals(KanaQuestion.class) || question.getClass().equals(KanjiQuestion.class))
                 {
                     returnValue.append(question.getQuestionText());
+                    returnValue.append('\u0000');
                     if (questionSet.length <= 10)
                         returnValue.append('\u00A0');
                     else
@@ -555,8 +558,10 @@ public class QuestionManagement
                 else if (question.getClass().equals(WordQuestion.class))
                 {
                     returnValue.append(question.fetchCorrectAnswer().replace(' ', '\u00A0'));
+                    returnValue.append('\u0000');
                     returnValue.append(", ");
                 }
+            }
         if (returnValue.length() > 1)
             returnValue.setCharAt(returnValue.length() - 1, ' ');
         return returnValue.toString();
