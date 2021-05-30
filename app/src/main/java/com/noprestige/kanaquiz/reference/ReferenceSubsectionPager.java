@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -27,10 +27,9 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-class ReferenceSubsectionPager extends FragmentPagerAdapter
+class ReferenceSubsectionPager extends FragmentStateAdapter
 {
     private int questionTypeRef;
     private List<Integer> tabList;
@@ -38,11 +37,12 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
 
     private static List<String> pageIds;
 
-    ReferenceSubsectionPager(FragmentManager fm, Context context, int questionTypeRef)
+    ReferenceSubsectionPager(Fragment refPage, int questionTypeRef)
     {
-        super(fm);
+        //ref: https://www.reddit.com/r/androiddev/comments/kqz3sg/error_fragmentmanager_is_already_executing/gi6ipn4
+        super(refPage);
         this.questionTypeRef = questionTypeRef;
-        this.context = context;
+        context = refPage.getContext();
 
         tabList = new ArrayList<>(3);
 
@@ -91,7 +91,7 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
     }
 
     @Override
-    public Fragment getItem(int position)
+    public Fragment createFragment(int position)
     {
         if (questionTypeRef == R.string.vocabulary)
             return ReferenceSubsectionVocab
@@ -99,6 +99,8 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
         else
             return ReferenceSubsectionPage.newInstance(questionTypeRef, tabList.get(position));
     }
+
+    private static final int KANJI_LOCALE_SHIFT = Integer.SIZE; // = Long.SIZE / 2
 
     @Override
     public long getItemId(int position)
@@ -112,21 +114,46 @@ class ReferenceSubsectionPager extends FragmentPagerAdapter
                 pageIds.add(prefId);
             return pageIds.indexOf(prefId);
         }
-        if (questionTypeRef == R.string.kanji)
+        else if (questionTypeRef == R.string.kanji)
             //should clear out all pages if locale changes
-            //no more than 16 kanji files, or this'll need to be modified
-            return (Locale.getDefault().hashCode() << 4) + tabList.get(position);
+            return ((long) Locale.getDefault().hashCode() << KANJI_LOCALE_SHIFT) + tabList.get(position);
         else
             return tabList.get(position);
     }
 
+    // should result in a binary value of 32 ones and 32 zeroes
+    private static final long KANJI_LOCALE_MASK = -(1L << KANJI_LOCALE_SHIFT);
+
+    //ref: https://stackoverflow.com/a/57691487/3582371
     @Override
-    public int getCount()
+    public boolean containsItem(long itemId)
+    {
+        if (questionTypeRef == R.string.vocabulary)
+            if (itemId < pageIds.size())
+            {
+                int setNumber = QuestionManagement.getVocabulary().getSetNumber(pageIds.get((int) itemId));
+                if (setNumber == 0)
+                    return false;
+                else
+                    return tabList.contains(setNumber);
+            }
+            else
+                return false;
+        else if (questionTypeRef == R.string.kanji)
+            if ((itemId & KANJI_LOCALE_MASK) == ((long) Locale.getDefault().hashCode() << KANJI_LOCALE_SHIFT))
+                return tabList.contains((int) (itemId & ~KANJI_LOCALE_MASK));
+            else
+                return false;
+        else
+            return tabList.contains((int) itemId);
+    }
+
+    @Override
+    public int getItemCount()
     {
         return tabList.size();
     }
 
-    @Override
     public CharSequence getPageTitle(int position)
     {
         if (questionTypeRef == R.string.vocabulary)

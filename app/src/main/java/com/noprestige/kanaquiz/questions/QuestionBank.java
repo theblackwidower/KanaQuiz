@@ -252,7 +252,7 @@ public class QuestionBank extends WeightedList<Question>
         // answer had this count (which is actually impossible because of the range restriction, but better to
         // err on the side of caution) the resultant calculations of 2^count would not add up to an integer
         // overflow.
-        return (int) Math.floor(Math.log(Integer.MAX_VALUE / (list.size() - 1)) / Math.log(2));
+        return (int) Math.floor(Math.log((double) Integer.MAX_VALUE / (list.size() - 1)) / Math.log(2));
     }
 
     public String[] getPossibleAnswers()
@@ -372,7 +372,7 @@ public class QuestionBank extends WeightedList<Question>
                         //fetch all data
                         int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
                                 getCurrentQuestionType(), answer);
-                        if (getSpecialList((KanaQuestion) currentQuestion).contains(currentQuestion.getDatabaseKey()))
+                        if (getSpecialList((KanaQuestion) currentQuestion).contains(answer))
                             count += 2;
                         answerCounts.put(answer, count);
                     }
@@ -418,21 +418,25 @@ public class QuestionBank extends WeightedList<Question>
         if (minCount > 0)
         {
             maxCount -= minCount;
+            Map<String, Float> editedCount = new TreeMap<>();
             for (String answer : newAnswerCount.keySet())
             {
-                float newCount = newAnswerCount.remove(answer) - minCount;
-                newAnswerCount.put(answer, newCount);
+                float newCount = newAnswerCount.get(answer) - minCount;
+                editedCount.put(answer, newCount);
             }
+            newAnswerCount = editedCount;
         }
 
         if (maxCount > maxAnswerWeight)
         {
-            float controlFactor = maxAnswerWeight / maxCount;
+            float controlFactor = (float) maxAnswerWeight / maxCount;
+            Map<String, Float> editedCount = new TreeMap<>();
             for (String answer : newAnswerCount.keySet())
             {
-                float newCount = newAnswerCount.remove(answer) * controlFactor;
-                newAnswerCount.put(answer, newCount);
+                float newCount = newAnswerCount.get(answer) * controlFactor;
+                editedCount.put(answer, newCount);
             }
+            newAnswerCount = editedCount;
         }
 
         WeightedList<String> weightedAnswerList = new WeightedList<>();

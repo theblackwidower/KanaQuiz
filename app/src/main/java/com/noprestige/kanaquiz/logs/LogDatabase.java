@@ -21,7 +21,7 @@ import android.database.Cursor;
 
 import com.noprestige.kanaquiz.questions.QuestionType;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 import androidx.room.Database;
 import androidx.room.Room;

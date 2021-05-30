@@ -41,8 +41,7 @@ import com.noprestige.kanaquiz.questions.QuestionType;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-
+import java.time.LocalDate;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
@@ -300,28 +299,25 @@ public class MainQuiz extends AppCompatActivity
         Class destination;
         int result = 0;
 
-        switch (item.getItemId())
+        int id = item.getItemId();
+        if (id == R.id.mnuSelection)
         {
-            case R.id.mnuSelection:
-                destination = QuestionSelection.class;
-                result = 1;
-                break;
-            case R.id.mnuReference:
-                destination = ReferenceScreen.class;
-                break;
-            case R.id.mnuOptions:
-                destination = OptionsScreen.class;
-                result = 1;
-                break;
-            case R.id.mnuLogs:
-                destination = LogView.class;
-                break;
-            case R.id.mnuAbout:
-                destination = AboutScreen.class;
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+            destination = QuestionSelection.class;
+            result = 1;
         }
+        else if (id == R.id.mnuReference)
+            destination = ReferenceScreen.class;
+        else if (id == R.id.mnuOptions)
+        {
+            destination = OptionsScreen.class;
+            result = 1;
+        }
+        else if (id == R.id.mnuLogs)
+            destination = LogView.class;
+        else if (id == R.id.mnuAbout)
+            destination = AboutScreen.class;
+        else
+            return super.onOptionsItemSelected(item);
 
         startActivityForResult(new Intent(this, destination), result);
         return true;

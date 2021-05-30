@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import android.content.res.Resources;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 import java.util.Set;
 

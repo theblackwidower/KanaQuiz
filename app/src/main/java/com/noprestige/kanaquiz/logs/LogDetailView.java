@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
@@ -34,15 +35,16 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.ZoneId;
-
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import static android.os.Build.VERSION.SDK_INT;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class LogDetailView extends AppCompatActivity
@@ -102,7 +104,7 @@ public class LogDetailView extends AppCompatActivity
                 LogDetailItem output = new LogDetailItem(activity);
                 output.setFromRecord(record);
 
-                chartSeries.add(new BarEntry(staticLabels.size(), (record.getCorrectAnswers() * 100) /
+                chartSeries.add(new BarEntry(staticLabels.size(), (float) (record.getCorrectAnswers() * 100) /
                         (record.getCorrectAnswers() + record.getIncorrectAnswers())));
 
                 staticLabels.add(record.getQuestion());
@@ -167,12 +169,16 @@ public class LogDetailView extends AppCompatActivity
         Bundle extras = getIntent().getExtras();
         date = (LocalDate) extras.get("date");
 
-        //ref: https://stackoverflow.com/a/22992578/3582371
-        //Only needed because the threeten backport has a different package name than java.time, which would require
-        // no modification. I blame anyone not Oreo or newer.
         //ref: https://developer.android.com/reference/java/util/Formatter#ddt
-        String titleText =
-                getString(R.string.log_detail_title, date.atStartOfDay(ZoneId.systemDefault()).toEpochSecond() * 1000L);
+        String titleText;
+        if (SDK_INT >= Build.VERSION_CODES.O)
+            titleText = getString(R.string.log_detail_title, date);
+        else
+            //ref: https://stackoverflow.com/a/22992578/3582371
+            //Only needed because the desugared java.time API has a different package name than java.time,
+            // which would require no modification. I blame anyone not Oreo or newer.
+            titleText = getString(R.string.log_detail_title,
+                    Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
         String[] splitTitle = titleText.split(":");
 

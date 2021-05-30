@@ -1,7 +1,7 @@
 # KanaQuiz
 
 [![GitHub release](https://img.shields.io/github/release/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/releases/)
-[![GitHub license](https://img.shields.io/github/license/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/theblackwidower/KanaQuiz.svg)](LICENSE)
 
 [![GitHub issues](https://img.shields.io/github/issues/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/issues/)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/theblackwidower/KanaQuiz.svg)](https://github.com/theblackwidower/KanaQuiz/pulls/)
@@ -62,24 +62,7 @@ _NB: The following features have no planned release date, or guarantee of releas
 
 ## Code Analysis, Continuous Integration and Test Coverage
 
-| Code Analysis Service | Badge |
-| --------------------- |:-----:|
-| Code Climate          | [![Maintainability](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/maintainability)](https://codeclimate.com/github/theblackwidower/KanaQuiz/maintainability) |
-| Codacy                | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0af5712d54745ada2893d82c55a680b)](https://www.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=theblackwidower/KanaQuiz&amp;utm_campaign=Badge_Grade) |
-
-| CI Server | Badge&nbsp;with&nbsp;status | My Review |
-| --------- |:---------------------------:| --------- |
-| Travis CI | master:<br />[![Build Status](https://travis-ci.org/theblackwidower/KanaQuiz.svg?branch=master)](https://travis-ci.org/theblackwidower/KanaQuiz)<br />develop:<br />[![Build Status](https://travis-ci.org/theblackwidower/KanaQuiz.svg?branch=master)](https://travis-ci.org/theblackwidower/KanaQuiz) | ★★★☆☆<br />Mostly automated. Handles Android pretty well, but emulation support is limited to Android 5.1 (API 22), at the latest. |
-| Circle CI | [![CircleCI](https://circleci.com/gh/theblackwidower/KanaQuiz.svg?style=shield)](https://circleci.com/gh/theblackwidower/KanaQuiz) | ★☆☆☆☆<br />Pretty good, but does not handle Android emulation. The only way to run Instrumented Tests is to take advantage of Firebase Test Lab remote testing, which has problems with automated result collecting, unless you're willing to pay for a results bucket. |
-| Codeship  | master:<br />[![Codeship Status for theblackwidower/KanaQuiz](https://app.codeship.com/projects/7db68d50-ff29-0135-aeeb-56b253369268/status?branch=master)](https://app.codeship.com/projects/279635)<br />develop:<br />[![Codeship Status for theblackwidower/KanaQuiz](https://app.codeship.com/projects/7db68d50-ff29-0135-aeeb-56b253369268/status?branch=develop)](https://app.codeship.com/projects/279635) | ★★★★☆<br />Highly customizable. Build scripts can be written like any Linux Bash script. Even includes a special debug mode, allowing direct access to build environments through SSH, where one can experiment with build commands in the environment they run. However, it currently seems to have a problem with Android emulators, where builds will occasionally fail to install, but work on retry. Don't know what's going on. |
-| Semaphore | master:<br />[![Build Status](https://semaphoreci.com/api/v1/theblackwidower/kanaquiz/branches/master/shields_badge.svg)](https://semaphoreci.com/theblackwidower/kanaquiz)<br />develop:<br />[![Build Status](https://semaphoreci.com/api/v1/theblackwidower/kanaquiz/branches/develop/shields_badge.svg)](https://semaphoreci.com/theblackwidower/kanaquiz) | ★★★★★<br />Highly customizable. Much like Codeship, build scripts can be written like any Linux Bash script, and it's very user friendly. Includes a special 'Launch SSH' feature to allow direct access to build environments through SSH. Also, unlike Codeship, it automatically runs builds on pull requests. |
-
-| Coverage Reporter | Badge&nbsp;with&nbsp;percentage | My Review |
-| ----------------- |:-------------------------------:| --------- |
-| Coveralls         | master:<br />[![Coverage Status](https://coveralls.io/repos/github/theblackwidower/KanaQuiz/badge.svg?branch=master)](https://coveralls.io/github/theblackwidower/KanaQuiz?branch=master)<br />develop:<br />[![Coverage Status](https://coveralls.io/repos/github/theblackwidower/KanaQuiz/badge.svg?branch=develop)](https://coveralls.io/github/theblackwidower/KanaQuiz?branch=develop) | ☆☆☆☆☆<br />Only reports on unit tests, because they will not accept more than one report, or provide utilities for merging. |
-| Codecov           | master:<br />[![codecov](https://codecov.io/gh/theblackwidower/KanaQuiz/branch/master/graph/badge.svg)](https://codecov.io/gh/theblackwidower/KanaQuiz)<br />develop:<br />[![codecov](https://codecov.io/gh/theblackwidower/KanaQuiz/branch/develop/graph/badge.svg)](https://codecov.io/gh/theblackwidower/KanaQuiz) | ★★★★★<br />Best report interface. Submission utility intuitively collects and submits reports with a single command, and site itself is intuitive and complete. |
-| Code Climate      | [![Test Coverage](https://api.codeclimate.com/v1/badges/e0d6b8024f0ffa7682c9/test_coverage)](https://codeclimate.com/github/theblackwidower/KanaQuiz/test_coverage) | ★★★☆☆<br />Bundled with code analysis service. Submission utility can convert reports to JSON, and merge as many JSON reports as you like. |
-| Codacy            | [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b0af5712d54745ada2893d82c55a680b)](https://www.codacy.com/app/theblackwidower/KanaQuiz?utm_source=github.com&utm_medium=referral&utm_content=theblackwidower/KanaQuiz&utm_campaign=Badge_Coverage) | ★★★☆☆<br />Bundled with code analysis service. Submission utility allows you to submit multiple reports, so it's ideal for parallel testing. |
+[Details of all the external services I'm using with this project can be found here. As well as me explaining my thoughts on each of them in little mini-reviews, for your viewing pleasure.](CIServices.md)
 
 ## Branching Model
 
@@ -101,9 +84,9 @@ If you don't wish to bother with pull requests, using the template listed above 
 
 I'll also ask, if possible, for any translators to also translate the vocabulary and kanji files, and insert them into a language-specific directory (`app/src/main/res/xml-[language code]/`), so they'll be automatically included as part of the translation package.
 
-The vocabulary file ([vocabulary.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/vocabulary.xml)) just needs to have it's English answers replaced.
+The vocabulary file ([vocabulary.xml](app/src/main/res/xml/vocabulary.xml)) just needs to have it's English answers replaced.
 
-The kanji files however, are a bit more complex. There are many more kanji to tranlate, and all three can just be translated and copied over. However, if you do not wish to translate all three files ([kanji_1.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_1.xml), [kanji_2.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_2.xml), [kanji_3.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji_3.xml)), just take the base kanji file ([kanji.xml](https://github.com/theblackwidower/KanaQuiz/blob/develop/app/src/main/res/xml/kanji.xml)) and remove the QuestionFile elements of the files you do not wish to translate. All together, these files should be copied into the new folder.
+The kanji files however, are a bit more complex. There are many more kanji to tranlate, and all three can just be translated and copied over. However, if you do not wish to translate all three files ([kanji_1.xml](app/src/main/res/xml/kanji_1.xml), [kanji_2.xml](app/src/main/res/xml/kanji_2.xml), [kanji_3.xml](app/src/main/res/xml/kanji_3.xml)), just take the base kanji file ([kanji.xml](app/src/main/res/xml/kanji.xml)) and remove the QuestionFile elements of the files you do not wish to translate. All together, these files should be copied into the new folder.
 
 If you require any assistance, please do not be afraid to email me. I appreciate the assistance from anyone wishing to volunteer their skills to help with this project.
 

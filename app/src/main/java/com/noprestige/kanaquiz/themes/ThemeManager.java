@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import com.noprestige.kanaquiz.KanaQuizMain;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
 import androidx.annotation.RequiresApi;
 import moe.shizuku.fontprovider.FontProviderClient;
@@ -162,8 +162,10 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
-            if (!isFontInitialized)
+        // These two 'if' statements need to be structured like this to deal with a false positive caused by the
+        // 'NewApi' lint inspection.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && !isFontInitialized)
             {
                 int code = FontProviderClient.checkAvailability(activity);
                 if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
