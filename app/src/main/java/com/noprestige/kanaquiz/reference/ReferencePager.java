@@ -47,7 +47,8 @@ class ReferencePager extends FragmentStateAdapter
             tabList.add(R.string.katakana);
             if (QuestionManagement.getKanjiFileCount() > 0)
                 tabList.add(R.string.kanji);
-            tabList.add(R.string.vocabulary);
+            if (QuestionManagement.getVocabulary().getCategoryCount() > 0)
+                tabList.add(R.string.vocabulary);
         }
         else
         {
