@@ -61,6 +61,7 @@ public class ReferenceScreen extends AppCompatActivity
             ViewGroup layout = (ViewGroup) viewPager.getParent();
             layout.removeAllViews();
             layout.addView(lblEmpty);
+            viewPager = null;
         }
         else
         {
@@ -89,7 +90,7 @@ public class ReferenceScreen extends AppCompatActivity
     public boolean dispatchTouchEvent(MotionEvent event)
     {
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
+        if ((event.getAction() == MotionEvent.ACTION_DOWN) && (viewPager != null))
         {
             if (touchArea == null)
             {
