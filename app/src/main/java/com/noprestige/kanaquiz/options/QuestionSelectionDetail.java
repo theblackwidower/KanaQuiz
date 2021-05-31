@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.noprestige.kanaquiz.questions.KanaQuestion;
 import com.noprestige.kanaquiz.questions.KanjiQuestion;
@@ -91,7 +92,10 @@ public class QuestionSelectionDetail extends DialogFragment
             content.addView(checkBox);
         }
 
-        builder.setView(content);
+        ScrollView scrollBox = new ScrollView(getContext());
+        scrollBox.addView(content);
+        builder.setView(scrollBox);
+        builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
     }
 
