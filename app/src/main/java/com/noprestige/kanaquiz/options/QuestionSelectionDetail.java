@@ -19,10 +19,6 @@ package com.noprestige.kanaquiz.options;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import com.noprestige.kanaquiz.questions.KanaQuestion;
 import com.noprestige.kanaquiz.questions.KanjiQuestion;
@@ -41,7 +37,7 @@ public class QuestionSelectionDetail extends DialogFragment
     private static final String ARG_QUESTION_NAMES = "questionNames";
     private static final String ARG_QUESTION_PREFIDS = "questionPrefIds";
 
-    private CheckBox[] checkBoxes;
+    private boolean[] isCheckedSet;
 
     private QuestionSelectionItem parent;
 
@@ -72,46 +68,34 @@ public class QuestionSelectionDetail extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LinearLayout content = new LinearLayout(getContext());
-        content.setOrientation(LinearLayout.VERTICAL);
-        content.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         String prefIdStart = getArguments().getString(ARG_PREFID);
         String[] questionNames = getArguments().getStringArray(ARG_QUESTION_NAMES);
         String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
-        checkBoxes = new CheckBox[questionNames.length];
-        for (int i = 0; i < questionNames.length; i++)
-        {
-            String prefId = prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i];
-            CheckBox checkBox = new CheckBox(getContext());
-            checkBox.setText(questionNames[i]);
-            checkBox.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            checkBox.setChecked(OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
-                    OptionsControl.getBoolean(prefId));
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> updatePref(prefIdStart, prefId, isChecked));
-            checkBoxes[i] = checkBox;
-            content.addView(checkBox);
-        }
 
-        ScrollView scrollBox = new ScrollView(getContext());
-        scrollBox.addView(content);
-        builder.setView(scrollBox);
+        isCheckedSet = new boolean[questionNames.length];
+        for (int i = 0; i < questionNames.length; i++)
+            isCheckedSet[i] = OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
+                    OptionsControl.getBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i]);
+
+        builder.setMultiChoiceItems(questionNames, isCheckedSet,
+                (dialog, which, isChecked) -> updatePref(prefIdStart, which, isChecked));
+
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
     }
 
-    private void updatePref(String prefIdStart, String prefId, boolean isChecked)
+    private void updatePref(String prefIdStart, int which, boolean isChecked)
     {
+        String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
         if (OptionsControl.exists(prefIdStart))
         {
             OptionsControl.delete(prefIdStart);
             parent.nullify();
-            String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
             for (int i = 0; i < questionPrefIds.length; i++)
-                OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i],
-                        checkBoxes[i].isChecked());
+                OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i], isCheckedSet[i]);
         }
-        else
-            OptionsControl.setBoolean(prefId, isChecked);
+        OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[which], isChecked);
+        isCheckedSet[which] = isChecked;
         parent.buildTextBox();
     }
 
@@ -126,10 +110,10 @@ public class QuestionSelectionDetail extends DialogFragment
         super.onDismiss(dialog);
         Boolean overallPref = null;
 
-        for (CheckBox box : checkBoxes)
+        for (boolean isChecked : isCheckedSet)
             if (overallPref == null)
-                overallPref = box.isChecked();
-            else if (!overallPref.equals(box.isChecked()))
+                overallPref = isChecked;
+            else if (!overallPref.equals(isChecked))
             {
                 overallPref = null;
                 break;
