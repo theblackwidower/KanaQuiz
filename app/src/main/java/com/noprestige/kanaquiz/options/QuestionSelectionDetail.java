@@ -110,12 +110,10 @@ public class QuestionSelectionDetail extends DialogFragment
     public void onDismiss(@NonNull DialogInterface dialog)
     {
         super.onDismiss(dialog);
-        Boolean overallPref = null;
+        Boolean overallPref = isCheckedSet[0];
 
         for (boolean isChecked : isCheckedSet)
-            if (overallPref == null)
-                overallPref = isChecked;
-            else if (!overallPref.equals(isChecked))
+            if (!overallPref.equals(isChecked))
             {
                 overallPref = null;
                 break;
