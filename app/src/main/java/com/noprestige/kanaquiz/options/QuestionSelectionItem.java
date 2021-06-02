@@ -190,8 +190,14 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
     public static void setHighlightColour(Context context)
     {
-        StringBuilder colourString = new StringBuilder(
-                Integer.toHexString(ThemeManager.getThemeColour(context, R.attr.colorAccent) & 0xffffff));
+        int colourRef;
+        if (ThemeManager.isLightTheme(context))
+            colourRef = R.attr.colorPrimary;
+        else
+            colourRef = R.attr.colorAccent;
+
+        StringBuilder colourString =
+                new StringBuilder(Integer.toHexString(ThemeManager.getThemeColour(context, colourRef) & 0xffffff));
         while (colourString.length() < 6)
             colourString.insert(0, '0');
 
