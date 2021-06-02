@@ -73,9 +73,10 @@ public class QuestionSelectionDetail extends DialogFragment
         String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
 
         isCheckedSet = new boolean[questionNames.length];
+        Boolean isAll = OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) : null;
         for (int i = 0; i < questionNames.length; i++)
-            isCheckedSet[i] = OptionsControl.exists(prefIdStart) ? OptionsControl.getBoolean(prefIdStart) :
-                    OptionsControl.getBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i]);
+            isCheckedSet[i] = (isAll == null) ?
+                    OptionsControl.getBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i]) : isAll;
 
         builder.setMultiChoiceItems(questionNames, isCheckedSet,
                 (dialog, which, isChecked) -> updatePref(prefIdStart, which, isChecked));
@@ -89,10 +90,11 @@ public class QuestionSelectionDetail extends DialogFragment
         String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
         if (OptionsControl.exists(prefIdStart))
         {
+            boolean currentSetting = OptionsControl.getBoolean(prefIdStart);
             OptionsControl.delete(prefIdStart);
             parent.nullify();
-            for (int i = 0; i < questionPrefIds.length; i++)
-                OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i], isCheckedSet[i]);
+            for (String thisPrefId : questionPrefIds)
+                OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + thisPrefId, currentSetting);
         }
         OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[which], isChecked);
         isCheckedSet[which] = isChecked;
