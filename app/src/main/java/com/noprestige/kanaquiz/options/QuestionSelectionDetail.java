@@ -100,7 +100,6 @@ public class QuestionSelectionDetail extends DialogFragment
                 OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + thisPrefId, currentSetting);
         }
         OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[which], isChecked);
-        isCheckedSet[which] = isChecked;
         parent.buildTextBox();
     }
 
