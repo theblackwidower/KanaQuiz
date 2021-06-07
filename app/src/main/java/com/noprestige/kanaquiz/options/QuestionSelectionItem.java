@@ -113,7 +113,6 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
             if (context instanceof QuestionSelection)
             {
                 QuestionSelectionDetail box = QuestionSelectionDetail.newInstance(prefId, questions);
-                box.recordParentCheckbox(this);
                 box.show(((QuestionSelection) context).getSupportFragmentManager(), "detailView");
                 return true;
             }
@@ -246,6 +245,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         if (prefId != null)
         {
             this.prefId = prefId;
+            setTag(prefId);
 
             if (!isInEditMode())
                 if (OptionsControl.exists(getPrefId()))

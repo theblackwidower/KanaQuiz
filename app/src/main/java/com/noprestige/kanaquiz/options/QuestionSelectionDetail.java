@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.questions.KanaQuestion;
 import com.noprestige.kanaquiz.questions.KanjiQuestion;
 import com.noprestige.kanaquiz.questions.Question;
@@ -80,6 +81,8 @@ public class QuestionSelectionDetail extends DialogFragment
 
         builder.setMultiChoiceItems(questionNames, isCheckedSet, this::updatePref);
 
+        parent = getActivity().findViewById(R.id.viewPager).findViewWithTag(prefIdStart);
+
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
     }
@@ -99,11 +102,6 @@ public class QuestionSelectionDetail extends DialogFragment
         OptionsControl.setBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[which], isChecked);
         isCheckedSet[which] = isChecked;
         parent.buildTextBox();
-    }
-
-    public void recordParentCheckbox(QuestionSelectionItem checkbox)
-    {
-        parent = checkbox;
     }
 
     @Override
