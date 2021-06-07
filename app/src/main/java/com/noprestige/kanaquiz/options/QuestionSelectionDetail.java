@@ -78,15 +78,15 @@ public class QuestionSelectionDetail extends DialogFragment
             isCheckedSet[i] = (isAll == null) ?
                     OptionsControl.getBoolean(prefIdStart + SUBPREFERENCE_DELIMITER + questionPrefIds[i]) : isAll;
 
-        builder.setMultiChoiceItems(questionNames, isCheckedSet,
-                (dialog, which, isChecked) -> updatePref(prefIdStart, which, isChecked));
+        builder.setMultiChoiceItems(questionNames, isCheckedSet, this::updatePref);
 
         builder.setPositiveButton(android.R.string.ok, null);
         return builder.create();
     }
 
-    private void updatePref(String prefIdStart, int which, boolean isChecked)
+    private void updatePref(DialogInterface dialog, int which, boolean isChecked)
     {
+        String prefIdStart = getArguments().getString(ARG_PREFID);
         String[] questionPrefIds = getArguments().getStringArray(ARG_QUESTION_PREFIDS);
         if (OptionsControl.exists(prefIdStart))
         {
