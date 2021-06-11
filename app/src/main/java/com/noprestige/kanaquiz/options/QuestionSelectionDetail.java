@@ -53,9 +53,9 @@ public class QuestionSelectionDetail extends DialogFragment
         {
             if (questions[i].getClass().equals(KanaQuestion.class) ||
                     questions[i].getClass().equals(KanjiQuestion.class))
-                questionNames[i] = questions[i].getQuestionText();
+                questionNames[i] = questions[i].getQuestionText() + " - " + questions[i].fetchCorrectAnswer();
             else if (questions[i].getClass().equals(WordQuestion.class))
-                questionNames[i] = questions[i].fetchCorrectAnswer();
+                questionNames[i] = questions[i].fetchCorrectAnswer() + " - " + questions[i].getQuestionText();
 
             questionPrefIds[i] = questions[i].getDatabaseKey();
         }
