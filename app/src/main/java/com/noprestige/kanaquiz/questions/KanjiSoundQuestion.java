@@ -43,7 +43,7 @@ public class KanjiSoundQuestion extends Question
     }
 
     @Override
-    String getQuestionText()
+    public String getQuestionText()
     {
         return kanji;
     }
@@ -62,13 +62,13 @@ public class KanjiSoundQuestion extends Question
     }
 
     @Override
-    String fetchCorrectAnswer()
+    public String fetchCorrectAnswer()
     {
         return answer;
     }
 
     @Override
-    String getDatabaseKey()
+    public String getDatabaseKey()
     {
         return kanji;
     }
