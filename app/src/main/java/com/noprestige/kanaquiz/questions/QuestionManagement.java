@@ -56,7 +56,7 @@ public class QuestionManagement
 
     private final String[] setNoDiacriticsTitles;
 
-    public static final String SUBPREFERENCE_DELIMITER = "_";
+    public static final String SUBPREFERENCE_DELIMITER = "~";
 
     public int getCategoryCount()
     {
