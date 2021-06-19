@@ -84,7 +84,7 @@
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="prefId" type="text" use="required"/>
+            <xs:attribute name="prefId" type="prefId" use="required" />
             <xs:attribute name="setTitle" type="text" use="required"/>
             <xs:attribute name="setNoDiacriticsTitle" type="text"/>
         </xs:complexType>
@@ -176,25 +176,31 @@
             <xs:simpleType>
                 <xs:list itemType="romanization_system"/>
             </xs:simpleType>
-            <xs:minLength value="1"/>
+            <xs:minLength value="1" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="text">
         <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="prefId">
+        <xs:restriction base="text">
+            <xs:pattern value="[^~ ]*" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="meanings">
         <xs:restriction base="text">
-            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
+            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
+            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*" />
         </xs:restriction>
     </xs:simpleType>
 

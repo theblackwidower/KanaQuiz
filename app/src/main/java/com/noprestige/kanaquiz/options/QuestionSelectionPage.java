@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -44,6 +44,10 @@ public class QuestionSelectionPage extends Fragment
     private static final String ARG_ITEM_STATES = "states";
     LinearLayout screen;
 
+    private static final char STATUS_TRUE = 'T';
+    private static final char STATUS_FALSE = 'F';
+    private static final char STATUS_NEUTRAL = 'N';
+
     public static QuestionSelectionPage newInstance(int questionTypeRef)
     {
         QuestionSelectionPage screen = new QuestionSelectionPage();
@@ -87,7 +91,7 @@ public class QuestionSelectionPage extends Fragment
     {
         super.onStart();
         //This block of code could also work in the onResume method
-        boolean[] record = getArguments().getBooleanArray(ARG_ITEM_STATES);
+        char[] record = getArguments().getCharArray(ARG_ITEM_STATES);
         String[] prefIds = getArguments().getStringArray(ARG_ITEM_IDS);
         if (record != null)
         {
@@ -104,7 +108,10 @@ public class QuestionSelectionPage extends Fragment
                 {
                     QuestionSelectionItem item = itemList.get(prefIds[i]);
                     if (item != null)
-                        item.setChecked(record[i]);
+                        if (record[i] == STATUS_NEUTRAL)
+                            item.nullify();
+                        else
+                            item.setChecked(record[i] == STATUS_TRUE);
                 }
         }
     }
@@ -115,7 +122,7 @@ public class QuestionSelectionPage extends Fragment
         super.onStop();
         //This block of code could also work in the onPause and onStop methods
         int count = screen.getChildCount();
-        boolean[] record = new boolean[count];
+        char[] record = new char[count];
         String[] prefIds = new String[count];
 
         for (int i = 0; i < count; i++)
@@ -123,10 +130,15 @@ public class QuestionSelectionPage extends Fragment
             {
                 QuestionSelectionItem item = (QuestionSelectionItem) screen.getChildAt(i);
                 prefIds[i] = item.getPrefId();
-                record[i] = item.isChecked();
+                if (item.isNeutral())
+                    record[i] = STATUS_NEUTRAL;
+                else if (item.isChecked())
+                    record[i] = STATUS_TRUE;
+                else
+                    record[i] = STATUS_FALSE;
             }
 
-        getArguments().putBooleanArray(ARG_ITEM_STATES, record);
+        getArguments().putCharArray(ARG_ITEM_STATES, record);
         getArguments().putStringArray(ARG_ITEM_IDS, prefIds);
     }
 
