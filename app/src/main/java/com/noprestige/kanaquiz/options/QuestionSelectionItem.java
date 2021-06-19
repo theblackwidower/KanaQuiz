@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -29,15 +29,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.Question;
+import com.noprestige.kanaquiz.questions.WordQuestion;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.util.Locale;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
 
 public class QuestionSelectionItem extends LinearLayout implements Checkable
 {
     private String prefId;
     private String title;
     private String contents;
+    private Question[] questions;
 
     private TextView lblText;
     private CheckBox chkCheckBox;
@@ -77,9 +82,13 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         chkCheckBox = findViewById(R.id.chkCheckBox);
 
         setOnClickListener(view -> toggle());
+        setOnLongClickListener(view -> detailView());
 
-        chkCheckBox.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> OptionsControl.setBoolean(getPrefId(), isChecked));
+        chkCheckBox.setOnCheckedChangeListener((buttonView, isChecked) ->
+        {
+            OptionsControl.setQuestionSetBool(getPrefId(), isChecked);
+            buildTextBox();
+        });
 
         lblText.setTextLocale(Locale.JAPANESE);
 
@@ -94,6 +103,21 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
 
         linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
+    }
+
+    private boolean detailView()
+    {
+        if (questions != null)
+        {
+            Context context = getContext();
+            if (context instanceof QuestionSelection)
+            {
+                QuestionSelectionDetail box = QuestionSelectionDetail.newInstance(prefId, questions);
+                box.show(((QuestionSelection) context).getSupportFragmentManager(), "detailView");
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -157,10 +181,58 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         }
     }
 
-    private void buildTextBox()
+    public void setQuestions(Question[] questions)
     {
-        if ((title != null) && (contents != null))
-            lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + contents));
+        this.questions = questions;
+        buildTextBox();
+    }
+
+    public static void setHighlightColour(Context context)
+    {
+        int colourRef;
+        if (ThemeManager.isLightTheme(context))
+            colourRef = R.attr.colorPrimary;
+        else
+            colourRef = R.attr.colorAccent;
+
+        StringBuilder colourString =
+                new StringBuilder(Integer.toHexString(ThemeManager.getThemeColour(context, colourRef) & 0xffffff));
+        while (colourString.length() < 6)
+            colourString.insert(0, '0');
+
+        highlightColour = colourString.toString();
+    }
+
+    static final String HIGHLIGHT_HTML = "<font color=\"#%1$s\">%2$s</font>";
+    static String highlightColour;
+
+    public void buildTextBox()
+    {
+        if ((title != null) && (contents != null) && (questions != null))
+        {
+            String highlightedContents = contents;
+            if (OptionsControl.exists(prefId))
+            {
+                if (OptionsControl.getBoolean(prefId))
+                    highlightedContents = String.format(HIGHLIGHT_HTML, highlightColour, contents);
+            }
+            else
+                for (Question question : questions)
+                    if (OptionsControl.getBoolean(prefId + SUBPREFERENCE_DELIMITER + question.getDatabaseKey()))
+                    {
+                        String questionText;
+                        if (WordQuestion.class.equals(question.getClass()))
+                            questionText = question.fetchCorrectAnswer().replace(' ', '\u00A0');
+                        else
+                            questionText = question.getQuestionText();
+
+                        highlightedContents = highlightedContents.replace('\u0000' + questionText + '\u0000',
+                                String.format(HIGHLIGHT_HTML, highlightColour, questionText));
+                    }
+            highlightedContents = highlightedContents.replace("</font>,", ",</font>");
+
+            lblText.setText(Html.fromHtml("<b>" + title + "</b><br/>" + highlightedContents));
+        }
     }
 
     public void setPrefId(int resId)
@@ -173,27 +245,51 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
         if (prefId != null)
         {
             this.prefId = prefId;
+            setTag(prefId);
 
             if (!isInEditMode())
-                setChecked(OptionsControl.getBoolean(getPrefId()));
+                if (OptionsControl.exists(getPrefId()))
+                    setChecked(OptionsControl.getBoolean(getPrefId()));
+                else
+                    nullify();
         }
+    }
+
+    public void nullify()
+    {
+        chkCheckBox.setVisibility(INVISIBLE);
+    }
+
+    public boolean isNeutral()
+    {
+        return (chkCheckBox.getVisibility() == INVISIBLE);
     }
 
     @Override
     public boolean isChecked()
     {
-        return chkCheckBox.isChecked();
+        return (chkCheckBox.getVisibility() == VISIBLE) && chkCheckBox.isChecked();
     }
 
     @Override
     public void setChecked(boolean checked)
     {
-        chkCheckBox.setChecked(checked);
+        chkCheckBox.setVisibility(VISIBLE);
+        if (chkCheckBox.isChecked() == checked)
+            OptionsControl.setQuestionSetBool(getPrefId(), checked);
+        else
+            chkCheckBox.setChecked(checked);
     }
 
     @Override
     public void toggle()
     {
-        chkCheckBox.toggle();
+        if (chkCheckBox.getVisibility() == VISIBLE)
+            chkCheckBox.toggle();
+        else
+        {
+            chkCheckBox.setVisibility(VISIBLE);
+            chkCheckBox.setChecked(true);
+        }
     }
 }

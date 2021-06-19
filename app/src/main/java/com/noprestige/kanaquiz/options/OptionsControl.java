@@ -23,19 +23,23 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.questions.QuestionManagement;
 
 import java.time.LocalDate;
 
+import java.util.Map;
 import java.util.Set;
 
 import androidx.preference.PreferenceManager;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
 
 public final class OptionsControl
 {
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static Resources resources;
+
+    private static final String DEFAULT_QUESTION_SET = "hiragana_set_1";
 
     private OptionsControl() {}
 
@@ -59,8 +63,7 @@ public final class OptionsControl
 
     public static boolean getBoolean(String prefId)
     {
-        //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, false);
     }
 
     public static void setBoolean(int resId, boolean setting)
@@ -72,6 +75,55 @@ public final class OptionsControl
     {
         editor.putBoolean(prefId, setting);
         editor.apply();
+    }
+
+    public static Boolean getQuestionSetBool(String prefId)
+    {
+        if (exists(prefId))
+            return getBoolean(prefId);
+        else
+        {
+            boolean hasTrue = false;
+            boolean hasFalse = false;
+            for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet())
+                if (entry.getKey().startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                    if ((Boolean) entry.getValue())
+                        hasTrue = true;
+                    else
+                        hasFalse = true;
+
+            if (hasTrue && hasFalse)
+                return null;
+            else
+                return hasTrue;
+        }
+    }
+
+    public static void setQuestionSetBool(String prefId, boolean setting)
+    {
+        for (String key : sharedPreferences.getAll().keySet())
+            if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                delete(key);
+        editor.putBoolean(prefId, setting);
+        editor.apply();
+    }
+
+    public static void setQuestionSetDefaults(String[] prefIds)
+    {
+        Set<String> extantPrefs = sharedPreferences.getAll().keySet();
+        for (String prefId : prefIds)
+            if (!extantPrefs.contains(prefId))
+            {
+                boolean setDefault = true;
+                for (String key : extantPrefs)
+                    if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                    {
+                        setDefault = false;
+                        break;
+                    }
+                if (setDefault)
+                    setBoolean(prefId, (prefId.equals(DEFAULT_QUESTION_SET)));
+            }
     }
 
     public static int getInt(int resId)
@@ -134,6 +186,27 @@ public final class OptionsControl
     public static void setStringSet(String prefId, Set<String> setting)
     {
         editor.putStringSet(prefId, setting);
+        editor.apply();
+    }
+
+    public static boolean exists(int resId)
+    {
+        return exists(resources.getString(resId));
+    }
+
+    public static boolean exists(String prefId)
+    {
+        return sharedPreferences.contains(prefId);
+    }
+
+    public static void delete(int resId)
+    {
+        delete(resources.getString(resId));
+    }
+
+    public static void delete(String prefId)
+    {
+        editor.remove(prefId);
         editor.apply();
     }
 

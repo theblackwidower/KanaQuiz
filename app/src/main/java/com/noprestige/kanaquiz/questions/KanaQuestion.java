@@ -42,7 +42,7 @@ public class KanaQuestion extends Question
         this.altRomaji = altRomaji;
     }
 
-    String getQuestionText()
+    public String getQuestionText()
     {
         return kana;
     }
@@ -59,7 +59,7 @@ public class KanaQuestion extends Question
         return false;
     }
 
-    String fetchCorrectAnswer()
+    public String fetchCorrectAnswer()
     {
         return fetchRomaji();
     }
@@ -94,7 +94,7 @@ public class KanaQuestion extends Question
     }
 
     @Override
-    String getDatabaseKey()
+    public String getDatabaseKey()
     {
         return kana;
     }

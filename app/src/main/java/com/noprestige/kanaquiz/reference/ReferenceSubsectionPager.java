@@ -50,8 +50,11 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
         {
             boolean isFullReference = OptionsControl.getBoolean(R.string.prefid_full_reference);
             for (int i = 1; i <= QuestionManagement.getVocabulary().getCategoryCount(); i++)
-                if (isFullReference || QuestionManagement.getVocabulary().getPref(i))
+            {
+                Boolean pref = QuestionManagement.getVocabulary().getPref(i);
+                if (isFullReference || (pref == null) || pref)
                     tabList.add(i);
+            }
         }
         else if (questionTypeRef == R.string.kanji)
         {

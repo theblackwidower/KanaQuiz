@@ -48,6 +48,8 @@ public class QuestionSelection extends AppCompatActivity
             tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position)))
                 .attach();
+
+        QuestionSelectionItem.setHighlightColour(this);
     }
 
     @Override

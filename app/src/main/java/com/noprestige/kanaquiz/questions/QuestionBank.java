@@ -136,12 +136,25 @@ public class QuestionBank extends WeightedList<Question>
 
     public boolean addQuestions(Question[] questions)
     {
+        if (questions != null)
+        {
+            boolean returnValue = true;
+            for (Question question : questions)
+                // if any one of the additions fail, the method returns false
+                returnValue = addQuestion(question) && returnValue;
+            return returnValue;
+        }
+        return false;
+    }
+
+    public boolean addQuestion(Question question)
+    {
         weightedAnswerListCache = null;
         previousQuestions = null;
         maxKanaAnswerWeight = -1;
         maxWordAnswerWeight = -1;
         maxYomiAnswerWeight = -1;
-        if (questions != null)
+        if (question != null)
         {
             boolean returnValue = true;
             Set<String> kanjiQuestionTypePref = null;
@@ -166,8 +179,6 @@ public class QuestionBank extends WeightedList<Question>
 
     private boolean addQuestion(Question question)
     {
-        boolean returnValue = true;
-
         // Fetches the percentage of times the user got a question right,
         Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(), question.getType());
         if (percentage == null)
@@ -179,8 +190,8 @@ public class QuestionBank extends WeightedList<Question>
         // so any question the user got perfect will still appear in the quiz.
         if (weight < 2)
             weight = 2;
-        // if any one of the additions fail, the method returns false
-        returnValue = add(weight, question) && returnValue;
+        // if any aspect of the addition fails, the method returns false
+        boolean returnValue = add(weight, question);
         QuestionType type = question.getType();
         if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
             returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;

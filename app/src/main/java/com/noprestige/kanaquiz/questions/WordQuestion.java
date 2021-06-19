@@ -49,7 +49,7 @@ public class WordQuestion extends Question
     }
 
     @Override
-    String getQuestionText()
+    public String getQuestionText()
     {
         if (OptionsControl.compareStrings(R.string.prefid_vocab_display, R.string.prefid_vocab_display_romaji))
             return fetchText(QuestionTextType.ROMAJI);
@@ -95,13 +95,13 @@ public class WordQuestion extends Question
     }
 
     @Override
-    String fetchCorrectAnswer()
+    public String fetchCorrectAnswer()
     {
         return answer;
     }
 
     @Override
-    String getDatabaseKey()
+    public String getDatabaseKey()
     {
         return romaji;
     }

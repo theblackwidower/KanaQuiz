@@ -22,13 +22,13 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public abstract class Question
 {
-    abstract String getQuestionText();
+    public abstract String getQuestionText();
 
     abstract boolean checkAnswer(String response);
 
-    abstract String fetchCorrectAnswer();
+    public abstract String fetchCorrectAnswer();
 
-    abstract String getDatabaseKey();
+    public abstract String getDatabaseKey();
 
     abstract QuestionType getType();
 
