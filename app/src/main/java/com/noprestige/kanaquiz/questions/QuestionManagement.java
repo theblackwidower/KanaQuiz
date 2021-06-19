@@ -257,7 +257,7 @@ public class QuestionManagement
         questionFiles[2] = VOCABULARY;
         System.arraycopy(KANJI_FILES, 0, questionFiles, 3, KANJI_FILES.length);
 
-        int prefCount = 1;
+        int prefCount = 4;
         for (QuestionManagement questionFile : questionFiles)
             prefCount += questionFile.prefCountCache;
         int[] currentPrefRecord = new int[(prefCount / Integer.SIZE) + 1];
@@ -268,11 +268,14 @@ public class QuestionManagement
 
         Set<String> kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
 
-        currentPrefRecord[2] = kanjiQuestionTypePref.contains("meaning");
-        currentPrefRecord[3] = kanjiQuestionTypePref.contains("kunyomi");
-        currentPrefRecord[4] = kanjiQuestionTypePref.contains("onyomi");
+        if (kanjiQuestionTypePref.contains("meaning"))
+            currentPrefRecord[0] += 0b10;
+        if (kanjiQuestionTypePref.contains("kunyomi"))
+            currentPrefRecord[0] += 0b100;
+        if (kanjiQuestionTypePref.contains("onyomi"))
+            currentPrefRecord[0] += 0b1000;
 
-        int index = 1;
+        int index = 4;
         int section = 0;
         for (QuestionManagement questionFile : questionFiles)
             for (Map.Entry<SetCode, Question[]> set : questionFile.questionSets.entrySet())
