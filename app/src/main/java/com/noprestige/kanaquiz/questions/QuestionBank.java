@@ -139,22 +139,9 @@ public class QuestionBank extends WeightedList<Question>
         if (questions != null)
         {
             boolean returnValue = true;
-            Set<String> kanjiQuestionTypePref = null;
             for (Question question : questions)
                 // if any one of the additions fail, the method returns false
-                if (question.getClass().equals(KanjiQuestion.class))
-                {
-                    if (kanjiQuestionTypePref == null)
-                        kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
-                    if (kanjiQuestionTypePref.contains("meaning"))
-                        returnValue = addQuestion(question) && returnValue;
-                    if (kanjiQuestionTypePref.contains("kunyomi"))
-                        returnValue = addQuestion(((KanjiQuestion) question).getKunYomiQuestion()) && returnValue;
-                    if (kanjiQuestionTypePref.contains("onyomi"))
-                        returnValue = addQuestion(((KanjiQuestion) question).getOnYomiQuestion()) && returnValue;
-                }
-                else
-                    returnValue = addQuestion(question) && returnValue;
+                returnValue = addQuestion(question) && returnValue;
             return returnValue;
         }
         return false;
@@ -169,34 +156,52 @@ public class QuestionBank extends WeightedList<Question>
         maxYomiAnswerWeight = -1;
         if (question != null)
         {
-            // Fetches the percentage of times the user got a question right,
-            Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(), question.getType());
-            if (percentage == null)
-                percentage = 0.1f;
-            // The 1f is to invert the value so we get the number of times they got it wrong,
-            // Times 100f to get the percentage.
-            int weight = (int) Math.ceil((1f - percentage) * 100f);
-            // Setting weight to never get lower than 2,
-            // so any question the user got perfect will still appear in the quiz.
-            if (weight < 2)
-                weight = 2;
-            // if any aspect of the addition fails, the method returns false
-            boolean returnValue = add(weight, question);
-            QuestionType type = question.getType();
-            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
-                returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-            else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
-                returnValue = yomiAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-            else if (type == QuestionType.KANA)
+            if (question.getClass().equals(KanjiQuestion.class))
             {
-                returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                // Storing answers in specialized answer lists for more specialized answer selection
-                returnValue = getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
+                boolean returnValue = true;
+                Set<String> kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
+                if (kanjiQuestionTypePref.contains("meaning"))
+                    returnValue = addQuestionInternal(question) && returnValue;
+                if (kanjiQuestionTypePref.contains("kunyomi"))
+                    returnValue = addQuestionInternal(((KanjiQuestion) question).getKunYomiQuestion()) && returnValue;
+                if (kanjiQuestionTypePref.contains("onyomi"))
+                    returnValue = addQuestionInternal(((KanjiQuestion) question).getOnYomiQuestion()) && returnValue;
+                return returnValue;
             }
-
-            return returnValue;
+            else
+                return addQuestionInternal(question);
         }
         return false;
+    }
+
+    private boolean addQuestionInternal(Question question)
+    {
+        // Fetches the percentage of times the user got a question right,
+        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(), question.getType());
+        if (percentage == null)
+            percentage = 0.1f;
+        // The 1f is to invert the value so we get the number of times they got it wrong,
+        // Times 100f to get the percentage.
+        int weight = (int) Math.ceil((1f - percentage) * 100f);
+        // Setting weight to never get lower than 2,
+        // so any question the user got perfect will still appear in the quiz.
+        if (weight < 2)
+            weight = 2;
+        // if any aspect of the addition fails, the method returns false
+        boolean returnValue = add(weight, question);
+        QuestionType type = question.getType();
+        if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
+            returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+        else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
+            returnValue = yomiAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+        else if (type == QuestionType.KANA)
+        {
+            returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+            // Storing answers in specialized answer lists for more specialized answer selection
+            returnValue = getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
+        }
+
+        return returnValue;
     }
 
     private Set<String> getSpecialList(KanaQuestion question)
