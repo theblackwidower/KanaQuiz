@@ -52,6 +52,8 @@ public class QuestionBank extends WeightedList<Question>
     private int maxWordAnswerWeight = -1;
     private int maxYomiAnswerWeight = -1;
 
+    private boolean isReset = true;
+
     public QuestionType getCurrentQuestionType()
     {
         return currentQuestion.getType();
@@ -62,8 +64,11 @@ public class QuestionBank extends WeightedList<Question>
         if (count() > 0)
         {
             if (previousQuestions == null)
+            {
                 previousQuestions =
                         new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+                isReset = false;
+            }
             do
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
@@ -116,8 +121,11 @@ public class QuestionBank extends WeightedList<Question>
     public boolean loadQuestion(String questionKey, QuestionType type)
     {
         if (previousQuestions == null)
+        {
             previousQuestions =
                     new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+            isReset = false;
+        }
 
         Collection<Question> questions = values();
 
@@ -149,11 +157,15 @@ public class QuestionBank extends WeightedList<Question>
 
     public boolean addQuestion(Question question)
     {
-        weightedAnswerListCache = null;
-        previousQuestions = null;
-        maxKanaAnswerWeight = -1;
-        maxWordAnswerWeight = -1;
-        maxYomiAnswerWeight = -1;
+        if (!isReset)
+        {
+            weightedAnswerListCache = null;
+            previousQuestions = null;
+            maxKanaAnswerWeight = -1;
+            maxWordAnswerWeight = -1;
+            maxYomiAnswerWeight = -1;
+            isReset = true;
+        }
         if (question != null)
         {
             if (question.getClass().equals(KanjiQuestion.class))
@@ -223,6 +235,7 @@ public class QuestionBank extends WeightedList<Question>
         maxKanaAnswerWeight = -1;
         maxWordAnswerWeight = -1;
         maxYomiAnswerWeight = -1;
+        isReset = true;
         fullKanaAnswerList.addAll(questions.fullKanaAnswerList);
         basicAnswerList.addAll(questions.basicAnswerList);
         diacriticAnswerList.addAll(questions.diacriticAnswerList);
@@ -236,21 +249,30 @@ public class QuestionBank extends WeightedList<Question>
     private int getMaxKanaAnswerWeight()
     {
         if (maxKanaAnswerWeight < 0)
+        {
             maxKanaAnswerWeight = getMaxAnswerWeight(fullKanaAnswerList);
+            isReset = false;
+        }
         return maxKanaAnswerWeight;
     }
 
     private int getMaxWordAnswerWeight()
     {
         if (maxWordAnswerWeight < 0)
+        {
             maxWordAnswerWeight = getMaxAnswerWeight(wordAnswerList);
+            isReset = false;
+        }
         return maxWordAnswerWeight;
     }
 
     private int getMaxYomiAnswerWeight()
     {
         if (maxYomiAnswerWeight < 0)
+        {
             maxYomiAnswerWeight = getMaxAnswerWeight(yomiAnswerList);
+            isReset = false;
+        }
         return maxYomiAnswerWeight;
     }
 
@@ -286,7 +308,10 @@ public class QuestionBank extends WeightedList<Question>
         else
         {
             if (weightedAnswerListCache == null)
+            {
                 weightedAnswerListCache = new TreeMap<>();
+                isReset = false;
+            }
             char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
@@ -327,7 +352,10 @@ public class QuestionBank extends WeightedList<Question>
         else
         {
             if (weightedAnswerListCache == null)
+            {
                 weightedAnswerListCache = new TreeMap<>();
+                isReset = false;
+            }
             char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
@@ -368,7 +396,10 @@ public class QuestionBank extends WeightedList<Question>
         else
         {
             if (weightedAnswerListCache == null)
+            {
                 weightedAnswerListCache = new TreeMap<>();
+                isReset = false;
+            }
             char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
             if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
