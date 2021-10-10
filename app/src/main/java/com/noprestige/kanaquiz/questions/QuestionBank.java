@@ -155,6 +155,8 @@ public class QuestionBank extends WeightedList<Question>
         return false;
     }
 
+    private Set<String> kanjiQuestionTypePref;
+
     public boolean addQuestion(Question question)
     {
         if (!isReset)
@@ -171,7 +173,8 @@ public class QuestionBank extends WeightedList<Question>
             if (question.getClass().equals(KanjiQuestion.class))
             {
                 boolean returnValue = true;
-                Set<String> kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
+                if (kanjiQuestionTypePref == null)
+                    kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
                 if (kanjiQuestionTypePref.contains("meaning"))
                     returnValue = addQuestionInternal(question) && returnValue;
                 if (kanjiQuestionTypePref.contains("kunyomi"))
