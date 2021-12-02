@@ -41,15 +41,16 @@ public class Fraction
 
     public Fraction(int numerator, int denominator)
     {
-        whole = 0;
-        this.numerator = numerator;
+        whole = numerator / denominator;
+        this.numerator = numerator % denominator;
         this.denominator = denominator;
     }
 
     public Fraction(int whole, int numerator, int denominator)
     {
         this.whole = whole;
-        this.numerator = numerator;
+        this.whole += numerator / denominator;
+        this.numerator = numerator % denominator;
         this.denominator = denominator;
     }
 
