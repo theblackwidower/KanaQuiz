@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -39,6 +39,20 @@ public class Fraction
         numerator = numerator % denominator;
     }
 
+    public Fraction(int numerator, int denominator)
+    {
+        whole = 0;
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
+    public Fraction(int whole, int numerator, int denominator)
+    {
+        this.whole = whole;
+        this.numerator = numerator;
+        this.denominator = denominator;
+    }
+
     public void simplify()
     {
         for (int prime : PRIME_NUMBERS)
@@ -51,6 +65,60 @@ public class Fraction
                 break;
             }
         }
+    }
+
+    public Fraction add(int num)
+    {
+        return new Fraction(whole + num, numerator, denominator);
+    }
+
+    public Fraction add(Fraction num)
+    {
+        int newNumerator = (numerator * num.denominator) + (num.numerator * denominator);
+        int newDenominator = denominator * num.denominator;
+        return new Fraction(whole + num.whole, newNumerator, newDenominator);
+    }
+
+    public Fraction subtract(int num)
+    {
+        return new Fraction(whole - num, numerator, denominator);
+    }
+
+    public Fraction subtract(Fraction num)
+    {
+        int newNumerator = (numerator * num.denominator) - (num.numerator * denominator);
+        int newDenominator = denominator * num.denominator;
+        return new Fraction(whole - num.whole, newNumerator, newDenominator);
+    }
+
+    public Fraction multiply(int num)
+    {
+        return new Fraction(whole * num, numerator * num, denominator);
+    }
+
+    public Fraction multiply(Fraction num)
+    {
+        int newWhole = whole * num.whole;
+        int newNumerator = numerator * num.numerator;
+        int newDenominator = denominator * num.denominator;
+        newNumerator += whole * denominator * num.numerator;
+        newNumerator += num.whole * num.denominator * numerator;
+        return new Fraction(newWhole, newNumerator, newDenominator);
+    }
+
+    public Fraction divide(int num)
+    {
+        return new Fraction((whole * denominator) + numerator, denominator * num);
+    }
+
+    public Fraction divide(Fraction num)
+    {
+        return multiply(num.getReciprocal());
+    }
+
+    public Fraction getReciprocal()
+    {
+        return new Fraction(denominator, (whole * denominator) + numerator);
     }
 
     public float getDecimal()
