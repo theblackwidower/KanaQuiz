@@ -18,6 +18,8 @@ package com.noprestige.kanaquiz.logs;
 
 import android.os.AsyncTask;
 
+import com.noprestige.kanaquiz.Fraction;
+
 import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
@@ -79,7 +81,7 @@ public abstract class LogDao
         {
             String question = data[0];
 
-            addTodaysRecord(1);
+            addTodaysRecord(Fraction.ONE);
             addQuestionRecord(question, true);
 
             return null;
@@ -94,7 +96,7 @@ public abstract class LogDao
             String question = data[0];
             String answer = data[1];
 
-            addTodaysRecord(0);
+            addTodaysRecord(Fraction.ZERO);
             addQuestionRecord(question, false);
             addIncorrectAnswerRecord(question, answer);
 
@@ -108,9 +110,10 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
+            //TODO: Redesign to not use parseFloat
             float score = Float.parseFloat(data[1]);
 
-            addTodaysRecord(score);
+            addTodaysRecord(new Fraction(score));
             addQuestionRecord(question, false);
 
             return null;
@@ -186,7 +189,7 @@ public abstract class LogDao
         }
     }
 
-    static void addTodaysRecord(float score)
+    static void addTodaysRecord(Fraction score)
     {
         DailyRecord record = LogDatabase.DAO.getDateRecord(LocalDate.now());
         if (record == null)
@@ -194,7 +197,8 @@ public abstract class LogDao
             record = new DailyRecord();
             LogDatabase.DAO.insertDailyRecord(record);
         }
-        if (score > 0)
+        //TODO: utilize a comparison function
+        if (score.getDecimal() > 0)
             record.addToCorrectAnswers(score);
 
         record.incrementTotalAnswers();
@@ -242,9 +246,10 @@ public abstract class LogDao
         new ReportIncorrectAnswer().execute(question, answer);
     }
 
-    public static void reportRetriedCorrectAnswer(String question, float score)
+    public static void reportRetriedCorrectAnswer(String question, Fraction score)
     {
-        new ReportRetriedCorrectAnswer().execute(question, Float.toString(score));
+        //TODO: Don't use float parsing
+        new ReportRetriedCorrectAnswer().execute(question, Float.toString(score.getDecimal()));
     }
 
     public static void reportIncorrectRetry(String question, String answer)

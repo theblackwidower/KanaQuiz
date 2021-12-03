@@ -16,6 +16,10 @@
 
 package com.noprestige.kanaquiz.logs;
 
+import com.noprestige.kanaquiz.Fraction;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.time.LocalDate;
 
 import androidx.room.ColumnInfo;
@@ -31,7 +35,8 @@ public class DailyRecord
     private final LocalDate date;
 
     @ColumnInfo(name = "correct_answers")
-    private float correctAnswers;
+    @NotNull
+    private Fraction correctAnswers;
 
     @ColumnInfo(name = "total_answers")
     private int totalAnswers;
@@ -40,11 +45,11 @@ public class DailyRecord
     public DailyRecord()
     {
         date = LocalDate.now();
-        correctAnswers = 0;
+        correctAnswers = Fraction.ZERO;
         totalAnswers = 0;
     }
 
-    DailyRecord(LocalDate date, float correctAnswers, int totalAnswers)
+    DailyRecord(LocalDate date, Fraction correctAnswers, int totalAnswers)
     {
         this.date = date;
         this.correctAnswers = correctAnswers;
@@ -56,7 +61,7 @@ public class DailyRecord
         return date;
     }
 
-    public float getCorrectAnswers()
+    public Fraction getCorrectAnswers()
     {
         return correctAnswers;
     }
@@ -66,9 +71,9 @@ public class DailyRecord
         return totalAnswers;
     }
 
-    public void addToCorrectAnswers(float score)
+    public void addToCorrectAnswers(Fraction score)
     {
-        correctAnswers += score;
+        correctAnswers = correctAnswers.add(score);
     }
 
     public void incrementTotalAnswers()

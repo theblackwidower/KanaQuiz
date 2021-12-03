@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.AboutScreen;
+import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDao;
@@ -56,7 +57,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class MainQuiz extends AppCompatActivity
 {
     int totalQuestions;
-    float totalCorrect;
+    Fraction totalCorrect;
     private boolean canSubmit;
 
     private TextView lblResponse;
@@ -78,7 +79,7 @@ public class MainQuiz extends AppCompatActivity
         protected void onPreExecute()
         {
             totalQuestions = 0;
-            totalCorrect = 0;
+            totalCorrect = Fraction.ZERO;
         }
 
         @Override
@@ -93,7 +94,7 @@ public class MainQuiz extends AppCompatActivity
             if (record != null)
             {
                 totalQuestions += record.getTotalAnswers();
-                totalCorrect += record.getCorrectAnswers();
+                totalCorrect = totalCorrect.add(record.getCorrectAnswers());
             }
             frmAnswer.updateScore(totalCorrect, totalQuestions);
         }
@@ -199,19 +200,19 @@ public class MainQuiz extends AppCompatActivity
                     lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkCorrect));
                 if (retryCount == 0)
                 {
-                    totalCorrect++;
+                    totalCorrect = totalCorrect.add(1);
                     LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
-                    float score = (float) Math.pow(0.5f, retryCount);
-                    totalCorrect += score;
+                    Fraction score = new Fraction(1, (int) Math.pow(2, retryCount));
+                    totalCorrect = totalCorrect.add(score);
                     LogDao.reportRetriedCorrectAnswer(
                             QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
                 }
                 else
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), 0);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), Fraction.ZERO);
             }
             else
             {

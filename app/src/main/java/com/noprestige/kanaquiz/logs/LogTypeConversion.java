@@ -16,6 +16,8 @@
 
 package com.noprestige.kanaquiz.logs;
 
+import com.noprestige.kanaquiz.Fraction;
+
 import java.time.LocalDate;
 
 import androidx.room.TypeConverter;
@@ -34,5 +36,17 @@ public final class LogTypeConversion
     public static Integer dateToTimestamp(LocalDate date)
     {
         return (date == null) ? null : ((date.getYear() * 10000) + (date.getMonthValue() * 100) + date.getDayOfMonth());
+    }
+
+    @TypeConverter
+    public static Fraction toFraction(Float value)
+    {
+        return new Fraction(value);
+    }
+
+    @TypeConverter
+    public static Float fromFraction(Fraction value)
+    {
+        return value.getDecimal();
     }
 }

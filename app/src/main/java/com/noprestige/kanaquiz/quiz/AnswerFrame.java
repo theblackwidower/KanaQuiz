@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -147,17 +147,17 @@ public class AnswerFrame extends LinearLayout
         txtAnswer.setText("");
     }
 
-    public void updateScore(float totalCorrect, int totalQuestions)
+    public void updateScore(Fraction totalCorrect, int totalQuestions)
     {
         if (totalQuestions > 0)
         {
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(PERCENT_FORMATTER.format(totalCorrect / (float) totalQuestions));
+            lblScore.append(PERCENT_FORMATTER.format(totalCorrect.getDecimal() / (float) totalQuestions));
 
             lblScore.append(System.getProperty("line.separator"));
-            lblScore.append(new Fraction(totalCorrect).toString());
+            lblScore.append(totalCorrect.toString());
             lblScore.append(" / ");
             lblScore.append(Integer.toString(totalQuestions));
         }

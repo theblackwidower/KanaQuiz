@@ -30,6 +30,8 @@ public class Fraction
             {'⅛', NUL, '⅜', NUL, '⅝', NUL, '⅞'}, {'⅑'}, {'⅒'}
     };
 
+    public static final Fraction ZERO = new Fraction(0, 1);
+    public static final Fraction ONE = new Fraction(1, 0, 1);
 
     public Fraction(float value)
     {

@@ -40,7 +40,7 @@ import java.util.Locale;
 
 public class DailyLogItem extends View
 {
-    private float correctAnswers = -1;
+    private Fraction correctAnswers;
     private int totalAnswers = -1;
     private LocalDate date;
     private boolean isDynamicSize;
@@ -114,7 +114,7 @@ public class DailyLogItem extends View
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
-        setCorrectAnswers(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1));
+        setCorrectAnswers(new Fraction(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1)));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
@@ -256,7 +256,7 @@ public class DailyLogItem extends View
         return date;
     }
 
-    public float getCorrectAnswers()
+    public Fraction getCorrectAnswers()
     {
         return correctAnswers;
     }
@@ -310,7 +310,7 @@ public class DailyLogItem extends View
         dateWidth3 = datePaint.measureText(dateString3);
     }
 
-    public void setCorrectAnswers(float correctAnswers)
+    public void setCorrectAnswers(Fraction correctAnswers)
     {
         this.correctAnswers = correctAnswers;
         updateAnswers();
@@ -359,9 +359,10 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    public static String parseCount(float count)
+    public static String parseCount(Fraction count)
     {
-        return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
+        //TODO: utilize a comparison function and maybe special rounding function
+        return (count.getDecimal() < 100) ? count.toString() : parseCount(Math.round(count.getDecimal()));
     }
 
     public static String parseCount(int count)
@@ -376,11 +377,12 @@ public class DailyLogItem extends View
 
     private void updateAnswers()
     {
-        if ((correctAnswers >= 0) && (totalAnswers >= 0))
+        //TODO: utilize a comparison function
+        if ((correctAnswers.getDecimal() >= 0) && (totalAnswers >= 0))
         {
             correctString = parseCount(correctAnswers);
             totalString = parseCount(totalAnswers);
-            float percentage = correctAnswers / (float) totalAnswers;
+            float percentage = correctAnswers.getDecimal() / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
             percentagePaint.setColor(getPercentageColour(percentage, getContext()));
 

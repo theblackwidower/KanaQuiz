@@ -79,7 +79,7 @@ public class LogView extends AppCompatActivity
                 output.setFromRecord(record);
 
                 graphSeries.appendData(new DataPoint(startDate.until(record.getDate(), DAYS),
-                        (record.getCorrectAnswers() / record.getTotalAnswers()) * 100f), true, 1000, true);
+                        (record.getCorrectAnswers().getDecimal() / record.getTotalAnswers()) * 100f), true, 1000, true);
 
                 if (isCancelled())
                     return null;
