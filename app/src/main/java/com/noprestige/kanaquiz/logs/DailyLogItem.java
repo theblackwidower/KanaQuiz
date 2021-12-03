@@ -361,8 +361,7 @@ public class DailyLogItem extends View
 
     public static String parseCount(Fraction count)
     {
-        //TODO: utilize a comparison function and maybe special rounding function
-        return (count.getDecimal() < 100) ? count.toString() : parseCount(Math.round(count.getDecimal()));
+        return (count.compareTo(Fraction.HUNDRED) < 0) ? count.toString() : parseCount(count.round());
     }
 
     public static String parseCount(int count)
@@ -377,8 +376,7 @@ public class DailyLogItem extends View
 
     private void updateAnswers()
     {
-        //TODO: utilize a comparison function
-        if ((correctAnswers.getDecimal() >= 0) && (totalAnswers >= 0))
+        if ((correctAnswers.compareTo(Fraction.ZERO) >= 0) && (totalAnswers >= 0))
         {
             correctString = parseCount(correctAnswers);
             totalString = parseCount(totalAnswers);

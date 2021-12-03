@@ -197,8 +197,7 @@ public abstract class LogDao
             record = new DailyRecord();
             LogDatabase.DAO.insertDailyRecord(record);
         }
-        //TODO: utilize a comparison function
-        if (score.getDecimal() > 0)
+        if (score.compareTo(Fraction.ZERO) > 0)
             record.addToCorrectAnswers(score);
 
         record.incrementTotalAnswers();

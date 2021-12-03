@@ -16,7 +16,7 @@
 
 package com.noprestige.kanaquiz;
 
-public class Fraction
+public class Fraction implements Comparable<Fraction>
 {
     private int whole;
     private int numerator;
@@ -32,6 +32,7 @@ public class Fraction
 
     public static final Fraction ZERO = new Fraction(0, 1);
     public static final Fraction ONE = new Fraction(1, 0, 1);
+    public static final Fraction HUNDRED = new Fraction(100, 0, 1);
 
     public Fraction(float value)
     {
@@ -162,5 +163,27 @@ public class Fraction
         if (returnValue.length() == 0)
             returnValue.append('0');
         return returnValue.toString();
+    }
+
+    public int round()
+    {
+        int returnValue = whole;
+        if ((numerator * 2) >= denominator)
+            returnValue++;
+        return returnValue;
+    }
+
+    @Override
+    public int compareTo(Fraction o)
+    {
+        int returnValue = whole - o.whole;
+        if (returnValue == 0)
+        {
+            if (denominator == o.denominator)
+                returnValue = numerator - o.numerator;
+            else
+                returnValue = (numerator * o.denominator) - (o.numerator * denominator);
+        }
+        return returnValue;
     }
 }
