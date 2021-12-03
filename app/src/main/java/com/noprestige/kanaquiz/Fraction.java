@@ -143,14 +143,11 @@ public class Fraction implements Comparable<Fraction>
         {
             simplify();
             char fractionChar;
-            try
-            {
+            if (((denominator - 2) < Array.getLength(FRACTION_CHARS)) &&
+                    ((numerator - 1) < Array.getLength(FRACTION_CHARS[denominator - 2])))
                 fractionChar = FRACTION_CHARS[denominator - 2][numerator - 1];
-            }
-            catch (ArrayIndexOutOfBoundsException ex)
-            {
+            else
                 fractionChar = NUL;
-            }
             if (fractionChar == NUL)
             {
                 if (returnValue.length() > 0)
