@@ -16,6 +16,8 @@
 
 package com.noprestige.kanaquiz;
 
+import java.lang.reflect.Array;
+
 public class Fraction implements Comparable<Fraction>
 {
     private int whole;
@@ -163,6 +165,45 @@ public class Fraction implements Comparable<Fraction>
         if (returnValue.length() == 0)
             returnValue.append('0');
         return returnValue.toString();
+    }
+
+    public static Fraction parse(String string)
+    {
+        int whole;
+        int numerator = Integer.MIN_VALUE;
+        int denominator = Integer.MIN_VALUE;
+        int fractionChar = -1;
+        for (int i = 0; (fractionChar == -1) && (i < Array.getLength(FRACTION_CHARS)); i++)
+            for (int j = 0; (fractionChar == -1) && (j < Array.getLength(FRACTION_CHARS[i])); j++)
+                if (FRACTION_CHARS[i][j] != NUL)
+                {
+                    fractionChar = string.indexOf(FRACTION_CHARS[i][j]);
+                    if (fractionChar > -1)
+                    {
+                        denominator = i + 2;
+                        numerator = j + 1;
+                    }
+                }
+        if (fractionChar == 0)
+            return new Fraction(numerator, denominator);
+        else if (fractionChar > 0)
+        {
+            whole = Integer.parseInt(string.substring(0, fractionChar - 1));
+            return new Fraction(whole, numerator, denominator);
+        }
+        int splitter = string.indexOf("\u200B");
+        int slash = string.indexOf("⁄");
+        if (slash > -1)
+        {
+            numerator = Integer.parseInt(string.substring(splitter + 1, slash - 1));
+            denominator = Integer.parseInt(string.substring(slash + 1));
+            if (splitter == -1)
+                whole = 0;
+            else
+                whole = Integer.parseInt(string.substring(0, splitter - 1));
+            return new Fraction(whole, numerator, denominator);
+        }
+        return new Fraction(Integer.parseInt(string), 0, 1);
     }
 
     public int round()

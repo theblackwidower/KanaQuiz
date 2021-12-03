@@ -110,10 +110,9 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
-            //TODO: Redesign to not use parseFloat
-            float score = Float.parseFloat(data[1]);
+            Fraction score = Fraction.parse(data[1]);
 
-            addTodaysRecord(new Fraction(score));
+            addTodaysRecord(score);
             addQuestionRecord(question, false);
 
             return null;
@@ -247,8 +246,7 @@ public abstract class LogDao
 
     public static void reportRetriedCorrectAnswer(String question, Fraction score)
     {
-        //TODO: Don't use float parsing
-        new ReportRetriedCorrectAnswer().execute(question, Float.toString(score.getDecimal()));
+        new ReportRetriedCorrectAnswer().execute(question, score.toString());
     }
 
     public static void reportIncorrectRetry(String question, String answer)
