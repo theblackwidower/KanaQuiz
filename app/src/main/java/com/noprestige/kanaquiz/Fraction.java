@@ -24,8 +24,8 @@ public class Fraction implements Comparable<Fraction>
     private int numerator;
     private int denominator;
 
-    private static final int[] PRIME_NUMBERS = {2, 3, 5};
-    private static final int RESOLUTION = 240;
+    private static final float RESOLUTION = 1.52587890625e-05f; //2^-16
+    private static final int MAX_DENOMINATOR = 256;
     private static final char NUL = '\u0000';
     private static final char[][] FRACTION_CHARS = {
             {'½'}, {'⅓', '⅔'}, {'¼', NUL, '¾'}, {'⅕', '⅖', '⅗', '⅘'}, {'⅙', NUL, NUL, NUL, '⅚'}, {'⅐'},
@@ -38,7 +38,20 @@ public class Fraction implements Comparable<Fraction>
 
     public Fraction(float value)
     {
-        this(Math.round(value * (float) RESOLUTION), RESOLUTION);
+        whole = (int) Math.floor(value);
+        value -= whole;
+        for (int i = 2; i < MAX_DENOMINATOR; i++)
+            for (int j = 1; j < i; j++)
+                if (Math.abs(((float) j / (float) i) - value) < RESOLUTION)
+                {
+                    numerator = j;
+                    denominator = i;
+                    simplify();
+                    return;
+                }
+        denominator = MAX_DENOMINATOR;
+        numerator = Math.round(value * (float) MAX_DENOMINATOR);
+        simplify();
     }
 
     public Fraction(int numerator, int denominator)
