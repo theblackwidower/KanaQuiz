@@ -38,18 +38,12 @@ public class Fraction implements Comparable<Fraction>
 
     public Fraction(float value)
     {
-        denominator = RESOLUTION;
-        numerator = Math.round(value * (float) denominator);
-        whole = 0;
-        simplify();
+        this(Math.round(value * (float) RESOLUTION), RESOLUTION);
     }
 
     public Fraction(int numerator, int denominator)
     {
-        whole = 0;
-        this.numerator = numerator;
-        this.denominator = denominator;
-        simplify();
+        this(0, numerator, denominator);
     }
 
     public Fraction(int whole, int numerator, int denominator)
