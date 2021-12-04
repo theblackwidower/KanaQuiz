@@ -40,37 +40,56 @@ public class Fraction implements Comparable<Fraction>
     {
         denominator = RESOLUTION;
         numerator = Math.round(value * (float) denominator);
-        whole = numerator / denominator;
-        numerator = numerator % denominator;
+        whole = 0;
+        simplify();
     }
 
     public Fraction(int numerator, int denominator)
     {
-        whole = numerator / denominator;
-        this.numerator = numerator % denominator;
+        whole = 0;
+        this.numerator = numerator;
         this.denominator = denominator;
+        simplify();
     }
 
     public Fraction(int whole, int numerator, int denominator)
     {
         this.whole = whole;
-        this.whole += numerator / denominator;
-        this.numerator = numerator % denominator;
+        this.numerator = numerator;
         this.denominator = denominator;
+        simplify();
     }
 
     public void simplify()
     {
-        for (int prime : PRIME_NUMBERS)
+        if (numerator >= denominator)
         {
-            if (((denominator % prime) == 0) && ((numerator % prime) == 0))
+            whole += numerator / denominator;
+            numerator %= denominator;
+        }
+
+        if (numerator != 0)
+        {
+            int divisor = GCD(numerator, denominator);
+
+            if (divisor > 1)
             {
-                numerator /= prime;
-                denominator /= prime;
-                simplify();
-                break;
+                numerator /= divisor;
+                denominator /= divisor;
             }
         }
+    }
+
+    public static int GCD(int num1, int num2)
+    {
+        while (num1 != num2)
+        {
+            if (num1 < num2)
+                num2 -= num1;
+            else
+                num1 -= num2;
+        }
+        return num1;
     }
 
     public Fraction add(int num)
@@ -141,7 +160,6 @@ public class Fraction implements Comparable<Fraction>
 
         if (numerator != 0)
         {
-            simplify();
             char fractionChar;
             if (((denominator - 2) < Array.getLength(FRACTION_CHARS)) &&
                     ((numerator - 1) < Array.getLength(FRACTION_CHARS[denominator - 2])))
