@@ -20,9 +20,9 @@ import java.lang.reflect.Array;
 
 public class Fraction implements Comparable<Fraction>
 {
-    private final int whole;
-    private final int numerator;
-    private final int denominator;
+    public final int whole;
+    public final int numerator;
+    public final int denominator;
 
     private static final float RESOLUTION = 1.52587890625e-05f; //2^-16
     private static final int MAX_DENOMINATOR = 256;

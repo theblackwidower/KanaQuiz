@@ -312,14 +312,18 @@ public class FractionTest
         assertThat(Fraction.fromFloat(30f / 16f).toString(), is("1⅞"));
         assertThat(Fraction.fromFloat(31f / 16f).toString(), is("1\u200B15⁄16"));
         assertThat(Fraction.fromFloat(32f / 16f).toString(), is("2"));
+    }
 
-        for (int i = 17; i <= 256; i++)
-        {
-            assertThat(Fraction.fromFloat(1f / i).toString(), is("1⁄" + i));
-            assertThat(Fraction.fromFloat((i - 1f) / i).toString(), is((i - 1) + "⁄" + i));
-
-            assertThat(Fraction.fromFloat((i + 1f) / i).toString(), is("1\u200B1⁄" + i));
-            assertThat(Fraction.fromFloat(((2 * i) - 1f) / i).toString(), is("1\u200B" + (i - 1) + "⁄" + i));
-        }
+    @Test
+    public void fromFloatTest()
+    {
+        for (int i = 1; i <= 256; i++)
+            for (int j = 0; j <= (2 * i); j++)
+            {
+                Fraction frac = Fraction.fromFloat((float) j / i);
+                int d = i / frac.denominator;
+                assertThat(((frac.whole * frac.denominator) + frac.numerator) * d, is(j));
+                assertThat(frac.denominator * d, is(i));
+            }
     }
 }
