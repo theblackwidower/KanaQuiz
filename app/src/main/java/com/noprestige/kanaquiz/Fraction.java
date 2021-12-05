@@ -20,9 +20,9 @@ import java.lang.reflect.Array;
 
 public class Fraction implements Comparable<Fraction>
 {
-    private int whole;
-    private int numerator;
-    private int denominator;
+    private final int whole;
+    private final int numerator;
+    private final int denominator;
 
     private static final float RESOLUTION = 1.52587890625e-05f; //2^-16
     private static final int MAX_DENOMINATOR = 256;
@@ -36,22 +36,15 @@ public class Fraction implements Comparable<Fraction>
     public static final Fraction ONE = new Fraction(1, 0, 1);
     public static final Fraction HUNDRED = new Fraction(100, 0, 1);
 
-    public Fraction(float value)
+    public static Fraction fromFloat(float value)
     {
-        whole = (int) Math.floor(value);
+        int whole = (int) Math.floor(value);
         value -= whole;
         for (int i = 2; i < MAX_DENOMINATOR; i++)
             for (int j = 1; j < i; j++)
                 if (Math.abs(((float) j / (float) i) - value) < RESOLUTION)
-                {
-                    numerator = j;
-                    denominator = i;
-                    simplify();
-                    return;
-                }
-        denominator = MAX_DENOMINATOR;
-        numerator = Math.round(value * (float) MAX_DENOMINATOR);
-        simplify();
+                    return new Fraction(whole, j, i);
+        return new Fraction(whole, Math.round(value * (float) MAX_DENOMINATOR), MAX_DENOMINATOR);
     }
 
     public Fraction(int numerator, int denominator)
@@ -60,14 +53,6 @@ public class Fraction implements Comparable<Fraction>
     }
 
     public Fraction(int whole, int numerator, int denominator)
-    {
-        this.whole = whole;
-        this.numerator = numerator;
-        this.denominator = denominator;
-        simplify();
-    }
-
-    public void simplify()
     {
         if (numerator >= denominator)
         {
@@ -85,6 +70,10 @@ public class Fraction implements Comparable<Fraction>
                 denominator /= divisor;
             }
         }
+
+        this.whole = whole;
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     public static int GCD(int num1, int num2)

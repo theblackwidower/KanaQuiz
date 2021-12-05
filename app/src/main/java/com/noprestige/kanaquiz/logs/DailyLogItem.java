@@ -114,7 +114,7 @@ public class DailyLogItem extends View
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
-        setCorrectAnswers(new Fraction(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1)));
+        setCorrectAnswers(Fraction.fromFloat(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1)));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));

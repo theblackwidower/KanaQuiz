@@ -41,7 +41,7 @@ public final class LogTypeConversion
     @TypeConverter
     public static Fraction toFraction(Float value)
     {
-        return new Fraction(value);
+        return Fraction.fromFloat(value);
     }
 
     @TypeConverter
