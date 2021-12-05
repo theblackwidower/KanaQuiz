@@ -40,10 +40,15 @@ public class Fraction implements Comparable<Fraction>
     {
         int whole = (int) Math.floor(value);
         value -= whole;
-        for (int i = 2; i < MAX_DENOMINATOR; i++)
-            for (int j = 1; j < i; j++)
-                if (Math.abs(((float) j / (float) i) - value) < RESOLUTION)
-                    return new Fraction(whole, j, i);
+        if (value < RESOLUTION) //fractional part is zero
+            return new Fraction(whole, 0, 1);
+        if ((1f - value) < RESOLUTION) //fractional part is 1
+            return new Fraction(whole + 1, 0, 1);
+        else
+            for (int i = 2; i < MAX_DENOMINATOR; i++)
+                for (int j = 1; j < i; j++)
+                    if (Math.abs(((float) j / (float) i) - value) < RESOLUTION)
+                        return new Fraction(whole, j, i);
         return new Fraction(whole, Math.round(value * (float) MAX_DENOMINATOR), MAX_DENOMINATOR);
     }
 
