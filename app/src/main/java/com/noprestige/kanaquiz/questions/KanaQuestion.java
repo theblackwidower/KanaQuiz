@@ -120,4 +120,10 @@ public class KanaQuestion extends Question
                 return true;
         return false;
     }
+
+    @Override
+    QuestionType getType()
+    {
+        return QuestionType.KANA;
+    }
 }

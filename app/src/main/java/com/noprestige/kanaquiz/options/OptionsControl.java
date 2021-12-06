@@ -52,7 +52,7 @@ public final class OptionsControl
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             editor = sharedPreferences.edit();
             resources = appContext.getResources();
-            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, false);
+            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, true);
         }
     }
 
@@ -165,6 +165,27 @@ public final class OptionsControl
     public static void setString(String prefId, String setting)
     {
         editor.putString(prefId, setting);
+        editor.apply();
+    }
+
+    public static Set<String> getStringSet(int resId)
+    {
+        return getStringSet(resources.getString(resId));
+    }
+
+    public static Set<String> getStringSet(String prefId)
+    {
+        return sharedPreferences.getStringSet(prefId, null);
+    }
+
+    public static void setStringSet(int resId, Set<String> setting)
+    {
+        setStringSet(resources.getString(resId), setting);
+    }
+
+    public static void setStringSet(String prefId, Set<String> setting)
+    {
+        editor.putStringSet(prefId, setting);
         editor.apply();
     }
 

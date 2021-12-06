@@ -18,6 +18,7 @@ package com.noprestige.kanaquiz.questions;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.LogDao;
+import com.noprestige.kanaquiz.logs.LogTypeConversion;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.util.Arrays;
@@ -42,17 +43,20 @@ public class QuestionBank extends WeightedList<Question>
     private String[] currentPossibleAnswers;
 
     private Set<String> wordAnswerList = new TreeSet<>();
+    private Set<String> yomiAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 
     private QuestionRecord previousQuestions;
     private int maxKanaAnswerWeight = -1;
     private int maxWordAnswerWeight = -1;
+    private int maxYomiAnswerWeight = -1;
 
-    public boolean isCurrentQuestionVocab()
+    private boolean isReset = true;
+
+    public QuestionType getCurrentQuestionType()
     {
-        return (currentQuestion.getClass().equals(WordQuestion.class) ||
-                currentQuestion.getClass().equals(KanjiQuestion.class));
+        return currentQuestion.getType();
     }
 
     public void newQuestion()
@@ -60,8 +64,11 @@ public class QuestionBank extends WeightedList<Question>
         if (count() > 0)
         {
             if (previousQuestions == null)
+            {
                 previousQuestions =
                         new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+                isReset = false;
+            }
             do
                 currentQuestion = getRandom();
             while (!previousQuestions.add(currentQuestion));
@@ -78,11 +85,12 @@ public class QuestionBank extends WeightedList<Question>
 
         public boolean add(Question question)
         {
-            if (contains(question.getDatabaseKey()))
+            char prefix = LogTypeConversion.toCharFromType(question.getType());
+            if (contains(prefix + question.getDatabaseKey()))
                 return false;
             else
             {
-                add(question.getDatabaseKey());
+                add(prefix + question.getDatabaseKey());
                 if (remainingCapacity() == 0)
                     remove();
                 return true;
@@ -110,17 +118,20 @@ public class QuestionBank extends WeightedList<Question>
         return currentQuestion.fetchCorrectAnswer();
     }
 
-    public boolean loadQuestion(String questionKey)
+    public boolean loadQuestion(String questionKey, QuestionType type)
     {
         if (previousQuestions == null)
+        {
             previousQuestions =
                     new QuestionRecord(Math.min(count(), OptionsControl.getInt(R.string.prefid_repetition)));
+            isReset = false;
+        }
 
         Collection<Question> questions = values();
 
         for (Question thisQuestion : questions)
         {
-            if (thisQuestion.getDatabaseKey().equals(questionKey))
+            if (thisQuestion.getDatabaseKey().equals(questionKey) && (thisQuestion.getType() == type))
             {
                 currentQuestion = thisQuestion;
                 previousQuestions.add(thisQuestion);
@@ -144,38 +155,68 @@ public class QuestionBank extends WeightedList<Question>
         return false;
     }
 
+    private Set<String> kanjiQuestionTypePref;
+
     public boolean addQuestion(Question question)
     {
-        weightedAnswerListCache = null;
-        previousQuestions = null;
-        maxKanaAnswerWeight = -1;
-        maxWordAnswerWeight = -1;
+        if (!isReset)
+        {
+            weightedAnswerListCache = null;
+            previousQuestions = null;
+            maxKanaAnswerWeight = -1;
+            maxWordAnswerWeight = -1;
+            maxYomiAnswerWeight = -1;
+            isReset = true;
+        }
         if (question != null)
         {
-            // Fetches the percentage of times the user got a question right,
-            Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey());
-            if (percentage == null)
-                percentage = 0.1f;
-            // The 1f is to invert the value so we get the number of times they got it wrong,
-            // Times 100f to get the percentage.
-            int weight = (int) Math.ceil((1f - percentage) * 100f);
-            // Setting weight to never get lower than 2,
-            // so any question the user got perfect will still appear in the quiz.
-            if (weight < 2)
-                weight = 2;
-            // if any aspect of the addition fails, the method returns false
-            boolean returnValue = add(weight, question);
-            if (question.getClass().equals(WordQuestion.class) || question.getClass().equals(KanjiQuestion.class))
-                returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-            else if (question.getClass().equals(KanaQuestion.class))
+            if (question.getClass().equals(KanjiQuestion.class))
             {
-                returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
-                // Storing answers in specialized answer lists for more specialized answer selection
-                returnValue = getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
+                boolean returnValue = true;
+                if (kanjiQuestionTypePref == null)
+                    kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
+                if (kanjiQuestionTypePref.contains("meaning"))
+                    returnValue = addQuestionInternal(question) && returnValue;
+                if (kanjiQuestionTypePref.contains("kunyomi"))
+                    returnValue = addQuestionInternal(((KanjiQuestion) question).getKunYomiQuestion()) && returnValue;
+                if (kanjiQuestionTypePref.contains("onyomi"))
+                    returnValue = addQuestionInternal(((KanjiQuestion) question).getOnYomiQuestion()) && returnValue;
+                return returnValue;
             }
-            return returnValue;
+            else
+                return addQuestionInternal(question);
         }
         return false;
+    }
+
+    private boolean addQuestionInternal(Question question)
+    {
+        // Fetches the percentage of times the user got a question right,
+        Float percentage = LogDao.getQuestionPercentage(question.getDatabaseKey(), question.getType());
+        if (percentage == null)
+            percentage = 0.1f;
+        // The 1f is to invert the value so we get the number of times they got it wrong,
+        // Times 100f to get the percentage.
+        int weight = (int) Math.ceil((1f - percentage) * 100f);
+        // Setting weight to never get lower than 2,
+        // so any question the user got perfect will still appear in the quiz.
+        if (weight < 2)
+            weight = 2;
+        // if any aspect of the addition fails, the method returns false
+        boolean returnValue = add(weight, question);
+        QuestionType type = question.getType();
+        if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
+            returnValue = wordAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+        else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
+            returnValue = yomiAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+        else if (type == QuestionType.KANA)
+        {
+            returnValue = fullKanaAnswerList.add(question.fetchCorrectAnswer()) && returnValue;
+            // Storing answers in specialized answer lists for more specialized answer selection
+            returnValue = getSpecialList((KanaQuestion) question).add(question.fetchCorrectAnswer()) && returnValue;
+        }
+
+        return returnValue;
     }
 
     private Set<String> getSpecialList(KanaQuestion question)
@@ -196,27 +237,46 @@ public class QuestionBank extends WeightedList<Question>
         previousQuestions = null;
         maxKanaAnswerWeight = -1;
         maxWordAnswerWeight = -1;
+        maxYomiAnswerWeight = -1;
+        isReset = true;
         fullKanaAnswerList.addAll(questions.fullKanaAnswerList);
         basicAnswerList.addAll(questions.basicAnswerList);
         diacriticAnswerList.addAll(questions.diacriticAnswerList);
         digraphAnswerList.addAll(questions.digraphAnswerList);
         diacriticDigraphAnswerList.addAll(questions.diacriticDigraphAnswerList);
         wordAnswerList.addAll(questions.wordAnswerList);
+        yomiAnswerList.addAll(questions.yomiAnswerList);
         return merge(questions);
     }
 
     private int getMaxKanaAnswerWeight()
     {
         if (maxKanaAnswerWeight < 0)
+        {
             maxKanaAnswerWeight = getMaxAnswerWeight(fullKanaAnswerList);
+            isReset = false;
+        }
         return maxKanaAnswerWeight;
     }
 
     private int getMaxWordAnswerWeight()
     {
         if (maxWordAnswerWeight < 0)
+        {
             maxWordAnswerWeight = getMaxAnswerWeight(wordAnswerList);
+            isReset = false;
+        }
         return maxWordAnswerWeight;
+    }
+
+    private int getMaxYomiAnswerWeight()
+    {
+        if (maxYomiAnswerWeight < 0)
+        {
+            maxYomiAnswerWeight = getMaxAnswerWeight(yomiAnswerList);
+            isReset = false;
+        }
+        return maxYomiAnswerWeight;
     }
 
     private int getMaxAnswerWeight(Set<String> list)
@@ -231,8 +291,15 @@ public class QuestionBank extends WeightedList<Question>
     public String[] getPossibleAnswers()
     {
         if (currentPossibleAnswers == null)
-            currentPossibleAnswers = (isCurrentQuestionVocab()) ? getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS) :
-                    getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        {
+            QuestionType type = getCurrentQuestionType();
+            if ((type == QuestionType.VOCABULARY) || (type == QuestionType.KANJI))
+                currentPossibleAnswers = getPossibleWordAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+            else if ((type == QuestionType.KUN_YOMI) || (type == QuestionType.ON_YOMI))
+                currentPossibleAnswers = getPossibleYomiAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+            else if (type == QuestionType.KANA)
+                currentPossibleAnswers = getPossibleKanaAnswers(MAX_MULTIPLE_CHOICE_ANSWERS);
+        }
         return currentPossibleAnswers;
     }
 
@@ -244,8 +311,12 @@ public class QuestionBank extends WeightedList<Question>
         else
         {
             if (weightedAnswerListCache == null)
+            {
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+                isReset = false;
+            }
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : wordAnswerList)
@@ -253,7 +324,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
                         answerCounts.put(answer, count);
                     }
                 }
@@ -261,16 +333,60 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxWordAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
 
             Arrays.sort(possibleAnswerStrings);
+
+            return possibleAnswerStrings;
+        }
+    }
+
+    public String[] getPossibleYomiAnswers(int maxChoices)
+    {
+        if (yomiAnswerList.size() <= maxChoices)
+            return yomiAnswerList.toArray(new String[0]);
+        else
+        {
+            if (weightedAnswerListCache == null)
+            {
+                weightedAnswerListCache = new TreeMap<>();
+                isReset = false;
+            }
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
+            {
+                Map<String, Integer> answerCounts = new TreeMap<>();
+                for (String answer : yomiAnswerList)
+                {
+                    if (!answer.equals(fetchCorrectAnswer()))
+                    {
+                        //fetch all data
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
+                        answerCounts.put(answer, count);
+                    }
+                }
+
+                WeightedList<String> weightedAnswerList =
+                        generateWeightedAnswerList(answerCounts, getMaxYomiAnswerWeight());
+
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
+            }
+
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
+
+            possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
+            possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();
+
+            GojuonOrder.sort(possibleAnswerStrings);
 
             return possibleAnswerStrings;
         }
@@ -283,8 +399,12 @@ public class QuestionBank extends WeightedList<Question>
         else
         {
             if (weightedAnswerListCache == null)
+            {
                 weightedAnswerListCache = new TreeMap<>();
-            if (!weightedAnswerListCache.containsKey(currentQuestion.getDatabaseKey()))
+                isReset = false;
+            }
+            char prefix = LogTypeConversion.toCharFromType(currentQuestion.getType());
+            if (!weightedAnswerListCache.containsKey(prefix + currentQuestion.getDatabaseKey()))
             {
                 Map<String, Integer> answerCounts = new TreeMap<>();
                 for (String answer : fullKanaAnswerList)
@@ -292,7 +412,8 @@ public class QuestionBank extends WeightedList<Question>
                     if (!answer.equals(fetchCorrectAnswer()))
                     {
                         //fetch all data
-                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(), answer);
+                        int count = LogDao.getIncorrectAnswerCount(currentQuestion.getDatabaseKey(),
+                                getCurrentQuestionType(), answer);
                         if (getSpecialList((KanaQuestion) currentQuestion).contains(answer))
                             count += 2;
                         answerCounts.put(answer, count);
@@ -302,11 +423,11 @@ public class QuestionBank extends WeightedList<Question>
                 WeightedList<String> weightedAnswerList =
                         generateWeightedAnswerList(answerCounts, getMaxKanaAnswerWeight());
 
-                weightedAnswerListCache.put(currentQuestion.getDatabaseKey(), weightedAnswerList);
+                weightedAnswerListCache.put(prefix + currentQuestion.getDatabaseKey(), weightedAnswerList);
             }
 
-            String[] possibleAnswerStrings =
-                    weightedAnswerListCache.get(currentQuestion.getDatabaseKey()).getRandom(new String[maxChoices - 1]);
+            String[] possibleAnswerStrings = weightedAnswerListCache.get(prefix + currentQuestion.getDatabaseKey())
+                    .getRandom(new String[maxChoices - 1]);
 
             possibleAnswerStrings = Arrays.copyOf(possibleAnswerStrings, maxChoices);
             possibleAnswerStrings[maxChoices - 1] = fetchCorrectAnswer();

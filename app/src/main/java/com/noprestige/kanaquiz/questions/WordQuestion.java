@@ -113,4 +113,10 @@ public class WordQuestion extends Question
         cell.setSubjectSize(context.getResources().getDimension(R.dimen.vocabReferenceSubjectSize));
         return cell;
     }
+
+    @Override
+    QuestionType getType()
+    {
+        return QuestionType.VOCABULARY;
+    }
 }

@@ -25,10 +25,10 @@ public class KanjiQuestion extends Question
 {
     public static final String MEANING_DELIMITER = "/";
 
-    private final String kanji;
-    private final String meaning;
-    private final String kunYomi;
-    private final String onYomi;
+    final String kanji;
+    final String meaning;
+    final String kunYomi;
+    final String onYomi;
 
     KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi)
     {
@@ -36,6 +36,16 @@ public class KanjiQuestion extends Question
         this.meaning = meaning;
         this.kunYomi = kunYomi;
         this.onYomi = onYomi;
+    }
+
+    KanjiSoundQuestion getKunYomiQuestion()
+    {
+        return new KanjiSoundQuestion(this, QuestionType.KUN_YOMI);
+    }
+
+    KanjiSoundQuestion getOnYomiQuestion()
+    {
+        return new KanjiSoundQuestion(this, QuestionType.ON_YOMI);
     }
 
     @Override
@@ -76,5 +86,11 @@ public class KanjiQuestion extends Question
         cell.setSubjectSize(context.getResources().getDimension(R.dimen.kanjiReferenceSubjectSize));
         cell.setDescriptionSize(context.getResources().getDimension(R.dimen.kanjiReferenceDescriptionSize));
         return cell;
+    }
+
+    @Override
+    QuestionType getType()
+    {
+        return QuestionType.KANJI;
     }
 }

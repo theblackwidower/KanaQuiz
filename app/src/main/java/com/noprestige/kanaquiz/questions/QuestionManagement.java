@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class QuestionManagement
@@ -206,7 +207,10 @@ public class QuestionManagement
 
         //TODO: Find way to preserve previous questions record
         if (questionBank != null)
+        {
             currentQuestionBackup = questionBank.getCurrentQuestionKey();
+            currentQuestionBackupType = questionBank.getCurrentQuestionType();
+        }
 
         prefRecord = null;
         questionBank = null;
@@ -216,6 +220,7 @@ public class QuestionManagement
     private int prefCountCache;
     private static int[] prefRecord;
     private static String currentQuestionBackup;
+    private static QuestionType currentQuestionBackupType;
 
     public static void refreshStaticQuestionBank()
     {
@@ -223,9 +228,11 @@ public class QuestionManagement
         {
             prefRecord = getCurrentPrefRecord();
             questionBank = getFullQuestionBank();
-            if ((currentQuestionBackup == null) || !questionBank.loadQuestion(currentQuestionBackup))
+            if ((currentQuestionBackup == null) || (currentQuestionBackupType == null) ||
+                    !questionBank.loadQuestion(currentQuestionBackup, currentQuestionBackupType))
                 questionBank.newQuestion();
             currentQuestionBackup = null;
+            currentQuestionBackupType = null;
         }
         else
         {
@@ -250,7 +257,7 @@ public class QuestionManagement
         questionFiles[2] = VOCABULARY;
         System.arraycopy(KANJI_FILES, 0, questionFiles, 3, KANJI_FILES.length);
 
-        int prefCount = 1;
+        int prefCount = 4;
         for (QuestionManagement questionFile : questionFiles)
             prefCount += questionFile.prefCountCache;
         int[] currentPrefRecord = new int[(prefCount / Integer.SIZE) + 1];
@@ -259,7 +266,16 @@ public class QuestionManagement
             currentPrefRecord[0] += 0b1;
         boolean isDiacritics = OptionsControl.getBoolean(R.string.prefid_diacritics);
 
-        int index = 1;
+        Set<String> kanjiQuestionTypePref = OptionsControl.getStringSet(R.string.prefid_kanji_question_type);
+
+        if (kanjiQuestionTypePref.contains("meaning"))
+            currentPrefRecord[0] += 0b10;
+        if (kanjiQuestionTypePref.contains("kunyomi"))
+            currentPrefRecord[0] += 0b100;
+        if (kanjiQuestionTypePref.contains("onyomi"))
+            currentPrefRecord[0] += 0b1000;
+
+        int index = 4;
         int section = 0;
         for (QuestionManagement questionFile : questionFiles)
             for (Map.Entry<SetCode, Question[]> set : questionFile.questionSets.entrySet())

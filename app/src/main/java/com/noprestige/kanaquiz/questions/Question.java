@@ -30,6 +30,8 @@ public abstract class Question
 
     public abstract String getDatabaseKey();
 
+    abstract QuestionType getType();
+
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);

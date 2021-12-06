@@ -34,6 +34,10 @@
     <string name="request_kana_multiple_choice">Select the Romaji equivalent</string>
     <string name="request_vocab_text_input">Enter the English translation</string>
     <string name="request_vocab_multiple_choice">Select the English translation</string>
+    <string name="request_kunyomi_text_input">Enter the appropriate Kun\'Yomi</string>
+    <string name="request_kunyomi_multiple_choice">Select the appropriate Kun\'Yomi</string>
+    <string name="request_onyomi_text_input">Enter the appropriate On\'Yomi</string>
+    <string name="request_onyomi_multiple_choice">Select the appropriate On\'Yomi</string>
     <string name="try_again">Try again</string>
     <string name="show_correct_answer">The correct answer is</string>
 
@@ -138,6 +142,32 @@
         <item>@string/prefid_vocab_display_romaji</item>
         <item>@string/prefid_vocab_display_kana</item>
         <item>@string/prefid_vocab_display_kanji</item>
+    </string-array>
+
+    <string name="kanji_question_type_option_title">Available Kanji Questions</string>
+    <string name="kanji_question_type_option_summary">What kind of kanji questions are available</string>
+    <string name="kanji_question_type_option_meaning">Meaning</string>
+    <string name="kanji_question_type_option_kunyomi" translatable="false">Kun\'Yomi</string>
+    <string name="kanji_question_type_option_onyomi" translatable="false">On\'Yomi</string>
+
+    <string name="prefid_kanji_question_type" translatable="false">kanji_question_type</string>
+    <string name="prefid_kanji_question_type_meaning" translatable="false">meaning</string>
+    <string name="prefid_kanji_question_type_kunyomi" translatable="false">kunyomi</string>
+    <string name="prefid_kanji_question_type_onyomi" translatable="false">onyomi</string>
+
+    <string-array name="kanji_question_type_option_item_names">
+        <item>@string/kanji_question_type_option_meaning</item>
+        <item>@string/kanji_question_type_option_kunyomi</item>
+        <item>@string/kanji_question_type_option_onyomi</item>
+    </string-array>
+    <string-array name="prefids_kanji_question_type">
+        <item>@string/prefid_kanji_question_type_meaning</item>
+        <item>@string/prefid_kanji_question_type_kunyomi</item>
+        <item>@string/prefid_kanji_question_type_onyomi</item>
+    </string-array>
+
+    <string-array name="kanji_question_type_default">
+        <item>@string/prefid_kanji_question_type_meaning</item>
     </string-array>
 
     <string name="repetition_option_title">Repetition control</string>

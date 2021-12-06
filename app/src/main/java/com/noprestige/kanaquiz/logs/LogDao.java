@@ -20,6 +20,8 @@ import android.os.AsyncTask;
 
 import com.noprestige.kanaquiz.Fraction;
 
+import com.noprestige.kanaquiz.questions.QuestionType;
+
 import java.time.LocalDate;
 import java.util.concurrent.ExecutionException;
 
@@ -37,7 +39,8 @@ public abstract class LogDao
         protected Float doInBackground(String... data)
         {
             String question = data[0];
-            QuestionRecord[] records = LogDatabase.DAO.getQuestionRecord(question);
+            QuestionType type = QuestionType.valueOf(data[1]);
+            QuestionRecord[] records = LogDatabase.DAO.getQuestionRecord(question, type);
             if (records.length <= 0)
                 return null;
             else
@@ -60,8 +63,9 @@ public abstract class LogDao
         protected Integer doInBackground(String... data)
         {
             String question = data[0];
-            String answer = data[1];
-            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(question, answer);
+            QuestionType type = QuestionType.valueOf(data[1]);
+            String answer = data[2];
+            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(question, type, answer);
             if (records.length <= 0)
                 return 0;
             else
@@ -80,9 +84,10 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
+            QuestionType type = QuestionType.valueOf(data[1]);
 
             addTodaysRecord(Fraction.ONE);
-            addQuestionRecord(question, true);
+            addQuestionRecord(question, type, true);
 
             return null;
         }
@@ -94,11 +99,12 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
-            String answer = data[1];
+            QuestionType type = QuestionType.valueOf(data[1]);
+            String answer = data[2];
 
             addTodaysRecord(Fraction.ZERO);
-            addQuestionRecord(question, false);
-            addIncorrectAnswerRecord(question, answer);
+            addQuestionRecord(question, type, false);
+            addIncorrectAnswerRecord(question, type, answer);
 
             return null;
         }
@@ -110,10 +116,11 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
-            Fraction score = Fraction.parse(data[1]);
+            QuestionType type = QuestionType.valueOf(data[1]);
+            Fraction score = Fraction.parse(data[2]);
 
             addTodaysRecord(score);
-            addQuestionRecord(question, false);
+            addQuestionRecord(question, type, false);
 
             return null;
         }
@@ -125,9 +132,10 @@ public abstract class LogDao
         protected Void doInBackground(String... data)
         {
             String question = data[0];
-            String answer = data[1];
+            QuestionType type = QuestionType.valueOf(data[1]);
+            String answer = data[2];
 
-            addIncorrectAnswerRecord(question, answer);
+            addIncorrectAnswerRecord(question, type, answer);
 
             return null;
         }
@@ -136,35 +144,37 @@ public abstract class LogDao
     @Query("SELECT * FROM daily_record WHERE date = :date")
     public abstract DailyRecord getDateRecord(LocalDate date);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :question")
-    abstract QuestionRecord[] getQuestionRecord(String question);
+    @Query("SELECT * FROM question_records WHERE question = :question AND type = :type")
+    abstract QuestionRecord[] getQuestionRecord(String question, QuestionType type);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer")
-    abstract IncorrectAnswerRecord[] getAnswerRecord(String question, String answer);
+    @Query("SELECT * FROM incorrect_answers WHERE question = :question AND type = :type AND incorrect_answer = :answer")
+    abstract IncorrectAnswerRecord[] getAnswerRecord(String question, QuestionType type, String answer);
 
-    @Query("SELECT * FROM kana_records WHERE kana = :question AND date = :date")
-    abstract QuestionRecord getDaysQuestionRecord(String question, LocalDate date);
+    @Query("SELECT * FROM question_records WHERE question = :question AND type = :type AND date = :date")
+    abstract QuestionRecord getDaysQuestionRecord(String question, QuestionType type, LocalDate date);
 
-    @Query("SELECT * FROM incorrect_answers WHERE kana = :question AND incorrect_romanji = :answer AND date = :date")
-    abstract IncorrectAnswerRecord getDaysAnswerRecord(String question, String answer, LocalDate date);
+    @Query("SELECT * FROM incorrect_answers WHERE question = :question AND type = :type AND incorrect_answer = " +
+            ":answer AND date = :date")
+    abstract IncorrectAnswerRecord getDaysAnswerRecord(String question, QuestionType type, String answer,
+            LocalDate date);
 
     @Query("SELECT * FROM daily_record")
     abstract DailyRecord[] getAllDailyRecords();
 
-    @Query("SELECT * FROM kana_records")
+    @Query("SELECT * FROM question_records")
     abstract QuestionRecord[] getAllQuestionRecords();
 
-    @Query("SELECT * FROM kana_records WHERE date = :date")
+    @Query("SELECT * FROM question_records WHERE date = :date")
     abstract QuestionRecord[] getDatesQuestionRecords(LocalDate date);
 
-    @Query("SELECT * FROM incorrect_answers ORDER BY kana")
+    @Query("SELECT * FROM incorrect_answers ORDER BY question")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
 
-    public static Float getQuestionPercentage(String question)
+    public static Float getQuestionPercentage(String question, QuestionType type)
     {
         try
         {
-            return new GetQuestionPercentage().execute(question).get();
+            return new GetQuestionPercentage().execute(question, type.toString()).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {
@@ -174,11 +184,11 @@ public abstract class LogDao
         }
     }
 
-    public static int getIncorrectAnswerCount(String question, String answer)
+    public static int getIncorrectAnswerCount(String question, QuestionType type, String answer)
     {
         try
         {
-            return new GetIncorrectAnswerCount().execute(question, answer).get();
+            return new GetIncorrectAnswerCount().execute(question, type.toString(), answer).get();
         }
         catch (InterruptedException | ExecutionException ex)
         {
@@ -204,12 +214,12 @@ public abstract class LogDao
         LogDatabase.DAO.updateDailyRecord(record);
     }
 
-    static void addQuestionRecord(String question, boolean isCorrect)
+    static void addQuestionRecord(String question, QuestionType type, boolean isCorrect)
     {
-        QuestionRecord record = LogDatabase.DAO.getDaysQuestionRecord(question, LocalDate.now());
+        QuestionRecord record = LogDatabase.DAO.getDaysQuestionRecord(question, type, LocalDate.now());
         if (record == null)
         {
-            record = new QuestionRecord(question);
+            record = new QuestionRecord(question, type);
             LogDatabase.DAO.insertQuestionRecord(record);
         }
         if (isCorrect)
@@ -219,12 +229,12 @@ public abstract class LogDao
         LogDatabase.DAO.updateQuestionRecord(record);
     }
 
-    static void addIncorrectAnswerRecord(String question, String answer)
+    static void addIncorrectAnswerRecord(String question, QuestionType type, String answer)
     {
-        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(question, answer, LocalDate.now());
+        IncorrectAnswerRecord record = LogDatabase.DAO.getDaysAnswerRecord(question, type, answer, LocalDate.now());
         if (record == null)
         {
-            record = new IncorrectAnswerRecord(question, answer);
+            record = new IncorrectAnswerRecord(question, type, answer);
             LogDatabase.DAO.insertIncorrectAnswer(record);
         }
         else
@@ -234,30 +244,30 @@ public abstract class LogDao
         }
     }
 
-    public static void reportCorrectAnswer(String question)
+    public static void reportCorrectAnswer(String question, QuestionType type)
     {
-        new ReportCorrectAnswer().execute(question);
+        new ReportCorrectAnswer().execute(question, type.toString());
     }
 
-    public static void reportIncorrectAnswer(String question, String answer)
+    public static void reportIncorrectAnswer(String question, QuestionType type, String answer)
     {
-        new ReportIncorrectAnswer().execute(question, answer);
+        new ReportIncorrectAnswer().execute(question, type.toString(), answer);
     }
 
-    public static void reportRetriedCorrectAnswer(String question, Fraction score)
+    public static void reportRetriedCorrectAnswer(String question, QuestionType type, Fraction score)
     {
-        new ReportRetriedCorrectAnswer().execute(question, score.toString());
+        new ReportRetriedCorrectAnswer().execute(question, type.toString(), score.toString());
     }
 
-    public static void reportIncorrectRetry(String question, String answer)
+    public static void reportIncorrectRetry(String question, QuestionType type, String answer)
     {
-        new ReportIncorrectRetry().execute(question, answer);
+        new ReportIncorrectRetry().execute(question, type.toString(), answer);
     }
 
     @Query("DELETE FROM daily_record WHERE 1 = 1")
     abstract void deleteAllDailyRecords();
 
-    @Query("DELETE FROM kana_records WHERE 1 = 1")
+    @Query("DELETE FROM question_records WHERE 1 = 1")
     abstract void deleteAllQuestionRecords();
 
     @Query("DELETE FROM incorrect_answers WHERE 1 = 1")

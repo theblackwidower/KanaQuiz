@@ -16,6 +16,8 @@
 
 package com.noprestige.kanaquiz.logs;
 
+import com.noprestige.kanaquiz.questions.QuestionType;
+
 import java.time.LocalDate;
 
 import androidx.annotation.NonNull;
@@ -23,18 +25,20 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-//TODO: Edit field name 'kana' to 'question' and table name from 'kana_records' to 'question_records' on next major,
-// migration-requiring database change
-@Entity(tableName = "kana_records", primaryKeys = {"date", "kana"})
+@Entity(tableName = "question_records", primaryKeys = {"date", "question", "type"})
 public class QuestionRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
     private final LocalDate date;
 
-    @ColumnInfo(name = "kana")
+    @ColumnInfo(name = "question")
     @NonNull
     private final String question;
+
+    @ColumnInfo(name = "type")
+    @NonNull
+    private final QuestionType type;
 
     @ColumnInfo(name = "correct_answers")
     private int correctAnswers;
@@ -43,18 +47,20 @@ public class QuestionRecord
     private int incorrectAnswers;
 
     @Ignore
-    public QuestionRecord(String question)
+    public QuestionRecord(String question, QuestionType type)
     {
         date = LocalDate.now();
         this.question = question;
+        this.type = type;
         correctAnswers = 0;
         incorrectAnswers = 0;
     }
 
-    QuestionRecord(LocalDate date, String question, int correctAnswers, int incorrectAnswers)
+    QuestionRecord(LocalDate date, String question, QuestionType type, int correctAnswers, int incorrectAnswers)
     {
         this.date = date;
         this.question = question;
+        this.type = type;
         this.correctAnswers = correctAnswers;
         this.incorrectAnswers = incorrectAnswers;
     }
@@ -69,6 +75,12 @@ public class QuestionRecord
     public String getQuestion()
     {
         return question;
+    }
+
+    @NonNull
+    public QuestionType getType()
+    {
+        return type;
     }
 
     public int getCorrectAnswers()

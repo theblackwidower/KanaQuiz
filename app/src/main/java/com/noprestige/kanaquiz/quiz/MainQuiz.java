@@ -38,6 +38,7 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+import com.noprestige.kanaquiz.questions.QuestionType;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
@@ -201,18 +202,21 @@ public class MainQuiz extends AppCompatActivity
                 if (retryCount == 0)
                 {
                     totalCorrect = totalCorrect.add(1);
-                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
+                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
                     Fraction score = new Fraction(1, (int) Math.pow(2, retryCount));
                     totalCorrect = totalCorrect.add(score);
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), score);
                 }
                 else
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), Fraction.ZERO);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), Fraction.ZERO);
             }
             else
             {
@@ -240,6 +244,7 @@ public class MainQuiz extends AppCompatActivity
                     isGetNewQuestion = false;
 
                     LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
                             answer);
 
                     delayHandler.postDelayed(() ->
@@ -251,6 +256,7 @@ public class MainQuiz extends AppCompatActivity
 
                 if (isGetNewQuestion)
                     LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
                             answer);
             }
 
@@ -267,20 +273,15 @@ public class MainQuiz extends AppCompatActivity
 
     private void readyForAnswer()
     {
-        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
-                lblResponse.setText(R.string.request_vocab_multiple_choice);
-            else
-                lblResponse.setText(R.string.request_kana_multiple_choice);
-        else
-        {
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
-                lblResponse.setText(R.string.request_vocab_text_input);
-            else
-                lblResponse.setText(R.string.request_kana_text_input);
+        QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
 
+        boolean isMultipleChoice = OptionsControl.getBoolean(R.string.prefid_multiple_choice);
+
+        lblResponse.setText(type.getPrompt(isMultipleChoice));
+
+        if (!isMultipleChoice)
             frmAnswer.readyForTextAnswer();
-        }
+
         canSubmit = true;
         lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
         lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));

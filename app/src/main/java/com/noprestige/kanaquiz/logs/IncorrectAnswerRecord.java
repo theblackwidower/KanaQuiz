@@ -16,6 +16,8 @@
 
 package com.noprestige.kanaquiz.logs;
 
+import com.noprestige.kanaquiz.questions.QuestionType;
+
 import java.time.LocalDate;
 
 import androidx.annotation.NonNull;
@@ -23,20 +25,22 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-//TODO: Edit field names 'kana' and 'incorrect_romanji' to 'question' and 'incorrect_answer' on next major,
-// migration-requiring database change
-@Entity(tableName = "incorrect_answers", primaryKeys = {"date", "kana", "incorrect_romanji"})
+@Entity(tableName = "incorrect_answers", primaryKeys = {"date", "question", "type", "incorrect_answer"})
 public class IncorrectAnswerRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
     private final LocalDate date;
 
-    @ColumnInfo(name = "kana")
+    @ColumnInfo(name = "question")
     @NonNull
     private final String question;
 
-    @ColumnInfo(name = "incorrect_romanji")
+    @ColumnInfo(name = "type")
+    @NonNull
+    private final QuestionType type;
+
+    @ColumnInfo(name = "incorrect_answer")
     @NonNull
     private final String incorrectAnswer;
 
@@ -44,18 +48,20 @@ public class IncorrectAnswerRecord
     private int occurrences;
 
     @Ignore
-    public IncorrectAnswerRecord(String question, String incorrectAnswer)
+    public IncorrectAnswerRecord(String question, QuestionType type, String incorrectAnswer)
     {
         date = LocalDate.now();
         this.question = question;
+        this.type = type;
         this.incorrectAnswer = incorrectAnswer;
         occurrences = 1;
     }
 
-    IncorrectAnswerRecord(LocalDate date, String question, String incorrectAnswer, int occurrences)
+    IncorrectAnswerRecord(LocalDate date, String question, QuestionType type, String incorrectAnswer, int occurrences)
     {
         this.date = date;
         this.question = question;
+        this.type = type;
         this.incorrectAnswer = incorrectAnswer;
         this.occurrences = occurrences;
     }
@@ -70,6 +76,12 @@ public class IncorrectAnswerRecord
     public String getQuestion()
     {
         return question;
+    }
+
+    @NonNull
+    public QuestionType getType()
+    {
+        return type;
     }
 
     @NonNull
