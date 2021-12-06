@@ -6,12 +6,12 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 31
+    buildToolsVersion '31.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
-        minSdkVersion 17
-        targetSdkVersion 30
+        minSdkVersion 22
+        targetSdkVersion 31
         versionCode 18
         versionName '0.14.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -52,8 +52,8 @@ android {
     }
     compileOptions {
         coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
     lintOptions {

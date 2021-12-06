@@ -17,6 +17,7 @@
         <activity
             android:name=".quiz.MainQuiz"
             android:configChanges="keyboard|keyboardHidden"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
