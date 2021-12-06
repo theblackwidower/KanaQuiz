@@ -318,12 +318,15 @@ public class FractionTest
     public void fromFloatTest()
     {
         for (int i = 1; i <= 256; i++)
+        {
+            float slice = 1f / i;
             for (int j = 0; j <= (2 * i); j++)
             {
-                Fraction frac = Fraction.fromFloat((float) j / i);
+                Fraction frac = Fraction.fromFloat(j * slice);
                 int d = i / frac.denominator;
-                assertThat(((frac.whole * frac.denominator) + frac.numerator) * d, is(j));
-                assertThat(frac.denominator * d, is(i));
+                assertThat(j + "/" + i, ((frac.whole * frac.denominator) + frac.numerator) * d, is(j));
+                assertThat(j + "/" + i, frac.denominator * d, is(i));
             }
+        }
     }
 }
