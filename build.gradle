@@ -6,12 +6,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:7.0.3'
         if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release') ||
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
-            classpath 'com.google.gms:google-services:4.3.8'
+            classpath 'com.google.gms:google-services:4.3.10'
             classpath 'com.google.firebase:perf-plugin:1.4.0'
-            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.6.1'
+            classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1'
         }
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,7 +22,7 @@ buildscript {
 plugins {
     id 'com.vanniktech.android.junit.jacoco' version '0.16.0'
     id 'com.github.kt3k.coveralls' version '2.12.0'
-    id 'com.github.ben-manes.versions' version '0.38.0'
+    id 'com.github.ben-manes.versions' version '0.39.0'
 }
 
 allprojects {
