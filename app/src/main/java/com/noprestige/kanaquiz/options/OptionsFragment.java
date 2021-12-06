@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -78,10 +78,8 @@ public class OptionsFragment extends PreferenceFragmentCompat
 
         Preference fontProviderLink = findPreference("font_provider_link");
 
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) &&
-                (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) &&
-                (FontProviderClient.checkAvailability(getActivity()) ==
-                        FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P && FontProviderClient.checkAvailability(getActivity()) ==
+                FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
         {
             String downloadLink;
             if (KanaQuiz.isGooglePlayStoreOnDevice())

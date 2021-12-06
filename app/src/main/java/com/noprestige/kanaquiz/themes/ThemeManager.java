@@ -162,38 +162,35 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        // These two 'if' statements need to be structured like this to deal with a false positive caused by the
-        // 'NewApi' lint inspection.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && !isFontInitialized)
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && !isFontInitialized)
+        {
+            int code = FontProviderClient.checkAvailability(activity);
+            if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
             {
-                int code = FontProviderClient.checkAvailability(activity);
-                if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
-                {
-                    if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
-                        getDownloadDialog(activity, true);
-                }
-                else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
-                    getDownloadDialog(activity, false);
-                else if (code == FontProviderClient.FontProviderAvailability.OK)
-                {
-                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-                        if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                                PackageManager.PERMISSION_GRANTED)
-                        {
-                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                            dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
-                            dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                            dialogBuilder.setOnDismissListener(dialog -> activity
-                                    .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
-                            dialogBuilder.show();
-                        }
-                        else
-                            initializeFonts(activity);
+                if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
+                    getDownloadDialog(activity, true);
+            }
+            else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
+                getDownloadDialog(activity, false);
+            else if (code == FontProviderClient.FontProviderAvailability.OK)
+            {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                    if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                            PackageManager.PERMISSION_GRANTED)
+                    {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                        dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                        dialogBuilder.setOnDismissListener(dialog -> activity
+                                .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                        dialogBuilder.show();
+                    }
                     else
                         initializeFonts(activity);
-                }
+                else
+                    initializeFonts(activity);
             }
+        }
     }
 
     public static void permissionRequestReturn(Activity activity, String[] permissions, int[] grantResults)
@@ -300,10 +297,5 @@ public final class ThemeManager
                 }
             }
         }
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT)
-            //ref: https://stackoverflow.com/a/13866702/3582371
-            activity.getWindow().getDecorView()
-                    .setBackgroundColor(getThemeColour(activity, android.R.attr.colorBackground));
     }
 }

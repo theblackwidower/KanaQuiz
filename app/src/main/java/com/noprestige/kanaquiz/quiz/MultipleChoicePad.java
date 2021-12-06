@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -20,19 +20,15 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-
-import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static android.graphics.Typeface.NORMAL;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class MultipleChoicePad extends FlowLayout
@@ -94,8 +90,6 @@ public class MultipleChoicePad extends FlowLayout
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
         btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator"))
                 .replace(MEANING_DELIMITER, MEANING_DELIMITER + System.getProperty("line.separator")));
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)
-            btnNewButton.setTypeface(ThemeManager.getDefaultThemeFont(getContext(), NORMAL));
         addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
