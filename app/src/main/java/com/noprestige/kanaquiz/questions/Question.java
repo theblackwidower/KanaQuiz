@@ -22,6 +22,8 @@ import com.noprestige.kanaquiz.reference.ReferenceCell;
 
 public abstract class Question
 {
+    public static final Question[] EMPTY_QUESTION_ARRAY = new Question[0];
+
     public abstract String getQuestionText();
 
     abstract boolean checkAnswer(String response);

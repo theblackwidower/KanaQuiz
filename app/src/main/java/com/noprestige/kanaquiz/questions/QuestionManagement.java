@@ -39,6 +39,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
+import static com.noprestige.kanaquiz.questions.Question.EMPTY_QUESTION_ARRAY;
+
 public class QuestionManagement
 {
     private static QuestionManagement HIRAGANA;
@@ -58,6 +61,8 @@ public class QuestionManagement
     private final String[] setNoDiacriticsTitles;
 
     public static final String SUBPREFERENCE_DELIMITER = "~";
+
+    public static final QuestionManagement[] EMPTY_QM_ARRAY = new QuestionManagement[0];
 
     public int getCategoryCount()
     {
@@ -178,9 +183,9 @@ public class QuestionManagement
         categoryCount = prefIdList.size();
 
         questionSets = questionSetList;
-        prefIds = prefIdList.toArray(new String[0]);
-        setTitles = setTitleList.toArray(new String[0]);
-        setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(new String[0]);
+        prefIds = prefIdList.toArray(EMPTY_STRING_ARRAY);
+        setTitles = setTitleList.toArray(EMPTY_STRING_ARRAY);
+        setNoDiacriticsTitles = setNoDiacriticsTitleList.toArray(EMPTY_STRING_ARRAY);
 
         OptionsControl.setQuestionSetDefaults(prefIds);
 
@@ -200,8 +205,8 @@ public class QuestionManagement
 
         XmlParser.parseXmlFileSetDocument(R.xml.kanji, context.getResources(), fileSetList, titleList);
 
-        KANJI_FILES = fileSetList.toArray(new QuestionManagement[0]);
-        KANJI_TITLES = titleList.toArray(new String[0]);
+        KANJI_FILES = fileSetList.toArray(EMPTY_QM_ARRAY);
+        KANJI_TITLES = titleList.toArray(EMPTY_STRING_ARRAY);
 
         VOCABULARY = new QuestionManagement(R.xml.vocabulary, context.getResources());
 
@@ -457,7 +462,7 @@ public class QuestionManagement
             if (returnValue.isEmpty())
                 return null;
             else
-                return returnValue.toArray(new Question[]{});
+                return returnValue.toArray(EMPTY_QUESTION_ARRAY);
         }
         else if ((prefOne != null) && (prefTwo != null) && prefOne && prefTwo)
             return set.getValue();
@@ -627,7 +632,7 @@ public class QuestionManagement
                 if (getPref(number, question.getDatabaseKey()))
                     tempList.add(question);
             if (!tempList.isEmpty())
-                questionSet = tempList.toArray(new Question[0]);
+                questionSet = tempList.toArray(EMPTY_QUESTION_ARRAY);
         }
         return questionSet;
     }
@@ -802,7 +807,7 @@ public class QuestionManagement
                 if (set != null)
                     questions.addAll(Arrays.asList(set));
             }
-            item.setQuestions(questions.toArray(new Question[]{}));
+            item.setQuestions(questions.toArray(EMPTY_QUESTION_ARRAY));
             layout.addView(item);
         }
     }

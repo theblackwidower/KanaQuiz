@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class ReferenceCell extends View
@@ -269,7 +270,7 @@ public class ReferenceCell extends View
                     tempMultiLine.add(part);
             }
             if (tempMultiLine.size() != multiLineDescription.length)
-                multiLineDescription = tempMultiLine.toArray(new String[0]);
+                multiLineDescription = tempMultiLine.toArray(EMPTY_STRING_ARRAY);
             descriptionHeight *= multiLineDescription.length;
         }
         else

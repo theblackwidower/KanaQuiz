@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
+import static com.noprestige.kanaquiz.questions.Question.EMPTY_QUESTION_ARRAY;
 
 final class XmlParser
 {
@@ -167,7 +170,7 @@ final class XmlParser
         }
 
         questionSetList.put(new QuestionManagement.SetCode(indexPoint, QuestionManagement.Diacritic.NO_DIACRITIC, null),
-                currentSet.toArray(new Question[0]));
+                currentSet.toArray(EMPTY_QUESTION_ARRAY));
     }
 
     private static void parseXmlKanaSubsection(XmlPullParser parser, Resources resources,
@@ -208,7 +211,7 @@ final class XmlParser
         }
 
         questionSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, digraphs),
-                currentSet.toArray(new Question[0]));
+                currentSet.toArray(EMPTY_QUESTION_ARRAY));
     }
 
     private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources)
@@ -367,7 +370,7 @@ final class XmlParser
                 throw new ParseException("Missing KanaQuestion closing tag", lineNumber);
         }
 
-        return thisAltAnswers.toArray(new String[0]);
+        return thisAltAnswers.toArray(EMPTY_STRING_ARRAY);
     }
 
     private static KanaQuestion.RomanizationSystem[] parseRomanizationSystemList(String attributeString)

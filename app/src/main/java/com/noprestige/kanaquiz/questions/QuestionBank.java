@@ -29,6 +29,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
+
 public class QuestionBank extends WeightedList<Question>
 {
     private Question currentQuestion;
@@ -307,7 +309,7 @@ public class QuestionBank extends WeightedList<Question>
     public String[] getPossibleWordAnswers(int maxChoices)
     {
         if (wordAnswerList.size() <= maxChoices)
-            return wordAnswerList.toArray(new String[0]);
+            return wordAnswerList.toArray(EMPTY_STRING_ARRAY);
         else
         {
             if (weightedAnswerListCache == null)
@@ -351,7 +353,7 @@ public class QuestionBank extends WeightedList<Question>
     public String[] getPossibleYomiAnswers(int maxChoices)
     {
         if (yomiAnswerList.size() <= maxChoices)
-            return yomiAnswerList.toArray(new String[0]);
+            return yomiAnswerList.toArray(EMPTY_STRING_ARRAY);
         else
         {
             if (weightedAnswerListCache == null)
@@ -395,7 +397,7 @@ public class QuestionBank extends WeightedList<Question>
     public String[] getPossibleKanaAnswers(int maxChoices)
     {
         if (fullKanaAnswerList.size() <= maxChoices)
-            return fullKanaAnswerList.toArray(new String[0]);
+            return fullKanaAnswerList.toArray(EMPTY_STRING_ARRAY);
         else
         {
             if (weightedAnswerListCache == null)
