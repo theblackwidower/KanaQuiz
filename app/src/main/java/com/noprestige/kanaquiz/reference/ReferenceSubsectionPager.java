@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
@@ -93,6 +94,7 @@ class ReferenceSubsectionPager extends FragmentStateAdapter
         }
     }
 
+    @NonNull
     @Override
     public Fragment createFragment(int position)
     {

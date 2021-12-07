@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2021 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -21,6 +21,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
+
+import androidx.annotation.NonNull;
 
 class WeightedList<E> implements Cloneable
 {
@@ -185,6 +187,7 @@ class WeightedList<E> implements Cloneable
         return map.values();
     }
 
+    @NonNull
     @SuppressWarnings("unchecked")
     @Override
     public WeightedList<E> clone() throws CloneNotSupportedException

@@ -42,11 +42,13 @@ public class KanaQuestion extends Question
         this.altRomaji = altRomaji;
     }
 
+    @Override
     public String getQuestionText()
     {
         return kana;
     }
 
+    @Override
     boolean checkAnswer(String response)
     {
         if (defaultRomaji.trim().equalsIgnoreCase(response.trim()))
@@ -59,6 +61,7 @@ public class KanaQuestion extends Question
         return false;
     }
 
+    @Override
     public String fetchCorrectAnswer()
     {
         return fetchRomaji();

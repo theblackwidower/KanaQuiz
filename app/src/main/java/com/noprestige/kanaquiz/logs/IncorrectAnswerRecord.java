@@ -48,7 +48,7 @@ public class IncorrectAnswerRecord
     private int occurrences;
 
     @Ignore
-    public IncorrectAnswerRecord(String question, QuestionType type, String incorrectAnswer)
+    public IncorrectAnswerRecord(@NonNull String question, @NonNull QuestionType type, @NonNull String incorrectAnswer)
     {
         date = LocalDate.now();
         this.question = question;
@@ -57,7 +57,8 @@ public class IncorrectAnswerRecord
         occurrences = 1;
     }
 
-    IncorrectAnswerRecord(LocalDate date, String question, QuestionType type, String incorrectAnswer, int occurrences)
+    IncorrectAnswerRecord(@NonNull LocalDate date, @NonNull String question, @NonNull QuestionType type,
+            @NonNull String incorrectAnswer, int occurrences)
     {
         this.date = date;
         this.question = question;

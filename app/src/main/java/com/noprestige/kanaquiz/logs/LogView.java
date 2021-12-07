@@ -32,6 +32,7 @@ import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.time.LocalDate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -150,7 +151,7 @@ public class LogView extends AppCompatActivity
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
+    public void onConfigurationChanged(@NonNull Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
 

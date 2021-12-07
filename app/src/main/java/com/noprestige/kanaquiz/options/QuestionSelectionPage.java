@@ -35,6 +35,7 @@ import com.noprestige.kanaquiz.questions.QuestionManagement;
 import java.util.Map;
 import java.util.TreeMap;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 public class QuestionSelectionPage extends Fragment
@@ -58,7 +59,7 @@ public class QuestionSelectionPage extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         int questionTypeRef = getArguments().getInt(ARG_QUESTION_TYPE_REF, 0);
 

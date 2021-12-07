@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -49,7 +50,7 @@ public class DailyRecord
         totalAnswers = 0;
     }
 
-    DailyRecord(LocalDate date, Fraction correctAnswers, int totalAnswers)
+    DailyRecord(LocalDate date, @NonNull Fraction correctAnswers, int totalAnswers)
     {
         this.date = date;
         this.correctAnswers = correctAnswers;
@@ -61,6 +62,7 @@ public class DailyRecord
         return date;
     }
 
+    @NonNull
     public Fraction getCorrectAnswers()
     {
         return correctAnswers;

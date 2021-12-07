@@ -47,7 +47,7 @@ public class QuestionRecord
     private int incorrectAnswers;
 
     @Ignore
-    public QuestionRecord(String question, QuestionType type)
+    public QuestionRecord(@NonNull String question, @NonNull QuestionType type)
     {
         date = LocalDate.now();
         this.question = question;
@@ -56,7 +56,8 @@ public class QuestionRecord
         incorrectAnswers = 0;
     }
 
-    QuestionRecord(LocalDate date, String question, QuestionType type, int correctAnswers, int incorrectAnswers)
+    QuestionRecord(@NonNull LocalDate date, @NonNull String question, @NonNull QuestionType type, int correctAnswers,
+            int incorrectAnswers)
     {
         this.date = date;
         this.question = question;
