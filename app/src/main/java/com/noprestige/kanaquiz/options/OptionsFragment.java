@@ -18,9 +18,9 @@ package com.noprestige.kanaquiz.options;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.noprestige.kanaquiz.KanaQuiz;
 import com.noprestige.kanaquiz.R;
@@ -35,17 +35,24 @@ import moe.shizuku.fontprovider.FontProviderClient;
 
 public class OptionsFragment extends PreferenceFragmentCompat
 {
-    static class DeleteAll extends AsyncTask<Preference, Void, Preference>
+    static class DeleteAll implements Runnable
     {
-        @Override
-        protected Preference doInBackground(Preference... btnClearLogs)
+        private Preference btnClearLogs;
+
+        DeleteAll(Preference btnClearLogs)
         {
-            LogDao.deleteAll();
-            return btnClearLogs[0];
+            this.btnClearLogs = btnClearLogs;
         }
 
         @Override
-        protected void onPostExecute(Preference btnClearLogs)
+        public void run()
+        {
+            LogDao.deleteAll();
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(btnClearLogs.getContext().getMainLooper()).post(this::done);
+        }
+
+        private void done()
         {
             btnClearLogs.setEnabled(false);
         }
@@ -65,7 +72,8 @@ public class OptionsFragment extends PreferenceFragmentCompat
         //ref: https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
         findPreference("clear_logs").setOnPreferenceClickListener(btnClearLogs ->
         {
-            new DeleteAll().execute(btnClearLogs);
+            //ref: https://www.codespeedy.com/multithreading-in-java/
+            new Thread(new DeleteAll(btnClearLogs)).start();
             return true;
         });
 
