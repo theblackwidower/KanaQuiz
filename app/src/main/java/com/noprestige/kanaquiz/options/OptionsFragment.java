@@ -124,7 +124,7 @@ public class OptionsFragment extends PreferenceFragmentCompat
         if (dialog != null)
         {
             dialog.setTargetFragment(this, 0);
-            dialog.show(getFragmentManager(), null);
+            dialog.show(getParentFragmentManager(), null);
         }
         else
             super.onDisplayPreferenceDialog(preference);
