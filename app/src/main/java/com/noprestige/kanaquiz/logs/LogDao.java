@@ -16,13 +16,10 @@
 
 package com.noprestige.kanaquiz.logs;
 
-import android.os.AsyncTask;
-
 import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.questions.QuestionType;
 
 import java.time.LocalDate;
-import java.util.concurrent.ExecutionException;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -32,48 +29,35 @@ import androidx.room.Update;
 @Dao
 public abstract class LogDao
 {
-    static class GetQuestionPercentage extends AsyncTask<String, Void, Float>
+    public static Float getQuestionPercentage(String question, QuestionType type)
     {
-        @Override
-        protected Float doInBackground(String... data)
+        QuestionRecord[] records = LogDatabase.DAO.getQuestionRecord(question, type);
+        if (records.length <= 0)
+            return null;
+        else
         {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-            QuestionRecord[] records = LogDatabase.DAO.getQuestionRecord(question, type);
-            if (records.length <= 0)
-                return null;
-            else
+            int totalCorrect = 0;
+            int totalIncorrect = 0;
+            for (QuestionRecord record : records)
             {
-                int totalCorrect = 0;
-                int totalIncorrect = 0;
-                for (QuestionRecord record : records)
-                {
-                    totalCorrect += record.getCorrectAnswers();
-                    totalIncorrect += record.getIncorrectAnswers();
-                }
-                return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
+                totalCorrect += record.getCorrectAnswers();
+                totalIncorrect += record.getIncorrectAnswers();
             }
+            return (float) totalCorrect / (float) (totalIncorrect + totalCorrect);
         }
     }
 
-    static class GetIncorrectAnswerCount extends AsyncTask<String, Void, Integer>
+    public static int getIncorrectAnswerCount(String question, QuestionType type, String answer)
     {
-        @Override
-        protected Integer doInBackground(String... data)
+        IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(question, type, answer);
+        if (records.length <= 0)
+            return 0;
+        else
         {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-            String answer = data[2];
-            IncorrectAnswerRecord[] records = LogDatabase.DAO.getAnswerRecord(question, type, answer);
-            if (records.length <= 0)
-                return 0;
-            else
-            {
-                int totalOccurrences = 0;
-                for (IncorrectAnswerRecord record : records)
-                    totalOccurrences += record.getOccurrences();
-                return totalOccurrences;
-            }
+            int totalOccurrences = 0;
+            for (IncorrectAnswerRecord record : records)
+                totalOccurrences += record.getOccurrences();
+            return totalOccurrences;
         }
     }
 
@@ -142,34 +126,6 @@ public abstract class LogDao
 
     @Query("SELECT * FROM incorrect_answers ORDER BY question")
     abstract IncorrectAnswerRecord[] getAllAnswerRecords();
-
-    public static Float getQuestionPercentage(String question, QuestionType type)
-    {
-        try
-        {
-            return new GetQuestionPercentage().execute(question, type.toString()).get();
-        }
-        catch (InterruptedException | ExecutionException ex)
-        {
-            //if this happens, we have bigger problems
-            //noinspection ProhibitedExceptionThrown
-            throw new RuntimeException(ex);
-        }
-    }
-
-    public static int getIncorrectAnswerCount(String question, QuestionType type, String answer)
-    {
-        try
-        {
-            return new GetIncorrectAnswerCount().execute(question, type.toString(), answer).get();
-        }
-        catch (InterruptedException | ExecutionException ex)
-        {
-            //if this happens, we have bigger problems
-            //noinspection ProhibitedExceptionThrown
-            throw new RuntimeException(ex);
-        }
-    }
 
     static void addTodaysRecord(Fraction score)
     {

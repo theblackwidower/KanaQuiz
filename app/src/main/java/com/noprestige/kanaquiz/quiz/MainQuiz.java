@@ -169,8 +169,13 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        QuestionManagement.refreshStaticQuestionBank();
-        refreshDisplay();
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread((Runnable) () ->
+        {
+            QuestionManagement.refreshStaticQuestionBank();
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(getBaseContext().getMainLooper()).post(() -> refreshDisplay());
+        }).start();
 
         frmAnswer.resetQuiz();
     }

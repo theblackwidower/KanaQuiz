@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -126,7 +127,14 @@ public class AnswerFrame extends LinearLayout
     public void setMultipleChoices(QuestionBank questionBank)
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
+        {
+            //ref: https://www.codespeedy.com/multithreading-in-java/
+            new Thread(() ->
+            {
+                String answers[] = questionBank.getPossibleAnswers();
+                new Handler(getContext().getMainLooper()).post(() -> btnMultipleChoice.setChoices(answers));
+            }).start();
+        }
     }
 
     public void onNoQuestions()
