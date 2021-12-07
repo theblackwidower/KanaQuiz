@@ -19,7 +19,7 @@ package com.noprestige.kanaquiz.quiz;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -101,23 +101,31 @@ public class MultipleChoicePad extends FlowLayout
         for (String answer : answers)
             addChoice(answer);
 
-        new NormalizeSizeTask().execute(this);
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(new NormalizeSizeTask(this)).start();
     }
 
-    static class NormalizeSizeTask extends AsyncTask<MultipleChoicePad, Void, MultipleChoicePad>
+    static class NormalizeSizeTask implements Runnable
     {
+        private MultipleChoicePad thisPad;
+
         private int maxWidth;
         private int maxHeight;
 
+        NormalizeSizeTask(MultipleChoicePad pad)
+        {
+            thisPad = pad;
+        }
+
         @Override
-        protected MultipleChoicePad doInBackground(MultipleChoicePad... item)
+        public void run()
         {
             try
             {
                 do
                 {
                     Thread.sleep(100);
-                    for (Button btnChoice : item[0].btnChoices)
+                    for (Button btnChoice : thisPad.btnChoices)
                     {
                         int thisWidth = btnChoice.getWidth();
                         if (thisWidth > maxWidth)
@@ -130,25 +138,22 @@ public class MultipleChoicePad extends FlowLayout
                 }
                 while ((maxWidth == 0) || (maxHeight == 0));
             }
-            catch (InterruptedException ignored)
-            {
-                cancel(true);
-            }
-            return item[0];
+            catch (InterruptedException ignored) {}
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(thisPad.getContext().getMainLooper()).post(this::done);
         }
 
-        @Override
-        protected void onPostExecute(MultipleChoicePad item)
+        private void done()
         {
             if (maxWidth > 0)
-                for (Button btnChoice : item.btnChoices)
+                for (Button btnChoice : thisPad.btnChoices)
                     btnChoice.setWidth(maxWidth);
 
             if (maxHeight > 0)
-                for (Button btnChoice : item.btnChoices)
+                for (Button btnChoice : thisPad.btnChoices)
                     btnChoice.setHeight(maxHeight);
 
-            item.setVisibility(View.VISIBLE);
+            thisPad.setVisibility(View.VISIBLE);
         }
     }
 }
