@@ -16,12 +16,11 @@
 
 package com.noprestige.kanaquiz.logs;
 
-import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -49,24 +48,23 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 public class LogDetailView extends AppCompatActivity
 {
-    static class FetchLogDetails extends AsyncTask<LogDetailView, LogDetailItem, Integer>
+    static class FetchLogDetails implements Runnable
     {
-        @SuppressLint("StaticFieldLeak")
         LogDetailView activity;
-        @SuppressLint("StaticFieldLeak")
         LinearLayout layout;
-        @SuppressLint("StaticFieldLeak")
         TextView lblDetailMessage;
-        @SuppressLint("StaticFieldLeak")
         BarChart logDetailChart;
         List<BarEntry> chartSeries;
         List<String> staticLabels;
 
-        @Override
-        protected void onPreExecute()
+        Handler mainLoop;
+        boolean isCancelled;
+
+        FetchLogDetails(LogDetailView activity)
         {
             chartSeries = new ArrayList<>();
             staticLabels = new ArrayList<>();
+            this.activity = activity;
         }
 
         public String formatXLabel(float value)
@@ -78,9 +76,11 @@ public class LogDetailView extends AppCompatActivity
         }
 
         @Override
-        protected Integer doInBackground(LogDetailView... activities)
+        public void run()
         {
-            activity = activities[0];
+            //ref: https://stackoverflow.com/a/11125271
+            mainLoop = new Handler(activity.getBaseContext().getMainLooper());
+
             layout = activity.findViewById(R.id.logDetailViewLayout);
             lblDetailMessage = activity.findViewById(R.id.lblDetailMessage);
             logDetailChart = activity.findViewById(R.id.logDetailChart);
@@ -96,9 +96,6 @@ public class LogDetailView extends AppCompatActivity
                 }
             });
 
-            if (records.length == 0)
-                return 0;
-
             for (QuestionRecord record : records)
             {
                 LogDetailItem output = new LogDetailItem(activity);
@@ -109,31 +106,30 @@ public class LogDetailView extends AppCompatActivity
 
                 staticLabels.add(record.getQuestion());
 
-                if (isCancelled())
-                    return null;
+                if (isCancelled)
+                    break;
                 else
-                    publishProgress(output);
+                    mainLoop.post(() -> update(output));
             }
 
-            return records.length;
+            if (!isCancelled)
+                mainLoop.post(() -> done(records.length));
         }
 
-        @Override
-        protected void onProgressUpdate(LogDetailItem... item)
+        protected void update(LogDetailItem item)
         {
-            layout.addView(item[0], layout.getChildCount() - 1);
+            layout.addView(item, layout.getChildCount() - 1);
         }
 
-        @Override
-        protected void onCancelled()
+        protected void cancel()
         {
+            isCancelled = true;
             layout = null;
             lblDetailMessage = null;
             logDetailChart = null;
         }
 
-        @Override
-        protected void onPostExecute(Integer count)
+        protected void done(int count)
         {
             if (count > 0)
             {
@@ -185,8 +181,9 @@ public class LogDetailView extends AppCompatActivity
         getSupportActionBar().setTitle(splitTitle[0].trim() + ':');
         getSupportActionBar().setSubtitle(splitTitle[1].trim());
 
-        fetchThread = new FetchLogDetails();
-        fetchThread.execute(this);
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        fetchThread = new FetchLogDetails(this);
+        new Thread(fetchThread).start();
 
         BarChart logDetailChart = findViewById(R.id.logDetailChart);
 
@@ -253,7 +250,7 @@ public class LogDetailView extends AppCompatActivity
     protected void onDestroy()
     {
         if (fetchThread != null)
-            fetchThread.cancel(true);
+            fetchThread.cancel();
         super.onDestroy();
     }
 
