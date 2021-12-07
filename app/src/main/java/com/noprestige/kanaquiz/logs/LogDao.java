@@ -19,7 +19,6 @@ package com.noprestige.kanaquiz.logs;
 import android.os.AsyncTask;
 
 import com.noprestige.kanaquiz.Fraction;
-
 import com.noprestige.kanaquiz.questions.QuestionType;
 
 import java.time.LocalDate;
@@ -78,67 +77,41 @@ public abstract class LogDao
         }
     }
 
-    static class ReportCorrectAnswer extends AsyncTask<String, Void, Void>
+    public static void reportCorrectAnswer(String question, QuestionType type)
     {
-        @Override
-        protected Void doInBackground(String... data)
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(() ->
         {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-
             addTodaysRecord(Fraction.ONE);
             addQuestionRecord(question, type, true);
-
-            return null;
-        }
+        }).start();
     }
 
-    static class ReportIncorrectAnswer extends AsyncTask<String, Void, Void>
+    public static void reportIncorrectAnswer(String question, QuestionType type, String answer)
     {
-        @Override
-        protected Void doInBackground(String... data)
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(() ->
         {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-            String answer = data[2];
-
             addTodaysRecord(Fraction.ZERO);
             addQuestionRecord(question, type, false);
             addIncorrectAnswerRecord(question, type, answer);
-
-            return null;
-        }
+        }).start();
     }
 
-    static class ReportRetriedCorrectAnswer extends AsyncTask<String, Void, Void>
+    public static void reportRetriedCorrectAnswer(String question, QuestionType type, Fraction score)
     {
-        @Override
-        protected Void doInBackground(String... data)
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(() ->
         {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-            Fraction score = Fraction.parse(data[2]);
-
             addTodaysRecord(score);
             addQuestionRecord(question, type, false);
-
-            return null;
-        }
+        }).start();
     }
 
-    static class ReportIncorrectRetry extends AsyncTask<String, Void, Void>
+    public static void reportIncorrectRetry(String question, QuestionType type, String answer)
     {
-        @Override
-        protected Void doInBackground(String... data)
-        {
-            String question = data[0];
-            QuestionType type = QuestionType.valueOf(data[1]);
-            String answer = data[2];
-
-            addIncorrectAnswerRecord(question, type, answer);
-
-            return null;
-        }
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(() -> addIncorrectAnswerRecord(question, type, answer)).start();
     }
 
     @Query("SELECT * FROM daily_record WHERE date = :date")
@@ -242,26 +215,6 @@ public abstract class LogDao
             record.incrementOccurrences();
             LogDatabase.DAO.updateIncorrectAnswer(record);
         }
-    }
-
-    public static void reportCorrectAnswer(String question, QuestionType type)
-    {
-        new ReportCorrectAnswer().execute(question, type.toString());
-    }
-
-    public static void reportIncorrectAnswer(String question, QuestionType type, String answer)
-    {
-        new ReportIncorrectAnswer().execute(question, type.toString(), answer);
-    }
-
-    public static void reportRetriedCorrectAnswer(String question, QuestionType type, Fraction score)
-    {
-        new ReportRetriedCorrectAnswer().execute(question, type.toString(), score.toString());
-    }
-
-    public static void reportIncorrectRetry(String question, QuestionType type, String answer)
-    {
-        new ReportIncorrectRetry().execute(question, type.toString(), answer);
     }
 
     @Query("DELETE FROM daily_record WHERE 1 = 1")
