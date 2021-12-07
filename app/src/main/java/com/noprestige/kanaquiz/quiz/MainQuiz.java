@@ -16,10 +16,9 @@
 
 package com.noprestige.kanaquiz.quiz;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -73,24 +72,36 @@ public class MainQuiz extends AppCompatActivity
 
     private FetchTodaysLog fetchScoreThread;
 
-    @SuppressLint("StaticFieldLeak")
-    class FetchTodaysLog extends AsyncTask<LocalDate, Void, DailyRecord>
+    class FetchTodaysLog implements Runnable
     {
-        @Override
-        protected void onPreExecute()
+        LocalDate date;
+        Context context;
+
+        boolean isCancelled;
+
+        FetchTodaysLog(LocalDate date, Context context)
         {
             totalQuestions = 0;
             totalCorrect = Fraction.ZERO;
+            this.date = date;
+            this.context = context;
         }
 
         @Override
-        protected DailyRecord doInBackground(LocalDate... date)
+        public void run()
         {
-            return LogDatabase.DAO.getDateRecord(date[0]);
+            DailyRecord record = LogDatabase.DAO.getDateRecord(date);
+            if (!isCancelled)
+                //ref: https://stackoverflow.com/a/11125271
+                new Handler(context.getMainLooper()).post(() -> done(record));
         }
 
-        @Override
-        protected void onPostExecute(DailyRecord record)
+        public void cancel()
+        {
+            isCancelled = true;
+        }
+
+        private void done(DailyRecord record)
         {
             if (record != null)
             {
@@ -122,9 +133,10 @@ public class MainQuiz extends AppCompatActivity
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
         if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
-        fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(LocalDate.now());
+            fetchScoreThread.cancel();
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        fetchScoreThread = new FetchTodaysLog(LocalDate.now(), getBaseContext());
+        new Thread(fetchScoreThread).start();
 
         resetQuiz();
     }
@@ -145,7 +157,7 @@ public class MainQuiz extends AppCompatActivity
     protected void onDestroy()
     {
         if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
+            fetchScoreThread.cancel();
         super.onDestroy();
     }
 
