@@ -243,4 +243,19 @@ public class Fraction implements Comparable<Fraction>
         }
         return returnValue;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof Fraction))
+            return false;
+        return (whole == ((Fraction) o).whole) && (numerator == ((Fraction) o).numerator) &&
+                (denominator == ((Fraction) o).denominator);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (((whole << 8) + numerator) << 8) + denominator;
+    }
 }
