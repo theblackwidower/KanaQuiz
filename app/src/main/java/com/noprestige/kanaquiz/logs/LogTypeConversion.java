@@ -17,7 +17,6 @@
 package com.noprestige.kanaquiz.logs;
 
 import com.noprestige.kanaquiz.Fraction;
-
 import com.noprestige.kanaquiz.questions.QuestionType;
 
 import java.time.LocalDate;

@@ -132,7 +132,7 @@ public class AnswerFrame extends LinearLayout
             //ref: https://www.codespeedy.com/multithreading-in-java/
             new Thread(() ->
             {
-                String answers[] = questionBank.getPossibleAnswers();
+                String[] answers = questionBank.getPossibleAnswers();
                 new Handler(getContext().getMainLooper()).post(() -> btnMultipleChoice.setChoices(answers));
             }).start();
         }

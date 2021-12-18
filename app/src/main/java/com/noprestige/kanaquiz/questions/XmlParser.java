@@ -67,7 +67,7 @@ final class XmlParser
                         }
                     }
 
-                    if (resourceFileId == 0 || title == null)
+                    if ((resourceFileId == 0) || (title == null))
                         throw new ParseException("Missing attribute in QuestionFile", 0);
 
                     fileSetList.add(new QuestionManagement(resourceFileId, resources));

@@ -25,7 +25,6 @@ import android.content.res.Resources;
 import com.noprestige.kanaquiz.R;
 
 import java.time.LocalDate;
-
 import java.util.Map;
 import java.util.Set;
 

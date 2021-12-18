@@ -86,8 +86,8 @@ public class OptionsFragment extends PreferenceFragmentCompat
 
         Preference fontProviderLink = findPreference("font_provider_link");
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P && FontProviderClient.checkAvailability(getActivity()) ==
-                FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && (FontProviderClient.checkAvailability(getActivity()) ==
+                FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
         {
             String downloadLink;
             if (KanaQuiz.isGooglePlayStoreOnDevice())

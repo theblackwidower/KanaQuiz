@@ -174,7 +174,7 @@ public class MainQuiz extends AppCompatActivity
         {
             QuestionManagement.refreshStaticQuestionBank();
             //ref: https://stackoverflow.com/a/11125271
-            new Handler(getBaseContext().getMainLooper()).post(() -> refreshDisplay());
+            new Handler(getBaseContext().getMainLooper()).post(this::refreshDisplay);
         }).start();
 
         frmAnswer.resetQuiz();
@@ -261,8 +261,7 @@ public class MainQuiz extends AppCompatActivity
                     isGetNewQuestion = false;
 
                     LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
-                            answer);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -273,8 +272,7 @@ public class MainQuiz extends AppCompatActivity
 
                 if (isGetNewQuestion)
                     LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(),
-                            answer);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), answer);
             }
 
             if (isGetNewQuestion)
