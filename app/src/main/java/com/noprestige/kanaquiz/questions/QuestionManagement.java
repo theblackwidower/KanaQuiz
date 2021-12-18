@@ -624,10 +624,10 @@ public class QuestionManagement
             questionSet = getQuestionSet(number, diacritic, null);
         else if (pref == null)
         {
-            ArrayList<Question> tempList = new ArrayList<>();
             Question[] fullSet = getQuestionSet(number, diacritic, null);
             if (fullSet == null)
                 return null;
+            ArrayList<Question> tempList = new ArrayList<>();
             for (Question question : fullSet)
                 if (getPref(number, question.getDatabaseKey()))
                     tempList.add(question);

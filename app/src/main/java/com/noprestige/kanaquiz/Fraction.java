@@ -185,7 +185,6 @@ public class Fraction implements Comparable<Fraction>
 
     public static Fraction parse(String string)
     {
-        int whole;
         int numerator = Integer.MIN_VALUE;
         int denominator = Integer.MIN_VALUE;
         int fractionChar = -1;
@@ -200,6 +199,7 @@ public class Fraction implements Comparable<Fraction>
                         numerator = j + 1;
                     }
                 }
+        int whole;
         if (fractionChar == 0)
             return new Fraction(numerator, denominator);
         else if (fractionChar > 0)
@@ -207,10 +207,10 @@ public class Fraction implements Comparable<Fraction>
             whole = Integer.parseInt(string.substring(0, fractionChar - 1));
             return new Fraction(whole, numerator, denominator);
         }
-        int splitter = string.indexOf("\u200B");
         int slash = string.indexOf("⁄");
         if (slash > -1)
         {
+            int splitter = string.indexOf("\u200B");
             numerator = Integer.parseInt(string.substring(splitter + 1, slash - 1));
             denominator = Integer.parseInt(string.substring(slash + 1));
             if (splitter == -1)
