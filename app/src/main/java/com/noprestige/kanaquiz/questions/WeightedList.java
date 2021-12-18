@@ -47,8 +47,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + key + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
         {
             key = map.floorKey(key);
@@ -78,8 +77,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + key + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
         {
             if ((getWeight(key) + adjustment) <= 0)
@@ -114,8 +112,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((value >= maxValue) || (value < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(value) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + value + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
             return map.get(map.floorKey(value));
     }

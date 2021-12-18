@@ -369,9 +369,9 @@ public class DailyLogItem extends View
         if (count < 1000)
             return Integer.toString(count);
         else if (count < 10000)
-            return Float.toString(Math.round((float) count / 100f) / 10f) + "k";
+            return (Math.round((float) count / 100f) / 10f) + "k";
         else //if (count < 100000)
-            return Integer.toString(Math.round((float) count / 1000f)) + "k";
+            return Math.round((float) count / 1000f) + "k";
     }
 
     private void updateAnswers()

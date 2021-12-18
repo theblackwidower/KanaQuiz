@@ -170,7 +170,7 @@ public class MainQuiz extends AppCompatActivity
             lblResponse.setMinLines(2);
 
         //ref: https://www.codespeedy.com/multithreading-in-java/
-        new Thread((Runnable) () ->
+        new Thread(() ->
         {
             QuestionManagement.refreshStaticQuestionBank();
             //ref: https://stackoverflow.com/a/11125271

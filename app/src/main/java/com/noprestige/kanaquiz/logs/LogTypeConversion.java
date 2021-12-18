@@ -82,7 +82,7 @@ public final class LogTypeConversion
             case ON_YOMI:
                 return 'o';
             default:
-                throw new IllegalArgumentException(type.toString() + " is not a valid type.");
+                throw new IllegalArgumentException(type + " is not a valid type.");
         }
     }
 
