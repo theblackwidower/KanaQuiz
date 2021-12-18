@@ -281,7 +281,7 @@ public class DailyLogItem extends View
         return isDynamicSize;
     }
 
-    public boolean setDate(String date)
+    public boolean setDate(CharSequence date)
     {
         if (date == null)
             return false;

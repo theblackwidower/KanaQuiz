@@ -143,7 +143,7 @@ public class QuestionSelectionPage extends Fragment
         getArguments().putStringArray(ARG_ITEM_IDS, prefIds);
     }
 
-    public static TextView buildHeader(Context context, String title)
+    public static TextView buildHeader(Context context, CharSequence title)
     {
         TextView header = new TextView(context);
         header.setText(title);

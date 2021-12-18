@@ -101,7 +101,7 @@ public abstract class Question
             return KanaSystem.NO_KANA; //possibly a reserved character in the block
     }
 
-    public static KanaSystem whatKanaSystem(String kana)
+    public static KanaSystem whatKanaSystem(CharSequence kana)
     {
         int hiraganaCount = 0;
         int katakanaCount = 0;

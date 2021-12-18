@@ -281,7 +281,7 @@ public class QuestionBank extends WeightedList<Question>
         return maxYomiAnswerWeight;
     }
 
-    private int getMaxAnswerWeight(Set<String> list)
+    private int getMaxAnswerWeight(Collection<String> list)
     {
         // Max value is to prevent integer overflow in the weighted answer list. Number is chosen so if every
         // answer had this count (which is actually impossible because of the range restriction, but better to

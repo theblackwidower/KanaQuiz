@@ -89,7 +89,7 @@ public abstract class LogDatabase extends RoomDatabase
         }
     };
 
-    private static final QuestionType identifyQuestion(String question)
+    private static final QuestionType identifyQuestion(CharSequence question)
     {
         int kanaCount = 0;
         int kanjiCount = 0;

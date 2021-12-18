@@ -28,6 +28,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -39,8 +40,8 @@ final class XmlParser
 {
     private XmlParser() {}
 
-    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources, List<QuestionManagement> fileSetList,
-            List<String> titleList)
+    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources,
+            Collection<QuestionManagement> fileSetList, Collection<String> titleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -83,8 +84,8 @@ final class XmlParser
     }
 
     static void parseXmlDocument(int xmlRefId, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
-            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, Collection<String> prefIdList,
+            Collection<String> setTitleList, Collection<String> setNoDiacriticsTitleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -109,8 +110,8 @@ final class XmlParser
     }
 
     private static void parseXmlQuestionSet(XmlPullParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
-            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, Collection<String> prefIdList,
+            Collection<String> setTitleList, Collection<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
