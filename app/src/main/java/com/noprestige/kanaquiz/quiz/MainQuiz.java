@@ -66,7 +66,7 @@ public class MainQuiz extends AppCompatActivity
 
     private static final int MAX_RETRIES = 3;
 
-    private Handler delayHandler = new Handler();
+    private final Handler delayHandler = new Handler();
 
     private int retryCount;
 

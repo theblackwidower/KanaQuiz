@@ -44,10 +44,10 @@ public class LogDetailItem extends View
     private String totalString = "";
     private String percentageString = "";
 
-    private TextPaint mainPaint = new TextPaint();
-    private TextPaint percentagePaint = new TextPaint();
-    private TextPaint typePaint = new TextPaint();
-    private Paint linePaint = new Paint();
+    private final TextPaint mainPaint = new TextPaint();
+    private final TextPaint percentagePaint = new TextPaint();
+    private final TextPaint typePaint = new TextPaint();
+    private final Paint linePaint = new Paint();
 
     private float originalFontSize;
     private int desiredHeight;

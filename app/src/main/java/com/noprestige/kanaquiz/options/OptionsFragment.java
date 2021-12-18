@@ -37,7 +37,7 @@ public class OptionsFragment extends PreferenceFragmentCompat
 {
     static class DeleteAll implements Runnable
     {
-        private Preference btnClearLogs;
+        private final Preference btnClearLogs;
 
         DeleteAll(Preference btnClearLogs)
         {

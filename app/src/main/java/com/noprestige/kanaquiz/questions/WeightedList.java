@@ -29,7 +29,7 @@ class WeightedList<E> implements Cloneable
     private TreeMap<Integer, E> map = new TreeMap<>();
     private int maxValue;
 
-    private static Random rng = new Random();
+    private static final Random rng = new Random();
 
     boolean add(int weight, E element)
     {

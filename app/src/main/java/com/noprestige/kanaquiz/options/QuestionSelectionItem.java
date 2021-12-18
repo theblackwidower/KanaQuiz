@@ -47,7 +47,7 @@ public class QuestionSelectionItem extends LinearLayout implements Checkable
     private TextView lblText;
     private CheckBox chkCheckBox;
 
-    private Paint linePaint = new Paint();
+    private final Paint linePaint = new Paint();
 
     private float lineXPoint1;
     private float lineXPoint2;

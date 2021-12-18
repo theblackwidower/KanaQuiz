@@ -31,7 +31,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 class QuestionSelectionPager extends FragmentStateAdapter
 {
-    private List<Integer> tabList;
+    private final List<Integer> tabList;
     Context context;
 
     QuestionSelectionPager(FragmentActivity fa)

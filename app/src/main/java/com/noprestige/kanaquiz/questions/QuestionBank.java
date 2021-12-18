@@ -34,18 +34,18 @@ import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
 public class QuestionBank extends WeightedList<Question>
 {
     private Question currentQuestion;
-    private Set<String> fullKanaAnswerList = new TreeSet<>(new GojuonOrder());
+    private final Set<String> fullKanaAnswerList = new TreeSet<>(new GojuonOrder());
     private Map<String, WeightedList<String>> weightedAnswerListCache;
 
-    private Set<String> basicAnswerList = new TreeSet<>(new GojuonOrder());
-    private Set<String> diacriticAnswerList = new TreeSet<>(new GojuonOrder());
-    private Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
-    private Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
+    private final Set<String> basicAnswerList = new TreeSet<>(new GojuonOrder());
+    private final Set<String> diacriticAnswerList = new TreeSet<>(new GojuonOrder());
+    private final Set<String> digraphAnswerList = new TreeSet<>(new GojuonOrder());
+    private final Set<String> diacriticDigraphAnswerList = new TreeSet<>(new GojuonOrder());
 
     private String[] currentPossibleAnswers;
 
-    private Set<String> wordAnswerList = new TreeSet<>();
-    private Set<String> yomiAnswerList = new TreeSet<>();
+    private final Set<String> wordAnswerList = new TreeSet<>();
+    private final Set<String> yomiAnswerList = new TreeSet<>();
 
     private static final int MAX_MULTIPLE_CHOICE_ANSWERS = 6;
 

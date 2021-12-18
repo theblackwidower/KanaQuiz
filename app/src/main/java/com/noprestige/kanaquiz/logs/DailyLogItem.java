@@ -52,10 +52,10 @@ public class DailyLogItem extends View
     private String totalString = "";
     private String percentageString = "";
 
-    private TextPaint datePaint = new TextPaint();
-    private TextPaint ratioPaint = new TextPaint();
-    private TextPaint percentagePaint = new TextPaint();
-    private Paint linePaint = new Paint();
+    private final TextPaint datePaint = new TextPaint();
+    private final TextPaint ratioPaint = new TextPaint();
+    private final TextPaint percentagePaint = new TextPaint();
+    private final Paint linePaint = new Paint();
 
     private float dateXPoint;
     private float dateYPoint1;

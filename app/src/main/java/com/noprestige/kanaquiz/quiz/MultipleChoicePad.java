@@ -107,7 +107,7 @@ public class MultipleChoicePad extends FlowLayout
 
     static class NormalizeSizeTask implements Runnable
     {
-        private MultipleChoicePad thisPad;
+        private final MultipleChoicePad thisPad;
 
         private int maxWidth;
         private int maxHeight;

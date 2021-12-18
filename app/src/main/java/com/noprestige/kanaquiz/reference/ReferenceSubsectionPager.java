@@ -32,8 +32,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 class ReferenceSubsectionPager extends FragmentStateAdapter
 {
-    private int questionTypeRef;
-    private List<Integer> tabList;
+    private final int questionTypeRef;
+    private final List<Integer> tabList;
     Context context;
 
     private static List<String> pageIds;

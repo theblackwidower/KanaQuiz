@@ -47,8 +47,8 @@ public class ReferenceCell extends View
     private String description;
     private String[] multiLineDescription;
 
-    private TextPaint subjectPaint = new TextPaint();
-    private TextPaint descriptionPaint = new TextPaint();
+    private final TextPaint subjectPaint = new TextPaint();
+    private final TextPaint descriptionPaint = new TextPaint();
 
     private float subjectXPoint;
     private float subjectYPoint;

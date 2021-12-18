@@ -32,8 +32,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 class ReferencePager extends FragmentStateAdapter
 {
-    private List<Integer> tabList;
-    private Context context;
+    private final List<Integer> tabList;
+    private final Context context;
 
     ReferencePager(FragmentActivity fa)
     {
