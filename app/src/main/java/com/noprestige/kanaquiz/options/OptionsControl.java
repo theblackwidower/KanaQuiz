@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -47,11 +47,10 @@ public final class OptionsControl
     {
         if (sharedPreferences == null)
         {
-            Context appContext = context;
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             editor = sharedPreferences.edit();
-            resources = appContext.getResources();
-            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, true);
+            resources = ((Context) context).getResources();
+            PreferenceManager.setDefaultValues(context, R.xml.preferences, true);
         }
     }
 
