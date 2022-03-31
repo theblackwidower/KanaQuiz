@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -34,14 +34,16 @@ public class WordQuestion extends Question
     private final String kanji;
     private final String answer;
     private final String[] altAnswers;
+    private final String setTitle;
 
-    public WordQuestion(String romaji, String answer, String kana, String kanji, String[] altAnswers)
+    public WordQuestion(String romaji, String answer, String kana, String kanji, String[] altAnswers, String setTitle)
     {
         this.romaji = romaji.trim();
         this.answer = answer.trim();
         this.kana = (kana != null) ? kana.trim() : null;
         this.kanji = (kanji != null) ? kanji.trim() : null;
         this.altAnswers = altAnswers;
+        this.setTitle = setTitle;
     }
 
     enum QuestionTextType
@@ -139,6 +141,12 @@ public class WordQuestion extends Question
         details.put("Translation", answer.toString());
 
         return details;
+    }
+
+    @Override
+    public String getReferenceHeader()
+    {
+        return "Vocabulary - " + setTitle;
     }
 
     @Override

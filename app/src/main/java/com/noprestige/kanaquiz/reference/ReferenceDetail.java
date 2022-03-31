@@ -1,5 +1,5 @@
 /*
- *    Copyright 2020 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.app.Dialog;
+import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -42,12 +43,14 @@ public class ReferenceDetail extends DialogFragment
     private static final String ARG_SUBJECT = "subject";
     private static final String ARG_LABELS = "labels";
     private static final String ARG_DETAILS = "details";
+    private static final String ARG_HEADER = "header";
 
     public static ReferenceDetail newInstance(Question question)
     {
         Bundle args = new Bundle();
         ReferenceDetail dialog = new ReferenceDetail();
         args.putString(ARG_SUBJECT, question.getQuestionText());
+        args.putString(ARG_HEADER, question.getReferenceHeader());
 
         Map<String, String> details = question.getReferenceDetails();
         args.putStringArray(ARG_LABELS, details.keySet().toArray(new String[0]));
@@ -64,12 +67,16 @@ public class ReferenceDetail extends DialogFragment
         View content = requireActivity().getLayoutInflater().inflate(R.layout.reference_detail_dialog, null);
         TextView lblSubject = content.findViewById(R.id.lblSubject);
 
+        TextView lblHeader = content.findViewById(R.id.lblHeader);
+        lblHeader.setPaintFlags(lblHeader.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        lblHeader.setText(getArguments().getString(ARG_HEADER));
+
         String subject = getArguments().getString(ARG_SUBJECT);
 
         lblSubject.setText(subject);
 
         if (subject.length() > 1)
-            ((LinearLayout) content).setOrientation(LinearLayout.VERTICAL);
+            ((LinearLayout) content.findViewById(R.id.layDetail)).setOrientation(LinearLayout.VERTICAL);
 
         if (SDK_INT < Build.VERSION_CODES.O)
             TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblSubject, 12, 128, 2, COMPLEX_UNIT_SP);

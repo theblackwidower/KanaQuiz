@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -33,13 +33,15 @@ public class KanjiQuestion extends Question
     private final String meaning;
     private final String kunYomi;
     private final String onYomi;
+    private final String setTitle;
 
-    KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi)
+    KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi, String setTitle)
     {
         this.kanji = kanji;
         this.meaning = meaning;
         this.kunYomi = kunYomi;
         this.onYomi = onYomi;
+        this.setTitle = setTitle;
     }
 
     @Override
@@ -86,6 +88,12 @@ public class KanjiQuestion extends Question
             details.put('\u200D' + "On'yomi", onYomi);
 
         return details;
+    }
+
+    @Override
+    public String getReferenceHeader()
+    {
+        return "Kanji - " + setTitle;
     }
 
     @Override
