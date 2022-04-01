@@ -31,17 +31,19 @@ public class KanaQuestion extends Question
     private final String kana;
     private final String defaultRomaji;
     private final Map<RomanizationSystem, String> altRomaji;
+    private final boolean isExtended;
 
     KanaQuestion(String kana, String romaji)
     {
-        this(kana, romaji, null);
+        this(kana, romaji, null, false);
     }
 
-    KanaQuestion(String kana, String romaji, Map<RomanizationSystem, String> altRomaji)
+    KanaQuestion(String kana, String romaji, Map<RomanizationSystem, String> altRomaji, boolean isExtended)
     {
         this.kana = kana.trim();
         defaultRomaji = romaji.trim();
         this.altRomaji = altRomaji;
+        this.isExtended = isExtended;
     }
 
     public String getQuestionText()
@@ -159,7 +161,7 @@ public class KanaQuestion extends Question
             case HIRAGANA:
                 return "Hiragana";
             case KATAKANA:
-                return "Katakana";
+                return isExtended ? "Extended Katakana" : "Katakana";
             default:
                 return null;
         }

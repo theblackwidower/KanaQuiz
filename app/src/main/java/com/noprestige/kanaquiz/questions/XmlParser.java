@@ -150,10 +150,10 @@ final class XmlParser
             if (eventType == XmlPullParser.START_TAG)
             {
                 if ("Section".equalsIgnoreCase(parser.getName()))
-                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint);
+                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint, prefId);
 
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlKanaQuestion(parser, resources));
+                    currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
                 else if ("KanjiQuestion".equalsIgnoreCase(parser.getName()))
                     currentSet.add(parseXmlKanjiQuestion(parser, resources, setTitle));
@@ -171,7 +171,7 @@ final class XmlParser
     }
 
     private static void parseXmlKanaSubsection(XmlPullParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint, String prefId)
             throws XmlPullParserException, IOException, ParseException
     {
         QuestionManagement.Diacritic diacritics = null;
@@ -201,7 +201,7 @@ final class XmlParser
                 eventType = parser.next())
         {
             if ((eventType == XmlPullParser.START_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()))
-                currentSet.add(parseXmlKanaQuestion(parser, resources));
+                currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing Section closing tag", lineNumber);
@@ -211,7 +211,7 @@ final class XmlParser
                 currentSet.toArray(new Question[0]));
     }
 
-    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources)
+    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources, String prefId)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = null;
@@ -237,7 +237,7 @@ final class XmlParser
         if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
-        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
+        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers, prefId.startsWith("extended"));
     }
 
     private static KanjiQuestion parseXmlKanjiQuestion(XmlPullParser parser, Resources resources, String setTitle)
