@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ public class ReferenceCell extends View
         Context context = getContext();
         if (context instanceof ReferenceScreen)
         {
-            ReferenceDetail.newInstance(question)
+            ReferenceDetail.newInstance(question, getResources())
                     .show(((ReferenceScreen) context).getSupportFragmentManager(), "detailView");
             return true;
         }

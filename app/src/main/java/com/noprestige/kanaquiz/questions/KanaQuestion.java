@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
@@ -154,14 +155,14 @@ public class KanaQuestion extends Question
     }
 
     @Override
-    public String getReferenceHeader()
+    public String getReferenceHeader(Resources resources)
     {
         switch (whatKanaSystem(kana))
         {
             case HIRAGANA:
-                return "Hiragana";
+                return resources.getString(R.string.hiragana);
             case KATAKANA:
-                return isExtended ? "Extended Katakana" : "Katakana";
+                return resources.getString(isExtended ? R.string.extended_katakana_title : R.string.katakana);
             default:
                 return null;
         }

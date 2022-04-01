@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.reference;
 
 import android.app.Dialog;
+import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,12 +48,12 @@ public class ReferenceDetail extends DialogFragment
     private static final String ARG_DETAILS = "details";
     private static final String ARG_HEADER = "header";
 
-    public static ReferenceDetail newInstance(Question question)
+    public static ReferenceDetail newInstance(Question question, Resources resources)
     {
         Bundle args = new Bundle();
         ReferenceDetail dialog = new ReferenceDetail();
         args.putString(ARG_SUBJECT, question.getQuestionText());
-        args.putString(ARG_HEADER, question.getReferenceHeader());
+        args.putString(ARG_HEADER, question.getReferenceHeader(resources));
 
         Map<String, String> details = question.getReferenceDetails();
         args.putStringArray(ARG_LABELS, details.keySet().toArray(new String[0]));

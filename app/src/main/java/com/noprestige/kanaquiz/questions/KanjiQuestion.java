@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
@@ -91,9 +92,9 @@ public class KanjiQuestion extends Question
     }
 
     @Override
-    public String getReferenceHeader()
+    public String getReferenceHeader(Resources resources)
     {
-        return "Kanji - " + setTitle;
+        return resources.getString(R.string.kanji) + " - " + setTitle;
     }
 
     @Override

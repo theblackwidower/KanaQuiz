@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
@@ -34,7 +35,7 @@ public abstract class Question
 
     public abstract Map<String, String> getReferenceDetails();
 
-    public abstract String getReferenceHeader();
+    public abstract String getReferenceHeader(Resources resources);
 
     public ReferenceCell generateReference(Context context)
     {

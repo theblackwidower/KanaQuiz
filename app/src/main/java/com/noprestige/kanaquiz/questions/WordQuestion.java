@@ -17,6 +17,7 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
@@ -144,9 +145,9 @@ public class WordQuestion extends Question
     }
 
     @Override
-    public String getReferenceHeader()
+    public String getReferenceHeader(Resources resources)
     {
-        return "Vocabulary - " + setTitle;
+        return resources.getString(R.string.vocabulary) + " - " + setTitle;
     }
 
     @Override
