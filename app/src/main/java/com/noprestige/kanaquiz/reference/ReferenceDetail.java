@@ -19,10 +19,7 @@ package com.noprestige.kanaquiz.reference;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.TextPaint;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -35,11 +32,7 @@ import com.noprestige.kanaquiz.questions.Question;
 import java.util.Map;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.widget.TextViewCompat;
 import androidx.fragment.app.DialogFragment;
-
-import static android.os.Build.VERSION.SDK_INT;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class ReferenceDetail extends DialogFragment
 {
@@ -68,7 +61,7 @@ public class ReferenceDetail extends DialogFragment
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View content = requireActivity().getLayoutInflater().inflate(R.layout.reference_detail_dialog, null);
-        TextView lblSubject = content.findViewById(R.id.lblSubject);
+        AutoSizedTextView lblSubject = content.findViewById(R.id.lblSubject);
 
         TextView lblHeader = content.findViewById(R.id.lblHeader);
         lblHeader.setPaintFlags(lblHeader.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -79,13 +72,7 @@ public class ReferenceDetail extends DialogFragment
         lblSubject.setText(subject);
 
         if (subject.length() > 1)
-        {
             ((LinearLayout) content.findViewById(R.id.layDetail)).setOrientation(LinearLayout.VERTICAL);
-            //ref: https://www.codespeedy.com/multithreading-in-java/
-            new Thread(new ReferenceDetail.CorrectSizeTask(lblSubject)).start();
-        }
-        if (SDK_INT < Build.VERSION_CODES.O)
-            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(lblSubject, 12, 128, 2, COMPLEX_UNIT_SP);
 
         TableLayout detailTable = content.findViewById(R.id.tblReferenceDetail);
 
@@ -107,55 +94,5 @@ public class ReferenceDetail extends DialogFragment
         ((TextView) (row.findViewById(R.id.lblItemLabel))).append(":");
         ((TextView) (row.findViewById(R.id.lblItemText))).setText(text);
         return row;
-    }
-
-    static class CorrectSizeTask implements Runnable
-    {
-        private final TextView lblSubject;
-
-        private float oldHeight;
-        private float oldWidth;
-        private float newHeight;
-        private float newWidth;
-
-        CorrectSizeTask(TextView lblSubject)
-        {
-            this.lblSubject = lblSubject;
-        }
-
-        @Override
-        public void run()
-        {
-            try
-            {
-                do
-                {
-                    Thread.sleep(100);
-                    oldHeight = lblSubject.getHeight();
-                    oldWidth = lblSubject.getWidth();
-                }
-                while ((oldWidth <= 0) || (oldHeight <= 0));
-                do
-                {
-                    Thread.sleep(100);
-                    //ref: https://stackoverflow.com/a/49267252
-                    TextPaint textPaint = lblSubject.getPaint();
-                    newHeight = textPaint.getFontMetrics().descent - textPaint.getFontMetrics().ascent;
-                    newWidth = textPaint.measureText(lblSubject.getText().toString());
-                }
-                while ((oldWidth < newWidth) || (oldHeight < newHeight));
-                newHeight += lblSubject.getPaddingTop() + lblSubject.getPaddingBottom();
-                newWidth += lblSubject.getPaddingLeft() + lblSubject.getPaddingRight();
-            }
-            catch (InterruptedException ignored) {}
-            //ref: https://stackoverflow.com/a/11125271
-            new Handler(lblSubject.getContext().getMainLooper()).post(this::done);
-        }
-
-        private void done()
-        {
-            if (oldHeight > newHeight)
-                lblSubject.setHeight((int) (newHeight * 1.1f));
-        }
     }
 }

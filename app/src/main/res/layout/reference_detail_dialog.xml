@@ -37,17 +37,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <com.noprestige.kanaquiz.reference.AutoSizedTextView
             android:id="@+id/lblSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center_horizontal"
-            android:autoSizeMaxTextSize="128sp"
-            android:autoSizeTextType="uniform"
             android:maxLines="1"
             android:padding="6dp"
-            android:textSize="128sp"
-            tools:targetApi="o"/>
+            android:textSize="128sp"/>
 
         <TableLayout
             android:id="@+id/tblReferenceDetail"
