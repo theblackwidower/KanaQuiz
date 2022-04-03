@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,9 +17,14 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.reference.ReferenceCell;
+
+import java.util.Map;
+
+import androidx.collection.ArrayMap;
 
 public class KanjiQuestion extends Question
 {
@@ -29,13 +34,15 @@ public class KanjiQuestion extends Question
     final String meaning;
     final String kunYomi;
     final String onYomi;
+    private final String setTitle;
 
-    KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi)
+    KanjiQuestion(String kanji, String meaning, String kunYomi, String onYomi, String setTitle)
     {
         this.kanji = kanji;
         this.meaning = meaning;
         this.kunYomi = kunYomi;
         this.onYomi = onYomi;
+        this.setTitle = setTitle;
     }
 
     KanjiSoundQuestion getKunYomiQuestion()
@@ -77,6 +84,27 @@ public class KanjiQuestion extends Question
     public String getDatabaseKey()
     {
         return kanji;
+    }
+
+    @Override
+    public Map<String, String> getReferenceDetails()
+    {
+        Map<String, String> details = new ArrayMap<>();
+
+        if (meaning != null)
+            details.put("Meaning", meaning);
+        if (kunYomi != null)
+            details.put("Kun'yomi", kunYomi);
+        if (onYomi != null)
+            details.put('\u200D' + "On'yomi", onYomi);
+
+        return details;
+    }
+
+    @Override
+    public String getReferenceHeader(Resources resources)
+    {
+        return resources.getString(R.string.kanji) + " - " + setTitle;
     }
 
     @Override

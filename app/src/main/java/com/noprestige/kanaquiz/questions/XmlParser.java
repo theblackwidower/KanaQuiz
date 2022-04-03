@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -154,16 +154,16 @@ final class XmlParser
             if (eventType == XmlPullParser.START_TAG)
             {
                 if ("Section".equalsIgnoreCase(parser.getName()))
-                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint);
+                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint, prefId);
 
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlKanaQuestion(parser, resources));
+                    currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
                 else if ("KanjiQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlKanjiQuestion(parser, resources));
+                    currentSet.add(parseXmlKanjiQuestion(parser, resources, setTitle));
 
                 else if ("WordQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlWordQuestion(parser, resources));
+                    currentSet.add(parseXmlWordQuestion(parser, resources, setTitle));
             }
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -175,7 +175,7 @@ final class XmlParser
     }
 
     private static void parseXmlKanaSubsection(XmlPullParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint, String prefId)
             throws XmlPullParserException, IOException, ParseException
     {
         QuestionManagement.Diacritic diacritics = null;
@@ -205,7 +205,7 @@ final class XmlParser
                 eventType = parser.next())
         {
             if ((eventType == XmlPullParser.START_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()))
-                currentSet.add(parseXmlKanaQuestion(parser, resources));
+                currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing Section closing tag", lineNumber);
@@ -215,7 +215,7 @@ final class XmlParser
                 currentSet.toArray(EMPTY_QUESTION_ARRAY));
     }
 
-    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources)
+    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources, String prefId)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = null;
@@ -241,10 +241,11 @@ final class XmlParser
         if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
-        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
+        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers, prefId.startsWith("extended"));
     }
 
-    private static KanjiQuestion parseXmlKanjiQuestion(XmlPullParser parser, Resources resources) throws ParseException
+    private static KanjiQuestion parseXmlKanjiQuestion(XmlPullParser parser, Resources resources, String setTitle)
+            throws ParseException
     {
         String thisQuestion = null;
         String thisMeaning = null;
@@ -272,10 +273,10 @@ final class XmlParser
         if ((thisQuestion == null) || (thisMeaning == null) || ((thisKunYomi == null) && (thisOnYomi == null)))
             throw new ParseException("Missing attribute in KanjiQuestion", parser.getLineNumber());
 
-        return new KanjiQuestion(thisQuestion, thisMeaning, thisKunYomi, thisOnYomi);
+        return new KanjiQuestion(thisQuestion, thisMeaning, thisKunYomi, thisOnYomi, setTitle);
     }
 
-    private static WordQuestion parseXmlWordQuestion(XmlPullParser parser, Resources resources)
+    private static WordQuestion parseXmlWordQuestion(XmlPullParser parser, Resources resources, String setTitle)
             throws ParseException, IOException, XmlPullParserException
     {
         String thisRomaji = null;
@@ -307,7 +308,7 @@ final class XmlParser
         if (!((parser.next() == XmlPullParser.END_TAG) && "WordQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlWordAltAnswers(parser);
 
-        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers);
+        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers, setTitle);
     }
 
     private static TreeMap<KanaQuestion.RomanizationSystem, String> parseXmlKanaAltAnswers(XmlPullParser parser)

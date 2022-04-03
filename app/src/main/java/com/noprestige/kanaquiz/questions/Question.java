@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,8 +17,11 @@
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
+
+import java.util.Map;
 
 public abstract class Question
 {
@@ -34,11 +37,16 @@ public abstract class Question
 
     abstract QuestionType getType();
 
+    public abstract Map<String, String> getReferenceDetails();
+
+    public abstract String getReferenceHeader(Resources resources);
+
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);
         cell.setSubject(getQuestionText());
         cell.setDescription(fetchCorrectAnswer());
+        cell.storeQuestionData(this);
         return cell;
     }
 
