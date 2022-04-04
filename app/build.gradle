@@ -6,12 +6,12 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion '31.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 18
         versionName '0.14.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -65,19 +65,19 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'org.jetbrains:annotations:23.0.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0'
 
-    implementation 'androidx.room:room-runtime:2.3.0'
-    annotationProcessor 'androidx.room:room-compiler:2.3.0'
+    implementation 'androidx.room:room-runtime:2.4.2'
+    annotationProcessor 'androidx.room:room-compiler:2.4.2'
 
-    androidTestImplementation 'androidx.room:room-testing:2.3.0'
+    androidTestImplementation 'androidx.room:room-testing:2.4.2'
 
-    releaseImplementation 'com.google.firebase:firebase-core:20.0.0'
-    releaseImplementation 'com.google.firebase:firebase-perf:20.0.4'
-    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.2.5'
-    releaseImplementation 'com.google.firebase:firebase-analytics:20.0.0'
+    releaseImplementation 'com.google.firebase:firebase-core:20.1.2'
+    releaseImplementation 'com.google.firebase:firebase-perf:20.0.6'
+    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.2.9'
+    releaseImplementation 'com.google.firebase:firebase-analytics:20.1.2'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
@@ -91,7 +91,7 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference:1.2.0'
 
     implementation 'moe.shizuku.fontprovider:api:10'
 
