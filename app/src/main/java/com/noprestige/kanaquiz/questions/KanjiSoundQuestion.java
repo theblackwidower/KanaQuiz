@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2022 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,6 +15,10 @@
  */
 
 package com.noprestige.kanaquiz.questions;
+
+import android.content.res.Resources;
+
+import java.util.Map;
 
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
@@ -77,5 +81,17 @@ public class KanjiSoundQuestion extends Question
     QuestionType getType()
     {
         return type;
+    }
+
+    @Override
+    public Map<String, String> getReferenceDetails()
+    {
+        return null;
+    }
+
+    @Override
+    public String getReferenceHeader(Resources resources)
+    {
+        return null;
     }
 }
