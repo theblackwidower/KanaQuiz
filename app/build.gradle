@@ -12,8 +12,8 @@ android {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
         targetSdkVersion 32
-        versionCode 18
-        versionName '0.14.1'
+        versionCode 19
+        versionName '0.15'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         //ref: https://stackoverflow.com/a/47525966/3582371
         resConfigs 'en-rCA', 'es-rES', 'ca-rES', 'de-rDE'
