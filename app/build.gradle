@@ -6,12 +6,12 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion '31.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 19
         versionName '0.15'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -64,31 +64,31 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'org.jetbrains:annotations:23.0.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'org.jetbrains:annotations:24.0.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.9.0'
 
-    implementation 'androidx.room:room-runtime:2.4.2'
-    annotationProcessor 'androidx.room:room-compiler:2.4.2'
+    implementation 'androidx.room:room-runtime:2.5.2'
+    annotationProcessor 'androidx.room:room-compiler:2.5.2'
 
-    androidTestImplementation 'androidx.room:room-testing:2.4.2'
+    androidTestImplementation 'androidx.room:room-testing:2.5.2'
 
-    releaseImplementation 'com.google.firebase:firebase-core:20.1.2'
-    releaseImplementation 'com.google.firebase:firebase-perf:20.0.6'
-    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.2.9'
-    releaseImplementation 'com.google.firebase:firebase-analytics:20.1.2'
+    releaseImplementation 'com.google.firebase:firebase-core:21.1.1'
+    releaseImplementation 'com.google.firebase:firebase-perf:20.3.3'
+    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.3.7'
+    releaseImplementation 'com.google.firebase:firebase-analytics:21.3.0'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation 'ch.acra:acra-mail:5.8.4'
-    pureImplementation 'ch.acra:acra-toast:5.8.4'
-    pureImplementation 'ch.acra:acra-limiter:5.8.4'
+    pureImplementation 'ch.acra:acra-mail:5.10.1'
+    pureImplementation 'ch.acra:acra-toast:5.10.1'
+    pureImplementation 'ch.acra:acra-limiter:5.10.1'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
     implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 
@@ -96,7 +96,7 @@ dependencies {
 
     implementation 'moe.shizuku.fontprovider:api:10'
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
 }
 
 coveralls {
