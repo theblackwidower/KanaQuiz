@@ -55,8 +55,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    namespace 'com.noprestige.kanaquiz'
     //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
-    lintOptions {
+    lint {
         disable 'MissingTranslation'
     }
 }
