@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2023 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class XmlParserTest
         List<String> setTitleList = new ArrayList<>();
         List<String> setNoDiacriticsTitleList = new ArrayList<>();
 
-        XmlParser.parseXmlDocument(com.noprestige.kanaquiz.dev.test.R.xml.test_questions,
+        XmlParser.parseXmlDocument(com.noprestige.kanaquiz.test.R.xml.test_questions,
                 InstrumentationRegistry.getInstrumentation().getContext().getResources(), kanaSetList, prefIdList,
                 setTitleList, setNoDiacriticsTitleList);
 
