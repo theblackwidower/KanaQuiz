@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
 import android.content.Context;
@@ -10,6 +26,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 import com.noprestige.kanaquiz.R;
+import com.noprestige.kanaquiz.questions.QuestionType;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import java.text.DecimalFormat;
@@ -20,15 +37,17 @@ public class LogDetailItem extends View
     private int correctAnswers = -1;
     private int totalAnswers = -1;
     private String question = "";
+    private QuestionType type;
     private boolean isDynamicSize = true;
 
     private String correctString = "";
     private String totalString = "";
     private String percentageString = "";
 
-    private TextPaint mainPaint = new TextPaint();
-    private TextPaint percentagePaint = new TextPaint();
-    private Paint linePaint = new Paint();
+    private final TextPaint mainPaint = new TextPaint();
+    private final TextPaint percentagePaint = new TextPaint();
+    private final TextPaint typePaint = new TextPaint();
+    private final Paint linePaint = new Paint();
 
     private float originalFontSize;
     private int desiredHeight;
@@ -84,16 +103,19 @@ public class LogDetailItem extends View
         setMainColour(ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary));
 
         mainPaint.setAntiAlias(true);
+        typePaint.setAntiAlias(true);
         percentagePaint.setAntiAlias(true);
 
         Typeface font = ThemeManager.getDefaultThemeFont(context, Typeface.NORMAL);
 
         mainPaint.setTypeface(font);
+        typePaint.setTypeface(font);
         percentagePaint.setTypeface(font);
 
         mainPaint.setTextLocale(Locale.JAPANESE);
 
         linePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorPrimary));
+        typePaint.setColor(ThemeManager.getThemeColour(context, android.R.attr.textColorTertiary));
         linePaint.setStrokeWidth(context.getResources().getDimension(R.dimen.dividingLine));
 
         internalVerticalPadding = getResources().getDimensionPixelSize(R.dimen.logItemInternalVerticalPadding);
@@ -171,6 +193,31 @@ public class LogDetailItem extends View
         canvas.drawText(totalString, totalXPoint, dataYPoint, mainPaint);
         canvas.drawText(percentageString, percentageXPoint, dataYPoint, percentagePaint);
         canvas.drawLine(lineXPoint1, lineYPoint, lineXPoint2, lineYPoint, linePaint);
+
+        if ((type != QuestionType.KANA) && (type != QuestionType.VOCABULARY))
+            paintType(canvas);
+    }
+
+    private void paintType(Canvas canvas)
+    {
+        String typeString = null;
+        if (type == QuestionType.KANJI)
+            typeString = getResources().getString(R.string.kanji_question_type_option_meaning);
+        else if (type == QuestionType.KUN_YOMI)
+            typeString = getResources().getString(R.string.kanji_question_type_option_kunyomi);
+        else if (type == QuestionType.ON_YOMI)
+            typeString = getResources().getString(R.string.kanji_question_type_option_onyomi);
+
+        typeString = '(' + typeString + ')';
+        float padding = mainPaint.measureText(" ");
+        float typeXPoint = questionXPoint + questionWidth + padding;
+        float availableSpace = correctXPoint - typeXPoint - padding;
+
+        typePaint.setTextSize(originalFontSize / 4f);
+        while (typePaint.measureText(typeString) > availableSpace)
+            typePaint.setTextSize(typePaint.getTextSize() - 1);
+
+        canvas.drawText(typeString, typeXPoint, dataYPoint, typePaint);
     }
 
     public void correctFontSize()
@@ -188,6 +235,7 @@ public class LogDetailItem extends View
     public void setFromRecord(QuestionRecord record)
     {
         setQuestion(record.getQuestion());
+        setType(record.getType());
         setCorrectAnswers(record.getCorrectAnswers());
         setTotalAnswers(record.getCorrectAnswers() + record.getIncorrectAnswers());
     }
@@ -225,6 +273,12 @@ public class LogDetailItem extends View
     public void setQuestion(String question)
     {
         this.question = question;
+        updateAnswers();
+    }
+
+    public void setType(QuestionType type)
+    {
+        this.type = type;
         updateAnswers();
     }
 

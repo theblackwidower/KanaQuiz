@@ -1,24 +1,52 @@
+/*
+ *    Copyright 2022 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.questions;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.reference.ReferenceCell;
 
+import java.util.Map;
+
 public abstract class Question
 {
-    abstract String getQuestionText();
+    public static final Question[] EMPTY_QUESTION_ARRAY = new Question[0];
+
+    public abstract String getQuestionText();
 
     abstract boolean checkAnswer(String response);
 
-    abstract String fetchCorrectAnswer();
+    public abstract String fetchCorrectAnswer();
 
-    abstract String getDatabaseKey();
+    public abstract String getDatabaseKey();
+
+    abstract QuestionType getType();
+
+    public abstract Map<String, String> getReferenceDetails();
+
+    public abstract String getReferenceHeader(Resources resources);
 
     public ReferenceCell generateReference(Context context)
     {
         ReferenceCell cell = new ReferenceCell(context);
         cell.setSubject(getQuestionText());
         cell.setDescription(fetchCorrectAnswer());
+        cell.storeQuestionData(this);
         return cell;
     }
 
@@ -81,7 +109,7 @@ public abstract class Question
             return KanaSystem.NO_KANA; //possibly a reserved character in the block
     }
 
-    public static KanaSystem whatKanaSystem(String kana)
+    public static KanaSystem whatKanaSystem(CharSequence kana)
     {
         int hiraganaCount = 0;
         int katakanaCount = 0;

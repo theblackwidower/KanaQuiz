@@ -1,6 +1,23 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -69,6 +86,7 @@ public class AnswerFrame extends LinearLayout
         btnMultipleChoice.setOnAnswerListener(this::checkAnswer);
     }
 
+    @FunctionalInterface
     public interface OnAnswerListener
     {
         void onAnswer(String answer);
@@ -110,7 +128,14 @@ public class AnswerFrame extends LinearLayout
     public void setMultipleChoices(QuestionBank questionBank)
     {
         if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            btnMultipleChoice.setChoices(questionBank.getPossibleAnswers());
+        {
+            //ref: https://www.codespeedy.com/multithreading-in-java/
+            new Thread(() ->
+            {
+                String[] answers = questionBank.getPossibleAnswers();
+                new Handler(getContext().getMainLooper()).post(() -> btnMultipleChoice.setChoices(answers));
+            }).start();
+        }
     }
 
     public void onNoQuestions()
@@ -131,17 +156,17 @@ public class AnswerFrame extends LinearLayout
         txtAnswer.setText("");
     }
 
-    public void updateScore(float totalCorrect, int totalQuestions)
+    public void updateScore(Fraction totalCorrect, int totalQuestions)
     {
         if (totalQuestions > 0)
         {
             lblScore.setText(R.string.score_label);
             lblScore.append(": ");
 
-            lblScore.append(PERCENT_FORMATTER.format(totalCorrect / (float) totalQuestions));
+            lblScore.append(PERCENT_FORMATTER.format(totalCorrect.getDecimal() / (float) totalQuestions));
 
             lblScore.append(System.getProperty("line.separator"));
-            lblScore.append(new Fraction(totalCorrect).toString());
+            lblScore.append(totalCorrect.toString());
             lblScore.append(" / ");
             lblScore.append(Integer.toString(totalQuestions));
         }

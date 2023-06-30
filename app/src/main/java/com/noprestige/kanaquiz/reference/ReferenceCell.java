@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2022 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.reference;
 
 import android.content.ClipData;
@@ -22,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class ReferenceCell extends View
@@ -30,8 +47,8 @@ public class ReferenceCell extends View
     private String description;
     private String[] multiLineDescription;
 
-    private TextPaint subjectPaint = new TextPaint();
-    private TextPaint descriptionPaint = new TextPaint();
+    private final TextPaint subjectPaint = new TextPaint();
+    private final TextPaint descriptionPaint = new TextPaint();
 
     private float subjectXPoint;
     private float subjectYPoint;
@@ -90,6 +107,24 @@ public class ReferenceCell extends View
 
         subjectPaint.setTypeface(font);
         descriptionPaint.setTypeface(font);
+    }
+
+    public void storeQuestionData(Question question)
+    {
+        setOnClickListener(view -> detailView(question));
+    }
+
+    private boolean detailView(Question question)
+    {
+        Context context = getContext();
+        if (context instanceof ReferenceScreen)
+        {
+            ReferenceDetail.newInstance(question, getResources())
+                    .show(((ReferenceScreen) context).getSupportFragmentManager(), "detailView");
+            return true;
+        }
+        else
+            return false;
     }
 
     private boolean copyItem()
@@ -253,7 +288,7 @@ public class ReferenceCell extends View
                     tempMultiLine.add(part);
             }
             if (tempMultiLine.size() != multiLineDescription.length)
-                multiLineDescription = tempMultiLine.toArray(new String[0]);
+                multiLineDescription = tempMultiLine.toArray(EMPTY_STRING_ARRAY);
             descriptionHeight *= multiLineDescription.length;
         }
         else
@@ -269,46 +304,42 @@ public class ReferenceCell extends View
         descriptionPaint.setColor(colour);
     }
 
-    public static TableRow buildSpecialRow(Context context, Question[] questions)
+    private static final char[] VOWELS = {'a', 'i', 'u', 'e', 'o'};
+    private static final char CONSONANT = 'n';
+
+    public static View buildKanaRow(Context context, Question[] questions)
     {
         if (questions == null)
             return null;
         else
         {
-            TableRow row = new TableRow(context);
-
-            switch (questions.length)
+            ReferenceCell[] cells = new ReferenceCell[VOWELS.length];
+            if ((questions.length == 1) && Character.toString(CONSONANT).equals(questions[0].fetchCorrectAnswer()))
+                return questions[0].generateReference(context);
+            for (Question question : questions)
             {
-                case 1:
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(questions[0].generateReference(context));
-                    break;
-                case 2:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(new View(context));
-                    row.addView(questions[1].generateReference(context));
-                    break;
-                case 3:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[1].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[2].generateReference(context));
-                    break;
-                case 4:
-                    row.addView(questions[0].generateReference(context));
-                    row.addView(questions[1].generateReference(context));
-                    row.addView(new View(context));
-                    row.addView(questions[2].generateReference(context));
-                    row.addView(questions[3].generateReference(context));
-                    break;
-                default:
-                    for (Question question : questions)
-                        row.addView(question.generateReference(context));
+                String romaji = question.fetchCorrectAnswer();
+                char vowel = romaji.charAt(romaji.length() - 1);
+                for (int i = 0; i < VOWELS.length; i++)
+                    if (vowel == VOWELS[i])
+                        if (cells[i] == null)
+                        {
+                            vowel = 0x0;
+                            cells[i] = question.generateReference(context);
+                            break;
+                        }
+                        else
+                            throw new IllegalArgumentException("Cell already occupied.");
+                if (vowel != 0x0)
+                    throw new IllegalArgumentException("Question failed to get added to reference screen.");
             }
+
+            TableRow row = new TableRow(context);
+            for (int i = 0; i < 5; i++)
+                if (cells[i] == null)
+                    row.addView(new View(context));
+                else
+                    row.addView(cells[i]);
             return row;
         }
     }

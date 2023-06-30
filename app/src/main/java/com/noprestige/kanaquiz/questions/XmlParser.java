@@ -1,7 +1,24 @@
+/*
+ *    Copyright 2022 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.questions;
 
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.util.AttributeSet;
 
 import com.noprestige.kanaquiz.R;
 
@@ -11,16 +28,20 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import static androidx.room.util.StringUtil.EMPTY_STRING_ARRAY;
+import static com.noprestige.kanaquiz.questions.Question.EMPTY_QUESTION_ARRAY;
 
 final class XmlParser
 {
     private XmlParser() {}
 
-    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources, List<QuestionManagement> fileSetList,
-            List<String> titleList)
+    public static void parseXmlFileSetDocument(int xmlRefId, Resources resources,
+            Collection<QuestionManagement> fileSetList, Collection<String> titleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -46,7 +67,7 @@ final class XmlParser
                         }
                     }
 
-                    if (resourceFileId == 0 || title == null)
+                    if ((resourceFileId == 0) || (title == null))
                         throw new ParseException("Missing attribute in QuestionFile", 0);
 
                     fileSetList.add(new QuestionManagement(resourceFileId, resources));
@@ -63,8 +84,8 @@ final class XmlParser
     }
 
     static void parseXmlDocument(int xmlRefId, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
-            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, Collection<String> prefIdList,
+            Collection<String> setTitleList, Collection<String> setNoDiacriticsTitleList)
     {
         XmlResourceParser parser = resources.getXml(xmlRefId);
 
@@ -88,9 +109,9 @@ final class XmlParser
         }
     }
 
-    private static void parseXmlQuestionSet(XmlResourceParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, List<String> prefIdList,
-            List<String> setTitleList, List<String> setNoDiacriticsTitleList)
+    private static void parseXmlQuestionSet(XmlPullParser parser, Resources resources,
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, Collection<String> prefIdList,
+            Collection<String> setTitleList, Collection<String> setNoDiacriticsTitleList)
             throws XmlPullParserException, IOException, ParseException
     {
         String prefId = null;
@@ -133,16 +154,16 @@ final class XmlParser
             if (eventType == XmlPullParser.START_TAG)
             {
                 if ("Section".equalsIgnoreCase(parser.getName()))
-                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint);
+                    parseXmlKanaSubsection(parser, resources, questionSetList, indexPoint, prefId);
 
                 else if ("KanaQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlKanaQuestion(parser, resources));
+                    currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
                 else if ("KanjiQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlKanjiQuestion(parser, resources));
+                    currentSet.add(parseXmlKanjiQuestion(parser, resources, setTitle));
 
                 else if ("WordQuestion".equalsIgnoreCase(parser.getName()))
-                    currentSet.add(parseXmlWordQuestion(parser, resources));
+                    currentSet.add(parseXmlWordQuestion(parser, resources, setTitle));
             }
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
@@ -150,11 +171,11 @@ final class XmlParser
         }
 
         questionSetList.put(new QuestionManagement.SetCode(indexPoint, QuestionManagement.Diacritic.NO_DIACRITIC, null),
-                currentSet.toArray(new Question[0]));
+                currentSet.toArray(EMPTY_QUESTION_ARRAY));
     }
 
-    private static void parseXmlKanaSubsection(XmlResourceParser parser, Resources resources,
-            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint)
+    private static void parseXmlKanaSubsection(XmlPullParser parser, Resources resources,
+            Map<QuestionManagement.SetCode, Question[]> questionSetList, int indexPoint, String prefId)
             throws XmlPullParserException, IOException, ParseException
     {
         QuestionManagement.Diacritic diacritics = null;
@@ -184,17 +205,17 @@ final class XmlParser
                 eventType = parser.next())
         {
             if ((eventType == XmlPullParser.START_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName()))
-                currentSet.add(parseXmlKanaQuestion(parser, resources));
+                currentSet.add(parseXmlKanaQuestion(parser, resources, prefId));
 
             else if (eventType == XmlPullParser.END_DOCUMENT)
                 throw new ParseException("Missing Section closing tag", lineNumber);
         }
 
         questionSetList.put(new QuestionManagement.SetCode(indexPoint, diacritics, digraphs),
-                currentSet.toArray(new Question[0]));
+                currentSet.toArray(EMPTY_QUESTION_ARRAY));
     }
 
-    private static KanaQuestion parseXmlKanaQuestion(XmlResourceParser parser, Resources resources)
+    private static KanaQuestion parseXmlKanaQuestion(XmlPullParser parser, Resources resources, String prefId)
             throws ParseException, XmlPullParserException, IOException
     {
         String thisQuestion = null;
@@ -220,14 +241,16 @@ final class XmlParser
         if (!((parser.next() == XmlPullParser.END_TAG) && "KanaQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlKanaAltAnswers(parser);
 
-        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers);
+        return new KanaQuestion(thisQuestion, thisAnswer, thisAltAnswers, prefId.startsWith("extended"));
     }
 
-    private static KanjiQuestion parseXmlKanjiQuestion(XmlResourceParser parser, Resources resources)
+    private static KanjiQuestion parseXmlKanjiQuestion(XmlPullParser parser, Resources resources, String setTitle)
             throws ParseException
     {
         String thisQuestion = null;
         String thisMeaning = null;
+        String thisKunYomi = null;
+        String thisOnYomi = null;
 
         for (int i = 0; i < parser.getAttributeCount(); i++)
         {
@@ -238,16 +261,22 @@ final class XmlParser
                     break;
                 case "meaning":
                     thisMeaning = parseXmlValue(parser, i, resources);
+                    break;
+                case "kunYomi":
+                    thisKunYomi = parseXmlValue(parser, i, resources);
+                    break;
+                case "onYomi":
+                    thisOnYomi = parseXmlValue(parser, i, resources);
             }
         }
 
-        if ((thisQuestion == null) || (thisMeaning == null))
+        if ((thisQuestion == null) || (thisMeaning == null) || ((thisKunYomi == null) && (thisOnYomi == null)))
             throw new ParseException("Missing attribute in KanjiQuestion", parser.getLineNumber());
 
-        return new KanjiQuestion(thisQuestion, thisMeaning);
+        return new KanjiQuestion(thisQuestion, thisMeaning, thisKunYomi, thisOnYomi, setTitle);
     }
 
-    private static WordQuestion parseXmlWordQuestion(XmlResourceParser parser, Resources resources)
+    private static WordQuestion parseXmlWordQuestion(XmlPullParser parser, Resources resources, String setTitle)
             throws ParseException, IOException, XmlPullParserException
     {
         String thisRomaji = null;
@@ -279,7 +308,7 @@ final class XmlParser
         if (!((parser.next() == XmlPullParser.END_TAG) && "WordQuestion".equalsIgnoreCase(parser.getName())))
             thisAltAnswers = parseXmlWordAltAnswers(parser);
 
-        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers);
+        return new WordQuestion(thisRomaji, thisAnswer, thisKana, thisKanji, thisAltAnswers, setTitle);
     }
 
     private static TreeMap<KanaQuestion.RomanizationSystem, String> parseXmlKanaAltAnswers(XmlPullParser parser)
@@ -343,7 +372,7 @@ final class XmlParser
                 throw new ParseException("Missing KanaQuestion closing tag", lineNumber);
         }
 
-        return thisAltAnswers.toArray(new String[0]);
+        return thisAltAnswers.toArray(EMPTY_STRING_ARRAY);
     }
 
     private static KanaQuestion.RomanizationSystem[] parseRomanizationSystemList(String attributeString)
@@ -357,15 +386,17 @@ final class XmlParser
         return systemList;
     }
 
-    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources)
+    private static String parseXmlValue(XmlPullParser parser, int index, Resources resources)
     {
         return parseXmlValue(parser, index, resources, 0, 0);
     }
 
-    private static String parseXmlValue(XmlResourceParser parser, int index, Resources resources, int stringResource1,
+    private static String parseXmlValue(XmlPullParser parser, int index, Resources resources, int stringResource1,
             int stringResource2)
     {
-        int refId = parser.getAttributeResourceValue(index, 0);
+        int refId = 0;
+        if (parser instanceof AttributeSet)
+            refId = ((AttributeSet) parser).getAttributeResourceValue(index, 0);
 
         if (refId == 0)
             return parser.getAttributeValue(index);

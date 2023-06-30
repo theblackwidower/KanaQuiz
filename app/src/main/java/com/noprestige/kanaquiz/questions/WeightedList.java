@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.questions;
 
 import java.util.ArrayList;
@@ -6,12 +22,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
 
+import androidx.annotation.NonNull;
+
 class WeightedList<E> implements Cloneable
 {
     private TreeMap<Integer, E> map = new TreeMap<>();
     private int maxValue;
 
-    private static Random rng = new Random();
+    private static final Random rng = new Random();
 
     boolean add(int weight, E element)
     {
@@ -29,8 +47,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + key + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
         {
             key = map.floorKey(key);
@@ -60,8 +77,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((key >= maxValue) || (key < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(key) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + key + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
         {
             if ((getWeight(key) + adjustment) <= 0)
@@ -96,8 +112,7 @@ class WeightedList<E> implements Cloneable
     {
         if ((value >= maxValue) || (value < 0))
             throw new IndexOutOfBoundsException(
-                    "(" + Integer.toString(value) + ") is an invalid key. The key must be between 0 and " +
-                            Integer.toString(maxValue) + ".");
+                    "(" + value + ") is an invalid key. The key must be between 0 and " + maxValue + ".");
         else
             return map.get(map.floorKey(value));
     }
@@ -169,6 +184,7 @@ class WeightedList<E> implements Cloneable
         return map.values();
     }
 
+    @NonNull
     @SuppressWarnings("unchecked")
     @Override
     public WeightedList<E> clone() throws CloneNotSupportedException

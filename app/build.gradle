@@ -1,27 +1,30 @@
 apply plugin: 'com.android.application'
 //ref: https://stackoverflow.com/a/49739351/3582371
 if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release')) {
-    apply plugin: 'io.fabric'
     apply plugin: 'com.google.firebase.firebase-perf'
+    apply plugin: 'com.google.firebase.crashlytics'
 }
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
-        minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 18
-        versionName '0.14.1'
+        minSdkVersion 22
+        targetSdkVersion 33
+        versionCode 19
+        versionName '0.15'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-        resConfigs 'en-rCA', 'es-rES', 'ca-rES' //ref: https://stackoverflow.com/a/47525966/3582371
+        //ref: https://stackoverflow.com/a/47525966/3582371
+        resConfigs 'en-rCA', 'es-rES', 'ca-rES', 'de-rDE'
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
                                      "$projectDir/schemas".toString()]
             }
         }
+        // Required when setting minSdkVersion to 20 or lower
+        multiDexEnabled true
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
@@ -35,7 +38,9 @@ android {
         debug {
             testCoverageEnabled true
             applicationIdSuffix '.dev'
-            versionNameSuffix ' (dev)'
+            def gitBranchName = 'git rev-parse --abbrev-ref HEAD'.execute([], project.rootDir).text.trim().replace('-', '_')
+            //ref: https://stackoverflow.com/q/19172565
+            versionNameSuffix '-' + gitBranchName + '-' + new Date().format('yyyyMMddHHmm')
             debuggable true
         }
         pure {
@@ -46,48 +51,52 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+    namespace 'com.noprestige.kanaquiz'
     //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
-    lintOptions {
+    lint {
         disable 'MissingTranslation'
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'org.jetbrains:annotations:24.0.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.google.android.material:material:1.9.0'
 
-    implementation 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
+    implementation 'androidx.room:room-runtime:2.5.2'
+    annotationProcessor 'androidx.room:room-compiler:2.5.2'
 
-    androidTestImplementation 'androidx.room:room-testing:2.0.0'
+    androidTestImplementation 'androidx.room:room-testing:2.5.2'
 
-    releaseImplementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
-    releaseImplementation 'com.google.firebase:firebase-core:16.0.6'
-    releaseImplementation 'com.google.firebase:firebase-perf:16.2.3'
+    releaseImplementation 'com.google.firebase:firebase-core:21.1.1'
+    releaseImplementation 'com.google.firebase:firebase-perf:20.3.3'
+    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.3.7'
+    releaseImplementation 'com.google.firebase:firebase-analytics:21.3.0'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
-
     implementation 'com.jjoe64:graphview:4.2.2'
 
-    pureImplementation 'ch.acra:acra-mail:5.2.1'
-    pureImplementation 'ch.acra:acra-toast:5.2.1'
-    pureImplementation 'ch.acra:acra-limiter:5.2.1'
+    pureImplementation 'ch.acra:acra-mail:5.10.1'
+    pureImplementation 'ch.acra:acra-toast:5.10.1'
+    pureImplementation 'ch.acra:acra-limiter:5.10.1'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 
-    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.preference:preference:1.2.0'
 
     implementation 'moe.shizuku.fontprovider:api:10'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
 }
 
 coveralls {

@@ -1,10 +1,26 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.options;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.noprestige.kanaquiz.KanaQuiz;
 import com.noprestige.kanaquiz.R;
@@ -19,17 +35,24 @@ import moe.shizuku.fontprovider.FontProviderClient;
 
 public class OptionsFragment extends PreferenceFragmentCompat
 {
-    static class DeleteAll extends AsyncTask<Preference, Void, Preference>
+    static class DeleteAll implements Runnable
     {
-        @Override
-        protected Preference doInBackground(Preference... btnClearLogs)
+        private final Preference btnClearLogs;
+
+        DeleteAll(Preference btnClearLogs)
         {
-            LogDao.deleteAll();
-            return btnClearLogs[0];
+            this.btnClearLogs = btnClearLogs;
         }
 
         @Override
-        protected void onPostExecute(Preference btnClearLogs)
+        public void run()
+        {
+            LogDao.deleteAll();
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(btnClearLogs.getContext().getMainLooper()).post(this::done);
+        }
+
+        private void done()
         {
             btnClearLogs.setEnabled(false);
         }
@@ -49,7 +72,8 @@ public class OptionsFragment extends PreferenceFragmentCompat
         //ref: https://stackoverflow.com/questions/5330677/android-preferences-onclick-event
         findPreference("clear_logs").setOnPreferenceClickListener(btnClearLogs ->
         {
-            new DeleteAll().execute(btnClearLogs);
+            //ref: https://www.codespeedy.com/multithreading-in-java/
+            new Thread(new DeleteAll(btnClearLogs)).start();
             return true;
         });
 
@@ -62,10 +86,8 @@ public class OptionsFragment extends PreferenceFragmentCompat
 
         Preference fontProviderLink = findPreference("font_provider_link");
 
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) &&
-                (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) &&
-                (FontProviderClient.checkAvailability(getActivity()) ==
-                        FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && (FontProviderClient.checkAvailability(getActivity()) ==
+                FontProviderClient.FontProviderAvailability.NOT_INSTALLED))
         {
             String downloadLink;
             if (KanaQuiz.isGooglePlayStoreOnDevice())
@@ -102,7 +124,7 @@ public class OptionsFragment extends PreferenceFragmentCompat
         if (dialog != null)
         {
             dialog.setTargetFragment(this, 0);
-            dialog.show(getFragmentManager(), null);
+            dialog.show(getParentFragmentManager(), null);
         }
         else
             super.onDisplayPreferenceDialog(preference);

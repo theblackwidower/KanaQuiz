@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2022 T Duke Perry & Laura C.
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <resources>
     <string name="selection_title">Seleccionar temari</string>
     <string name="reference_title">Referència ràpida</string>
@@ -19,7 +35,7 @@
     <string name="github_logo">Logotip de Github</string>
     <string name="twitter_logo">Logotip de Twitter</string>
     <string name="source_code_on_github">Tot el codi font disponible a Github</string>
-    <string name="copyright_claim">© 2017–2019 T Duke Perry. Tots els drets reservats.</string>
+    <string name="copyright_claim">© 2017–2022 T Duke Perry. Tots els drets reservats.</string>
     <string name="special_thanks_start">Agraïments especials a:</string>
     <string name="special_thanks_1">Sleepy Duck, per la sèrie Learn Japanese to Survive</string>
     <string name="icon_credit_start">Icona creada amb l\'ajuda de:</string>
@@ -80,18 +96,4 @@
     <string name="set_4_no_diacritics_title">%1$s T</string>
     <string name="set_6_no_diacritics_title">%1$s H</string>
     <string name="extended_katakana_title">Katakana extès</string>
-    <string name="vocab_set_basic_title">Vocabulari bàsic</string>
-    <string name="vocab_set_study_title">Material d\'estudi</string>
-    <string name="vocab_set_animals_title">Animals</string>
-    <string name="vocab_set_transport_title">Transport</string>
-    <string name="vocab_set_people_title">Persones i familiars</string>
-    <string name="vocab_set_food_title">Menjar i beguda</string>
-    <string name="vocab_set_home_title">Casa i llar</string>
-    <string name="vocab_set_numbers_title">Números</string>
-    <string name="vocab_set_countries_title">Països</string>
-    <string name="vocab_set_places_title">Llocs</string>
-    <string name="vocab_set_clothing_title">Vestimenta</string>
-    <string name="vocab_set_home_2_title">Casa i llar 2</string>
-    <string name="vocab_set_school_title">Escola</string>
-    <string name="vocab_set_jobs_title">Oficis</string>
 </resources>

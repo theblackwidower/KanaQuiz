@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2019 T Duke Perry
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <Questions xmlns="https://www.noprestige.com"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="https://www.noprestige.com questions.xsd">
-    <QuestionSet prefId="ljts_kanji_set_27" setTitle="@string/ljts_kanji_set_27_title">
+    <QuestionSet prefId="ljts_kanji_set_27" setTitle="Weapons &amp; Warriors">
         <KanjiQuestion question="弱" meaning="weak" kunYomi="yowa" onYomi="jaku"/>
         <KanjiQuestion question="強" meaning="strong" kunYomi="tsuyo/shi" onYomi="kyō/gō"/>
         <KanjiQuestion question="刀" meaning="sword" kunYomi="katana" onYomi="tō"/>
@@ -10,7 +26,7 @@
         <KanjiQuestion question="引" meaning="pull/draw back" kunYomi="hi" onYomi="in"/>
         <KanjiQuestion question="当" meaning="hit/this" kunYomi="a" onYomi="tō"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_28" setTitle="@string/ljts_kanji_set_28_title">
+    <QuestionSet prefId="ljts_kanji_set_28" setTitle="House &amp; Home">
         <KanjiQuestion question="家" meaning="house/specialist" kunYomi="ie/uchi/ya" onYomi="ka/ke"/>
         <KanjiQuestion question="室" meaning="room" kunYomi="muro" onYomi="shitsu"/>
         <KanjiQuestion question="戸" meaning="door" kunYomi="to" onYomi="ko"/>
@@ -18,7 +34,7 @@
         <KanjiQuestion question="門" meaning="gate" kunYomi="kado" onYomi="mon"/>
         <KanjiQuestion question="通" meaning="pass through" kunYomi="tō/kayo" onYomi="tsū"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_29" setTitle="@string/ljts_kanji_set_29_title">
+    <QuestionSet prefId="ljts_kanji_set_29" setTitle="Colours, Roads, &amp; Buildings">
         <KanjiQuestion question="色" meaning="color" kunYomi="iro" onYomi="shoku/shiki"/>
         <KanjiQuestion question="黄" meaning="yellow" kunYomi="ki" onYomi="kō/ō"/>
         <KanjiQuestion question="黒" meaning="black" kunYomi="kuro" onYomi="koku"/>
@@ -26,7 +42,7 @@
         <KanjiQuestion question="角" meaning="corner/angle/horn" kunYomi="kado/tsuno" onYomi="kaku"/>
         <KanjiQuestion question="高" meaning="tall/high/expensive" kunYomi="taka" onYomi="kō"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_30" setTitle="@string/ljts_kanji_set_30_title">
+    <QuestionSet prefId="ljts_kanji_set_30" setTitle="Movement">
         <KanjiQuestion question="行" meaning="go/act" kunYomi="i/yu/okona" onYomi="kō/gyō"/>
         <KanjiQuestion question="帰" meaning="return" kunYomi="kae" onYomi="ki"/>
         <KanjiQuestion question="来" meaning="come/next" kunYomi="ku/kita" onYomi="rai"/>
@@ -34,7 +50,7 @@
         <KanjiQuestion question="走" meaning="run" kunYomi="hashi" onYomi="sō"/>
         <KanjiQuestion question="止" meaning="stop/quit" kunYomi="to/ya" onYomi="shi"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_31" setTitle="@string/ljts_kanji_set_31_title">
+    <QuestionSet prefId="ljts_kanji_set_31" setTitle="Age, Questions &amp; Music">
         <KanjiQuestion question="新" meaning="new" kunYomi="atara/ara" onYomi="shin"/>
         <KanjiQuestion question="古" meaning="old" kunYomi="furu" onYomi="ko"/>
         <KanjiQuestion question="何" meaning="what/how many" kunYomi="nani/nan" onYomi="ka"/>
@@ -42,7 +58,7 @@
         <KanjiQuestion question="楽" meaning="music/pleasure" kunYomi="tano" onYomi="gaku/raku"/>
         <KanjiQuestion question="歌" meaning="song/sing" kunYomi="uta" onYomi="ka"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_32" setTitle="@string/ljts_kanji_set_32_title">
+    <QuestionSet prefId="ljts_kanji_set_32" setTitle="Lines &amp; People">
         <KanjiQuestion question="線" meaning="line" onYomi="sen"/>
         <KanjiQuestion question="矢" meaning="arrow" kunYomi="ya" onYomi="shi"/>
         <KanjiQuestion question="台" meaning="pedestal/stand" onYomi="dai/tai"/>
@@ -50,7 +66,7 @@
         <KanjiQuestion question="友" meaning="friend" kunYomi="tomo" onYomi="yū"/>
         <KanjiQuestion question="同" meaning="same" kunYomi="ona" onYomi="dō"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_33" setTitle="@string/ljts_kanji_set_33_title">
+    <QuestionSet prefId="ljts_kanji_set_33" setTitle="Pen to Paper">
         <KanjiQuestion question="読" meaning="read" kunYomi="yo" onYomi="doku/toku"/>
         <KanjiQuestion question="書" meaning="write" kunYomi="ka" onYomi="sho"/>
         <KanjiQuestion question="記" meaning="record/chronicle" kunYomi="shiru" onYomi="ki"/>
@@ -59,7 +75,7 @@
         <KanjiQuestion question="絵" meaning="picture/painting" onYomi="kai/e"/>
         <KanjiQuestion question="図" meaning="plan/diagram" kunYomi="haka" onYomi="zu/to"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_34" setTitle="@string/ljts_kanji_set_34_title">
+    <QuestionSet prefId="ljts_kanji_set_34" setTitle="Numbers &amp; Counting">
         <KanjiQuestion question="数" meaning="number (amount)" kunYomi="kazu/kazo" onYomi="sū"/>
         <KanjiQuestion question="番" meaning="number (series)" onYomi="ban"/>
         <KanjiQuestion question="多" meaning="many" kunYomi="ō" onYomi="ta"/>
@@ -68,7 +84,7 @@
         <KanjiQuestion question="半" meaning="half/middle" kunYomi="naka" onYomi="han"/>
         <KanjiQuestion question="間" meaning="interval/space" kunYomi="aida/ma" onYomi="kan/ken"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_35" setTitle="@string/ljts_kanji_set_35_title">
+    <QuestionSet prefId="ljts_kanji_set_35" setTitle="Think About Direction 2">
         <KanjiQuestion question="方" meaning="direction/person" kunYomi="kata" onYomi="hō"/>
         <KanjiQuestion question="北" meaning="north" kunYomi="kita" onYomi="hoku"/>
         <KanjiQuestion question="南" meaning="south" kunYomi="minami" onYomi="nan"/>
@@ -77,7 +93,7 @@
         <KanjiQuestion question="近" meaning="near" kunYomi="chika" onYomi="kin"/>
         <KanjiQuestion question="遠" meaning="far" kunYomi="tō" onYomi="en"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_set_36" setTitle="@string/ljts_kanji_set_36_title">
+    <QuestionSet prefId="ljts_kanji_set_36" setTitle="Power">
         <KanjiQuestion question="光" meaning="light/shine" kunYomi="hikari/hika" onYomi="kō"/>
         <KanjiQuestion question="明" meaning="bright/light" kunYomi="aka/a" onYomi="mei/myō"/>
         <KanjiQuestion question="電" meaning="electricity" onYomi="den"/>
@@ -86,7 +102,7 @@
         <KanjiQuestion question="風" meaning="wind/style" kunYomi="kaze" onYomi="fū/fu"/>
         <KanjiQuestion question="回" meaning="turn/rotate" kunYomi="mawa" onYomi="kai"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_bonus_set_9_10" setTitle="@string/ljts_kanji_bonus_set_9_10_title">
+    <QuestionSet prefId="ljts_kanji_bonus_set_9_10" setTitle="Think Clearly &amp; Consider Barking">
         <!--Duck Bonus 9-->
         <KanjiQuestion question="晴" meaning="clear" kunYomi="ha" onYomi="sei"/>
         <KanjiQuestion question="思" meaning="think" kunYomi="omo" onYomi="shi"/>
@@ -94,7 +110,7 @@
         <KanjiQuestion question="考" meaning="consider" kunYomi="kanga" onYomi="kō"/>
         <KanjiQuestion question="鳴" meaning="chirp/bark" kunYomi="na" onYomi="mei"/>
     </QuestionSet>
-    <QuestionSet prefId="ljts_kanji_bonus_set_11_12" setTitle="@string/ljts_kanji_bonus_set_11_12_title">
+    <QuestionSet prefId="ljts_kanji_bonus_set_11_12" setTitle="Steam, Group, Boat, Join &amp; The Government">
         <!--Duck Bonus 11-->
         <KanjiQuestion question="汽" meaning="steam/vapor" onYomi="ki"/>
         <KanjiQuestion question="組" meaning="group/assemble" kunYomi="kumi/ku" onYomi="so"/>

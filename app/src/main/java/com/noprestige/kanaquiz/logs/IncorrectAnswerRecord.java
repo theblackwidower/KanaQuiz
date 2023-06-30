@@ -1,26 +1,46 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
-import org.threeten.bp.LocalDate;
+import com.noprestige.kanaquiz.questions.QuestionType;
+
+import java.time.LocalDate;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
-//TODO: Edit field names 'kana' and 'incorrect_romanji' to 'question' and 'incorrect_answer' on next major,
-// migration-requiring database change
-@Entity(tableName = "incorrect_answers", primaryKeys = {"date", "kana", "incorrect_romanji"})
+@Entity(tableName = "incorrect_answers", primaryKeys = {"date", "question", "type", "incorrect_answer"})
 public class IncorrectAnswerRecord
 {
     @ColumnInfo(name = "date")
     @NonNull
     private final LocalDate date;
 
-    @ColumnInfo(name = "kana")
+    @ColumnInfo(name = "question")
     @NonNull
     private final String question;
 
-    @ColumnInfo(name = "incorrect_romanji")
+    @ColumnInfo(name = "type")
+    @NonNull
+    private final QuestionType type;
+
+    @ColumnInfo(name = "incorrect_answer")
     @NonNull
     private final String incorrectAnswer;
 
@@ -28,18 +48,21 @@ public class IncorrectAnswerRecord
     private int occurrences;
 
     @Ignore
-    public IncorrectAnswerRecord(String question, String incorrectAnswer)
+    public IncorrectAnswerRecord(@NonNull String question, @NonNull QuestionType type, @NonNull String incorrectAnswer)
     {
         date = LocalDate.now();
         this.question = question;
+        this.type = type;
         this.incorrectAnswer = incorrectAnswer;
         occurrences = 1;
     }
 
-    IncorrectAnswerRecord(LocalDate date, String question, String incorrectAnswer, int occurrences)
+    IncorrectAnswerRecord(@NonNull LocalDate date, @NonNull String question, @NonNull QuestionType type,
+            @NonNull String incorrectAnswer, int occurrences)
     {
         this.date = date;
         this.question = question;
+        this.type = type;
         this.incorrectAnswer = incorrectAnswer;
         this.occurrences = occurrences;
     }
@@ -54,6 +77,12 @@ public class IncorrectAnswerRecord
     public String getQuestion()
     {
         return question;
+    }
+
+    @NonNull
+    public QuestionType getType()
+    {
+        return type;
     }
 
     @NonNull

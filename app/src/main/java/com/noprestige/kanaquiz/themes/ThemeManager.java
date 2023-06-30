@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2023 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.themes;
 
 import android.Manifest;
@@ -22,9 +38,8 @@ import com.noprestige.kanaquiz.KanaQuizMain;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.options.OptionsControl;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
-import androidx.annotation.RequiresApi;
 import moe.shizuku.fontprovider.FontProviderClient;
 import moe.shizuku.fontprovider.FontRequest;
 
@@ -146,36 +161,35 @@ public final class ThemeManager
     {
         activity.setTheme(getCurrentThemeId());
 
-        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.P))
-            if (!isFontInitialized)
+        if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.P) && !isFontInitialized)
+        {
+            int code = FontProviderClient.checkAvailability(activity);
+            if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
             {
-                int code = FontProviderClient.checkAvailability(activity);
-                if (code == FontProviderClient.FontProviderAvailability.NOT_INSTALLED)
-                {
-                    if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
-                        getDownloadDialog(activity, true);
-                }
-                else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
-                    getDownloadDialog(activity, false);
-                else if (code == FontProviderClient.FontProviderAvailability.OK)
-                {
-                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
-                        if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
-                                PackageManager.PERMISSION_GRANTED)
-                        {
-                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-                            dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
-                            dialogBuilder.setPositiveButton(android.R.string.ok, null);
-                            dialogBuilder.setOnDismissListener(dialog -> activity
-                                    .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
-                            dialogBuilder.show();
-                        }
-                        else
-                            initializeFonts(activity);
+                if (!OptionsControl.getBoolean(R.string.prefid_ignore_font_provider))
+                    getDownloadDialog(activity, true);
+            }
+            else if (code == FontProviderClient.FontProviderAvailability.VERSION_TOO_LOW)
+                getDownloadDialog(activity, false);
+            else if (code == FontProviderClient.FontProviderAvailability.OK)
+            {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                    if (activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                            PackageManager.PERMISSION_GRANTED)
+                    {
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+                        dialogBuilder.setMessage(R.string.marshmallow_font_permission_request);
+                        dialogBuilder.setPositiveButton(android.R.string.ok, null);
+                        dialogBuilder.setOnDismissListener(dialog -> activity
+                                .requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0));
+                        dialogBuilder.show();
+                    }
                     else
                         initializeFonts(activity);
-                }
+                else
+                    initializeFonts(activity);
             }
+        }
     }
 
     public static void permissionRequestReturn(Activity activity, String[] permissions, int[] grantResults)
@@ -187,7 +201,6 @@ public final class ThemeManager
                 activity.recreate();
     }
 
-    @RequiresApi(21)
     private static void initializeFonts(Activity activity)
     {
         FontProviderClient client = FontProviderClient.create(activity);
@@ -236,7 +249,6 @@ public final class ThemeManager
         }
     }
 
-    @RequiresApi(21)
     private static void getDownloadDialog(Activity activity, boolean isNewInstall)
     {
         LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
@@ -282,10 +294,5 @@ public final class ThemeManager
                 }
             }
         }
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT)
-            //ref: https://stackoverflow.com/a/13866702/3582371
-            activity.getWindow().getDecorView()
-                    .setBackgroundColor(getThemeColour(activity, android.R.attr.colorBackground));
     }
 }

@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2021 T Duke Perry
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <xs:schema
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     targetNamespace="https://www.noprestige.com"
@@ -22,7 +38,7 @@
     <xs:element name="Questions">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="QuestionSet" maxOccurs="unbounded"/>
+                <xs:element ref="QuestionSet" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
         </xs:complexType>
         <!-- ref: https://stackoverflow.com/a/5541804/3582371 -->
@@ -68,7 +84,7 @@
                 </xs:choice>
                 <xs:element ref="Section" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="prefId" type="text" use="required"/>
+            <xs:attribute name="prefId" type="prefId" use="required" />
             <xs:attribute name="setTitle" type="text" use="required"/>
             <xs:attribute name="setNoDiacriticsTitle" type="text"/>
         </xs:complexType>
@@ -160,25 +176,31 @@
             <xs:simpleType>
                 <xs:list itemType="romanization_system"/>
             </xs:simpleType>
-            <xs:minLength value="1"/>
+            <xs:minLength value="1" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="text">
         <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="prefId">
+        <xs:restriction base="text">
+            <xs:pattern value="[^~ ]*" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="meanings">
         <xs:restriction base="text">
-            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*"/>
+            <xs:pattern value="[ '()/0-9A-Za-zÀ-ÖØ-öø-ÿ]*" />
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="romaji">
         <xs:restriction base="text">
-            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*"/>
+            <xs:pattern value="[ '\-/A-Za-zĀāĒēĪīŌōŪū]*" />
         </xs:restriction>
     </xs:simpleType>
 

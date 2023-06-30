@@ -1,22 +1,34 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.quiz;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-
-import com.noprestige.kanaquiz.themes.ThemeManager;
 
 import org.apmem.tools.layouts.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static android.graphics.Typeface.NORMAL;
 import static com.noprestige.kanaquiz.questions.KanjiQuestion.MEANING_DELIMITER;
 
 public class MultipleChoicePad extends FlowLayout
@@ -78,8 +90,6 @@ public class MultipleChoicePad extends FlowLayout
         btnNewButton.setOnClickListener((view) -> submitAnswer(view, answer));
         btnNewButton.setText(answer.replace(" ", System.getProperty("line.separator"))
                 .replace(MEANING_DELIMITER, MEANING_DELIMITER + System.getProperty("line.separator")));
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP)
-            btnNewButton.setTypeface(ThemeManager.getDefaultThemeFont(getContext(), NORMAL));
         addView(btnNewButton);
         btnChoices.add(btnNewButton);
     }
@@ -91,23 +101,31 @@ public class MultipleChoicePad extends FlowLayout
         for (String answer : answers)
             addChoice(answer);
 
-        new NormalizeSizeTask().execute(this);
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(new NormalizeSizeTask(this)).start();
     }
 
-    static class NormalizeSizeTask extends AsyncTask<MultipleChoicePad, Void, MultipleChoicePad>
+    static class NormalizeSizeTask implements Runnable
     {
+        private final MultipleChoicePad thisPad;
+
         private int maxWidth;
         private int maxHeight;
 
+        NormalizeSizeTask(MultipleChoicePad pad)
+        {
+            thisPad = pad;
+        }
+
         @Override
-        protected MultipleChoicePad doInBackground(MultipleChoicePad... item)
+        public void run()
         {
             try
             {
                 do
                 {
                     Thread.sleep(100);
-                    for (Button btnChoice : item[0].btnChoices)
+                    for (Button btnChoice : thisPad.btnChoices)
                     {
                         int thisWidth = btnChoice.getWidth();
                         if (thisWidth > maxWidth)
@@ -120,25 +138,22 @@ public class MultipleChoicePad extends FlowLayout
                 }
                 while ((maxWidth == 0) || (maxHeight == 0));
             }
-            catch (InterruptedException ignored)
-            {
-                cancel(true);
-            }
-            return item[0];
+            catch (InterruptedException ignored) {}
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(thisPad.getContext().getMainLooper()).post(this::done);
         }
 
-        @Override
-        protected void onPostExecute(MultipleChoicePad item)
+        private void done()
         {
             if (maxWidth > 0)
-                for (Button btnChoice : item.btnChoices)
+                for (Button btnChoice : thisPad.btnChoices)
                     btnChoice.setWidth(maxWidth);
 
             if (maxHeight > 0)
-                for (Button btnChoice : item.btnChoices)
+                for (Button btnChoice : thisPad.btnChoices)
                     btnChoice.setHeight(maxHeight);
 
-            item.setVisibility(View.VISIBLE);
+            thisPad.setVisibility(View.VISIBLE);
         }
     }
 }

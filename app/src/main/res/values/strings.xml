@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~    Copyright 2022 T Duke Perry
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
 <resources>
     <string name="app_name">The Kana Quiz</string>
 
@@ -18,6 +34,10 @@
     <string name="request_kana_multiple_choice">Select the Romaji equivalent</string>
     <string name="request_vocab_text_input">Enter the English translation</string>
     <string name="request_vocab_multiple_choice">Select the English translation</string>
+    <string name="request_kunyomi_text_input">Enter the appropriate Kun\'Yomi</string>
+    <string name="request_kunyomi_multiple_choice">Select the appropriate Kun\'Yomi</string>
+    <string name="request_onyomi_text_input">Enter the appropriate On\'Yomi</string>
+    <string name="request_onyomi_multiple_choice">Select the appropriate On\'Yomi</string>
     <string name="try_again">Try again</string>
     <string name="show_correct_answer">The correct answer is</string>
 
@@ -25,7 +45,7 @@
     <string name="github_logo">Github Logo</string>
     <string name="twitter_logo">Twitter Logo</string>
     <string name="source_code_on_github">Full source code available on GitHub.</string>
-    <string name="copyright_claim">\u00A9 2017&#8211;2019 T Duke Perry. All rights reserved.</string>
+    <string name="copyright_claim">\u00A9 2017&#8211;2022 T Duke Perry. All rights reserved.</string>
 
     <string name="special_thanks_start">Special Thanks to:</string>
     <string name="special_thanks_1">Sleepy Duck, for the Learn Japanese to Survive series</string>
@@ -124,6 +144,32 @@
         <item>@string/prefid_vocab_display_kanji</item>
     </string-array>
 
+    <string name="kanji_question_type_option_title">Available Kanji Questions</string>
+    <string name="kanji_question_type_option_summary">What kind of kanji questions are available</string>
+    <string name="kanji_question_type_option_meaning">Meaning</string>
+    <string name="kanji_question_type_option_kunyomi" translatable="false">Kun\'Yomi</string>
+    <string name="kanji_question_type_option_onyomi" translatable="false">On\'Yomi</string>
+
+    <string name="prefid_kanji_question_type" translatable="false">kanji_question_type</string>
+    <string name="prefid_kanji_question_type_meaning" translatable="false">meaning</string>
+    <string name="prefid_kanji_question_type_kunyomi" translatable="false">kunyomi</string>
+    <string name="prefid_kanji_question_type_onyomi" translatable="false">onyomi</string>
+
+    <string-array name="kanji_question_type_option_item_names">
+        <item>@string/kanji_question_type_option_meaning</item>
+        <item>@string/kanji_question_type_option_kunyomi</item>
+        <item>@string/kanji_question_type_option_onyomi</item>
+    </string-array>
+    <string-array name="prefids_kanji_question_type">
+        <item>@string/prefid_kanji_question_type_meaning</item>
+        <item>@string/prefid_kanji_question_type_kunyomi</item>
+        <item>@string/prefid_kanji_question_type_onyomi</item>
+    </string-array>
+
+    <string-array name="kanji_question_type_default">
+        <item>@string/prefid_kanji_question_type_meaning</item>
+    </string-array>
+
     <string name="repetition_option_title">Repetition control</string>
     <string name="repetition_option_summary">Number of consecutive questions with no repeats</string>
     <string name="prefid_repetition" translatable="false">repeat_control</string>
@@ -148,9 +194,6 @@
     <string name="base_form_title">Main</string>
     <string name="diacritics_title">Diacritics</string>
     <string name="digraphs_title">Digraphs</string>
-    <string name="kanji_phase_1">Phase One</string>
-    <string name="kanji_phase_2">Phase Two</string>
-    <string name="kanji_phase_3">Phase Three</string>
     <string name="view_logs">View Logs</string>
     <string name="clear_logs">Clear Logs</string>
     <string name="clipboard_message">Copied to clipboard</string>
@@ -225,80 +268,4 @@
     <string name="extended_katakana_set_2_title">%2$s (MEXT expanded list for accurate transliteration)</string>
     <string name="extended_katakana_set_3_title">%2$s (ANSI/BSI suggestions)</string>
     <string name="extended_katakana_set_4_title">%2$s (Sourced from the 1974 Hyōjun-shiki format)</string>
-
-    <string name="ljts_kanji_set_1_title">Wu Xing Elements</string>
-    <string name="ljts_kanji_set_2_title">Day &amp; Night</string>
-    <string name="ljts_kanji_set_3_title">Numbers 1–5</string>
-    <string name="ljts_kanji_set_4_title">Numbers 6–10</string>
-    <string name="ljts_kanji_set_5_title">Think about direction</string>
-    <string name="ljts_kanji_set_6_title">Numbers &amp; Writing</string>
-    <string name="ljts_kanji_set_7_title">Existence</string>
-    <string name="ljts_kanji_set_8_title">School</string>
-    <string name="ljts_kanji_set_9_title">Environment</string>
-    <string name="ljts_kanji_set_10_title">Jewelery &amp; Size</string>
-    <string name="ljts_kanji_set_11_title">People</string>
-    <string name="ljts_kanji_set_12_title">Body Parts</string>
-    <string name="ljts_kanji_set_13_title">Nature</string>
-    <string name="ljts_kanji_set_14_title">Towns, a Few Colours, &amp; Another One</string>
-    <string name="ljts_kanji_bonus_set_1_2_title">Cars, Insects, Thread, &amp; Shellfish</string>
-    <string name="ljts_kanji_bonus_set_3_4_title">Bamboo, Sound, Mix &amp; Measure</string>
-
-    <string name="ljts_kanji_set_15_title">Communication</string>
-    <string name="ljts_kanji_set_16_title">Seasons &amp; Weather</string>
-    <string name="ljts_kanji_set_17_title">Rural Life</string>
-    <string name="ljts_kanji_set_18_title">The Body</string>
-    <string name="ljts_kanji_set_19_title">Food &amp; Drink</string>
-    <string name="ljts_kanji_set_20_title">Knowledge</string>
-    <string name="ljts_kanji_set_21_title">Animals &amp; Water</string>
-    <string name="ljts_kanji_set_22_title">Cities &amp; Locations</string>
-    <string name="ljts_kanji_set_23_title">Time After Time</string>
-    <string name="ljts_kanji_set_24_title">Time of Day</string>
-    <string name="ljts_kanji_set_25_title">Family</string>
-    <string name="ljts_kanji_set_26_title">Shape &amp; Size</string>
-    <string name="ljts_kanji_bonus_set_5_6_title">Honesty, Logic, Calculate, Cut, Active, &amp; Shop</string>
-    <string name="ljts_kanji_bonus_set_7_8_title">Buy, Sell, Section, Cliff &amp; Star</string>
-
-    <string name="ljts_kanji_set_27_title">Weapons &amp; Warriors</string>
-    <string name="ljts_kanji_set_28_title">House &amp; Home</string>
-    <string name="ljts_kanji_set_29_title">Colours, Roads, &amp; Buildings</string>
-    <string name="ljts_kanji_set_30_title">Movement</string>
-    <string name="ljts_kanji_set_31_title">Age, Questions &amp; Music</string>
-    <string name="ljts_kanji_set_32_title">Lines &amp; People</string>
-    <string name="ljts_kanji_set_33_title">Pen to Paper</string>
-    <string name="ljts_kanji_set_34_title">Numbers &amp; Counting</string>
-    <string name="ljts_kanji_set_35_title">Think About Direction 2</string>
-    <string name="ljts_kanji_set_36_title">Power</string>
-    <string name="ljts_kanji_bonus_set_9_10_title">Think Clearly &amp; Consider Barking</string>
-    <string name="ljts_kanji_bonus_set_11_12_title">Steam, Group, Boat, Join &amp; The Government</string>
-
-    <string name="vocab_set_basic_title">Basic vocabulary</string>
-    <string name="vocab_set_study_title">Study Supplies</string>
-    <string name="vocab_set_animals_title">Animals</string>
-    <string name="vocab_set_transport_title">Transport</string>
-    <string name="vocab_set_people_title">People &amp; Family</string>
-    <string name="vocab_set_food_title">Food &amp; Drink</string>
-    <string name="vocab_set_home_title">House &amp; Home</string>
-    <string name="vocab_set_numbers_title">Numbers</string>
-    <string name="vocab_set_countries_title">Countries</string>
-    <string name="vocab_set_places_title">Places</string>
-    <string name="vocab_set_clothing_title">Clothing</string>
-    <string name="vocab_set_home_2_title">House &amp; Home 2</string>
-    <string name="vocab_set_school_title">School</string>
-    <string name="vocab_set_jobs_title">Jobs</string>
-    <string name="vocab_set_schools_size_title">Schools &amp; Sizes</string>
-    <string name="vocab_set_people_2_title">People Around You</string>
-    <string name="vocab_set_random_1_title">Random Words</string>
-    <string name="vocab_set_weekdays_title">Days of the Week</string>
-    <string name="vocab_set_time_music_title">Time &amp; Music</string>
-    <string name="vocab_set_news_title">The News</string>
-    <string name="vocab_set_power_community_title">Power &amp; Community</string>
-
-    <!-- Licence Boilerplate (wanted to put in about screen, haven't found a way to yet) -->
-    <string name="licence_boilerplate" translatable="false">Copyright 2017&#8211;2018 T Duke Perry\n\nLicensed under
-        the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with
-        the License. You may obtain a copy of the License
-        at\n\n\u00A0\u00A0\u00A0http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or
-        agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
-        language governing permissions and limitations under the License.</string>
 </resources>

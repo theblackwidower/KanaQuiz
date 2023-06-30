@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.reference;
 
 import android.os.Bundle;
@@ -45,28 +61,28 @@ public class ReferenceSubsectionPage extends Fragment
         {
             if (refCategoryId < QuestionManagement.getKanjiFileCount())
                 layout.addView(
-                        QuestionManagement.getKanji(refCategoryId).getKanjiReferenceTable(container.getContext()));
+                        QuestionManagement.getKanji(refCategoryId).getKanjiReferenceTable(inflater.getContext()));
             return scrollBox;
         }
         else
             throw new IllegalArgumentException("questionTypeRef '" + questionTypeRef + "' is invalid.");
 
         if (refCategoryId == R.string.base_form_title)
-            layout.addView(questions.getMainReferenceTable(container.getContext()));
+            layout.addView(questions.getMainReferenceTable(inflater.getContext()));
         else if (refCategoryId == R.string.diacritics_title)
-            layout.addView(questions.getDiacriticReferenceTable(container.getContext()));
+            layout.addView(questions.getDiacriticReferenceTable(inflater.getContext()));
         else if (refCategoryId == R.string.digraphs_title)
         {
-            layout.addView(questions.getMainDigraphsReferenceTable(container.getContext()));
+            layout.addView(questions.getMainDigraphsReferenceTable(inflater.getContext()));
             if (OptionsControl.getBoolean(R.string.prefid_full_reference) || questions.diacriticDigraphsSelected())
             {
                 layout.addView(
                         ReferenceCell.buildHeader(getContext(), getResources().getString(R.string.diacritics_title)));
-                layout.addView(questions.getDiacriticDigraphsReferenceTable(container.getContext()));
+                layout.addView(questions.getDiacriticDigraphsReferenceTable(inflater.getContext()));
             }
         }
         else if (refCategoryId == R.string.extended_katakana_title)
-            layout.addView(questions.getExtendedKatakanaReferenceTable(container.getContext()));
+            layout.addView(questions.getExtendedKatakanaReferenceTable(inflater.getContext()));
 
         return scrollBox;
     }

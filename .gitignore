@@ -10,3 +10,7 @@
 .externalNativeBuild
 .idea/dictionaries
 .idea/caches
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/androidTestResultsUserPreferences.xml
+.idea/deploymentTargetDropDown.xml

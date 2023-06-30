@@ -1,9 +1,24 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
-import android.annotation.SuppressLint;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,82 +30,87 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static org.threeten.bp.temporal.ChronoUnit.DAYS;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class LogView extends AppCompatActivity
 {
-    static class FetchLogs extends AsyncTask<LogView, DailyLogItem, Integer>
+    static class FetchLogs implements Runnable
     {
         LocalDate startDate;
 
-        @SuppressLint("StaticFieldLeak")
+        LogView activity;
         LinearLayout layout;
-        @SuppressLint("StaticFieldLeak")
         TextView lblLogMessage;
-        @SuppressLint("StaticFieldLeak")
         GraphView logGraph;
         LineGraphSeries<DataPoint> graphSeries;
 
-        @Override
-        protected void onPreExecute()
+        Handler mainLoop;
+        boolean isCancelled;
+
+        FetchLogs(LogView activity)
         {
             graphSeries = new LineGraphSeries<>();
+            this.activity = activity;
         }
 
         @Override
-        protected Integer doInBackground(LogView... activity)
+        public void run()
         {
-            layout = activity[0].findViewById(R.id.logViewLayout);
-            lblLogMessage = activity[0].findViewById(R.id.lblLogMessage);
-            logGraph = activity[0].findViewById(R.id.logGraph);
+            //ref: https://stackoverflow.com/a/11125271
+            mainLoop = new Handler(activity.getBaseContext().getMainLooper());
+
+            layout = activity.findViewById(R.id.logViewLayout);
+            lblLogMessage = activity.findViewById(R.id.lblLogMessage);
+            logGraph = activity.findViewById(R.id.logGraph);
 
             DailyRecord[] records = LogDatabase.DAO.getAllDailyRecords();
 
-            if (records.length == 0)
-                return 0;
-
-            graphSeries.setColor(ThemeManager.getThemeColour(activity[0], R.attr.colorAccent));
-            startDate = records[0].getDate();
+            if (records.length != 0)
+            {
+                graphSeries.setColor(ThemeManager.getThemeColour(activity, R.attr.colorAccent));
+                startDate = records[0].getDate();
+            }
 
             for (DailyRecord record : records)
             {
-                DailyLogItem output = new DailyLogItem(activity[0]);
+                DailyLogItem output = new DailyLogItem(activity);
                 output.setFromRecord(record);
 
                 graphSeries.appendData(new DataPoint(startDate.until(record.getDate(), DAYS),
-                        (record.getCorrectAnswers() / record.getTotalAnswers()) * 100f), true, 1000, true);
+                        (record.getCorrectAnswers().getDecimal() / record.getTotalAnswers()) * 100f), true, 1000, true);
 
-                if (isCancelled())
-                    return null;
+                if (isCancelled)
+                    break;
                 else
-                    publishProgress(output);
+                    mainLoop.post(() -> update(output));
             }
-            return records.length;
+
+            if (!isCancelled)
+                mainLoop.post(() -> done(records.length));
         }
 
-        @Override
-        protected void onProgressUpdate(DailyLogItem... item)
+        protected void update(DailyLogItem item)
         {
-            layout.addView(item[0], layout.getChildCount() - 1);
-            logGraph.getViewport().setMaxX(startDate.until(item[0].getDate(), DAYS));
+            layout.addView(item, layout.getChildCount() - 1);
+            logGraph.getViewport().setMaxX(startDate.until(item.getDate(), DAYS));
             logGraph.addSeries(graphSeries);
         }
 
-        @Override
-        protected void onCancelled()
+        protected void cancel()
         {
+            isCancelled = true;
             layout = null;
             lblLogMessage = null;
             logGraph = null;
         }
 
-        @Override
-        protected void onPostExecute(Integer count)
+        protected void done(Integer count)
         {
             if (count > 0)
                 layout.removeView(lblLogMessage);
@@ -109,8 +129,9 @@ public class LogView extends AppCompatActivity
         setContentView(R.layout.activity_log_view);
         onConfigurationChanged(getResources().getConfiguration());
 
-        fetchThread = new FetchLogs();
-        fetchThread.execute(this);
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        fetchThread = new FetchLogs(this);
+        new Thread(fetchThread).start();
 
         GraphView logGraph = findViewById(R.id.logGraph);
 
@@ -130,7 +151,7 @@ public class LogView extends AppCompatActivity
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
+    public void onConfigurationChanged(@NonNull Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
 
@@ -171,7 +192,7 @@ public class LogView extends AppCompatActivity
     protected void onDestroy()
     {
         if (fetchThread != null)
-            fetchThread.cancel(true);
+            fetchThread.cancel();
         super.onDestroy();
     }
 }

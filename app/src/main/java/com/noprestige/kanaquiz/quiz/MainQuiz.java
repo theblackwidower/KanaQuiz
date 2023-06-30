@@ -1,9 +1,24 @@
+/*
+ *    Copyright 2022 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.quiz;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +27,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.noprestige.kanaquiz.AboutScreen;
+import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.logs.DailyRecord;
 import com.noprestige.kanaquiz.logs.LogDao;
@@ -21,11 +37,11 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 import com.noprestige.kanaquiz.options.OptionsScreen;
 import com.noprestige.kanaquiz.options.QuestionSelection;
 import com.noprestige.kanaquiz.questions.QuestionManagement;
+import com.noprestige.kanaquiz.questions.QuestionType;
 import com.noprestige.kanaquiz.reference.ReferenceScreen;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-
+import java.time.LocalDate;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
@@ -41,7 +57,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class MainQuiz extends AppCompatActivity
 {
     int totalQuestions;
-    float totalCorrect;
+    Fraction totalCorrect;
     private boolean canSubmit;
 
     private TextView lblResponse;
@@ -50,35 +66,47 @@ public class MainQuiz extends AppCompatActivity
 
     private static final int MAX_RETRIES = 3;
 
-    private Handler delayHandler = new Handler();
+    private final Handler delayHandler = new Handler();
 
     private int retryCount;
 
     private FetchTodaysLog fetchScoreThread;
 
-    @SuppressLint("StaticFieldLeak")
-    class FetchTodaysLog extends AsyncTask<LocalDate, Void, DailyRecord>
+    class FetchTodaysLog implements Runnable
     {
-        @Override
-        protected void onPreExecute()
+        LocalDate date;
+        Context context;
+
+        boolean isCancelled;
+
+        FetchTodaysLog(LocalDate date, Context context)
         {
             totalQuestions = 0;
-            totalCorrect = 0;
+            totalCorrect = Fraction.ZERO;
+            this.date = date;
+            this.context = context;
         }
 
         @Override
-        protected DailyRecord doInBackground(LocalDate... date)
+        public void run()
         {
-            return LogDatabase.DAO.getDateRecord(date[0]);
+            DailyRecord record = LogDatabase.DAO.getDateRecord(date);
+            if (!isCancelled)
+                //ref: https://stackoverflow.com/a/11125271
+                new Handler(context.getMainLooper()).post(() -> done(record));
         }
 
-        @Override
-        protected void onPostExecute(DailyRecord record)
+        public void cancel()
+        {
+            isCancelled = true;
+        }
+
+        private void done(DailyRecord record)
         {
             if (record != null)
             {
                 totalQuestions += record.getTotalAnswers();
-                totalCorrect += record.getCorrectAnswers();
+                totalCorrect = totalCorrect.add(record.getCorrectAnswers());
             }
             frmAnswer.updateScore(totalCorrect, totalQuestions);
         }
@@ -105,15 +133,16 @@ public class MainQuiz extends AppCompatActivity
         frmAnswer.setOnAnswerListener(this::checkAnswer);
 
         if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
-        fetchScoreThread = new FetchTodaysLog();
-        fetchScoreThread.execute(LocalDate.now());
+            fetchScoreThread.cancel();
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        fetchScoreThread = new FetchTodaysLog(LocalDate.now(), getBaseContext());
+        new Thread(fetchScoreThread).start();
 
         resetQuiz();
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig)
+    public void onConfigurationChanged(@NonNull Configuration newConfig)
     {
         super.onConfigurationChanged(newConfig);
 
@@ -128,7 +157,7 @@ public class MainQuiz extends AppCompatActivity
     protected void onDestroy()
     {
         if (fetchScoreThread != null)
-            fetchScoreThread.cancel(true);
+            fetchScoreThread.cancel();
         super.onDestroy();
     }
 
@@ -140,8 +169,13 @@ public class MainQuiz extends AppCompatActivity
         if (!OptionsControl.compareStrings(R.string.prefid_on_incorrect, R.string.prefid_on_incorrect_default))
             lblResponse.setMinLines(2);
 
-        QuestionManagement.refreshStaticQuestionBank();
-        refreshDisplay();
+        //ref: https://www.codespeedy.com/multithreading-in-java/
+        new Thread(() ->
+        {
+            QuestionManagement.refreshStaticQuestionBank();
+            //ref: https://stackoverflow.com/a/11125271
+            new Handler(getBaseContext().getMainLooper()).post(this::refreshDisplay);
+        }).start();
 
         frmAnswer.resetQuiz();
     }
@@ -184,19 +218,22 @@ public class MainQuiz extends AppCompatActivity
                     lblResponse.setTextColor(ContextCompat.getColor(this, R.color.darkCorrect));
                 if (retryCount == 0)
                 {
-                    totalCorrect++;
-                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey());
+                    totalCorrect = totalCorrect.add(1);
+                    LogDao.reportCorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType());
                 }
                 else if (retryCount <= MAX_RETRIES) //anything over MAX_RETRIES gets no score at all
                 {
-                    float score = (float) Math.pow(0.5f, retryCount);
-                    totalCorrect += score;
+                    Fraction score = new Fraction(1, (int) Math.pow(2, retryCount));
+                    totalCorrect = totalCorrect.add(score);
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), score);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), score);
                 }
                 else
                     LogDao.reportRetriedCorrectAnswer(
-                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(), 0);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), Fraction.ZERO);
             }
             else
             {
@@ -224,7 +261,7 @@ public class MainQuiz extends AppCompatActivity
                     isGetNewQuestion = false;
 
                     LogDao.reportIncorrectRetry(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
-                            answer);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), answer);
 
                     delayHandler.postDelayed(() ->
                     {
@@ -235,7 +272,7 @@ public class MainQuiz extends AppCompatActivity
 
                 if (isGetNewQuestion)
                     LogDao.reportIncorrectAnswer(QuestionManagement.getStaticQuestionBank().getCurrentQuestionKey(),
-                            answer);
+                            QuestionManagement.getStaticQuestionBank().getCurrentQuestionType(), answer);
             }
 
             if (isGetNewQuestion)
@@ -251,20 +288,15 @@ public class MainQuiz extends AppCompatActivity
 
     private void readyForAnswer()
     {
-        if (OptionsControl.getBoolean(R.string.prefid_multiple_choice))
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
-                lblResponse.setText(R.string.request_vocab_multiple_choice);
-            else
-                lblResponse.setText(R.string.request_kana_multiple_choice);
-        else
-        {
-            if (QuestionManagement.getStaticQuestionBank().isCurrentQuestionVocab())
-                lblResponse.setText(R.string.request_vocab_text_input);
-            else
-                lblResponse.setText(R.string.request_kana_text_input);
+        QuestionType type = QuestionManagement.getStaticQuestionBank().getCurrentQuestionType();
 
+        boolean isMultipleChoice = OptionsControl.getBoolean(R.string.prefid_multiple_choice);
+
+        lblResponse.setText(type.getPrompt(isMultipleChoice));
+
+        if (!isMultipleChoice)
             frmAnswer.readyForTextAnswer();
-        }
+
         canSubmit = true;
         lblResponse.setTypeface(ThemeManager.getDefaultThemeFont(this, NORMAL));
         lblResponse.setTextColor(ThemeManager.getThemeColour(this, android.R.attr.textColorTertiary));
@@ -283,28 +315,25 @@ public class MainQuiz extends AppCompatActivity
         Class destination;
         int result = 0;
 
-        switch (item.getItemId())
+        int id = item.getItemId();
+        if (id == R.id.mnuSelection)
         {
-            case R.id.mnuSelection:
-                destination = QuestionSelection.class;
-                result = 1;
-                break;
-            case R.id.mnuReference:
-                destination = ReferenceScreen.class;
-                break;
-            case R.id.mnuOptions:
-                destination = OptionsScreen.class;
-                result = 1;
-                break;
-            case R.id.mnuLogs:
-                destination = LogView.class;
-                break;
-            case R.id.mnuAbout:
-                destination = AboutScreen.class;
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+            destination = QuestionSelection.class;
+            result = 1;
         }
+        else if (id == R.id.mnuReference)
+            destination = ReferenceScreen.class;
+        else if (id == R.id.mnuOptions)
+        {
+            destination = OptionsScreen.class;
+            result = 1;
+        }
+        else if (id == R.id.mnuLogs)
+            destination = LogView.class;
+        else if (id == R.id.mnuAbout)
+            destination = AboutScreen.class;
+        else
+            return super.onOptionsItemSelected(item);
 
         startActivityForResult(new Intent(this, destination), result);
         return true;
@@ -313,6 +342,7 @@ public class MainQuiz extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        super.onActivityResult(requestCode, resultCode, data);
         recreate();
     }
 

@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2021 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.logs;
 
 import android.annotation.SuppressLint;
@@ -17,15 +33,14 @@ import com.noprestige.kanaquiz.Fraction;
 import com.noprestige.kanaquiz.R;
 import com.noprestige.kanaquiz.themes.ThemeManager;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.TextStyle;
-
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class DailyLogItem extends View
 {
-    private float correctAnswers = -1;
+    private Fraction correctAnswers;
     private int totalAnswers = -1;
     private LocalDate date;
     private boolean isDynamicSize;
@@ -37,10 +52,10 @@ public class DailyLogItem extends View
     private String totalString = "";
     private String percentageString = "";
 
-    private TextPaint datePaint = new TextPaint();
-    private TextPaint ratioPaint = new TextPaint();
-    private TextPaint percentagePaint = new TextPaint();
-    private Paint linePaint = new Paint();
+    private final TextPaint datePaint = new TextPaint();
+    private final TextPaint ratioPaint = new TextPaint();
+    private final TextPaint percentagePaint = new TextPaint();
+    private final Paint linePaint = new Paint();
 
     private float dateXPoint;
     private float dateYPoint1;
@@ -99,7 +114,7 @@ public class DailyLogItem extends View
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DailyLogItem, defStyle, 0);
 
         setDate(a.getString(R.styleable.DailyLogItem_date));
-        setCorrectAnswers(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1));
+        setCorrectAnswers(Fraction.fromFloat(a.getFloat(R.styleable.DailyLogItem_correctAnswers, -1)));
         setTotalAnswers(a.getInt(R.styleable.DailyLogItem_totalAnswers, -1));
         setFontSize(a.getDimension(R.styleable.DailyLogItem_fontSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, context.getResources().getDisplayMetrics())));
@@ -241,7 +256,7 @@ public class DailyLogItem extends View
         return date;
     }
 
-    public float getCorrectAnswers()
+    public Fraction getCorrectAnswers()
     {
         return correctAnswers;
     }
@@ -266,7 +281,7 @@ public class DailyLogItem extends View
         return isDynamicSize;
     }
 
-    public boolean setDate(String date)
+    public boolean setDate(CharSequence date)
     {
         if (date == null)
             return false;
@@ -295,7 +310,7 @@ public class DailyLogItem extends View
         dateWidth3 = datePaint.measureText(dateString3);
     }
 
-    public void setCorrectAnswers(float correctAnswers)
+    public void setCorrectAnswers(Fraction correctAnswers)
     {
         this.correctAnswers = correctAnswers;
         updateAnswers();
@@ -344,9 +359,9 @@ public class DailyLogItem extends View
         this.isDynamicSize = isDynamicSize;
     }
 
-    public static String parseCount(float count)
+    public static String parseCount(Fraction count)
     {
-        return (count < 100) ? new Fraction(count).toString() : parseCount(Math.round(count));
+        return (count.compareTo(Fraction.HUNDRED) < 0) ? count.toString() : parseCount(count.round());
     }
 
     public static String parseCount(int count)
@@ -354,18 +369,18 @@ public class DailyLogItem extends View
         if (count < 1000)
             return Integer.toString(count);
         else if (count < 10000)
-            return Float.toString(Math.round((float) count / 100f) / 10f) + "k";
+            return (Math.round((float) count / 100f) / 10f) + "k";
         else //if (count < 100000)
-            return Integer.toString(Math.round((float) count / 1000f)) + "k";
+            return Math.round((float) count / 1000f) + "k";
     }
 
     private void updateAnswers()
     {
-        if ((correctAnswers >= 0) && (totalAnswers >= 0))
+        if ((correctAnswers.compareTo(Fraction.ZERO) >= 0) && (totalAnswers >= 0))
         {
             correctString = parseCount(correctAnswers);
             totalString = parseCount(totalAnswers);
-            float percentage = correctAnswers / (float) totalAnswers;
+            float percentage = correctAnswers.getDecimal() / (float) totalAnswers;
             percentageString = PERCENT_FORMATTER.format(percentage);
             percentagePaint.setColor(getPercentageColour(percentage, getContext()));
 

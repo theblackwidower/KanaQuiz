@@ -1,3 +1,19 @@
+/*
+ *    Copyright 2022 T Duke Perry
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 package com.noprestige.kanaquiz.options;
 
 import android.annotation.SuppressLint;
@@ -7,17 +23,22 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import com.noprestige.kanaquiz.R;
-import com.noprestige.kanaquiz.questions.QuestionManagement;
 
-import org.threeten.bp.LocalDate;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Set;
 
 import androidx.preference.PreferenceManager;
+
+import static com.noprestige.kanaquiz.questions.QuestionManagement.SUBPREFERENCE_DELIMITER;
 
 public final class OptionsControl
 {
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor editor;
     private static Resources resources;
+
+    private static final String DEFAULT_QUESTION_SET = "hiragana_set_1";
 
     private OptionsControl() {}
 
@@ -26,11 +47,10 @@ public final class OptionsControl
     {
         if (sharedPreferences == null)
         {
-            Context appContext = context;
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             editor = sharedPreferences.edit();
-            resources = appContext.getResources();
-            PreferenceManager.setDefaultValues(appContext, R.xml.preferences, false);
+            resources = ((Context) context).getResources();
+            PreferenceManager.setDefaultValues(context, R.xml.preferences, true);
         }
     }
 
@@ -41,8 +61,7 @@ public final class OptionsControl
 
     public static boolean getBoolean(String prefId)
     {
-        //Boolean preferences to default to true, all others default to false
-        return sharedPreferences.getBoolean(prefId, QuestionManagement.getHiragana().getPrefId(1).equals(prefId));
+        return sharedPreferences.getBoolean(prefId, false);
     }
 
     public static void setBoolean(int resId, boolean setting)
@@ -54,6 +73,55 @@ public final class OptionsControl
     {
         editor.putBoolean(prefId, setting);
         editor.apply();
+    }
+
+    public static Boolean getQuestionSetBool(String prefId)
+    {
+        if (exists(prefId))
+            return getBoolean(prefId);
+        else
+        {
+            boolean hasTrue = false;
+            boolean hasFalse = false;
+            for (Map.Entry<String, ?> entry : sharedPreferences.getAll().entrySet())
+                if (entry.getKey().startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                    if ((Boolean) entry.getValue())
+                        hasTrue = true;
+                    else
+                        hasFalse = true;
+
+            if (hasTrue && hasFalse)
+                return null;
+            else
+                return hasTrue;
+        }
+    }
+
+    public static void setQuestionSetBool(String prefId, boolean setting)
+    {
+        for (String key : sharedPreferences.getAll().keySet())
+            if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                delete(key);
+        editor.putBoolean(prefId, setting);
+        editor.apply();
+    }
+
+    public static void setQuestionSetDefaults(String[] prefIds)
+    {
+        Set<String> extantPrefs = sharedPreferences.getAll().keySet();
+        for (String prefId : prefIds)
+            if (!extantPrefs.contains(prefId))
+            {
+                boolean setDefault = true;
+                for (String key : extantPrefs)
+                    if (key.startsWith(prefId + SUBPREFERENCE_DELIMITER))
+                    {
+                        setDefault = false;
+                        break;
+                    }
+                if (setDefault)
+                    setBoolean(prefId, (prefId.equals(DEFAULT_QUESTION_SET)));
+            }
     }
 
     public static int getInt(int resId)
@@ -95,6 +163,48 @@ public final class OptionsControl
     public static void setString(String prefId, String setting)
     {
         editor.putString(prefId, setting);
+        editor.apply();
+    }
+
+    public static Set<String> getStringSet(int resId)
+    {
+        return getStringSet(resources.getString(resId));
+    }
+
+    public static Set<String> getStringSet(String prefId)
+    {
+        return sharedPreferences.getStringSet(prefId, null);
+    }
+
+    public static void setStringSet(int resId, Set<String> setting)
+    {
+        setStringSet(resources.getString(resId), setting);
+    }
+
+    public static void setStringSet(String prefId, Set<String> setting)
+    {
+        editor.putStringSet(prefId, setting);
+        editor.apply();
+    }
+
+    public static boolean exists(int resId)
+    {
+        return exists(resources.getString(resId));
+    }
+
+    public static boolean exists(String prefId)
+    {
+        return sharedPreferences.contains(prefId);
+    }
+
+    public static void delete(int resId)
+    {
+        delete(resources.getString(resId));
+    }
+
+    public static void delete(String prefId)
+    {
+        editor.remove(prefId);
         editor.apply();
     }
 
