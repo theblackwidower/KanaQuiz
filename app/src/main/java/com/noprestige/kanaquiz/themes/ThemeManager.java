@@ -1,5 +1,5 @@
 /*
- *    Copyright 2021 T Duke Perry
+ *    Copyright 2023 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -40,7 +40,6 @@ import com.noprestige.kanaquiz.options.OptionsControl;
 
 import java.time.LocalDate;
 
-import androidx.annotation.RequiresApi;
 import moe.shizuku.fontprovider.FontProviderClient;
 import moe.shizuku.fontprovider.FontRequest;
 
@@ -202,7 +201,6 @@ public final class ThemeManager
                 activity.recreate();
     }
 
-    @RequiresApi(21)
     private static void initializeFonts(Activity activity)
     {
         FontProviderClient client = FontProviderClient.create(activity);
@@ -251,7 +249,6 @@ public final class ThemeManager
         }
     }
 
-    @RequiresApi(21)
     private static void getDownloadDialog(Activity activity, boolean isNewInstall)
     {
         LocalDate remindDate = OptionsControl.getDate(R.string.prefid_font_remind_date);
