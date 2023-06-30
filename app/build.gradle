@@ -7,7 +7,7 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 
 android {
     compileSdkVersion 33
-    buildToolsVersion '31.0.0'
+    buildToolsVersion '33.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
