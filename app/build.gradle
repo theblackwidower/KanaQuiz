@@ -6,17 +6,17 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '33.0.0'
+    compileSdkVersion 34
+    buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
-        targetSdkVersion 33
+        targetSdkVersion 34
         versionCode 19
         versionName '0.15'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         //ref: https://stackoverflow.com/a/47525966/3582371
-        resConfigs 'en-rCA', 'es-rES', 'ca-rES', 'de-rDE'
+        resourceConfigurations += ['en-rCA', 'es-rES', 'ca-rES', 'de-rDE']
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
@@ -99,13 +99,13 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 }
 
-coveralls {
-    sourceDirs += "${rootDir}/app/src/main/java/"
-    //Unit tests
-    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
-    //Instrument tests
-    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
-}
+//coveralls {
+//    sourceDirs += "${rootDir}/app/src/main/java/"
+//    //Unit tests
+//    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
+//    //Instrument tests
+//    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
+//}
 
 //ref: https://stackoverflow.com/a/49739351/3582371
 if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release')) {
