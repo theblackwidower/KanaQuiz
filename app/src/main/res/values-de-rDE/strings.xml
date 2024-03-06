@@ -38,7 +38,7 @@
     <string name="try_again">Erneut versuchen</string>
     <string name="show_correct_answer">Die richtige Antwort lautet</string>
     <string name="github_logo">Github Logo</string>
-    <string name="twitter_logo">Twitter Logo</string>
+    <string name="mastodon_logo">Mastodon Logo</string>
     <string name="source_code_on_github">Vollständiger Quellcode auf GitHub verfügbar</string>
     <string name="copyright_claim">\u00A9 2017&#8211;2024 T Duke Perry. Alle Rechte vorbehalten.</string>
     <string name="special_thanks_start">Besonderer Dank an:</string>

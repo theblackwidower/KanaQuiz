@@ -33,7 +33,7 @@
     <string name="try_again">Vuelve a intentarlo</string>
     <string name="show_correct_answer">La respuesta correcta es</string>
     <string name="github_logo">Logotipo de Github</string>
-    <string name="twitter_logo">Logotipo de Twitter</string>
+    <string name="mastodon_logo">Logotipo de Mastodon</string>
     <string name="source_code_on_github">Todo el código fuente disponible en Github</string>
     <string name="copyright_claim">© 2017–2024 T Duke Perry. Todos los derechos reservados.</string>
     <string name="special_thanks_start">Agradecimientos especiales a:</string>
