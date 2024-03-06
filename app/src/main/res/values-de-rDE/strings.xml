@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2022 T Duke Perry & Zenahr Barzani
+  ~    Copyright 2024 T Duke Perry & Zenahr Barzani
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@
     <string name="github_logo">Github Logo</string>
     <string name="twitter_logo">Twitter Logo</string>
     <string name="source_code_on_github">Vollständiger Quellcode auf GitHub verfügbar</string>
-    <string name="copyright_claim">\u00A9 2017&#8211;2022 T Duke Perry. Alle Rechte vorbehalten.</string>
+    <string name="copyright_claim">\u00A9 2017&#8211;2024 T Duke Perry. Alle Rechte vorbehalten.</string>
     <string name="special_thanks_start">Besonderer Dank an:</string>
     <string name="special_thanks_1">Sleepy Duck, für die Learn Japanese to Survive Serie</string>
     <string name="icon_credit_start">Icon erstellt mit Hilfe von:</string>
