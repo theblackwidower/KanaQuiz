@@ -6,8 +6,8 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 34
-    buildToolsVersion '34.0.0'
+    compileSdk 34
+    buildToolsVersion = '34.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
@@ -59,6 +59,9 @@ android {
     //ref: planet.jboss.org/post/android_lint_ignore_specific_errors
     lint {
         disable 'MissingTranslation'
+    }
+    buildFeatures {
+        buildConfig true
     }
 }
 
