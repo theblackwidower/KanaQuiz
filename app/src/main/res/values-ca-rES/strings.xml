@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~    Copyright 2022 T Duke Perry & Laura C.
+  ~    Copyright 2024 T Duke Perry & Laura C.
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@
     <string name="try_again">Torna-ho a provar</string>
     <string name="show_correct_answer">La resposta correcta és</string>
     <string name="github_logo">Logotip de Github</string>
-    <string name="twitter_logo">Logotip de Twitter</string>
+    <string name="mastodon_logo">Logotip de Mastodon</string>
     <string name="source_code_on_github">Tot el codi font disponible a Github</string>
-    <string name="copyright_claim">© 2017–2022 T Duke Perry. Tots els drets reservats.</string>
+    <string name="copyright_claim">© 2017–2024 T Duke Perry. Tots els drets reservats.</string>
     <string name="special_thanks_start">Agraïments especials a:</string>
     <string name="special_thanks_1">Sleepy Duck, per la sèrie Learn Japanese to Survive</string>
     <string name="icon_credit_start">Icona creada amb l\'ajuda de:</string>
