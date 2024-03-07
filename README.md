@@ -30,6 +30,8 @@ This application is in a state of constant development. Any additional feature r
 
   * Supports Hiragana and Katakana character sets
   * Ten different character groupings for each set, allowing a gradual progression through the characters
+  * Complete control of which characters the user is quizzed on (either groups of questions or individual questions can be enabled and disabled)
+  * Support for kun'yomi and on'yomi-based kanji questions
   * Can answer questions by entering them using the on-screen keyboard, or as multiple choice questions
   * Built-in kana reference sheet
   * Supports both digraphs (ひゃ, みゅ, リュ) and diacritics (が, ぴ)
@@ -50,14 +52,12 @@ _NB: The following features have no planned release date, or guarantee of releas
 
   * Multiple fonts
   * Obsolete kana option
-  * Finer question selection feature
   * User-made question lists
   * Furigana option
   * Export logs and preferences
   * Pronunciation Guide
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
-  * Support for kun'yomi and on'yomi-based kanji questions
   * Limitation alerts, either by time, or number of questions
 
 ## Code Analysis, Continuous Integration and Test Coverage
