@@ -6,17 +6,17 @@ if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().cont
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '33.0.0'
+    compileSdk 34
+    buildToolsVersion = '34.0.0'
     defaultConfig {
         applicationId 'com.noprestige.kanaquiz'
         minSdkVersion 22
-        targetSdkVersion 33
-        versionCode 19
-        versionName '0.15'
+        targetSdkVersion 34
+        versionCode 20
+        versionName '0.15.1'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         //ref: https://stackoverflow.com/a/47525966/3582371
-        resConfigs 'en-rCA', 'es-rES', 'ca-rES', 'de-rDE'
+        resourceConfigurations += ['en-rCA', 'es-rES', 'ca-rES', 'de-rDE']
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ['room.schemaLocation':
@@ -60,6 +60,9 @@ android {
     lint {
         disable 'MissingTranslation'
     }
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 dependencies {
@@ -68,17 +71,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     testImplementation 'junit:junit:4.13.2'
-    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.google.android.material:material:1.11.0'
 
-    implementation 'androidx.room:room-runtime:2.5.2'
-    annotationProcessor 'androidx.room:room-compiler:2.5.2'
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
 
-    androidTestImplementation 'androidx.room:room-testing:2.5.2'
+    androidTestImplementation 'androidx.room:room-testing:2.6.1'
 
     releaseImplementation 'com.google.firebase:firebase-core:21.1.1'
-    releaseImplementation 'com.google.firebase:firebase-perf:20.3.3'
-    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.3.7'
-    releaseImplementation 'com.google.firebase:firebase-analytics:21.3.0'
+    releaseImplementation 'com.google.firebase:firebase-perf:20.5.2'
+    releaseImplementation 'com.google.firebase:firebase-crashlytics:18.6.2'
+    releaseImplementation 'com.google.firebase:firebase-analytics:21.5.1'
 
     implementation 'org.apmem.tools:layouts:1.10@aar'
 
@@ -92,20 +95,20 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
 
     implementation 'moe.shizuku.fontprovider:api:10'
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 }
 
-coveralls {
-    sourceDirs += "${rootDir}/app/src/main/java/"
-    //Unit tests
-    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
-    //Instrument tests
-    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
-}
+//coveralls {
+//    sourceDirs += "${rootDir}/app/src/main/java/"
+//    //Unit tests
+//    jacocoReportPath "${buildDir}/reports/jacoco/debug/jacoco.xml"
+//    //Instrument tests
+//    //jacocoReportPath "${buildDir}/reports/coverage/debug/report.xml"
+//}
 
 //ref: https://stackoverflow.com/a/49739351/3582371
 if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release')) {

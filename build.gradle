@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.3.0'
         if (getGradle().getStartParameter().getTaskNames().toString().toLowerCase().contains('release') ||
                 getGradle().getStartParameter().getTaskNames().toString().contains('dependencyUpdates')) {
             classpath 'com.google.gms:google-services:4.3.15'
@@ -20,7 +20,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.vanniktech.android.junit.jacoco' version '0.16.0'
+//    id 'com.vanniktech.android.junit.jacoco' version '0.16.0'
     id 'com.github.kt3k.coveralls' version '2.12.2'
     id 'com.github.ben-manes.versions' version '0.47.0'
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2018 T Duke Perry
+ *    Copyright 2024 T Duke Perry
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -93,9 +93,9 @@ public class AboutScreen extends AppCompatActivity
         toGithub("theblackwidower/KanaQuiz");
     }
 
-    public void toTwitter(View view)
+    public void toMastodon(View view)
     {
-        toSite("https://twitter.com/theblackwidower/");
+        toSite("https://fandom.ink/@scarletduke");
     }
 
     public void toAssetStudioGithub(View view)

@@ -30,6 +30,8 @@ This application is in a state of constant development. Any additional feature r
 
   * Supports Hiragana and Katakana character sets
   * Ten different character groupings for each set, allowing a gradual progression through the characters
+  * Complete control of which characters the user is quizzed on (either groups of questions or individual questions can be enabled and disabled)
+  * Support for kun'yomi and on'yomi-based kanji questions
   * Can answer questions by entering them using the on-screen keyboard, or as multiple choice questions
   * Built-in kana reference sheet
   * Supports both digraphs (ひゃ, みゅ, リュ) and diacritics (が, ぴ)
@@ -50,14 +52,12 @@ _NB: The following features have no planned release date, or guarantee of releas
 
   * Multiple fonts
   * Obsolete kana option
-  * Finer question selection feature
   * User-made question lists
   * Furigana option
   * Export logs and preferences
   * Pronunciation Guide
   * Number questions
   * Reverse questions mode (questions in English, answers in Japanese)
-  * Support for kun'yomi and on'yomi-based kanji questions
   * Limitation alerts, either by time, or number of questions
 
 ## Code Analysis, Continuous Integration and Test Coverage
@@ -78,7 +78,7 @@ If you are multi-lingual, and wish to assist this project by volunteering transl
 
 If you wish to submit a translation as a pull request, please use Android Studio's built-in Translations Editor. 
 
-If you don't wish to go through the hassle of installing Android Studio, you can use [this strings.xml file](https://gist.github.com/theblackwidower/206876858d2bc5a81f9014267750d8fd) as a template, and place it in a new directory called `/app/src/main/res/values-[language code]/` with the [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). The various string tags contain elements that need to be translated. Be sure to place the name of the language you're translating as well as your own name, in the field marked `translator_credit`. You can also place the URL to your GitHub, Twitter, or other social media profile or personal/professional website in the field marked `translator_credit_url`.
+If you don't wish to go through the hassle of installing Android Studio, you can use [this strings.xml file](https://gist.github.com/theblackwidower/206876858d2bc5a81f9014267750d8fd) as a template, and place it in a new directory called `/app/src/main/res/values-[language code]/` with the [ISO 639-1 language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). The various string tags contain elements that need to be translated. Be sure to place the name of the language you're translating as well as your own name, in the field marked `translator_credit`. You can also place the URL to your GitHub, Twitter/X, Mastodon, Bluesky or other social media profile or personal/professional website in the field marked `translator_credit_url`.
 
 If you don't wish to bother with pull requests, using the template listed above you can also submit your translation through email to [theblackwidower@gmail.com](mailto:theblackwidower@gmail.com?subject=KanaQuiz%20Translation), with the subject "KanaQuiz Translation".
 
